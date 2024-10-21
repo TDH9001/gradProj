@@ -12,7 +12,12 @@ class homePage extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
       body: Column(
-        children: [],
+        children: [
+          MaterialButton(
+            onPressed: () {},
+            child: Text("damaging attack"),
+          ),
+        ],
       ),
     ));
   }
