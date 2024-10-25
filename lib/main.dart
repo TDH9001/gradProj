@@ -10,12 +10,13 @@ class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         home: Scaffold(
       body: Column(
         children: [
           MaterialButton(
             onPressed: () {},
-            child: Text("damaging at j tack"),
+            child: Text("damaging at tack"),
             color: Colors.green,
           ),
         ],
