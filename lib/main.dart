@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/splash_screen.dart';
 
 void main() {
   runApp(homePage());
@@ -10,16 +11,8 @@ class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      body: Column(
-        children: [
-          MaterialButton(
-            onPressed: () {},
-            child: Text("damaging at j tack"),
-            color: Colors.green,
-          ),
-        ],
-      ),
-    ));
+      debugShowCheckedModeBanner: false,
+        home:SplashScreen()
+    );
   }
 }
