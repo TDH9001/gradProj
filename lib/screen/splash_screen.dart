@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 4),()
     {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Scaffold(),
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const OnboardingScreen(),
       ),
       );
     },
@@ -30,9 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Color(0xffC6EAFA),
       body: Center(
         child: Image(image: AssetImage('assets/images/science.png')),
-      ),
-
-
+      )
     );
   }
 }
