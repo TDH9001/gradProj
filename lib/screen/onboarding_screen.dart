@@ -21,6 +21,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff7AB2D3),
+        leading: CircleAvatar(
+          backgroundImage: AssetImage('assets/images/AinShamsUniv.png'),
+          radius: 20,
+        ),
+        actions: [
+          CircleAvatar(
+            backgroundImage:AssetImage('assets/images/science.png'),
+            radius: 20,
+          ),
+        ],
+      ),
         body: Stack(children: [
       PageView(
         controller: pageController,
