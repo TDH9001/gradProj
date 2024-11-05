@@ -11,8 +11,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
     Timer(
       const Duration(seconds: 4),()
@@ -26,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color(0xffC6EAFA),
+      backgroundColor: Color(0xff7AB2D3),
       body: Center(
         child: Image(image: AssetImage('assets/images/science.png')),
       )

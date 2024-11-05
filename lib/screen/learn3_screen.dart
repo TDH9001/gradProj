@@ -9,20 +9,20 @@ class Learn3Screen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children:
       [
-        Image(image: AssetImage('assets/images/img.png'),),
-        SizedBox(height: 20,),
-        Text("sarah medhaat" ,
+        Image(image: AssetImage('assets/images/img3.png'),),
+        SizedBox(height: 10,),
+        Text(" Chatting " ,
           style:TextStyle(
-            fontSize: 20 ,
+            fontSize: 18 ,
             color: Colors.black ,
             fontWeight: FontWeight.w400 ,
           ),
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text('uhugyguggygyg' ,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text("There will be a chat between the doctor of the subject that was recorded" ,
             style: TextStyle(
-              fontSize: 16 ,
+              fontSize: 12 ,
               color: Colors.black,
             ),
             textAlign: TextAlign.center,

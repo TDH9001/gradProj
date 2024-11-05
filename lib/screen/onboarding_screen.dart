@@ -21,6 +21,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff7AB2D3),
+        leading: CircleAvatar(
+          backgroundImage: AssetImage('assets/images/AinShamsUniv.png'),
+          radius: 20,
+        ),
+        actions: [
+          CircleAvatar(
+            backgroundImage:AssetImage('assets/images/science.png'),
+            radius: 20,
+          ),
+        ],
+      ),
         body: Stack(children: [
       PageView(
         controller: pageController,
@@ -55,8 +68,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            GestureDetector(
-              onTap: () {
+            ElevatedButton(
+              onPressed: () {
                 if (currentpageindex == 0) {
                   Navigator.push(
                     context,
@@ -72,11 +85,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.linear);
                 }
               },
-              child: Text(buttonText),
+              // style: ElevatedButton.styleFrom(
+              //   backgroundColor: Color(0xff7AB2D3),
+              // ),
+              child: Text(buttonText,
+              ),
             ),
             SmoothPageIndicator(controller: pageController, count: 3),
-            GestureDetector(
-              onTap: () {
+            ElevatedButton(
+              onPressed: () {
                 if (currentpageindex == 2) {
                   Navigator.push(
                     context,
@@ -89,14 +106,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 } else {
                   pageController.nextPage(
                       duration: Duration(milliseconds: 500),
-                      curve: Curves.linear);
+                      curve: Curves.linear,
+                  );
                 }
               },
+              // style: ElevatedButton.styleFrom(
+              //   backgroundColor: Color(0xff7AB2D3),
+              // ),
               child: Text(nextButtonText),
             ),
           ],
         ),
       )
-    ]));
+    ],),);
   }
 }
