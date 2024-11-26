@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/login_screen.dart';
 import 'package:grad_proj/screen/splash_screen.dart';
 
 void main() {
@@ -11,14 +12,8 @@ class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-        home:SplashScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        //changed the main page from  SplashScreen() to  LoginScreen()
+        home: LoginScreen());
   }
 }
-
-
-
-
-
-
