@@ -3,12 +3,13 @@ import 'package:grad_proj/screen/singupform_screen.dart';
 
 import 'login_screen.dart';
 
-class  SingupScreen extends StatelessWidget {
-  const  SingupScreen({super.key});
+class SingupScreen extends StatelessWidget {
+  const SingupScreen({super.key});
+  static String id = "";
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: ListView(
         children: [
           Column(
@@ -17,13 +18,13 @@ class  SingupScreen extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Text('Create Account' ,
+                child: Text(
+                  'Create Account',
                   style: TextStyle(
-                      fontSize: 20 ,
-                      fontWeight: FontWeight.bold ,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
               ),
@@ -31,13 +32,14 @@ class  SingupScreen extends StatelessWidget {
                 height: 5,
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    Text('Already have an account ?' ,
+                    Text(
+                      'Already have an account ?',
                       style: TextStyle(
-                          fontSize: 15 ,
-                          fontWeight: FontWeight.bold ,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
                     SizedBox(
@@ -45,18 +47,19 @@ class  SingupScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>  LoginScreen()
-                        ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
                       },
-                      child: Text('Login' ,
+                      child: Text(
+                        'Login',
                         style: TextStyle(
-                            fontSize: 15 ,
-                            fontWeight: FontWeight.bold ,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
                             color: Colors.black,
-                            decoration: TextDecoration.underline
-                        ),
-                        ),
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
                   ],
                 ),
@@ -64,8 +67,10 @@ class  SingupScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Padding(padding: EdgeInsets.all(8.0)
-                  ,child: SingupformScreen(),),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: SingupformScreen(),
+              ),
             ],
           ),
         ],
