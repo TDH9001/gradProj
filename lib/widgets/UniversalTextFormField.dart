@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Universaltextformfield extends StatefulWidget {
-  Universaltextformfield(
-      {super.key, required this.label, required this.Password});
-
+  Universaltextformfield({
+    super.key,
+    required this.label,
+    required this.Password,
+    required this.controller,
+  });
+//
   final String label;
   final bool Password;
+  final TextEditingController controller;
   bool isObscure = true;
   @override
   State<Universaltextformfield> createState() => _MyWidgetState();
@@ -19,6 +24,7 @@ class _MyWidgetState extends State<Universaltextformfield> {
         vertical: 5,
       ),
       child: TextFormField(
+        controller: widget.controller,
         obscureText: widget.Password ? widget.isObscure : false,
         decoration: InputDecoration(
             labelText: widget.label,

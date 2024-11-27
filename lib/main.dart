@@ -12,7 +12,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(homePage());
-  print(SingupScreen.id);
 }
 
 class homePage extends StatelessWidget {

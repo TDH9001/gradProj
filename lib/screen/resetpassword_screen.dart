@@ -7,8 +7,9 @@ import 'package:grad_proj/refactored/resetform_screen.dart';
 import '../UI/text_style.dart';
 
 class ResetpasswordScreen extends StatelessWidget {
-  const ResetpasswordScreen({super.key});
+  ResetpasswordScreen({super.key});
   static String id = "resetPassScreen";
+  final TextEditingController t1 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,8 @@ class ResetpasswordScreen extends StatelessWidget {
               height: 10,
             ),
             //    ResetformScreen(),
-            Universaltextformfield(label: "Email", Password: false),
+            Universaltextformfield(
+                label: "Email", Password: false, controller: t1),
             const SizedBox(
               height: 10,
             ),

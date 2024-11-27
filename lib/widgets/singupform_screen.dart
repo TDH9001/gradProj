@@ -11,17 +11,28 @@ class SingupformScreen extends StatefulWidget {
 
 class _SingupformScreenState extends State<SingupformScreen> {
   bool _isObscure = true;
+  final TextEditingController t2 = TextEditingController();
+  final TextEditingController t1 = TextEditingController();
+  final TextEditingController t3 = TextEditingController();
+  final TextEditingController t4 = TextEditingController();
+  final TextEditingController t5 = TextEditingController();
+  final TextEditingController t6 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Universaltextformfield(label: 'First Name', Password: false),
-        Universaltextformfield(label: 'Last Name', Password: false),
-        Universaltextformfield(label: 'Email', Password: false),
-        Universaltextformfield(label: 'Phone Number', Password: false),
-        Universaltextformfield(label: 'Password', Password: true),
-        Universaltextformfield(label: 'Confirm Password', Password: true),
+        Universaltextformfield(
+            label: 'First Name', Password: false, controller: t1),
+        Universaltextformfield(
+            label: 'Last Name', Password: false, controller: t2),
+        Universaltextformfield(label: 'Email', Password: false, controller: t3),
+        Universaltextformfield(
+            label: 'Phone Number', Password: false, controller: t4),
+        Universaltextformfield(
+            label: 'Password', Password: true, controller: t5),
+        Universaltextformfield(
+            label: 'Confirm Password', Password: true, controller: t6),
         // buildInputForm('First Name', false),
         // buildInputForm('Last Name', false),
         // buildInputForm('Email', false),

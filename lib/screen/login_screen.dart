@@ -9,8 +9,10 @@ import 'package:grad_proj/screen/resetpassword_screen.dart';
 import 'package:grad_proj/screen/singup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
   static String id = "login";
+  final TextEditingController t2 = TextEditingController();
+  final TextEditingController t1 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +32,18 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 190,
               ),
-             
+
               //error was located here >LoginformScreen() has a list view but was not given a size
               //added a temporary sizebox
               Universaltextformfield(
                 label: "Email",
                 Password: false,
+                controller: t1,
               ),
               Universaltextformfield(
                 label: "Password",
                 Password: true,
+                controller: t2,
               ),
               const PrimaryButton(
                 buttontext: 'Login',
