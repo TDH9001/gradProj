@@ -5,7 +5,7 @@ class ResetformScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding (
+    return Padding(
       padding: EdgeInsets.only(top: 20),
       child: TextFormField(
         decoration: InputDecoration(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/refactored/loginform_screen.dart';
+import 'package:grad_proj/widgets/singupform_screen.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -29,6 +30,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 190,
               ),
+             
               //error was located here >LoginformScreen() has a list view but was not given a size
               //added a temporary sizebox
               Universaltextformfield(
