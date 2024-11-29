@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class LoginformScreen extends StatefulWidget {
   const LoginformScreen({super.key});
+  //this code was refactored into
+  //the "universalTextFormField" widget
+  //where the widget became a form field taht can be used where ever we please
+  //instead of relying on a certain screen
 
   @override
   State<LoginformScreen> createState() => _LoginformScreenState();
@@ -27,15 +31,15 @@ class _LoginformScreenState extends State<LoginformScreen> {
 
   Padding buildInputform(String lable, bool password) {
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 5,
       ),
       child: TextFormField(
         obscureText: password ? isObscure : false,
         decoration: InputDecoration(
             labelText: lable,
-            labelStyle: TextStyle(color: Colors.black),
-            focusedBorder: UnderlineInputBorder(
+            labelStyle: const TextStyle(color: Colors.black),
+            focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
             ),
             suffixIcon: password
@@ -46,11 +50,11 @@ class _LoginformScreenState extends State<LoginformScreen> {
                       });
                     },
                     icon: isObscure
-                        ? Icon(
+                        ? const Icon(
                             Icons.visibility_off,
                             color: Colors.black,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.visibility,
                             color: Colors.black,
                           ),

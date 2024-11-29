@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1095379499506",
+    "project_id": "gradproj-89f8a",
+    "storage_bucket": "gradproj-89f8a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095379499506:android:e83accf2d760d89d77d36b",
+        "android_client_info": {
+          "package_name": "com.example.grad_proj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfFeg2zhvx_H13lDx52xoUl50KZ2RgsLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095379499506:android:c428e413f47fd0ad77d36b",
+        "android_client_info": {
+          "package_name": "com.example.gradproj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfFeg2zhvx_H13lDx52xoUl50KZ2RgsLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
