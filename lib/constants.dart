@@ -6,9 +6,25 @@ const Color accent = Color(0x7AB2D3);
 const Color backGround = Colors.white;
 const Color textAndAccent = Colors.black;
 
-void printSnackBar(BuildContext context, String S) {
+void PrintSnackBarSucces(BuildContext context, String S) {
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text(S)),
+    SnackBar(
+      duration: Duration(seconds: 2),
+      content:
+          Text(S, style: const TextStyle(color: Colors.black, fontSize: 15)),
+      backgroundColor: Colors.green,
+    ),
+  );
+}
+
+void PrintSnackBarFail(BuildContext context, String S) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: Duration(seconds: 2),
+      content:
+          Text(S, style: const TextStyle(color: Colors.black, fontSize: 15)),
+      backgroundColor: Colors.red,
+    ),
   );
 }
 

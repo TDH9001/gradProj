@@ -11,6 +11,7 @@ import 'package:grad_proj/screen/resetpassword_screen.dart';
 import 'package:grad_proj/screen/singup_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import '../services/snackBar_service.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -38,29 +39,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   AuthProvider _auth = AuthProvider();
 
-  //by addign this > isntead of being provided a new var > i only need the one here
   @override
   Widget build(BuildContext context) {
     _DeviceHeight = MediaQuery.of(context).size.height;
     _DeviceWidth = MediaQuery.of(context).size.width;
-
     return SafeArea(
         child: Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ChangeNotifierProvider<AuthProvider>.value(
           value: AuthProvider.instance, // HEREEEEEE
-          //now everytime the authprovider calls > it will re-render the shole UI and provide it's
-          //context to the provider > taht should provide the Firebase with the data it needs
-          //so now each time i need an authProvider > it will heck all the aprents searchign for one untill
-          //one can provide it
-          //here the builder si provided the provideor from the ChangeNotifier above it
+
           child: Builder(builder: (BuildContext _context) {
-            //made an instance of > ChangeNotifierProvider > set the value to an isntance of my provider
-            //made ti take a builder taht will build my UI
             _auth = Provider.of<AuthProvider>(_context);
-            //ALL OF THAT > was to return the firebase user data
-            print(_auth.user);
+            // print(_auth.user);
             return ListView(
               children: [
                 SizedBox(height: _DeviceHeight! * 0.17),
@@ -101,8 +93,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 if (_formKey.currentState!.validate()) {
                                   _auth.loginUserWithEmailAndPassword(
                                       _email, _password);
+                                  if (_auth.user?.email == null) {
+                                    PrintSnackBarFail(
+                                        context, "No email available");
+                                  } else {
+                                    PrintSnackBarSucces(context,
+                                        "welcome, ${_auth.user?.email}");
+                                  }
 
-                                  printSnackBar(context, "valid credntials");
+                                  // SnackbarService.isntance.showSuccessSnackBar(
+                                  //     "WORKSSSSSSSSSSSSSS");
+
                                   //loginuser
                                 }
                               },
@@ -124,8 +125,19 @@ class _LoginScreenState extends State<LoginScreen> {
           }),
         ),
       ),
-    )
-        //HEREEEEEEEEEEEEEEEEEEE
-        );
+    ));
   }
 }
+
+
+  //by addign this > isntead of being provided a new var > i only need the one here
+   //now everytime the authprovider calls > it will re-render the shole UI and provide it's
+          //context to the provider > taht should provide the Firebase with the data it needs
+          //so now each time i need an authProvider > it will heck all the aprents searchign for one untill
+          //one can provide it
+          //here the builder si provided the provideor from the ChangeNotifier above it
+          
+            //made an instance of > ChangeNotifierProvider > set the value to an isntance of my provider
+            //made ti take a builder taht will build my UI
+                        //ALL OF THAT > was to return the firebase user data
+
