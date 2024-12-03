@@ -25,6 +25,20 @@ class _MyWidgetState extends State<Universaltextformfield> {
       ),
       child: TextFormField(
         controller: widget.controller,
+        autocorrect: false,
+        //undetermidn cursor collor
+        cursorColor: Colors.white,
+        validator: (data) {
+          if (widget.label == "login") {
+            if (data == null || data.isEmpty) {
+              return "empty field";
+            } else if (!data.contains("@")) {
+              return "the email msut contain an '@' symbol";
+            } else if (data.indexOf("@") != data.lastIndexOf("@")) {
+              return "you can only contain one instance of '@' in your email";
+            }
+          } //else if() {} //and more
+        },
         obscureText: widget.Password ? widget.isObscure : false,
         decoration: InputDecoration(
             labelText: widget.label,

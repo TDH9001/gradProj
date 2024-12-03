@@ -6,6 +6,10 @@ const Color accent = Color(0x7AB2D3);
 const Color backGround = Colors.white;
 const Color textAndAccent = Colors.black;
 
+
+//  MediaQuery.of(context).size.height;
+
+
 class TextStyles {
   static TextStyle text = TextStyle(
     fontSize: 20,
