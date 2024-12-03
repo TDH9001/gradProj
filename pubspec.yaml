@@ -38,6 +38,8 @@ dependencies:
   smooth_page_indicator:
   firebase_core: ^3.8.0
   google_nav_bar : ^5.0.7
+  provider: ^6.1.2
+  firebase_auth: ^5.3.3
 
 dev_dependencies:
   flutter_test:

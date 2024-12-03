@@ -2,16 +2,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/resetpassword_screen.dart';
 import 'package:grad_proj/screen/singup_screen.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:grad_proj/screen/login_screen.dart';
 import 'package:grad_proj/screen/splash_screen.dart';
+import '../providers/auth_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(homePage());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+  ], child: homePage()));
 }
 
 class homePage extends StatelessWidget {

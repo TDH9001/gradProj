@@ -6,9 +6,13 @@ const Color accent = Color(0x7AB2D3);
 const Color backGround = Colors.white;
 const Color textAndAccent = Colors.black;
 
+void printSnackBar(BuildContext context, String S) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(S)),
+  );
+}
 
 //  MediaQuery.of(context).size.height;
-
 
 class TextStyles {
   static TextStyle text = TextStyle(
