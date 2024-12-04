@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/refactored/loginform_screen.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
-import 'package:grad_proj/widgets/singupform_screen.dart';
+import 'package:grad_proj/refactored/singupform_screen.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -11,7 +11,6 @@ import 'package:grad_proj/screen/resetpassword_screen.dart';
 import 'package:grad_proj/screen/singup_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
-import '../services/snackBar_service.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -100,11 +99,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     PrintSnackBarSucces(context,
                                         "welcome, ${_auth.user?.email}");
                                   }
-
-                                  // SnackbarService.isntance.showSuccessSnackBar(
-                                  //     "WORKSSSSSSSSSSSSSS");
-
-                                  //loginuser
                                 }
                               },
                             ),

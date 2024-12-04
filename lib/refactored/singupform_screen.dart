@@ -10,6 +10,7 @@ class SingupformScreen extends StatefulWidget {
 }
 
 class _SingupformScreenState extends State<SingupformScreen> {
+  
   bool _isObscure = true;
   final TextEditingController t2 = TextEditingController();
   final TextEditingController t1 = TextEditingController();
