@@ -47,16 +47,17 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ChangeNotifierProvider<AuthProvider>.value(
-          value: AuthProvider.instance, // HEREEEEEE
-
-          child: Builder(builder: (BuildContext _context) {
+          // the provider taht lsitens
+          value: AuthProvider.instance,
+          // the instance of auth provider that is affected when a listener lsitens
+          child: Builder(builder: (_context) {
+            //the _auth is the value used to indecate action succ status
             _auth = Provider.of<AuthProvider>(_context);
-            // print(_auth.user);
             return ListView(
               children: [
                 SizedBox(height: _DeviceHeight! * 0.17),
                 TextHeader(
-                  height: _DeviceHeight! * .2, //_DeviceHeight! * 24,
+                  height: _DeviceHeight! * .2,
                   largeText: "Welcome Student!",
                   littleText: "please login to your app",
                 ),
@@ -123,15 +124,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
+//by addign this > isntead of being provided a new var > i only need the one here
+//now everytime the authprovider calls > it will re-render the shole UI and provide it's
+//context to the provider > taht should provide the Firebase with the data it needs
+//so now each time i need an authProvider > it will heck all the aprents searchign for one untill
+//one can provide it
+//here the builder si provided the provideor from the ChangeNotifier above it
 
-  //by addign this > isntead of being provided a new var > i only need the one here
-   //now everytime the authprovider calls > it will re-render the shole UI and provide it's
-          //context to the provider > taht should provide the Firebase with the data it needs
-          //so now each time i need an authProvider > it will heck all the aprents searchign for one untill
-          //one can provide it
-          //here the builder si provided the provideor from the ChangeNotifier above it
-          
-            //made an instance of > ChangeNotifierProvider > set the value to an isntance of my provider
-            //made ti take a builder taht will build my UI
-                        //ALL OF THAT > was to return the firebase user data
-
+//made an instance of > ChangeNotifierProvider > set the value to an isntance of my provider
+//made ti take a builder taht will build my UI
+//ALL OF THAT > was to return the firebase user data
