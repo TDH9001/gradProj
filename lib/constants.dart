@@ -40,4 +40,26 @@ class TextStyles {
     color: Colors.black,
     fontWeight: FontWeight.w600,
   );
+
+  void addProfileImage() {
+    print("PUT INT HE REGESTRATION PAGE");
+    // try {
+    // _imageFileExample = await MediaService.instance
+    //     .getImageFromLibrary();
+    //   var _result = await CloudStorageService
+    //       .instance
+    //       .upLoadUserProfileImage(
+    //           uid: _uid,
+    //           image: _imageFileExample!);
+    //   var _imageLink = CloudStorageService
+    //       .instance.baseRef
+    //       .getDownloadURL();
+    //   print(_imageLink);
+    // } catch (e) {
+    //   SnackBarService.instance
+    //       .showsSnackBarError(
+    //           text:
+    //               "image could nto be uploaded");
+    // }
+  }
 }

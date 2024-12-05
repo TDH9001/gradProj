@@ -149,13 +149,6 @@ class _SingupScreenState extends State<SingupScreen> {
                                       //               "image could nto be uploaded");
                                       // }
                                     });
-                                if (_auth.user?.email == null) {
-                                  PrintSnackBarFail(
-                                      context, "No email available");
-                                } else if (_auth.user?.email != null) {
-                                  PrintSnackBarSucces(
-                                      context, "welcome, ${_auth.user?.email}");
-                                }
                               }
                             },
                           ),
