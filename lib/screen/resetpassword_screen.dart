@@ -40,7 +40,10 @@ class ResetpasswordScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
               },
-              child: PrimaryButton(buttontext: 'Reset Password'),
+              child: PrimaryButton(
+                buttontext: 'Reset Password',
+                func: () {},
+              ),
             ),
           ],
         ),
