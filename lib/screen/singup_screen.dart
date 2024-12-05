@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
+import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -53,97 +55,114 @@ class _SingupScreenState extends State<SingupScreen> {
             alignment: Alignment.center,
             child: Builder(builder: (_context) {
               _auth = Provider.of<AuthProvider>(_context);
-              return ListView(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    child: Center(
-                      child: TextHeader(
-                        height: widget._DeviceHeight! * 0.1,
-                        largeText: "Create a new account",
-                        littleText: "  we are pleased to have you",
+              return Form(
+                key: SingupScreen._formKey,
+                child: ListView(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      child: Center(
+                        child: TextHeader(
+                          height: widget._DeviceHeight! * 0.1,
+                          largeText: "Create a new account",
+                          littleText: "  we are pleased to have you",
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Form(
-                    key: SingupScreen._formKey,
-                    child: Column(
-                      children: [
-                        Universaltextformfield(
-                            label: 'First Name',
-                            Password: false,
-                            controller: _firstName),
-                        Universaltextformfield(
-                            label: 'Last Name',
-                            Password: false,
-                            controller: _LastName),
-                        Universaltextformfield(
-                            label: 'Email',
-                            Password: false,
-                            controller: _email),
-                        Universaltextformfield(
-                            label: 'Phone Number',
-                            Password: false,
-                            controller: _phoneNumber),
-                        Universaltextformfield(
-                            label: 'Password',
-                            Password: true,
-                            controller: _passWord),
-                        Universaltextformfield(
-                            label: 'Confirm Password',
-                            Password: true,
-                            controller: _confirmPassWord),
-                      ],
+                    const SizedBox(
+                      height: 50,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  _auth.status == AuthStatus.Authenticating
-                      ? const Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator())
-                      : PrimaryButton(
-                          buttontext: "Create the account",
-                          func: () async {
-                            String fn = _firstName.text.trim();
-                            String ln = _LastName.text.trim();
-                            String em = _email.text.trim();
-                            String pn = _phoneNumber.text.trim();
-                            String pw = _passWord.text.trim();
-                            String cpw = _confirmPassWord.text.trim();
-                            DBService.instance.createUserInDB(
-                                cont: context,
-                                userId: "012012",
-                                firstName: fn,
-                                lastname: ln,
-                                email: em,
-                                phoneNumber: pn,
-                                password: pw);
-                            if (SingupScreen._formKey.currentState!
-                                .validate()) {
-                              _auth.loginUserWithEmailAndPassword(em, pw);
-                              if (_auth.user?.email == null) {
-                                PrintSnackBarFail(
-                                    context, "No email available");
-                              } else {
-                                PrintSnackBarSucces(
-                                    context, "welcome, ${_auth.user?.email}");
+                    Universaltextformfield(
+                        label: 'First Name',
+                        Password: false,
+                        controller: _firstName),
+                    Universaltextformfield(
+                        label: 'Last Name',
+                        Password: false,
+                        controller: _LastName),
+                    Universaltextformfield(
+                        label: 'Email', Password: false, controller: _email),
+                    Universaltextformfield(
+                        label: 'Phone Number',
+                        Password: false,
+                        controller: _phoneNumber),
+                    Universaltextformfield(
+                        label: 'Password',
+                        Password: true,
+                        controller: _passWord),
+                    Universaltextformfield(
+                        label: 'Confirm Password',
+                        Password: true,
+                        controller: _confirmPassWord),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _auth.status == AuthStatus.Authenticating
+                        ? const Align(
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator())
+                        : PrimaryButton(
+                            buttontext: "Create the account",
+                            func: () async {
+                              if (SingupScreen._formKey.currentState!
+                                  .validate()) {
+                                String fn = _firstName.text.trim();
+                                String ln = _LastName.text.trim();
+                                String em = _email.text.trim();
+                                String pn = _phoneNumber.text.trim();
+                                String pw = _passWord.text.trim();
+                                String cpw = _confirmPassWord.text.trim();
+                                _auth.RegesterUser(
+                                    firstName: fn,
+                                    lastname: ln,
+                                    email: em,
+                                    phoneNumber: pn,
+                                    password: pw,
+                                    onSucces: (String _uid) async {
+                                      DBService.instance.createUserInDB(
+                                          userId: _uid,
+                                          firstName: fn,
+                                          lastname: ln,
+                                          email: em,
+                                          phoneNumber: pn,
+                                          password: pw);
+                                      // try {
+                                      // _imageFileExample = await MediaService.instance
+                                      //     .getImageFromLibrary();
+                                      //   var _result = await CloudStorageService
+                                      //       .instance
+                                      //       .upLoadUserProfileImage(
+                                      //           uid: _uid,
+                                      //           image: _imageFileExample!);
+                                      //   var _imageLink = CloudStorageService
+                                      //       .instance.baseRef
+                                      //       .getDownloadURL();
+                                      //   print(_imageLink);
+                                      // } catch (e) {
+                                      //   SnackBarService.instance
+                                      //       .showsSnackBarError(
+                                      //           text:
+                                      //               "image could nto be uploaded");
+                                      // }
+                                    });
+                                if (_auth.user?.email == null) {
+                                  PrintSnackBarFail(
+                                      context, "No email available");
+                                } else if (_auth.user?.email != null) {
+                                  PrintSnackBarSucces(
+                                      context, "welcome, ${_auth.user?.email}");
+                                }
                               }
-                            }
-                          },
-                        ),
-                  Navigatortextbutton(
-                      text: 'Already have an account ?',
-                      location: LoginScreen.id),
-                ],
+                            },
+                          ),
+                    Navigatortextbutton(
+                        text: 'Already have an account ?', location: "pop"),
+                  ],
+                ),
               );
             }),
           ),

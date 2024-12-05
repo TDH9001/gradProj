@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 import 'package:grad_proj/screen/login_screen.dart';
 import 'package:grad_proj/screen/splash_screen.dart';
 import '../providers/auth_provider.dart';
+import '../services/navigation_Service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,26 +25,22 @@ class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Sci.Connect",
-        //to make light mode we need the data to be stored on the app >then depending on the setting
-        //we can make it dark or bright >> isDark?  Brightness.dark : Brightness.light
-        theme: ThemeData(
-            // theme link z
-            // textTheme: TextTheme(),
-            brightness: Brightness.light,
-            primaryColor: Colors.white, //fromARGB(255, 152, 188, 209)
-            hintColor: Color.fromARGB(199, 146, 190, 188),
-            scaffoldBackgroundColor:
-                Colors.white //fromARGB(199, 146, 190, 188),
-            ),
-        //darkTheme: ThemeData.dark(),
-        routes: {
-          "login": (context) => LoginScreen(),
-          "resetPassScreen": (context) => ResetpasswordScreen(),
-          "SingupScreen": (context) => SingupScreen(),
-        },
-        debugShowCheckedModeBanner: false,
-        //changed the main page from   SplashScreen() to  LoginScreen(),
-        home: LoginScreen());
+      navigatorKey: navigationService.instance.navKey, //added the nav service
+      title: "Sci.Connect",
+      theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.white, //fromARGB(255, 152, 188, 209)
+          hintColor: Color.fromARGB(199, 146, 190, 188),
+          scaffoldBackgroundColor: Colors.white //fromARGB(199, 146, 190, 188),
+          ),
+      //darkTheme: ThemeData.dark(),
+      routes: {
+        "login": (context) => LoginScreen(),
+        "resetPassScreen": (context) => ResetpasswordScreen(),
+        "SingupScreen": (context) => SingupScreen(),
+      },
+      initialRoute: LoginScreen.id,
+      debugShowCheckedModeBanner: false,
+    );
   }
 }

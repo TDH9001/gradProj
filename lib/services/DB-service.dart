@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 
 class DBService {
   static DBService instance = DBService();
@@ -14,7 +15,6 @@ class DBService {
   String _UserCollection = "users";
 
   Future<void> createUserInDB({
-    required BuildContext cont,
     required String userId,
     required String firstName,
     required String lastname,
@@ -32,10 +32,10 @@ class DBService {
         "Password": password, //stupid move > should nto be added here
         "lastSeen": DateTime.now().toUtc()
       });
-      PrintSnackBarSucces(cont, "Account created Succesfully");
+      SnackBarService.instance.showsSnackBarSucces(text: "User Created");
     } catch (e) {
       print(e);
-      PrintSnackBarFail(cont, "Error occured, please connect to internet");
+      SnackBarService.instance.showsSnackBarError(text: "Creation erros");
     }
   }
 }

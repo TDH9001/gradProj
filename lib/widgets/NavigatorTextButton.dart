@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/resetpassword_screen.dart';
+import '../services/navigation_Service.dart';
 
 class Navigatortextbutton extends StatelessWidget {
   Navigatortextbutton({super.key, required this.text, required this.location});
@@ -10,7 +10,12 @@ class Navigatortextbutton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, location);
+          if (location != "pop") {
+            navigationService.instance.navigateTo(location);
+          } else {
+            navigationService.instance.goBack();
+          }
+          // Navigator.pushNamed(context, location);
         },
         child: Text(
           text,
