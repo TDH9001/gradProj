@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/chat_main_Screen.dart';
 import 'package:grad_proj/screen/resetpassword_screen.dart';
 import 'package:grad_proj/screen/singup_screen.dart';
 import 'package:provider/provider.dart';
@@ -38,9 +39,11 @@ class homePage extends StatelessWidget {
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
         "SingupScreen": (context) => SingupScreen(),
+        "ChatMainScreen": (context) => ChatMainScreen(),
       },
       initialRoute: LoginScreen.id,
       debugShowCheckedModeBanner: false,
     );
   }
 }
+//stopped at 5

@@ -12,7 +12,7 @@ class DBService {
     _db = FirebaseFirestore.instance;
   }
 //collection sit he name of the Field i want to acces in firebase
-  String _UserCollection = "users";
+  String _UserCollection = "Users";
 
   Future<void> createUserInDB({
     required String userId,
@@ -32,10 +32,9 @@ class DBService {
         "Password": password, //stupid move > should nto be added here
         "lastSeen": DateTime.now().toUtc()
       });
-      SnackBarService.instance.showsSnackBarSucces(text: "User Created");
     } catch (e) {
       print(e);
-      SnackBarService.instance.showsSnackBarError(text: "Creation erros");
+      SnackBarService.instance.showsSnackBarError(text: "Creation error");
     }
   }
 }
