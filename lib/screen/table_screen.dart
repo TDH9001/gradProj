@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/custom_dropdown.dart';
+import 'package:grad_proj/screen/orgappbar.dart';
+import 'navbar_screen.dart';
+import 'tableform_screen.dart';
+
+class TableScreen extends StatefulWidget {
+  const TableScreen({super.key});
+
+  @override
+  State<TableScreen> createState() => _TableScreenState();
+}
+
+class _TableScreenState extends State<TableScreen> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  String? selectedValue; // corse
+  String? selectedValue2; // day
+  String? selectedValue3; // time
+  final List<Map<String, String>> addedCourses = [];
+  void addCourse() {
+    if (selectedValue != null && selectedValue2 != null && selectedValue3 != null) {
+      setState(() {
+        addedCourses.add({
+          "course": selectedValue!,
+          "day": selectedValue2!,
+          "time": selectedValue3!,
+        });
+        selectedValue = null;
+        selectedValue2 = null;
+        selectedValue3 = null;
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please fill all fields before adding a course."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: Orgappbar(scaffoldKey: scaffoldKey),
+      drawer: NavbarScreen(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              ' Create Table',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+            SizedBox(height: 20,),
+            CustomDropdownField<String>(
+              items: ["Maths", "Physics", "Chemistry", "Biology"],
+              // example course
+              onChanged: (
+                String? value,
+              ) {
+                setState(() {
+                  selectedValue = value;
+                });
+              },
+              label: "Select Course",
+              isMandatory: true,
+              hintText: "Select Course",
+              value: selectedValue,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CustomDropdownField<String>(
+              items: ["starday", "monday", "tuesday", "wednesday"],
+              // example day
+              onChanged: (
+                String? value,
+              ) {
+                setState(() {
+                  selectedValue2 = value;
+                });
+              },
+              label: "Select day ",
+              isMandatory: true,
+              hintText: "Select day",
+              value: selectedValue2,
+            ),
+            SizedBox(height: 20,),
+            CustomDropdownField<String>(
+              items: ["8:00", "9:00", "10:00", "11:00"],
+              // example time
+              onChanged: (
+                String? value,
+              ) {
+                setState(() {
+                  selectedValue3 = value;
+                });
+              },
+              label: "Select time ",
+              isMandatory: true,
+              hintText: "Select time",
+              value: selectedValue3,
+            ),
+            SizedBox(height: 60,),
+            Expanded(
+              child: ListView.builder(
+                itemCount: addedCourses.length,
+                itemBuilder: (context, index) {
+                  final course = addedCourses[index];
+                  return ListTile(
+                    title: Text("${course['course']} - ${course['day']}"),
+                    subtitle: Text("Time: ${course['time']}"),
+                  );
+                },
+              ),
+            ),
+            Row(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff7AB2D3),
+                  ),
+                  onPressed: ()
+                  {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TableformScreen()));
+
+                  },
+                  child: Text(
+                    'Create Table',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+                SizedBox(width: 35,),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff7AB2D3),
+                  ),
+                  onPressed: addCourse,
+                  child: Text(
+                    'add course',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
+import 'package:grad_proj/screen/table_screen.dart';
 import 'navbar_screen.dart';
 import 'orgappbar.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,13 +14,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
+  int selectedIndex = 0;
   List<Widget> screens = [
     Container(
       child: Center(
         child: Text("Home"),
       ),
-    )
+    ),
+    TableScreen(),
+    Container(
+      child: Center(
+        child: Text("Table"),
+      ),
+    ),
   ];
 
   @override
@@ -28,7 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: scaffoldKey,
       drawer: NavbarScreen(),
-       appBar:Orgappbar(scaffoldKey: scaffoldKey,),
+      appBar: Orgappbar(
+        scaffoldKey: scaffoldKey,
+      ),
+      body: Container(
+        child: Center(
+          child: Text("Home"),
+        ),
+      ),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: Padding(
@@ -40,7 +53,20 @@ class _HomeScreenState extends State<HomeScreen> {
               tabBackgroundColor: Color(0xff7AB2D3),
               gap: 8,
               onTabChange: (index) {
-                print(index);
+                if (index == 1) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  title: Text("Chat"),
+                                ),
+                              )));
+                }
+                if (index == 2) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TableScreen()));
+                }
               },
               padding: EdgeInsets.all(16),
               tabs: const [
@@ -55,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 GButton(
                   icon: Icons.table_view,
                   text: "Table",
-
                 ),
               ]),
         ),
