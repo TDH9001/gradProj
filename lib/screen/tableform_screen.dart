@@ -68,7 +68,7 @@ class _TableformScreenState extends State<TableformScreen> {
                     0: FixedColumnWidth(100),
                     1: FlexColumnWidth(100),
                     2: FlexColumnWidth(100),
-                    
+
                   },
                   children: [
                     buildTableRow(headers, isHeader: true),
