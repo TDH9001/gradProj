@@ -87,9 +87,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.linear);
                 }
               },
-              // style: ElevatedButton.styleFrom(
-              //   backgroundColor: Color(0xff7AB2D3),
-              // ),
               child: Text(buttonText,
               ),
             ),
@@ -112,9 +109,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   );
                 }
               },
-              // style: ElevatedButton.styleFrom(
-              //   backgroundColor: Color(0xff7AB2D3),
-              // ),
               child: Text(nextButtonText),
             ),
           ],
