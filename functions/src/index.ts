@@ -2,7 +2,7 @@ import * as firestore from 'firebase-functions/v2/firestore';
 import * as admin from 'firebase-admin';
 
 admin.initializeApp();
-
+//edit to satisfy your own needs as you DEVthe app
 exports.onChatCreated = firestore.onDocumentCreated(
   "Chats/{chatID}",
   (event) => {
@@ -35,9 +35,10 @@ exports.onChatCreated = firestore.onDocumentCreated(
                     .doc(m)
                     .create({
                       chatID: ChatID,
-                      name: userData.name,
+                      firstName: userData.firstName,
+                      lastName: userData.lastName,
                       phoneNumber : userData.PhoneNumber,
-                      unseenCount: 1,
+                      unseenCount: 0,
                     });
                 }
                 return null;
@@ -51,3 +52,52 @@ exports.onChatCreated = firestore.onDocumentCreated(
     }
   }
 );
+exports.onChatsUpdated = firestore.onDocumentUpdated(
+    "Chats/{chatID}",
+    async (event) => {
+      const afterSnapshot = event.data?.after; // Firestore snapshot after update
+      const chatID = event.params.chatID;
+  
+      if (afterSnapshot) {
+        const data = afterSnapshot.data();
+        if (data) {
+          const members: string[] = data.members;
+          const lastMessage = data.messages[data.messages.length - 1];
+  
+          // Collect promises to ensure all updates are completed
+          const updatePromises: Promise<void | FirebaseFirestore.WriteResult>[] = [];
+  
+          members.forEach((currentUserID) => {
+            const remainingUserIDs = members.filter((u: string) => u !== currentUserID);
+  
+            remainingUserIDs.forEach((otherUserID) => {
+              const updatePromise = admin
+                .firestore()
+                .collection("Users")
+                .doc(currentUserID)
+                .collection("Chats")
+                .doc(otherUserID)
+                .update({
+                  lastMessage: lastMessage.message,
+                  timestamp: lastMessage.timestamp,
+                  type: lastMessage.type,
+                  unseenCount: admin.firestore.FieldValue.increment(1),
+                })
+                .catch((error) => {
+                  console.error(
+                    `Failed to update Chats for user ${currentUserID} with ${otherUserID}:`,
+                    error
+                  );
+                });
+  
+              updatePromises.push(updatePromise);
+            });
+          });
+  
+          // Wait for all promises to complete
+          await Promise.all(updatePromises);
+          console.log(`All Chats updated successfully for chatID: ${chatID}`);
+        }
+      }
+    }
+  );
