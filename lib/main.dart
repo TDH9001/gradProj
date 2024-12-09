@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/home_screen.dart';
 import 'package:grad_proj/screen/resetpassword_screen.dart';
 import 'package:grad_proj/screen/singup_screen.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,7 @@ class homePage extends StatelessWidget {
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
         "SingupScreen": (context) => SingupScreen(),
+        "HomeScreen": (context) => HomeScreen(),
       },
       initialRoute: LoginScreen.id,
       debugShowCheckedModeBanner: false,
