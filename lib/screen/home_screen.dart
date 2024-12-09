@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:grad_proj/screen/chats/chat_tabs_screen.dart';
+import 'package:grad_proj/screen/chats/chat_main_Screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
 import 'navbar_screen.dart';
 import 'orgappbar.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  static String id = "HomeScreen";
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: scaffoldKey,
       drawer: NavbarScreen(),
-       appBar:Orgappbar(scaffoldKey: scaffoldKey,),
+      appBar: Orgappbar(
+        scaffoldKey: scaffoldKey,
+      ),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: Padding(
@@ -43,19 +47,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 print(index);
               },
               padding: EdgeInsets.all(16),
-              tabs: const [
+              tabs:  [
                 GButton(
                   icon: Icons.home,
                   text: "Home",
                 ),
                 GButton(
+                  onPressed: () {
+                    print("palceHolder");
+                  },
                   icon: Icons.chat,
                   text: "Chat",
                 ),
                 GButton(
                   icon: Icons.table_view,
                   text: "Table",
-
                 ),
               ]),
         ),

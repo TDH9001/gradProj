@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
@@ -10,8 +9,8 @@ import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
 import 'login_screen.dart';
 import 'package:provider/provider.dart';
-import '../services/DB-service.dart';
-import '../providers/auth_provider.dart';
+import '../../services/DB-service.dart';
+import '../../providers/auth_provider.dart';
 
 class SingupScreen extends StatefulWidget {
   SingupScreen({super.key});
@@ -129,24 +128,6 @@ class _SingupScreenState extends State<SingupScreen> {
                                           email: em,
                                           phoneNumber: pn,
                                           password: pw);
-                                      // try {
-                                      // _imageFileExample = await MediaService.instance
-                                      //     .getImageFromLibrary();
-                                      //   var _result = await CloudStorageService
-                                      //       .instance
-                                      //       .upLoadUserProfileImage(
-                                      //           uid: _uid,
-                                      //           image: _imageFileExample!);
-                                      //   var _imageLink = CloudStorageService
-                                      //       .instance.baseRef
-                                      //       .getDownloadURL();
-                                      //   print(_imageLink);
-                                      // } catch (e) {
-                                      //   SnackBarService.instance
-                                      //       .showsSnackBarError(
-                                      //           text:
-                                      //               "image could nto be uploaded");
-                                      // }
                                     });
                               }
                             },

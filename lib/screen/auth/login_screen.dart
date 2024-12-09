@@ -7,12 +7,12 @@ import 'package:grad_proj/refactored/singupform_screen.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
-import 'package:grad_proj/screen/resetpassword_screen.dart';
-import 'package:grad_proj/screen/singup_screen.dart';
+import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
+import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
-import '../services/snackbar_service.dart';
-import '../services/navigation_Service.dart';
+import '../../providers/auth_provider.dart';
+import '../../services/snackbar_service.dart';
+import '../../services/navigation_Service.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});

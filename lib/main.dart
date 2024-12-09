@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/chat_main_Screen.dart';
-import 'package:grad_proj/screen/resetpassword_screen.dart';
-import 'package:grad_proj/screen/singup_screen.dart';
+import 'package:grad_proj/screen/Profile_screen.dart';
+import 'package:grad_proj/screen/chats/chat_main_Screen.dart';
+import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
+import 'package:grad_proj/screen/auth/singup_screen.dart';
+import 'package:grad_proj/screen/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'package:grad_proj/screen/login_screen.dart';
+import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
@@ -40,6 +42,8 @@ class homePage extends StatelessWidget {
         "resetPassScreen": (context) => ResetpasswordScreen(),
         "SingupScreen": (context) => SingupScreen(),
         "ChatMainScreen": (context) => ChatMainScreen(),
+        "HomeScreen": (context) => HomeScreen(),
+        "ProfileScreen": (context) => ProfileScreen(),
       },
       initialRoute: LoginScreen.id,
       debugShowCheckedModeBanner: false,

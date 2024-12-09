@@ -4,7 +4,7 @@ import 'package:grad_proj/screen/learn2_screen.dart';
 import 'package:grad_proj/screen/learn3_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'login_screen.dart';
+import 'auth/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

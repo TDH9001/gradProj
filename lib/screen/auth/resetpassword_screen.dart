@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/login_screen.dart';
+import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/refactored/resetform_screen.dart';
-import '../UI/text_style.dart';
+import '../../UI/text_style.dart';
 
 class ResetpasswordScreen extends StatelessWidget {
   ResetpasswordScreen({super.key});

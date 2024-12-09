@@ -1,6 +1,8 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
+import "package:grad_proj/screen/chats/chat_main_Screen.dart";
+import "package:grad_proj/screen/home_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
 import '../services/snackbar_service.dart';
 
@@ -29,7 +31,24 @@ class AuthProvider extends ChangeNotifier {
   AuthProvider() {
     //constructor to give init value on startup/use
     _auth = FirebaseAuth.instance;
+    _isAuthenticated();
   }
+
+  void _autiLogin() {
+    if (user != null) {
+      navigationService.instance.navigateToReplacement(HomeScreen.id);
+    }
+  }
+
+//firebase has it's own login-indecators > very usefll
+  void _isAuthenticated() async {
+    user = await _auth.currentUser;
+    if (user != null) {
+      notifyListeners();
+      _autiLogin();
+    }
+  }
+
 //provider Functions
   void loginUserWithEmailAndPassword(String _email, String _password) async {
     //tells the app we are currently working on signing in the user
