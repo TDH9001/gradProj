@@ -1,5 +1,5 @@
 import 'dart:ffi';
-import 'package:grad_proj/screen/chats_and_profile/profile_screen_ui.dart';
+import 'package:grad_proj/screen/profiles/profile_screen_ui.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:grad_proj/screen/chats_and_profile/chat_tabs_screen.dart';
-import 'package:grad_proj/screen/chats_and_profile/chat_main_Screen.dart';
+import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
 import 'navbar_screen.dart';
 import 'orgappbar.dart';
 import '../providers/auth_provider.dart';
@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: RecentChats(),
       key: scaffoldKey,
       drawer: NavbarScreen(),
       appBar: Orgappbar(
@@ -57,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 GButton(
                   onPressed: () {
                     print("palceHolder");
+                    navigationService.instance.navigateTo(RecentChats.id);
                   },
                   icon: Icons.chat,
                   text: "Chat",

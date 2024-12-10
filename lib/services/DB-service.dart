@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import '../models/contact.dart';
+import '../models/Chats.dart';
 
 class DBService {
   static DBService instance = DBService();
@@ -14,6 +15,7 @@ class DBService {
   }
 //collection sit he name of the Field i want to acces in firebase
   String _UserCollection = "Users";
+  String _ChatCollection = "Chats";
 
   Future<void> createUserInDB({
     required String userId,
@@ -31,7 +33,7 @@ class DBService {
         "Email": email,
         "PhoneNumber": phoneNumber,
         "Password": password, //stupid move > should nto be added here
-        "lastSeen": DateTime.now().toUtc(),
+        // "lastSeen": DateTime.now().toUtc(),
         "isComplete": false,
         "classes": [],
         "academicYear": 0,
@@ -63,6 +65,17 @@ class DBService {
     return ref.snapshots().map((_snap) {
       print(contact.fromFirestore(_snap));
       return contact.fromFirestore(_snap);
+    });
+  }
+
+  Stream<List<ChatSnipits>> getUserChats(String _uid) {
+    var ref =
+        _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
+    return ref.snapshots().map((_snap) {
+      //print(ChatSnipits.fromFirestore(_snap));
+      return _snap.docs.map((_doc) {
+        return ChatSnipits.fromFirestore(_doc);
+      }).toList();
     });
   }
 }

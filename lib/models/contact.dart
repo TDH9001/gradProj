@@ -4,7 +4,7 @@ class contact {
   final String Id;
   final String FirstName;
   final String LastName;
-  final Timestamp LastSeet;
+  // final Timestamp LastSeet;
   final List<String> Classes;
   final int Year;
   final bool isComplete;
@@ -15,7 +15,7 @@ class contact {
       required this.LastName,
       required this.Classes,
       required this.Year,
-      required this.LastSeet,
+      // required this.LastSeet,
       required this.isComplete,
       required this.phoneNumber});
 
@@ -27,7 +27,7 @@ class contact {
         Classes: (_snap["classes"] as List<dynamic>)
             .map((e) => e.toString())
             .toList(),
-        LastSeet: _snap["lastSeen"],
+        // LastSeet: _snap["lastSeen"],
         Year: _snap["academicYear"],
         isComplete: _snap["isComplete"],
         phoneNumber: _snap["PhoneNumber"]);

@@ -30,14 +30,14 @@ exports.onChatCreated = firestore.onDocumentCreated(
                   return admin
                     .firestore()
                     .collection("Users")
-                    .doc(currentUserID)
+                    .doc(ChatID)
                     .collection("Chats")
                     .doc(m)
                     .create({
                       chatID: ChatID,
-                      firstName: userData.firstName,
-                      lastName: userData.lastName,
-                      phoneNumber : userData.PhoneNumber,
+                      name : ChatID,
+                      senderName: userData.firstName.concat(" ",userData.lastName,),
+                      senderId: currentUserID,
                       unseenCount: 0,
                     });
                 }
@@ -82,6 +82,7 @@ exports.onChatsUpdated = firestore.onDocumentUpdated(
                   timestamp: lastMessage.timestamp,
                   type: lastMessage.type,
                   unseenCount: admin.firestore.FieldValue.increment(1),
+                  sender: currentUserID
                 })
                 .catch((error) => {
                   console.error(
