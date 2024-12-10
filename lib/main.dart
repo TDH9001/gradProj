@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/chats_and_profile/CompleteProfile.dart';
 import 'package:grad_proj/screen/Profile_screen.dart';
-import 'package:grad_proj/screen/chats/chat_main_Screen.dart';
+import 'package:grad_proj/screen/chats_and_profile/chat_main_Screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/home_screen.dart';
@@ -44,6 +45,7 @@ class homePage extends StatelessWidget {
         "ChatMainScreen": (context) => ChatMainScreen(),
         "HomeScreen": (context) => HomeScreen(),
         "ProfileScreen": (context) => ProfileScreen(),
+        "CompleteProfile": (context) => CompleteProfile(),
       },
       initialRoute: LoginScreen.id,
       debugShowCheckedModeBanner: false,

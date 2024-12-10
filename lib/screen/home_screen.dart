@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:grad_proj/screen/chats/chat_tabs_screen.dart';
-import 'package:grad_proj/screen/chats/chat_main_Screen.dart';
+import 'package:grad_proj/screen/chats_and_profile/chat_tabs_screen.dart';
+import 'package:grad_proj/screen/chats_and_profile/chat_main_Screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
 import 'navbar_screen.dart';
 import 'orgappbar.dart';
+import '../providers/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
   static String id = "HomeScreen";
 
   @override
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 print(index);
               },
               padding: EdgeInsets.all(16),
-              tabs:  [
+              tabs: [
                 GButton(
                   icon: Icons.home,
                   text: "Home",

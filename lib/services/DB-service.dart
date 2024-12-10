@@ -32,7 +32,9 @@ class DBService {
         "PhoneNumber": phoneNumber,
         "Password": password, //stupid move > should nto be added here
         "lastSeen": DateTime.now().toUtc(),
-        "isComplete": false
+        "isComplete": false,
+        "classes": [],
+        "academicYear": 0,
       });
     } catch (e) {
       print(e);
@@ -58,7 +60,7 @@ class DBService {
 //how to get a file from the cloud as a model
   Stream<contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
-    return ref.get().asStream().map((_snap) {
+    return ref.snapshots().map((_snap) {
       print(contact.fromFirestore(_snap));
       return contact.fromFirestore(_snap);
     });

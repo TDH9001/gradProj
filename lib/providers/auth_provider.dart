@@ -1,7 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
-import "package:grad_proj/screen/chats/chat_main_Screen.dart";
+import "package:grad_proj/screen/chats_and_profile/chat_main_Screen.dart";
 import "package:grad_proj/screen/home_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
 import '../services/snackbar_service.dart';
@@ -40,6 +40,11 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  void signOut() {
+    _auth.signOut();
+    user = null;
+  }
+
 //firebase has it's own login-indecators > very usefll
   void _isAuthenticated() async {
     user = await _auth.currentUser;
@@ -65,7 +70,7 @@ class AuthProvider extends ChangeNotifier {
       status = AuthStatus.Authenticated;
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      navigationService.instance.navigateToReplacement("ChatMainScreen");
+      navigationService.instance.navigateToReplacement("HomeScreen");
     } catch (e) {
       status = AuthStatus.ERROR;
       user = null;
@@ -93,7 +98,7 @@ class AuthProvider extends ChangeNotifier {
       navigationService.instance.goBack();
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      navigationService.instance.navigateToReplacement("ChatMainScreen");
+      navigationService.instance.navigateToReplacement("HomeScreen");
     } catch (e) {
       print(e);
       status = AuthStatus.ERROR;
@@ -104,39 +109,4 @@ class AuthProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // void RegisterUser(
-  //     {required BuildContext cont,
-  //     required String userId,
-  //     required String firstName,
-  //     required String lastname,
-  //     required String email,
-  //     required String phoneNumber,
-  //     required String password}) {
-  //   Future<void> onSuccess(String userId) async {
-  //     status = AuthStatus.Authenticating;
-  //     notifyListeners();
-  //     try {
-  //       UserCredential _result = await _auth.
-  // UserWithEmailAndPassword(
-  //           email: email, password: password);
-  //       user = _result.user;
-  //       status = AuthStatus.Authenticated;
-  //       await onSuccess(user!.uid);
-  //       Navigator.pop(cont);
-  //       //update the last seen variable
-  //       //add the user to the database
-  //       PrintSnackBarSucces(cont, "welcome ${user!.email}");
-
-  //       //should amke it navigate to homepage > not yet made
-  //     } catch (e) {
-  //       status = AuthStatus.ERROR;
-  //       user = null;
-  //       PrintSnackBarFail(cont, "error in regestry");
-
-  //       print(e);
-  //     }
-  //     notifyListeners();
-  //   }
-  // }
 }
