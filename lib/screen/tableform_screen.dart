@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
+import '../UI/text_style.dart';
 import 'navbar_screen.dart';
-import 'text_style.dart';
+
 
 class TableformScreen extends StatefulWidget {
   const TableformScreen({super.key});

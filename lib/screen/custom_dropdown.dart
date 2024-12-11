@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/text_style.dart';
+import '../UI/text_style.dart';
 
 class CustomDropdownField<T> extends StatelessWidget {
     final String label;

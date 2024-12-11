@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'about_screen.dart';
 import 'home_screen.dart';
 
 class NavbarScreen extends StatelessWidget {
@@ -62,7 +63,12 @@ class NavbarScreen extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text("Logout"),
             onTap: () => print("Logout Tapped"),
-          )
+          ),
+          ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text("About"),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AboutScreen()))),
         ],
       ),
     );
