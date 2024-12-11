@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
+import 'package:grad_proj/screen/table_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'navbar_screen.dart';
 import 'orgappbar.dart';
