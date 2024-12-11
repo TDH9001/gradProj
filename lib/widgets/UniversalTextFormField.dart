@@ -118,6 +118,16 @@ class _MyWidgetState extends State<Universaltextformfield> {
               return 'Phone number must be exactly 11 digits long.';
             }
             return null; // Valid input
+          } else if (widget.label == "Academic Year") {
+            if (data == null || data.trim().isEmpty) {
+              return 'Phone number cannot be empty.';
+            }
+            if (!RegExp(r'^\d+$').hasMatch(data)) {
+              return 'Year number must contain digits.';
+            }
+            if (data.trim().length > 1) {
+              return 'year must contain only digits.';
+            }
           } //username , phone , etc
         },
       ),

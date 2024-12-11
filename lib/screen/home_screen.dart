@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
-import 'package:grad_proj/screen/table_screen.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
 import 'navbar_screen.dart';
 import 'orgappbar.dart';
+import '../providers/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  static String id = "HomeScreen";
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,15 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: RecentChats(),
       key: scaffoldKey,
       drawer: NavbarScreen(),
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
-      ),
-      body: Container(
-        child: Center(
-          child: Text("Home"),
-        ),
       ),
       bottomNavigationBar: Container(
         color: Colors.white,
@@ -69,12 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
               padding: EdgeInsets.all(16),
-              tabs: const [
+              tabs: [
                 GButton(
                   icon: Icons.home,
                   text: "Home",
                 ),
                 GButton(
+                  onPressed: () {
+                    print("palceHolder");
+                    navigationService.instance.navigateTo(RecentChats.id);
+                  },
                   icon: Icons.chat,
                   text: "Chat",
                 ),

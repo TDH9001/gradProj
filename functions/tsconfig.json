@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "types": [
+      "node",
+      "babel__core",
+      "babel__generator",
+      "babel__template",
+      "babel__traverse",
+      "graceful-fs",
+      "istanbul-lib-coverage",
+      "istanbul-lib-report",
+      "istanbul-reports",
+      "lodash",
+      "stack-utils",
+      "yargs",
+      "yargs-parser"
+    ],
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017"
+  },
+  "compileOnSave": true,
+  "include": [
+    "src"
+  ]
+}
