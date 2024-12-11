@@ -13,6 +13,7 @@ exports.onChatCreated = firestore.onDocumentCreated(
       const data = snapshot.data();
       if (data) {
         const members: string[] = data.members;
+        const ownerIDs : string[] = data.ownerID;
 
         for (let index = 0; index < members.length; index++) {
           const currentUserID = members[index];
@@ -30,15 +31,15 @@ exports.onChatCreated = firestore.onDocumentCreated(
                   return admin
                     .firestore()
                     .collection("Users")
-                    .doc(ChatID)
+                    .doc(currentUserID)
                     .collection("Chats")
-                    .doc(m)
+                    .doc(ChatID)
                     .create({
                       chatID: ChatID,
                       name : ChatID,
                       senderName: userData.firstName.concat(" ",userData.lastName,),
-                      senderId: currentUserID,
                       unseenCount: 0,
+                      admins:ownerIDs
                     });
                 }
                 return null;
@@ -76,13 +77,14 @@ exports.onChatsUpdated = firestore.onDocumentUpdated(
                 .collection("Users")
                 .doc(currentUserID)
                 .collection("Chats")
-                .doc(otherUserID)
+                .doc(chatID)
                 .update({
                   lastMessage: lastMessage.message,
                   timestamp: lastMessage.timestamp,
                   type: lastMessage.type,
                   unseenCount: admin.firestore.FieldValue.increment(1),
-                  sender: currentUserID
+                  senderID:lastMessage.senderID,
+                  senderName:lastMessage.senderName
                 })
                 .catch((error) => {
                   console.error(

@@ -7,6 +7,7 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../screen/chats/Chat_page.dart';
 
 class RecentChats extends StatelessWidget {
   RecentChats({super.key});
@@ -53,8 +54,15 @@ Widget _RecentChats() {
                   itemBuilder: (context, index) {
                     return ListTile(
                         tileColor: Colors.white,
-                        onTap: () {},
-                        title: Text(data[index].Sendername),
+                        onTap: () {
+                          navigationService.instance.navigateToRoute(
+                              MaterialPageRoute(builder: (_context) {
+                            return ChatPage(
+                                chatID: data[index].Chatid,
+                                senderName: data[index].Sendername);
+                          }));
+                        },
+                        title: Text(data[index].Chatid),
                         subtitle: Text(data[index].LastMessage),
                         leading: Container(
                           width: 50,
@@ -66,7 +74,7 @@ Widget _RecentChats() {
                           ),
                         ),
                         trailing: Container(
-                            width: 70,
+                            width: 100,
                             child: ChatScreenTrailingiwdget(
                                 data[index].timestamp)));
                   },
@@ -81,8 +89,7 @@ Widget _RecentChats() {
 }
 
 Widget ChatScreenTrailingiwdget(Timestamp s) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.end,
+  return ListView(
     children: [
       Text(
         timeago.format(s.toDate()),

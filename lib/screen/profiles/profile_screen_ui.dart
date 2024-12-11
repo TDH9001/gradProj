@@ -144,8 +144,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                         buttontext: "LOGOUT",
                         func: () async {
                           _auth.signOut();
-                          navigationService.instance
-                              .navigateToReplacement(LoginScreen.id);
+                          navigationService.instance.navigateTo(LoginScreen.id);
                         }),
                     SizedBox(
                       height: widget.height * 0.04,

@@ -4,6 +4,7 @@ import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
+import '../models/message.dart';
 
 class DBService {
   static DBService instance = DBService();
@@ -76,6 +77,13 @@ class DBService {
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
       }).toList();
+    });
+  }
+
+  Stream<ChatData> getChat(String ChatId) {
+    var ref = _db.collection(_ChatCollection).doc(ChatId);
+    return ref.snapshots().map((_snap) {
+      return ChatData.fromFirestore(_snap);
     });
   }
 }
