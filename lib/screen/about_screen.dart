@@ -6,6 +6,7 @@ import 'package:grad_proj/screen/orgappbar.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
+  static String id = "AboutScreen";
 
   @override
   State<AboutScreen> createState() => _AboutScreenState();
@@ -19,11 +20,12 @@ class _AboutScreenState extends State<AboutScreen> {
       key: scaffoldKey,
       appBar: Orgappbar(scaffoldKey: scaffoldKey),
       drawer: NavbarScreen(),
-      body:Padding(padding: EdgeInsets.all(8.0),
+      body: Padding(
+        padding: EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           Text(
+            Text(
               'About Us',
               style: TextStyle(
                 fontSize: 20,
@@ -32,26 +34,31 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
             ),
             SizedBox(height: 20),
-        AboutbuttonScreen(
-          text: 'About Courses',
-          onpressed: ()
-          {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const LevelScreen()));
-
-          },
-        ),
-            SizedBox(height: 20,),
+            AboutbuttonScreen(
+              text: 'About Courses',
+              onpressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LevelScreen()));
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
             AboutbuttonScreen(
               text: 'About Calculate Gpa',
-              onpressed: (){},
+              onpressed: () {},
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             AboutbuttonScreen(
               text: 'About Computerscience',
-              onpressed: (){},
+              onpressed: () {},
             ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
   }

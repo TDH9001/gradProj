@@ -64,12 +64,11 @@ class NavbarScreen extends StatelessWidget {
               title: Text("Notifications"),
               onTap: () => print("Notification Tapped"),
             ),
-           ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text("About"),
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AboutScreen()))),
-
+            ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text("About"),
+                onTap: () =>
+                    navigationService.instance.navigateTo(AboutScreen.id)),
           ],
         ),
       ),
