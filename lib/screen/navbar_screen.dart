@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'about_screen.dart';
+import 'home_screen.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
@@ -62,18 +64,12 @@ class NavbarScreen extends StatelessWidget {
               title: Text("Notifications"),
               onTap: () => print("Notification Tapped"),
             ),
-            // ListTile(
-            //   leading: Icon(Icons.logout),
-            //   title: Text("Logout"),
-            //   onTap: () async {
-            //     print("Logout Tapped");
-            //     var _auth = Provider.of<AuthProvider>(context);
+           ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text("About"),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AboutScreen()))),
 
-            //     _auth.signOut();
-            //     navigationService.instance
-            //         .navigateToReplacement(LoginScreen.id);
-            //   },
-            // )
           ],
         ),
       ),

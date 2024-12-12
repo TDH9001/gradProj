@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
+import '../UI/text_style.dart';
 import 'navbar_screen.dart';
 import '../UI/text_style.dart';
 

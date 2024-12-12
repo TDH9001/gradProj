@@ -104,7 +104,7 @@ class _SingupScreenState extends State<SingupScreen> {
                             alignment: Alignment.center,
                             child: CircularProgressIndicator())
                         : PrimaryButton(
-                            buttontext: "Create the account",
+                            buttontext: "Create the account" ,
                             func: () async {
                               if (SingupScreen._formKey.currentState!
                                   .validate()) {
