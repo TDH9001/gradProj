@@ -154,7 +154,7 @@ class _ChatPageState extends State<ChatPage> {
       )),
     );
   }
-
+//FIXME:
   Widget _messageTextField(TextEditingController txt) {
     return SizedBox(
       width: _width * 0.5,
