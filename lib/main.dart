@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/about_screen.dart';
+import 'package:grad_proj/screen/aboutscreens/about_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/screen/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
