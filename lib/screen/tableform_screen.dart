@@ -78,7 +78,7 @@ class _TableformScreenState extends State<TableformScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: Orgappbar(scaffoldKey: scaffoldKey),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey,title: "Table", ),
       drawer: const NavbarScreen(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -86,11 +86,6 @@ class _TableformScreenState extends State<TableformScreen> {
           children: [
             Column(
               children: [
-                Text(
-                  'Table',
-                  style: TextStyles.text,
-                ),
-                const SizedBox(height: 16),
                 Table(
                   border: TableBorder.all(), // Adds a border to the table
                   columnWidths: const {

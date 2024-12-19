@@ -44,21 +44,13 @@ class _TableScreenState extends State<TableScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: Orgappbar(scaffoldKey: scaffoldKey),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey , title: "Create Table"),
       drawer: NavbarScreen(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              ' Create Table',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-            SizedBox(height: 20,),
             CustomDropdownField<String>(
               items: ["Maths", "Physics", "Chemistry", "Biology"],
               // example course
@@ -108,7 +100,7 @@ class _TableScreenState extends State<TableScreen> {
               hintText: "Select time",
               value: selectedValue3,
             ),
-            SizedBox(height: 60,),
+            //SizedBox(height: 60,),
             Expanded(
               child: ListView.builder(
                 itemCount: addedCourses.length,
@@ -121,40 +113,43 @@ class _TableScreenState extends State<TableScreen> {
                 },
               ),
             ),
-            Row(
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff7AB2D3),
-                  ),
-                  onPressed: ()
-                  {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => TableformScreen()));
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff7AB2D3),
+                    ),
+                    onPressed: ()
+                    {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TableformScreen()));
 
-                  },
-                  child: Text(
-                    'Create Table',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                    },
+                    child: Text(
+                      'Create Table',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                ),
-                SizedBox(width: 35,),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff7AB2D3),
+                  Spacer(),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff7AB2D3),
+                    ),
+                    onPressed: addCourse,
+                    child: Text(
+                      'add course',
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                  onPressed: addCourse,
-                  child: Text(
-                    'add course',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

@@ -33,7 +33,7 @@ class CustomDropdownField<T> extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyles.text,
+              style: TextStyles.subtext,
             ),
             if (isMandatory == true)
               Text(

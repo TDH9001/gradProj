@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/aboutbutton_screen.dart';
-import 'package:grad_proj/screen/level_screen.dart';
+import 'package:grad_proj/screen/aboutscreens/level_screen.dart';
 import 'package:grad_proj/screen/navbar_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
+
+import 'component.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -32,23 +33,27 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
             ),
             SizedBox(height: 20),
-        AboutbuttonScreen(
-          text: 'About Courses',
-          onpressed: ()
+            aboutButtonScreen(
+            text: 'About Courses',
+            onPressed: ()
           {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const LevelScreen()));
+           // print('hello sarah ');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LevelScreen()),
+            );
 
           },
         ),
             SizedBox(height: 20,),
-            AboutbuttonScreen(
+            aboutButtonScreen(
               text: 'About Calculate Gpa',
-              onpressed: (){},
+              onPressed: (){},
             ),
             SizedBox(height: 20,),
-            AboutbuttonScreen(
+            aboutButtonScreen(
               text: 'About Computerscience',
-              onpressed: (){},
+              onPressed: (){},
             ),
         ],
       ),
