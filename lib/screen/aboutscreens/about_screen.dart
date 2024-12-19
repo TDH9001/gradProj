@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/aboutbutton_screen.dart';
-import 'package:grad_proj/screen/level_screen.dart';
+import 'package:grad_proj/screen/aboutscreens/level_screen.dart';
 import 'package:grad_proj/screen/navbar_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
 
+import 'component.dart';
+
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
-  static String id = "AboutScreen";
 
   @override
   State<AboutScreen> createState() => _AboutScreenState();
@@ -20,12 +20,11 @@ class _AboutScreenState extends State<AboutScreen> {
       key: scaffoldKey,
       appBar: Orgappbar(scaffoldKey: scaffoldKey),
       drawer: NavbarScreen(),
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
+      body:Padding(padding: EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+           Text(
               'About Us',
               style: TextStyle(
                 fontSize: 20,
@@ -34,31 +33,30 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
             ),
             SizedBox(height: 20),
-            AboutbuttonScreen(
-              text: 'About Courses',
-              onpressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LevelScreen()));
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            AboutbuttonScreen(
-              text: 'About Calculate Gpa',
-              onpressed: () {},
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            AboutbuttonScreen(
-              text: 'About Computerscience',
-              onpressed: () {},
-            ),
-          ],
+            aboutButtonScreen(
+            text: 'About Courses',
+            onPressed: ()
+          {
+           // print('hello sarah ');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LevelScreen()),
+            );
+
+          },
         ),
+            SizedBox(height: 20,),
+            aboutButtonScreen(
+              text: 'About Calculate Gpa',
+              onPressed: (){},
+            ),
+            SizedBox(height: 20,),
+            aboutButtonScreen(
+              text: 'About Computerscience',
+              onPressed: (){},
+            ),
+        ],
+      ),
       ),
     );
   }

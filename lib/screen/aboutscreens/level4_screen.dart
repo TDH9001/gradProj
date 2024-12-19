@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'navbar_screen.dart';
-import 'orgappbar.dart';
+import '../navbar_screen.dart';
+import '../orgappbar.dart';
 
 class Level4Screen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
