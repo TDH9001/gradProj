@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -104,7 +105,7 @@ class _SingupScreenState extends State<SingupScreen> {
                             alignment: Alignment.center,
                             child: CircularProgressIndicator())
                         : PrimaryButton(
-                            buttontext: "Create the account" ,
+                            buttontext: "Create the account",
                             func: () async {
                               if (SingupScreen._formKey.currentState!
                                   .validate()) {
@@ -129,6 +130,8 @@ class _SingupScreenState extends State<SingupScreen> {
                                           phoneNumber: pn,
                                           password: pw);
                                     });
+                                navigationService.instance
+                                    .navigateTo("HomeScreen");
                               }
                             },
                           ),

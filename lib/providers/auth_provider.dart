@@ -69,7 +69,6 @@ class AuthProvider extends ChangeNotifier {
       status = AuthStatus.Authenticated;
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      navigationService.instance.navigateToReplacement("HomeScreen");
     } catch (e) {
       status = AuthStatus.ERROR;
       user = null;
@@ -97,7 +96,6 @@ class AuthProvider extends ChangeNotifier {
       navigationService.instance.goBack();
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      navigationService.instance.navigateToReplacement("HomeScreen");
     } catch (e) {
       print(e);
       status = AuthStatus.ERROR;

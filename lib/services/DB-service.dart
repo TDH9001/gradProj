@@ -86,4 +86,32 @@ class DBService {
       return ChatData.fromFirestore(_snap);
     });
   }
+
+  Future<void> addMessageInChat(
+      {required String chatId, required Message messageData}) {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    String type = "";
+    switch (messageData.type) {
+      case messageType.Text:
+        type = "text";
+        break;
+      case messageType.image:
+        type = "image";
+        break;
+      default:
+        break;
+    }
+    return ref.update({
+      //when adding a value to an array
+      "messages": FieldValue.arrayUnion([
+        {
+          "message": messageData.messageContent,
+          "senderID": messageData.senderID,
+          "senderName": messageData.senderName,
+          "timestamp": messageData.timestamp,
+          "type": type //messageData.type
+        }
+      ])
+    });
+  }
 }

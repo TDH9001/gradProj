@@ -52,6 +52,19 @@ class ChatData {
     List<Message> MessageDataCurr = rawMessages.map((message) {
       messageType ms =
           message["type"] == "text" ? messageType.Text : messageType.image;
+      // messageType ms = messageType.Text;
+      // switch (message["type"]) {
+      //   case "text":
+      //     ms = messageType.Text;
+      //     break;
+      //   case "image":
+      //     ms = messageType.image;
+      //     break;
+      //   case "file":
+      //     ms = messageType.file;
+      //     break;
+      //   default:
+      // }
 
       return Message(
         senderID: message["senderID"] ?? "",

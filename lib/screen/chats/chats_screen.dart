@@ -57,9 +57,7 @@ Widget _RecentChats() {
                         onTap: () {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {
-                            return ChatPage(
-                                chatID: data[index].Chatid,
-                                senderName: data[index].Sendername);
+                            return ChatPage(chatID: data[index].Chatid);
                           }));
                         },
                         title: Text(data[index].Chatid),

@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as p;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -10,7 +12,9 @@ class CloudStorageService {
 
   Reference baseRef = FirebaseStorage.instance.ref();
 
-  String _profileimages = "profile image of user";
+  final String _profileimages = "profile image of user";
+  final String _messageFiles = "messageFiles of chats";
+  final String _images = "images";
 
   CloudStorageService() {
     _storage = FirebaseStorage.instance;
@@ -22,6 +26,24 @@ class CloudStorageService {
       {required String uid, required File image}) async {
     try {
       return await baseRef.child(_profileimages).child(uid).putFile(image);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<TaskSnapshot?> uploadChatFile(
+      {required String uid, required File fileData}) async {
+    var _timestamp = Timestamp.now();
+    var _Filename = p.basename(
+        fileData.path); //for when the file is not taken from the galary
+    _Filename += "_${_timestamp.toString()}";
+    try {
+      return baseRef
+          .child(_messageFiles)
+          .child(uid)
+          .child(_images)
+          .child(_Filename)
+          .putFile(fileData);
     } catch (e) {
       print(e);
     }

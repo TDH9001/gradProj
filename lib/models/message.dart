@@ -19,7 +19,7 @@ class Message {
     return Message(
       messageContent: _snap["message"],
       senderID: _snap["senderID"],
-      type: _snap["type"],
+      type: _snap["type"] == "text" ? messageType.Text : messageType.image,
       timestamp: _snap["timestamp"],
       senderName: _snap["senderName"],
     );

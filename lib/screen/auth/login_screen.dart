@@ -82,12 +82,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         Password: true,
                         controller: t2,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       _auth.status == AuthStatus.Authenticating
                           ? const Align(
                               alignment: Alignment.center,
                               child: CircularProgressIndicator())
-                           : PrimaryButton(
+                          : PrimaryButton(
                               buttontext: 'Login',
                               func: () {
                                 _password = t2.text.trim();
@@ -96,6 +98,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _auth.loginUserWithEmailAndPassword(
                                       _email, _password);
                                 }
+                                navigationService.instance
+                                    .navigateTo("HomeScreen");
                               },
                             ),
                       //cahnged from big button to this
