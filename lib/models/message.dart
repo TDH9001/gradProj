@@ -1,12 +1,12 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 
-enum messageType { Text, image, file }
+// enum messageType { Text, image, file }
 
 class Message {
   final String messageContent;
   final String senderID;
   final Timestamp timestamp;
-  final messageType type;
+  final String type;
   final String senderName;
   Message(
       {required this.senderID,
@@ -19,7 +19,7 @@ class Message {
     return Message(
       messageContent: _snap["message"],
       senderID: _snap["senderID"],
-      type: _snap["type"] == "text" ? messageType.Text : messageType.image,
+      type: _snap["type"],
       timestamp: _snap["timestamp"],
       senderName: _snap["senderName"],
     );

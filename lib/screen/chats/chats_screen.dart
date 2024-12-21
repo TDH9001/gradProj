@@ -61,7 +61,17 @@ Widget _RecentChats() {
                           }));
                         },
                         title: Text(data[index].Chatid),
-                        subtitle: Text(data[index].LastMessage),
+                        subtitle: data[index].type == "image"
+                            ? Row(
+                                children: [
+                                  Text("image attachment"),
+                                  Icon(
+                                    Icons.image,
+                                    color: Colors.blue,
+                                  ),
+                                ],
+                              )
+                            : Text(data[index].LastMessage),
                         leading: Container(
                           width: 50,
                           height: 50,
@@ -74,7 +84,8 @@ Widget _RecentChats() {
                         trailing: Container(
                             width: 100,
                             child: ChatScreenTrailingiwdget(
-                                data[index].timestamp)));
+                                data[index].timestamp,
+                                data[index].unseenCount >= 1)));
                   },
                 )
               : Center(
@@ -86,22 +97,24 @@ Widget _RecentChats() {
   });
 }
 
-Widget ChatScreenTrailingiwdget(Timestamp s) {
+Widget ChatScreenTrailingiwdget(Timestamp s, bool isUnseen) {
   return ListView(
     children: [
       Text(
         timeago.format(s.toDate()),
-        style: TextStyle(fontSize: 15),
+        style: TextStyle(fontSize: 12),
       ),
       SizedBox(
-        height: 12,
+        height: 8,
       ),
-      Container(
-        height: 18,
-        width: 18,
-        decoration: BoxDecoration(
-            color: Colors.red, borderRadius: BorderRadius.circular(300)),
-      )
+      isUnseen
+          ? Container(
+              height: 18,
+              width: 18,
+              decoration: BoxDecoration(
+                  color: Colors.red, borderRadius: BorderRadius.circular(360)),
+            )
+          : SizedBox()
     ],
   );
 }

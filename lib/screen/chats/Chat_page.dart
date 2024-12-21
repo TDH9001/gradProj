@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
@@ -19,6 +21,7 @@ class ChatPage extends StatefulWidget {
   late AuthProvider _auth;
   GlobalKey<FormState> GK = GlobalKey<FormState>();
   String textTosend = "";
+  final ScrollController _LVC = ScrollController();
 
   @override
   State<ChatPage> createState() {
@@ -65,6 +68,7 @@ class _ChatPageState extends State<ChatPage> {
         builder: (_context, _snapshot) {
           var _data = _snapshot.data;
 
+          //used to tell the builder to start from the end
           if (_snapshot.connectionState == ConnectionState.waiting ||
               _snapshot.connectionState == ConnectionState.none) {
             return Center(child: CircularProgressIndicator());
@@ -74,12 +78,23 @@ class _ChatPageState extends State<ChatPage> {
                 child: Text(
                     "Error: ${_snapshot.error} \n please update your data and the data field mising"));
           }
+          //FIXME: possibly not working after a large enough amount of data is sent
+          Timer(
+            Duration(milliseconds: 50),
+            () {
+              widget._LVC.jumpTo(
+                widget._LVC.position.maxScrollExtent * 2,
+              ); //giving it a larger expented scrool amount
+            },
+          );
 
           return ListView.builder(
-            itemCount: _snapshot.data!.messages.length,
+            itemCount: _snapshot.data!.messages.length, controller: widget._LVC,
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
             itemBuilder: (_Context, index) {
               var ChatdataOfCurrentChat = _data!.messages[index];
-              print("Message Type: ${_data.messages[index].type}");
 
               return Padding(
                   padding: EdgeInsets.only(
@@ -94,8 +109,7 @@ class _ChatPageState extends State<ChatPage> {
                             ? MainAxisAlignment.end
                             : MainAxisAlignment.start,
                     children: [
-                      //FIXME: here it thinks all the types are images
-                      _data.messages[index].type == messageType.Text
+                      _data.messages[index].type == "text"
                           ? _MessageBubble(
                               message: ChatdataOfCurrentChat.messageContent
                                   .toString(),
@@ -180,10 +194,7 @@ class _ChatPageState extends State<ChatPage> {
               stops: [0.40, 0.70],
               begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
               end: isOurs ? Alignment.topRight : Alignment.topLeft)),
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      // height:
-      //     _height * 0.13 + ((FileAdress.length * 3.5 + senderName.length) / 10),
-      width: _width * 0.80,
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -195,12 +206,12 @@ class _ChatPageState extends State<ChatPage> {
             height: 9,
           ),
           Container(
-            height: _height * 0.30,
-            width: _width * 0.30,
+            height: _height * 0.45,
+            width: _width * 0.6,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 image: DecorationImage(
-                    image: NetworkImage(FileAdress), fit: BoxFit.cover)),
+                    image: NetworkImage(FileAdress), fit: BoxFit.fill)),
           ),
           SizedBox(
             height: 15,
@@ -266,7 +277,7 @@ class _ChatPageState extends State<ChatPage> {
       width: _width * 0.09,
       child: IconButton(
         icon: Icon(Icons.send),
-        onPressed: () {
+        onPressed: () async {
           if (widget.GK.currentState!.validate()) {
             // txt.text.trim();
             DBService.instance.addMessageInChat(
@@ -275,7 +286,7 @@ class _ChatPageState extends State<ChatPage> {
                     senderID: widget._auth.user!.uid,
                     messageContent: txt.text.trim(),
                     timestamp: Timestamp.now(),
-                    type: messageType.Text,
+                    type: "text",
                     //TODO: here after making databse > make it so here it sends the current user data in DB
                     senderName: widget._auth.user!.email ?? "how is it null"));
           }
@@ -303,11 +314,12 @@ class _ChatPageState extends State<ChatPage> {
                         senderID: widget._auth.user!.uid,
                         messageContent: _imageurl,
                         timestamp: Timestamp.now(),
-                        type: messageType.image,
+                        type: "image",
                         //TODO: here after making databse > make it so here it sends the current user data in DB
                         senderName:
                             widget._auth.user!.email ?? "how is it null"));
               }
+              FocusScope.of(context).unfocus();
             },
             icon: Icon(Icons.camera_enhance)));
   }

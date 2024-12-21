@@ -9,6 +9,7 @@ class ChatSnipits {
   final int unseenCount;
   final Timestamp timestamp;
   final List<String> adminId;
+  final String type;
 
   ChatSnipits(
       {required this.id,
@@ -17,7 +18,8 @@ class ChatSnipits {
       required this.Sendername,
       required this.unseenCount,
       required this.timestamp,
-      required this.adminId});
+      required this.adminId,
+      required this.type});
 
   factory ChatSnipits.fromFirestore(DocumentSnapshot _snap) {
     var _data = _snap.data();
@@ -28,6 +30,7 @@ class ChatSnipits {
       timestamp: _snap["timestamp"],
       unseenCount: _snap["unseenCount"],
       Sendername: _snap["senderName"],
+      type: _snap["type"],
       adminId:
           (_snap["admins"] as List<dynamic>).map((e) => e.toString()).toList(),
     );
@@ -50,43 +53,25 @@ class ChatData {
     List<dynamic> rawMessages = _snap["messages"] ?? [];
 
     List<Message> MessageDataCurr = rawMessages.map((message) {
-      messageType ms =
-          message["type"] == "text" ? messageType.Text : messageType.image;
-      // messageType ms = messageType.Text;
-      // switch (message["type"]) {
-      //   case "text":
-      //     ms = messageType.Text;
-      //     break;
-      //   case "image":
-      //     ms = messageType.image;
-      //     break;
-      //   case "file":
-      //     ms = messageType.file;
-      //     break;
-      //   default:
-      // }
-
       return Message(
         senderID: message["senderID"] ?? "",
         senderName: message["senderName"] ?? "",
         messageContent: message["message"] ?? "",
         timestamp: message["timestamp"],
-        type: ms,
+        type: message["type"] ?? "text",
       );
     }).toList();
     //messageType
 
     if (!MessageDataCurr.isEmpty || MessageDataCurr != null) {
       MessageDataCurr = MessageDataCurr.map((_m) {
-        var MessageType =
-            _m.type == "text" ? messageType.Text : messageType.image;
         //handle files being sent
         return Message(
             senderID: _m.senderID,
             senderName: _m.senderName,
             messageContent: _m.messageContent,
             timestamp: _m.timestamp,
-            type: MessageType);
+            type: _m.type);
       }).toList();
     } else {
       MessageDataCurr = <Message>[
@@ -95,7 +80,7 @@ class ChatData {
             senderID: "",
             senderName: "",
             timestamp: Timestamp.now(),
-            type: messageType.Text)
+            type: "text")
       ];
     }
 
