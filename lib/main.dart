@@ -40,10 +40,13 @@ class homePage extends StatelessWidget {
           ),
       //darkTheme: ThemeData.dark(),
       //TODO: add logic for user to be added to thier classes after finishing
-      //TODO: handle files being added to the chat > probably needs storage
       //TODO: add local storage to store user current data
       //TODO: make chat be stored localy > then allow acces of images , files
       //TODO: make caht be loaded from DB then from cloud
+       //TODO: handle files being added to the chat > probably needs storage
+
+       //FIXME: fix ui > make ui look good > UI UI UI UI UI 
+
       routes: {
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
