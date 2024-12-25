@@ -5,22 +5,22 @@ import '../UI/text_style.dart';
 class Orgappbar extends StatelessWidget implements PreferredSizeWidget
 {
   final GlobalKey<ScaffoldState> scaffoldKey;
-   String title  ;
+  String title;
 
-   Orgappbar({required this.scaffoldKey, Key? key,   this.title="SciConnect"}) : super(key: key);
+   Orgappbar({required this.scaffoldKey, Key? key, this.title='SciConnect'}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Color(0xff7AB2D3),
       title: Text(title,style: TextStyles.appBarText,),
-      leading: InkWell(
-        onTap: ()
-        {
-          scaffoldKey.currentState?.openDrawer();
-        },
-        child: Icon(Icons.menu),
-      ),
+      // leading: InkWell(
+      //   onTap: ()
+      //   {
+      //     scaffoldKey.currentState?.openDrawer();
+      //   },
+      //   child: Icon(Icons.menu),
+      // ),
       actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -29,6 +29,8 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget
             radius: 20,
           ),
         ),
+        SizedBox(width: 10,),
+
       ],
     );
   }

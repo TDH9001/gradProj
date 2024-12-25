@@ -1,7 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
-import "package:grad_proj/screen/home_screen.dart";
+import "package:grad_proj/screen/bottom_navegation_bar_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
 import '../services/snackbar_service.dart';
 
@@ -35,7 +35,7 @@ class AuthProvider extends ChangeNotifier {
 
   void _autiLogin() {
     if (user != null) {
-      navigationService.instance.navigateToReplacement(HomeScreen.id);
+      navigationService.instance.navigateToReplacement(BottomNavegationBarScreen.id);
     }
   }
 

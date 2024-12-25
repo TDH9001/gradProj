@@ -46,6 +46,7 @@ dependencies:
   cloud_functions: ^5.2.0
   multi_dropdown: ^3.0.1
   timeago: ^3.7.0
+  curved_navigation_bar: ^1.0.5
 
 dev_dependencies:
   flutter_test:

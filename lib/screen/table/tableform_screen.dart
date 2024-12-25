@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
-import '../UI/text_style.dart';
-import 'navbar_screen.dart';
-import '../UI/text_style.dart';
+import '../../UI/text_style.dart';
+import '../account/account_screen.dart';
+import '../../UI/text_style.dart';
 
 class TableformScreen extends StatefulWidget {
   const TableformScreen({super.key});
@@ -78,14 +78,19 @@ class _TableformScreenState extends State<TableformScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: Orgappbar(scaffoldKey: scaffoldKey,title: "Table", ),
-      drawer: const NavbarScreen(),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Table",),
+      drawer: const AccountScreen(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
             Column(
               children: [
+                Text(
+                  'Table',
+                  style: TextStyles.text,
+                ),
+                const SizedBox(height: 16),
                 Table(
                   border: TableBorder.all(), // Adds a border to the table
                   columnWidths: const {

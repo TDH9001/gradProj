@@ -11,6 +11,7 @@ class Universaltextformfield extends StatefulWidget {
   final String label;
   final bool Password;
   final TextEditingController controller;
+
   bool isObscure = true;
   @override
   State<Universaltextformfield> createState() => _MyWidgetState();
