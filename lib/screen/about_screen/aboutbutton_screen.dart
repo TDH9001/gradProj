@@ -8,7 +8,7 @@ class AboutbuttonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: (){},
+        onPressed: onpressed,
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

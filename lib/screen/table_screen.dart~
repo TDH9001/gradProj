@@ -44,21 +44,14 @@ class _TableScreenState extends State<TableScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: Orgappbar(scaffoldKey: scaffoldKey),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Table",),
       drawer: NavbarScreen(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              ' Create Table',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-            SizedBox(height: 20,),
+
             CustomDropdownField<String>(
               items: ["Maths", "Physics", "Chemistry", "Biology"],
               // example course
@@ -108,20 +101,10 @@ class _TableScreenState extends State<TableScreen> {
               hintText: "Select time",
               value: selectedValue3,
             ),
-            SizedBox(height: 60,),
-            Expanded(
-              child: ListView.builder(
-                itemCount: addedCourses.length,
-                itemBuilder: (context, index) {
-                  final course = addedCourses[index];
-                  return ListTile(
-                    title: Text("${course['course']} - ${course['day']}"),
-                    subtitle: Text("Time: ${course['time']}"),
-                  );
-                },
-              ),
-            ),
+            SizedBox(height: 40,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -129,7 +112,7 @@ class _TableScreenState extends State<TableScreen> {
                   ),
                   onPressed: ()
                   {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => TableformScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TableformScreen()));
 
                   },
                   child: Text(
@@ -155,6 +138,19 @@ class _TableScreenState extends State<TableScreen> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: 40,),
+            Expanded(
+              child: ListView.builder(
+                itemCount: addedCourses.length,
+                itemBuilder: (context, index) {
+                  final course = addedCourses[index];
+                  return ListTile(
+                    title: Text("${course['course']} - ${course['day']}"),
+                    subtitle: Text("Time: ${course['time']}"),
+                  );
+                },
+              ),
             ),
           ],
         ),

@@ -8,19 +8,23 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: Color(0xff7AB2D3)),
-      child: MaterialButton(
-        height: MediaQuery.of(context).size.height * 0.08,
-        minWidth: double.infinity,
-        onPressed: func,
-        child: Text(
-          buttontext,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 25, fontWeight: FontWeight.w400),
+    return ElevatedButton(
+      onPressed: func,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xff7AB2D3),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
-    ); //saaaaaaaaaaaaaaaaa
+      child: Text(
+      buttontext,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }

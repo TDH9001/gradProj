@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/navbar_screen.dart';
+import 'package:grad_proj/screen/account/account_screen.dart';
 
-import 'orgappbar.dart';
+import '../orgappbar.dart';
 
 class GpaScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -13,7 +13,7 @@ class GpaScreen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: Orgappbar(scaffoldKey: scaffoldKey),
-      drawer: NavbarScreen(),
+      drawer: AccountScreen(),
 
 
     );

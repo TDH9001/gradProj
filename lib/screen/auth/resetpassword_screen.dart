@@ -5,6 +5,7 @@ import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/refactored/resetform_screen.dart';
 import '../../UI/text_style.dart';
+import '../../widgets/customTextField.dart';
 
 class ResetpasswordScreen extends StatelessWidget {
   ResetpasswordScreen({super.key});
@@ -14,40 +15,56 @@ class ResetpasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: ListView(
-          //crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 200,
-            ),
-            Text('Reset Password', style: TextStyles.text),
-            const SizedBox(
-              height: 5,
-            ),
-            Text('Please enter your email', style: TextStyles.subtext),
-            const SizedBox(
-              height: 10,
-            ),
-            //    ResetformScreen(),
-            Universaltextformfield(
-                label: "Email", Password: false, controller: t1),
-            const SizedBox(
-              height: 10,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: PrimaryButton(
-                buttontext: 'Reset Password',
-                func: () {},
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 32),
+              const Text(
+                'Create your Account',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF1F2937),
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+              const SizedBox(height: 32),
+              CustomTextField(
+                controller: TextEditingController(),
+                hintText: 'Email',
+                onChanged: (value) {},
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                controller: TextEditingController(),
+                hintText: 'Password',
+                isPassword: true,
+                onChanged: (value) {},
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(controller: TextEditingController(),
+                hintText: 'Confirm Password',
+                isPassword: true,
+                onChanged: (value) {},
+              ),
+              const SizedBox(height: 40),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: PrimaryButton(
+                  buttontext: 'Reset Password',
+                  func: () {},
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+

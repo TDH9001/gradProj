@@ -1,16 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/about_screen.dart';
+import 'package:grad_proj/screen/about_screen/about_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/screen/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
-import 'package:grad_proj/screen/home_screen.dart';
+import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
-import 'package:grad_proj/screen/splash_screen.dart';
+import 'package:grad_proj/screen/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
 
@@ -43,7 +43,7 @@ class homePage extends StatelessWidget {
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
         "SingupScreen": (context) => SingupScreen(),
-        "HomeScreen": (context) => HomeScreen(),
+        "HomeScreen": (context) => BottomNavegationBarScreen(),
         "ProfileScreen": (context) => ProfileScreen(),
         "CompleteProfile": (context) => CompleteProfile(),
         "RecentChats": (context) => RecentChats(),
