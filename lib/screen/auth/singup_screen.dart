@@ -40,14 +40,8 @@ class _SingupScreenState extends State<SingupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    widget._DeviceHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
-    widget._DeviceWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    widget._DeviceHeight = MediaQuery.of(context).size.height;
+    widget._DeviceWidth = MediaQuery.of(context).size.width;
 
     File? _imageFileExample;
 
@@ -88,48 +82,48 @@ class _SingupScreenState extends State<SingupScreen> {
                       hintText: 'First Name',
                       isPassword: false,
                       controller: _firstName,
-                      onChanged: (String value) {  },
+                      onChanged: (String value) {},
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       hintText: 'last Name',
                       isPassword: false,
-                        controller: _LastName,
+                      controller: _LastName,
                       onChanged: (value) {},
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       hintText: 'Email',
                       isPassword: false,
-                        controller: _email,
+                      controller: _email,
                       onChanged: (value) {},
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       hintText: 'Phone Number',
                       isPassword: false,
-                        controller: _phoneNumber,
+                      controller: _phoneNumber,
                       onChanged: (value) {},
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       hintText: 'Password',
                       isPassword: true,
-                        controller: _passWord,
+                      controller: _passWord,
                       onChanged: (value) {},
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       hintText: ' Confirm Password',
                       isPassword: true,
-                        controller: _confirmPassWord,
+                      controller: _confirmPassWord,
                       onChanged: (value) {},
                     ),
                     const SizedBox(height: 24),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator())
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator())
                         : PrimaryButton(
                             buttontext: "Create the account",
                             func: () async {
@@ -161,34 +155,8 @@ class _SingupScreenState extends State<SingupScreen> {
                               }
                             },
                           ),
-                      buttontext: "Create the account" ,
-                        func: () async {
-                          if (SingupScreen._formKey.currentState!
-                              .validate()) {
-                            String fn = _firstName.text.trim();
-                            String ln = _LastName.text.trim();
-                            String em = _email.text.trim();
-                            String pn = _phoneNumber.text.trim();
-                            String pw = _passWord.text.trim();
-                            String cpw = _confirmPassWord.text.trim();
-                            _auth.RegesterUser(
-                                firstName: fn,
-                                lastname: ln,
-                                email: em,
-                                phoneNumber: pn,
-                                password: pw,
-                                onSucces: (String _uid) async {
-                                  DBService.instance.createUserInDB(
-                                      userId: _uid,
-                                      firstName: fn,
-                                      lastname: ln,
-                                      email: em,
-                                      phoneNumber: pn,
-                                      password: pw);
-                                });
-                          }
-                        },
-                    ),
+
+                    // ),
                     Navigatortextbutton(
                         text: 'Already have an account ?', location: "pop"),
                     //   buttontext: 'Login',),

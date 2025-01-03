@@ -89,18 +89,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 24),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator())
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator())
                         : PrimaryButton(
-                     func: () {
-                        _password = t2.text.trim();
-                        _email = t1.text.trim();
-                        if (_formKey.currentState!.validate()) {
-                          _auth.loginUserWithEmailAndPassword(
-                              _email, _password);
-                        }
-                      },
-                      buttontext: 'Login',),
+                            func: () {
+                              _password = t2.text.trim();
+                              _email = t1.text.trim();
+                              if (_formKey.currentState!.validate()) {
+                                _auth.loginUserWithEmailAndPassword(
+                                    _email, _password);
+                              }
+                              navigationService.instance
+                                  .navigateToReplacement("HomeScreen");
+                            },
+                            buttontext: 'Login',
+                          ),
                     const SizedBox(height: 24),
                     const Row(
                       children: [
@@ -132,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  SingupScreen(),
+                                builder: (context) => SingupScreen(),
                               ),
                             );
                           },
@@ -159,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  ResetpasswordScreen(),
+                                builder: (context) => ResetpasswordScreen(),
                               ),
                             );
                           },

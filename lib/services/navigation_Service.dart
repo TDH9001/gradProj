@@ -23,13 +23,13 @@ class navigationService {
     //unknown
     return navKey.currentState!.push(_route);
   }
-    // navigationService.instance.navigateToRoute(
-    //                           MaterialPageRoute(builder: (_context) {
-    //                         return ChatPage(
-    //                             chatID: data[index].Chatid,
-    //                             senderName: data[index].Sendername);
-    //                       }));
-    //                     },
+  // navigationService.instance.navigateToRoute(
+  //                           MaterialPageRoute(builder: (_context) {
+  //                         return ChatPage(
+  //                             chatID: data[index].Chatid,
+  //                             senderName: data[index].Sendername);
+  //                       }));
+  //                     },
 
   void goBack() {
     return navKey.currentState!.pop();

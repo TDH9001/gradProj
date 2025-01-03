@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/navbar_screen.dart';
+// import 'package:grad_proj/screen/navbar_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
 
 class Level1Screen extends StatelessWidget {
@@ -16,7 +16,7 @@ class Level1Screen extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: Orgappbar(scaffoldKey: scaffoldKey),
-      drawer: NavbarScreen(),
+      // drawer: NavbarScreen(),
       body: ListView(
         padding: const EdgeInsets.all(8.0),
         children: [

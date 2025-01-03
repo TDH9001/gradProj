@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/aboutscreens/about_screen.dart';
+import 'package:grad_proj/screen/about_screen/about_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/screen/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
@@ -34,23 +34,27 @@ class homePage extends StatelessWidget {
       title: "Sci.Connect",
       theme: ThemeData(
           brightness: Brightness.light,
-          primaryColor: Colors.white, //fromARGB(255, 152, 188, 209)
+          primaryColor:
+              Color.fromARGB(100, 255, 255, 255), //fromARGB(255, 152, 188, 209)
           hintColor: Color.fromARGB(199, 146, 190, 188),
           scaffoldBackgroundColor: Colors.white //fromARGB(199, 146, 190, 188),
           ),
       //darkTheme: ThemeData.dark(),
+      //FIXME: fix the isseus with levels in the ABOUT screens
+      //FIXME: make a model for the table
+      //FIXME: implement the table screen and its stuff
+
       //TODO: add logic for user to be added to thier classes after finishing
       //TODO: add local storage to store user current data
       //TODO: make chat be stored localy > then allow acces of images , files
       //TODO: make caht be loaded from DB then from cloud
-       //TODO: handle files being added to the chat > probably needs storage
-
-       //FIXME: fix ui > make ui look good > UI UI UI UI UI 
+      //TODO: handle files being added to the chat > probably needs storage
 
       routes: {
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
         "SingupScreen": (context) => SingupScreen(),
+        //home has been replaced by BottomNavegationBarScreen
         "HomeScreen": (context) => BottomNavegationBarScreen(),
         "ProfileScreen": (context) => ProfileScreen(),
         "CompleteProfile": (context) => CompleteProfile(),
