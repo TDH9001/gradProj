@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/about_screen/about_screen.dart';
+import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/screen/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
@@ -51,6 +52,7 @@ class homePage extends StatelessWidget {
       //TODO: handle files being added to the chat > probably needs storage
 
       routes: {
+        "OnboardingScreen": (context) => OnboardingScreen(),
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
         "SingupScreen": (context) => SingupScreen(),
@@ -61,7 +63,7 @@ class homePage extends StatelessWidget {
         "RecentChats": (context) => RecentChats(),
         "AboutScreen": (context) => AboutScreen(),
       },
-      initialRoute: LoginScreen.id,
+      initialRoute: OnboardingScreen.id,
       debugShowCheckedModeBanner: false,
     );
   }

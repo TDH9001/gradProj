@@ -35,7 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  smooth_page_indicator:
+  smooth_page_indicator: ^1.2.0+3
+  #smooth_page_indicator:
   firebase_core: ^3.8.0
   google_nav_bar : ^5.0.7
   provider: ^6.1.2
