@@ -21,9 +21,9 @@ class ResetpasswordScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 32),
+              const SizedBox(height: 40),
               const Text(
-                'Create your Account',
+                'New Password',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
@@ -31,7 +31,19 @@ class ResetpasswordScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 40, right: 40, top: 10),
+                child: Text(
+                  'Your new password must be different from previously used password',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 40),
               CustomTextField(
                 controller: TextEditingController(),
                 hintText: 'Email',
@@ -56,7 +68,7 @@ class ResetpasswordScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: PrimaryButton(
-                  buttontext: 'Reset Password',
+                  buttontext: 'Create New Password',
                   func: () {},
                 ),
               ),

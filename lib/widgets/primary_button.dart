@@ -8,14 +8,17 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SizedBox(
+    height: 50,
+     width: 300,
+     child:  ElevatedButton(
       onPressed: func,
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xff7AB2D3),
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        // padding: const EdgeInsets.symmetric(vertical: 16),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.circular(8),
+        // ),
       ),
       child: Text(
       buttontext,
@@ -25,6 +28,7 @@ class PrimaryButton extends StatelessWidget {
           color: Colors.white,
         ),
       ),
+     ),
     );
   }
 }

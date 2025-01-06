@@ -20,11 +20,12 @@ class Navigatortextbutton extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.normal,
               decoration: TextDecoration.underline,
+              decorationColor: Color(0xff7AB2D3),
               decorationThickness: 2,
-              color: Colors.black),
+              color: Color(0xff7AB2D3)),
         ));
   }
 }
