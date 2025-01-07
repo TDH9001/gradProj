@@ -90,14 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextField(
                       controller: t1,
                       hintText: 'Email',
-                      onChanged: (value) {},
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
                       controller: t2,
                       hintText: 'Password',
                       isPassword: true,
-                      onChanged: (value) {},
                     ),
                     const SizedBox(height: 40),
                 Row(

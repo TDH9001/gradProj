@@ -47,20 +47,17 @@ class ResetpasswordScreen extends StatelessWidget {
               CustomTextField(
                 controller: TextEditingController(),
                 hintText: 'Email',
-                onChanged: (value) {},
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 controller: TextEditingController(),
                 hintText: 'Password',
                 isPassword: true,
-                onChanged: (value) {},
               ),
               const SizedBox(height: 16),
               CustomTextField(controller: TextEditingController(),
                 hintText: 'Confirm Password',
                 isPassword: true,
-                onChanged: (value) {},
               ),
               const SizedBox(height: 40),
               GestureDetector(
