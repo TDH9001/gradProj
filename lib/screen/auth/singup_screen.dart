@@ -68,7 +68,7 @@ class _SingupScreenState extends State<SingupScreen> {
                   children: [
                     const SizedBox(height: 40),
                     const Text(
-                      'Create a New Account',
+                      'Create Account',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
@@ -84,28 +84,28 @@ class _SingupScreenState extends State<SingupScreen> {
                       controller: _firstName,
                       onChanged: (String value) {},
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
                     CustomTextField(
                       hintText: 'last Name',
                       isPassword: false,
                       controller: _LastName,
                       onChanged: (value) {},
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
                     CustomTextField(
                       hintText: 'Email',
                       isPassword: false,
                       controller: _email,
                       onChanged: (value) {},
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
                     CustomTextField(
                       hintText: 'Phone Number',
                       isPassword: false,
                       controller: _phoneNumber,
                       onChanged: (value) {},
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
                     CustomTextField(
                       hintText: 'Password',
                       isPassword: true,
@@ -119,7 +119,7 @@ class _SingupScreenState extends State<SingupScreen> {
                       controller: _confirmPassWord,
                       onChanged: (value) {},
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 40),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
                             alignment: Alignment.center,
@@ -155,84 +155,24 @@ class _SingupScreenState extends State<SingupScreen> {
                               }
                             },
                           ),
-
-                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already have an account ?",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF6B7280),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                     Navigatortextbutton(
-                        text: 'Already have an account ?', location: "pop"),
-                    //   buttontext: 'Login',),
-                    // const SizedBox(height: 24),
-                    // const Row(
-                    //   children: [
-                    //     Expanded(child: Divider()),
-                    //     Padding(
-                    //       padding: EdgeInsets.symmetric(horizontal: 16),
-                    //       child: Text(
-                    //         'Or',
-                    //         style: TextStyle(
-                    //           color: Color(0xFF6B7280),
-                    //           fontSize: 14,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     Expanded(child: Divider()),
-                    //   ],
-                    // ),
-                    // const SizedBox(height: 24),
-                    // const SizedBox(height: 24),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     const Text(
-                    //       "Don't have an account? ",
-                    //       style: TextStyle(color: Color(0xFF6B7280)),
-                    //     ),
-                    //     TextButton(
-                    //       onPressed: () {
-                    //         // Navigator.push(
-                    //         //   context,
-                    //         //   MaterialPageRoute(
-                    //         //     builder: (context) => const RegisterScreen(),
-                    //         //   ),
-                    //         // );
-                    //       },
-                    //       child: const Text(
-                    //         'Sign up',
-                    //         style: TextStyle(
-                    //           color: Color(0xff7AB2D3),
-                    //           fontWeight: FontWeight.w600,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // const SizedBox(height: 24),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     const Text(
-                    //       "Forget password ? ",
-                    //       style: TextStyle(color: Color(0xFF6B7280)),
-                    //     ),
-                    //     TextButton(
-                    //       onPressed: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) => ResetpasswordScreen(),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: const Text(
-                    //         'Reset password ',
-                    //         style: TextStyle(
-                    //           color: Color(0xff7AB2D3),
-                    //           fontWeight: FontWeight.w600,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                        text: 'Login',
+                        location: "pop" ,
+                    ),
                   ],
+                ),
+                ],
                 ),
               );
             }),

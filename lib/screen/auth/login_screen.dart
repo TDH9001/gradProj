@@ -61,19 +61,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   _formKey.currentState?.save();
                 },
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 80),
+                    const SizedBox(height: 40),
+                    Image(image: AssetImage('assets/images/login.jpeg')),
                     const Text(
-                      'Login to your Account',
+                      'SciConnect',
                       style: TextStyle(
                         fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                         color: Color(0xFF1F2937),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 40),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: const Text(
+                    'LOGIN',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1F2937),
+                    ),
+                  ),
+                ),
+                    const SizedBox(height: 15),
                     CustomTextField(
                       controller: t1,
                       hintText: 'Email',
@@ -86,7 +99,36 @@ class _LoginScreenState extends State<LoginScreen> {
                       isPassword: true,
                       onChanged: (value) {},
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 40),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Forget password ? ",
+                        style: TextStyle(color: Color(0xFF6B7280)),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResetpasswordScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Reset password ',
+                          style: TextStyle(
+                            color: Color(0xff7AB2D3),
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color(0xff7AB2D3),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                    SizedBox(height: 30),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
                             alignment: Alignment.center,
@@ -104,25 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             buttontext: 'Login',
                           ),
-                    const SizedBox(height: 24),
-                    const Row(
-                      children: [
-                        Expanded(child: Divider()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'Or',
-                            style: TextStyle(
-                              color: Color(0xFF6B7280),
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                        Expanded(child: Divider()),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -144,38 +168,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               color: Color(0xff7AB2D3),
                               fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Color(0xff7AB2D3),
+
                             ),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 24),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Forget password ? ",
-                          style: TextStyle(color: Color(0xFF6B7280)),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ResetpasswordScreen(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'Reset password ',
-                            style: TextStyle(
-                              color: Color(0xff7AB2D3),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               );
@@ -186,5 +187,4 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 }
-/*
-* */
+
