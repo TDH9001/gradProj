@@ -37,6 +37,8 @@ class AuthProvider extends ChangeNotifier {
     if (user != null) {
       navigationService.instance
           .navigateToReplacement(BottomNavegationBarScreen.id);
+    } else {
+      navigationService.instance.navigateTo("OnboardingScreen");
     }
   }
 

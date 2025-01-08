@@ -64,7 +64,7 @@ class homePage extends StatelessWidget {
         "RecentChats": (context) => RecentChats(),
         "AboutScreen": (context) => AboutScreen(),
       },
-      initialRoute: _auth.user == null ? "OnboardingScreen" : "HomeScreen",
+      initialRoute: "login",
       debugShowCheckedModeBanner: false,
     );
   }

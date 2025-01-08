@@ -43,68 +43,68 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
+    widget._auth = Provider.of<AuthProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: FutureBuilder<List<String>>(
-            future: hobbiesFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                List<String> hobbies = snapshot.data!;
-              }
-              List<String> ddt = snapshot.data!;
+        flexibleSpace: widget.admins.contains(widget._auth.user!.uid)
+            ? FutureBuilder<List<String>>(
+                future: hobbiesFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    List<String> hobbies = snapshot.data!;
+                  }
+                  List<String> ddt = snapshot.data!;
 
-              return StreamBuilder<List<contact>>(
-                  stream: DBService.instance
-                      .getMembersDataOfChat(ddt, widget.chatID),
-                  builder: (_context, _snapshot) {
-                    var _data = _snapshot.data;
+                  return StreamBuilder<List<contact>>(
+                      stream: DBService.instance
+                          .getMembersDataOfChat(ddt, widget.chatID),
+                      builder: (_context, _snapshot) {
+                        var _data = _snapshot.data;
 
-                    //used to tell the builder to start from the end
-                    if (_snapshot.connectionState == ConnectionState.waiting ||
-                        _snapshot.connectionState == ConnectionState.none) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    if (_snapshot.hasError) {
-                      return Center(
-                          child: Text(
-                              "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-                    }
-//jsut a place holder for the output methoud
-                    return AppbarDropdown(
-                      items: [
-                        for (int i = 0; i < _snapshot.data!.length; i++)
-                          [
-                            //returns a list where > [0] = the name and phone number
-                            //the [1]is the user ID in database to be give to make admin
-                            "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
-                            _snapshot.data![i].Id
-                          ]
-                      ],
-                      title: (user) {
-                        print(widget.admins);
-                        print(
-                            "is ${user[0]} and admin or not  :  ${widget.admins.contains(user[0])}");
-                        print(widget.admins);
-                        if (widget.admins.contains(user[0])) {
-                          return user[0] +
-                              "\n already an admin \n does nothing when the button is pressed";
-                        } else {
-                          return user[0].toString() +
-                              "click to make a group admin";
+                        //used to tell the builder to start from the end
+                        if (_snapshot.connectionState ==
+                                ConnectionState.waiting ||
+                            _snapshot.connectionState == ConnectionState.none) {
+                          return Center(child: CircularProgressIndicator());
                         }
-                      },
-                      onClick: (user) {
-                        DBService.instance.makeAdmin(user[1], widget.chatID);
-                      },
-                      selected: [""],
-                    );
-                  });
-            }),
+                        if (_snapshot.hasError) {
+                          return Center(
+                              child: Text(
+                                  "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                        }
+//jsut a place holder for the output methoud
+                        return AppbarDropdown(
+                          items: [
+                            for (int i = 0; i < _snapshot.data!.length; i++)
+                              [
+                                //returns a list where > [0] = the name and phone number
+                                //the [1]is the user ID in database to be give to make admin
+                                "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
+                                _snapshot.data![i].Id
+                              ]
+                          ],
+                          title: (user) {
+                            if (widget.admins.contains(user[1])) {
+                              return user[0] +
+                                  "\n already an admin \n does nothing when the button is pressed";
+                            } else {
+                              return user[0].toString() +
+                                  "\nclick to make a group admin";
+                            }
+                          },
+                          onClick: (user) {
+                            DBService.instance
+                                .makeAdmin(user[1], widget.chatID);
+                          },
+                        );
+                      });
+                })
+            : SizedBox(),
         backgroundColor: Color(0xff7AB2D3),
         title: Text(widget.chatID),
       ),

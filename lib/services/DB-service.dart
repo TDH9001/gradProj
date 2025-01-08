@@ -53,10 +53,10 @@ class DBService {
     try {
       await _db.collection(_UserCollection).doc(userId).update(
           {"academicYear": year, "classes": classes, "isComplete": true});
-      SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
+      //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
       print(e);
-      SnackBarService.instance.showsSnackBarError(text: "error Happened");
+      //SnackBarService.instance.showsSnackBarError(text: "error Happened");
     }
   }
 
@@ -118,17 +118,6 @@ class DBService {
     }
   }
 
-  // Stream<List<contact>> getMembersDataOfChat(
-  //     List<String> users, String chatId) {
-  //   List<contact> l = [];
-  //   for (int i = 0; i < users.length; i++) {
-  //     var ref = _db.collection(_UserCollection).doc(users[i]);
-  //      ref.snapshots().map((_snap) {
-  //       print(contact.fromFirestore(_snap));
-  //       return contact.fromFirestore(_snap);
-  //     });
-  //   }
-  // }
   Stream<List<contact>> getMembersDataOfChat(
       List<String> users, String chatId) {
     var ref = FirebaseFirestore.instance.collection(_UserCollection);
@@ -165,5 +154,28 @@ class DBService {
         .collection(_ChatCollection)
         .doc(chatID);
     return ref.update({"unseenCount": 0});
+  }
+
+  Future<void> addChatsToUser(String uid, String chatID) {
+    var ref = _db
+        .collection(_UserCollection)
+        .doc(uid)
+        .collection(_ChatCollection)
+        .doc(chatID);
+    ref.set({
+      "chatID": chatID,
+      "name": chatID,
+      "unseenCount": 0,
+      "admins": [],
+      "lastMessage": "welcome New User",
+      "senderID": "",
+      "senderName": "dev_lead",
+      "timestamp": Timestamp.now(),
+      "type": "text"
+    });
+    var ref2 = _db.collection(_ChatCollection).doc(chatID);
+    return ref.update({
+      "members": FieldValue.arrayUnion([uid]),
+    });
   }
 }

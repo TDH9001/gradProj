@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import '../about_screen/about_screen.dart';
 import '../bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
@@ -137,7 +138,10 @@ class AccountScreen extends StatelessWidget {
                               color: Color(0xff7AB2D3)),
                           title: const Text("Settings",
                               style: TextStyle(fontWeight: FontWeight.bold)),
-                          onTap: () {},
+                          onTap: () {
+                            navigationService.instance
+                                .navigateTo(CompleteProfile.id);
+                          },
                           trailing:
                               const Icon(Icons.arrow_forward_ios, size: 16),
                         ),

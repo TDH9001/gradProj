@@ -24,6 +24,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
     DropdownItem(label: 'math 101', value: "math101"),
     DropdownItem(label: 'math 102', value: "math102"),
     DropdownItem(label: 'math 103', value: "math103"),
+    DropdownItem(label: 'math 105', value: "math 105"),
   ];
   static final _Listcontroller = MultiSelectController<String>();
   static final _yearController = TextEditingController();
@@ -69,6 +70,10 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                               .toList(),
                           year: int.parse(_yearController.text),
                           userId: _auth.user!.uid);
+                      for (int i = 0; i < selectedItems.length; i++) {
+                        DBService.instance.addChatsToUser(
+                            _auth.user!.uid, selectedItems[i].value);
+                      }
 
                       debugPrint(selectedItems.toString());
                       navigationService.instance.goBack();
