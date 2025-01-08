@@ -104,4 +104,66 @@ class DBService {
       ])
     });
   }
+
+  Future<List<String>> getMembersOfChat(String chatID) async {
+    var snap = await _db.collection(_ChatCollection).doc(chatID).get();
+    if (snap.exists) {
+      List<String> mem = List<String>.from(snap.get("members"));
+      print(mem);
+      return mem;
+    } else {
+      print("ERRRRORRRORROROROROROORORORROOR");
+
+      throw Exception('Document does not exist');
+    }
+  }
+
+  // Stream<List<contact>> getMembersDataOfChat(
+  //     List<String> users, String chatId) {
+  //   List<contact> l = [];
+  //   for (int i = 0; i < users.length; i++) {
+  //     var ref = _db.collection(_UserCollection).doc(users[i]);
+  //      ref.snapshots().map((_snap) {
+  //       print(contact.fromFirestore(_snap));
+  //       return contact.fromFirestore(_snap);
+  //     });
+  //   }
+  // }
+  Stream<List<contact>> getMembersDataOfChat(
+      List<String> users, String chatId) {
+    var ref = FirebaseFirestore.instance.collection(_UserCollection);
+
+    // Convert the list of UIDs into a stream of contacts
+    return Stream.fromFuture(Future.wait(
+      users.map((uid) async {
+        var doc = await ref.doc(uid).get();
+        if (doc.exists) {
+          return contact.fromFirestore(doc);
+        } else {
+          return null; // Handle case where user doc doesn't exist
+        }
+      }).toList(),
+    )).map((contacts) {
+      // Filter out any null values in case a user document is missing
+      return contacts.whereType<contact>().toList();
+    });
+  }
+
+  Future<void> makeAdmin(String uid, String chatID) {
+    var ref = _db.collection(_ChatCollection).doc(chatID);
+    return ref.update({
+      //when adding a value to an array
+      "ownerID": FieldValue.arrayUnion([uid])
+    });
+    //does nto create duplicates
+  }
+
+  Future<void> resetUnseenCount(String uid, String chatID) {
+    var ref = _db
+        .collection(_UserCollection)
+        .doc(uid)
+        .collection(_ChatCollection)
+        .doc(chatID);
+    return ref.update({"unseenCount": 0});
+  }
 }

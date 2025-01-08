@@ -77,10 +77,13 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.home, color: Color(0xff7AB2D3)),
-                          title: const Text("Home", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading:
+                              const Icon(Icons.home, color: Color(0xff7AB2D3)),
+                          title: const Text("Home",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () => print("Home Tapped"),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -100,13 +103,17 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.person, color: Color(0xff7AB2D3)),
-                          title: const Text("Profile", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: const Icon(Icons.person,
+                              color: Color(0xff7AB2D3)),
+                          title: const Text("Profile",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () {
                             print("Profile Tapped");
-                            navigationService.instance.navigateTo(ProfileScreen.id);
+                            navigationService.instance
+                                .navigateTo(ProfileScreen.id);
                           },
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -126,10 +133,13 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.settings, color: Color(0xff7AB2D3)),
-                          title: const Text("Settings", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: const Icon(Icons.settings,
+                              color: Color(0xff7AB2D3)),
+                          title: const Text("Settings",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () {},
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -149,10 +159,13 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.chat, color: Color(0xff7AB2D3)),
-                          title: const Text("Chatting", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading:
+                              const Icon(Icons.chat, color: Color(0xff7AB2D3)),
+                          title: const Text("Chatting",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () => print("Chatting Tapped"),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -172,10 +185,13 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.notifications, color: Color(0xff7AB2D3)),
-                          title: const Text("Notifications", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: const Icon(Icons.notifications,
+                              color: Color(0xff7AB2D3)),
+                          title: const Text("Notifications",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () => print("Notification Tapped"),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -195,10 +211,14 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.info, color: Color(0xff7AB2D3)),
-                          title: const Text("About", style: TextStyle(fontWeight: FontWeight.bold)),
-                          onTap: () => navigationService.instance.navigateTo(AboutScreen.id),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          leading:
+                              const Icon(Icons.info, color: Color(0xff7AB2D3)),
+                          title: const Text("About",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          onTap: () => navigationService.instance
+                              .navigateTo(AboutScreen.id),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),

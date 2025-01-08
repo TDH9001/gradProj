@@ -23,7 +23,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: widget.isPassword,
+      obscureText:
+          widget.hintText == "Password" ? widget.isObscure : widget.isPassword,
       autocorrect: false,
       // onChanged: onChanged,
       decoration: InputDecoration(

@@ -29,10 +29,9 @@ class RecentChats extends StatelessWidget {
 Widget _RecentChats() {
   return Builder(builder: (_context) {
     var _auth = Provider.of<AuthProvider>(_context);
-    if (_auth.user == null) {
-      navigationService.instance.navigateToReplacement(LoginScreen.id);
-    }
-    //all it does ios go up the widget tree > searching for the CHANGENOTI... and taking it's data
+    // if (_auth.user == null) {
+    //   navigationService.instance.navigateToReplacement(LoginScreen.id);
+    // }
     return StreamBuilder<List<ChatSnipits>>(
         stream: DBService.instance.getUserChats(_auth.user!.uid),
         builder: (context, _snapshot) {
@@ -57,8 +56,13 @@ Widget _RecentChats() {
                         onTap: () {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {
-                            return ChatPage(chatID: data[index].Chatid);
+                            return ChatPage(
+                              chatID: data[index].Chatid,
+                              admins: data[index].adminId,
+                            );
                           }));
+                          DBService.instance.resetUnseenCount(
+                              _auth.user!.uid, data[index].Chatid);
                         },
                         title: Text(data[index].Chatid),
                         subtitle: data[index].type == "image"
@@ -85,7 +89,8 @@ Widget _RecentChats() {
                             width: 100,
                             child: ChatScreenTrailingiwdget(
                                 data[index].timestamp,
-                                data[index].unseenCount >= 1)));
+                                data[index].unseenCount >= 1,
+                                data[index].unseenCount)));
                   },
                 )
               : Center(
@@ -97,8 +102,9 @@ Widget _RecentChats() {
   });
 }
 
-Widget ChatScreenTrailingiwdget(Timestamp s, bool isUnseen) {
-  return ListView(
+Widget ChatScreenTrailingiwdget(Timestamp s, bool isUnseen, int unseenCount) {
+//  await getMembersOfChat("math 105");
+  return Column(
     children: [
       Text(
         timeago.format(s.toDate()),
@@ -110,9 +116,15 @@ Widget ChatScreenTrailingiwdget(Timestamp s, bool isUnseen) {
       isUnseen
           ? Container(
               height: 18,
-              width: 18,
+              width: 25,
               decoration: BoxDecoration(
                   color: Colors.red, borderRadius: BorderRadius.circular(360)),
+              child: Center(
+                child: Text(
+                  unseenCount.toString(),
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+              ),
             )
           : SizedBox()
     ],

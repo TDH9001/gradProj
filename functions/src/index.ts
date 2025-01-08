@@ -84,7 +84,8 @@ exports.onChatsUpdated = firestore.onDocumentUpdated(
                   type: lastMessage.type,
                   unseenCount: admin.firestore.FieldValue.increment(1),
                   senderID:lastMessage.senderID,
-                  senderName:lastMessage.senderName
+                  senderName:lastMessage.senderName,
+                  admins:data.ownerID,
                 })
                 .catch((error) => {
                   console.error(
