@@ -6,6 +6,7 @@ import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import '../../UI/colors.dart';
 import '../../services/DB-service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../providers/auth_provider.dart';
@@ -38,8 +39,33 @@ class _ChatPageState extends State<ChatPage> {
     _width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff7AB2D3),
-        title: Text(widget.chatID),
+        backgroundColor: ColorsApp.primary,
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/images/chat.png'),
+            ),
+            SizedBox(width: 10),
+            Text(
+              widget.chatID,
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ],
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert, color: Colors.white),
+            onPressed: () {
+              // TODO: Add options like deleting or muting the chat
+            },
+          ),
+        ],
       ),
       body: ChangeNotifierProvider<AuthProvider>.value(
           value: AuthProvider.instance, child: _chatPageUI()),
@@ -81,7 +107,7 @@ class _ChatPageState extends State<ChatPage> {
           //FIXME: possibly not working after a large enough amount of data is sent
           Timer(
             Duration(milliseconds: 50),
-            () {
+                () {
               widget._LVC.jumpTo(
                 widget._LVC.position.maxScrollExtent * 2,
               ); //giving it a larger expented scrool amount
@@ -105,27 +131,27 @@ class _ChatPageState extends State<ChatPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment:
-                        widget._auth.user!.uid == _data.messages[index].senderID
-                            ? MainAxisAlignment.end
-                            : MainAxisAlignment.start,
+                    widget._auth.user!.uid == _data.messages[index].senderID
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.start,
                     children: [
                       _data.messages[index].type == "text"
                           ? _MessageBubble(
-                              message: ChatdataOfCurrentChat.messageContent
-                                  .toString(),
-                              isOurs: widget._auth.user!.uid ==
-                                  _data.messages[index].senderID,
-                              ts: _data.messages[index].timestamp,
-                              senderName: _data.messages[index].senderName,
-                            )
+                        message: ChatdataOfCurrentChat.messageContent
+                            .toString(),
+                        isOurs: widget._auth.user!.uid ==
+                            _data.messages[index].senderID,
+                        ts: _data.messages[index].timestamp,
+                        senderName: _data.messages[index].senderName,
+                      )
                           : _FileMessageBubble(
-                              FileAdress: ChatdataOfCurrentChat.messageContent
-                                  .toString(),
-                              isOurs: widget._auth.user!.uid ==
-                                  _data.messages[index].senderID,
-                              ts: _data.messages[index].timestamp,
-                              senderName: _data.messages[index].senderName,
-                            ),
+                        FileAdress: ChatdataOfCurrentChat.messageContent
+                            .toString(),
+                        isOurs: widget._auth.user!.uid ==
+                            _data.messages[index].senderID,
+                        ts: _data.messages[index].timestamp,
+                        senderName: _data.messages[index].senderName,
+                      ),
                     ],
                   ));
             },
@@ -137,12 +163,12 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _MessageBubble(
       {required String message,
-      required bool isOurs,
-      required Timestamp ts,
-      required String senderName}) {
+        required bool isOurs,
+        required Timestamp ts,
+        required String senderName}) {
     List<Color> colorScheme = isOurs
-        ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
-        : [Color.fromARGB(197, 5, 140, 57), Color.fromARGB(170, 216, 30, 204)];
+        ? [Color(0xFFA3BFE0),Color(0xFF769BC6)]
+        : [Color(0xFF769BC6),Color(0xFFA3BFE0)];
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -159,7 +185,7 @@ class _ChatPageState extends State<ChatPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment:
-            isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Text(senderName),
           SizedBox(
@@ -180,12 +206,12 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _FileMessageBubble(
       {required FileAdress,
-      required bool isOurs,
-      required Timestamp ts,
-      required String senderName}) {
+        required bool isOurs,
+        required Timestamp ts,
+        required String senderName}) {
     List<Color> colorScheme = isOurs
-        ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
-        : [Color.fromARGB(197, 5, 140, 57), Color.fromARGB(170, 216, 30, 204)];
+        ? [Color(0xFFA3BFE0),Color(0xFF769BC6)]
+    : [Color(0xFF769BC6),Color(0xFFA3BFE0)];
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -199,7 +225,7 @@ class _ChatPageState extends State<ChatPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment:
-            isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Text(senderName),
           SizedBox(
@@ -231,7 +257,7 @@ class _ChatPageState extends State<ChatPage> {
       height: _height * 0.1,
       width: _width,
       decoration: BoxDecoration(
-          color: Color.fromARGB(43, 43, 43, 1),
+         color: Colors.grey[200],
           borderRadius: BorderRadius.circular(22)),
       margin: EdgeInsets.symmetric(
           horizontal: _width * 0.02, vertical: _height * 0.02),
@@ -256,27 +282,28 @@ class _ChatPageState extends State<ChatPage> {
       child: TextFormField(
         controller: txt,
         validator: (data) {
-          if (data == null) {
-            return "empty field";
+          if (data == null || data.trim().isEmpty) {
+            return "The message cannot be empty";
           }
+          return null;
         },
         cursorColor: Colors.black,
         autocorrect: false,
         decoration:
-            InputDecoration(border: InputBorder.none, hintText: "type please"),
+        InputDecoration(border: InputBorder.none, hintText: "type Massage ... "),
       ),
     );
   }
 
   Widget _sendMessageButton(
-    BuildContext context,
-    TextEditingController txt,
-  ) {
+      BuildContext context,
+      TextEditingController txt,
+      ) {
     return Container(
       height: _height * 0.1,
       width: _width * 0.09,
       child: IconButton(
-        icon: Icon(Icons.send),
+        icon: Icon(Icons.send, color: ColorsApp.primary),
         onPressed: () async {
           if (widget.GK.currentState!.validate()) {
             // txt.text.trim();
@@ -317,10 +344,10 @@ class _ChatPageState extends State<ChatPage> {
                         type: "image",
                         //TODO: here after making databse > make it so here it sends the current user data in DB
                         senderName:
-                            widget._auth.user!.email ?? "how is it null"));
+                        widget._auth.user!.email ?? "how is it null"));
               }
               FocusScope.of(context).unfocus();
             },
-            icon: Icon(Icons.camera_enhance)));
+            icon: Icon(Icons.camera_alt)));
   }
 }

@@ -67,7 +67,7 @@ Widget _RecentChats() {
                                   Text("image attachment"),
                                   Icon(
                                     Icons.image,
-                                    color: Colors.blue,
+                                    color: Color(0xff7AB2D3),
                                   ),
                                 ],
                               )
@@ -78,7 +78,7 @@ Widget _RecentChats() {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
                             image: DecorationImage(
-                                image: AssetImage("assets/images/science.png")),
+                                image: AssetImage("assets/images/chat.png")),
                           ),
                         ),
                         trailing: Container(

@@ -8,7 +8,6 @@ import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
-
 class CompleteProfile extends StatefulWidget {
   CompleteProfile({super.key});
   static String id = "CompleteProfile";
@@ -28,11 +27,11 @@ class _UpdateUserDataState extends State<CompleteProfile> {
   static final _Listcontroller = MultiSelectController<String>();
   static final _yearController = TextEditingController();
 
-  // final controller = MultiSelectController();
+   final controller = MultiSelectController();
   @override
   Widget build(BuildContext _context) {
-    final double _DeviceHeight = MediaQuery.of(_context).size.height;
-    final double _DeviceWidth = MediaQuery.of(_context).size.width;
+    // final double _DeviceHeight = MediaQuery.of(_context).size.height;
+    // final double _DeviceWidth = MediaQuery.of(_context).size.width;
     var _auth = Provider.of<AuthProvider>(_context);
     return Scaffold(
       body: ChangeNotifierProvider<AuthProvider>.value(
@@ -41,14 +40,14 @@ class _UpdateUserDataState extends State<CompleteProfile> {
           key: CompleteProfile._GK,
           child: ListView(
             children: [
-              TextHeader(
-                height: _DeviceHeight * 0.19,
-                largeText: "please Update your data",
-                littleText: "",
-              ),
-              SizedBox(
-                height: _DeviceHeight * 0.03,
-              ),
+              // TextHeader(
+              //   //height: _DeviceHeight * 0.19,
+              //   largeText: "please Update your data",
+              //   littleText: "",
+              // ),
+              // SizedBox(
+              //   height: _DeviceHeight * 0.03,
+              // ),
               DropdownSelect(
                 data: courses,
                 cont: _Listcontroller,

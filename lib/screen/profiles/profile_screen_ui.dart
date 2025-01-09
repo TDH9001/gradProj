@@ -6,6 +6,7 @@ import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import '../../services/navigation_Service.dart';
 import '../../providers/auth_provider.dart';
@@ -55,97 +56,148 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
           return isComp
               ? ListView(
                   children: [
-                    TextHeader(
-                        height: widget.height * 0.12,
-                        largeText: "Profile Screen",
-                        littleText: "We hope you are enjoying our app"),
                     SizedBox(
-                      height: widget.height * 0.04,
+                      height: 35,
                     ),
                     TextFormField(
                       enabled: false,
                       initialValue: _snapshot.data!.FirstName,
-                      style: TextStyle(color: Colors.black54),
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
-                          labelText: "FirstName",
-                          labelStyle: TextStyle(color: Colors.black54)),
-                    ),
-                    SizedBox(
-                      height: widget.height * 0.04,
-                    ),
-                    TextFormField(
-                      enabled: false,
-                      initialValue: _snapshot.data!.LastName,
-                      decoration: InputDecoration(
-                        labelText: "Last Name",
+                        labelText: "Name",
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xff7AB2D3),
+                            ),
+                            borderRadius: BorderRadius.circular(60)),
                       ),
                     ),
                     SizedBox(
-                      height: widget.height * 0.04,
+                      height: 35,
                     ),
                     TextFormField(
                       enabled: false,
                       initialValue: _auth.user!.email,
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         labelText: "Email",
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xff7AB2D3),
+                            ),
+                            borderRadius: BorderRadius.circular(60)),
                       ),
                     ),
                     SizedBox(
-                      height: widget.height * 0.04,
+                      height: 35,
                     ),
-                    TextFormField(
+                    IntlPhoneField(
                       enabled: false,
                       initialValue: _snapshot.data!.phoneNumber,
+                      style: TextStyle(color: Colors.black),
+                      initialCountryCode: 'EG',
+                     showCountryFlag: true,
+                      showDropdownIcon: false,
+                      onChanged: (phone) {
+                        print(phone.completeNumber);
+                      },
                       decoration: InputDecoration(
                         labelText: "Phone Number",
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Color(0xff769BC6)),
+                          borderRadius: BorderRadius.circular(60),
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: widget.height * 0.04,
+                      height: 35,
                     ),
                     TextFormField(
                       enabled: false,
                       initialValue: _snapshot.data!.Year.toString(),
+                      style: TextStyle(color: Colors.black),
                       decoration: InputDecoration(
                         labelText: "Academec Year",
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xff769BC6),
+                            ),
+                            borderRadius: BorderRadius.circular(60)),
                       ),
                     ),
-                    SizedBox(
-                      height: widget.height * 0.04,
-                      child: Text(
-                        "courses",
-                        style: TextStyle(fontSize: 20, color: Colors.black54),
-                      ),
+                    Text(
+                      'Courses:',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87),
                     ),
-                    SizedBox(
-                        height: widget.height * 0.15,
-                        width: widget.length,
-                        child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
-                            itemCount: _snapshot.data!.Classes.length,
-                            itemBuilder: (_context, index) {
-                              return Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text(
-                                    _snapshot.data!.Classes[index],
-                                    style: TextStyle(
-                                        fontSize: 25, color: Colors.black54),
-                                  ),
+                    SizedBox(height: 10),
+                    userData.Classes.isEmpty
+                        ? Center(
+                            child: Text(
+                              'No courses enrolled yet.',
+                              style: TextStyle(
+                                  color: Colors.grey[600], fontSize: 16),
+                            ),
+                          )
+                        : Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 8,
+                                  offset: Offset(0, 5),
                                 ),
-                              );
-                            })),
-                    SizedBox(
-                      height: widget.height * 0.04,
-                    ),
-                    PrimaryButton(
-                        buttontext: "LOGOUT",
-                        func: () async {
-                          _auth.signOut();
-                          navigationService.instance.navigateTo(LoginScreen.id);
-                        }),
+                              ],
+                            ),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: userData.Classes.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    elevation: 5,
+                                    child: ListTile(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 16.0, vertical: 12.0),
+                                      leading: Icon(Icons.book,
+                                          color: Color(0xff769BC6)),
+                                      title: Text(
+                                        userData.Classes[index],
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+
+                    // SizedBox(
+                    //   height: widget.height * 0.04,
+                    // ),
+                    // PrimaryButton(
+                    //     buttontext: "LOGOUT",
+                    //     func: () async {
+                    //       _auth.signOut();
+                    //       navigationService.instance.navigateTo(LoginScreen.id);
+                    //     }),
                     SizedBox(
                       height: widget.height * 0.04,
                     ),

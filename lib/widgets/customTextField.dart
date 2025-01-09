@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../UI/colors.dart';
+
 class CustomTextField extends StatefulWidget {
   final String hintText;
   final bool isPassword;
@@ -34,16 +36,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fillColor: Colors.grey[50],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(60),
-            borderSide: const BorderSide(color: Color(0xff7AB2D3)),
+            borderSide: const BorderSide(color: ColorsApp.primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(60),
-            borderSide: const BorderSide(color: Color(0xff7AB2D3)),
+            borderSide: const BorderSide(color: ColorsApp.primary),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(60),
             borderSide: const BorderSide(
-              color: Color(0xff7AB2D3),
+              color: ColorsApp.primary,
             ),
           ),
           //contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
