@@ -19,9 +19,11 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: ColorsApp.primary,
-      title: Text(
-        title,
-        style: TextStyles.appBarText,
+      title: Center (
+        child: Text(
+          title,
+          style: TextStyles.appBarText,
+        ),
       ),
       leading: leading,
       actions: [

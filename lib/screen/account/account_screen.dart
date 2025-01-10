@@ -10,9 +10,12 @@ import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+   AccountScreen({super.key});
 
-  @override
+   // AuthProvider _auth = AuthProvider();
+
+
+   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
@@ -199,7 +202,10 @@ class AccountScreen extends StatelessWidget {
                         child: ListTile(
                           leading: const Icon(Icons.logout, color: Color(0xff769BC6)),
                           title: const Text("About", style: TextStyle(fontWeight: FontWeight.bold)),
-                          //onTap: () => navigationService.instance.navigateTo(Logout.id),
+                          onTap: () {
+                            // _auth.signOut();
+                            navigationService.instance.navigateTo(LoginScreen.id);
+                          },
                           trailing: const Icon(Icons.logout, size: 16),
                         ),
                       ),

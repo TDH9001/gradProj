@@ -189,12 +189,12 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Text(senderName),
           SizedBox(
-            height: 9,
+            height: 5,
           ),
           Text(message),
-          SizedBox(
-            height: 15,
-          ),
+          // SizedBox(
+          //   height: 15,
+          // ),
           Text(
             timeago.format(ts.toDate()),
             style: TextStyle(color: Colors.black45),
@@ -254,7 +254,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget MessageField(BuildContext _context) {
     TextEditingController txt = TextEditingController();
     return Container(
-      height: _height * 0.1,
+      // height: _height * 0.1,
       width: _width,
       decoration: BoxDecoration(
          color: Colors.grey[200],
@@ -299,8 +299,8 @@ class _ChatPageState extends State<ChatPage> {
       BuildContext context,
       TextEditingController txt,
       ) {
-    return Container(
-      height: _height * 0.1,
+    return SizedBox(
+      // height: _height * 0.1,
       width: _width * 0.09,
       child: IconButton(
         icon: Icon(Icons.send, color: ColorsApp.primary),
@@ -325,8 +325,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _imageMessageButton() {
-    return Container(
-        height: _height * 0.1,
+    return SizedBox(
+        height: _height * 0.07,
         width: _width * 0.09,
         child: IconButton(
             onPressed: () async {

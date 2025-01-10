@@ -25,9 +25,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-      obscureText: widget.isPassword,
+      obscureText: widget.isObscure,
       autocorrect: false,
-      // onChanged: onChanged,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.fromLTRB(20, 10.0, 20.0, 10.0),
           hintText: widget.hintText,

@@ -42,15 +42,17 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
         title: appBarTitles[currentIndex],
-        leading: (currentIndex == 2 || currentIndex == 1) // Show back button on Table and Chats screen
+        leading: (currentIndex == 2 ||
+                currentIndex == 1) // Show back button on Table and Chats screen
             ? IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            setState(() {
-              currentIndex = 0; // Go back to the Home screen or any other screen
-            });
-          },
-        )
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  setState(() {
+                    currentIndex =
+                        0; // Go back to the Home screen or any other screen
+                  });
+                },
+              )
             : null, // No back button for other screens
       ),
       body: screens[currentIndex],
