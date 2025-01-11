@@ -140,7 +140,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _messageLsitView() {
     return Container(
-      height: _height * 0.75,
+      height: _height * 0.815,
       child: StreamBuilder<ChatData>(
         stream: DBService.instance.getChat(this.widget.chatID),
         builder: (_context, _snapshot) {
@@ -238,8 +238,8 @@ class _ChatPageState extends State<ChatPage> {
       5: "friday"
     };
     List<Color> colorScheme = isOurs
-        ? [Color(0xFFA3BFE0),Color(0xFF769BC6)]
-        : [Color(0xFF769BC6),Color(0xFFA3BFE0)];
+        ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
+        : [Color(0xFF769BC6), Color(0xFFA3BFE0)];
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -256,7 +256,7 @@ class _ChatPageState extends State<ChatPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment:
-        isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+            isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Text(senderName),
           SizedBox(
@@ -304,8 +304,11 @@ class _ChatPageState extends State<ChatPage> {
       5: "friday"
     };
     List<Color> colorScheme = isOurs
-        ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
-        : [Color.fromARGB(197, 5, 140, 57), Color.fromARGB(170, 216, 30, 204)];
+        ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
+        : [
+            Color(0xFFA3BFE0),
+            Color(0xFF769BC6),
+          ];
     return GestureDetector(
       onTap: () => showDialog(
           context: context,
@@ -358,8 +361,7 @@ class _ChatPageState extends State<ChatPage> {
       // height: _height * 0.1,
       width: _width,
       decoration: BoxDecoration(
-         color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(22)),
+          color: Colors.grey[200], borderRadius: BorderRadius.circular(22)),
       margin: EdgeInsets.symmetric(
           horizontal: _width * 0.02, vertical: _height * 0.02),
       child: Form(
@@ -394,16 +396,16 @@ class _ChatPageState extends State<ChatPage> {
         },
         cursorColor: Colors.black,
         autocorrect: false,
-        decoration:
-        InputDecoration(border: InputBorder.none, hintText: "type Massage ... "),
+        decoration: InputDecoration(
+            border: InputBorder.none, hintText: "type Massage ... "),
       ),
     );
   }
 
   Widget _sendMessageButton(
-      BuildContext context,
-      TextEditingController txt,
-      ) {
+    BuildContext context,
+    TextEditingController txt,
+  ) {
     return SizedBox(
       // height: _height * 0.1,
       width: _width * 0.09,
@@ -449,7 +451,7 @@ class _ChatPageState extends State<ChatPage> {
                         type: "image",
                         //TODO: here after making databse > make it so here it sends the current user data in DB
                         senderName:
-                        widget._auth.user!.email ?? "how is it null"));
+                            widget._auth.user!.email ?? "how is it null"));
               }
               FocusScope.of(context).unfocus();
             },

@@ -65,10 +65,10 @@ class homePage extends StatelessWidget {
         "CompleteProfile": (context) => CompleteProfile(),
         "RecentChats": (context) => RecentChats(),
         "AboutScreen": (context) => AboutScreen(),
-        "SettingScreen" : (context) => SettingScreen(),
-
+        "SettingScreen": (context) => SettingScreen(),
       },
-      initialRoute: SplashScreen.id,
+      //make it splash later
+      initialRoute: LoginScreen.id,
       debugShowCheckedModeBanner: false,
     );
   }
