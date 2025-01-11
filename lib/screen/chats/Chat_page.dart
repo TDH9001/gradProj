@@ -228,13 +228,13 @@ class _ChatPageState extends State<ChatPage> {
       12: "dec"
     };
     var _weekmap = {
-      1: "saturday",
-      2: 'sunday',
-      3: "monday",
-      4: "tuesday",
-      5: "wednesday",
-      6: "thursday",
-      7: "friday"
+      6: "saturday",
+      7: 'sunday',
+      1: "monday",
+      2: "tuesday",
+      3: "wednesday",
+      4: "thursday",
+      5: "friday"
     };
     List<Color> colorScheme = isOurs
         ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
@@ -294,13 +294,13 @@ class _ChatPageState extends State<ChatPage> {
       12: "dec"
     };
     var _weekmap = {
-      1: "saturday",
-      2: 'sunday',
-      3: "monday",
-      4: "tuesday",
-      5: "wednesday",
-      6: "thursday",
-      7: "friday"
+      6: "saturday",
+      7: 'sunday',
+      1: "monday",
+      2: "tuesday",
+      3: "wednesday",
+      4: "thursday",
+      5: "friday"
     };
     List<Color> colorScheme = isOurs
         ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
