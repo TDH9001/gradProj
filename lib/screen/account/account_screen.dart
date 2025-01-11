@@ -10,13 +10,13 @@ import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
-   AccountScreen({super.key});
+  AccountScreen({super.key});
 
-   // AuthProvider _auth = AuthProvider();
+  // AuthProvider _auth = AuthProvider();
 
-
-   @override
+  @override
   Widget build(BuildContext context) {
+    var _auth = Provider.of<AuthProvider>(context);
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
       child: Scaffold(
@@ -83,8 +83,10 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.person, color: Color(0xff769BC6)),
-                          title: const Text("Profile", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: const Icon(Icons.person,
+                              color: Color(0xff769BC6)),
+                          title: const Text("Profile",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () {
                             print("Profile Tapped");
                             navigationService.instance
@@ -111,10 +113,14 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.settings, color: Color(0xff769BC6)),
-                          title: const Text("Settings", style: TextStyle(fontWeight: FontWeight.bold)),
-                          onTap: () => navigationService.instance.navigateTo(SettingScreen.id),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          leading: const Icon(Icons.settings,
+                              color: Color(0xff769BC6)),
+                          title: const Text("Settings",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          onTap: () => navigationService.instance
+                              .navigateTo(SettingScreen.id),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -157,10 +163,13 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.notifications, color: Color(0xff769BC6)),
-                          title: const Text("Notifications", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: const Icon(Icons.notifications,
+                              color: Color(0xff769BC6)),
+                          title: const Text("Notifications",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () => print("Notification Tapped"),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -180,10 +189,14 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.info, color: Color(0xff769BC6)),
-                          title: const Text("About", style: TextStyle(fontWeight: FontWeight.bold)),
-                          onTap: () => navigationService.instance.navigateTo(AboutScreen.id),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          leading:
+                              const Icon(Icons.info, color: Color(0xff769BC6)),
+                          title: const Text("About",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          onTap: () => navigationService.instance
+                              .navigateTo(AboutScreen.id),
+                          trailing:
+                              const Icon(Icons.arrow_forward_ios, size: 16),
                         ),
                       ),
                     ),
@@ -202,11 +215,14 @@ class AccountScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: ListTile(
-                          leading: const Icon(Icons.logout, color: Color(0xff769BC6)),
-                          title: const Text("About", style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: const Icon(Icons.logout,
+                              color: Color(0xff769BC6)),
+                          title: const Text("Logout",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           onTap: () {
-                            // _auth.signOut();
-                            navigationService.instance.navigateTo(LoginScreen.id);
+                            _auth.signOut();
+                            navigationService.instance
+                                .navigateTo(LoginScreen.id);
                           },
                           trailing: const Icon(Icons.logout, size: 16),
                         ),
@@ -222,4 +238,3 @@ class AccountScreen extends StatelessWidget {
     );
   }
 }
-

@@ -24,7 +24,7 @@ class ChatPage extends StatefulWidget {
   final ScrollController _LVC = ScrollController();
   List<String> admins;
   final TextEditingController txt = TextEditingController();
-  late Stream<ChatData> dt;
+  late String currID;
   @override
   State<ChatPage> createState() {
     return _ChatPageState();
@@ -45,17 +45,17 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    widget.dt = DBService.instance.getChat(widget.chatID);
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     widget._auth = Provider.of<AuthProvider>(context);
+    widget.currID = widget._auth.user!.uid;
 //thsi cahnge notifier may be redundant
     return ChangeNotifierProvider.value(
       value: AuthProvider.instance,
       child: Scaffold(
         //resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          flexibleSpace: widget.admins.contains(widget._auth.user!.uid)
+          flexibleSpace: widget.admins.contains(widget.currID)
               ? FutureBuilder<List<String>>(
                   future: hobbiesFuture,
                   builder: (context, snapshot) {
