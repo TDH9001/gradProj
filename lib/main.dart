@@ -31,6 +31,7 @@ class homePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _auth = Provider.of<AuthProvider>(context);
     return MaterialApp(
       navigatorKey: navigationService.instance.navKey, //added the nav service
       title: "Sci.Connect",
@@ -64,8 +65,7 @@ class homePage extends StatelessWidget {
         "CompleteProfile": (context) => CompleteProfile(),
         "RecentChats": (context) => RecentChats(),
         "AboutScreen": (context) => AboutScreen(),
-        "SettingScreen" : (context) => SettingScreen(),
-
+        "SettingScreen": (context) => SettingScreen(),
       },
       initialRoute: SplashScreen.id,
       debugShowCheckedModeBanner: false,

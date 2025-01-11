@@ -52,6 +52,7 @@ dependencies:
   timeago: ^3.7.0
   curved_navigation_bar: ^1.0.5
   calendar_view: ^1.4.0
+  appbar_dropdown: ^0.0.4
 
 dev_dependencies:
   flutter_test:

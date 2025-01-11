@@ -35,7 +35,10 @@ class AuthProvider extends ChangeNotifier {
 
   void _autiLogin() {
     if (user != null) {
-      navigationService.instance.navigateToReplacement(BottomNavegationBarScreen.id);
+      navigationService.instance
+          .navigateToReplacement(BottomNavegationBarScreen.id);
+    } else {
+      navigationService.instance.navigateTo("OnboardingScreen");
     }
   }
 
@@ -67,8 +70,8 @@ class AuthProvider extends ChangeNotifier {
       user = _result.user!;
       //update last seen time
       status = AuthStatus.Authenticated;
-      SnackBarService.instance
-          .showsSnackBarSucces(text: "Welcome ${user?.email}");
+      // SnackBarService.instance
+      //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
     } catch (e) {
       status = AuthStatus.ERROR;
       user = null;

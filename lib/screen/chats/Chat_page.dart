@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:appbar_dropdown/appbar_dropdown.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
+import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -13,17 +15,16 @@ import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class ChatPage extends StatefulWidget {
-  ChatPage({
-    super.key,
-    required this.chatID,
-  });
+  ChatPage({super.key, required this.chatID, required this.admins});
   final String id = "ChatPage";
   String chatID;
   late AuthProvider _auth;
   GlobalKey<FormState> GK = GlobalKey<FormState>();
   String textTosend = "";
   final ScrollController _LVC = ScrollController();
-
+  List<String> admins;
+  final TextEditingController txt = TextEditingController();
+  late Stream<ChatData> dt;
   @override
   State<ChatPage> createState() {
     return _ChatPageState();
@@ -33,42 +34,93 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double _height = 0;
   double _width = 0;
+  late Future<List<String>> hobbiesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    hobbiesFuture = DBService.instance.getMembersOfChat(
+        widget.chatID); // Call the method during initialization
+  }
+
   @override
   Widget build(BuildContext context) {
+    widget.dt = DBService.instance.getChat(widget.chatID);
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorsApp.primary,
-        title: Row(
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage('assets/images/chat.png'),
-            ),
-            SizedBox(width: 10),
-            Text(
-              widget.chatID,
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ],
+    widget._auth = Provider.of<AuthProvider>(context);
+//thsi cahnge notifier may be redundant
+    return ChangeNotifierProvider.value(
+      value: AuthProvider.instance,
+      child: Scaffold(
+        //resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          flexibleSpace: widget.admins.contains(widget._auth.user!.uid)
+              ? FutureBuilder<List<String>>(
+                  future: hobbiesFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      List<String> hobbies = snapshot.data!;
+                    }
+                    List<String> ddt = snapshot.data!;
+
+                    return StreamBuilder<List<contact>>(
+                        stream: DBService.instance
+                            .getMembersDataOfChat(ddt, widget.chatID),
+                        builder: (_context, _snapshot) {
+                          var _data = _snapshot.data;
+
+                          //used to tell the builder to start from the end
+                          if (_snapshot.connectionState ==
+                                  ConnectionState.waiting ||
+                              _snapshot.connectionState ==
+                                  ConnectionState.none) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          if (_snapshot.hasError) {
+                            return Center(
+                                child: Text(
+                                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                          }
+                          //jsut a place holder for the output methoud
+                          return AppbarDropdown(
+                            dropdownAppBarColor: Color(0xff7AB2D3),
+                            items: [
+                              for (int i = 0; i < _snapshot.data!.length; i++)
+                                [
+                                  //returns a list where > [0] = the name and phone number
+                                  //the [1]is the user ID in database to be give to make admin
+                                  "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
+                                  _snapshot.data![i].Id
+                                ]
+                            ],
+                            title: (user) {
+                              if (widget.admins.contains(user[1])) {
+                                return user[0] +
+                                    "\n already an admin \n does nothing when the button is pressed";
+                              } else {
+                                return user[0].toString() +
+                                    "\nclick to make a group admin";
+                              }
+                            },
+                            onClick: (user) {
+                              DBService.instance
+                                  .makeAdmin(user[1], widget.chatID);
+                            },
+                          );
+                        });
+                  })
+              : SizedBox(),
+          backgroundColor: Color(0xff7AB2D3),
+          title: Text(widget.chatID),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.more_vert, color: Colors.white),
-            onPressed: () {
-              // TODO: Add options like deleting or muting the chat
-            },
-          ),
-        ],
+        body: ChangeNotifierProvider<AuthProvider>.value(
+            value: AuthProvider.instance, child: _chatPageUI()),
       ),
-      body: ChangeNotifierProvider<AuthProvider>.value(
-          value: AuthProvider.instance, child: _chatPageUI()),
     );
   }
 
@@ -105,22 +157,18 @@ class _ChatPageState extends State<ChatPage> {
                     "Error: ${_snapshot.error} \n please update your data and the data field mising"));
           }
           //FIXME: possibly not working after a large enough amount of data is sent
-          Timer(
-            Duration(milliseconds: 50),
-                () {
-              widget._LVC.jumpTo(
-                widget._LVC.position.maxScrollExtent * 2,
-              ); //giving it a larger expented scrool amount
-            },
-          );
 
+          print(widget.admins);
+          print(widget._auth.user!.uid);
+          //reversing the list
+          List bubbles = _data!.messages.reversed.toList();
           return ListView.builder(
             itemCount: _snapshot.data!.messages.length, controller: widget._LVC,
-            physics: BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(), reverse: true,
             scrollDirection: Axis.vertical,
             // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
             itemBuilder: (_Context, index) {
-              var ChatdataOfCurrentChat = _data!.messages[index];
+              var ChatdataOfCurrentChat = bubbles[index];
 
               return Padding(
                   padding: EdgeInsets.only(
@@ -131,27 +179,27 @@ class _ChatPageState extends State<ChatPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment:
-                    widget._auth.user!.uid == _data.messages[index].senderID
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.start,
+                        widget._auth.user!.uid == bubbles[index].senderID
+                            ? MainAxisAlignment.end
+                            : MainAxisAlignment.start,
                     children: [
-                      _data.messages[index].type == "text"
+                      bubbles[index].type == "text"
                           ? _MessageBubble(
-                        message: ChatdataOfCurrentChat.messageContent
-                            .toString(),
-                        isOurs: widget._auth.user!.uid ==
-                            _data.messages[index].senderID,
-                        ts: _data.messages[index].timestamp,
-                        senderName: _data.messages[index].senderName,
-                      )
-                          : _FileMessageBubble(
-                        FileAdress: ChatdataOfCurrentChat.messageContent
-                            .toString(),
-                        isOurs: widget._auth.user!.uid ==
-                            _data.messages[index].senderID,
-                        ts: _data.messages[index].timestamp,
-                        senderName: _data.messages[index].senderName,
-                      ),
+                              message: ChatdataOfCurrentChat.messageContent
+                                  .toString(),
+                              isOurs: widget._auth.user!.uid ==
+                                  bubbles[index].senderID,
+                              ts: bubbles[index].timestamp,
+                              senderName: bubbles[index].senderName,
+                            )
+                          : _imageMessageBubble(
+                              FileAdress: ChatdataOfCurrentChat.messageContent
+                                  .toString(),
+                              isOurs: widget._auth.user!.uid ==
+                                  bubbles[index].senderID,
+                              ts: bubbles[index].timestamp,
+                              senderName: bubbles[index].senderName,
+                            ),
                     ],
                   ));
             },
@@ -163,9 +211,32 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _MessageBubble(
       {required String message,
-        required bool isOurs,
-        required Timestamp ts,
-        required String senderName}) {
+      required bool isOurs,
+      required Timestamp ts,
+      required String senderName}) {
+    var _numMap = {
+      1: "jan ",
+      2: "feb",
+      3: "mar",
+      4: 'apr',
+      5: "may",
+      6: "jun",
+      7: "jul",
+      8: "aug",
+      9: "sep",
+      10: "oct",
+      11: "nov",
+      12: "dec"
+    };
+    var _weekmap = {
+      6: "saturday",
+      7: 'sunday',
+      1: "monday",
+      2: "tuesday",
+      3: "wednesday",
+      4: "thursday",
+      5: "friday"
+    };
     List<Color> colorScheme = isOurs
         ? [Color(0xFFA3BFE0),Color(0xFF769BC6)]
         : [Color(0xFF769BC6),Color(0xFFA3BFE0)];
@@ -196,63 +267,93 @@ class _ChatPageState extends State<ChatPage> {
           //   height: 15,
           // ),
           Text(
-            timeago.format(ts.toDate()),
-            style: TextStyle(color: Colors.black45),
+            "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
+            style: TextStyle(fontSize: 16),
           )
         ],
       ),
     );
   }
 
-  Widget _FileMessageBubble(
+  Widget _imageMessageBubble(
       {required FileAdress,
-        required bool isOurs,
-        required Timestamp ts,
-        required String senderName}) {
+      required bool isOurs,
+      required Timestamp ts,
+      required String senderName}) {
+    var _numMap = {
+      1: "jan ",
+      2: "feb",
+      3: "mar",
+      4: 'apr',
+      5: "may",
+      6: "jun",
+      7: "jul",
+      8: "aug",
+      9: "sep",
+      10: "oct",
+      11: "nov",
+      12: "dec"
+    };
+    var _weekmap = {
+      6: "saturday",
+      7: 'sunday',
+      1: "monday",
+      2: "tuesday",
+      3: "wednesday",
+      4: "thursday",
+      5: "friday"
+    };
     List<Color> colorScheme = isOurs
-        ? [Color(0xFFA3BFE0),Color(0xFF769BC6)]
-    : [Color(0xFF769BC6),Color(0xFFA3BFE0)];
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-              colors: colorScheme,
-              stops: [0.40, 0.70],
-              begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-              end: isOurs ? Alignment.topRight : Alignment.topLeft)),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment:
-        isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-        children: [
-          Text(senderName),
-          SizedBox(
-            height: 9,
-          ),
-          Container(
-            height: _height * 0.45,
-            width: _width * 0.6,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                    image: NetworkImage(FileAdress), fit: BoxFit.fill)),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            timeago.format(ts.toDate()),
-            style: TextStyle(color: Colors.black45),
-          )
-        ],
+        ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
+        : [Color.fromARGB(197, 5, 140, 57), Color.fromARGB(170, 216, 30, 204)];
+    return GestureDetector(
+      onTap: () => showDialog(
+          context: context,
+          builder: (_) => Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Image(image: NetworkImage(FileAdress)))),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+                colors: colorScheme,
+                stops: [0.40, 0.70],
+                begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
+                end: isOurs ? Alignment.topRight : Alignment.topLeft)),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment:
+              isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+          children: [
+            Text(senderName),
+            SizedBox(
+              height: 9,
+            ),
+            Container(
+              height: _height * 0.45,
+              width: _width * 0.6,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      image: NetworkImage(FileAdress), fit: BoxFit.fill)),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
+              style: TextStyle(fontSize: 16),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget MessageField(BuildContext _context) {
-    TextEditingController txt = TextEditingController();
     return Container(
       // height: _height * 0.1,
       width: _width,
@@ -267,11 +368,15 @@ class _ChatPageState extends State<ChatPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              _messageTextField(txt),
-              _sendMessageButton(_context, txt),
-              _imageMessageButton()
-            ],
+            children: widget.admins.contains(widget._auth.user!.uid)
+                ? [
+                    _messageTextField(widget.txt),
+                    _sendMessageButton(_context, widget.txt),
+                    _imageMessageButton()
+                  ]
+                : [
+                    Text("only admins can contribute to this chat"),
+                  ],
           )),
     );
   }
