@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
 import 'package:grad_proj/screen/table/table_screen.dart';
+import '../UI/colors.dart';
 import 'home/home_screen.dart';
 import 'account/account_screen.dart';
-import 'orgappbar.dart';
 
 class BottomNavegationBarScreen extends StatefulWidget {
   BottomNavegationBarScreen({super.key});
@@ -13,32 +13,49 @@ class BottomNavegationBarScreen extends StatefulWidget {
   static String id = "HomeScreen";
 
   @override
-  State<BottomNavegationBarScreen> createState() => _BottomNavegationBarScreenState();
+  State<BottomNavegationBarScreen> createState() =>
+      _BottomNavegationBarScreenState();
 }
 
 class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int currentIndex = 0;
+
   final List<Widget> screens = [
     HomeScreen(),
     RecentChats(),
     TableScreen(),
     AccountScreen(),
   ];
+
   final List<String> appBarTitles = [
     'Home',
-    'Chats',     // Title for RecentChats()// Title for NavbarScreen()
-    'Table',
-    'Account'// Title for TableScreen()
+    'Chats', // Title for RecentChats()
+    'Table', // Title for TableScreen()
+    'Account',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: Orgappbar(scaffoldKey: scaffoldKey,title: '${appBarTitles[currentIndex]}',),
+      appBar: Orgappbar(
+        scaffoldKey: scaffoldKey,
+        title: appBarTitles[currentIndex],
+        leading: (currentIndex == 2 ||
+                currentIndex == 1) // Show back button on Table and Chats screen
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () {
+                  setState(() {
+                    currentIndex =
+                        0; // Go back to the Home screen or any other screen
+                  });
+                },
+              )
+            : null, // No back button for other screens
+      ),
       body: screens[currentIndex],
-      //drawer: NavbarScreen(),
       bottomNavigationBar: CurvedNavigationBar(
         items: const <Widget>[
           Icon(
@@ -51,28 +68,25 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
             size: 30,
             color: Colors.white,
           ),
-
           Icon(
             Icons.table_view_outlined,
             size: 30,
             color: Colors.white,
           ),
           Icon(
-            Icons.person,
+            Icons.menu,
             size: 30,
             color: Colors.white,
           ),
         ],
-       color: Color(0xff7AB2D3),
+        color: ColorsApp.primary,
         backgroundColor: Colors.white10,
-        buttonBackgroundColor: Color(0xffB9E5E8),
-        //backgroundColor: Color(0xff7AB2D3),
+        buttonBackgroundColor: const Color(0xff769BC6),
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {
           setState(() {
             currentIndex = index;
-
           });
         },
       ),

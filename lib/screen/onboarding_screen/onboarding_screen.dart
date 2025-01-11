@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../UI/colors.dart';
 import '../auth/login_screen.dart';
 
 class OnbordingModel {
@@ -62,6 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
             child: Text(
               'Skip',
+              style: TextStyle(color: Color(0xff769BC6)),
             ),
           ),
         ],
@@ -99,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   controller: boardController,
                   effect: ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: Color(0xff7AB2D3),
+                    activeDotColor: Color(0xff769BC6),
                     dotHeight: 10,
                     expansionFactor: 4,
                     dotWidth: 10,
@@ -109,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 Spacer(),
                 FloatingActionButton(
-                  backgroundColor: Color(0xff7AB2D3),
+                  backgroundColor: Color(0xff769BC6),
                   onPressed: () {
                     if (isLast) {
                       Navigator.pushAndRemoveUntil(

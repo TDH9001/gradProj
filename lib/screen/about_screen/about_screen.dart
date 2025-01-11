@@ -3,6 +3,8 @@ import 'package:grad_proj/screen/about_screen/level_screen.dart';
 import 'package:grad_proj/screen/account/account_screen.dart';
 import 'package:grad_proj/screen/orgappbar.dart';
 
+import '../../UI/colors.dart';
+
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
 
@@ -19,7 +21,13 @@ class _AboutScreenState extends State<AboutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "About"),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "About" ,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -39,7 +47,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListTile(
-                  leading: const Icon(Icons.school, color: Color(0xff7AB2D3)),
+                  leading: const Icon(Icons.school, color:Color(0xff769BC6)),
                   title: const Text(
                     'About Courses',
                     style: TextStyle(
@@ -75,7 +83,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 child: ListTile(
                   leading:
-                      const Icon(Icons.calculate, color: Color(0xff7AB2D3)),
+                      const Icon(Icons.calculate, color: Color(0xff769BC6)),
                   title: const Text(
                     'About Calculate GPA',
                     style: TextStyle(
@@ -104,7 +112,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ListTile(
-                  leading: const Icon(Icons.computer, color: Color(0xff7AB2D3)),
+                  leading: const Icon(Icons.computer,color: Color(0xff769BC6)),
                   title: const Text(
                     'About Computer Science',
                     style: TextStyle(

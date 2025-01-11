@@ -5,6 +5,7 @@ import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+  static String id = "SplashScreen";
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -26,9 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color(0xff7AB2D3),
+    // backgroundColor: Colors.white,
+      backgroundColor: Color(0xff769BC6),
       body: Center(
-        child: Image(image: AssetImage('assets/images/science.png')),
+        child: Image(image: AssetImage('assets/images/splash.png')),
       )
     );
   }

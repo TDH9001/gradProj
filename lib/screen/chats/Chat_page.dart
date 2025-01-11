@@ -8,6 +8,7 @@ import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import '../../UI/colors.dart';
 import '../../services/DB-service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../providers/auth_provider.dart';
@@ -237,8 +238,8 @@ class _ChatPageState extends State<ChatPage> {
       5: "friday"
     };
     List<Color> colorScheme = isOurs
-        ? [Colors.blue, Color.fromARGB(170, 143, 8, 227)]
-        : [Color.fromARGB(197, 5, 140, 57), Color.fromARGB(170, 216, 30, 204)];
+        ? [Color(0xFFA3BFE0),Color(0xFF769BC6)]
+        : [Color(0xFF769BC6),Color(0xFFA3BFE0)];
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -255,16 +256,16 @@ class _ChatPageState extends State<ChatPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment:
-            isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Text(senderName),
           SizedBox(
-            height: 9,
+            height: 5,
           ),
           Text(message),
-          SizedBox(
-            height: 15,
-          ),
+          // SizedBox(
+          //   height: 15,
+          // ),
           Text(
             "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
             style: TextStyle(fontSize: 16),
@@ -354,10 +355,10 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget MessageField(BuildContext _context) {
     return Container(
-      height: _height * 0.1,
+      // height: _height * 0.1,
       width: _width,
       decoration: BoxDecoration(
-          color: Color.fromARGB(43, 43, 43, 1),
+         color: Colors.grey[200],
           borderRadius: BorderRadius.circular(22)),
       margin: EdgeInsets.symmetric(
           horizontal: _width * 0.02, vertical: _height * 0.02),
@@ -386,27 +387,28 @@ class _ChatPageState extends State<ChatPage> {
       child: TextFormField(
         controller: txt,
         validator: (data) {
-          if (data == null) {
-            return "empty field";
+          if (data == null || data.trim().isEmpty) {
+            return "The message cannot be empty";
           }
+          return null;
         },
         cursorColor: Colors.black,
         autocorrect: false,
         decoration:
-            InputDecoration(border: InputBorder.none, hintText: "type please"),
+        InputDecoration(border: InputBorder.none, hintText: "type Massage ... "),
       ),
     );
   }
 
   Widget _sendMessageButton(
-    BuildContext context,
-    TextEditingController txt,
-  ) {
-    return Container(
-      height: _height * 0.1,
+      BuildContext context,
+      TextEditingController txt,
+      ) {
+    return SizedBox(
+      // height: _height * 0.1,
       width: _width * 0.09,
       child: IconButton(
-        icon: Icon(Icons.send),
+        icon: Icon(Icons.send, color: ColorsApp.primary),
         onPressed: () async {
           if (widget.GK.currentState!.validate()) {
             // txt.text.trim();
@@ -428,8 +430,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _imageMessageButton() {
-    return Container(
-        height: _height * 0.1,
+    return SizedBox(
+        height: _height * 0.07,
         width: _width * 0.09,
         child: IconButton(
             onPressed: () async {
@@ -447,10 +449,10 @@ class _ChatPageState extends State<ChatPage> {
                         type: "image",
                         //TODO: here after making databse > make it so here it sends the current user data in DB
                         senderName:
-                            widget._auth.user!.email ?? "how is it null"));
+                        widget._auth.user!.email ?? "how is it null"));
               }
               FocusScope.of(context).unfocus();
             },
-            icon: Icon(Icons.camera_enhance)));
+            icon: Icon(Icons.camera_alt)));
   }
 }

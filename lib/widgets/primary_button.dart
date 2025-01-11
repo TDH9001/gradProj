@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../UI/colors.dart';
+
 class PrimaryButton extends StatelessWidget {
   PrimaryButton({super.key, required this.buttontext, required this.func});
   final String buttontext;
@@ -14,7 +16,7 @@ class PrimaryButton extends StatelessWidget {
      child:  ElevatedButton(
       onPressed: func,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xff7AB2D3),
+        backgroundColor:  ColorsApp.primary,
         // padding: const EdgeInsets.symmetric(vertical: 16),
         // shape: RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(8),
