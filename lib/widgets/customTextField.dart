@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../UI/colors.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -23,9 +22,16 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
+    void initstate() {
+      super.initState();
+      widget.isObscure = widget.isPassword;
+    }
+
     return TextFormField(
+      obscureText: widget.isObscure,
+
       controller: widget.controller,
-      obscureText: widget.hintText == "Password" ? true : false,
+      //obscureText: widget.hintText == "Password" ? true : false,
       autocorrect: false,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.fromLTRB(20, 10.0, 20.0, 10.0),

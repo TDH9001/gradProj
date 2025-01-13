@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -57,7 +58,7 @@ class _SingupScreenState extends State<SingupScreen> {
             //value: AuthProvider.instance,
             child: Builder(builder: (_context) {
               _auth = Provider.of<AuthProvider>(_context);
-              //SnackBarService.instance.buildContext = context;
+              SnackBarService.instance.buildContext = context;
               return Form(
                 key: SingupScreen._formKey,
                 // onChanged: () {

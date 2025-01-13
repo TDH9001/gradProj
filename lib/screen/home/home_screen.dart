@@ -18,14 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var _auth = Provider.of<AuthProvider>(context);
     return Scaffold(
-      body: Center(
-        child: PrimaryButton(
-            buttontext: "LOGOUT",
-            func: () {
-              _auth.signOut();
-              navigationService.instance.navigateToReplacement(LoginScreen.id);
-            }),
-      ),
+      // body: Center(
+      //   child: PrimaryButton(
+      //       buttontext: "LOGOUT",
+      //       func: () {
+      //         _auth.signOut();
+      //         navigationService.instance.navigateToReplacement(LoginScreen.id);
+      //       }),
+      // ),
     );
   }
 }

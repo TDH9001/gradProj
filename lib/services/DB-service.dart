@@ -28,6 +28,8 @@ class DBService {
         password, // possibly add an image url one tro send the image user stores
   }) async {
     try {
+      SnackBarService.instance.showsSnackBarSucces(text: "welcome New User ${firstName} ${lastname}");
+
       await _db.collection(_UserCollection).doc(userId).set({
         "firstName": firstName,
         "lastName": lastname,
@@ -42,6 +44,7 @@ class DBService {
     } catch (e) {
       print(e);
       SnackBarService.instance.showsSnackBarError(text: "Creation error");
+
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/UI/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
 
@@ -19,7 +20,7 @@ class SnackBarService {
     ScaffoldMessenger.of(_buildContext).showSnackBar(SnackBar(
         content: Text(
           text,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
         duration: Duration(seconds: 2)));
@@ -29,9 +30,9 @@ class SnackBarService {
     ScaffoldMessenger.of(_buildContext).showSnackBar(SnackBar(
         content: Text(
           text,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: ColorsApp.primary,
         duration: Duration(seconds: 2)));
   }
 }

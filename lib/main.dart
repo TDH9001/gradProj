@@ -68,7 +68,7 @@ class homePage extends StatelessWidget {
         "SettingScreen": (context) => SettingScreen(),
       },
       //make it splash later
-      initialRoute: LoginScreen.id,
+      initialRoute:OnboardingScreen.id,
       debugShowCheckedModeBanner: false,
     );
   }

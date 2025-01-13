@@ -89,7 +89,8 @@ class _ChatPageState extends State<ChatPage> {
                           }
                           //jsut a place holder for the output methoud
                           return AppbarDropdown(
-                            dropdownAppBarColor: Color(0xff7AB2D3),
+
+                            dropdownAppBarColor: ColorsApp.primary,
                             items: [
                               for (int i = 0; i < _snapshot.data!.length; i++)
                                 [
@@ -116,7 +117,7 @@ class _ChatPageState extends State<ChatPage> {
                         });
                   })
               : SizedBox(),
-          backgroundColor: Color(0xff7AB2D3),
+          backgroundColor: ColorsApp.primary,
           title: Text(widget.chatID),
         ),
         body: ChangeNotifierProvider<AuthProvider>.value(
