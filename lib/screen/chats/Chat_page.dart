@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
+import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import '../../UI/colors.dart';
@@ -149,7 +150,8 @@ class _ChatPageState extends State<ChatPage> {
           //used to tell the builder to start from the end
           if (_snapshot.connectionState == ConnectionState.waiting ||
               _snapshot.connectionState == ConnectionState.none) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+                child: Image(image: AssetImage('assets/images/splash.png')));
           }
           if (_snapshot.hasError) {
             return Center(

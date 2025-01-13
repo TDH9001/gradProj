@@ -19,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 4),
       () {
-        navigationService.instance
-            .navigateToReplacement(OnboardingScreen.id); // OnboardingScreen(),;
+        // navigationService.instance
+        //     .navigateToReplacement(OnboardingScreen.id); // OnboardingScreen(),;
       },
     );
   }

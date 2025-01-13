@@ -14,6 +14,10 @@ class _LevelScreenState extends State<LevelScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedValue1;
   String? selectedValue2;
+  Map<String, List<String>> data = {
+    "11": ["math 101", "math 102"],
+    "12": ["math 102"]
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +43,9 @@ class _LevelScreenState extends State<LevelScreen> {
               SizedBox(height: 20),
               // Dropdown for selecting Level
               DropdownButtonFormField<String>(
-                items: [
-                  "Level 1", "Level 2", "Level 3", "Level 4", "All Levels"
-                ]
+                items: ["1", "2", "3", "4", "0"]
                     .map((level) =>
-                    DropdownMenuItem(value: level, child: Text(level)))
+                        DropdownMenuItem(value: level, child: Text(level)))
                     .toList(),
                 onChanged: (value) {
                   setState(() {
@@ -69,27 +71,29 @@ class _LevelScreenState extends State<LevelScreen> {
               // Dropdown for selecting Semester
               DropdownButtonFormField<String>(
                 items: [
-                  "Semester 1", "Semester 2",
+                  "1",
+                  "2",
                 ]
                     .map((semester) => DropdownMenuItem(
-                  value: semester,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 4.0),
-                    child: Text(
-                      semester,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
-                    ),
-                  ),
-                ))
+                          value: semester,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 4.0),
+                            child: Text(
+                              semester,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                        ))
                     .toList(),
                 onChanged: (value) {
                   setState(() {
                     selectedValue2 = value;
+                    print("${selectedValue1}${selectedValue2}");
                   });
                 },
                 decoration: InputDecoration(
@@ -109,7 +113,7 @@ class _LevelScreenState extends State<LevelScreen> {
                 value: selectedValue2,
                 isExpanded: false,
               ),
-              
+
               SizedBox(height: 20),
               // Display selected values
               Text(
@@ -129,6 +133,66 @@ class _LevelScreenState extends State<LevelScreen> {
                   color: Colors.black87,
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 600,
+                child: ListView.builder(
+                  itemCount: data["${selectedValue1}${selectedValue2}"] == null
+                      ? 0
+                      : data["${selectedValue1}${selectedValue2}"]!.length,
+                  //  data["${selectedValue1}+${selectedValue2}"] == null
+                  //     ? 0
+                  //     : data["${selectedValue1}+${selectedValue2}"]!.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Colors.blue.shade50, Colors.white],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: ExpansionTile(
+                          // elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          title: Text(
+                              data["${selectedValue1}${selectedValue2}"] == null
+                                  ? "no data"
+                                  : data["${selectedValue1}${selectedValue2}"]![
+                                      index]),
+                          children: [
+                            Container(child: Text("fillerData")),
+                            
+                          ],
+                        ),
+                      ),
+                    );
+
+                    // ExpansionTile(
+                    //   // elevation: 4,
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(15),
+                    //   ),
+                    //   title: Text(data["${selectedValue1}${selectedValue2}"] ==
+                    //           null
+                    //       ? "no data"
+                    //       : data["${selectedValue1}${selectedValue2}"]![index]),
+                    //   children: [Container(child: Text("fillerData"))],
+                    // );
+                  },
+                ),
+              )
             ],
           ),
         ),
