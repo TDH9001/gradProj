@@ -93,11 +93,16 @@ Widget _RecentChats() {
                                 data[index].unseenCount)));
                   },
                 )
-              : Center(
-                  child: Text(
-                  "no chats...., ",
-                  style: TextStyle(fontSize: 30),
-                ));
+              :Center(
+            child: Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "no chats please go to the profile and add courses....",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          );
+
         });
   });
 }

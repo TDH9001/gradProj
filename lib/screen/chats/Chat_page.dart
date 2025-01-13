@@ -10,6 +10,7 @@ import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import '../../UI/colors.dart';
+import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../providers/auth_provider.dart';
@@ -118,7 +119,14 @@ class _ChatPageState extends State<ChatPage> {
                   })
               : SizedBox(),
           backgroundColor: ColorsApp.primary,
-          title: Text(widget.chatID),
+          title: Center(child: Text(widget.chatID, style: TextStyles.appBarText)
+          ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back, color: Colors.white),
+          //   onPressed: () {
+          //     //Navigator.pop(_context);
+          //   },
+          // ),
         ),
         body: ChangeNotifierProvider<AuthProvider>.value(
             value: AuthProvider.instance, child: _chatPageUI()),

@@ -9,6 +9,8 @@ import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
 
+import '../orgappbar.dart';
+
 class CompleteProfile extends StatefulWidget {
   CompleteProfile({super.key});
   static String id = "CompleteProfile";
@@ -20,71 +22,118 @@ class CompleteProfile extends StatefulWidget {
 }
 
 class _UpdateUserDataState extends State<CompleteProfile> {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List<DropdownItem<String>> courses = [
     DropdownItem(label: 'math 101', value: "math101"),
     DropdownItem(label: 'math 102', value: "math102"),
     DropdownItem(label: 'math 103', value: "math103"),
-    DropdownItem(label: 'math 105', value: "math 105"),
+    DropdownItem(label: 'math 105', value: "math105"),
   ];
   static final _Listcontroller = MultiSelectController<String>();
   static final _yearController = TextEditingController();
 
-  final controller = MultiSelectController();
   @override
   Widget build(BuildContext _context) {
-    // final double _DeviceHeight = MediaQuery.of(_context).size.height;
-    // final double _DeviceWidth = MediaQuery.of(_context).size.width;
     var _auth = Provider.of<AuthProvider>(_context);
     return Scaffold(
+      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Course Register",
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(_context);
+          },
+        ),
+      ),
       body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
         child: Form(
           key: CompleteProfile._GK,
           child: ListView(
+            padding: EdgeInsets.all(12),
             children: [
-              TextHeader(
-                //height: _DeviceHeight * 0.19,
-                largeText: "Course Register ",
-                littleText: "Please register your academic year and courses",
-                height: 140,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              DropdownSelect(
-                data: courses,
-                cont: _Listcontroller,
-              ),
-              Universaltextformfield(
+              SizedBox(height: 20),
+              Text('Please register your academic year and courses',
+                  style: TextStyle(
+                    fontSize: 18, color: Color(0xFF9CA3AF),
+                  )),
+              // TextHeader(
+              //   largeText: "Course Register ",
+              //   littleText: "Please register your academic year and courses",
+              //   height: 140,
+              // ),
+              SizedBox(height: 20),
+              _buildInfoCard(
+                label: "Academic Year",
+                child: Universaltextformfield(
                   label: "Academic Year",
                   Password: false,
-                  controller: _yearController),
-              SizedBox(
-                height: 40,
+                  controller: _yearController,
+                ),
               ),
+              SizedBox(height: 20),
+              _buildInfoCard(
+                label: "Courses",
+                child: DropdownSelect(
+                  data: courses,
+                  cont: _Listcontroller,
+                ),
+              ),
+              SizedBox(height: 40),
               PrimaryButton(
-                  buttontext: "validate and submit",
-                  func: () {
-                    if (CompleteProfile._GK.currentState?.validate() ?? false) {
-                      final selectedItems = _Listcontroller.selectedItems;
+                buttontext: "Validate and Submit",
+                func: () {
+                  if (CompleteProfile._GK.currentState?.validate() ?? false) {
+                    final selectedItems = _Listcontroller.selectedItems;
 
-                      DBService.instance.addUserClasesAndYear(
-                          classes: selectedItems
-                              .map((item) => item.value.trim())
-                              .toList(),
-                          year: int.parse(_yearController.text),
-                          userId: _auth.user!.uid);
-                      for (int i = 0; i < selectedItems.length; i++) {
-                        DBService.instance.addChatsToUser(
-                            _auth.user!.uid, selectedItems[i].value);
-                      }
-
-                      debugPrint(selectedItems.toString());
-                      navigationService.instance.goBack();
+                    DBService.instance.addUserClasesAndYear(
+                      classes: selectedItems
+                          .map((item) => item.value.trim())
+                          .toList(),
+                      year: int.parse(_yearController.text),
+                      userId: _auth.user!.uid,
+                    );
+                    for (int i = 0; i < selectedItems.length; i++) {
+                      DBService.instance.addChatsToUser(
+                        _auth.user!.uid,
+                        selectedItems[i].value,
+                      );
                     }
-                  })
+
+                    debugPrint(selectedItems.toString());
+                    navigationService.instance.goBack();
+                  }
+                },
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInfoCard({required String label, required Widget child}) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[600],
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            child,
+          ],
         ),
       ),
     );

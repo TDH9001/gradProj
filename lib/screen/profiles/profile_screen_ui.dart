@@ -141,36 +141,40 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Material(
-                          elevation: 4.0,
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.transparent,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: Color(0xff769BC6),
-                              shadowColor: Color(0xff769BC6),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.blue.shade50, Colors.white],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
                               ),
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            onPressed: () {
-                              setState(() {
-                                visible = !visible;
-                              });
-                            },
-                            child: Text(
-                              'Courses Enrolled',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
+                            child: ListTile(
+                              leading: const Icon(Icons.book, color: Color(0xff769BC6)),
+                              title: const Text(
+                                "Courses Enrolled",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
                               ),
+                              onTap: () {
+                                setState(() {
+                                  visible = !visible;
+                                });
+                              },
+                              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                             ),
                           ),
                         ),
                       ),
+
 
                       SizedBox(height: 10),
                       userData!.Classes.isEmpty

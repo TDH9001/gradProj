@@ -18,11 +18,11 @@ class TextHeader extends StatelessWidget {
           children: [
             Text(
               largeText,
-              style: const TextStyle(fontSize: 35, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
             ),
             Text(
               littleText,
-              style: const TextStyle(fontSize: 22, color: Color(0xFF9CA3AF)),
+              style: const TextStyle(fontSize: 18, color: Color(0xFF9CA3AF)),
             )
           ],
         ),
