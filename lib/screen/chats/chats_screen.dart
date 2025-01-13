@@ -95,7 +95,7 @@ Widget _RecentChats() {
                 )
               : Center(
                   child: Text(
-                  "WOW, such emptyness",
+                  "no chats...., ",
                   style: TextStyle(fontSize: 30),
                 ));
         });

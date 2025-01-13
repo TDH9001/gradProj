@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
     //required this.onChanged,
     required this.controller,
   });
-  bool isObscure = true;
+  bool isObscure = false;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -29,7 +29,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
     return TextFormField(
       obscureText: widget.isObscure,
-
       controller: widget.controller,
       //obscureText: widget.hintText == "Password" ? true : false,
       autocorrect: false,

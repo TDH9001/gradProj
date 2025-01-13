@@ -22,7 +22,7 @@ class TextHeader extends StatelessWidget {
             ),
             Text(
               littleText,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 22, color: Color(0xFF9CA3AF)),
             )
           ],
         ),
