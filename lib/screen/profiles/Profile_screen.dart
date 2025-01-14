@@ -6,9 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
-import '../providers/auth_provider.dart';
-import '../services/DB-service.dart';
-import '../services/snackbar_service.dart';
+import '../../providers/auth_provider.dart';
+import '../../services/DB-service.dart';
+import '../../services/snackbar_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});

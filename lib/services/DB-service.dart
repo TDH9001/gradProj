@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
+import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
@@ -28,7 +30,8 @@ class DBService {
         password, // possibly add an image url one tro send the image user stores
   }) async {
     try {
-      SnackBarService.instance.showsSnackBarSucces(text: "welcome New User ${firstName} ${lastname}");
+      SnackBarService.instance.showsSnackBarSucces(
+          text: "welcome New User ${firstName} ${lastname}");
 
       await _db.collection(_UserCollection).doc(userId).set({
         "firstName": firstName,
@@ -41,11 +44,11 @@ class DBService {
         "classes": [],
         "academicYear": 0,
       });
-      
+      navigationService.instance
+          .navigateToReplacement(BottomNavegationBarScreen.id);
     } catch (e) {
       print(e);
       SnackBarService.instance.showsSnackBarError(text: "Creation error");
-
     }
   }
 
@@ -166,7 +169,7 @@ class DBService {
         .doc(uid)
         .collection(_ChatCollection)
         .doc(chatID);
-    ref.set({
+    return ref.set({
       "chatID": chatID,
       "name": chatID,
       "unseenCount": 0,
@@ -177,8 +180,15 @@ class DBService {
       "timestamp": Timestamp.now(),
       "type": "text"
     });
+    // var ref2 = _db.collection(_ChatCollection).doc(chatID);
+    // ref2.update({
+    //   "members": FieldValue.arrayUnion([uid]),
+    // });
+  }
+
+  Future<void> addMembersToChat(String uid, String chatID) {
     var ref2 = _db.collection(_ChatCollection).doc(chatID);
-    return ref.update({
+    return ref2.update({
       "members": FieldValue.arrayUnion([uid]),
     });
   }

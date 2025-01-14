@@ -139,44 +139,43 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                       SizedBox(
                         height: 35,
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.blue.shade50, Colors.white],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: ListTile(
-                              leading: const Icon(Icons.book, color: Color(0xff769BC6)),
-                              title: const Text(
-                                "Courses Enrolled",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  visible = !visible;
-                                });
-                              },
-                              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                            ),
-                          ),
-                        ),
-                      ),
-
-
-                      SizedBox(height: 10),
+                      // Align(
+                      //   alignment: Alignment.centerLeft,
+                      //   child: Card(
+                      //     elevation: 4,
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(15),
+                      //     ),
+                      //     child: Container(
+                      //       decoration: BoxDecoration(
+                      //         gradient: LinearGradient(
+                      //           colors: [Colors.blue.shade50, Colors.white],
+                      //           begin: Alignment.topLeft,
+                      //           end: Alignment.bottomRight,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(15),
+                      //       ),
+                      //       child: ListTile(
+                      //         leading: const Icon(Icons.book,
+                      //             color: Color(0xff769BC6)),
+                      //         title: const Text(
+                      //           "Courses Enrolled",
+                      //           style: TextStyle(
+                      //             fontWeight: FontWeight.bold,
+                      //             fontSize: 18,
+                      //           ),
+                      //         ),
+                      //         onTap: () {
+                      //           setState(() {
+                      //             visible = !visible;
+                      //           });
+                      //         },
+                      //         trailing:
+                      //             const Icon(Icons.arrow_forward_ios, size: 16),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       userData!.Classes.isEmpty
                           ? Center(
                               child: Text(
@@ -185,53 +184,72 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                                     color: Colors.grey[600], fontSize: 16),
                               ),
                             )
-                          : Visibility(
-                              visible: visible,
+                          : Card(
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               child: Container(
-                                padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      blurRadius: 8,
-                                      offset: Offset(0, 5),
+                                  gradient: LinearGradient(
+                                    colors: [Colors.blue.shade50, Colors.white],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: ExpansionTile(
+                                  leading: const Icon(Icons.book,
+                                      color: Color(0xff769BC6)),
+                                  // elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  title: const Text(
+                                    "Courses Enrolled",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
+                                  ),
+                                  children: [
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: userData.Classes.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            elevation: 5,
+                                            child: ListTile(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 16.0,
+                                                      vertical: 12.0),
+                                              leading: Icon(Icons.book,
+                                                  color: Color(0xff769BC6)),
+                                              title: Text(
+                                                userData.Classes[index],
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
                                   ],
                                 ),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: userData.Classes.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        elevation: 5,
-                                        child: ListTile(
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 16.0, vertical: 12.0),
-                                          leading: Icon(Icons.book,
-                                              color: Color(0xff769BC6)),
-                                          title: Text(
-                                            userData.Classes[index],
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
                               ),
-                            ),
+                            )
 
                       // SizedBox(
                       //   height: widget.height * 0.04,
@@ -242,6 +260,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                       //       _auth.signOut();
                       //       navigationService.instance.navigateTo(LoginScreen.id);
                       //     }),
+                      ,
                       SizedBox(
                         height: 20,
                       ),

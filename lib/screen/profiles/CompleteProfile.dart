@@ -29,23 +29,30 @@ class _UpdateUserDataState extends State<CompleteProfile> {
     DropdownItem(label: 'math 103', value: "math103"),
     DropdownItem(label: 'math 105', value: "math 105"),
   ];
-  static final _Listcontroller = MultiSelectController<String>();
-  static final _yearController = TextEditingController();
+  final _Listcontroller = MultiSelectController<String>();
+  final _yearController = TextEditingController();
 
   @override
   Widget build(BuildContext _context) {
     var _auth = Provider.of<AuthProvider>(_context);
+
+    if (_auth.user == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return Scaffold(
-      appBar: Orgappbar(
-        scaffoldKey: scaffoldKey,
-        title: "Course Register",
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(_context);
-          },
-        ),
-      ),
+      // appBar: Orgappbar(
+      //   scaffoldKey: scaffoldKey,
+      //   title: "Course Register",
+      //   leading: IconButton(
+      //     icon: Icon(Icons.arrow_back, color: Colors.white),
+      //     onPressed: () {
+      //       Navigator.pop(_context);
+      //     },
+      //   ),
+      // ),
       body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
         child: Form(
@@ -53,7 +60,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
           child: ListView(
             padding: EdgeInsets.all(12),
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 200),
               Text('Please register your academic year and courses',
                   style: TextStyle(
                     fontSize: 18,
@@ -84,7 +91,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               SizedBox(height: 40),
               PrimaryButton(
                 buttontext: "Validate and Submit",
-                func: () {
+                func: () async {
                   if (CompleteProfile._GK.currentState?.validate() ?? false) {
                     final selectedItems = _Listcontroller.selectedItems;
 
@@ -96,7 +103,11 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                       userId: _auth.user!.uid,
                     );
                     for (int i = 0; i < selectedItems.length; i++) {
-                      DBService.instance.addChatsToUser(
+                      await DBService.instance.addChatsToUser(
+                        _auth.user!.uid,
+                        selectedItems[i].value,
+                      );
+                      await DBService.instance.addMembersToChat(
                         _auth.user!.uid,
                         selectedItems[i].value,
                       );

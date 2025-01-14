@@ -65,7 +65,7 @@ class _LevelScreenState extends State<LevelScreen> {
                   color: Color(0xff769BC6),
                 ),
                 value: selectedValue1,
-                isExpanded: false, // لمنع أخذ القائمة عرض الحقل بالكامل
+                isExpanded: false,
               ),
               SizedBox(height: 20),
               // Dropdown for selecting Semester
@@ -172,24 +172,13 @@ class _LevelScreenState extends State<LevelScreen> {
                                   : data["${selectedValue1}${selectedValue2}"]![
                                       index]),
                           children: [
-                            Container(child: Text("fillerData")),
-                            
+                            Container(
+                                child: Text(
+                                    "Place holder data \nresearch not completed")),
                           ],
                         ),
                       ),
                     );
-
-                    // ExpansionTile(
-                    //   // elevation: 4,
-                    //   shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(15),
-                    //   ),
-                    //   title: Text(data["${selectedValue1}${selectedValue2}"] ==
-                    //           null
-                    //       ? "no data"
-                    //       : data["${selectedValue1}${selectedValue2}"]![index]),
-                    //   children: [Container(child: Text("fillerData"))],
-                    // );
                   },
                 ),
               )

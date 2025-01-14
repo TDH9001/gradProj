@@ -4,7 +4,7 @@ import '../../UI/colors.dart';
 import '../about_screen/about_screen.dart';
 import '../bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/Profile_screen.dart';
+import 'package:grad_proj/screen/profiles/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';

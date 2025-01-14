@@ -29,7 +29,7 @@ class ResetpasswordScreen extends StatelessWidget {
               const Text(
                 'New Password',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 30,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF1F2937),
                 ),
@@ -41,7 +41,7 @@ class ResetpasswordScreen extends StatelessWidget {
                 child: Text(
                   'Your new password must be different from previously used password',
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 19,
                     color: Colors.black54,
                   ),
                   textAlign: TextAlign.center,

@@ -26,7 +26,8 @@ class ChatPage extends StatefulWidget {
   final ScrollController _LVC = ScrollController();
   List<String> admins;
   final TextEditingController txt = TextEditingController();
-  late String currID;
+  late String memberName;
+  // late String currID;
   @override
   State<ChatPage> createState() {
     return _ChatPageState();
@@ -36,100 +37,110 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double _height = 0;
   double _width = 0;
-  late Future<List<String>> hobbiesFuture;
+  late Future<List<String>> chatMembersFuture;
 
   @override
   void initState() {
     super.initState();
-    hobbiesFuture = DBService.instance.getMembersOfChat(
-        widget.chatID); // Call the method during initialization
+    chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
+    widget._auth = context.read<AuthProvider>();
+    // Call the method during initialization
   }
 
   @override
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
-    widget._auth = context.read<AuthProvider>();
-    widget.currID = widget._auth.user!.uid;
+    //widget._auth = context.read<AuthProvider>();
+
+    if (widget._auth.user == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    widget.memberName = widget._auth.user!.email!;
+    //   widget.currID = widget._auth.user!.uid;
 //thsi cahnge notifier may be redundant
-    return ChangeNotifierProvider.value(
-      value: AuthProvider.instance,
-      child: Scaffold(
-        //resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          flexibleSpace: widget.admins.contains(widget.currID)
-              ? FutureBuilder<List<String>>(
-                  future: hobbiesFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      List<String> hobbies = snapshot.data!;
-                    }
-                    List<String> ddt = snapshot.data!;
+    return Scaffold(
+      //resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        flexibleSpace: widget.admins.contains(widget._auth.user!.uid)
+            ? FutureBuilder<List<String>>(
+                future: chatMembersFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    List<String> hobbies = snapshot.data!;
+                  }
 
-                    return StreamBuilder<List<contact>>(
-                        stream: DBService.instance
-                            .getMembersDataOfChat(ddt, widget.chatID),
-                        builder: (_context, _snapshot) {
-                          var _data = _snapshot.data;
+                  List<String> ddt = snapshot.data!;
 
-                          //used to tell the builder to start from the end
-                          if (_snapshot.connectionState ==
-                                  ConnectionState.waiting ||
-                              _snapshot.connectionState ==
-                                  ConnectionState.none) {
-                            return Center(child: CircularProgressIndicator());
+                  return StreamBuilder<List<contact>>(
+                      stream: DBService.instance
+                          .getMembersDataOfChat(ddt, widget.chatID),
+                      builder: (_context, _snapshot) {
+                        var _data = _snapshot.data;
+
+                        //used to tell the builder to start from the end
+                        if (_snapshot.connectionState ==
+                                ConnectionState.waiting ||
+                            _snapshot.connectionState == ConnectionState.none) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (_snapshot.hasError) {
+                          return Center(
+                              child: Text(
+                                  "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                        }
+                        for (int i = 0; i < snapshot.data!.length; i++) {
+                          if (widget._auth.user!.uid == _snapshot.data![i].Id) {
+                            widget.memberName =
+                                " ${_snapshot.data![i].FirstName} ${_snapshot.data![i].LastName}";
                           }
-                          if (_snapshot.hasError) {
-                            return Center(
-                                child: Text(
-                                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-                          }
-                          //jsut a place holder for the output methoud
-                          return AppbarDropdown(
-                            dropdownAppBarColor: ColorsApp.primary,
-                            items: [
-                              for (int i = 0; i < _snapshot.data!.length; i++)
-                                [
-                                  //returns a list where > [0] = the name and phone number
-                                  //the [1]is the user ID in database to be give to make admin
-                                  "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
-                                  _snapshot.data![i].Id
-                                ]
-                            ],
-                            title: (user) {
-                              if (widget.admins.contains(user[1])) {
-                                return user[0] +
-                                    "\n already an admin \n does nothing when the button is pressed";
-                              } else {
-                                return user[0].toString() +
-                                    "\nclick to make a group admin";
-                              }
-                            },
-                            onClick: (user) {
-                              DBService.instance
-                                  .makeAdmin(user[1], widget.chatID);
-                            },
-                          );
-                        });
-                  })
-              : SizedBox(),
-          backgroundColor: ColorsApp.primary,
-          title:
-              Center(child: Text(widget.chatID, style: TextStyles.appBarText)),
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back, color: Colors.white),
-          //   onPressed: () {
-          //     //Navigator.pop(_context);
-          //   },
-          // ),
-        ),
-        body: ChangeNotifierProvider<AuthProvider>.value(
-            value: AuthProvider.instance, child: _chatPageUI()),
+                        }
+                        //jsut a place holder for the output methoud
+                        return AppbarDropdown(
+                          dropdownAppBarColor: ColorsApp.primary,
+                          items: [
+                            for (int i = 0; i < _snapshot.data!.length; i++)
+                              [
+                                //returns a list where > [0] = the name and phone number
+                                //the [1]is the user ID in database to be give to make admin
+                                "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
+                                _snapshot.data![i].Id
+                              ]
+                          ],
+                          title: (user) {
+                            if (widget.admins.contains(user[1])) {
+                              return user[0] +
+                                  "\n already an admin \n does nothing when the button is pressed";
+                            } else {
+                              return user[0].toString() +
+                                  "\nclick to make a group admin";
+                            }
+                          },
+                          onClick: (user) {
+                            DBService.instance
+                                .makeAdmin(user[1], widget.chatID);
+                          },
+                        );
+                      });
+                })
+            : SizedBox(),
+        backgroundColor: ColorsApp.primary,
+        title: Center(child: Text(widget.chatID, style: TextStyles.appBarText)),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back, color: Colors.white),
+        //   onPressed: () {
+        //     //Navigator.pop(_context);
+        //   },
+        // ),
       ),
+      body: ChangeNotifierProvider<AuthProvider>.value(
+          value: AuthProvider.instance, child: _chatPageUI()),
     );
   }
 
@@ -432,7 +443,7 @@ class _ChatPageState extends State<ChatPage> {
                     timestamp: Timestamp.now(),
                     type: "text",
                     //TODO: here after making databse > make it so here it sends the current user data in DB
-                    senderName: widget._auth.user!.email ?? "how is it null"));
+                    senderName: widget.memberName));
           }
           txt.text = "";
           FocusScope.of(context).unfocus();
@@ -460,8 +471,7 @@ class _ChatPageState extends State<ChatPage> {
                         timestamp: Timestamp.now(),
                         type: "image",
                         //TODO: here after making databse > make it so here it sends the current user data in DB
-                        senderName:
-                            widget._auth.user!.email ?? "how is it null"));
+                        senderName: widget.memberName));
               }
               FocusScope.of(context).unfocus();
             },
