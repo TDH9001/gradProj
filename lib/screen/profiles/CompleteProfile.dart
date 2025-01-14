@@ -27,7 +27,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
     DropdownItem(label: 'math 101', value: "math101"),
     DropdownItem(label: 'math 102', value: "math102"),
     DropdownItem(label: 'math 103', value: "math103"),
-    DropdownItem(label: 'math 105', value: "math105"),
+    DropdownItem(label: 'math 105', value: "math 105"),
   ];
   static final _Listcontroller = MultiSelectController<String>();
   static final _yearController = TextEditingController();
@@ -36,7 +36,9 @@ class _UpdateUserDataState extends State<CompleteProfile> {
   Widget build(BuildContext _context) {
     var _auth = Provider.of<AuthProvider>(_context);
     return Scaffold(
-      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Course Register",
+      appBar: Orgappbar(
+        scaffoldKey: scaffoldKey,
+        title: "Course Register",
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -54,7 +56,8 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               SizedBox(height: 20),
               Text('Please register your academic year and courses',
                   style: TextStyle(
-                    fontSize: 18, color: Color(0xFF9CA3AF),
+                    fontSize: 18,
+                    color: Color(0xFF9CA3AF),
                   )),
               // TextHeader(
               //   largeText: "Course Register ",
