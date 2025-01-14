@@ -8,6 +8,7 @@ import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
+import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/settings/setting.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -54,7 +55,8 @@ class homePage extends StatelessWidget {
       //TODO: handle files being added to the chat > probably needs storage
 
       routes: {
-        "SplashScreen": (context) => SplashScreen(),
+        SplashScreen.id: (context) => SplashScreen(),
+        Determine.id: (context) => Determine(),
         "OnboardingScreen": (context) => OnboardingScreen(),
         "login": (context) => LoginScreen(),
         "resetPassScreen": (context) => ResetpasswordScreen(),
@@ -68,7 +70,7 @@ class homePage extends StatelessWidget {
         "SettingScreen": (context) => SettingScreen(),
       },
       //make it splash later
-      initialRoute: LoginScreen.id,
+      initialRoute: SplashScreen.id,
       debugShowCheckedModeBanner: false,
     );
   }

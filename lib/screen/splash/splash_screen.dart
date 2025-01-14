@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
+import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
@@ -17,10 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      const Duration(seconds: 4),
+      const Duration(seconds: 3),
       () {
-        // navigationService.instance
-        //     .navigateToReplacement(OnboardingScreen.id); // OnboardingScreen(),;
+        navigationService.instance
+            .navigateToReplacement(Determine.id); // OnboardingScreen(),;
       },
     );
   }

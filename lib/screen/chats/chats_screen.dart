@@ -29,9 +29,12 @@ class RecentChats extends StatelessWidget {
 Widget _RecentChats() {
   return Builder(builder: (_context) {
     var _auth = Provider.of<AuthProvider>(_context);
-    // if (_auth.user == null) {
-    //   navigationService.instance.navigateToReplacement(LoginScreen.id);
-    // }
+
+    if (_auth.user == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return StreamBuilder<List<ChatSnipits>>(
         stream: DBService.instance.getUserChats(_auth.user!.uid),
         builder: (context, _snapshot) {
@@ -93,16 +96,15 @@ Widget _RecentChats() {
                                 data[index].unseenCount)));
                   },
                 )
-              :Center(
-            child: Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                "no chats please go to the profile and add courses....",
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-          );
-
+              : Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "no chats please go to the profile and add courses....",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                );
         });
   });
 }

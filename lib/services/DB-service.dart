@@ -41,6 +41,7 @@ class DBService {
         "classes": [],
         "academicYear": 0,
       });
+      
     } catch (e) {
       print(e);
       SnackBarService.instance.showsSnackBarError(text: "Creation error");

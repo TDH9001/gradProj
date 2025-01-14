@@ -75,17 +75,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 40),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: const Text(
-                    'LOGIN',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1F2937),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: const Text(
+                        'LOGIN',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1F2937),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
                     const SizedBox(height: 15),
                     CustomTextField(
                       controller: t1,
@@ -98,34 +98,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       isPassword: true,
                     ),
                     const SizedBox(height: 40),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Forget password ? ",
-                        style: TextStyle(color: Color(0xFF6B7280)),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResetpasswordScreen(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Forget password ? ",
+                          style: TextStyle(color: Color(0xFF6B7280)),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResetpasswordScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Reset password ',
+                            style: TextStyle(
+                              color: Color(0xff769BC6),
+                              fontWeight: FontWeight.w600,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Color(0xff769BC6),
                             ),
-                          );
-                        },
-                        child: const Text(
-                          'Reset password ',
-                          style: TextStyle(
-                            color: Color(0xff769BC6),
-                            fontWeight: FontWeight.w600,
-                            decoration: TextDecoration.underline,
-                            decorationColor: Color(0xff769BC6),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                     SizedBox(height: 30),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
@@ -139,8 +139,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _auth.loginUserWithEmailAndPassword(
                                     _email, _password);
                               }
-                              navigationService.instance
-                                  .navigateToReplacement("HomeScreen");
                             },
                             buttontext: 'Login',
                           ),
@@ -168,7 +166,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.w600,
                               decoration: TextDecoration.underline,
                               decorationColor: Color(0xff769BC6),
-
                             ),
                           ),
                         ),
@@ -185,4 +182,3 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 }
-

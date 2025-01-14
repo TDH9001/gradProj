@@ -2,6 +2,7 @@ import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
 import "package:grad_proj/screen/bottom_navegation_bar_screen.dart";
+import "package:grad_proj/screen/splash/splash_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
 import '../services/snackbar_service.dart';
 
@@ -34,12 +35,12 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void _autiLogin() {
-    if (user != null) {
-      navigationService.instance
-          .navigateToReplacement(BottomNavegationBarScreen.id);
-    } else {
-      navigationService.instance.navigateTo("OnboardingScreen");
-    }
+    navigationService.instance.navigateToReplacement(SplashScreen.id);
+    print("naved home");
+    // } else {
+    //   navigationService.instance.navigateTo("OnboardingScreen");
+    //   print("naved to onboarding");
+    // }
   }
 
   void signOut() {
@@ -52,7 +53,7 @@ class AuthProvider extends ChangeNotifier {
     user = await _auth.currentUser;
     if (user != null) {
       notifyListeners();
-      _autiLogin();
+      //  _autiLogin();
     }
   }
 
@@ -70,8 +71,9 @@ class AuthProvider extends ChangeNotifier {
       user = _result.user!;
       //update last seen time
       status = AuthStatus.Authenticated;
-      // SnackBarService.instance
-      //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
+      SnackBarService.instance
+          .showsSnackBarSucces(text: "Welcome ${user?.email}");
+      navigationService.instance.navigateToReplacement("HomeScreen");
     } catch (e) {
       status = AuthStatus.ERROR;
       user = null;
@@ -96,7 +98,6 @@ class AuthProvider extends ChangeNotifier {
       status = AuthStatus.Authenticated;
       await onSucces!(user!.uid.toString());
       //comment to update the alst seen time
-      navigationService.instance.goBack();
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
     } catch (e) {

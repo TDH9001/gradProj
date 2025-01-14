@@ -49,7 +49,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
-    widget._auth = Provider.of<AuthProvider>(context);
+    widget._auth = context.read<AuthProvider>();
     widget.currID = widget._auth.user!.uid;
 //thsi cahnge notifier may be redundant
     return ChangeNotifierProvider.value(
@@ -90,7 +90,6 @@ class _ChatPageState extends State<ChatPage> {
                           }
                           //jsut a place holder for the output methoud
                           return AppbarDropdown(
-
                             dropdownAppBarColor: ColorsApp.primary,
                             items: [
                               for (int i = 0; i < _snapshot.data!.length; i++)
@@ -119,8 +118,8 @@ class _ChatPageState extends State<ChatPage> {
                   })
               : SizedBox(),
           backgroundColor: ColorsApp.primary,
-          title: Center(child: Text(widget.chatID, style: TextStyles.appBarText)
-          ),
+          title:
+              Center(child: Text(widget.chatID, style: TextStyles.appBarText)),
           // leading: IconButton(
           //   icon: Icon(Icons.arrow_back, color: Colors.white),
           //   onPressed: () {
