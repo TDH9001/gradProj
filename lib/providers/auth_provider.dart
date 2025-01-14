@@ -57,6 +57,20 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  void sendResetPassword({required String email}) async {
+    notifyListeners();
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      SnackBarService.instance
+          .showsSnackBarSucces(text: "password Rest Email sent to your inbox");
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      print(e.message);
+      SnackBarService.instance
+          .showsSnackBarError(text: "PasswordRest failed ${e.message}");
+    }
+  }
+
 //provider Functions
   void loginUserWithEmailAndPassword(String _email, String _password) async {
     //tells the app we are currently working on signing in the user

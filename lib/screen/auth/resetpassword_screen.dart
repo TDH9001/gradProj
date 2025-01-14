@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/refactored/resetform_screen.dart';
@@ -14,6 +17,7 @@ class ResetpasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SnackBarService.instance.buildContext = context;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -45,29 +49,29 @@ class ResetpasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               CustomTextField(
-                controller: TextEditingController(),
+                controller: t1,
                 hintText: 'Email',
               ),
               const SizedBox(height: 16),
-              CustomTextField(
-                controller: TextEditingController(),
-                hintText: 'Password',
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(controller: TextEditingController(),
-                hintText: 'Confirm Password',
-                isPassword: true,
-              ),
+              // CustomTextField(
+              //   controller: TextEditingController(),
+              //   hintText: 'Password',
+              //   isPassword: true,
+              // ),
+              // const SizedBox(height: 16),
+              // CustomTextField(
+              //   controller: TextEditingController(),
+              //   hintText: 'Confirm Password',
+              //   isPassword: true,
+              // ),
               const SizedBox(height: 40),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
+              PrimaryButton(
+                buttontext: 'Create New Password',
+                func: () {
+                  AuthProvider.instance
+                      .sendResetPassword(email: t1.text.trim());
+                  navigationService.instance.goBack();
                 },
-                child: PrimaryButton(
-                  buttontext: 'Create New Password',
-                  func: () {},
-                ),
               ),
             ],
           ),
