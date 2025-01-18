@@ -9,6 +9,8 @@ import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import '../../UI/colors.dart';
 import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
@@ -49,6 +51,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    SnackBarService.instance.buildContext = context;
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     //widget._auth = context.read<AuthProvider>();
@@ -123,8 +126,15 @@ class _ChatPageState extends State<ChatPage> {
                             }
                           },
                           onClick: (user) {
-                            DBService.instance
-                                .makeAdmin(user[1], widget.chatID);
+                            try {
+                              DBService.instance
+                                  .makeAdmin(user[1], widget.chatID);
+                            } catch (e) {
+                              SnackBarService.instance.showsSnackBarError(
+                                  text:
+                                      'an error occured while making $user an admin \n please try again');
+                              navigationService.instance.goBack();
+                            }
                           },
                         );
                       });

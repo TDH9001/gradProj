@@ -1,31 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:grad_proj/providers/auth_provider.dart';
-// import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
-// import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
-// import 'package:grad_proj/services/navigation_Service.dart';
-// import 'package:provider/provider.dart';
-
-// class Determine extends StatelessWidget {
-//   const Determine({super.key});
-//   static String id = "Determine";
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var _auth = Provider.of<AuthProvider>(context);
-//     if (_auth.user == null) {
-//       navigationService.instance.navigateToReplacement(OnboardingScreen.id);
-//     } else {
-//       navigationService.instance
-//           .navigateToReplacement(BottomNavegationBarScreen.id);
-//     }
-//     return const Scaffold(
-//         // backgroundColor: Colors.white,
-//         backgroundColor: Color(0xff769BC6),
-//         body: Center(
-//           child: Image(image: AssetImage('assets/images/splash.png')),
-//         ));
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
@@ -33,6 +5,7 @@ import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class Determine extends StatelessWidget {
   static String id = "Determine";

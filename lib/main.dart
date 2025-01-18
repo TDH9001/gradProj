@@ -9,6 +9,7 @@ import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
+import 'package:grad_proj/screen/splash/no_internet_page.dart';
 import 'package:grad_proj/settings/setting.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -68,6 +69,7 @@ class homePage extends StatelessWidget {
         "RecentChats": (context) => RecentChats(),
         "AboutScreen": (context) => AboutScreen(),
         "SettingScreen": (context) => SettingScreen(),
+        "noInternet": (context) => noInternet(),
       },
       //make it splash later
       initialRoute: SplashScreen.id,

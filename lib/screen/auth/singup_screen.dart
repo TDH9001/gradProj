@@ -145,7 +145,6 @@ class _SingupScreenState extends State<SingupScreen> {
                                           phoneNumber: pn,
                                           password: pw);
                                     });
-                                
                               }
                             },
                           ),
