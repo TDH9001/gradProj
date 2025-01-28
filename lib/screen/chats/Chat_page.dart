@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:appbar_dropdown/appbar_dropdown.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/models/Chats.dart';
+import 'package:grad_proj/models/chats.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
