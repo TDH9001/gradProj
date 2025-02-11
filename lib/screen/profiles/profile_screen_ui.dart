@@ -249,18 +249,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                                   ],
                                 ),
                               ),
-                            )
-
-                      // SizedBox(
-                      //   height: widget.height * 0.04,
-                      // ),
-                      // PrimaryButton(
-                      //     buttontext: "LOGOUT",
-                      //     func: () async {
-                      //       _auth.signOut();
-                      //       navigationService.instance.navigateTo(LoginScreen.id);
-                      //     }),
-                      ,
+                            ),
                       SizedBox(
                         height: 20,
                       ),
@@ -274,7 +263,6 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                   )
                 : CompleteProfile();
           }
-
           return SizedBox.shrink();
         });
   }

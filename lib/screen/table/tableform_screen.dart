@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../orgappbar.dart';
+import '../../widgets/orgappbar.dart';
 
 class TableformScreen extends StatelessWidget {
   final List<Map<String, String>> courses = [

@@ -1,13 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/about_screen/about_screen.dart';
+import 'package:grad_proj/screen/about_screen/question_screen.dart';
 import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/screen/profiles/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
-import 'package:grad_proj/screen/bottom_navegation_bar_screen.dart';
+import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
 import 'package:grad_proj/settings/setting.dart';

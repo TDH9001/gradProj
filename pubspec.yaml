@@ -32,7 +32,8 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.8.1
 
-  # The following adds the Cupertino Icons font to your application.
+
+    # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   smooth_page_indicator: ^1.2.0+3
@@ -54,6 +55,7 @@ dependencies:
   calendar_view: ^1.4.0
   appbar_dropdown: ^0.0.4
   connectivity_plus: ^6.1.2
+
 
 dev_dependencies:
   flutter_test:
