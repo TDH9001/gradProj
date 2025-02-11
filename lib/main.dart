@@ -17,8 +17,38 @@ import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
+import 'models/chats.dart'; 
+import 'models/message.dart';
+import 'models/contact.dart';
+import 'services/hive-service.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+    Hive.registerAdapter(ChatSnipitsAdapter());
+    Hive.registerAdapter(ChatDataAdapter());
+    Hive.registerAdapter(MessageAdapter());
+    Hive.registerAdapter(ContactAdapter());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  //for testing the boxes
+  // ChatSnipits chat = ChatSnipits(
+  //   id: "123",
+  //   Chatid: "chat_123",
+  //   LastMessage: "Hello",
+  //   Sendername: "Alice",
+  //   unseenCount: 2,
+  //   timestamp: DateTime.now(),
+  //   adminId: ["admin1", "admin2"],
+  //   type: "text",
+  // );
+  
+  await HiveService.saveChatSnippet(chat);
+  print("Chat snippet saved successfully!");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
