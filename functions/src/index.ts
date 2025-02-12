@@ -52,56 +52,46 @@ exports.onChatCreated = firestore.onDocumentCreated(
       }
     }
   }
-);
-exports.onChatsUpdated = firestore.onDocumentUpdated(
-    "Chats/{chatID}",
-    async (event) => {
-      const afterSnapshot = event.data?.after; // Firestore snapshot after update
-      const chatID = event.params.chatID;
-  
-      if (afterSnapshot) {
-        const data = afterSnapshot.data();
-        if (data) {
-          const members: string[] = data.members;
-          const lastMessage = data.messages[data.messages.length - 1];
-  
-          // Collect promises to ensure all updates are completed
-          const updatePromises: Promise<void | FirebaseFirestore.WriteResult>[] = [];
-  
-          members.forEach((currentUserID) => {
-            const remainingUserIDs = members.filter((u: string) => u !== currentUserID);
-  
-            remainingUserIDs.forEach((otherUserID) => {
-              const updatePromise = admin
-                .firestore()
-                .collection("Users")
-                .doc(currentUserID)
-                .collection("Chats")
-                .doc(chatID)
-                .update({
-                  lastMessage: lastMessage.message,
-                  timestamp: lastMessage.timestamp,
-                  type: lastMessage.type,
-                  unseenCount: admin.firestore.FieldValue.increment(1),
-                  senderID:lastMessage.senderID,
-                  senderName:lastMessage.senderName,
-                  admins:data.ownerID,
-                })
-                .catch((error) => {
-                  console.error(
-                    `Failed to update Chats for user ${currentUserID} with ${otherUserID}:`,
-                    error
-                  );
-                });
-  
-              updatePromises.push(updatePromise);
+);exports.onChatsUpdated = firestore.onDocumentUpdated(
+  "Chats/{chatID}",
+  async (event) => {
+    const afterSnapshot = event.data?.after;
+    const chatID = event.params.chatID;
+
+    if (afterSnapshot) {
+      const data = afterSnapshot.data();
+      if (data) {
+        const members: string[] = data.members;
+        const lastMessage = data.messages[data.messages.length - 1];
+
+        const updatePromises: Promise<void | FirebaseFirestore.WriteResult>[] = [];
+
+        members.forEach((currentUserID) => {
+          const updatePromise = admin
+            .firestore()
+            .collection("Users")
+            .doc(currentUserID)
+            .collection("Chats")
+            .doc(chatID)
+            .update({
+              lastMessage: lastMessage.message,
+              timestamp: lastMessage.timestamp,
+              type: lastMessage.type,
+              unseenCount: admin.firestore.FieldValue.increment(1), // ✅ Each user updates ONCE
+              senderID: lastMessage.senderID,
+              senderName: lastMessage.senderName,
+              admins: data.ownerID,
+            })
+            .catch((error) => {
+              console.error(`Failed to update Chats for user ${currentUserID}:`, error);
             });
-          });
-  
-          // Wait for all promises to complete
-          await Promise.all(updatePromises);
-          console.log(`All Chats updated successfully for chatID: ${chatID}`);
-        }
+
+          updatePromises.push(updatePromise);
+        });
+
+        await Promise.all(updatePromises);
+        console.log(`All Chats updated successfully for chatID: ${chatID}`);
       }
     }
-  );
+  }
+);
