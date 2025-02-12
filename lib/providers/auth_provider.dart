@@ -82,7 +82,7 @@ class AuthProvider extends ChangeNotifier {
     try {
       UserCredential _result = await _auth.signInWithEmailAndPassword(
           email: _email, password: _password);
-      user = _result.user!;
+      instance.user = _result.user!;
       //update last seen time
       status = AuthStatus.Authenticated;
       SnackBarService.instance
@@ -90,7 +90,7 @@ class AuthProvider extends ChangeNotifier {
       navigationService.instance.navigateToReplacement("HomeScreen");
     } catch (e) {
       status = AuthStatus.ERROR;
-      user = null;
+      instance.user = null;
       SnackBarService.instance.showsSnackBarError(text: "Error authenticating");
     }
     notifyListeners();
@@ -108,16 +108,16 @@ class AuthProvider extends ChangeNotifier {
     try {
       UserCredential _result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      user = _result.user;
+      instance.user = _result.user;
       status = AuthStatus.Authenticated;
-      await onSucces!(user!.uid.toString());
+      await onSucces!(instance.user!.uid.toString());
       //comment to update the alst seen time
       SnackBarService.instance
-          .showsSnackBarSucces(text: "Welcome ${user?.email}");
+          .showsSnackBarSucces(text: "Welcome ${instance.user?.email}");
     } catch (e) {
       print(e);
       status = AuthStatus.ERROR;
-      user = null;
+      instance.user = null;
 
       navigationService.instance.goBack();
       SnackBarService.instance.showsSnackBarError(text: "Error authenticating");

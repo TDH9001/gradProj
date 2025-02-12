@@ -55,6 +55,9 @@ dependencies:
   calendar_view: ^1.4.0
   appbar_dropdown: ^0.0.4
   connectivity_plus: ^6.1.2
+  audioplayers: ^6.1.2
+  path_provider: ^2.1.5
+  record: ^5.2.0
 
 
 dev_dependencies:
