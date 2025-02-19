@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:appbar_dropdown/appbar_dropdown.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +12,9 @@ import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:record/record.dart';
+import 'package:uuid/uuid.dart';
 import '../../UI/colors.dart';
 import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
@@ -29,6 +33,11 @@ class ChatPage extends StatefulWidget {
   List<String> admins;
   final TextEditingController txt = TextEditingController();
   late String memberName;
+  final record = AudioRecorder();
+  bool isRecording = false;
+  String path = "";
+  String url = "";
+
   // late String currID;
   @override
   State<ChatPage> createState() {
@@ -47,6 +56,33 @@ class _ChatPageState extends State<ChatPage> {
     chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
     widget._auth = context.read<AuthProvider>();
     // Call the method during initialization
+  }
+
+  void startRecord(AudioRecorder rec) async {
+    var location = await getApplicationDocumentsDirectory();
+    String fileName = Uuid().v4();
+    if (await rec.hasPermission()) {
+      await rec.start(RecordConfig(), path: location.path + fileName + '.m4a');
+      setState(() {
+        widget.isRecording = true;
+      });
+      print("recordStarted ");
+    }
+  }
+
+  void stopRecord(AudioRecorder rec) async {
+    String? finalPath = await rec.stop();
+    // StepState() {
+    //   widget.path = finalPath ?? "";
+    // }
+    print("record stopped");
+    if (finalPath != null) {
+      CloudStorageService.instance.uploadVoice(
+          uid: AuthProvider.instance.user!.uid, fileData: File(finalPath));
+    } else {
+      SnackBarService.instance
+          .showsSnackBarError(text: "could not uplaod the file");
+    }
   }
 
   @override
@@ -447,9 +483,14 @@ class _ChatPageState extends State<ChatPage> {
       // height: _height * 0.1,
       width: _width * 0.09,
       child: IconButton(
-        icon: Icon(Icons.send, color: ColorsApp.primary),
+        icon: Icon(
+            widget.txt.text.isEmpty
+                ? (widget.isRecording ? Icons.stop : Icons.mic)
+                : Icons.send,
+            color: ColorsApp.primary),
         onPressed: () async {
-          if (widget.GK.currentState!.validate()) {
+          if (widget.GK.currentState!.validate() &&
+              widget.txt.text.isNotEmpty) {
             // txt.text.trim();
             DBService.instance.addMessageInChat(
                 chatId: widget.chatID,
@@ -460,6 +501,12 @@ class _ChatPageState extends State<ChatPage> {
                     type: "text",
                     //TODO: here after making databse > make it so here it sends the current user data in DB
                     senderName: widget.memberName));
+          } else if (widget.txt.text.isEmpty) {
+            if (!widget.isRecording) {
+              startRecord(widget.record);
+            } else {
+              stopRecord(widget.record);
+            }
           }
           txt.text = "";
           FocusScope.of(context).unfocus();

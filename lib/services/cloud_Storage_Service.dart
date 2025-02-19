@@ -15,6 +15,7 @@ class CloudStorageService {
   final String _profileimages = "profile image of user";
   final String _messageFiles = "messageFiles of chats";
   final String _images = "images";
+  final String _voice = "voices";
 
   CloudStorageService() {
     _storage = FirebaseStorage.instance;
@@ -44,6 +45,25 @@ class CloudStorageService {
           .child(_images)
           .child(_Filename)
           .putFile(fileData);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<TaskSnapshot?> uploadVoice({
+    required String uid,
+    required File fileData,
+  }) async {
+    var _timestamp = Timestamp.now();
+    var _Filename = p.basename(fileData.path);
+    try {
+      var data = await baseRef
+          .child(_voice)
+          .child(uid)
+          .child(_Filename)
+          .putFile(fileData);
+      print("uploaded");
+      return data;
     } catch (e) {
       print(e);
     }
