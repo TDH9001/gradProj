@@ -31,7 +31,9 @@ class ChatSnipits {
       timestamp: _snap["timestamp"],
       unseenCount: _snap["unseenCount"],
       Sendername: _snap["senderName"],
-      type: _snap["type"],
+      type: _snap["type"] is int
+          ? MessageType.values[_snap["type"]].name
+          : _snap["type"],
       adminId:
           (_snap["admins"] as List<dynamic>).map((e) => e.toString()).toList(),
     );

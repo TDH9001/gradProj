@@ -78,7 +78,17 @@ Widget _RecentChats() {
                                   ),
                                 ],
                               )
-                            : Text(data[index].LastMessage),
+                            : data[index].type == "voice"
+                                ? Row(
+                                    children: [
+                                      Text("Voice attachment"),
+                                      Icon(
+                                        Icons.music_note,
+                                        color: Color(0xff7AB2D3),
+                                      ),
+                                    ],
+                                  )
+                                : Text(data[index].LastMessage),
                         leading: Container(
                           width: 50,
                           height: 50,

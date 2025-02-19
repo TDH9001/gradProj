@@ -1,5 +1,6 @@
 //will allowus to get files from device library
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
@@ -20,7 +21,7 @@ class MediaService {
     return null; // Return null if no image is picked
   }
 
- 
+
 }
 //how to get the file and use this class
 //make a file variable > make it the reciver (_imageFileExample)  >then sue it normaly

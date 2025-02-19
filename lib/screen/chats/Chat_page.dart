@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:appbar_dropdown/appbar_dropdown.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
@@ -35,8 +36,9 @@ class ChatPage extends StatefulWidget {
   late String memberName;
   final record = AudioRecorder();
   bool isRecording = false;
-  String path = "";
-  String url = "";
+  late AudioPlayer audioPlayer = AudioPlayer();
+//  subject to change > is a type of listener that only works for an inbuilt lsitener
+  ValueNotifier<bool> isPlaying = ValueNotifier<bool>(false);
 
   // late String currID;
   @override
@@ -55,7 +57,15 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
     widget._auth = context.read<AuthProvider>();
+    //  widget.audioPlayer = AudioPlayer();
     // Call the method during initialization
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    widget.audioPlayer.dispose();
   }
 
   void startRecord(AudioRecorder rec) async {
@@ -84,6 +94,20 @@ class _ChatPageState extends State<ChatPage> {
       SnackBarService.instance
           .showsSnackBarError(text: "could not uplaod the file");
     }
+  }
+
+  void playAudio(AudioPlayer play, String url) async {
+    await play.play(UrlSource(url));
+    widget.isPlaying =   ValueNotifier<bool>(true);
+    print("playing");
+  }
+
+  void pauseAudio(AudioPlayer play) async {
+    await play.pause();
+    setState(() {
+      widget.isPlaying =ValueNotifier<bool>(false);
+    });
+    print("Paused");
   }
 
   @override
@@ -266,14 +290,25 @@ class _ChatPageState extends State<ChatPage> {
                               ts: bubbles[index].timestamp,
                               senderName: bubbles[index].senderName,
                             )
-                          : _imageMessageBubble(
-                              FileAdress: ChatdataOfCurrentChat.messageContent
-                                  .toString(),
-                              isOurs: widget._auth.user!.uid ==
-                                  bubbles[index].senderID,
-                              ts: bubbles[index].timestamp,
-                              senderName: bubbles[index].senderName,
-                            ),
+                          : bubbles[index].type == "image"
+                              ? _imageMessageBubble(
+                                  FileAdress: ChatdataOfCurrentChat
+                                      .messageContent
+                                      .toString(),
+                                  isOurs: widget._auth.user!.uid ==
+                                      bubbles[index].senderID,
+                                  ts: bubbles[index].timestamp,
+                                  senderName: bubbles[index].senderName,
+                                )
+                              : _VoiceMessageBubble(
+                                  AudioAdress: ChatdataOfCurrentChat
+                                      .messageContent
+                                      .toString(),
+                                  isOurs: widget._auth.user!.uid ==
+                                      bubbles[index].senderID,
+                                  ts: bubbles[index].timestamp,
+                                  senderName: bubbles[index].senderName,
+                                  isPlaying: widget.isPlaying),
                     ],
                   ));
             },
@@ -314,7 +349,7 @@ class _ChatPageState extends State<ChatPage> {
     List<Color> colorScheme = isOurs
         ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
         : [Color(0xFF769BC6), Color(0xFFA3BFE0)];
-    return Container(
+    return  Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
@@ -349,7 +384,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget _imageMessageBubble(
+  Widget  _imageMessageBubble(
       {required FileAdress,
       required bool isOurs,
       required Timestamp ts,
@@ -383,7 +418,7 @@ class _ChatPageState extends State<ChatPage> {
             Color(0xFFA3BFE0),
             Color(0xFF769BC6),
           ];
-    return GestureDetector(
+    return  GestureDetector(
       onTap: () => showDialog(
           context: context,
           builder: (_) => Dialog(
@@ -430,6 +465,89 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
+  Widget _VoiceMessageBubble(
+      {required AudioAdress,
+      required bool isOurs,
+      required Timestamp ts,
+      required String senderName,
+      required ValueNotifier<bool> isPlaying}) {
+    var _numMap = {
+      1: "jan ",
+      2: "feb",
+      3: "mar",
+      4: 'apr',
+      5: "may",
+      6: "jun",
+      7: "jul",
+      8: "aug",
+      9: "sep",
+      10: "oct",
+      11: "nov",
+      12: "dec"
+    };
+    var _weekmap = {
+      6: "saturday",
+      7: 'sunday',
+      1: "monday",
+      2: "tuesday",
+      3: "wednesday",
+      4: "thursday",
+      5: "friday"
+    };
+    List<Color> colorScheme = isOurs
+        ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
+        : [
+            Color(0xFFA3BFE0),
+            Color(0xFF769BC6),
+          ];
+
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+              colors: colorScheme,
+              stops: [0.40, 0.70],
+              begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
+              end: isOurs ? Alignment.topRight : Alignment.topLeft)),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment:
+            isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        children: [
+          Text(senderName),
+          SizedBox(height: 9),
+
+          // Only the button will update when clicked
+          ValueListenableBuilder<bool>(
+            valueListenable:widget.isPlaying ,
+            builder: (context, value, child) {
+              return IconButton(
+                onPressed: () {
+                  if (value) {
+                    pauseAudio(widget.audioPlayer);
+                  } else {
+                    playAudio(widget.audioPlayer, AudioAdress);
+                  }
+                  isPlaying.value = !value; // Update only the button
+                },
+                icon: Icon(value ? Icons.pause : Icons.play_arrow),
+              );
+            },
+          ), 
+          SizedBox(
+              height: 15,
+            ),
+            Text(
+              "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
+              style: TextStyle(fontSize: 16),
+            )
+        ],
+      ),
+    );
+  }
+
   Widget MessageField(BuildContext _context) {
     return Container(
       // height: _height * 0.1,
@@ -462,6 +580,9 @@ class _ChatPageState extends State<ChatPage> {
       width: _width * 0.5,
       child: TextFormField(
         controller: txt,
+        onTap: () {
+          txt.text += " ";
+        },
         validator: (data) {
           if (data == null || data.trim().isEmpty) {
             return "The message cannot be empty";
@@ -490,7 +611,22 @@ class _ChatPageState extends State<ChatPage> {
                 : Icons.send,
             color: ColorsApp.primary),
         onPressed: () async {
-          if (widget.GK.currentState!.validate() &&
+          if (widget.txt.text.isEmpty) {
+            if (!widget.isRecording) {
+              startRecord(widget.record);
+            } else {
+              String? VoiceUrl = await stopRecord(widget.record);
+              DBService.instance.addMessageInChat(
+                  chatId: widget.chatID,
+                  messageData: Message(
+                      senderID: widget._auth.user!.uid,
+                      messageContent: VoiceUrl!,
+                      timestamp: Timestamp.now(),
+                      type: "voice",
+                      //TODO: here after making databse > make it so here it sends the current user data in DB
+                      senderName: widget.memberName));
+            }
+          } else if (widget.GK.currentState!.validate() &&
               widget.txt.text.isNotEmpty) {
             // txt.text.trim();
             DBService.instance.addMessageInChat(
@@ -502,12 +638,6 @@ class _ChatPageState extends State<ChatPage> {
                     type: "text",
                     //TODO: here after making databse > make it so here it sends the current user data in DB
                     senderName: widget.memberName));
-          } else if (widget.txt.text.isEmpty) {
-            if (!widget.isRecording) {
-              startRecord(widget.record);
-            } else {
-              String? VoiceUrl = await stopRecord(widget.record);
-            }
           }
           txt.text = "";
           FocusScope.of(context).unfocus();
@@ -540,5 +670,64 @@ class _ChatPageState extends State<ChatPage> {
               FocusScope.of(context).unfocus();
             },
             icon: Icon(Icons.camera_alt)));
+  }
+}
+
+class _VoiceBubble extends StatefulWidget {
+  final String AudioAdress;
+  final bool isOurs;
+  final Timestamp ts;
+  final String senderName;
+  final AudioPlayer audioPlayer;
+
+  _VoiceBubble({
+    required this.AudioAdress,
+    required this.isOurs,
+    required this.ts,
+    required this.senderName,
+    required this.audioPlayer,
+  });
+
+  @override
+  _VoiceMessageBubbleState createState() => _VoiceMessageBubbleState();
+}
+
+class _VoiceMessageBubbleState extends State<_VoiceBubble> {
+  final ValueNotifier<bool> isPlaying = ValueNotifier<bool>(false);
+
+  void playAudio() async {
+    await widget.audioPlayer.play(UrlSource(widget.AudioAdress));
+    isPlaying.value = true; // Updates only the button
+    print("playing");
+  }
+
+  void pauseAudio() async {
+    await widget.audioPlayer.pause();
+    isPlaying.value = false; // Updates only the button
+    print("Paused");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: Column(
+        children: [
+          Text(widget.senderName),
+          SizedBox(height: 9),
+          ValueListenableBuilder<bool>(
+            valueListenable: isPlaying,
+            builder: (context, value, child) {
+              return IconButton(
+                onPressed: () {
+                  value ? pauseAudio() : playAudio();
+                },
+                icon: Icon(value ? Icons.pause : Icons.play_arrow),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
