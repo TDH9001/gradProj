@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:grad_proj/services/DB-service.dart';
 import '../models/message.dart';
 
 class ChatSnipits {
@@ -58,7 +59,9 @@ class ChatData {
         senderName: message["senderName"] ?? "",
         messageContent: message["message"] ?? "",
         timestamp: message["timestamp"],
-        type: message["type"] ?? "text",
+        type: message["type"] is int
+            ? MessageType.values[message["type"]].name
+            : message["type"] ?? "text",
       );
     }).toList();
     //messageType

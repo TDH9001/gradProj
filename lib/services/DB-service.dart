@@ -8,6 +8,8 @@ import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
 
+enum MessageType { text, image, voice }
+
 class DBService {
   static DBService instance = DBService();
 
@@ -94,6 +96,7 @@ class DBService {
     });
   }
 
+// to be updated
   Future<void> addMessageInChat(
       {required String chatId, required Message messageData}) {
     var ref = _db.collection(_ChatCollection).doc(chatId);
@@ -106,7 +109,9 @@ class DBService {
           "senderID": messageData.senderID,
           "senderName": messageData.senderName,
           "timestamp": messageData.timestamp,
-          "type": messageData.type //messageData.type
+          "type": MessageType.values
+              .byName(messageData.type)
+              .index //messageData.type
         }
       ])
     });

@@ -70,15 +70,16 @@ class _ChatPageState extends State<ChatPage> {
     }
   }
 
-  void stopRecord(AudioRecorder rec) async {
+  Future<String?> stopRecord(AudioRecorder rec) async {
     String? finalPath = await rec.stop();
-    // StepState() {
-    //   widget.path = finalPath ?? "";
-    // }
+    setState(() {
+      widget.isRecording = false;
+    });
     print("record stopped");
     if (finalPath != null) {
-      CloudStorageService.instance.uploadVoice(
+      var _result = await CloudStorageService.instance.uploadVoice(
           uid: AuthProvider.instance.user!.uid, fileData: File(finalPath));
+      return await _result!.ref.getDownloadURL();
     } else {
       SnackBarService.instance
           .showsSnackBarError(text: "could not uplaod the file");
@@ -231,8 +232,8 @@ class _ChatPageState extends State<ChatPage> {
           }
           //FIXME: possibly not working after a large enough amount of data is sent
 
-          print(widget.admins);
-          print(widget._auth.user!.uid);
+          // print(widget.admins);
+          // print(widget._auth.user!.uid);
           //reversing the list
           List bubbles = _data!.messages.reversed.toList();
           return ListView.builder(
@@ -505,7 +506,7 @@ class _ChatPageState extends State<ChatPage> {
             if (!widget.isRecording) {
               startRecord(widget.record);
             } else {
-              stopRecord(widget.record);
+              String? VoiceUrl = await stopRecord(widget.record);
             }
           }
           txt.text = "";

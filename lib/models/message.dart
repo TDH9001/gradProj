@@ -1,4 +1,5 @@
 import "package:cloud_firestore/cloud_firestore.dart";
+import "package:grad_proj/services/DB-service.dart";
 
 // enum messageType { Text, image, file }
 
@@ -19,9 +20,12 @@ class Message {
     return Message(
       messageContent: _snap["message"],
       senderID: _snap["senderID"],
-      type: _snap["type"],
+      type: _snap["type"] is int
+          ? MessageType.values[_snap["type"]].name
+          : _snap["type"],
       timestamp: _snap["timestamp"],
       senderName: _snap["senderName"],
     );
   }
+
 }
