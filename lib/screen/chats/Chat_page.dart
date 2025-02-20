@@ -37,10 +37,7 @@ class ChatPage extends StatefulWidget {
   final record = AudioRecorder();
   bool isRecording = false;
   late AudioPlayer audioPlayer = AudioPlayer();
-//  subject to change > is a type of listener that only works for an inbuilt lsitener
-  ValueNotifier<bool> isPlaying = ValueNotifier<bool>(false);
 
-  // late String currID;
   @override
   State<ChatPage> createState() {
     return _ChatPageState();
@@ -59,13 +56,6 @@ class _ChatPageState extends State<ChatPage> {
     widget._auth = context.read<AuthProvider>();
     //  widget.audioPlayer = AudioPlayer();
     // Call the method during initialization
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-
-    widget.audioPlayer.dispose();
   }
 
   void startRecord(AudioRecorder rec) async {
@@ -94,20 +84,6 @@ class _ChatPageState extends State<ChatPage> {
       SnackBarService.instance
           .showsSnackBarError(text: "could not uplaod the file");
     }
-  }
-
-  void playAudio(AudioPlayer play, String url) async {
-    await play.play(UrlSource(url));
-    widget.isPlaying =   ValueNotifier<bool>(true);
-    print("playing");
-  }
-
-  void pauseAudio(AudioPlayer play) async {
-    await play.pause();
-    setState(() {
-      widget.isPlaying =ValueNotifier<bool>(false);
-    });
-    print("Paused");
   }
 
   @override
@@ -300,7 +276,7 @@ class _ChatPageState extends State<ChatPage> {
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 )
-                              : _VoiceMessageBubble(
+                              : VoiceBubble(
                                   AudioAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),
@@ -308,7 +284,7 @@ class _ChatPageState extends State<ChatPage> {
                                       bubbles[index].senderID,
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
-                                  isPlaying: widget.isPlaying),
+                                ),
                     ],
                   ));
             },
@@ -349,7 +325,7 @@ class _ChatPageState extends State<ChatPage> {
     List<Color> colorScheme = isOurs
         ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
         : [Color(0xFF769BC6), Color(0xFFA3BFE0)];
-    return  Container(
+    return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
@@ -384,7 +360,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget  _imageMessageBubble(
+  Widget _imageMessageBubble(
       {required FileAdress,
       required bool isOurs,
       required Timestamp ts,
@@ -418,7 +394,7 @@ class _ChatPageState extends State<ChatPage> {
             Color(0xFFA3BFE0),
             Color(0xFF769BC6),
           ];
-    return  GestureDetector(
+    return GestureDetector(
       onTap: () => showDialog(
           context: context,
           builder: (_) => Dialog(
@@ -461,89 +437,6 @@ class _ChatPageState extends State<ChatPage> {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _VoiceMessageBubble(
-      {required AudioAdress,
-      required bool isOurs,
-      required Timestamp ts,
-      required String senderName,
-      required ValueNotifier<bool> isPlaying}) {
-    var _numMap = {
-      1: "jan ",
-      2: "feb",
-      3: "mar",
-      4: 'apr',
-      5: "may",
-      6: "jun",
-      7: "jul",
-      8: "aug",
-      9: "sep",
-      10: "oct",
-      11: "nov",
-      12: "dec"
-    };
-    var _weekmap = {
-      6: "saturday",
-      7: 'sunday',
-      1: "monday",
-      2: "tuesday",
-      3: "wednesday",
-      4: "thursday",
-      5: "friday"
-    };
-    List<Color> colorScheme = isOurs
-        ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
-        : [
-            Color(0xFFA3BFE0),
-            Color(0xFF769BC6),
-          ];
-
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-              colors: colorScheme,
-              stops: [0.40, 0.70],
-              begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-              end: isOurs ? Alignment.topRight : Alignment.topLeft)),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment:
-            isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-        children: [
-          Text(senderName),
-          SizedBox(height: 9),
-
-          // Only the button will update when clicked
-          ValueListenableBuilder<bool>(
-            valueListenable:widget.isPlaying ,
-            builder: (context, value, child) {
-              return IconButton(
-                onPressed: () {
-                  if (value) {
-                    pauseAudio(widget.audioPlayer);
-                  } else {
-                    playAudio(widget.audioPlayer, AudioAdress);
-                  }
-                  isPlaying.value = !value; // Update only the button
-                },
-                icon: Icon(value ? Icons.pause : Icons.play_arrow),
-              );
-            },
-          ), 
-          SizedBox(
-              height: 15,
-            ),
-            Text(
-              "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
-              style: TextStyle(fontSize: 16),
-            )
-        ],
       ),
     );
   }
@@ -673,59 +566,139 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-class _VoiceBubble extends StatefulWidget {
+class VoiceBubble extends StatefulWidget {
   final String AudioAdress;
   final bool isOurs;
   final Timestamp ts;
   final String senderName;
-  final AudioPlayer audioPlayer;
+  final AudioPlayer audioPlayer = AudioPlayer();
 
-  _VoiceBubble({
+  VoiceBubble({
     required this.AudioAdress,
     required this.isOurs,
     required this.ts,
     required this.senderName,
-    required this.audioPlayer,
   });
 
   @override
   _VoiceMessageBubbleState createState() => _VoiceMessageBubbleState();
 }
 
-class _VoiceMessageBubbleState extends State<_VoiceBubble> {
-  final ValueNotifier<bool> isPlaying = ValueNotifier<bool>(false);
-
-  void playAudio() async {
-    await widget.audioPlayer.play(UrlSource(widget.AudioAdress));
-    isPlaying.value = true; // Updates only the button
-    print("playing");
-  }
-
-  void pauseAudio() async {
-    await widget.audioPlayer.pause();
-    isPlaying.value = false; // Updates only the button
-    print("Paused");
-  }
+class _VoiceMessageBubbleState extends State<VoiceBubble> {
+  bool Playing = false;
+  Duration _duration = const Duration();
+  Duration _position = const Duration();
+  final _numMap = {
+    1: "jan",
+    2: "feb",
+    3: "mar",
+    4: 'apr',
+    5: "may",
+    6: "jun",
+    7: "jul",
+    8: "aug",
+    9: "sep",
+    10: "oct",
+    11: "nov",
+    12: "dec"
+  };
+  final _weekmap = {
+    6: "saturday",
+    7: 'sunday',
+    1: "monday",
+    2: "tuesday",
+    3: "wednesday",
+    4: "thursday",
+    5: "friday"
+  };
 
   @override
   Widget build(BuildContext context) {
+    dispose() {
+      widget.audioPlayer.dispose();
+    }
+
+    List<Color> colorScheme = widget.isOurs
+        ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
+        : [
+            Color(0xFFA3BFE0),
+            Color(0xFF769BC6),
+          ];
+    widget.audioPlayer.onDurationChanged.listen((Duration d) {
+      setState(() => _duration = d);
+    });
+    widget.audioPlayer.onPositionChanged.listen((Duration p) {
+      setState(() {
+        setState(() => _position = _duration);
+      });
+    });
+
     return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+              colors: colorScheme,
+              stops: [0.40, 0.70],
+              begin:
+                  widget.isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
+              end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment:
+            widget.isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: [
           Text(widget.senderName),
           SizedBox(height: 9),
-          ValueListenableBuilder<bool>(
-            valueListenable: isPlaying,
-            builder: (context, value, child) {
-              return IconButton(
+
+          // Only the button will update when clicked
+          Row(
+            children: [
+              IconButton(
+                splashColor: Playing ? ColorsApp.primary : Colors.red,
                 onPressed: () {
-                  value ? pauseAudio() : playAudio();
+                  if (Playing) {
+                    MediaService.instance.pauseAudio(widget.audioPlayer);
+                    Playing = !Playing;
+                    setState(() {});
+                  } else {
+                    MediaService.instance
+                        .playAudio(widget.audioPlayer, widget.AudioAdress);
+                    Playing = !Playing;
+                    setState(() {});
+                  }
                 },
-                icon: Icon(value ? Icons.pause : Icons.play_arrow),
-              );
-            },
+                icon: Icon(
+                  Playing ? Icons.pause : Icons.play_arrow,
+                ),
+              ),
+              Column(
+                children: [
+                  Slider(
+                    value: _position.inSeconds.toDouble(),
+                    onChanged: (value) async {
+                      await widget.audioPlayer
+                          .seek(Duration(seconds: value.toInt()));
+                      setState(() {});
+                    },
+                    min: 0,
+                    max: _duration.inSeconds.toDouble(),
+                    activeColor: ColorsApp.primary,
+                    inactiveColor: ColorsApp.secondary,
+                  ),
+                  Text(_duration.toString())
+                ],
+              )
+            ],
           ),
+          SizedBox(
+            height: 15,
+          ),
+          Text(
+            "${_weekmap[widget.ts.toDate().weekday]} ${_numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+            style: TextStyle(fontSize: 16),
+          )
         ],
       ),
     );

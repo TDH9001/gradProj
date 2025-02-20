@@ -21,7 +21,15 @@ class MediaService {
     return null; // Return null if no image is picked
   }
 
+  void playAudio(AudioPlayer play, String url) async {
+    await play.play(UrlSource(url));
+    print("playing");
+  }
 
+  void pauseAudio(AudioPlayer play) async {
+    await play.pause();
+    print("Paused");
+  }
 }
 //how to get the file and use this class
 //make a file variable > make it the reciver (_imageFileExample)  >then sue it normaly
