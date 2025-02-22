@@ -54,6 +54,7 @@ class homePage extends StatelessWidget {
       //TODO: make chat be stored localy > then allow acces of images , files
       //TODO: make caht be loaded from DB then from cloud
       //TODO: handle files being added to the chat > probably needs storage
+      //TODO: make the audi be laoded froma  file and solve the network crisis
 
       routes: {
         SplashScreen.id: (context) => SplashScreen(),

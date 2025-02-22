@@ -30,6 +30,11 @@ class MediaService {
     await play.pause();
     print("Paused");
   }
+
+  void resumeAudio(AudioPlayer play) async {
+    await play.resume();
+    print("resuming");
+  }
 }
 //how to get the file and use this class
 //make a file variable > make it the reciver (_imageFileExample)  >then sue it normaly
