@@ -23,6 +23,7 @@ class ContentItem {
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
