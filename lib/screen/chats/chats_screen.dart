@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/models/Chats.dart';
+import 'package:grad_proj/models/chats.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:grad_proj/services/DB-service.dart';
