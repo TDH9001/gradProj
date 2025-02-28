@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/table/tableform_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../UI/colors.dart';
+import '../../providers/theme_provider.dart';
 
 class TableScreen extends StatefulWidget {
   const TableScreen({super.key});
@@ -82,9 +84,11 @@ class _TableScreenState extends State<TableScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: const Color(0xFFF7F9FC),
+      //backgroundColor: const Color(0xFFF7F9FC),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -184,7 +188,7 @@ class _TableScreenState extends State<TableScreen> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsApp.primary,
+                      backgroundColor:isDarkMode ? Color(0xFF2E5077) : ColorsApp.primary,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -207,7 +211,7 @@ class _TableScreenState extends State<TableScreen> {
                   const SizedBox(width: 35),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorsApp.primary,
+                      backgroundColor:isDarkMode ? Color(0xFF2E5077) : ColorsApp.primary,
                     ),
                     onPressed: addCourse,
                     child: const Text(

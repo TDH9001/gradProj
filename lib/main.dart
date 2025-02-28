@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/providers/theme_provider.dart';
 import 'package:grad_proj/screen/about_screen/question_screen.dart';
 import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
@@ -7,11 +8,12 @@ import 'package:grad_proj/screen/profiles/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
+import 'package:grad_proj/screen/setting_screen/setting.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
-import 'package:grad_proj/settings/setting.dart';
 import 'package:provider/provider.dart';
+import 'UI/colors.dart';
 import 'firebase_options.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
@@ -25,6 +27,7 @@ void main() async {
   );
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+    ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
   ], child: homePage()));
 }
 
@@ -34,16 +37,31 @@ class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _auth = Provider.of<AuthProvider>(context);
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       navigatorKey: navigationService.instance.navKey, //added the nav service
       title: "Sci.Connect",
+      themeMode: themeProvider.getEffectiveThemeMode(),
       theme: ThemeData(
-          brightness: Brightness.light,
-          primaryColor:
-              Color.fromARGB(100, 255, 255, 255), //fromARGB(255, 152, 188, 209)
-          hintColor: Color.fromARGB(199, 146, 190, 188),
-          scaffoldBackgroundColor: Colors.white //fromARGB(199, 146, 190, 188),
-          ),
+        brightness: Brightness.light,
+        // colorScheme: ColorScheme.light(
+        //   background: Colors.white,
+        //),
+        scaffoldBackgroundColor: Colors.white,
+      ),
+
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        // colorScheme: ColorScheme.dark(
+        //   background: Colors.black,
+        //   primary: Colors.black, // لون افتراضي في الداكن
+        // ),
+        scaffoldBackgroundColor: Color(0xFF2E3B55),
+      ),
+
+      // theme: themeProvider.lightTheme,
+      // darkTheme: themeProvider.darkTheme,
+
       //darkTheme: ThemeData.dark(),
       //FIXME: fix the isseus with levels in the ABOUT screens
       //FIXME: make a model for the table
@@ -68,7 +86,7 @@ class homePage extends StatelessWidget {
         "CompleteProfile": (context) => CompleteProfile(),
         "RecentChats": (context) => RecentChats(),
         "AboutScreen": (context) => AboutScreen(),
-        "SettingScreen": (context) => SettingScreen(),
+        "Setting": (context) => Setting(),
         "noInternet": (context) => noInternet(),
       },
       //make it splash later

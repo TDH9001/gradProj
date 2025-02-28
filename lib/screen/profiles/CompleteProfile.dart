@@ -9,6 +9,7 @@ import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
 
 class CompleteProfile extends StatefulWidget {
@@ -32,9 +33,13 @@ class _UpdateUserDataState extends State<CompleteProfile> {
   final _Listcontroller = MultiSelectController<String>();
   final _yearController = TextEditingController();
 
+
+
   @override
   Widget build(BuildContext _context) {
     var _auth = Provider.of<AuthProvider>(_context);
+    final themeProvider = Provider.of<ThemeProvider>(_context);
+    final bool isDarkMode = themeProvider.isDarkMode;
 
     if (_auth.user == null) {
       return Center(
@@ -64,7 +69,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               Text('Please register your academic year and courses',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Color(0xFF9CA3AF),
+                    color:  isDarkMode ? Colors.white : Color(0xFF9CA3AF),
                   )),
               // TextHeader(
               //   largeText: "Course Register ",
@@ -126,6 +131,8 @@ class _UpdateUserDataState extends State<CompleteProfile> {
   }
 
   Widget _buildInfoCard({required String label, required Widget child}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -141,7 +148,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               label,
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey[600],
+                color:  isDarkMode ? Colors.white : Colors.grey[600],
                 fontWeight: FontWeight.bold,
               ),
             ),

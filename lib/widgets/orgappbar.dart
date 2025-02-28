@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../UI/colors.dart';
 import '../UI/text_style.dart';
+import '../providers/theme_provider.dart';
 
 class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -17,12 +19,16 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return AppBar(
-      backgroundColor: ColorsApp.primary,
+      backgroundColor: isDarkMode ? Color(0xFF2E5077) : ColorsApp.primary,
       title: Center (
         child: Text(
           title,
-          style: TextStyles.appBarText,
+          style: TextStyles.appBarText.copyWith(
+            color: isDarkMode ? Colors.white70 : Colors.white,
+          ),
         ),
       ),
       leading: leading,
@@ -30,6 +36,7 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
+            backgroundColor: isDarkMode ? Colors.white70 : Colors.white,
             backgroundImage: const AssetImage('assets/images/science.png'),
             radius: 20,
           ),

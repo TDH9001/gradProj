@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/sceduleitem.dart';
+import 'package:provider/provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
 
 
@@ -16,6 +18,9 @@ class TableformScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
+
     return Scaffold(
       key: scaffoldKey,
       appBar: Orgappbar(
@@ -33,12 +38,12 @@ class TableformScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Your Weekly Schedule',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color:  isDarkMode ? Colors.white : Colors.black,
               ),
             ),
             const SizedBox(height: 16),

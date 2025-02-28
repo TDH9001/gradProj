@@ -18,6 +18,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext _context) {

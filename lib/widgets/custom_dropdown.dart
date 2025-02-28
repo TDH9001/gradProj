@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../UI/text_style.dart';
+import '../providers/theme_provider.dart';
 
 class CustomDropdownField<T> extends StatelessWidget {
   final String label;
@@ -26,6 +28,8 @@ class CustomDropdownField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,7 +44,7 @@ class CustomDropdownField<T> extends StatelessWidget {
               Text(
                 "  ",
                 style: TextStyle(
-                  color: const Color(0xff7AB2D3),
+                  color: isDarkMode ? Colors.grey[400] : Color(0xff7AB2D3),
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
