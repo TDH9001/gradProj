@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
+import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -47,12 +48,12 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double _height = 0;
   double _width = 0;
-  late Future<List<String>> chatMembersFuture;
+  //late Future<List<String>> chatMembersFuture;
 
   @override
   void initState() {
     super.initState();
-    chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
+   // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
     widget._auth = context.read<AuthProvider>();
     //  _audioPlayer = AudioPlayer();
     // Call the method during initialization
@@ -106,81 +107,88 @@ class _ChatPageState extends State<ChatPage> {
       child: Scaffold(
         //resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          flexibleSpace: widget.admins.contains(AuthProvider.instance.user!.uid)
-              ? FutureBuilder<List<String>>(
-                  future: chatMembersFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      List<String> hobbies = snapshot.data!;
-                    }
+          actions: [
+            IconButton(
+                onPressed: (() {
+                  navigationService.instance.navigateTo(ChatDataScreen.id);
+                }),
+                icon: Icon(Icons.navigate_next))
+          ],
+          // flexibleSpace: widget.admins.contains(AuthProvider.instance.user!.uid)
+          //     ? FutureBuilder<List<String>>(
+          //         future: chatMembersFuture,
+          //         builder: (context, snapshot) {
+          //           if (snapshot.connectionState == ConnectionState.waiting) {
+          //             return Center(child: CircularProgressIndicator());
+          //           } else if (snapshot.hasError) {
+          //             return Center(child: Text('Error: ${snapshot.error}'));
+          //           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          //             List<String> hobbies = snapshot.data!;
+          //           }
 
-                    List<String> ddt = snapshot.data!;
+          //           List<String> ddt = snapshot.data!;
 
-                    return StreamBuilder<List<contact>>(
-                        stream: DBService.instance
-                            .getMembersDataOfChat(ddt, widget.chatID),
-                        builder: (_context, _snapshot) {
-                          var _data = _snapshot.data;
+          //           return StreamBuilder<List<contact>>(
+          //               stream: DBService.instance
+          //                   .getMembersDataOfChat(ddt, widget.chatID),
+          //               builder: (_context, _snapshot) {
+          //                 var _data = _snapshot.data;
 
-                          //used to tell the builder to start from the end
-                          if (_snapshot.connectionState ==
-                                  ConnectionState.waiting ||
-                              _snapshot.connectionState ==
-                                  ConnectionState.none) {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          if (_snapshot.hasError) {
-                            return Center(
-                                child: Text(
-                                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-                          }
-                          for (int i = 0; i < snapshot.data!.length; i++) {
-                            if (widget._auth.user!.uid ==
-                                _snapshot.data![i].Id) {
-                              widget.memberName =
-                                  " ${_snapshot.data![i].FirstName} ${_snapshot.data![i].LastName}";
-                            }
-                          }
-                          //jsut a place holder for the output methoud
-                          return AppbarDropdown(
-                            dropdownAppBarColor: ColorsApp.primary,
-                            items: [
-                              for (int i = 0; i < _snapshot.data!.length; i++)
-                                [
-                                  //returns a list where > [0] = the name and phone number
-                                  //the [1]is the user ID in database to be give to make admin
-                                  "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
-                                  _snapshot.data![i].Id
-                                ]
-                            ],
-                            title: (user) {
-                              if (widget.admins.contains(user[1])) {
-                                return user[0] +
-                                    "\n already an admin \n does nothing when the button is pressed";
-                              } else {
-                                return user[0].toString() +
-                                    "\nclick to make a group admin";
-                              }
-                            },
-                            onClick: (user) {
-                              try {
-                                DBService.instance
-                                    .makeAdmin(user[1], widget.chatID);
-                              } catch (e) {
-                                SnackBarService.instance.showsSnackBarError(
-                                    text:
-                                        'an error occured while making $user an admin \n please try again');
-                                navigationService.instance.goBack();
-                              }
-                            },
-                          );
-                        });
-                  })
-              : SizedBox(),
+          //                 //used to tell the builder to start from the end
+          //                 if (_snapshot.connectionState ==
+          //                         ConnectionState.waiting ||
+          //                     _snapshot.connectionState ==
+          //                         ConnectionState.none) {
+          //                   return Center(child: CircularProgressIndicator());
+          //                 }
+          //                 if (_snapshot.hasError) {
+          //                   return Center(
+          //                       child: Text(
+          //                           "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+          //                 }
+          //                 for (int i = 0; i < snapshot.data!.length; i++) {
+          //                   if (widget._auth.user!.uid ==
+          //                       _snapshot.data![i].Id) {
+          //                     widget.memberName =
+          //                         " ${_snapshot.data![i].FirstName} ${_snapshot.data![i].LastName}";
+          //                   }
+          //                 }
+          //                 //jsut a place holder for the output methoud
+          //                 return AppbarDropdown(
+          //                   dropdownAppBarColor: ColorsApp.primary,
+          //                   items: [
+          //                     for (int i = 0; i < _snapshot.data!.length; i++)
+          //                       [
+          //                         //returns a list where > [0] = the name and phone number
+          //                         //the [1]is the user ID in database to be give to make admin
+          //                         "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
+          //                         _snapshot.data![i].Id
+          //                       ]
+          //                   ],
+          //                   title: (user) {
+          //                     if (widget.admins.contains(user[1])) {
+          //                       return user[0] +
+          //                           "\n already an admin \n does nothing when the button is pressed";
+          //                     } else {
+          //                       return user[0].toString() +
+          //                           "\nclick to make a group admin";
+          //                     }
+          //                   },
+          //                   onClick: (user) {
+          //                     try {
+          //                       DBService.instance
+          //                           .makeAdmin(user[1], widget.chatID);
+          //                     } catch (e) {
+          //                       SnackBarService.instance.showsSnackBarError(
+          //                           text:
+          //                               'an error occured while making $user an admin \n please try again');
+          //                       navigationService.instance.goBack();
+          //                     }
+          //                   },
+          //                 );
+          //               });
+          //         })
+          //     : SizedBox(),
           backgroundColor: ColorsApp.primary,
           title:
               Center(child: Text(widget.chatID, style: TextStyles.appBarText)),

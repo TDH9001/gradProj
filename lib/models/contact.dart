@@ -4,7 +4,6 @@ class contact {
   final String Id;
   final String FirstName;
   final String LastName;
-  // final Timestamp LastSeet;
   final List<String> Classes;
   final int Year;
   final bool isComplete;
@@ -15,7 +14,6 @@ class contact {
       required this.LastName,
       required this.Classes,
       required this.Year,
-      // required this.LastSeet,
       required this.isComplete,
       required this.phoneNumber});
 
