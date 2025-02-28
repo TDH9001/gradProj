@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'package:grad_proj/screen/table/table_screen.dart';
+import 'package:provider/provider.dart';
 import '../UI/colors.dart';
+import '../providers/theme_provider.dart';
 import '../screen/home/home_screen.dart';
 import '../screen/account/account_screen.dart';
 
@@ -32,11 +34,14 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
     'Home',
     'Chats', // Title for RecentChats()
     'Table', // Title for TableScreen()
-    'Account',
+    'About',
   ];
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
+
     return Scaffold(
       key: scaffoldKey,
       appBar: Orgappbar(
@@ -45,7 +50,7 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
         leading: (currentIndex == 2 ||
                 currentIndex == 1) // Show back button on Table and Chats screen
             ? IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white: Colors.white),
                 onPressed: () {
                   setState(() {
                     currentIndex =
@@ -57,31 +62,31 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
       ),
       body: screens[currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        items: const <Widget>[
+        items: <Widget>[
           Icon(
             Icons.home,
             size: 30,
-            color: Colors.white,
+            color:  isDarkMode ? Colors.white70 : Colors.white,
           ),
           Icon(
             Icons.chat,
             size: 30,
-            color: Colors.white,
+            color:isDarkMode ? Colors.white70: Colors.white,
           ),
           Icon(
             Icons.table_view_outlined,
             size: 30,
-            color: Colors.white,
+            color: isDarkMode ? Colors.white70 : Colors.white,
           ),
           Icon(
             Icons.menu,
             size: 30,
-            color: Colors.white,
+            color:isDarkMode ? Colors.white70 : Colors.white,
           ),
         ],
-        color: ColorsApp.primary,
-        backgroundColor: Colors.white10,
-        buttonBackgroundColor: const Color(0xff769BC6),
+        color: isDarkMode ? Color(0xFF2E5077):  ColorsApp.primary,
+        backgroundColor:isDarkMode ? Colors.transparent: Colors.white10,
+        buttonBackgroundColor: isDarkMode ? Color(0xFF2E5077): Color(0xff769BC6),
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {

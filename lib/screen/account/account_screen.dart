@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/settings/setting.dart';
+
 import '../../UI/colors.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/custom_card.dart';
 import '../about_screen/question_screen.dart';
 import '../../widgets/bottom_navegation_bar_screen.dart';
@@ -10,6 +12,8 @@ import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
+import '../setting_screen/setting.dart';
+
 class AccountScreen extends StatelessWidget {
   AccountScreen({super.key});
 
@@ -18,6 +22,8 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _auth = Provider.of<AuthProvider>(context);
+    var themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
       child: Scaffold(
@@ -29,7 +35,7 @@ class AccountScreen extends StatelessWidget {
               Container(
                 height: 150,
                 decoration: BoxDecoration(
-                  color: ColorsApp.primary,
+                  color:  isDarkMode?Color(0xFF2E3B55):ColorsApp.primary,
                 ),
                 child: Center(
                   child: Column(
@@ -37,6 +43,7 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 35,
+                       backgroundColor:  isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
                         child: ClipOval(
                           child: Image.asset(
                             'assets/images/AinShamsUniv.png',
@@ -45,18 +52,18 @@ class AccountScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Text(
+                      Text(
                         "Ain Shams University",
                         style: TextStyle(
-                          color: Colors.white,
+                          color:  isDarkMode?Colors.white:Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Text(
+                      Text(
                         "science faculty",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: isDarkMode?Colors.grey[400]:Colors.white,
                           fontSize: 14,
                         ),
                       ),
@@ -82,7 +89,7 @@ class AccountScreen extends StatelessWidget {
                       icon: Icons.settings,
                       title: "Settings",
                       onTap: () =>
-                          navigationService.instance.navigateTo(SettingScreen.id),
+                          navigationService.instance.navigateTo(Setting.id),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(

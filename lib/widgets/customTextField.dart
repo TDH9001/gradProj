@@ -22,6 +22,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
+
     void initstate() {
       super.initState();
       widget.isObscure = widget.isPassword;
