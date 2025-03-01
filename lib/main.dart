@@ -58,7 +58,7 @@ class homePage extends StatelessWidget {
       //TODO: make the audi be laoded froma  file and solve the network crisis
 
       routes: {
-        ChatDataScreen.id: (context) => ChatDataScreen(),
+      //  ChatDataScreen.id: (context) => ChatDataScreen(),
         SplashScreen.id: (context) => SplashScreen(),
         Determine.id: (context) => Determine(),
         "OnboardingScreen": (context) => OnboardingScreen(),

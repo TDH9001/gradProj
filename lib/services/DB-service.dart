@@ -327,4 +327,86 @@ class DBService {
       print(e);
     }
   }
+
+  Stream<List<ScheduleItemClass>> getPermanantSceduleItems(String chatId) {
+    return _db
+        .collection(_ChatCollection)
+        .doc(chatId)
+        .snapshots() // to get a stream you need to watch the snapshots
+        .map((snap) {
+      if (snap.exists) {
+        List<dynamic> currentData = snap["permanantScedules"];
+        // List<ScheduleItemClass> data =
+        return currentData.map((item) {
+          return ScheduleItemClass(
+              creatorId: item["creatorId"],
+              creatorName: item["creatorName"],
+              day: item["day"],
+              endTime: item["endTime"],
+              location: item["location"],
+              name: item["name"],
+              startTime: item["startTime"],
+              type: item["type"]);
+        }).toList();
+      } else {
+        return [];
+      }
+    });
+  }
+
+//how to retrive it as a steam
+  Stream<List<ScheduleItemClass>> getTemporarySceduleItems(String chatId) {
+    return _db
+        .collection(_ChatCollection)
+        .doc(chatId)
+        .snapshots() // to get a stream you need to watch the snapshots
+        .map((snap) {
+      if (snap.exists) {
+        List<dynamic> currentData = snap["temporaryScedule"];
+        // List<ScheduleItemClass> data =
+        return currentData.map((item) {
+          return ScheduleItemClass(
+              creatorId: item["creatorId"],
+              creatorName: item["creatorName"],
+              day: item["day"],
+              endTime: item["endTime"],
+              location: item["location"],
+              name: item["name"],
+              startTime: item["startTime"],
+              endDate: item["endDate"],
+              type: item["type"]);
+        }).toList();
+      } else {
+        return [];
+      }
+    });
+  }
+// HOW TO GET IT AS FUTURE
+  // Future<List<ScheduleItemClass>> getTemporarySceduleItems(
+  //     String chatId) async {
+  //   var snap = await _db.collection(_ChatCollection).doc(chatId).get();
+  //   try {
+  //     if (snap.exists) {
+  //       List<dynamic> currentData = snap["temporaryScedule"];
+  //       // List<ScheduleItemClass> data =
+  //       return currentData.map((item) {
+  //         return ScheduleItemClass(
+  //             creatorId: item["creatorId"],
+  //             creatorName: item["creatorName"],
+  //             day: item["day"],
+  //             endTime: item["endTime"],
+  //             location: item["location"],
+  //             name: item["name"],
+  //             startTime: item["startTime"],
+  //             endDate: item["endDate"],
+  //             type: item["type"]);
+  //       }).toList();
+  //     } else {
+  //       return [];
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     return [];
+  //   }
+  // }
 }

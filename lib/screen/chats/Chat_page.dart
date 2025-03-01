@@ -53,7 +53,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-   // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
+    // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
     widget._auth = context.read<AuthProvider>();
     //  _audioPlayer = AudioPlayer();
     // Call the method during initialization
@@ -110,7 +110,13 @@ class _ChatPageState extends State<ChatPage> {
           actions: [
             IconButton(
                 onPressed: (() {
-                  navigationService.instance.navigateTo(ChatDataScreen.id);
+                  navigationService.instance
+                      .navigateToRoute(MaterialPageRoute(builder: (context) {
+                    return ChatDataScreen(
+                      adminList: widget.admins,
+                      cahtId: widget.chatID,
+                    );
+                  }));
                 }),
                 icon: Icon(Icons.navigate_next))
           ],

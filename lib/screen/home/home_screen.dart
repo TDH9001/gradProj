@@ -31,16 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   buttontext: "addCourse",
                   func: () {
                     ScheduleItemClass scl = ScheduleItemClass(
-                      creatorId: "123",
-                      creatorName: "tester",
-                      day: 1,
-                      location: "nowhere",
-                      name: "test of type1",
-                      startTime: 1,
-                      type: 3,
-                      endTime: 1,
-                      //  endDate: Timestamp.now()
-                    );
+                        creatorId: "123",
+                        creatorName: "tester",
+                        day: 1,
+                        location: "nowhere",
+                        name: "test of type1",
+                        startTime: 1,
+                        type: 2,
+                        endTime: 1,
+                        endDate: Timestamp.now());
                     DBService.instance.addSceduleItem(
                         "52stEYElBRO21mDdf85KdAaSg1E3", "math 105", scl);
                   }),
@@ -49,16 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   buttontext: "removeCourse",
                   func: () {
                     ScheduleItemClass scl = ScheduleItemClass(
-                      creatorId: "123",
-                      creatorName: "tester",
-                      day: 1,
-                      location: "nowhere",
-                      name: "test of type1",
-                      startTime: 1,
-                      type: 3,
-                      endTime: 1,
-                      //  endDate: Timestamp.now()
-                    );
+                        creatorId: "123",
+                        creatorName: "tester",
+                        day: 1,
+                        location: "nowhere",
+                        name: "test of type1",
+                        startTime: 1,
+                        type: 2,
+                        endTime: 1,
+                        endDate: Timestamp.now());
                     DBService.instance.removeSceduleItem(
                         scl, "52stEYElBRO21mDdf85KdAaSg1E3", "math 105");
                   })
