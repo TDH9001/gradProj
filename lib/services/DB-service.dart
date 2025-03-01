@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
+import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
@@ -185,10 +186,6 @@ class DBService {
       "timestamp": Timestamp.now(),
       "type": "text"
     });
-    // var ref2 = _db.collection(_ChatCollection).doc(chatID);
-    // ref2.update({
-    //   "members": FieldValue.arrayUnion([uid]),
-    // });
   }
 
   Future<void> addMembersToChat(String uid, String chatID) {
@@ -196,5 +193,138 @@ class DBService {
     return ref2.update({
       "members": FieldValue.arrayUnion([uid]),
     });
+  }
+
+  Future<void> addSceduleItem(
+      String uid, String chatID, ScheduleItemClass scl) async {
+    var ref = _db.collection(_ChatCollection).doc(chatID);
+    try {
+      if (scl.type == 1) {
+        //permanantScedules
+        return ref.update({
+          "permanantScedules": FieldValue.arrayUnion([
+            {
+              "name": scl.name,
+              "startTime": scl.startTime,
+              "endTime": scl.endTime,
+              "creatorName": scl.creatorName,
+              "creatorId": scl.creatorId,
+              "location": scl.location,
+              "day": scl.day,
+              "type": scl.type
+            }
+          ])
+        });
+      } else if (scl.type == 2) {
+        //temporaryScedule
+        return ref.update({
+          "temporaryScedule": FieldValue.arrayUnion([
+            {
+              "name": scl.name,
+              "startTime": scl.startTime,
+              "endTime": scl.endTime,
+              "creatorName": scl.creatorName,
+              "creatorId": scl.creatorId,
+              "location": scl.location,
+              "day": scl.day,
+              "type": scl.type,
+              "endDate": scl.endDate
+            }
+          ])
+        });
+      } else if (scl.type == 3) {
+        //personalScedules
+        var userRef = _db.collection(_UserCollection).doc(uid);
+        return userRef.update({
+          "personalScedules": FieldValue.arrayUnion([
+            {
+              "name": scl.name,
+              "startTime": scl.startTime,
+              "endTime": scl.endTime,
+              "creatorName": scl.creatorName,
+              "creatorId": scl.creatorId,
+              "location": scl.location,
+              "day": scl.day,
+              "type": scl.type,
+              "endDate": scl.endDate
+            }
+          ])
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> removeSceduleItem(
+      ScheduleItemClass scl, String uid, String chatId) async {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    try {
+      if (scl.type == 1) {
+        //permanantScedules
+        return ref.update({
+          "permanantScedules": FieldValue.arrayRemove([
+            {
+              "name": scl.name,
+              "startTime": scl.startTime,
+              "endTime": scl.endTime,
+              "creatorName": scl.creatorName,
+              "creatorId": scl.creatorId,
+              "location": scl.location,
+              "day": scl.day,
+              "type": scl.type,
+            }
+          ])
+        });
+      } else if (scl.type == 2) {
+        return ref.update({
+          //temporaryScedule
+          "temporaryScedule": FieldValue.arrayRemove([
+            {
+              "name": scl.name,
+              "startTime": scl.startTime,
+              "endTime": scl.endTime,
+              "creatorName": scl.creatorName,
+              "creatorId": scl.creatorId,
+              "location": scl.location,
+              "day": scl.day,
+              "type": scl.type,
+              "endDate": scl.endDate
+            }
+          ])
+        });
+      } else if (scl.type == 3) {
+        //personalScedules
+        var userRef = _db.collection(_UserCollection).doc(uid);
+        return userRef.update({
+          "personalScedules": FieldValue.arrayRemove([
+            {
+              "name": scl.name,
+              "startTime": scl.startTime,
+              "endTime": scl.endTime,
+              "creatorName": scl.creatorName,
+              "creatorId": scl.creatorId,
+              "location": scl.location,
+              "day": scl.day,
+              "type": scl.type,
+              "endDate": scl.endDate
+            }
+          ])
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateSceduleItem(ScheduleItemClass newscl,
+      ScheduleItemClass oldscl, String uid, String chatId) async {
+    try {
+      var ref = _db.collection(_ChatCollection).doc(chatId);
+      await DBService.instance.removeSceduleItem(oldscl, uid, chatId);
+      await DBService.instance.addSceduleItem(uid, chatId, newscl);
+    } catch (e) {
+      print(e);
+    }
   }
 }
