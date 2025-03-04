@@ -131,23 +131,39 @@ class DBService {
     }
   }
 
-  Stream<List<contact>> getMembersDataOfChat(
-      List<String> users, String chatId) {
-    var ref = FirebaseFirestore.instance.collection(_UserCollection);
+  // Stream<List<contact>> getMembersDataOfChat(
+  //     List<String> users, String chatId) {
+  //   var ref = FirebaseFirestore.instance.collection(_UserCollection);
 
-    // Convert the list of UIDs into a stream of contacts
-    return Stream.fromFuture(Future.wait(
-      users.map((uid) async {
-        var doc = await ref.doc(uid).get();
-        if (doc.exists) {
-          return contact.fromFirestore(doc);
-        } else {
-          return null; // Handle case where user doc doesn't exist
-        }
-      }).toList(),
-    )).map((contacts) {
-      // Filter out any null values in case a user document is missing
-      return contacts.whereType<contact>().toList();
+  //   // Convert the list of UIDs into a stream of contacts
+  //   return Stream.fromFuture(Future.wait(
+  //     users.map((uid) async {
+  //       var doc = await ref.doc(uid).get();
+  //       if (doc.exists) {
+  //         return contact.fromFirestore(doc);
+  //       } else {
+  //         return null; // Handle case where user doc doesn't exist
+  //       }
+  //     }).toList(),
+  //   )).map((contacts) {
+  //     // Filter out any null values in case a user document is missing
+  //     return contacts.whereType<contact>().toList();
+  //   });
+  // }
+
+  Stream<List<contact>> getChatMembersData(String chatId) {
+    return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
+      if (userIds.isEmpty) {
+        return Stream.value([]); // Return empty list if no members
+      }
+
+      // Listen to real-time updates instead of fetching once
+      return _db
+          .collection(_UserCollection)
+          .where(FieldPath.documentId, whereIn: userIds) // very efficiant
+          .snapshots()
+          .map((snapshot) =>
+              snapshot.docs.map((doc) => contact.fromFirestore(doc)).toList());
     });
   }
 

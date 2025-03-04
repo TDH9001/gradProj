@@ -67,7 +67,9 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                       ),
                       TextFormField(
                         enabled: false,
-                        initialValue: _snapshot.data?.FirstName ?? "",
+                        initialValue:
+                            " ${_snapshot.data?.FirstName} ${_snapshot.data?.LastName} " ??
+                                "",
                         style: TextStyle(color: Colors.black),
                         decoration: InputDecoration(
                           labelText: "Name",
