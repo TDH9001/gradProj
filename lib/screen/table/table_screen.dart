@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/models/schedule.dart';
+import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/table/tableform_screen.dart';
+import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/widgets/updated_scedule_item.dart';
+import 'package:provider/provider.dart';
 
 import '../../UI/colors.dart';
 
@@ -30,6 +35,7 @@ class _TableScreenState extends State<TableScreen> {
       });
     }
   }
+
   Future<void> pickStartTime() async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -41,6 +47,7 @@ class _TableScreenState extends State<TableScreen> {
       });
     }
   }
+
   Future<void> pickEndTime() async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -113,7 +120,8 @@ class _TableScreenState extends State<TableScreen> {
               InkWell(
                 onTap: pickDate,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8),
@@ -136,7 +144,8 @@ class _TableScreenState extends State<TableScreen> {
               InkWell(
                 onTap: pickStartTime,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8),
@@ -159,7 +168,8 @@ class _TableScreenState extends State<TableScreen> {
               InkWell(
                 onTap: pickEndTime,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(8),
@@ -203,7 +213,6 @@ class _TableScreenState extends State<TableScreen> {
                       ),
                     ),
                   ),
-
                   const SizedBox(width: 35),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -221,8 +230,8 @@ class _TableScreenState extends State<TableScreen> {
                   ),
                 ],
               ),
+              showSceduleData(),
               const SizedBox(height: 40),
-
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
                 child: ListView.builder(
@@ -253,4 +262,87 @@ class _TableScreenState extends State<TableScreen> {
       ),
     );
   }
+}
+
+Widget showSceduleData() {
+  return ChangeNotifierProvider.value(
+      value: AuthProvider.instance,
+      child: Column(
+        children: [
+          StreamBuilder<List<ScheduleItemClass>>(
+              stream: DBService.instance
+                  .getUserPermanatScedules(AuthProvider.instance.user!.uid),
+              builder: (context, _snapshot) {
+                if (_snapshot.connectionState == ConnectionState.waiting ||
+                    _snapshot.connectionState == ConnectionState.none) {
+                  return Center(
+                      child:
+                          Image(image: AssetImage('assets/images/splash.png')));
+                }
+                if (_snapshot.hasError) {
+                  return Center(
+                      child: Text(
+                          "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                }
+                return SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                      itemCount: _snapshot.data!.length,
+                      itemBuilder: (Context, index) {
+                        print(_snapshot.data!.length);
+                        return updatedSceduleItem(_snapshot.data![index]);
+                      }),
+                );
+              }),
+          StreamBuilder<List<ScheduleItemClass>>(
+              stream: DBService.instance
+                  .getUserTemporaryScedules(AuthProvider.instance.user!.uid),
+              builder: (context, _snapshot) {
+                if (_snapshot.connectionState == ConnectionState.waiting ||
+                    _snapshot.connectionState == ConnectionState.none) {
+                  return Center(
+                      child:
+                          Image(image: AssetImage('assets/images/splash.png')));
+                }
+                if (_snapshot.hasError) {
+                  return Center(
+                      child: Text(
+                          "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                }
+                return SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                      itemCount: _snapshot.data!.length,
+                      itemBuilder: (Context, index) {
+                        return updatedSceduleItem(_snapshot.data![index]);
+                      }),
+                );
+              }),
+          StreamBuilder<List<ScheduleItemClass>>(
+              stream: DBService.instance
+                  .getUserPersonalScedule("UyyMJiz3qnTfjus9dAoiNO7epKM2"),
+              builder: (context, _snapshot) {
+                if (_snapshot.connectionState == ConnectionState.waiting ||
+                    _snapshot.connectionState == ConnectionState.none) {
+                  return Center(
+                      child:
+                          Image(image: AssetImage('assets/images/splash.png')));
+                }
+                if (_snapshot.hasError) {
+                  return Center(
+                      child: Text(
+                          "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                }
+                return SizedBox(
+                  height: 150,
+                  child: ListView.builder(
+                      itemCount: _snapshot.data!.length,
+                      itemBuilder: (Context, index) {
+                        print(_snapshot.data!.length);
+                        return updatedSceduleItem(_snapshot.data![index]);
+                      }),
+                );
+              })
+        ],
+      ));
 }

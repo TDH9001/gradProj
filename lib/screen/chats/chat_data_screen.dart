@@ -8,6 +8,7 @@ import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/widgets/category_card.dart';
 import 'package:grad_proj/widgets/custom_card.dart';
+import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'package:grad_proj/widgets/sceduleitem.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:provider/provider.dart';
@@ -263,91 +264,4 @@ class _MyWidgetState extends State<ChatDataScreen> {
       ),
     );
   }
-}
-
-Widget updatedSceduleItem(ScheduleItemClass scl) {
-//  final ScheduleItemClass scl;
-
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 12),
-    child: Container(
-      decoration: BoxDecoration(
-        color: scl.type == 1 ? const Color(0xff769BC6) : Colors.redAccent,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  scl.name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  scl.location,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  scl.creatorName,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  "${scl.startTime} - ${scl.endTime}",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  "${days.values[scl.day].name}",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                scl.endDate != null
-                    ? Text(
-                        "${timeago.format(scl.endDate!.toDate())}",
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    : SizedBox()
-              ],
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
 }

@@ -5,6 +5,7 @@ import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:grad_proj/widgets/sceduleitem.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
@@ -90,6 +91,22 @@ class DBService {
     });
   }
 
+  Future<List<String>> getUserChatIDs(String _uid) async {
+    var ref = await _db
+        .collection(_UserCollection)
+        .doc(_uid)
+        .collection(_ChatCollection)
+        .get();
+    List<String> data = [];
+    for (int i = 0; i < ref.docs.length; i++) {
+      if (ref.docs[i].exists) {
+        String s = ref.docs[i].get(("chatID")).toString();
+        data.add(s);
+      }
+    }
+    return data;
+  }
+
   Stream<ChatData> getChat(String ChatId) {
     var ref = _db.collection(_ChatCollection).doc(ChatId);
     return ref.snapshots().map((_snap) {
@@ -130,26 +147,6 @@ class DBService {
       throw Exception('Document does not exist');
     }
   }
-
-  // Stream<List<contact>> getMembersDataOfChat(
-  //     List<String> users, String chatId) {
-  //   var ref = FirebaseFirestore.instance.collection(_UserCollection);
-
-  //   // Convert the list of UIDs into a stream of contacts
-  //   return Stream.fromFuture(Future.wait(
-  //     users.map((uid) async {
-  //       var doc = await ref.doc(uid).get();
-  //       if (doc.exists) {
-  //         return contact.fromFirestore(doc);
-  //       } else {
-  //         return null; // Handle case where user doc doesn't exist
-  //       }
-  //     }).toList(),
-  //   )).map((contacts) {
-  //     // Filter out any null values in case a user document is missing
-  //     return contacts.whereType<contact>().toList();
-  //   });
-  // }
 
   Stream<List<contact>> getChatMembersData(String chatId) {
     return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
@@ -344,32 +341,6 @@ class DBService {
     }
   }
 
-  Stream<List<ScheduleItemClass>> getPermanantSceduleItems(String chatId) {
-    return _db
-        .collection(_ChatCollection)
-        .doc(chatId)
-        .snapshots() // to get a stream you need to watch the snapshots
-        .map((snap) {
-      if (snap.exists) {
-        List<dynamic> currentData = snap["permanantScedules"];
-        // List<ScheduleItemClass> data =
-        return currentData.map((item) {
-          return ScheduleItemClass(
-              creatorId: item["creatorId"],
-              creatorName: item["creatorName"],
-              day: item["day"],
-              endTime: item["endTime"],
-              location: item["location"],
-              name: item["name"],
-              startTime: item["startTime"],
-              type: item["type"]);
-        }).toList();
-      } else {
-        return [];
-      }
-    });
-  }
-
 //how to retrive it as a steam
   Stream<List<ScheduleItemClass>> getTemporarySceduleItems(String chatId) {
     return _db
@@ -397,32 +368,127 @@ class DBService {
       }
     });
   }
-// HOW TO GET IT AS FUTURE
-  // Future<List<ScheduleItemClass>> getTemporarySceduleItems(
-  //     String chatId) async {
-  //   var snap = await _db.collection(_ChatCollection).doc(chatId).get();
-  //   try {
-  //     if (snap.exists) {
-  //       List<dynamic> currentData = snap["temporaryScedule"];
-  //       // List<ScheduleItemClass> data =
-  //       return currentData.map((item) {
-  //         return ScheduleItemClass(
-  //             creatorId: item["creatorId"],
-  //             creatorName: item["creatorName"],
-  //             day: item["day"],
-  //             endTime: item["endTime"],
-  //             location: item["location"],
-  //             name: item["name"],
-  //             startTime: item["startTime"],
-  //             endDate: item["endDate"],
-  //             type: item["type"]);
-  //       }).toList();
-  //     } else {
-  //       return [];
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //     return [];
-  //   }
-  // }
+
+  Stream<List<ScheduleItemClass>> getPermanantSceduleItems(String chatId) {
+    return _db
+        .collection(_ChatCollection)
+        .doc(chatId)
+        .snapshots() // to get a stream you need to watch the snapshots
+        .map((snap) {
+      if (snap.exists) {
+        List<dynamic> currentData = snap["permanantScedules"];
+        // List<ScheduleItemClass> data =
+        return currentData.map((item) {
+          return ScheduleItemClass(
+              creatorId: item["creatorId"],
+              creatorName: item["creatorName"],
+              day: item["day"],
+              endTime: item["endTime"],
+              location: item["location"],
+              name: item["name"],
+              startTime: item["startTime"],
+              type: item["type"]);
+        }).toList();
+      } else {
+        return [];
+      }
+    });
+  }
+
+  Stream<List<ScheduleItemClass>> getUserPermanatScedules(String uid) {
+    return Stream.fromFuture(getUserChatIDs(uid)).asyncExpand((chatIDs) {
+      if (chatIDs.isEmpty) {
+        return Stream.value([]);
+      }
+      return _db
+          .collection(_ChatCollection)
+          .where(FieldPath.documentId, whereIn: chatIDs)
+          .snapshots()
+          .map((chatData) {
+        // caht data here is the chatDocument
+        List<ScheduleItemClass> finalData = [];
+        //chatData.docs.map((doc){List<ScheduleItemClass> = ScheduleItemClass.fromFirestore(doc.) })
+        for (int i = 0; i < chatData.docs.length; i++) {
+          if (chatData.docs[i].data().containsKey("permanantScedules")) {
+            var scheduleList =
+                chatData.docs[i]["permanantScedules"] as List<dynamic>? ?? null;
+            if (scheduleList != null) {
+              finalData.addAll(scheduleList
+                  .map((item) => ScheduleItemClass.fromFirestore(item))
+                  .toList());
+            }
+          } else {
+            print(
+                "Document ${chatData.docs[i].id} does not contain 'temporaryScedule'");
+          }
+        }
+        return finalData;
+      });
+
+      // List<ScheduleItemClass> data = [];
+      // for (int i = 0; i < ref.length; i++) {}
+    });
+  }
+
+  Stream<List<ScheduleItemClass>> getUserTemporaryScedules(String uid) {
+    return Stream.fromFuture(getUserChatIDs(uid)).asyncExpand((chatIDs) {
+      if (chatIDs.isEmpty) {
+        return Stream.value([]);
+      }
+      return _db
+          .collection(_ChatCollection)
+          .where(FieldPath.documentId, whereIn: chatIDs)
+          .snapshots()
+          .map((chatData) {
+        // caht data here is the chatDocument
+        List<ScheduleItemClass> finalData = [];
+        //chatData.docs.map((doc){List<ScheduleItemClass> = ScheduleItemClass.fromFirestore(doc.) })
+        for (int i = 0; i < chatData.docs.length; i++) {
+          if (chatData.docs[i].data().containsKey("temporaryScedule")) {
+            var scheduleList =
+                chatData.docs[i]["temporaryScedule"] as List<dynamic>? ?? null;
+            if (scheduleList != null) {
+              finalData.addAll(scheduleList
+                  .map((item) => ScheduleItemClass.fromFirestore(item))
+                  .toList());
+            }
+          } else {
+            print(
+                "Document ${chatData.docs[i].id} does not contain 'permanantScedules'");
+          }
+        }
+        return finalData;
+      });
+
+      // List<ScheduleItemClass> data = [];
+      // for (int i = 0; i < ref.length; i++) {}
+    });
+  }
+
+  Stream<List<ScheduleItemClass>> getUserPersonalScedule(String uid) {
+    return _db.collection(_UserCollection).doc(uid).snapshots().map((snap) {
+      if (snap.exists) {
+        if (snap.data()!.containsKey("personalScedules")) {
+          List<dynamic> currentData = snap["personalScedules"];
+          // List<ScheduleItemClass> data =
+          return currentData.map((item) {
+            return ScheduleItemClass(
+                creatorId: item["creatorId"],
+                creatorName: item["creatorName"],
+                day: item["day"],
+                endTime: item["endTime"],
+                location: item["location"],
+                name: item["name"],
+                startTime: item["startTime"],
+                type: item["type"]);
+          }).toList();
+        } else {
+          return [];
+        }
+      } else {
+        print("this user does not have any personal Scedules");
+        return [];
+      }
+    });
+  }
 }
