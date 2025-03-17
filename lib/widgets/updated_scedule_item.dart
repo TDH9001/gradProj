@@ -59,7 +59,7 @@ Widget updatedSceduleItem(ScheduleItemClass scl) {
             Column(
               children: [
                 Text(
-                  "${scl.startTime} - ${scl.endTime}",
+                  "${(scl.startTime / 100).floor() % 12}:${scl.startTime % 100} ${scl.startTime / 100 > 12 ? "PM" : "AM"} - ${(scl.endTime / 100).floor() % 12}:${scl.endTime % 100} ${scl.endTime / 100 > 12 ? "PM" : "AM"}",
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white,

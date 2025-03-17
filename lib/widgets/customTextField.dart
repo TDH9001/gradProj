@@ -146,7 +146,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
           if (data.trim().length > 1) {
             return 'year must contain only digits.';
           }
-        } //username , phone , etc
+        }
+        // if (widget.hintText == "day") {
+        //   if (int.parse(data.toString().trim()) > 6) {
+        //     return "number must be lower than or =6";
+        //   }
+        // } //username , phone , etc
       },
     );
   }
