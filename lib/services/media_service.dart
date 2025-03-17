@@ -1,5 +1,6 @@
 //will allowus to get files from device library
 import 'dart:io';
+import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -10,6 +11,16 @@ import 'package:uuid/uuid.dart';
 // import 'dart:io';
 
 class MediaService {
+  double getWidth() {
+    return PlatformDispatcher.instance.views.first.physicalSize.width /
+        PlatformDispatcher.instance.views.first.devicePixelRatio;
+  }
+
+  double getHeight() {
+    return PlatformDispatcher.instance.views.first.physicalSize.height /
+        PlatformDispatcher.instance.views.first.devicePixelRatio;
+  }
+
   static MediaService instance = MediaService();
 
   Future<File?> getImageFromLibrary() async {

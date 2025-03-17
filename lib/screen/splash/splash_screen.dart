@@ -19,7 +19,10 @@ Future<bool> checkInternetConnection() async {
     }
   } on SocketException catch (_) {
     print("No internet access");
+  } catch (_) {
+    print("No internet access");
   }
+
   return false;
 }
 

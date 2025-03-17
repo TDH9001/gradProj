@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:appbar_dropdown/appbar_dropdown.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/contact.dart';
@@ -38,6 +40,7 @@ class ChatPage extends StatefulWidget {
   final record = AudioRecorder();
   bool isRecording = false;
   late AudioPlayer audioPlayer = AudioPlayer();
+  // PlatformDispatcher.
 
   @override
   State<ChatPage> createState() {
@@ -55,6 +58,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
     widget._auth = context.read<AuthProvider>();
+
     //  _audioPlayer = AudioPlayer();
     // Call the method during initialization
   }
@@ -90,8 +94,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     SnackBarService.instance.buildContext = context;
-    _height = MediaQuery.of(context).size.height;
-    _width = MediaQuery.of(context).size.width;
+    _height = MediaService.instance.getHeight();
+    print(MediaService.instance.getHeight());
+    print(MediaQuery.sizeOf(context).height);
+    _width = MediaService.instance.getWidth();
     //widget._auth = context.read<AuthProvider>();
 
     if (AuthProvider.instance.user == null) {
@@ -106,31 +112,7 @@ class _ChatPageState extends State<ChatPage> {
       value: AuthProvider.instance,
       child: Scaffold(
         //resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          actions: [
-            IconButton(
-                onPressed: (() {
-                  navigationService.instance
-                      .navigateToRoute(MaterialPageRoute(builder: (context) {
-                    return ChatDataScreen(
-                      adminList: widget.admins,
-                      cahtId: widget.chatID,
-                    );
-                  }));
-                }),
-                icon: Icon(Icons.navigate_next))
-          ],
-        
-          backgroundColor: ColorsApp.primary,
-          title:
-              Center(child: Text(widget.chatID, style: TextStyles.appBarText)),
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back, color: Colors.white),
-          //   onPressed: () {
-          //     //Navigator.pop(_context);
-          //   },
-          // ),
-        ),
+        appBar: AppbarGestureDetector(widget: widget),
         body: ChangeNotifierProvider<AuthProvider>.value(
             value: AuthProvider.instance, child: _chatPageUI()),
       ),
@@ -408,7 +390,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget _messageTextField(TextEditingController txt) {
+  Widget _messageTextField(final TextEditingController txt) {
     return SizedBox(
       width: _width * 0.5,
       child: TextFormField(
@@ -504,6 +486,42 @@ class _ChatPageState extends State<ChatPage> {
             },
             icon: Icon(Icons.camera_alt)));
   }
+}
+
+class AppbarGestureDetector extends StatelessWidget
+    implements PreferredSizeWidget {
+  const AppbarGestureDetector({
+    super.key,
+    required this.widget,
+  });
+
+  final ChatPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        {
+          navigationService.instance
+              .navigateToRoute(MaterialPageRoute(builder: (context) {
+            return ChatDataScreen(
+              adminList: widget.admins,
+              cahtId: widget.chatID,
+            );
+          }));
+        }
+      },
+      child: AppBar(
+        backgroundColor: ColorsApp.primary,
+        title: Text(widget.chatID, style: TextStyles.appBarText),
+        centerTitle: true,
+      ),
+    );
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(56.0);
 }
 
 class VoiceBubble extends StatefulWidget {
