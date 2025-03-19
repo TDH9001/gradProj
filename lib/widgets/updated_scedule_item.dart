@@ -4,6 +4,11 @@ import 'package:timeago/timeago.dart' as timeago;
 
 Widget updatedSceduleItem(ScheduleItemClass scl) {
 //  final ScheduleItemClass scl;
+  // print(scl.endDate.toString());
+  // if (scl.type == 2) {
+  //   print(scl.endDate!.toDate());
+  // }
+  // print("////////////////////////");
 
   return Padding(
     padding: const EdgeInsets.only(bottom: 12),
@@ -76,7 +81,9 @@ Widget updatedSceduleItem(ScheduleItemClass scl) {
                 ),
                 scl.endDate != null
                     ? Text(
-                        "${timeago.format(scl.endDate!.toDate())}",
+                        //needs to be made correct
+                        timeago.format(scl.endDate!.toDate(),
+                            allowFromNow: true),
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white,

@@ -37,4 +37,5 @@ class ScheduleItemClass {
         location: _snap["location"],
         endDate: _snap["endDate"] ?? null);
   }
+  
 }

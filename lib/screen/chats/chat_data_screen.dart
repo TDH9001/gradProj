@@ -17,6 +17,7 @@ import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'package:grad_proj/widgets/sceduleitem.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:provider/provider.dart';
 
@@ -42,6 +43,7 @@ class ChatDataScreen extends StatefulWidget {
     DropdownItem(label: "thursday", value: "thursday"),
     DropdownItem(label: "friday", value: "friday"),
   ];
+  
   @override
   State<ChatDataScreen> createState() => _MyWidgetState();
 }
@@ -99,22 +101,22 @@ class _MyWidgetState extends State<ChatDataScreen> {
                                   .validate()) {
                                 //need to validate the fields and the timeStuf
                                 TimeOfDay? startTime = await showTimePicker(
+                                  helpText: "start time",
                                   context: context,
                                   initialTime: TimeOfDay.now(),
                                 );
                                 TimeOfDay? EndTime = await showTimePicker(
+                                  helpText: "start time",
                                   context: context,
                                   initialTime: TimeOfDay.now(),
                                 );
                                 DateTime? endDate;
                                 if (itemType == 2) {
-                                  DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime
-                                        .now(), // Ensure initial date is set properly
-                                    firstDate: DateTime.now(),
-                                    lastDate: DateTime(2030),
-                                  );
+                                  DateTime? pickedDate =
+                                      await showOmniDateTimePicker(
+                                          title: Text(
+                                              "Temporary scedule's end date"),
+                                          context: context);
 
                                   if (pickedDate != null) {
                                     endDate =
@@ -299,16 +301,35 @@ class _MyWidgetState extends State<ChatDataScreen> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                           ),
-                          IconButton(
-                              onPressed: () async {
-                                final ScheduleItemClass? data =
-                                    await createSceduleItem(1)!;
-                                DBService.instance.addSceduleItem(
-                                    AuthProvider.instance.user!.uid,
-                                    widget.cahtId,
-                                    data!);
-                              },
-                              icon: Icon(Icons.add)),
+                          Row(
+                            children: [
+                              Spacer(
+                                flex: 1,
+                              ),
+                              Text(
+                                "Add permanant scedule item ",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Spacer(
+                                flex: 3,
+                              ),
+                              IconButton(
+                                  onPressed: () async {
+                                    final ScheduleItemClass? data =
+                                        await createSceduleItem(1)!;
+                                    DBService.instance.addSceduleItem(
+                                        AuthProvider.instance.user!.uid,
+                                        widget.cahtId,
+                                        data!);
+                                  },
+                                  icon: Icon(
+                                    Icons.add_alert_sharp,
+                                  )),
+                              Spacer(
+                                flex: 2,
+                              )
+                            ],
+                          ),
                           ListView.builder(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
@@ -377,26 +398,55 @@ class _MyWidgetState extends State<ChatDataScreen> {
                           ),
                         ),
                         children: [
-                          IconButton(
-                              onPressed: () async {
-                                final ScheduleItemClass? data =
-                                    await createSceduleItem(2)!;
-                                DBService.instance.addSceduleItem(
-                                    AuthProvider.instance.user!.uid,
-                                    widget.cahtId,
-                                    data!);
-                              },
-                              icon: Icon(Icons.add)),
+                          Row(
+                            children: [
+                              Spacer(
+                                flex: 1,
+                              ),
+                              Text(
+                                "Add temporary scedule item ",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Spacer(
+                                flex: 3,
+                              ),
+                              IconButton(
+                                  onPressed: () async {
+                                    final ScheduleItemClass? data =
+                                        await createSceduleItem(2)!;
+                                    DBService.instance.addSceduleItem(
+                                        AuthProvider.instance.user!.uid,
+                                        widget.cahtId,
+                                        data!);
+                                  },
+                                  icon: Icon(
+                                    Icons.add_alert_sharp,
+                                  )),
+                              Spacer(
+                                flex: 2,
+                              )
+                            ],
+                          ),
                           ListView.builder(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: _snapshot.data!.length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 2),
-                                child:
-                                    updatedSceduleItem(_snapshot.data![index]),
-                              );
+                              if (_snapshot.data![index].endDate!
+                                      .toDate()
+                                      .compareTo(DateTime.now()) <
+                                  1) {
+                                DBService.instance.removeSceduleItem(
+                                    _snapshot.data![index],
+                                    AuthProvider.instance.user!.uid,
+                                    widget.cahtId);
+                              } else {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 2),
+                                  child: updatedSceduleItem(
+                                      _snapshot.data![index]),
+                                );
+                              }
                             },
                           )
                         ],

@@ -71,10 +71,8 @@ class _MyWidgetState extends State<DropdownSelect> {
         },
         onSelectionChange: (selectedValues) {
           if (selectedValues.length >= widget.maxSelections) {
-           widget.cont.closeDropdown();
+            widget.cont.closeDropdown();
           } // Collapse the dropdown
-        }
-        
-        );
+        });
   }
 }
