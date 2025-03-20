@@ -6,7 +6,9 @@ import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/services/Scedule_creation_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/category_card.dart';
 import 'package:grad_proj/widgets/customTextField.dart';
@@ -43,7 +45,7 @@ class ChatDataScreen extends StatefulWidget {
     DropdownItem(label: "thursday", value: "thursday"),
     DropdownItem(label: "friday", value: "friday"),
   ];
-  
+
   @override
   State<ChatDataScreen> createState() => _MyWidgetState();
 }
@@ -66,95 +68,7 @@ class _MyWidgetState extends State<ChatDataScreen> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.sizeOf(context).height;
     double deviceWidth = MediaQuery.sizeOf(context).width;
-
-    Future<ScheduleItemClass?> createSceduleItem(int itemType) =>
-        showDialog<ScheduleItemClass?>(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: Text(
-                      "add a ${itemType == 1 ? "permanat" : itemType == 2 ? "temporary" : "personal"} scedule"),
-                  content: Form(
-                    key: widget.validateSceduleItem,
-                    child: Column(
-                      children: [
-                        DropdownSelect(
-                          data: widget.daysList,
-                          cont: widget.dayController,
-                          maxSelections: 1,
-                          isSearchable: false,
-                        ),
-                        CustomTextField(
-                            hintText: "location",
-                            controller: widget.locationController),
-                        CustomTextField(
-                            hintText: "scedule Name",
-                            controller: widget.sceduleName),
-                        CustomTextField(
-                            hintText: "Start time",
-                            controller: widget.startTime),
-                        CustomTextField(
-                            hintText: "end time", controller: widget.endTime),
-                        PrimaryButton(
-                            buttontext: "add the items",
-                            func: () async {
-                              if (widget.validateSceduleItem.currentState!
-                                  .validate()) {
-                                //need to validate the fields and the timeStuf
-                                TimeOfDay? startTime = await showTimePicker(
-                                  helpText: "start time",
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                );
-                                TimeOfDay? EndTime = await showTimePicker(
-                                  helpText: "start time",
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                );
-                                DateTime? endDate;
-                                if (itemType == 2) {
-                                  DateTime? pickedDate =
-                                      await showOmniDateTimePicker(
-                                          title: Text(
-                                              "Temporary scedule's end date"),
-                                          context: context);
-
-                                  if (pickedDate != null) {
-                                    endDate =
-                                        pickedDate; // Only assign if user selects a date
-                                  }
-                                }
-                                Timestamp? endDateTimestamp = endDate != null
-                                    ? Timestamp.fromDate(endDate)
-                                    : null;
-                                Navigator.of(context).pop(ScheduleItemClass(
-                                    creatorId: AuthProvider.instance.user!.uid,
-                                    creatorName: "User name ",
-                                    day: days.values
-                                        .byName(widget.dayController
-                                            .selectedItems[0].value
-                                            .toString()
-                                            .trim())
-                                        .index,
-                                    location:
-                                        widget.locationController.text.trim(),
-                                    name: widget.sceduleName.text.trim(),
-                                    startTime: int.parse(
-                                        // ${startTime!.hour > 12 ? "pm" : "am"}
-                                        "${startTime!.hour % 12}${startTime!.minute}"),
-                                    type: itemType,
-                                    endTime: int.parse(
-                                        //${EndTime!.hour > 12 ? "pm" : "am"}
-                                        "${EndTime!.hour % 12}${EndTime!.minute} "),
-                                    endDate: endDateTimestamp
-                                    // Timestamp.fromDate(
-                                    //     endDate ?? DateTime.now()
-                                    ));
-                              }
-                            })
-                      ],
-                    ),
-                  ),
-                ));
+    SnackBarService.instance.buildContext = context;
 
     var _auth = Provider.of<AuthProvider>(context);
     return Scaffold(
@@ -316,7 +230,9 @@ class _MyWidgetState extends State<ChatDataScreen> {
                               IconButton(
                                   onPressed: () async {
                                     final ScheduleItemClass? data =
-                                        await createSceduleItem(1)!;
+                                        await SceduleCreationService.instance
+                                            .createSceduleItem(
+                                                cont: context, itemType: 1);
                                     DBService.instance.addSceduleItem(
                                         AuthProvider.instance.user!.uid,
                                         widget.cahtId,
@@ -413,7 +329,9 @@ class _MyWidgetState extends State<ChatDataScreen> {
                               IconButton(
                                   onPressed: () async {
                                     final ScheduleItemClass? data =
-                                        await createSceduleItem(2)!;
+                                        await SceduleCreationService.instance
+                                            .createSceduleItem(
+                                                itemType: 2, cont: context)!;
                                     DBService.instance.addSceduleItem(
                                         AuthProvider.instance.user!.uid,
                                         widget.cahtId,

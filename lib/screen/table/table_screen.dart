@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
+import 'package:grad_proj/screen/table/Course_disaplay_Lists.dart';
 import 'package:grad_proj/screen/table/tableform_screen.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/services/Scedule_creation_service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/customTextField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -41,166 +44,9 @@ class TableScreen extends StatefulWidget {
 }
 
 class _TableScreenState extends State<TableScreen> {
-  Future<ScheduleItemClass?> createSceduleItem(int itemType) => showDialog<
-          ScheduleItemClass?>(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: Text(
-                "add a ${itemType == 1 ? "permanat" : itemType == 2 ? "temporary" : "personal"} scedule"),
-            content: Form(
-              key: widget.validateSceduleItemForPersonalUse,
-              child: Column(
-                children: [
-                  DropdownSelect(
-                    data: widget.daysList,
-                    cont: widget.dayController,
-                    maxSelections: 1,
-                    isSearchable: false,
-                  ),
-                  CustomTextField(
-                      hintText: "location",
-                      controller: widget.locationController),
-                  CustomTextField(
-                      hintText: "scedule Name", controller: widget.sceduleName),
-                  CustomTextField(
-                      hintText: "Start time", controller: widget.startTime),
-                  CustomTextField(
-                      hintText: "end time", controller: widget.endTime),
-                  PrimaryButton(
-                      buttontext: "add the items",
-                      func: () async {
-                        if (widget
-                            .validateSceduleItemForPersonalUse.currentState!
-                            .validate()) {
-                          //need to validate the fields and the timeStuf
-                          TimeOfDay? startTime = await showTimePicker(
-                            helpText: "start time",
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                          );
-                          TimeOfDay? EndTime = await showTimePicker(
-                            helpText: "start time",
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                          );
-                          DateTime? endDate;
-                          if (itemType == 2) {
-                            DateTime? pickedDate = await showOmniDateTimePicker(
-                                title: Text("Temporary scedule's end date"),
-                                context: context);
-
-                            if (pickedDate != null) {
-                              endDate =
-                                  pickedDate; // Only assign if user selects a date
-                            }
-                          }
-                          Timestamp? endDateTimestamp = endDate != null
-                              ? Timestamp.fromDate(endDate)
-                              : null;
-                          Navigator.of(context).pop(ScheduleItemClass(
-                              creatorId: AuthProvider.instance.user!.uid,
-                              creatorName: "User name ",
-                              day: days.values
-                                  .byName(widget
-                                      .dayController.selectedItems[0].value
-                                      .toString()
-                                      .trim())
-                                  .index,
-                              location: widget.locationController.text.trim(),
-                              name: widget.sceduleName.text.trim(),
-                              startTime: int.parse(
-                                  // ${startTime!.hour > 12 ? "pm" : "am"}
-                                  "${startTime!.hour % 12}${startTime!.minute}"),
-                              type: itemType,
-                              endTime: int.parse(
-                                  //${EndTime!.hour > 12 ? "pm" : "am"}
-                                  "${EndTime!.hour % 12}${EndTime!.minute} "),
-                              endDate: endDateTimestamp
-                              // Timestamp.fromDate(
-                              //     endDate ?? DateTime.now()
-                              ));
-                        }
-                      })
-                ],
-              ),
-            ),
-          ));
-
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  String? selectedCourse;
-  DateTime? selectedDay;
-  TimeOfDay? startTime;
-  TimeOfDay? endTime;
-  final List<Map<String, dynamic>> tableData = [];
-  Future<void> pickDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
-    );
-    if (picked != null && picked != selectedDay) {
-      setState(() {
-        selectedDay = picked;
-      });
-    }
-  }
-
-  Future<void> pickStartTime() async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null && picked != startTime) {
-      setState(() {
-        startTime = picked;
-      });
-    }
-  }
-
-  Future<void> pickEndTime() async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null && picked != endTime) {
-      setState(() {
-        endTime = picked;
-      });
-    }
-  }
-
-  void addCourse() {
-    if (selectedCourse != null &&
-        selectedDay != null &&
-        startTime != null &&
-        endTime != null) {
-      setState(() {
-        tableData.add({
-          "course": selectedCourse!,
-          "day": selectedDay!,
-          "start_time": startTime!,
-          "end_time": endTime!,
-        });
-        selectedCourse = null;
-        selectedDay = null;
-        startTime = null;
-        endTime = null;
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please select all fields before adding a course."),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: scaffoldKey,
         backgroundColor: const Color(0xFFF7F9FC),
         body: ChangeNotifierProvider.value(
             value: AuthProvider.instance,
@@ -222,11 +68,19 @@ class _TableScreenState extends State<TableScreen> {
                       IconButton(
                           onPressed: () async {
                             final ScheduleItemClass? data =
-                                await createSceduleItem(3)!;
-                            DBService.instance.addSceduleItem(
-                                AuthProvider.instance.user!.uid,
-                                "not relavant",
-                                data!);
+                                await SceduleCreationService.instance
+                                    .createSceduleItem(
+                                        itemType: 3, cont: context);
+                            if (data != null) {
+                              DBService.instance.addSceduleItem(
+                                  AuthProvider.instance.user!.uid,
+                                  "not relavant",
+                                  data!);
+                            } else {
+                              SnackBarService.instance.showsSnackBarError(
+                                  text:
+                                      "error adding scedule, please try again");
+                            }
                           },
                           icon: Icon(
                             Icons.add_alert_sharp,
@@ -237,88 +91,100 @@ class _TableScreenState extends State<TableScreen> {
                     ],
                   ),
                 ),
-                StreamBuilder<List<ScheduleItemClass>>(
-                    stream: DBService.instance
-                        .getUserPersonalScedule("UyyMJiz3qnTfjus9dAoiNO7epKM2"),
-                    builder: (context, _snapshot) {
-                      if (_snapshot.connectionState ==
-                              ConnectionState.waiting ||
-                          _snapshot.connectionState == ConnectionState.none) {
-                        return SliverToBoxAdapter(
-                          child: Center(
-                              child: Image(
-                                  image:
-                                      AssetImage('assets/images/splash.png'))),
-                        );
-                      }
-                      if (_snapshot.hasError) {
-                        return SliverToBoxAdapter(
-                          child: Center(
-                              child: Text(
-                                  "Error: ${_snapshot.error} \n please update your data and the data field mising")),
-                        );
-                      }
-                      return SliverList(
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                        return updatedSceduleItem(_snapshot.data![index]);
-                      }, childCount: _snapshot.data!.length));
-                    }),
-                StreamBuilder<List<ScheduleItemClass>>(
-                    stream: DBService.instance.getUserPermanatScedules(
-                        AuthProvider.instance.user!.uid),
-                    builder: (context, _snapshot) {
-                      if (_snapshot.connectionState ==
-                              ConnectionState.waiting ||
-                          _snapshot.connectionState == ConnectionState.none) {
-                        return SliverToBoxAdapter(
-                          child: Center(
-                              child: Image(
-                                  image:
-                                      AssetImage('assets/images/splash.png'))),
-                        );
-                      }
-                      if (_snapshot.hasError) {
-                        return SliverToBoxAdapter(
-                          child: Center(
-                              child: Text(
-                                  "Error: ${_snapshot.error} \n please update your data and the data field mising")),
-                        );
-                      }
-                      return SliverList(
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                        return updatedSceduleItem(_snapshot.data![index]);
-                      }, childCount: _snapshot.data!.length));
-                    }),
-                StreamBuilder<List<ScheduleItemClass>>(
-                    stream: DBService.instance.getUserTemporaryScedules(
-                        AuthProvider.instance.user!.uid),
-                    builder: (context, _snapshot) {
-                      if (_snapshot.connectionState ==
-                              ConnectionState.waiting ||
-                          _snapshot.connectionState == ConnectionState.none) {
-                        return SliverToBoxAdapter(
-                          child: Center(
-                              child: Image(
-                                  image:
-                                      AssetImage('assets/images/splash.png'))),
-                        );
-                      }
-                      if (_snapshot.hasError) {
-                        return Center(
-                            child: Text(
-                                "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-                      }
-                      return SliverList(
-                          delegate:
-                              SliverChildBuilderDelegate((context, index) {
-                        return updatedSceduleItem(_snapshot.data![index]);
-                      }, childCount: _snapshot.data!.length));
-                    }),
+                UserPerosnalSceduleList(),
+                CoursesPermanatSceduleList(),
+                CourseTemporarySceduleList(),
+                //located on the file called "Course_disaplay_Lists"
               ],
-            ))
-        //  Padding(
+            )));
+  }
+}
+
+
+
+// class AddCourseDialog {
+//   const AddCourseDialog({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }
+
+  // final scaffoldKey = GlobalKey<ScaffoldState>();
+  // String? selectedCourse;
+  // DateTime? selectedDay;
+  // TimeOfDay? startTime;
+  // TimeOfDay? endTime;
+  // final List<Map<String, dynamic>> tableData = [];
+  // Future<void> pickDate() async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(2020),
+  //     lastDate: DateTime(2030),
+  //   );
+  //   if (picked != null && picked != selectedDay) {
+  //     setState(() {
+  //       selectedDay = picked;
+  //     });
+  //   }
+  // }
+
+  // Future<void> pickStartTime() async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: TimeOfDay.now(),
+  //   );
+  //   if (picked != null && picked != startTime) {
+  //     setState(() {
+  //       startTime = picked;
+  //     });
+  //   }
+  // }
+
+  // Future<void> pickEndTime() async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: TimeOfDay.now(),
+  //   );
+  //   if (picked != null && picked != endTime) {
+  //     setState(() {
+  //       endTime = picked;
+  //     });
+  //   }
+  // }
+
+  // void addCourse() {
+  //   if (selectedCourse != null &&
+  //       selectedDay != null &&
+  //       startTime != null &&
+  //       endTime != null) {
+  //     setState(() {
+  //       tableData.add({
+  //         "course": selectedCourse!,
+  //         "day": selectedDay!,
+  //         "start_time": startTime!,
+  //         "end_time": endTime!,
+  //       });
+  //       selectedCourse = null;
+  //       selectedDay = null;
+  //       startTime = null;
+  //       endTime = null;
+  //     });
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Please select all fields before adding a course."),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //   }
+  // }
+  
+
+
+   //  Padding(
         //   padding: const EdgeInsets.all(16.0),
         //   child: SingleChildScrollView(
         //     child: Column(
@@ -486,10 +352,6 @@ class _TableScreenState extends State<TableScreen> {
         //     ),
         //   ),
         // ),
-        );
-  }
-}
-
 // Widget showSceduleData() {
 //   return ChangeNotifierProvider.value(
 //       value: AuthProvider.instance,
