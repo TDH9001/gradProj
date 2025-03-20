@@ -204,36 +204,38 @@ class _TableScreenState extends State<TableScreen> {
         backgroundColor: const Color(0xFFF7F9FC),
         body: ChangeNotifierProvider.value(
             value: AuthProvider.instance,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Spacer(
-                      flex: 1,
-                    ),
-                    Text(
-                      "Add permanant scedule item ",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Spacer(
-                      flex: 3,
-                    ),
-                    IconButton(
-                        onPressed: () async {
-                          final ScheduleItemClass? data =
-                              await createSceduleItem(3)!;
-                          DBService.instance.addSceduleItem(
-                              AuthProvider.instance.user!.uid,
-                              "not relavant",
-                              data!);
-                        },
-                        icon: Icon(
-                          Icons.add_alert_sharp,
-                        )),
-                    Spacer(
-                      flex: 2,
-                    )
-                  ],
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: Row(
+                    children: [
+                      Spacer(
+                        flex: 1,
+                      ),
+                      Text(
+                        "Add permanant scedule item ",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Spacer(
+                        flex: 3,
+                      ),
+                      IconButton(
+                          onPressed: () async {
+                            final ScheduleItemClass? data =
+                                await createSceduleItem(3)!;
+                            DBService.instance.addSceduleItem(
+                                AuthProvider.instance.user!.uid,
+                                "not relavant",
+                                data!);
+                          },
+                          icon: Icon(
+                            Icons.add_alert_sharp,
+                          )),
+                      Spacer(
+                        flex: 2,
+                      )
+                    ],
+                  ),
                 ),
                 StreamBuilder<List<ScheduleItemClass>>(
                     stream: DBService.instance
@@ -242,25 +244,25 @@ class _TableScreenState extends State<TableScreen> {
                       if (_snapshot.connectionState ==
                               ConnectionState.waiting ||
                           _snapshot.connectionState == ConnectionState.none) {
-                        return Center(
-                            child: Image(
-                                image: AssetImage('assets/images/splash.png')));
+                        return SliverToBoxAdapter(
+                          child: Center(
+                              child: Image(
+                                  image:
+                                      AssetImage('assets/images/splash.png'))),
+                        );
                       }
                       if (_snapshot.hasError) {
-                        return Center(
-                            child: Text(
-                                "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                        return SliverToBoxAdapter(
+                          child: Center(
+                              child: Text(
+                                  "Error: ${_snapshot.error} \n please update your data and the data field mising")),
+                        );
                       }
-                      return SizedBox(
-                        height: 150,
-                        child: ListView.builder(
-                            //shrinkWrap: true,
-                            itemCount: _snapshot.data!.length,
-                            itemBuilder: (Context, index) {
-                              print(_snapshot.data!.length);
-                              return updatedSceduleItem(_snapshot.data![index]);
-                            }),
-                      );
+                      return SliverList(
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                        return updatedSceduleItem(_snapshot.data![index]);
+                      }, childCount: _snapshot.data!.length));
                     }),
                 StreamBuilder<List<ScheduleItemClass>>(
                     stream: DBService.instance.getUserPermanatScedules(
@@ -269,24 +271,25 @@ class _TableScreenState extends State<TableScreen> {
                       if (_snapshot.connectionState ==
                               ConnectionState.waiting ||
                           _snapshot.connectionState == ConnectionState.none) {
-                        return Center(
-                            child: Image(
-                                image: AssetImage('assets/images/splash.png')));
+                        return SliverToBoxAdapter(
+                          child: Center(
+                              child: Image(
+                                  image:
+                                      AssetImage('assets/images/splash.png'))),
+                        );
                       }
                       if (_snapshot.hasError) {
-                        return Center(
-                            child: Text(
-                                "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                        return SliverToBoxAdapter(
+                          child: Center(
+                              child: Text(
+                                  "Error: ${_snapshot.error} \n please update your data and the data field mising")),
+                        );
                       }
-                      return SizedBox(
-                        height: 150,
-                        child: ListView.builder(
-                            itemCount: _snapshot.data!.length,
-                            itemBuilder: (Context, index) {
-                              print(_snapshot.data!.length);
-                              return updatedSceduleItem(_snapshot.data![index]);
-                            }),
-                      );
+                      return SliverList(
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                        return updatedSceduleItem(_snapshot.data![index]);
+                      }, childCount: _snapshot.data!.length));
                     }),
                 StreamBuilder<List<ScheduleItemClass>>(
                     stream: DBService.instance.getUserTemporaryScedules(
@@ -295,27 +298,24 @@ class _TableScreenState extends State<TableScreen> {
                       if (_snapshot.connectionState ==
                               ConnectionState.waiting ||
                           _snapshot.connectionState == ConnectionState.none) {
-                        return Center(
-                            child: Image(
-                                image: AssetImage('assets/images/splash.png')));
+                        return SliverToBoxAdapter(
+                          child: Center(
+                              child: Image(
+                                  image:
+                                      AssetImage('assets/images/splash.png'))),
+                        );
                       }
                       if (_snapshot.hasError) {
                         return Center(
                             child: Text(
                                 "Error: ${_snapshot.error} \n please update your data and the data field mising"));
                       }
-                      return SizedBox(
-                        height: 150,
-                        child: ListView.builder(
-                            itemCount: _snapshot.data!.length,
-                            itemBuilder: (Context, index) {
-                              return updatedSceduleItem(_snapshot.data![index]);
-                            }),
-                      );
+                      return SliverList(
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                        return updatedSceduleItem(_snapshot.data![index]);
+                      }, childCount: _snapshot.data!.length));
                     }),
-                SizedBox(
-                  height: 100,
-                ),
               ],
             ))
         //  Padding(
