@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/UI/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
+
+import '../theme/light_theme.dart';
 
 class SnackBarService {
   // to use aon a certain page > at the top  > add the following
@@ -32,7 +33,7 @@ class SnackBarService {
           text,
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: ColorsApp.primary,
+        backgroundColor: LightTheme.primary,
         duration: Duration(seconds: 2)));
   }
 }

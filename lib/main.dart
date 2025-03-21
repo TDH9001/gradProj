@@ -9,11 +9,12 @@ import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/setting_screen/setting.dart';
+import 'package:grad_proj/theme/dark_theme_colors.dart';
+import 'package:grad_proj/theme/light_theme.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
 import 'package:provider/provider.dart';
-import 'UI/colors.dart';
 import 'firebase_options.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
@@ -44,19 +45,16 @@ class homePage extends StatelessWidget {
       themeMode: themeProvider.getEffectiveThemeMode(),
       theme: ThemeData(
         brightness: Brightness.light,
-        // colorScheme: ColorScheme.light(
-        //   background: Colors.white,
-        //),
+        primaryColor: LightTheme.primary,
         scaffoldBackgroundColor: Colors.white,
+
       ),
 
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        // colorScheme: ColorScheme.dark(
-        //   background: Colors.black,
-        //   primary: Colors.black, // لون افتراضي في الداكن
-        // ),
-        scaffoldBackgroundColor: Color(0xFF2E3B55),
+        primaryColor: DarkThemeColors .primary,
+        scaffoldBackgroundColor: Color(0xFF1C1C1C)
+        //Color(0xFF2E3B55),
       ),
 
       // theme: themeProvider.lightTheme,

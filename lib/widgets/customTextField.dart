@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../UI/colors.dart';
+import '../theme/light_theme.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;
@@ -41,16 +41,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fillColor: Colors.grey[50],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(60),
-            borderSide: const BorderSide(color: ColorsApp.primary),
+            borderSide: const BorderSide(color: LightTheme.primary),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(60),
-            borderSide: const BorderSide(color: ColorsApp.primary),
+            borderSide: const BorderSide(color: LightTheme.primary),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(60),
             borderSide: const BorderSide(
-              color: ColorsApp.primary,
+              color: LightTheme.primary,
             ),
           ),
           //contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

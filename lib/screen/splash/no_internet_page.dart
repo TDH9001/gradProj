@@ -24,6 +24,7 @@ class noInternet extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/images/internet2.png"),
+                    colorFilter: isDarkMode ? ColorFilter.mode(Colors.white70, BlendMode.modulate) : null
                           ),
                   ),
               ),
@@ -32,7 +33,7 @@ class noInternet extends StatelessWidget {
                 buttontext: "try again",
                 func: () async {
                   checkConnection();
-                }),
+                },),
             Spacer(flex: 1),
           ],
         ),

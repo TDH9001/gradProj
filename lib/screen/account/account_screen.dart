@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../../UI/colors.dart';
+import '../../theme/light_theme.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/custom_card.dart';
 import '../about_screen/question_screen.dart';
@@ -35,7 +34,8 @@ class AccountScreen extends StatelessWidget {
               Container(
                 height: 150,
                 decoration: BoxDecoration(
-                  color:  isDarkMode?Color(0xFF2E3B55):ColorsApp.primary,
+                  color: isDarkMode?Color(0xFF1C1C1C):LightTheme.primary,
+                  //isDarkMode?Color(0xFF2E3B55):ColorsApp.primary,
                 ),
                 child: Center(
                   child: Column(
@@ -43,7 +43,8 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 35,
-                       backgroundColor:  isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
+                       backgroundColor:  Color(0xFF1C1C1C),
+                       //isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
                         child: ClipOval(
                           child: Image.asset(
                             'assets/images/AinShamsUniv.png',

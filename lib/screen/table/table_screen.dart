@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/table/tableform_screen.dart';
 import 'package:provider/provider.dart';
-
-import '../../UI/colors.dart';
+import '../../theme/light_theme.dart';
 import '../../providers/theme_provider.dart';
-
 class TableScreen extends StatefulWidget {
   const TableScreen({super.key});
 
@@ -76,7 +74,7 @@ class _TableScreenState extends State<TableScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Please select all fields before adding a course."),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.deepOrange,
         ),
       );
     }
@@ -95,12 +93,13 @@ class _TableScreenState extends State<TableScreen> {
           child: Column(
             children: [
               const SizedBox(height: 15),
-              const Text(
+              Text(
                 "Fill in the details to create your schedule",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 14,color: isDarkMode ? Colors.white70 : Colors.black87),
               ),
               const SizedBox(height: 30),
               TextField(
+                style: TextStyle(fontSize: 12,color: isDarkMode ? Colors.white : Colors.black),
                 onChanged: (value) {
                   setState(() {
                     selectedCourse = value;
@@ -108,6 +107,7 @@ class _TableScreenState extends State<TableScreen> {
                 },
                 decoration: InputDecoration(
                   labelText: "Enter Course Name",
+                  labelStyle: TextStyle(fontSize: 12,color:isDarkMode ? Colors.white70 : Colors.black87),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -129,7 +129,7 @@ class _TableScreenState extends State<TableScreen> {
                         selectedDay == null
                             ? "Select Day"
                             : "${selectedDay!.day}/${selectedDay!.month}/${selectedDay!.year}",
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 12,color: Colors.white70),
                       ),
                       const Icon(Icons.calendar_today, color: Colors.grey),
                     ],
@@ -152,7 +152,7 @@ class _TableScreenState extends State<TableScreen> {
                         startTime == null
                             ? "Select Start Time"
                             : startTime!.format(context),
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 12, color: Colors.white70),
                       ),
                       const Icon(Icons.access_time, color: Colors.grey),
                     ],
@@ -165,7 +165,7 @@ class _TableScreenState extends State<TableScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color:isDarkMode ? Colors.grey.shade600 : Colors.grey),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -175,20 +175,20 @@ class _TableScreenState extends State<TableScreen> {
                         endTime == null
                             ? "Select End Time"
                             : endTime!.format(context),
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 12, color: Colors.white70),
                       ),
-                      const Icon(Icons.access_time, color: Colors.grey),
+                      Icon(Icons.access_time, color:  isDarkMode ? Colors.white60: Colors.grey),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:isDarkMode ? Color(0xFF2E5077) : ColorsApp.primary,
+                      backgroundColor:isDarkMode ? Color(0xFF4A739F) : LightTheme.primary,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -202,7 +202,7 @@ class _TableScreenState extends State<TableScreen> {
                       'Create Table',
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         color: Colors.white,
                       ),
                     ),
@@ -211,21 +211,21 @@ class _TableScreenState extends State<TableScreen> {
                   const SizedBox(width: 35),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:isDarkMode ? Color(0xFF2E5077) : ColorsApp.primary,
+                      backgroundColor:isDarkMode ? Color(0xFF2E5077): LightTheme.primary,
                     ),
                     onPressed: addCourse,
                     child: const Text(
                       'Add Course',
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 50),
 
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
@@ -237,7 +237,7 @@ class _TableScreenState extends State<TableScreen> {
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       child: ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: ColorsApp.primary,
+                          backgroundColor: LightTheme.primary,
                           child: Text(
                             course['course']![0],
                             style: const TextStyle(color: Colors.white),

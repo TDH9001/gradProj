@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../UI/colors.dart';
 import '../UI/text_style.dart';
 import '../providers/theme_provider.dart';
-
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
 class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String title;
@@ -22,12 +21,13 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
     return AppBar(
-      backgroundColor: isDarkMode ? Color(0xFF2E5077) : ColorsApp.primary,
+      backgroundColor: isDarkMode ?DarkThemeColors.primary: LightTheme.primary,
+      //Color(0xFF2E5077)
       title: Center (
         child: Text(
           title,
           style: TextStyles.appBarText.copyWith(
-            color: isDarkMode ? Colors.white70 : Colors.white,
+            color: isDarkMode ? Colors.white : Colors.white,
           ),
         ),
       ),

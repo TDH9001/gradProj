@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../UI/colors.dart';
+import '../theme/light_theme.dart';
+import '../providers/theme_provider.dart';
 
 class PrimaryButton extends StatelessWidget {
   PrimaryButton({super.key, required this.buttontext, required this.func});
@@ -10,13 +12,15 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return SizedBox(
     height: 50,
      width: 300,
      child:  ElevatedButton(
       onPressed: func,
       style: ElevatedButton.styleFrom(
-        backgroundColor:  ColorsApp.primary,
+        backgroundColor:isDarkMode ? Color(0xFF2E5077) :   LightTheme.primary,
         // padding: const EdgeInsets.symmetric(vertical: 16),
         // shape: RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(8),
