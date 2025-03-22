@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
-
 class Sceduleitem extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -26,13 +25,14 @@ class Sceduleitem extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        color: isDarkMode ? Color(0xff1E1E1E) : Colors.white,
+        color: isDarkMode ? Color(0xFF1A2332) : Colors.white,
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: isDarkMode
-                  ? [Color(0xFF2E3B55), Color(0xFF2E5077)]
+                  ? [Color(0xFF2E5077), Color(0xFF1A2332)]
                   : [Colors.blue.shade50, Colors.white],
+              //Color(0xFF2E3B55), Color(0xFF2E5077)
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -49,8 +49,7 @@ class Sceduleitem extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                         color: isDarkMode ? Colors.white70 : Colors.black87,
                       ),
                     ),
@@ -59,7 +58,7 @@ class Sceduleitem extends StatelessWidget {
                       subtitle,
                       style: TextStyle(
                         fontSize: 14,
-                        color: isDarkMode ? Colors.grey[400] : Colors.black54,
+                        color: isDarkMode ? Color(0xFF98C1D9) : Colors.black54,
                       ),
                     ),
                   ],
@@ -68,8 +67,7 @@ class Sceduleitem extends StatelessWidget {
                   thirdText,
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: isDarkMode ? Colors.grey[300] : Colors.black87,
+                    color: isDarkMode ? Colors.white70 : Colors.black87,
                   ),
                 ),
               ],

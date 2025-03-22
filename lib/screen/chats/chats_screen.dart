@@ -7,6 +7,7 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../screen/chats/Chat_page.dart';
 
 class RecentChats extends StatelessWidget {
@@ -17,6 +18,7 @@ class RecentChats extends StatelessWidget {
   Widget build(BuildContext context) {
     final double _height = MediaQuery.of(context).size.height;
     final double _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
@@ -29,6 +31,8 @@ class RecentChats extends StatelessWidget {
 Widget _RecentChats() {
   return Builder(builder: (_context) {
     var _auth = Provider.of<AuthProvider>(_context);
+    final themeProvider = Provider.of<ThemeProvider>(_context);
+    final isDarkMode = themeProvider.isDarkMode;
 
     if (_auth.user == null) {
       return Center(
@@ -56,7 +60,7 @@ Widget _RecentChats() {
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                        tileColor: Colors.white,
+                        tileColor:  isDarkMode ? Colors.black54 : Colors.white,
                         onTap: () {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {

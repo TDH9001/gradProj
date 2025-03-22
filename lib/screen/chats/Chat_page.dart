@@ -19,7 +19,7 @@ import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
-import '../../UI/colors.dart';
+import '../../theme/light_theme.dart';
 import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -424,7 +424,7 @@ class _ChatPageState extends State<ChatPage> {
             widget.txt.text.isEmpty
                 ? (widget.isRecording ? Icons.stop : Icons.mic)
                 : Icons.send,
-            color: ColorsApp.primary),
+            color: LightTheme.primary),
         onPressed: () async {
           if (widget.txt.text.isEmpty) {
             if (!widget.isRecording) {
@@ -667,7 +667,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
           Row(
             children: [
               IconButton(
-                splashColor: Playing ? ColorsApp.primary : Colors.red,
+                splashColor: Playing ? LightTheme.primary : Colors.red,
                 onPressed: () {
                   _togglePlayPause();
                 },
@@ -693,8 +693,8 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
                     max: _duration.inSeconds.toDouble() > 0.0
                         ? _duration.inSeconds.toDouble()
                         : 1.0,
-                    activeColor: ColorsApp.primary,
-                    inactiveColor: ColorsApp.secondary,
+                    activeColor: LightTheme.primary,
+                    inactiveColor: LightTheme.secondary,
                   ),
                   Text("${_position.toString()} / ${_duration.toString()}")
                 ],

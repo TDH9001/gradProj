@@ -41,9 +41,8 @@ class TableformScreen extends StatelessWidget {
             Text(
               'Your Weekly Schedule',
               style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color:  isDarkMode ? Colors.white : Colors.black,
+                fontSize: 20,
+                color:  isDarkMode ? Colors.white70 : Colors.black,
               ),
             ),
             const SizedBox(height: 16),

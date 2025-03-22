@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/UI/colors.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/models/contact.dart';
