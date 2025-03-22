@@ -70,7 +70,9 @@ class _TableScreenState extends State<TableScreen> {
                             final ScheduleItemClass? data =
                                 await SceduleCreationService.instance
                                     .createSceduleItem(
-                                        itemType: 3, cont: context);
+                                        chatID: "Personal",
+                                        itemType: 3,
+                                        cont: context);
                             if (data != null) {
                               DBService.instance.addSceduleItem(
                                   AuthProvider.instance.user!.uid,
