@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:appbar_dropdown/appbar_dropdown.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
+import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -37,6 +40,7 @@ class ChatPage extends StatefulWidget {
   final record = AudioRecorder();
   bool isRecording = false;
   late AudioPlayer audioPlayer = AudioPlayer();
+  // PlatformDispatcher.
 
   @override
   State<ChatPage> createState() {
@@ -47,13 +51,14 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double _height = 0;
   double _width = 0;
-  late Future<List<String>> chatMembersFuture;
+  //late Future<List<String>> chatMembersFuture;
 
   @override
   void initState() {
     super.initState();
-    chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
+    // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
     widget._auth = context.read<AuthProvider>();
+
     //  _audioPlayer = AudioPlayer();
     // Call the method during initialization
   }
@@ -89,8 +94,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     SnackBarService.instance.buildContext = context;
-    _height = MediaQuery.of(context).size.height;
-    _width = MediaQuery.of(context).size.width;
+    _height = MediaService.instance.getHeight();
+    print(MediaService.instance.getHeight());
+    print(MediaQuery.sizeOf(context).height);
+    _width = MediaService.instance.getWidth();
     //widget._auth = context.read<AuthProvider>();
 
     if (AuthProvider.instance.user == null) {
@@ -105,92 +112,7 @@ class _ChatPageState extends State<ChatPage> {
       value: AuthProvider.instance,
       child: Scaffold(
         //resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          flexibleSpace: widget.admins.contains(AuthProvider.instance.user!.uid)
-              ? FutureBuilder<List<String>>(
-                  future: chatMembersFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      List<String> hobbies = snapshot.data!;
-                    }
-
-                    List<String> ddt = snapshot.data!;
-
-                    return StreamBuilder<List<contact>>(
-                        stream: DBService.instance
-                            .getMembersDataOfChat(ddt, widget.chatID),
-                        builder: (_context, _snapshot) {
-                          var _data = _snapshot.data;
-
-                          //used to tell the builder to start from the end
-                          if (_snapshot.connectionState ==
-                                  ConnectionState.waiting ||
-                              _snapshot.connectionState ==
-                                  ConnectionState.none) {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          if (_snapshot.hasError) {
-                            return Center(
-                                child: Text(
-                                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-                          }
-                          for (int i = 0; i < snapshot.data!.length; i++) {
-                            if (widget._auth.user!.uid ==
-                                _snapshot.data![i].Id) {
-                              widget.memberName =
-                                  " ${_snapshot.data![i].FirstName} ${_snapshot.data![i].LastName}";
-                            }
-                          }
-                          //jsut a place holder for the output methoud
-                          return AppbarDropdown(
-                            dropdownAppBarColor: ColorsApp.primary,
-                            items: [
-                              for (int i = 0; i < _snapshot.data!.length; i++)
-                                [
-                                  //returns a list where > [0] = the name and phone number
-                                  //the [1]is the user ID in database to be give to make admin
-                                  "${_snapshot.data![i].FirstName + " " + _snapshot.data![i].LastName + "     " + _snapshot.data![i].phoneNumber}",
-                                  _snapshot.data![i].Id
-                                ]
-                            ],
-                            title: (user) {
-                              if (widget.admins.contains(user[1])) {
-                                return user[0] +
-                                    "\n already an admin \n does nothing when the button is pressed";
-                              } else {
-                                return user[0].toString() +
-                                    "\nclick to make a group admin";
-                              }
-                            },
-                            onClick: (user) {
-                              try {
-                                DBService.instance
-                                    .makeAdmin(user[1], widget.chatID);
-                              } catch (e) {
-                                SnackBarService.instance.showsSnackBarError(
-                                    text:
-                                        'an error occured while making $user an admin \n please try again');
-                                navigationService.instance.goBack();
-                              }
-                            },
-                          );
-                        });
-                  })
-              : SizedBox(),
-          backgroundColor: ColorsApp.primary,
-          title:
-              Center(child: Text(widget.chatID, style: TextStyles.appBarText)),
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back, color: Colors.white),
-          //   onPressed: () {
-          //     //Navigator.pop(_context);
-          //   },
-          // ),
-        ),
+        appBar: AppbarGestureDetector(widget: widget),
         body: ChangeNotifierProvider<AuthProvider>.value(
             value: AuthProvider.instance, child: _chatPageUI()),
       ),
@@ -468,7 +390,7 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget _messageTextField(TextEditingController txt) {
+  Widget _messageTextField(final TextEditingController txt) {
     return SizedBox(
       width: _width * 0.5,
       child: TextFormField(
@@ -564,6 +486,42 @@ class _ChatPageState extends State<ChatPage> {
             },
             icon: Icon(Icons.camera_alt)));
   }
+}
+
+class AppbarGestureDetector extends StatelessWidget
+    implements PreferredSizeWidget {
+  const AppbarGestureDetector({
+    super.key,
+    required this.widget,
+  });
+
+  final ChatPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        {
+          navigationService.instance
+              .navigateToRoute(MaterialPageRoute(builder: (context) {
+            return ChatDataScreen(
+              adminList: widget.admins,
+              cahtId: widget.chatID,
+            );
+          }));
+        }
+      },
+      child: AppBar(
+        backgroundColor: ColorsApp.primary,
+        title: Text(widget.chatID, style: TextStyles.appBarText),
+        centerTitle: true,
+      ),
+    );
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(56.0);
 }
 
 class VoiceBubble extends StatefulWidget {

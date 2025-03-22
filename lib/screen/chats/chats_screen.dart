@@ -36,7 +36,8 @@ Widget _RecentChats() {
       );
     }
     return StreamBuilder<List<ChatSnipits>>(
-        stream: DBService.instance.getUserChats(_auth.user!.uid),
+        stream: DBService.instance.getUserChats(
+            AuthProvider.instance.user!.uid.toString()), //_auth.user!.uid),
         builder: (context, _snapshot) {
           var data = _snapshot.data;
 
