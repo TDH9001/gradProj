@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/UI/colors.dart';
 import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
@@ -10,6 +9,7 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Scedule_creation_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:grad_proj/theme/light_theme.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/category_card.dart';
 import 'package:grad_proj/widgets/customTextField.dart';
@@ -76,7 +76,7 @@ class _MyWidgetState extends State<ChatDataScreen> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: ColorsApp.primary,
+            backgroundColor: LightTheme.primary,
             //expandedHeight: 120.0,
             flexibleSpace: FlexibleSpaceBar(
               title: Center(child: Text(widget.cahtId, style: TextStyles.text)),

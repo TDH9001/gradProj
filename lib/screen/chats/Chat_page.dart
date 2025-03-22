@@ -512,7 +512,7 @@ class AppbarGestureDetector extends StatelessWidget
         }
       },
       child: AppBar(
-        backgroundColor: ColorsApp.primary,
+        backgroundColor: LightTheme.primary,
         title: Text(widget.chatID, style: TextStyles.appBarText),
         centerTitle: true,
       ),

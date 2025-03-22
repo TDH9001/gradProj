@@ -80,7 +80,10 @@ class _SelectableScheduleItemState extends State<SelectableScheduleItem> {
                         await SceduleCreationService.instance.createSceduleItem(
                             itemType: widget.scheduleItem.type,
                             cont: widget.cont,
-                            chatID: widget.scheduleItem.name.split(" ")[0]);
+                            chatID:
+                                widget.scheduleItem.name.split(" ")[0] == "math"
+                                    ? "math 105"
+                                    : widget.scheduleItem.name.split(" ")[0]);
                     if (scl != null) {
                       DBService.instance.updateSceduleItem(
                           scl,
