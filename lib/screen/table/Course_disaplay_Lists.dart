@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/widgets/selectable_scedule_item.dart';
 import 'package:grad_proj/widgets/updated_scedule_item.dart';
 
 class CourseTemporarySceduleList extends StatelessWidget {
@@ -29,7 +30,9 @@ class CourseTemporarySceduleList extends StatelessWidget {
           }
           return SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            return updatedSceduleItem(_snapshot.data![index]);
+            return updatedSceduleItem(
+              _snapshot.data![index],
+            );
           }, childCount: _snapshot.data!.length));
         });
   }
@@ -62,7 +65,9 @@ class CoursesPermanatSceduleList extends StatelessWidget {
           }
           return SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            return updatedSceduleItem(_snapshot.data![index]);
+            return updatedSceduleItem(
+              _snapshot.data![index],
+            );
           }, childCount: _snapshot.data!.length));
         });
   }
@@ -95,7 +100,11 @@ class UserPerosnalSceduleList extends StatelessWidget {
           }
           return SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
-            return updatedSceduleItem(_snapshot.data![index]);
+            return SelectableScheduleItem(
+              cont: context,
+              scheduleItem: _snapshot.data![index],
+            );
+//            return updatedSceduleItem(_snapshot.data![index]);
           }, childCount: _snapshot.data!.length));
         });
   }
