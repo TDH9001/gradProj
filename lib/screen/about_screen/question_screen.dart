@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/about_screen/Chatbot/chat_bot_screen.dart' show ChatBotScreen;
+
+
 import 'package:grad_proj/screen/about_screen/courses_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import '../../widgets/custom_card.dart';
@@ -53,6 +56,17 @@ class _AboutScreenState extends State<AboutScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>  GpaScreen()),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            CustomCard(
+              icon: Icons.calculate,
+              title: 'ChatBot',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  ChatBotScreen()),
                 );
               },
             ),
