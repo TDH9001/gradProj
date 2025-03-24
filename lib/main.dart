@@ -21,6 +21,7 @@ import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
+import 'package:grad_proj/screens/excel_import_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -89,6 +90,7 @@ class homePage extends StatelessWidget {
         "AboutScreen": (context) => AboutScreen(),
         "Setting": (context) => Setting(),
         "noInternet": (context) => noInternet(),
+        '/excel-import': (context) => const ExcelImportScreen(),
       },
       //make it splash later
       initialRoute: SplashScreen.id,

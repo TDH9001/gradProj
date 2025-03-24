@@ -33,10 +33,11 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_screenutil: ^5.8.1
-  syncfusion_flutter_xlsio: ^28.2.12
-  file_picker: ^9.2.1
+  # syncfusion_flutter_xlsio: ^28.2.12
+  file_picker: ^9.2.1  
   intl: ^0.18.1
-  excel: ^2.0.3
+  excel: ^2.1.0  
+  # path_provider: ^2.0.15  # For file path operations
   open_file: ^3.0.1
   
   
