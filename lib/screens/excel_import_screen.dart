@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:excel/excel.dart';
+import 'package:grad_proj/services/media_service.dart';
 
 class ExcelImportScreen extends StatefulWidget {
   const ExcelImportScreen({Key? key}) : super(key: key);
@@ -11,50 +9,47 @@ class ExcelImportScreen extends StatefulWidget {
 }
 
 class _ExcelImportScreenState extends State<ExcelImportScreen> {
-  List<List<dynamic>>? _excelData;
+  List<Map<String, String>>? _excelData;
+  List<String>? _headers;
   String _fileName = '';
+  bool _isLoading = false;
+  String _errorMessage = '';
+  int _totalRows = 0;
 
-  Future<void> _pickAndReadExcelFile() async {
+  Future<void> _importExcelFile() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['xlsx', 'xls'],
-      );
-
-      if (result != null) {
-        setState(() {
-          _fileName = result.files.single.name;
-        });
-
-        final file = File(result.files.single.path!);
-        final bytes = await file.readAsBytes();
-        final excel = Excel.decodeBytes(bytes);
-
+      final result = await MediaService.instance.pickAndReadExcelFile();
+      
+      setState(() {
+        _isLoading = false;
         
-        final sheet = excel.tables.keys.first;
-        final rows = excel.tables[sheet]!.rows;
-
-        
-        final data = <List<dynamic>>[];
-        for (var row in rows) {
-          final rowData = <dynamic>[];
-          for (var cell in row) {
-            rowData.add(cell?.value ?? '');
-          }
-          if (rowData.any((element) => element != '')) {
-            data.add(rowData);
-          }
+        if (result['success']) {
+          _fileName = result['fileName'];
+          _excelData = List<Map<String, String>>.from(result['data']);
+          _headers = List<String>.from(result['headers']);
+          _totalRows = _excelData?.length ?? 0;
+        } else {
+          _errorMessage = result['message'];
         }
-
-        setState(() {
-          _excelData = data;
-        });
-      }
+      });
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error reading Excel file: ${e.toString()}')),
-      );
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'An unexpected error occurred: ${e.toString()}';
+      });
     }
+  }
+
+  Future<void> _exportToBackend() async {
+    //u can handle ur data here
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Data ready for export to backend')),
+    );
   }
 
   @override
@@ -62,58 +57,111 @@ class _ExcelImportScreenState extends State<ExcelImportScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Excel Import'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.blue,
+        actions: [
+          if (_excelData != null && _excelData!.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.save),
+              onPressed: _exportToBackend,
+              tooltip: 'Export to Backend',
+            ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElevatedButton.icon(
-              onPressed: _pickAndReadExcelFile,
-              icon: const Icon(Icons.upload_file),
-              label: const Text('Import Excel File'),
-            ),
-            if (_fileName.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text('File: $_fileName'),
-              ),
-            if (_excelData != null) ...[
-              const SizedBox(height: 20),
-              const Text(
-                'Excel Data Preview',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: SingleChildScrollView(
-                    child: DataTable(
-                      columns: _excelData![0]
-                          .map((header) => DataColumn(
-                                label: Text(
-                                  header.toString(),
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ))
-                          .toList(),
-                      rows: _excelData!
-                          .skip(1)
-                          .map(
-                            (row) => DataRow(
-                              cells: row
-                                  .map((cell) => DataCell(Text(cell.toString())))
-                                  .toList(),
-                            ),
-                          )
-                          .toList(),
+            Row(
+              children: [
+                ElevatedButton.icon(
+                  onPressed: _isLoading ? null : _importExcelFile,
+                  icon: const Icon(Icons.upload_file),
+                  label: const Text('Import Excel File'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                if (_fileName.isNotEmpty && !_isLoading)
+                  Expanded(
+                    child: Text(
+                      'File: $_fileName (Rows: $_totalRows)',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
                     ),
+                  ),
+              ],
+            ),
+            
+            if (_isLoading)
+              const Padding(
+                padding: EdgeInsets.only(top: 16.0),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              
+            if (_errorMessage.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              ),
+              
+            if (_excelData != null && _excelData!.isNotEmpty && _headers != null)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Excel Data Preview',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      _buildDataTable(),
+                    ],
                   ),
                 ),
               ),
-            ],
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDataTable() {
+    return Expanded(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: SingleChildScrollView(
+          child: DataTable(
+            columns: _headers!.map((header) {
+              return DataColumn(
+                label: Text(
+                  header,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              );
+            }).toList(),
+            rows: _excelData!.map((rowData) {
+              return DataRow(
+                cells: List.generate(_headers!.length, (index) {
+                  final columnKey = index.toString();
+                  return DataCell(Text(rowData[columnKey] ?? ''));
+                }),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
