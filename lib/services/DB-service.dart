@@ -407,14 +407,13 @@ class DBService {
           .map((chatData) {
         // caht data here is the chatDocument
         List<ScheduleItemClass> finalData = [];
-        //chatData.docs.map((doc){List<ScheduleItemClass> = ScheduleItemClass.fromFirestore(doc.) })
         for (int i = 0; i < chatData.docs.length; i++) {
           if (chatData.docs[i].data().containsKey("permanantScedules")) {
             var scheduleList =
                 chatData.docs[i]["permanantScedules"] as List<dynamic>? ?? null;
             if (scheduleList != null) {
               finalData.addAll(scheduleList
-                  .map((item) => ScheduleItemClass.fromFirestore(item))
+                  .map((item) => ScheduleItemClass.fromMap(item))
                   .toList());
             }
           } else {
@@ -442,14 +441,13 @@ class DBService {
           .map((chatData) {
         // caht data here is the chatDocument
         List<ScheduleItemClass> finalData = [];
-        //chatData.docs.map((doc){List<ScheduleItemClass> = ScheduleItemClass.fromFirestore(doc.) })
         for (int i = 0; i < chatData.docs.length; i++) {
           if (chatData.docs[i].data().containsKey("temporaryScedule")) {
             var scheduleList =
                 chatData.docs[i]["temporaryScedule"] as List<dynamic>? ?? null;
             if (scheduleList != null) {
               finalData.addAll(scheduleList
-                  .map((item) => ScheduleItemClass.fromFirestore(item))
+                  .map((item) => ScheduleItemClass.fromMap(item))
                   .toList());
             }
           } else {

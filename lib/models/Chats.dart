@@ -4,9 +4,9 @@ import '../models/message.dart';
 
 class ChatSnipits {
   final String id;
-  final String Chatid;
-  final String LastMessage;
-  final String Sendername;
+  final String chatId;
+  final String lastMessage;
+  final String senderName;
   final int unseenCount;
   final Timestamp timestamp;
   final List<String> adminId;
@@ -14,9 +14,9 @@ class ChatSnipits {
 
   ChatSnipits(
       {required this.id,
-      required this.Chatid,
-      required this.LastMessage,
-      required this.Sendername,
+      required this.chatId,
+      required this.lastMessage,
+      required this.senderName,
       required this.unseenCount,
       required this.timestamp,
       required this.adminId,
@@ -26,11 +26,11 @@ class ChatSnipits {
     var _data = _snap.data();
     return ChatSnipits(
       id: _snap.id,
-      Chatid: _snap["chatID"],
-      LastMessage: _snap["lastMessage"] ?? "",
+      chatId: _snap["chatID"],
+      lastMessage: _snap["lastMessage"] ?? "",
       timestamp: _snap["timestamp"],
       unseenCount: _snap["unseenCount"],
-      Sendername: _snap["senderName"],
+      senderName: _snap["senderName"],
       type: _snap["type"] is int
           ? MessageType.values[_snap["type"]].name
           : _snap["type"],

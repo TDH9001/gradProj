@@ -29,23 +29,7 @@ class ChatDataScreen extends StatefulWidget {
   static String id = "ChatDataScreen";
   final String cahtId;
   final List<String> adminList;
-  // final GlobalKey<FormState> validateSceduleItem = GlobalKey();
-  // final MultiSelectController<String> dayController =
-  //     MultiSelectController<String>();
-  // final TextEditingController locationController = TextEditingController();
-  // final TextEditingController sceduleName = TextEditingController();
-  // final TextEditingController startTime = TextEditingController();
-  // final TextEditingController endTime = TextEditingController();
-  // final TextEditingController endDate = TextEditingController();
-  // final List<DropdownItem<String>> daysList = [
-  //   DropdownItem(label: "saturday", value: "saturday"),
-  //   DropdownItem(label: "sunday", value: "sunday"),
-  //   DropdownItem(label: "monday", value: "monday"),
-  //   DropdownItem(label: "tuesday", value: "tuesday"),
-  //   DropdownItem(label: "wednesday", value: "wednesday"),
-  //   DropdownItem(label: "thursday", value: "thursday"),
-  //   DropdownItem(label: "friday", value: "friday"),
-  // ];
+
 
   @override
   State<ChatDataScreen> createState() => _MyWidgetState();

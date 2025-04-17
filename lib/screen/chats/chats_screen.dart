@@ -60,19 +60,19 @@ Widget _RecentChats() {
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                        tileColor:  isDarkMode ? Colors.black54 : Colors.white,
+                        tileColor: isDarkMode ? Colors.black54 : Colors.white,
                         onTap: () {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {
                             return ChatPage(
-                              chatID: data[index].Chatid,
+                              chatID: data[index].chatId,
                               admins: data[index].adminId,
                             );
                           }));
                           DBService.instance.resetUnseenCount(
-                              _auth.user!.uid, data[index].Chatid);
+                              _auth.user!.uid, data[index].chatId);
                         },
-                        title: Text(data[index].Chatid),
+                        title: Text(data[index].chatId),
                         subtitle: data[index].type == "image"
                             ? Row(
                                 children: [
@@ -93,7 +93,7 @@ Widget _RecentChats() {
                                       ),
                                     ],
                                   )
-                                : Text(data[index].LastMessage),
+                                : Text(data[index].lastMessage),
                         leading: Container(
                           width: 50,
                           height: 50,
