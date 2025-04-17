@@ -10,8 +10,7 @@ import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/setting_screen/setting.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
-import 'package:grad_proj/theme/light_theme.dart';
+
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
@@ -46,14 +45,12 @@ class homePage extends StatelessWidget {
       themeMode: themeProvider.getEffectiveThemeMode(),
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: LightTheme.primary,
         scaffoldBackgroundColor: Colors.white,
 
       ),
 
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: DarkThemeColors .primary,
         scaffoldBackgroundColor: Color(0xFF1C1C1C)
         //Color(0xFF2E3B55),
       ),
@@ -86,7 +83,7 @@ class homePage extends StatelessWidget {
         "ProfileScreen": (context) => ProfileScreen(),
         "CompleteProfile": (context) => CompleteProfile(),
         "RecentChats": (context) => RecentChats(),
-        "AboutScreen": (context) => AboutScreen(),
+        "AboutScreen": (context) => QuestionScreen(),
         "Setting": (context) => Setting(),
         "noInternet": (context) => noInternet(),
       },

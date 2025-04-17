@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/theme/dark_theme_colors.dart';
 import '../../theme/light_theme.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/custom_card.dart';
@@ -34,7 +35,7 @@ class AccountScreen extends StatelessWidget {
               Container(
                 height: 150,
                 decoration: BoxDecoration(
-                  color: isDarkMode?Color(0xFF1C1C1C):LightTheme.primary,
+                  color: isDarkMode?DarkThemeColors.background:LightTheme.primary,
                   //isDarkMode?Color(0xFF2E3B55):ColorsApp.primary,
                 ),
                 child: Center(
@@ -43,7 +44,7 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 35,
-                       backgroundColor:  Color(0xFF1C1C1C),
+                       backgroundColor: isDarkMode ?  DarkThemeColors.background:LightTheme.backimg,
                        //isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
                         child: ClipOval(
                           child: Image.asset(
@@ -56,7 +57,7 @@ class AccountScreen extends StatelessWidget {
                       Text(
                         "Ain Shams University",
                         style: TextStyle(
-                          color:  isDarkMode?Colors.white:Colors.white,
+                          color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -102,7 +103,7 @@ class AccountScreen extends StatelessWidget {
                     CustomCard(
                       icon: Icons.question_mark_outlined,
                       title: "Questions",
-                      onTap: () => navigationService.instance.navigateTo(AboutScreen.id),
+                      onTap: () => navigationService.instance.navigateTo(QuestionScreen.id),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(

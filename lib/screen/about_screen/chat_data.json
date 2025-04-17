@@ -1,0 +1,610 @@
+[
+  {
+    "id": "language_selection",
+    "question": "Please select your preferred language / من فضلك اختر لغتك المفضلة",
+    "options": [
+      { "text": "English", "next": "start_en" },
+      { "text": "العربية", "next": "start_ar" }
+    ]
+  },
+
+  {
+    "id": "start_en",
+    "question": "Welcome to Ain Shams University Faculty of Science Guide! What would you like to explore?",
+    "options": [
+      {"text": "GPA ", "next": "gpa_en"},
+      { "text": "Departments", "next": "departments_en" },
+      { "text": "Study System", "next": "study_system_en" },
+      { "text": "Career Opportunities", "next": "careers_en" },
+      { "text": "Admission Requirements", "next": "admission_en" },
+      { "text": "Faculty Facilities", "next": "facilities_en" },
+      { "text": "Research Centers", "next": "research_en" },
+      { "text": "Back", "next": "language_selection" }
+    ]
+  },
+  {
+    "id": "gpa_english",
+    "question": "What would you like to know about GPA?",
+    "options": [
+      {
+        "text": "what is gpa",
+        "next": "what is gpa_en"
+      },
+      {
+        "text": "How to calculate gpa",
+        "next": "how to calculate gpa_en"
+      },
+      {
+        "text": "What's the difference between Semester GPA and Cumulative GPA?",
+        "next": "What's the difference between Semester GPA and Cumulative GPA? gpa_en"
+      },
+      {
+        "text": "How to improve GPA?",
+        "next": "how to improve gpa_en"
+      },
+      {
+        "text": "Can I retake a course?",
+        "next": "can i retake a course_en"
+      },
+      {
+        "text": "Grade Symbols & Values",
+        "next": "grade symbols and values_en"
+      },
+      {
+        "text": "Does failing a course affect GPA?",
+        "next": "does failing a course affect gpa_en"
+      },
+      {
+        "text": "Do withdrawals affect GPA?",
+        "next": "do withdrawals affect gpa_en"
+      },
+      {
+        "text": "When can I register only 12 credit hours?",
+        "next": "register_12_hours_en"
+
+      },
+      {
+        "text": "When can I register full credit hours?",
+        "next": "register_full_hours_en"
+
+      },
+      {
+        "text": "Can I register more than the usual credit hours?",
+        "next": "register_more_hours_en"
+      },
+      {
+        "text": "Back",
+        "next": "start_english"
+      }
+    ]
+  },
+  {
+    "id": "what is gpa_en",
+    "question": "GPA is a weighted average of your course grades. The weight is determined by the course credit hours. What would you like to know?",
+    "options": [
+      {
+        "text": "how to calculate gpa",
+        "next": "how to calculate gpa_en"
+      },
+      {
+        "text": "What's the difference between Semester GPA and Cumulative GPA?",
+        "next": "What's the difference between Semester GPA and Cumulative GPA? gpa_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "How to calculate gpa_en",
+    "question": "To calculate GPA:\nGPA = (Sum of (grade points × course credit hours)) ÷ (Total credit hours)",
+    "options": [
+      {
+        "text": "What's the difference between Semester GPA and Cumulative GPA?",
+        "next": "What's the difference between Semester GPA and Cumulative GPA? gpa_en"
+      },
+      {
+        "text": "How to improve GPA?",
+        "next": "how to improve gpa_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "What's the difference between Semester GPA and Cumulative GPA? gpa_en",
+    "question": "Semester GPA: The average of your grades for all courses in a semester.\nCumulative GPA: The average of your grades for all courses up to the current semester.",
+    "options": [
+      {
+        "text": "How to improve GPA?",
+        "next": "how to improve gpa_en"
+      },
+      {
+        "text": "Can I retake a course?",
+        "next": "can i retake a course_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "How to improve gpa_en",
+    "question": "To improve your GPA: attend lectures,.you should take courses with higher course credit hours, study regularly, focus on assignments, and if allowed, retake low-grade courses. ",
+    "options": [
+      {
+        "text": "Can I retake a course?",
+        "next": "can i retake a course_en"
+      },
+      {
+        "text": "Grade Symbols & Values",
+        "next": "grade symbols and values_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "can i retake a course_en",
+    "question": "Yes. You can usually retake a course. The new grade might replace the old one in your GPA calculation, depending on university rules.",
+    "options": [
+      {
+        "text": "Grade Symbols & Values",
+        "next": "grade symbols and values_en"
+      },
+      {
+        "text": "Does failing a course affect GPA?",
+        "next": "does failing a course affect gpa_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "grade symbols and values_en",
+    "question": "Grade Symbols:\\nA = 4.0\\nB+ = 3.5\\nB = 3.0\\nC+ = 2.5\\nC = 2.0\\nD = 1.0\\nF = 0.0",
+    "options": [
+      {
+        "text": "Does failing a course affect GPA?",
+        "next": "does failing a course affect gpa_en"
+      },
+      {
+        "text": "Do withdrawals affect GPA?",
+        "next": "do withdrawals affect gpa_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "Does failing a course affect gpa_en",
+    "question": "Yes. A failing grade (F) lowers your GPA, especially if the course has many credit hours.",
+    "options": [
+      {
+        "text": "Do withdrawals affect GPA?",
+        "next": "do withdrawals affect gpa_en"
+      },
+      {
+        "text": "When can I register only 12 credit hours?",
+        "next": "when can i register only 12 credit hours_en"
+      },
+      {
+
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "Do withdrawals affect gpa_en",
+    "question": "No. Withdrawing from a course officially will not affect your GPA, but it might show on your transcript as 'W'.",
+    "options": [
+      {
+        "text": "When can I register only 12 credit hours?",
+        "next": "when can i register only 12 credit hours_en"
+      },
+      {
+        "text": "When can I register full credit hours?",
+        "next": "register_full_hours_en"
+
+      },
+
+      {
+
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "when can i register only 12 credit hours_en",
+    "question": "If your GPA drops below 2.0, you may be limited to registering only 12 credit hours in the following semester. This policy is designed to help students improve their academic performance by reducing their course load.",
+    "options": [
+      {
+        "text": "When can I register full credit hours?",
+        "next": "register_full_hours_en"
+      },
+      {
+        "text": "Can I register more than the usual credit hours?",
+        "next": "register_more_hours_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "register_full_hours_en",
+    "question": "You can register for full credit hours in the following semester if your GPA is at least 2.0.",
+    "options": [
+      {
+        "text": "Can I register more than the usual credit hours?",
+        "next": "register_more_hours_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "register_more_hours_en",
+    "question": "Yes, in some cases. If your GPA is high (for example, above 3.0 ), you may be allowed to take more credit hours than usual — but only with academic advisor approval.",
+    "options": [
+      {
+        "text": "Back to menu",
+        "next": "gpa_english"
+      }
+    ]
+  },
+  {
+    "id": "end_conversation",
+    "question": "Thank you for chatting with us! If you need more information, feel free to come back anytime. Have a great day!",
+    "options": []
+  },
+
+  {
+    "id": "departments_en",
+    "question": "Here are the main departments in the Faculty of Science:",
+    "options": [
+      { "text": "Mathematics", "next": "math_en" },
+      { "text": "Physics", "next": "physics_en" },
+      { "text": "Chemistry", "next": "chemistry_en" },
+      { "text": "Biology", "next": "biology_en" },
+      { "text": "Geology", "next": "geology_en" },
+      { "text": "Computer Science", "next": "cs_en" },
+      { "text": "Environmental Science", "next": "env_science_en" },
+      { "text": "Astronomy & Space Science", "next": "astronomy_en" },
+      { "text": "Back", "next": "start_en" }
+    ]
+  },
+
+  {
+    "id": "math_en",
+    "question": "Mathematics Department:\n\nEstablished: 1950\nHead: Prof. Ahmed Samir\nLocation: Building B, 3rd Floor\n\nCovers Pure Math, Applied Math, and Statistics. What would you like to know?",
+    "options": [
+      { "text": "Courses Offered", "next": "courses_math_en" },
+      { "text": "Career Options", "next": "careers_math_en" },
+      { "text": "Specializations", "next": "specializations_math_en" },
+      { "text": "Research Areas", "next": "research_math_en" },
+      { "text": "Faculty Members", "next": "faculty_math_en" },
+      { "text": "Back", "next": "departments_en" }
+    ]
+  },
+  {
+    "id": "courses_math_en",
+    "question": "Mathematics Courses:\n\nCore Courses:\n- Calculus I-IV\n- Linear Algebra\n- Abstract Algebra\n- Real Analysis\n- Complex Analysis\n- Differential Equations\n\nElectives:\n- Number Theory\n- Topology\n- Numerical Analysis\n- Operations Research\n- Probability Theory",
+    "options": [
+      { "text": "Back", "next": "math_en" }
+    ]
+  },
+  {
+    "id": "careers_math_en",
+    "question": "Career Paths for Math Graduates:\n\n1. Academia & Teaching\n2. Data Science & Analytics\n3. Actuarial Science\n4. Cryptography & Cybersecurity\n5. Operations Research\n6. Financial Modeling\n7. Research Institutions\n8. Government Statistics\n\nAverage starting salary: $35,000-$60,000",
+    "options": [
+      { "text": "Back", "next": "math_en" }
+    ]
+  },
+  {
+    "id": "specializations_math_en",
+    "question": "Mathematics Specializations:\n\n1. Pure Mathematics:\n   - Algebra\n   - Analysis\n   - Geometry\n   - Topology\n\n2. Applied Mathematics:\n   - Mathematical Physics\n   - Fluid Dynamics\n   - Mathematical Biology\n\n3. Statistics & Probability:\n   - Data Analysis\n   - Stochastic Processes\n   - Statistical Modeling",
+    "options": [
+      { "text": "Back", "next": "math_en" }
+    ]
+  },
+  {
+    "id": "research_math_en",
+    "question": "Active Research Areas:\n\n- Algebraic Geometry\n- Functional Analysis\n- Mathematical Modeling\n- Graph Theory\n- Financial Mathematics\n- Time Series Analysis\n\nCollaborations with:\n- MIT Math Department\n- Max Planck Institute\n- KAUST",
+    "options": [
+      { "text": "Back", "next": "math_en" }
+    ]
+  },
+  {
+    "id": "faculty_math_en",
+    "question": "Mathematics Faculty Members:\n\n1. Prof. Ahmed Samir (Algebra)\n2. Prof. Mona Hassan (Analysis)\n3. Dr. Youssef Ali (Statistics)\n4. Dr. Leila Mohamed (Numerical Analysis)\n5. Prof. Karim Farouk (Topology)\n\nOffice Hours: Sun-Wed 10AM-2PM\nEmail: math.faculty@sci.asu.edu.eg",
+    "options": [
+      { "text": "Back", "next": "math_en" }
+    ]
+  },
+
+  {
+    "id": "physics_en",
+    "question": "Physics Department:\n\nEstablished: 1950\nHead: Prof. Mohamed Ali\nLocation: Building C, 2nd Floor\n\nSpecializations include Theoretical, Nuclear, and Solid State Physics.",
+    "options": [
+      { "text": "Courses", "next": "courses_physics_en" },
+      { "text": "Research Labs", "next": "labs_physics_en" },
+      { "text": "Career Paths", "next": "careers_physics_en" },
+      { "text": "Faculty Members", "next": "faculty_physics_en" },
+      { "text": "Back", "next": "departments_en" }
+    ]
+  },
+  {
+    "id": "courses_physics_en",
+    "question": "Physics Courses:\n\nCore:\n- Classical Mechanics\n- Electromagnetism\n- Quantum Mechanics\n- Thermodynamics\n- Statistical Mechanics\n\nElectives:\n- Nuclear Physics\n- Astrophysics\n- Condensed Matter\n- Particle Physics\n- Computational Physics",
+    "options": [
+      { "text": "Back", "next": "physics_en" }
+    ]
+  },
+  {
+    "id": "labs_physics_en",
+    "question": "Physics Research Labs:\n\n1. Advanced Materials Lab\n2. Nuclear Physics Lab\n3. Quantum Optics Lab\n4. Computational Physics Lab\n5. Astrophysics Observatory\n\nEquipment includes:\n- Electron Microscopes\n- Particle Accelerators\n- Spectrometers\n- Supercomputing Cluster",
+    "options": [
+      { "text": "Back", "next": "physics_en" }
+    ]
+  },
+  {
+    "id": "careers_physics_en",
+    "question": "Physics Career Paths:\n\n1. Research Scientist\n2. Medical Physicist\n3. Radiation Protection\n4. Aerospace Engineer\n5. Data Analyst\n6. University Professor\n7. Renewable Energy Specialist\n\nAverage Salary Range: $40,000-$80,000",
+    "options": [
+      { "text": "Back", "next": "physics_en" }
+    ]
+  },
+  {
+    "id": "faculty_physics_en",
+    "question": "Physics Faculty Members:\n\n1. Prof. Mohamed Ali (Theoretical Physics)\n2. Dr. Hanaa Said (Nuclear Physics)\n3. Prof. Adel Kamel (Solid State)\n4. Dr. Rania Farid (Astrophysics)\n5. Dr. Omar Ibrahim (Quantum Physics)\n\nOffice Hours: Sun-Thu 9AM-1PM\nEmail: physics.faculty@sci.asu.edu.eg",
+    "options": [
+      { "text": "Back", "next": "physics_en" }
+    ]
+  },
+
+  {
+    "id": "chemistry_en",
+    "question": "Chemistry Department:\n\nEstablished: 1952\nHead: Prof. Samira Abdelaziz\nLocation: Building D, 1st Floor\n\nSpecializations: Organic, Inorganic, Physical, and Analytical Chemistry.",
+    "options": [
+      { "text": "Courses", "next": "courses_chemistry_en" },
+      { "text": "Labs", "next": "labs_chemistry_en" },
+      { "text": "Careers", "next": "careers_chemistry_en" },
+      { "text": "Faculty", "next": "faculty_chemistry_en" },
+      { "text": "Back", "next": "departments_en" }
+    ]
+  },
+  {
+    "id": "courses_chemistry_en",
+    "question": "Chemistry Courses:\n\nCore:\n- Organic Chemistry I-III\n- Inorganic Chemistry\n- Physical Chemistry\n- Analytical Chemistry\n- Biochemistry\n\nElectives:\n- Polymer Chemistry\n- Environmental Chemistry\n- Pharmaceutical Chemistry\n- Nanochemistry",
+    "options": [
+      { "text": "Back", "next": "chemistry_en" }
+    ]
+  },
+  {
+    "id": "labs_chemistry_en",
+    "question": "Chemistry Labs:\n\n1. Organic Synthesis Lab\n2. Spectroscopy Lab\n3. Chromatography Lab\n4. Electrochemistry Lab\n5. Nanotechnology Lab\n\nSafety Level: BSL-2 Certified\nOpen Hours: 8AM-8PM Daily",
+    "options": [
+      { "text": "Back", "next": "chemistry_en" }
+    ]
+  },
+
+
+
+
+  {
+    "id": "study_system_en",
+    "question": "Study System:\n\n- Credit Hour System\n- 4 Year Bachelor Program\n- Total Credits Required: 144\n\nBreakdown:\n- University Requirements: 12 cr\n- Faculty Requirements: 30 cr\n- Specialization: 102 cr\n\nGrading:\nA: 90-100%\nB: 80-89%\nC: 70-79%\nD: 60-69%\nF: Below 60%",
+    "options": [
+      { "text": "Academic Calendar", "next": "calendar_en" },
+      { "text": "Grading Policy", "next": "grading_en" },
+      { "text": "Back", "next": "start_en" }
+    ]
+  },
+  {
+    "id": "calendar_en",
+    "question": "Academic Calendar 2023/2024:\n\nFall Semester:\n- Start: Sep 17, 2023\n- End: Jan 18, 2024\n\nSpring Semester:\n- Start: Feb 10, 2024\n- End: Jun 6, 2024\n\nSummer Term (optional):\n- Jul 1 - Aug 20, 2024",
+    "options": [
+      { "text": "Back", "next": "study_system_en" }
+    ]
+  },
+  {
+    "id": "grading_en",
+    "question": "Grading Policy:\n\n- Attendance: 10%\n- Midterm: 20%\n- Assignments: 20%\n- Final Exam: 50%\n\nMinimum passing grade: 60%\nDean's List: 90%+ average",
+    "options": [
+      { "text": "Back", "next": "study_system_en" }
+    ]
+  },
+
+  {
+    "id": "careers_en",
+    "question": "Career Opportunities:\n\nScience graduates work in:\n1. Education & Academia\n2. Research & Development\n3. Healthcare & Pharmaceuticals\n4. Energy & Environment\n5. Technology & IT\n6. Government Agencies\n\nCareer Center Services:\n- Resume Workshops\n- Job Fairs\n- Internship Programs",
+    "options": [
+      { "text": "Internship Partners", "next": "internships_en" },
+      { "text": "Alumni Network", "next": "alumni_en" },
+      { "text": "Back", "next": "start_en" }
+    ]
+  },
+  {
+    "id": "internships_en",
+    "question": "Internship Partners:\n\n1. Egyptian Petroleum Research Institute\n2. National Research Centre\n3. IBM Egypt\n4. Bayer Pharmaceuticals\n5. Egyptian Environmental Affairs Agency\n\nApplication Deadline: May 1st annually",
+    "options": [
+      { "text": "Back", "next": "careers_en" }
+    ]
+  },
+
+  {
+    "id": "start_ar",
+    "question": "مرحبًا بك في دليل كلية العلوم – جامعة عين شمس! ماذا تريد أن تستكشف؟",
+    "options": [
+      { "text": "الأقسام", "next": "departments_ar" },
+      { "text": "نظام الدراسة", "next": "study_system_ar" },
+      { "text": "فرص العمل", "next": "careers_ar" },
+      { "text": "شروط القبول", "next": "admission_ar" },
+      { "text": "مرافق الكلية", "next": "facilities_ar" },
+      { "text": "مراكز الأبحاث", "next": "research_ar" },
+      { "text": "رجوع", "next": "language_selection" }
+    ]
+  },
+
+  {
+    "id": "departments_ar",
+    "question": "إليك أهم أقسام كلية العلوم:",
+    "options": [
+      { "text": "الرياضيات", "next": "math_ar" },
+      { "text": "الفيزياء", "next": "physics_ar" },
+      { "text": "الكيمياء", "next": "chemistry_ar" },
+      { "text": "الأحياء", "next": "biology_ar" },
+      { "text": "الجيولوجيا", "next": "geology_ar" },
+      { "text": "علوم الحاسب", "next": "cs_ar" },
+      { "text": "علوم البيئة", "next": "env_science_ar" },
+      { "text": "علوم الفلك والفضاء", "next": "astronomy_ar" },
+      { "text": "رجوع", "next": "start_ar" }
+    ]
+  },
+
+  {
+    "id": "math_ar",
+    "question": "قسم الرياضيات:\n\nسنة التأسيس: ١٩٥٠\nرئيس القسم: أ.د. أحمد سمير\nالمكان: المبنى ب، الطابق الثالث\n\nيشمل الرياضيات البحتة، التطبيقية، والإحصاء. ماذا تريد أن تعرف؟",
+    "options": [
+      { "text": "المقررات الدراسية", "next": "courses_math_ar" },
+      { "text": "فرص العمل", "next": "careers_math_ar" },
+      { "text": "التخصصات", "next": "specializations_math_ar" },
+      { "text": "مجالات البحث", "next": "research_math_ar" },
+      { "text": "أعضاء هيئة التدريس", "next": "faculty_math_ar" },
+      { "text": "رجوع", "next": "departments_ar" }
+    ]
+  },
+  {
+    "id": "courses_math_ar",
+    "question": "مقررات قسم الرياضيات:\n\nالمقررات الأساسية:\n- التفاضل والتكامل ١-٤\n- الجبر الخطي\n- الجبر المجرد\n- التحليل الحقيقي\n- التحليل المركب\n- المعادلات التفاضلية\n\nالمقررات الاختيارية:\n- نظرية الأعداد\n- الطوبولوجيا\n- التحليل العددي\n- بحوث العمليات\n- نظرية الاحتمالات",
+    "options": [
+      { "text": "رجوع", "next": "math_ar" }
+    ]
+  },
+  {
+    "id": "careers_math_ar",
+    "question": "مجالات عمل خريجي الرياضيات:\n\n١. التدريس الأكاديمي\n٢. علم البيانات والتحليل\n٣. العلوم الاكتوارية\n٤. التشفير وأمن المعلومات\n٥. بحوث العمليات\n٦. النمذجة المالية\n٧. مراكز الأبحاث\n٨. الإحصاء الحكومي\n\nمتوسط الراتب المبدئي: ٥٥٠-٩٠٠ ألف جنيه سنويًا",
+    "options": [
+      { "text": "رجوع", "next": "math_ar" }
+    ]
+  },
+  {
+    "id": "specializations_math_ar",
+    "question": "تخصصات الرياضيات:\n\n١. رياضيات بحتة:\n   - الجبر\n   - التحليل\n   - الهندسة\n   - الطوبولوجيا\n\n٢. رياضيات تطبيقية:\n   - الفيزياء الرياضية\n   - ديناميكا الموائع\n   - الأحياء الرياضية\n\n٣. الإحصاء والاحتمالات:\n   - تحليل البيانات\n   - العمليات العشوائية\n   - النمذجة الإحصائية",
+    "options": [
+      { "text": "رجوع", "next": "math_ar" }
+    ]
+  },
+  {
+    "id": "research_math_ar",
+    "question": "مجالات البحث العلمي:\n\n- الهندسة الجبرية\n- التحليل الدالي\n- النمذجة الرياضية\n- نظرية المخططات\n- الرياضيات المالية\n- تحليل السلاسل الزمنية\n\nتعاون بحثي مع:\n- معهد ماساتشوستس للتكنولوجيا\n- معهد ماكس بلانك\n- جامعة الملك عبدالله",
+    "options": [
+      { "text": "رجوع", "next": "math_ar" }
+    ]
+  },
+  {
+    "id": "faculty_math_ar",
+    "question": "أعضاء هيئة التدريس:\n\n١. أ.د. أحمد سمير (الجبر)\n٢. أ.د. منى حسن (التحليل)\n٣. د. يوسف علي (الإحصاء)\n٤. د. ليلى محمد (التحليل العددي)\n٥. أ.د. كريم فاروق (الطوبولوجيا)\n\nساعات العمل: الأحد-الأربعاء ١٠ص-٢م\nالبريد الإلكتروني: math.faculty@sci.asu.edu.eg",
+    "options": [
+      { "text": "رجوع", "next": "math_ar" }
+    ]
+  },
+
+  {
+    "id": "study_system_ar",
+    "question": "نظام الدراسة:\n\n- نظام الساعات المعتمدة\n- برنامج البكالوريوس ٤ سنوات\n- إجمالي الساعات المطلوبة: ١٤٤ ساعة\n\nالتفصيل:\n- متطلبات جامعة: ١٢ ساعة\n- متطلبات كلية: ٣٠ ساعة\n- التخصص: ١٠٢ ساعة\n\nالتقديرات:\nممتاز: ٩٠-١٠٠٪\nجيد جدًا: ٨٠-٨٩٪\nجيد: ٧٠-٧٩٪\nمقبول: ٦٠-٦٩٪\nراسب: أقل من ٦٠٪",
+    "options": [
+      { "text": "التقويم الأكاديمي", "next": "calendar_ar" },
+      { "text": "سياسة التقييم", "next": "grading_ar" },
+      { "text": "رجوع", "next": "start_ar" }
+    ]
+  },
+  {
+    "id": "calendar_ar",
+    "question": "التقويم الأكاديمي ٢٠٢٣/٢٠٢٤:\n\nالفصل الدراسي الأول:\n- البداية: ١٧ سبتمبر ٢٠٢٣\n- النهاية: ١٨ يناير ٢٠٢٤\n\nالفصل الدراسي الثاني:\n- البداية: ١٠ فبراير ٢٠٢٤\n- النهاية: ٦ يونيو ٢٠٢٤\n\nالفصل الصيفي (اختياري):\n- ١ يوليو - ٢٠ أغسطس ٢٠٢٤",
+    "options": [
+      { "text": "رجوع", "next": "study_system_ar" }
+    ]
+  },
+  {
+    "id": "grading_ar",
+    "question": "سياسة التقييم:\n\n- الحضور: ١٠٪\n- الامتحان النصفي: ٢٠٪\n- الواجبات: ٢٠٪\n- الامتحان النهائي: ٥٠٪\n\nالدرجة النهائية للنجاح: ٦٠٪\nقائمة الشرف: ٩٠٪+ كمجموع",
+    "options": [
+      { "text": "رجوع", "next": "study_system_ar" }
+    ]
+  },
+
+  {
+    "id": "facilities_ar",
+    "question": "مرافق الكلية:\n\n١. المكتبة المركزية (٢٠٠ ألف مجلد)\n٢. ١٥ معمل أبحاث\n٣. مركز الحاسبات (٣٠٠ جهاز)\n٤. قاعة مؤتمرات (٥٠٠ فرد)\n٥. مركز الأنشطة الطلابية\n٦. وحدة المجاهر المتقدمة\n٧. معمل الرنين المغناطيسي\n٨. القبة السماوية",
+    "options": [
+      { "text": "خدمات المكتبة", "next": "library_ar" },
+      { "text": "أجهزة المعامل", "next": "equipment_ar" },
+      { "text": "رجوع", "next": "start_ar" }
+    ]
+  },
+  {
+    "id": "library_ar",
+    "question": "خدمات المكتبة:\n\n- ساعات العمل: ٨ص-٨م يوميًا\n- ٥٠ جهاز كمبيوتر\n- قواعد بيانات علمية\n- خدمة الاستعارة: ١٠ كتب لمدة أسبوعين\n- قاعات دراسة جماعية\n- مكتبة رقمية تضم ٥٠٠٠٠ كتاب إلكتروني",
+    "options": [
+      { "text": "رجوع", "next": "facilities_ar" }
+    ]
+  }
+]

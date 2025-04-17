@@ -1,6 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/theme/dark_theme_colors.dart';
+import 'package:grad_proj/theme/light_theme.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import '../../providers/theme_provider.dart';
 
 class ScheduleItem {
   final String courseName;
@@ -132,6 +137,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Widget _buildScheduleView() {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final  bool isDarkMode = themeProvider.isDarkMode;
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: _scheduleItems.length,
@@ -144,7 +151,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Text(day, 
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue)),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
+                    color: isDarkMode ?  DarkThemeColors.secondary : Colors.blue)),
             ),
             ...items.map((item) => _buildScheduleItem(item)).toList(),
           ],
@@ -196,9 +204,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Color _getTypeColor(String type) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
     switch (type.toLowerCase()) {
-      case 'lecture': return Colors.blue;
-      case 'lab': return Colors.green;
+      case 'lecture': return isDarkMode ?DarkThemeColors.buttonColor :  LightTheme.primary;
+      case 'lab': return  isDarkMode ?DarkThemeColors.secondary : LightTheme.secondary; // Colors.green;
       case 'seminar': return Colors.orange;
       default: return Colors.grey;
     }
@@ -206,9 +216,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor:  isDarkMode? DarkThemeColors.background : Colors.white,
         elevation: 1,
         title: Row(
           children: [
@@ -216,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               child: Container(
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: isDarkMode ?DarkThemeColors.primary: Colors.grey[200],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: TextField(
@@ -243,8 +255,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             Tab(text: 'Announcements'),
             Tab(text: 'Schedule'),
           ],
-          labelColor: Colors.blue,
-          indicatorColor: Colors.blue,
+          labelColor: isDarkMode ? DarkThemeColors.iconColor : Colors.blue,
+          indicatorColor: isDarkMode ? DarkThemeColors.iconColor : Colors.blue,
         ),
       ),
       body: TabBarView(
@@ -270,6 +282,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Widget _buildContentCard({required ContentItem item}) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Card(
       elevation: 2,
       margin: const EdgeInsets.only(bottom: 16),
@@ -304,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 IconButton(
                   icon: Icon(
                     item.isSaved ? Icons.bookmark : Icons.bookmark_border,
-                    color: item.isSaved ? Colors.blue : Colors.grey,
+                    color: isDarkMode ? (item.isSaved ? DarkThemeColors.iconColor: Colors.grey) : (item.isSaved ? Colors.blue : Colors.grey),
                   ),
                   onPressed: () => setState(() => item.isSaved = !item.isSaved),
                 ),
@@ -337,13 +351,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             if (item.description.length > 100)
               TextButton(
                 onPressed: () => _showFullDescription(context, item.description),
-                child: const Text('Read More', style: TextStyle(color: Colors.blue)),
+                child: Text('Read More', style: TextStyle(
+                    color:  isDarkMode ? DarkThemeColors.secondary :Colors.blue,
+                ),
+                ),
               ),
             const SizedBox(height: 8),
             Chip(
               label: Text(item.category),
-              backgroundColor: Colors.blue[50],
-              labelStyle: const TextStyle(color: Colors.blue),
+              backgroundColor: isDarkMode ? DarkThemeColors.buttonColor : Colors.blue[50],
+              //Colors.blue[50]
+              labelStyle: const TextStyle(color: Colors.white ),
             ),
           ],
         ),

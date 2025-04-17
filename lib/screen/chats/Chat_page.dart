@@ -19,6 +19,8 @@ import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
+import '../../providers/theme_provider.dart';
+import '../../theme/dark_theme_colors.dart';
 import '../../theme/light_theme.dart';
 import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
@@ -364,11 +366,14 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget MessageField(BuildContext _context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Container(
       // height: _height * 0.1,
       width: _width,
       decoration: BoxDecoration(
-          color: Colors.grey[200], borderRadius: BorderRadius.circular(22)),
+          color:  isDarkMode? DarkThemeColors.background : Colors.grey[200],
+          borderRadius: BorderRadius.circular(22)),
       margin: EdgeInsets.symmetric(
           horizontal: _width * 0.02, vertical: _height * 0.02),
       child: Form(
