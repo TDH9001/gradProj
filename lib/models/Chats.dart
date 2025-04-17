@@ -41,12 +41,12 @@ class ChatSnipits {
 }
 
 class ChatData {
-  final String Chatid;
+  final String chatid;
   final List<String> members;
   final List<String> owners;
   final List<Message> messages;
   ChatData(
-      {required this.Chatid,
+      {required this.chatid,
       required this.members,
       required this.messages,
       required this.owners});
@@ -90,7 +90,7 @@ class ChatData {
     }
 
     return ChatData(
-      Chatid: _snap.id,
+      chatid: _snap.id,
       members:
           (_snap["members"] as List<dynamic>).map((e) => e.toString()).toList(),
       owners:

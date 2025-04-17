@@ -30,7 +30,7 @@ class RecentChats extends StatelessWidget {
 
 Widget _RecentChats() {
   return Builder(builder: (_context) {
-    var _auth = Provider.of<AuthProvider>(_context);
+    final _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
     final isDarkMode = themeProvider.isDarkMode;
 
