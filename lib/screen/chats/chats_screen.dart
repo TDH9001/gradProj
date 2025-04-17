@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
+import 'package:grad_proj/theme/dark_theme_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -60,7 +61,7 @@ Widget _RecentChats() {
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                        tileColor: isDarkMode ? Colors.black54 : Colors.white,
+                        tileColor:  isDarkMode ? DarkThemeColors.background: Colors.white,
                         onTap: () {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {

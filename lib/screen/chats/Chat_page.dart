@@ -8,6 +8,8 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/message_list_view_chat_
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import '../../providers/theme_provider.dart';
+import '../../theme/dark_theme_colors.dart';
 import '../../theme/light_theme.dart';
 import '../../UI/text_style.dart';
 import '../../providers/auth_provider.dart';

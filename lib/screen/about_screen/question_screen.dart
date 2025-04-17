@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/about_screen/courses_screen.dart';
+import 'package:grad_proj/screen/about_screen/chatbot/chat_screen.dart';
+import 'package:grad_proj/widgets/custom_container.dart';
+import 'package:grad_proj/widgets/custom_scibutton.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
-import '../../widgets/custom_card.dart';
-import 'cs_screens/cs_screen.dart';
-import 'gpa_screens/gpa_screen.dart';
 
-class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key});
+class QuestionScreen extends StatefulWidget {
+  const QuestionScreen({super.key});
 
   static String id = "AboutScreen";
 
   @override
-  State<AboutScreen> createState() => _AboutScreenState();
+  State<QuestionScreen> createState() => _QuestionScreenState();
 }
 
-class _AboutScreenState extends State<AboutScreen> {
+class _QuestionScreenState extends State<QuestionScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F7FA),
       key: scaffoldKey,
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
@@ -31,45 +31,53 @@ class _AboutScreenState extends State<AboutScreen> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+      body: Center(
+        child: Stack(
+          clipBehavior: Clip.none,
           children: [
-            CustomCard(
-              icon: Icons.question_answer,
-              title: 'What courses are available?',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LevelScreen()),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            CustomCard(
-              icon: Icons.calculate,
-              title: 'How can I calculate my GPA?',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  GpaScreen()),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            CustomCard(
-              icon: Icons.computer,
-              title: 'Why study Computer Science?',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  CsScreen()),
-                );
-              },
-            ),
+        CustomContainer(
+        child: Column(
+        mainAxisSize: MainAxisSize.min,
+          children: [
+          Text(
+          'Welcome to Ain Shams University Faculty of Science Guide!',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold ,color: Colors.black),
+        ),
+        SizedBox(height: 10),
+        Text(
+          "I'm here to help you find the best courses and career paths "
+              "for your studies at Ain Shams University. 🎓\n\n"
+              "Would you like to start a conversation with our smart assistant?",
+          style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+          textAlign: TextAlign.center,
+        ),
+        Spacer(),
+        CustomScibutton(text: 'chat with sciMate', onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ChatScreen()));
+      },),
+        SizedBox(height: 10),
+        CustomScibutton(text: 'Cancel', onPressed: () {
+        Navigator.pop(context);
+      },),
           ],
         ),
-      ),
+    ),
+            Positioned(
+              top: -40,
+              right: -15,
+              child: CircleAvatar(
+                radius: 30,
+                child: CircleAvatar(
+                  backgroundColor: Color(0xffA3BFE0),
+                  radius: 28,
+                  backgroundImage: AssetImage('assets/images/robot.png'),
+                ),
+              ),
+            ),
+          ],
+    ),
+    ),
     );
   }
 }
