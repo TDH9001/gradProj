@@ -9,6 +9,7 @@ class ScheduleUpdateItem extends FeedItems {
   ScheduleUpdateItem(
       {required super.senderID,
       required super.timestamp,
+      required super.chatID,
       required this.newScheduleItem,
       required this.oldScheduleItem,
       required super.senderName})
@@ -21,6 +22,7 @@ class ScheduleUpdateItem extends FeedItems {
         senderID: map["senderID"],
         timestamp: map["timestamp"],
         senderName: map["senderName"],
+        chatID: map["chatID"],
       );
     } else {
       return ScheduleUpdateItem(
@@ -29,6 +31,7 @@ class ScheduleUpdateItem extends FeedItems {
         senderID: "",
         timestamp: Timestamp.now(),
         senderName: "",
+        chatID: "",
       );
     }
   }

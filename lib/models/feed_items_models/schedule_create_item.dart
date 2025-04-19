@@ -8,6 +8,7 @@ class SceduleCreateFeedItem extends FeedItems {
   @override
   SceduleCreateFeedItem(
       {required super.senderID,
+      required super.chatID,
       required this.scheduleItem,
       required super.timestamp,
       required super.senderName})
@@ -19,6 +20,7 @@ class SceduleCreateFeedItem extends FeedItems {
         senderID: map["senderID"],
         timestamp: map["timestamp"],
         senderName: map["senderName"],
+        chatID: map["chatID"],
       );
     } else {
       return SceduleCreateFeedItem(
@@ -26,6 +28,7 @@ class SceduleCreateFeedItem extends FeedItems {
         senderID: "",
         timestamp: Timestamp.now(),
         senderName: "",
+        chatID: "",
       );
     }
   }

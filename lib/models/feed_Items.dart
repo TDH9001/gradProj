@@ -23,11 +23,13 @@ abstract class FeedItems {
   final Timestamp timestamp;
   final String type;
   final String senderName;
+  final String chatID;
 
   FeedItems(
       {required this.senderID,
       required this.timestamp,
       required this.type,
+      required this.chatID,
       required this.senderName});
 
   Map<String, dynamic> toMap();

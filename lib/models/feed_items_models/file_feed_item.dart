@@ -7,6 +7,7 @@ class FileFeedItem extends FeedItems {
   FileFeedItem(
       {required super.senderID,
       required super.timestamp,
+      required super.chatID,
       required this.messageContent,
       required super.senderName})
       : super(type: feedItemsEnum.file.name);
@@ -18,6 +19,7 @@ class FileFeedItem extends FeedItems {
         timestamp: map["timestamp"],
         senderName: map["senderName"],
         messageContent: map["messageContent"],
+        chatID: map["chatID"],
       );
     } else {
       return FileFeedItem(
@@ -25,6 +27,7 @@ class FileFeedItem extends FeedItems {
         timestamp: Timestamp.now(),
         senderName: "",
         messageContent: "",
+        chatID: "",
       );
     }
   }

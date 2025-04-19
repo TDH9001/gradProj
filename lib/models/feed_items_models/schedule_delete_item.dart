@@ -8,6 +8,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
   ScheduleDeleteFeedItem(
       {required super.senderID,
       required super.timestamp,
+      required super.chatID,
       required this.scheduleItem,
       required super.senderName})
       : super(type: feedItemsEnum.sceduleDelete.name);
@@ -18,6 +19,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
         senderID: map["senderID"],
         timestamp: map["timestamp"],
         senderName: map["senderName"],
+        chatID: map["chatID"],
       );
     } else {
       return ScheduleDeleteFeedItem(
@@ -25,6 +27,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
         senderID: "",
         timestamp: Timestamp.now(),
         senderName: "",
+        chatID: "",
       );
     }
   }

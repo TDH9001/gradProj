@@ -6,6 +6,7 @@ class VideoFeedItem extends FeedItems {
   final String messagecontent;
   VideoFeedItem(
       {required super.senderID,
+      required super.chatID,
       required super.timestamp,
       required this.messagecontent,
       required super.senderName})
@@ -17,6 +18,7 @@ class VideoFeedItem extends FeedItems {
         timestamp: map["timestamp"],
         senderName: map["senderName"],
         messagecontent: map["messageContent"],
+        chatID: map["chatID"],
       );
     } else {
       return VideoFeedItem(
@@ -24,6 +26,7 @@ class VideoFeedItem extends FeedItems {
         timestamp: Timestamp.now(),
         senderName: "",
         messagecontent: "",
+        chatID: "",
       );
     }
   }

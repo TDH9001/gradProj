@@ -8,16 +8,28 @@ class MessageFeedItem extends FeedItems {
     required super.senderID,
     required super.timestamp,
     required super.senderName,
+    required super.chatID,
     required this.messageContent,
   }) : super(type: feedItemsEnum.message.name);
 
   factory MessageFeedItem.fromMap(Map<String, dynamic> map) {
-    return MessageFeedItem(
-      senderID: map["senderID"],
-      timestamp: map["timestamp"],
-      senderName: map["senderName"],
-      messageContent: map["messageContent"],
-    );
+    if (map.isNotEmpty) {
+      return MessageFeedItem(
+        senderID: map["senderID"],
+        timestamp: map["timestamp"],
+        senderName: map["senderName"],
+        messageContent: map["messageContent"],
+        chatID: map["chatID"],
+      );
+    } else {
+      return MessageFeedItem(
+        senderID: "",
+        timestamp: Timestamp.now(),
+        senderName: "",
+        messageContent: "",
+        chatID: "",
+      );
+    }
   }
 
   @override
@@ -30,24 +42,6 @@ class MessageFeedItem extends FeedItems {
       };
   //to get the type corect > switch(map["type"]){case 0: message(map) nad so on
   //AKA > depeding on the type, it selects the right class and type is auto injected
-
-  FeedItems fromMap(Map<String, dynamic> map) {
-    if (map.isNotEmpty) {
-      return MessageFeedItem(
-        senderID: map["senderID"],
-        timestamp: map["timestamp"],
-        senderName: map["senderName"],
-        messageContent: map["messageContent"],
-      );
-    } else {
-      return MessageFeedItem(
-        senderID: "",
-        timestamp: Timestamp.now(),
-        senderName: "",
-        messageContent: "",
-      );
-    }
-  }
 
   @override
   Widget present({required BuildContext context}) {

@@ -8,6 +8,7 @@ class ImageFeedItem extends FeedItems {
       {required super.senderID,
       required super.timestamp,
       required super.senderName,
+      required super.chatID,
       required this.messageContent})
       : super(type: feedItemsEnum.image.name);
   factory ImageFeedItem.fromMap(Map<String, dynamic> map) {
@@ -17,6 +18,7 @@ class ImageFeedItem extends FeedItems {
         timestamp: map["timestamp"],
         senderName: map["senderName"],
         messageContent: map["messageContent"],
+        chatID: map["chatID"],
       );
     } else {
       return ImageFeedItem(
@@ -24,6 +26,7 @@ class ImageFeedItem extends FeedItems {
         timestamp: Timestamp.now(),
         senderName: "",
         messageContent: "",
+        chatID: "",
       );
     }
   }
