@@ -225,7 +225,7 @@ class DBService {
     try {
       if (scl.type == 1) {
         //permanantScedules
-        return ref.update({
+        ref.update({
           "permanantScedules": FieldValue.arrayUnion([
             {
               "name": scl.name,
@@ -241,7 +241,7 @@ class DBService {
         });
       } else if (scl.type == 2) {
         //temporaryScedule
-        return ref.update({
+        ref.update({
           "temporaryScedule": FieldValue.arrayUnion([
             {
               "name": scl.name,
@@ -259,7 +259,7 @@ class DBService {
       } else if (scl.type == 3) {
         //personalScedules
         var userRef = _db.collection(_UserCollection).doc(uid);
-        return userRef.update({
+        userRef.update({
           "personalScedules": FieldValue.arrayUnion([
             {
               "name": scl.name,
@@ -276,7 +276,7 @@ class DBService {
         });
       }
       await DBService.instance.addFeedItemToChatUsers(
-          ScheduleDeleteFeedItem(
+          SceduleCreateFeedItem(
               chatID: chatID,
               senderID: uid,
               senderName: "PLACEHOLDER FOR NAME",
@@ -294,7 +294,7 @@ class DBService {
     try {
       if (scl.type == 1) {
         //permanantScedules
-        return ref.update({
+        ref.update({
           "permanantScedules": FieldValue.arrayRemove([
             {
               "name": scl.name,
@@ -309,7 +309,7 @@ class DBService {
           ])
         });
       } else if (scl.type == 2) {
-        return ref.update({
+        ref.update({
           //temporaryScedule
           "temporaryScedule": FieldValue.arrayRemove([
             {
@@ -328,7 +328,7 @@ class DBService {
       } else if (scl.type == 3) {
         //personalScedules
         var userRef = _db.collection(_UserCollection).doc(uid);
-        return userRef.update({
+        userRef.update({
           "personalScedules": FieldValue.arrayRemove([
             {
               "name": scl.name,
@@ -548,9 +548,9 @@ class DBService {
           .doc(uid)
           .collection(_FeedCollection)
           .doc()
-          .update({
+          .set({
         "StaredFeed": FieldValue.arrayUnion([feedItem.toMap()])
-      });
+      }, SetOptions(merge: true));
     } catch (e) {
       print(e);
     }
@@ -559,15 +559,18 @@ class DBService {
   Future<void> addFeedItemToChatUsers(FeedItems feedItem, String chatID) async {
     try {
       List<String> userIDs = await getMembersOfChat(chatID);
+      print(userIDs);
       for (int i = 0; i < userIDs.length; i++) {
         _db
             .collection(_UserCollection)
             .doc(userIDs[i])
             .collection(_FeedCollection)
             .doc(_PersonalFeed)
-            .update({
+            .set({
           "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
-        });
+        }, SetOptions(merge: true));
+        print(
+            'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
       }
     } catch (e) {
       print(e);

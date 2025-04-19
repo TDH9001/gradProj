@@ -45,6 +45,7 @@ class FileFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messageContent,
-        "type": feedItemsEnum.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID":chatID
       };
 }

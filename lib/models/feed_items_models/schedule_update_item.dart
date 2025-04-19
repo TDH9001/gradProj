@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/schedule.dart';
@@ -38,8 +39,9 @@ class ScheduleUpdateItem extends FeedItems {
 
   @override
   Widget present({required BuildContext context}) {
-    // TODO: implement present
-    throw UnimplementedError();
+    return Center(
+      child: Text("a scedule updated"),
+    );
   }
 
   @override
@@ -49,6 +51,7 @@ class ScheduleUpdateItem extends FeedItems {
         "senderName": senderName,
         "oldScheduleItem": oldScheduleItem.toMap(),
         "newScheduleItem": newScheduleItem.toMap(),
-        "type": feedItemsEnum.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID":chatID
       };
 }

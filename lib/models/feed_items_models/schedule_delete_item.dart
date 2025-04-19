@@ -44,6 +44,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "sceduleItem": scheduleItem.toMap(),
-        "type": feedItemsEnum.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID": chatID
       };
 }

@@ -38,7 +38,8 @@ class MessageFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messageContent,
-        "type": feedItemsEnum.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID": chatID
       };
   //to get the type corect > switch(map["type"]){case 0: message(map) nad so on
   //AKA > depeding on the type, it selects the right class and type is auto injected

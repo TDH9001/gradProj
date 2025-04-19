@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/schedule.dart';
 
@@ -35,7 +36,9 @@ class SceduleCreateFeedItem extends FeedItems {
 
   @override
   Widget present({required BuildContext context}) {
-    throw UnimplementedError();
+    return Center(
+      child: Text("a new scedule made"),
+    );
   }
 
   @override
@@ -44,6 +47,7 @@ class SceduleCreateFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "sceduleItem": scheduleItem.toMap(),
-        "type": feedItemsEnum.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID": chatID
       };
 }

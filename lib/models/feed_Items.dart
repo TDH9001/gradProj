@@ -35,7 +35,7 @@ abstract class FeedItems {
   Map<String, dynamic> toMap();
   Widget present({required BuildContext context});
 
-  static FeedItems getFeedItemFromSubClass(dynamic item) {
+  static FeedItems getFeedItemFromSubClass(Map<String, dynamic> item) {
     switch (feedItemsEnum.values[item["type"]]) {
       case feedItemsEnum.message:
         return MessageFeedItem.fromMap(item);

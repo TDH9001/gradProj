@@ -43,6 +43,7 @@ class VideoFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messagecontent,
-        "type": feedItemsEnum.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID": chatID
       };
 }
