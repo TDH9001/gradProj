@@ -11,6 +11,15 @@ class MessageFeedItem extends FeedItems {
     required this.messageContent,
   }) : super(type: feedItems.message.name);
 
+  factory MessageFeedItem.fromMap(Map<String, dynamic> map) {
+    return MessageFeedItem(
+      senderID: map["senderID"],
+      timestamp: map["timestamp"],
+      senderName: map["senderName"],
+      messageContent: map["messageContent"],
+    );
+  }
+
   @override
   Map<String, dynamic> toMap() => {
         "senderID": senderID,
@@ -21,7 +30,7 @@ class MessageFeedItem extends FeedItems {
       };
   //to get the type corect > switch(map["type"]){case 0: message(map) nad so on
   //AKA > depeding on the type, it selects the right class and type is auto injected
-  @override
+
   FeedItems fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return MessageFeedItem(

@@ -10,9 +10,7 @@ class VideoFeedItem extends FeedItems {
       required this.messagecontent,
       required super.senderName})
       : super(type: feedItems.video.name);
-
-  @override
-  FeedItems fromMap(Map<String, dynamic> map) {
+      factory VideoFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return VideoFeedItem(
         senderID: map["senderID"],
@@ -29,6 +27,7 @@ class VideoFeedItem extends FeedItems {
       );
     }
   }
+
 
   @override
   Widget present({required BuildContext context}) {

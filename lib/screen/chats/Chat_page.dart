@@ -95,8 +95,6 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     SnackBarService.instance.buildContext = context;
     _height = MediaService.instance.getHeight();
-    print(MediaService.instance.getHeight());
-    print(MediaQuery.sizeOf(context).height);
     _width = MediaService.instance.getWidth();
     //widget._auth = context.read<AuthProvider>();
 
@@ -153,10 +151,6 @@ class _ChatPageState extends State<ChatPage> {
                     "Error: ${_snapshot.error} \n please update your data and the data field mising"));
           }
           //FIXME: possibly not working after a large enough amount of data is sent
-
-          // print(widget.admins);
-          // print(widget._auth.user!.uid);
-          //reversing the list
           List bubbles = _data!.messages.reversed.toList();
           return ListView.builder(
             itemCount: _snapshot.data!.messages.length, controller: widget._LVC,

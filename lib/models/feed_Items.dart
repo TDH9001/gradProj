@@ -24,6 +24,7 @@ abstract class FeedItems {
       required this.senderName});
 
   Map<String, dynamic> toMap();
-  FeedItems fromMap(Map<String, dynamic> map);
   Widget present({required BuildContext context});
+
+  
 }

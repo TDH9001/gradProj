@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
+import 'package:grad_proj/models/feed_Items.dart';
+import 'package:grad_proj/models/feed_items_models/message_feed_Item.dart';
+import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -23,6 +26,9 @@ class DBService {
 //collection sit he name of the Field i want to acces in firebase
   String _UserCollection = "Users";
   String _ChatCollection = "Chats";
+  String _FeedCollection = "Feed";
+  String _PersonalFeed = "PersonalFeed";
+  String _StaredFeed = "StaredFeed";
 
   Future<void> createUserInDB({
     required String userId,
@@ -485,6 +491,84 @@ class DBService {
         }
       } else {
         print("this user does not have any personal Scedules");
+        return [];
+      }
+    });
+  }
+
+  Future<void> addFeedItemToUser(FeedItems feedItem, String uid) async {
+    try {
+      _db
+          .collection(_UserCollection)
+          .doc(uid)
+          .collection(_FeedCollection)
+          .doc(_PersonalFeed)
+          .update({
+        "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> addStaredFeedItemToUser(FeedItems feedItem, String uid) async {
+    try {
+      _db
+          .collection(_UserCollection)
+          .doc(uid)
+          .collection(_FeedCollection)
+          .doc()
+          .update({
+        "StaredFeed": FieldValue.arrayUnion([feedItem.toMap()])
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> addFeedItemToChatUsers(FeedItems feedItem, String chatID) async {
+    try {
+      List<String> userIDs = await getMembersOfChat(chatID);
+      for (int i = 0; i < userIDs.length; i++) {
+        _db
+            .collection(_UserCollection)
+            .doc(userIDs[i])
+            .collection(_FeedCollection)
+            .doc(_PersonalFeed)
+            .update({
+          "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Stream<List<FeedItems>> getUserFeed(String uid) {
+    return _db
+        .collection(_UserCollection)
+        .doc(uid)
+        .collection(_FeedCollection)
+        .doc(_PersonalFeed)
+        .snapshots()
+        .map((snap) {
+      if (snap.exists) {
+        if (snap.data()!.containsKey("PersonalFeed")) {
+          List<dynamic> currentData = snap["PersonalFeed"];
+          return currentData.map((item) {
+            switch (feedItems.values[item["type"]]) {
+              case feedItems.message:
+                return MessageFeedItem.fromMap(item);
+              case feedItems.sceduleCreate:
+                return SceduleCreateFeedItem.fromMap(map);
+              // Add other cases here
+              default:
+                throw UnimplementedError(
+                    "Unknown feed item type: ${map["type"]}");
+            }
+          }).toList();
+        }
+      } else {
         return [];
       }
     });

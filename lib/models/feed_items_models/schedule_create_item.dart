@@ -12,9 +12,7 @@ class SceduleCreateFeedItem extends FeedItems {
       required super.timestamp,
       required super.senderName})
       : super(type: feedItems.sceduleCreate.name);
-
-  @override
-  FeedItems fromMap(Map<String, dynamic> map) {
+  factory SceduleCreateFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return SceduleCreateFeedItem(
         scheduleItem: ScheduleItemClass.fromMap(map["sceduleItem"]),

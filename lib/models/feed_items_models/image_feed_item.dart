@@ -10,9 +10,7 @@ class ImageFeedItem extends FeedItems {
       required super.senderName,
       required this.messageContent})
       : super(type: feedItems.image.name);
-
-  @override
-  FeedItems fromMap(Map<String, dynamic> map) {
+  factory ImageFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return ImageFeedItem(
         senderID: map["senderID"],

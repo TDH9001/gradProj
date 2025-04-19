@@ -11,8 +11,7 @@ class FileFeedItem extends FeedItems {
       required super.senderName})
       : super(type: feedItems.file.name);
 
-  @override
-  FeedItems fromMap(Map<String, dynamic> map) {
+  factory FileFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return FileFeedItem(
         senderID: map["senderID"],
@@ -29,6 +28,8 @@ class FileFeedItem extends FeedItems {
       );
     }
   }
+
+
 
   @override
   Widget present({required BuildContext context}) {
