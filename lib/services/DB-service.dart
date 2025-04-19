@@ -275,6 +275,14 @@ class DBService {
           ])
         });
       }
+      await DBService.instance.addFeedItemToChatUsers(
+          ScheduleDeleteFeedItem(
+              chatID: chatID,
+              senderID: uid,
+              senderName: "PLACEHOLDER FOR NAME",
+              timestamp: Timestamp.now(),
+              scheduleItem: scl),
+          chatID);
     } catch (e) {
       print(e);
     }
@@ -336,6 +344,14 @@ class DBService {
           ])
         });
       }
+      await DBService.instance.addFeedItemToChatUsers(
+          ScheduleDeleteFeedItem(
+              chatID: chatId,
+              senderID: uid,
+              senderName: "PLACEHOLDER FOR NAME",
+              timestamp: Timestamp.now(),
+              scheduleItem: scl),
+          chatId);
     } catch (e) {
       print(e);
     }
@@ -347,6 +363,15 @@ class DBService {
       var ref = _db.collection(_ChatCollection).doc(chatId);
       await DBService.instance.removeSceduleItem(oldscl, uid, chatId);
       await DBService.instance.addSceduleItem(uid, chatId, newscl);
+      await DBService.instance.addFeedItemToChatUsers(
+          ScheduleUpdateItem(
+              chatID: chatId,
+              senderID: uid,
+              senderName: newscl.creatorName,
+              timestamp: Timestamp.now(),
+              newScheduleItem: newscl,
+              oldScheduleItem: oldscl),
+          chatId);
     } catch (e) {
       print(e);
     }
