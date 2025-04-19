@@ -9,7 +9,7 @@ class FileFeedItem extends FeedItems {
       required super.timestamp,
       required this.messageContent,
       required super.senderName})
-      : super(type: feedItems.file.name);
+      : super(type: feedItemsEnum.file.name);
 
   factory FileFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
@@ -29,8 +29,6 @@ class FileFeedItem extends FeedItems {
     }
   }
 
-
-
   @override
   Widget present({required BuildContext context}) {
     // TODO: implement present
@@ -43,6 +41,6 @@ class FileFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messageContent,
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
 }

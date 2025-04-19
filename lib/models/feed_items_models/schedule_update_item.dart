@@ -12,8 +12,8 @@ class ScheduleUpdateItem extends FeedItems {
       required this.newScheduleItem,
       required this.oldScheduleItem,
       required super.senderName})
-      : super(type: feedItems.sceduleChange.name);
-      factory ScheduleUpdateItem.fromMap(Map<String, dynamic> map) {
+      : super(type: feedItemsEnum.sceduleChange.name);
+  factory ScheduleUpdateItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return ScheduleUpdateItem(
         newScheduleItem: ScheduleItemClass.fromMap(map["newScheduleItem"]),
@@ -33,7 +33,6 @@ class ScheduleUpdateItem extends FeedItems {
     }
   }
 
-
   @override
   Widget present({required BuildContext context}) {
     // TODO: implement present
@@ -47,6 +46,6 @@ class ScheduleUpdateItem extends FeedItems {
         "senderName": senderName,
         "oldScheduleItem": oldScheduleItem.toMap(),
         "newScheduleItem": newScheduleItem.toMap(),
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
 }

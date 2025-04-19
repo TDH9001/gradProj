@@ -2,8 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/feed_Items.dart';
+import 'package:grad_proj/models/feed_items_models/file_feed_item.dart';
+import 'package:grad_proj/models/feed_items_models/image_feed_item.dart';
 import 'package:grad_proj/models/feed_items_models/message_feed_Item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
+import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
+import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
+import 'package:grad_proj/models/feed_items_models/video_feed_item.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -556,17 +561,33 @@ class DBService {
         if (snap.data()!.containsKey("PersonalFeed")) {
           List<dynamic> currentData = snap["PersonalFeed"];
           return currentData.map((item) {
-            switch (feedItems.values[item["type"]]) {
-              case feedItems.message:
-                return MessageFeedItem.fromMap(item);
-              case feedItems.sceduleCreate:
-                return SceduleCreateFeedItem.fromMap(map);
-              // Add other cases here
-              default:
-                throw UnimplementedError(
-                    "Unknown feed item type: ${map["type"]}");
-            }
+            return FeedItems.getFeedItemFromSubClass(item);
           }).toList();
+        } else {
+          return [];
+        }
+      } else {
+        return [];
+      }
+    });
+  }
+
+  Stream<List<FeedItems>> getUserStaredFeed(String uid) {
+    return _db
+        .collection(_UserCollection)
+        .doc(uid)
+        .collection(_FeedCollection)
+        .doc(_StaredFeed)
+        .snapshots()
+        .map((snap) {
+      if (snap.exists) {
+        if (snap.data()!.containsKey("StaredFeed")) {
+          List<dynamic> currentData = snap["StaredFeed"];
+          return currentData.map((item) {
+            return FeedItems.getFeedItemFromSubClass(item);
+          }).toList();
+        } else {
+          return [];
         }
       } else {
         return [];

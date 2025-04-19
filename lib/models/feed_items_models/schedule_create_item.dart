@@ -11,7 +11,7 @@ class SceduleCreateFeedItem extends FeedItems {
       required this.scheduleItem,
       required super.timestamp,
       required super.senderName})
-      : super(type: feedItems.sceduleCreate.name);
+      : super(type: feedItemsEnum.sceduleCreate.name);
   factory SceduleCreateFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return SceduleCreateFeedItem(
@@ -41,6 +41,6 @@ class SceduleCreateFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "sceduleItem": scheduleItem.toMap(),
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
 }

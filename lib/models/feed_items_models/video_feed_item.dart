@@ -9,8 +9,8 @@ class VideoFeedItem extends FeedItems {
       required super.timestamp,
       required this.messagecontent,
       required super.senderName})
-      : super(type: feedItems.video.name);
-      factory VideoFeedItem.fromMap(Map<String, dynamic> map) {
+      : super(type: feedItemsEnum.video.name);
+  factory VideoFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return VideoFeedItem(
         senderID: map["senderID"],
@@ -28,7 +28,6 @@ class VideoFeedItem extends FeedItems {
     }
   }
 
-
   @override
   Widget present({required BuildContext context}) {
     // TODO: implement present
@@ -41,6 +40,6 @@ class VideoFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messagecontent,
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
 }

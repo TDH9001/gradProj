@@ -10,8 +10,8 @@ class ScheduleDeleteFeedItem extends FeedItems {
       required super.timestamp,
       required this.scheduleItem,
       required super.senderName})
-      : super(type: feedItems.sceduleDelete.name);
-      factory ScheduleDeleteFeedItem.fromMap(Map<String, dynamic> map) {
+      : super(type: feedItemsEnum.sceduleDelete.name);
+  factory ScheduleDeleteFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return ScheduleDeleteFeedItem(
         scheduleItem: ScheduleItemClass.fromMap(map["sceduleItem"]),
@@ -29,8 +29,6 @@ class ScheduleDeleteFeedItem extends FeedItems {
     }
   }
 
- 
-
   @override
   Widget present({required BuildContext context}) {
     // TODO: implement present
@@ -43,6 +41,6 @@ class ScheduleDeleteFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "sceduleItem": scheduleItem.toMap(),
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
 }

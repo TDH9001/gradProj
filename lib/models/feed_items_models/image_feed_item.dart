@@ -9,7 +9,7 @@ class ImageFeedItem extends FeedItems {
       required super.timestamp,
       required super.senderName,
       required this.messageContent})
-      : super(type: feedItems.image.name);
+      : super(type: feedItemsEnum.image.name);
   factory ImageFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
       return ImageFeedItem(
@@ -40,6 +40,6 @@ class ImageFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messageContent,
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
 }

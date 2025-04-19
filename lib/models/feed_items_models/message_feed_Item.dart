@@ -9,7 +9,7 @@ class MessageFeedItem extends FeedItems {
     required super.timestamp,
     required super.senderName,
     required this.messageContent,
-  }) : super(type: feedItems.message.name);
+  }) : super(type: feedItemsEnum.message.name);
 
   factory MessageFeedItem.fromMap(Map<String, dynamic> map) {
     return MessageFeedItem(
@@ -26,7 +26,7 @@ class MessageFeedItem extends FeedItems {
         "timestamp": timestamp,
         "senderName": senderName,
         "messageContent": messageContent,
-        "type": feedItems.values.byName(type).index
+        "type": feedItemsEnum.values.byName(type).index
       };
   //to get the type corect > switch(map["type"]){case 0: message(map) nad so on
   //AKA > depeding on the type, it selects the right class and type is auto injected
