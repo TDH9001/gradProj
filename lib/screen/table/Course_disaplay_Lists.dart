@@ -82,7 +82,7 @@ class UserPerosnalSceduleList extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<List<ScheduleItemClass>>(
         stream: DBService.instance
-            .getUserPersonalScedule("UyyMJiz3qnTfjus9dAoiNO7epKM2"),
+            .getUserPersonalScedule(AuthProvider.instance.user!.uid),
         builder: (context, _snapshot) {
           if (_snapshot.connectionState == ConnectionState.waiting ||
               _snapshot.connectionState == ConnectionState.none) {
