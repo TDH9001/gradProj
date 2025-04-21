@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/screen/feed_test_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -24,8 +25,20 @@ class _HomeScreenState extends State<HomeScreen>
         child: (Scaffold(
             appBar: AppBar(
               title: Text("Home"),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.view_list),
+                  tooltip: "Test All Feed Items",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => FeedTestScreen()),
+                    );
+                  },
+                ),
+              ],
             ),
-            body: GetUsersStream())));
+            body: Container())));
   }
 }
 
