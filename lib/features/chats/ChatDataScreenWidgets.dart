@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/chats/chat_data_screen.dart';
+import 'package:grad_proj/features/chats/chat_data_screen.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Scedule_creation_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';

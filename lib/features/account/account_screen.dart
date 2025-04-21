@@ -7,8 +7,8 @@ import '../../widgets/custom_card.dart';
 import '../about_screen/question_screen.dart';
 import '../../widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/profiles/Profile_screen.dart';
-import 'package:grad_proj/screen/auth/login_screen.dart';
+import 'package:grad_proj/features/profiles/Profile_screen.dart';
+import 'package:grad_proj/features/auth/login_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 

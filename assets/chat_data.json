@@ -23,7 +23,7 @@
     ]
   },
   {
-    "id": "gpa_english",
+    "id": "gpa_en",
     "question": "What would you like to know about GPA?",
     "options": [
       {
@@ -493,6 +493,7 @@
     "id": "start_ar",
     "question": "مرحبًا بك في دليل كلية العلوم – جامعة عين شمس! ماذا تريد أن تستكشف؟",
     "options": [
+      {"text": "المعدل التراكمي", "next": "gpa_ar"},
       { "text": "الأقسام", "next": "departments_ar" },
       { "text": "نظام الدراسة", "next": "study_system_ar" },
       { "text": "فرص العمل", "next": "careers_ar" },
@@ -502,6 +503,59 @@
       { "text": "رجوع", "next": "language_selection" }
     ]
   },
+  {
+    "id": "gpa_ar",
+    "question": "ماذا تريد ان تعرف عن المعدل التراكمي؟",
+    "options": [
+      {
+        "text": "ما هو المعدل التراكمي",
+        "next": "  what gpa_info_ar"
+      },
+      {"text": "كيف يتم حساب المعدل التراكمي؟",
+        "next": "how to calculate gpa_ar"},
+      {
+        "text": "ما الفرق بين المعدل الفصلي والمعدل التراكمي؟",
+        "next": "difference between semester and cumulative gpa_ar"
+      },
+      {
+        "text": "كيف أرفع معدلي؟",
+        "next": "how to improve gpa_ar"
+      },
+      {
+        "text": "هل يمكنني إعادة مقرر؟",
+        "next": "can i retake a course_ar"
+      },
+      {
+        "text": "رموز الدرجات وقيمها",
+        "next": "grade symbols and values_ar"
+      },
+      {
+        "text": "هل الرسوب يؤثر على المعدل؟",
+        "next": "does failing a course affect gpa_ar"
+      },
+      {
+        "text": "هل الانسحاب يؤثر على المعدل؟",
+        "next": "do withdrawals affect gpa_ar"
+      },
+      {
+        "text": "متى يمكنني تسجيل 12 ساعة فقط؟",
+        "next": "register_12_hours_ar"
+      },
+      {
+        "text": "متى يمكنني تسجيل عدد الساعات الكامل؟",
+        "next": "register_full_hours_ar"
+      },
+      {
+        "text": "هل يمكنني تسجيل أكثر من عدد الساعات المعتاد؟",
+        "next": "register_more_hours_ar"
+      },
+      {
+        "text": "العودة",
+        "next": "start_arabic"
+      }
+      ]
+  },
+
 
   {
     "id": "departments_ar",

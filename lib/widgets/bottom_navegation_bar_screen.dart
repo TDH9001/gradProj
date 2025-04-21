@@ -1,14 +1,14 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/chats/chats_screen.dart';
+import 'package:grad_proj/features/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
-import 'package:grad_proj/screen/table/table_screen.dart';
+import 'package:grad_proj/features/table/table_screen.dart';
 import 'package:provider/provider.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
 import '../providers/theme_provider.dart';
-import '../screen/home/home_screen.dart';
-import '../screen/account/account_screen.dart';
+import '../features/home/home_screen.dart';
+import '../features/account/account_screen.dart';
 class BottomNavegationBarScreen extends StatefulWidget {
   BottomNavegationBarScreen({super.key});
 

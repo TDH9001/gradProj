@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/about_screen/chatbot/chat_screen.dart';
+import 'package:grad_proj/features/about_screen/chatbot/chat_screen.dart';
 import 'package:grad_proj/widgets/custom_container.dart';
 import 'package:grad_proj/widgets/custom_scibutton.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
-
   static String id = "AboutScreen";
-
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
 }

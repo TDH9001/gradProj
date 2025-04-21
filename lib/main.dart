@@ -1,23 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
-import 'package:grad_proj/screen/about_screen/question_screen.dart';
-import 'package:grad_proj/screen/chats/chat_data_screen.dart';
-import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
-import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
-import 'package:grad_proj/screen/profiles/Profile_screen.dart';
-import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
-import 'package:grad_proj/screen/auth/singup_screen.dart';
-import 'package:grad_proj/screen/chats/chats_screen.dart';
-import 'package:grad_proj/screen/setting_screen/setting.dart';
-
+import 'package:grad_proj/features/about_screen/question_screen.dart';
+import 'package:grad_proj/features/chats/chat_data_screen.dart';
+import 'package:grad_proj/features/onboarding_screen/onboarding_screen.dart';
+import 'package:grad_proj/features/profiles/CompleteProfile.dart';
+import 'package:grad_proj/features/profiles/Profile_screen.dart';
+import 'package:grad_proj/features/auth/resetpassword_screen.dart';
+import 'package:grad_proj/features/auth/singup_screen.dart';
+import 'package:grad_proj/features/chats/chats_screen.dart';
+import 'package:grad_proj/features/setting_screen/setting.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
-import 'package:grad_proj/screen/splash/determine.dart';
-import 'package:grad_proj/screen/splash/no_internet_page.dart';
+import 'package:grad_proj/features/splash/determine.dart';
+import 'package:grad_proj/features/splash/no_internet_page.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'package:grad_proj/screen/auth/login_screen.dart';
-import 'package:grad_proj/screen/splash/splash_screen.dart';
+import 'package:grad_proj/features/auth/login_screen.dart';
+import 'package:grad_proj/features/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
 

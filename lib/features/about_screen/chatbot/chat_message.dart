@@ -25,9 +25,9 @@ class ChatMessage extends ChatItem {
         children: [
           if (!isUser)
             CircleAvatar(
-              backgroundColor: Colors.white,
+              backgroundColor: Color(0xff769BC6),
               child: Image.asset(
-                'assets/images/img.png',
+                'assets/images/robot.png',
                 fit: BoxFit.cover,
               ), // E for Education bot
             ),
@@ -42,7 +42,8 @@ class ChatMessage extends ChatItem {
               alignment: isUser ? Alignment.topRight : Alignment.topLeft,
               margin: const EdgeInsets.only(top: 20),
               backGroundColor:
-              isUser ? Theme.of(context).primaryColor : Colors.grey[300],
+              isUser ? Color(0xff2E5077) : Colors.grey[200],
+              //Colors.grey[200] Color(0xFF8DA8C7)
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -53,7 +54,7 @@ class ChatMessage extends ChatItem {
                     Text(
                       text,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 15,
                         color: isUser ? Colors.white : Colors.black,
                       ),
                     ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/splash/splash_screen.dart';
+import 'package:grad_proj/features/splash/splash_screen.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:provider/provider.dart';
 

@@ -2,7 +2,7 @@ import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
 import "package:grad_proj/widgets/bottom_navegation_bar_screen.dart";
-import "package:grad_proj/screen/splash/splash_screen.dart";
+import "package:grad_proj/features//splash/splash_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
 import '../services/snackbar_service.dart';
 

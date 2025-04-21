@@ -1,26 +1,31 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:grad_proj/screen/about_screen/chatbot/question_model.dart';
+import 'package:grad_proj/features//about_screen/chatbot/question_model.dart';
 import 'chat_item.dart';
 import 'chat_message.dart';
 import 'chat_options.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
+
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
+
 class _ChatScreenState extends State<ChatScreen> {
   final List<ChatItem> _messages = [];
   final TextEditingController _controller = TextEditingController();
+
   Map<String, QuestionModel> _questionMap = {};
   String? _currentQuestionId = 'language_selection';
+
   @override
   void initState() {
     super.initState();
     _loadQuestionsFromJson();
   }
+
   Future<void> _loadQuestionsFromJson() async {
     final String response = await rootBundle.loadString(
       'assets/chat_data.json',
@@ -33,23 +38,30 @@ class _ChatScreenState extends State<ChatScreen> {
 
     _showCurrentQuestion();
   }
+
   void _handleSubmitted(String text) {
     if (text.isEmpty) return;
+
     setState(() {
       _messages.insert(
         0,
         ChatMessage(text: text, isUser: true, timestamp: DateTime.now()),
       );
     });
+
     _controller.clear();
+
     Future.delayed(const Duration(milliseconds: 500), () {
       _showCurrentQuestion();
     });
   }
+
   void _showCurrentQuestion() {
     if (_currentQuestionId == null) return;
+
     final question = _questionMap[_currentQuestionId];
     if (question == null) return;
+
     setState(() {
       _messages.insert(
         0,
@@ -59,6 +71,7 @@ class _ChatScreenState extends State<ChatScreen> {
           timestamp: DateTime.now(),
         ),
       );
+
       _messages.insert(
         0,
         ChatOptions(
@@ -69,13 +82,16 @@ class _ChatScreenState extends State<ChatScreen> {
       );
     });
   }
+
   void _handleOptionSelected(String selectedOption) {
     final current = _questionMap[_currentQuestionId];
     final selected = current?.options.firstWhere(
           (o) => o.text == selectedOption,
       orElse: () => OptionModel(text: '', next: ''),
     );
+
     if (selected == null || selected.next.isEmpty) return;
+
     setState(() {
       _messages.insert(
         0,
@@ -87,13 +103,16 @@ class _ChatScreenState extends State<ChatScreen> {
       );
       _currentQuestionId = selected.next;
     });
+
     Future.delayed(const Duration(milliseconds: 500), () {
       _showCurrentQuestion();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('What is your question?')),
       resizeToAvoidBottomInset: false,
       body: SafeArea(

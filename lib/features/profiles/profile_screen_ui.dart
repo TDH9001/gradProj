@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/auth/login_screen.dart';
-import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
+import 'package:grad_proj/features/auth/login_screen.dart';
+import 'package:grad_proj/features/profiles/CompleteProfile.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';

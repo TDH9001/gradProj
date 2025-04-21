@@ -1,6 +1,6 @@
 import 'dart:ffi';
 import 'package:grad_proj/widgets/orgappbar.dart';
-import 'package:grad_proj/screen/profiles/profile_screen_ui.dart';
+import 'package:grad_proj/features/profiles/profile_screen_ui.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
