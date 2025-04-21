@@ -36,11 +36,6 @@ class AuthProvider extends ChangeNotifier {
 
   void _autiLogin() {
     navigationService.instance.navigateToReplacement(SplashScreen.id);
-    print("naved home");
-    // } else {
-    //   navigationService.instance.navigateTo("OnboardingScreen");
-    //   print("naved to onboarding");
-    // }
   }
 
   void signOut() {

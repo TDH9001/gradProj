@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 
@@ -47,6 +48,6 @@ class MessageFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     // TODO: implement present
-    throw UnimplementedError();
+   return Text("Message"); 
   }
 }

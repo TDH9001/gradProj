@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 
@@ -35,8 +36,7 @@ class FileFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     // TODO: implement present
-    throw UnimplementedError();
-    //return design widget()
+    return Text("file"); //return design widget()
   }
 
   @override
@@ -46,6 +46,6 @@ class FileFeedItem extends FeedItems {
         "senderName": senderName,
         "messageContent": messageContent,
         "type": feedItemsEnum.values.byName(type).index,
-        "chatID":chatID
+        "chatID": chatID
       };
 }
