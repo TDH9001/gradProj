@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext _context) {
     final double _DeviceHeight = MediaService.instance.getHeight();
-    final double _DeviceWidth = MediaQuery.of(_context).size.width;
+    final double _DeviceWidth = MediaService.instance.getWidth();
     SnackBarService.instance.buildContext = _context;
     TextEditingController fn = TextEditingController();
 
