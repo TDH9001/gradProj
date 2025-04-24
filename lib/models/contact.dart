@@ -30,4 +30,15 @@ class contact {
       phoneNumber: snap["phoneNumber"],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "classes": classes,
+        "year": year,
+        "isComplete": isComplete,
+        "phoneNumber": phoneNumber,
+        "seatNumber": seatNumber
+      };
 }
