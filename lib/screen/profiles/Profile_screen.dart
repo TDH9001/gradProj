@@ -1,13 +1,9 @@
-import 'dart:ffi';
+import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'package:grad_proj/screen/profiles/profile_screen_ui.dart';
-import 'package:grad_proj/models/contact.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/widgets/Header_Text.dart';
-import 'package:grad_proj/widgets/primary_button.dart';
 import '../../providers/auth_provider.dart';
-import '../../services/DB-service.dart';
 import '../../services/snackbar_service.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -18,20 +14,20 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext _context) {
-    final double _DeviceHeight = MediaQuery.of(_context).size.height;
+    final double _DeviceHeight = MediaService.instance.getHeight();
     final double _DeviceWidth = MediaQuery.of(_context).size.width;
     SnackBarService.instance.buildContext = _context;
     TextEditingController fn = TextEditingController();
 
-
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
       child: Scaffold(
-        appBar: Orgappbar(scaffoldKey: scaffoldKey , title: "Profile",
+        appBar: Orgappbar(
+          scaffoldKey: scaffoldKey,
+          title: "Profile",
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () {

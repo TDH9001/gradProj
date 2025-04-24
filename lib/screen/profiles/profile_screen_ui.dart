@@ -4,7 +4,6 @@ import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +50,10 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
         if (snapshot.data == null) return SizedBox.shrink();
 
         final userData = snapshot.data;
-        final isComplete = userData?.isComplete ?? false;
+        bool isComplete = userData?.isComplete ?? false;
+        if (userData?.seatNumber == null) {
+          isComplete = false;
+        }
 
         return isComplete
             ? ListView(
@@ -59,6 +61,8 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                 children: [
                   _buildTextField("Name", userData?.firstName, isDarkMode),
                   _buildTextField("Email", auth.user!.email, isDarkMode),
+                  _buildTextField(
+                      "seat Number", userData?.seatNumber, isDarkMode),
                   _buildPhoneField(userData?.phoneNumber, isDarkMode),
                   _buildTextField(
                       "Academic Year", userData?.year.toString(), isDarkMode),

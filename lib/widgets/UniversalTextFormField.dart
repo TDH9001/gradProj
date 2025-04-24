@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class Universaltextformfield extends StatefulWidget {
-  Universaltextformfield({
-    super.key,
-    required this.label,
-    required this.Password,
-    required this.controller,
-  });
+  Universaltextformfield(
+      {super.key,
+      required this.label,
+      required this.Password,
+      required this.controller,
+      this.keaboardType = TextInputType.text});
 //
   final String label;
   final bool Password;
   final TextEditingController controller;
+  final TextInputType keaboardType;
 
   bool isObscure = true;
   @override
@@ -26,6 +27,7 @@ class _MyWidgetState extends State<Universaltextformfield> {
       ),
       child: TextFormField(
         controller: widget.controller,
+        keyboardType: widget.keaboardType,
         autocorrect: false,
         cursorColor: Colors.white,
         obscureText: widget.Password ? widget.isObscure : false,
@@ -128,6 +130,13 @@ class _MyWidgetState extends State<Universaltextformfield> {
             }
             if (data.trim().length > 1) {
               return 'year must contain only digits.';
+            }
+          } else if (widget.label == "Seat Number") {
+            if (data == null || data.trim().isEmpty) {
+              return 'Phone number cannot be empty.';
+            }
+            if (!RegExp(r'^\d+$').hasMatch(data)) {
+              return 'Year number must contain digits.';
             }
           } //username , phone , etc
         },

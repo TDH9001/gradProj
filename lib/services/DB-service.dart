@@ -60,14 +60,18 @@ class DBService {
     }
   }
 
-  void addUserClasesAndYear({
-    required List<String> classes,
-    required int year,
-    required String userId,
-  }) async {
+  void completeUserProfile(
+      {required List<String> classes,
+      required int year,
+      required String userId,
+      required int seatNumber}) async {
     try {
-      await _db.collection(_UserCollection).doc(userId).update(
-          {"academicYear": year, "classes": classes, "isComplete": true});
+      await _db.collection(_UserCollection).doc(userId).update({
+        "academicYear": year,
+        "classes": classes,
+        "isComplete": true,
+        "seatNumber": seatNumber
+      });
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
       print(e);
