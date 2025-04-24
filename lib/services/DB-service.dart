@@ -1,19 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/feed_Items.dart';
-import 'package:grad_proj/models/feed_items_models/file_feed_item.dart';
-import 'package:grad_proj/models/feed_items_models/image_feed_item.dart';
-import 'package:grad_proj/models/feed_items_models/message_feed_Item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
-import 'package:grad_proj/models/feed_items_models/video_feed_item.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:grad_proj/widgets/sceduleitem.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
@@ -86,8 +79,8 @@ class DBService {
   Stream<contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
-      print(contact.fromFirestore(_snap));
-      return contact.fromFirestore(_snap);
+      print(contact.fromJson(id: _snap.id, snap: _snap.data()!));
+      return contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });
   }
 
@@ -170,8 +163,9 @@ class DBService {
           .collection(_UserCollection)
           .where(FieldPath.documentId, whereIn: userIds) // very efficiant
           .snapshots()
-          .map((snapshot) =>
-              snapshot.docs.map((doc) => contact.fromFirestore(doc)).toList());
+          .map((snapshot) => snapshot.docs
+              .map((doc) => contact.fromJson(id: doc.id, snap: doc.data()))
+              .toList());
     });
   }
 

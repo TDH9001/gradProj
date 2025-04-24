@@ -1,33 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class contact {
-  final String Id;
-  final String FirstName;
-  final String LastName;
-  final List<String> Classes;
-  final int Year;
+  final String id;
+  final String firstName;
+  final String lastName;
+  final List<String> classes;
+  final int year;
   final bool isComplete;
   final String phoneNumber;
+  final String? seatNumber;
   contact(
-      {required this.Id,
-      required this.FirstName,
-      required this.LastName,
-      required this.Classes,
-      required this.Year,
+      {required this.id,
+      required this.seatNumber,
+      required this.firstName,
+      required this.lastName,
+      required this.classes,
+      required this.year,
       required this.isComplete,
       required this.phoneNumber});
 
-  factory contact.fromFirestore(DocumentSnapshot _snap) {
+  factory contact.fromJson(
+      {required Map<String, dynamic> snap, required String id}) {
     return contact(
-        Id: _snap.id,
-        FirstName: _snap["firstName"],
-        LastName: _snap["lastName"],
-        Classes: (_snap["classes"] as List<dynamic>)
-            .map((e) => e.toString())
-            .toList(),
-        // LastSeet: _snap["lastSeen"],
-        Year: _snap["academicYear"],
-        isComplete: _snap["isComplete"],
-        phoneNumber: _snap["PhoneNumber"]);
+      id: id,
+      seatNumber: snap["seatNumber"],
+      firstName: snap["firstName"],
+      lastName: snap["lastName"],
+      classes: snap["classes"],
+      year: snap["year"],
+      isComplete: snap["isComplete"],
+      phoneNumber: snap["phoneNumber"],
+    );
   }
 }

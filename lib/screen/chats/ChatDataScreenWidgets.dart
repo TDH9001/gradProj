@@ -352,7 +352,7 @@ class ChatMembersList extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 2),
                             child: Column(
                               children: [
-                                Text(_snapshot.data![index].FirstName),
+                                Text(_snapshot.data![index].firstName),
                               ],
                             ),
                           );
