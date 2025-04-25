@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/providers/theme_provider.dart';
+
 import 'package:grad_proj/features/about_screen/question_screen.dart';
 import 'package:grad_proj/features/chats/chat_data_screen.dart';
 import 'package:grad_proj/features/onboarding_screen/onboarding_screen.dart';
@@ -19,6 +19,7 @@ import 'package:grad_proj/features/auth/login_screen.dart';
 import 'package:grad_proj/features/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
+import 'theme/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

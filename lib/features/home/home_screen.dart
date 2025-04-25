@@ -4,8 +4,7 @@ import 'package:grad_proj/theme/dark_theme_colors.dart';
 import 'package:grad_proj/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 
 class ScheduleItem {
   final String courseName;

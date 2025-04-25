@@ -8,7 +8,7 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 import '../../features/chats/Chat_page.dart';
 
 class RecentChats extends StatelessWidget {

@@ -10,7 +10,8 @@ import 'package:grad_proj/features/splash/no_internet_page.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/theme_provider.dart';
+
+
 
 Future<bool> checkInternetConnection() async {
   try {
@@ -72,16 +73,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDarkMode = themeProvider.isDarkMode;
+    // final themeProvider = Provider.of<ThemeProvider>(context);
+    // final isDarkMode = themeProvider.isDarkMode;
 
     return Scaffold(
         // backgroundColor: Colors.white,
-        backgroundColor:isDarkMode ? Color(0xFF121212) : Color(0xff769BC6),
+        backgroundColor: Color(0xff769BC6),
         body: Center(
           child: Image(image: const AssetImage('assets/images/splash.png'),
-            color: isDarkMode ? Colors.white70 : null,
-            colorBlendMode: isDarkMode ? BlendMode.modulate : null,
+            color: null,
+            colorBlendMode: null,
           ),
         ));
   }

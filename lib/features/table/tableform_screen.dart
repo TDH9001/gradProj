@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/sceduleitem.dart';
 import 'package:provider/provider.dart';
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
 
 

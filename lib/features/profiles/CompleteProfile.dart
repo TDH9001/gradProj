@@ -9,7 +9,7 @@ import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
 
 class CompleteProfile extends StatefulWidget {

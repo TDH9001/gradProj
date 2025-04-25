@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../UI/text_style.dart';
-import '../providers/theme_provider.dart';
+import '../theme/theme_provider.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
 class Orgappbar extends StatelessWidget implements PreferredSizeWidget {

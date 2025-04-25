@@ -74,7 +74,7 @@
       },
       {
         "text": "Back",
-        "next": "start_english"
+        "next": "start_en"
       }
     ]
   },
@@ -92,7 +92,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -114,7 +114,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -136,7 +136,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -158,7 +158,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -180,7 +180,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -202,7 +202,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -225,7 +225,7 @@
       {
 
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -250,7 +250,7 @@
       {
 
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
 
       {
@@ -273,7 +273,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -291,7 +291,7 @@
       },
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       },
       {
         "text": "End Conversation",
@@ -305,7 +305,7 @@
     "options": [
       {
         "text": "Back to menu",
-        "next": "gpa_english"
+        "next": "gpa_en"
       }
     ]
   },
@@ -550,10 +550,246 @@
         "next": "register_more_hours_ar"
       },
       {
-        "text": "العودة",
+        "text": "رجوع",
         "next": "start_arabic"
       }
       ]
+  },
+  {
+    "id": "what gpa_info_ar",
+    "question": "المعدل التراكمى هو متوسط درجات مقرراتك مع الاخذ فى الاعتبار عدد الساعات المعتمده لكل مقرر ",
+    "options": [
+      {
+        "text": "كيف يتم حساب المعدل التراكمي؟",
+        "next": "how to calculate gpa_ar"
+      },
+      {
+        "text": "ما الفرق بين المعدل الفصلي والمعدل التراكمي؟",
+        "next": "difference between semester and cumulative gpa_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+      ]
+  },
+  {
+    "id": "how to calculate gpa_ar",
+    "question": "لحساب المعدل التراكمى :\n المعدل = (مجموع (النقاط × الساعات المعتمدة)) ÷ (إجمالي الساعات المعتمدة)",
+    "options": [
+      {
+          "text": "ما الفرق بين المعدل الفصلي والمعدل التراكمي؟",
+          "next": "difference between semester and cumulative gpa_ar"
+      },
+      {
+          "text": "كيف يمكننى تحسين معدلى ؟",
+          "next": "how to improve gpa_ar"
+      },
+      {
+          "text": "العوده الى القائمة الرئيسية",
+          "next": "gpa_ar"
+      },
+      {
+          "text": "الخروج من المحادثة",
+          "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "difference between semester and cumulative gpa_ar",
+    "question": "المعدل التركمى الفصلى : متوسط درجاتكفى مقررات فصل دراسى واحد\n المعدل التركمى الكلي : متوسط درجاتك فى جميع المقررات حتى الفصل الحالى  ",
+    "options": [
+      {
+        "text": "كيف يمكننى تحسين معدلى ؟",
+        "next": "how to improve gpa_ar"
+      },
+      {
+        "text": "هل يمكننى اعاده مقرر ؟",
+        "next": "can i retake a course_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "how to improve gpa_ar",
+    "question": "لتحسين معدلك: احضر المحاضرات، ركز على المقررات ذات الساعات الأعلى، ذاكر بانتظام، اهتم بالواجبات، وإذا كان مسموحًا، أعد المقررات التي حصلت فيها على درجات منخفضة",
+    "options": [
+      {
+        "text": "هل يمكننى اعاده مقرر ؟",
+        "next": "can i retake a course_ar"
+      },
+      {
+        "text": "رموز الدرجات وقيمها",
+        "next": "grade symbols and values_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "can i retake a course_ar",
+    "question": "نعم، يمكنك اعادة المقرر، وقد يتم استبدال الدرجه القديمه بالدرجه الجديده في حساب المعدل، بمجال سياسه الجامعية",
+    "options": [
+      {
+        "text": "رموز الدرجات وقيمها",
+        "next": "grade symbols and values_ar"
+      },
+      {
+        "text": "هل الرسزب فى مقرر يؤثر على المعدل التراكمى؟",
+        "next": "does failing a course affect gpa_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "grade symbols and values_ar",
+    "question": "رموز الدرجات وقيمها:\\nA = 4.0\\nB+ = 3.6\\nB = 3.0\\nC+ = 2.6\\nC = 2.3\\nD = 2.0\\nF = 0.0",
+    "options": [
+      {
+        "text": "هل الرسزب فى مقرر يؤثر على المعدل التراكمى؟",
+        "next": "does failing a course affect gpa_ar"
+      },
+      {
+        "text": "هل الانسحاب من مقرر يؤثر على المعدل التراكمى ",
+        "next": "do withdrawals affect gpa_ar "
+      },
+
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "does failing a course affect gpa_ar",
+    "question": "نعم الرسوب يخفض معدلك, خاصه اذا كان المقرر يحتوى على عدد كبير من الساعات (f) ",
+    "options": [
+      {
+        "text": "هل الانسحاب من مقرر يؤثر على المعدل التراكمى ",
+        "next": "do withdrawals affect gpa_ar"
+      },
+      {
+        "text": "متى يمكننى تسجيل 12 ساعه فقط؟",
+        "next": "register_12_hours_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "do withdrawals affect gpa_ar",
+    "question": "لا، الانسحاب  الرسمى من مقرر لا يؤثر على المعدل التراكمى، ولكن  قد يظهرفى السجل الاكاديمى ك 'W' ",
+    "options": [
+      {
+        "text": "متى يمكننى تسجيل 12 ساعه فقط؟",
+        "next": "register_12_hours_ar"
+      },
+      {
+        "text": "متى يمكننى تسجيل ساعات كامله؟",
+        "next": "register_full_hours_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "register_12_hours_ar",
+    "question": "إذا انخفض معدلك التراكمي عن 2.0، فقد يُسمح لك فقط بتسجيل 12 ساعة في الفصل التالي. هذا الإجراء يهدف لمساعدتك على تحسين الأداء بتقليل العبء.  ",
+    "options": [
+      {
+        "text": "متى يمكننى تسجيل ساعات كامله؟",
+        "next": "register_full_hours_ar"
+      },
+      {
+        "text": "هل يمكننى تسجيل اكثر من الساعات المعتاده؟",
+        "next": "register_more_hours_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "register_full_hours_ar",
+    "question": "يمكن لك تسجيل ساعات كامله في الفصل التالي اذا كان معدلك التراكمي على 2.0 او اكثر. ",
+    "options": [
+      {
+        "text": "هل يمكننى تسجيل اكثر من الساعات المعتاده؟",
+        "next": "register_more_hours_ar"
+      },
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "register_more_hours_ar",
+    "question": "نعم، في بعض الحالات. إذا كان معدلك مرتفعًا (مثلاً، فوق 3.0)، فقد يُسمح لك بتسجيل ساعات أكثر من المعتاد — ولكن فقط بموافقة المرشد الأكاديمي.",
+    "options": [
+      {
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
+      },
+      {
+        "text": "الخروج من المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "end_conversation_ar",
+    "question": "شكرًا لمحادثتك معنا! إذا كنت بحاجة لمزيد من المعلومات، لا تتردد في العودة في أي وقت. يومك سعيد!",
+    "options": []
   },
 
 

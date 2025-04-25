@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/custom_card.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'package:provider/provider.dart';
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});

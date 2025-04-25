@@ -17,7 +17,7 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import '../../theme/light_theme.dart';
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 class TableScreen extends StatefulWidget {
   TableScreen({super.key});
   final MultiSelectController<String> dayController =
