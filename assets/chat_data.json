@@ -17,9 +17,6 @@
       { "text": "Departments", "next": "departments_en" },
       { "text": "Study System", "next": "study_system_en" },
       { "text": "Career Opportunities", "next": "careers_en" },
-      { "text": "Admission Requirements", "next": "admission_en" },
-      { "text": "Faculty Facilities", "next": "facilities_en" },
-      { "text": "Research Centers", "next": "research_en" },
       { "text": "Back", "next": "language_selection" }
     ]
   },
@@ -94,7 +91,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -113,7 +110,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -132,7 +129,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -151,7 +148,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -170,7 +167,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -189,7 +186,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -208,7 +205,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -227,7 +224,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -246,7 +243,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -265,7 +262,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -284,17 +281,14 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
   {
-    "id": "end_conversation",
+    "id": "end_conversation_en",
     "question": "Thank you for chatting with us! If you need more information, feel free to come back anytime. Have a great day!",
-    "options": [
-      { "text": "Visit us again", "next": "start_en" },
-      { "text": "Goodbye", "next": "end_conversation" }
-    ]
+    "options": []
   },
   {
     "id": "graduation_reasons_en",
@@ -324,7 +318,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -343,7 +337,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -362,7 +356,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -381,7 +375,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -400,7 +394,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -418,7 +412,7 @@
       },
       {
         "text": "End Conversation",
-        "next": "end_conversation"
+        "next": "end_conversation_en"
       }
     ]
   },
@@ -426,270 +420,518 @@
     "id": "departments_en",
     "question": "Here are the main departments in the Faculty of Science:",
     "options": [
-      { "text": "Mathematics", "next": "math_en" },
-      { "text": "Physics", "next": "physics_en" },
-      { "text": "Chemistry", "next": "chemistry_en" },
-      {"text":"computer science", "next": "cs_en" },
-      { "text": "Biology", "next": "biology_en" },
-      { "text": "Geology", "next": "geology_en" },
+      { "text": "Physics and Computer Science", "next": "physics_computer_science_en" },
+      { "text": "Pure and Computer Science", "next": "pure_computer_science_en" },
+      { "text": "Statistics and Computer Science", "next": "statistics_computer_science_en" },
       { "text": "Computer Science", "next": "cs_en" },
-      { "text": "Environmental Science", "next": "env_science_en" },
-      { "text": "Astronomy & Space Science", "next": "astronomy_en" },
-      { "text": "Back", "next": "start_en" }
+      { "text": "Back to menu", "next": "start_en" }
     ]
   },
 
   {
-    "id": "math_en",
-    "question": "Mathematics Department:\n\nEstablished: 1950\nHead: Prof. Ahmed Samir\nLocation: Building B, 3rd Floor\n\nCovers Pure Math, Applied Math, and Statistics. What would you like to know?",
+    "id": "physics_computer_science_en",
+    "question": "Physics and Computer Science Programs:\n\nWould you like to know more about any of the following?\n- Courses\n- Career Opportunities\n- Department Goals\n- Graduation Requirements\n- Internship\n- Graduation Project",
     "options": [
-      { "text": "Courses Offered", "next": "courses_math_en" },
-      { "text": "Career Options", "next": "careers_math_en" },
-      { "text": "Specializations", "next": "specializations_math_en" },
-      { "text": "Research Areas", "next": "research_math_en" },
-      { "text": "Faculty Members", "next": "faculty_math_en" },
-      { "text": "Back to menu", "next": "departments_en" }
+      { "text": "Courses", "next": "courses_physics_computer_science_en" },
+      { "text": "Career Opportunities", "next": "careers_physics_computer_science_en" },
+      { "text": "Department Goals", "next": "department_goals_physics_computer_science_en" },
+      { "text": "Graduation Requirements", "next": "graduation_requirements_physics_computer_science_en" },
+      { "text": "Internship", "next": "internship_physics_computer_science_en" },
+      { "text": "Graduation Project", "next": "graduation_project_physics_computer_science_en" },
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "departments_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "courses_math_en",
-    "question": "Mathematics Courses:\n\nCore Courses:\n- Calculus I-IV\n- Linear Algebra\n- Abstract Algebra\n- Real Analysis\n- Complex Analysis\n- Differential Equations\n\nElectives:\n- Number Theory\n- Topology\n- Numerical Analysis\n- Operations Research\n- Probability Theory",
+    "id": "courses_physics_computer_science_en",
+    "question": "Courses offered in Physics and Computer Science:\n\n- Classical Mechanics\n- Quantum Physics\n- Software Engineering\n- Algorithms\n- Data Structures\n- Artificial Intelligence",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "math_en"
+        "next": "physics_computer_science_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
-    ]
-  },
-  {
-    "id": "careers_math_en",
-    "question": "Career Paths for Math Graduates:\n\n1. Academia & Teaching\n2. Data Science & Analytics\n3. Actuarial Science\n4. Cryptography & Cybersecurity\n5. Operations Research\n6. Financial Modeling\n7. Research Institutions\n8. Government Statistics\n\nAverage starting salary: $35,000-$60,000",
-    "options": [
       {
-        "text": "Ask another question ? ☺️",
-        "next": "math_en"
+        "text": "Back to menu",
+        "next": "start_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
-
-    ]
-  },
-  {
-    "id": "specializations_math_en",
-    "question": "Mathematics Specializations:\n\n1. Pure Mathematics:\n   - Algebra\n   - Analysis\n   - Geometry\n   - Topology\n\n2. Applied Mathematics:\n   - Mathematical Physics\n   - Fluid Dynamics\n   - Mathematical Biology\n\n3. Statistics & Probability:\n   - Data Analysis\n   - Stochastic Processes\n   - Statistical Modeling",
-    "options": [
       {
-        "text": "Ask another question ? ☺️",
-        "next": "math_en"
-      },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
-    ]
-  },
-  {
-    "id": "research_math_en",
-    "question": "Active Research Areas:\n\n- Algebraic Geometry\n- Functional Analysis\n- Mathematical Modeling\n- Graph Theory\n- Financial Mathematics\n- Time Series Analysis\n\nCollaborations with:\n- MIT Math Department\n- Max Planck Institute\n- KAUST",
-    "options": [
-      {
-        "text": "Ask another question ? ☺️",
-        "next": "math_en"
-      },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
-    ]
-  },
-  {
-    "id": "faculty_math_en",
-    "question": "Mathematics Faculty Members:\n\n1. Prof. Ahmed Samir (Algebra)\n2. Prof. Mona Hassan (Analysis)\n3. Dr. Youssef Ali (Statistics)\n4. Dr. Leila Mohamed (Numerical Analysis)\n5. Prof. Karim Farouk (Topology)\n\nOffice Hours: Sun-Wed 10AM-2PM\nEmail: math.faculty@sci.asu.edu.eg",
-    "options": [
-      {
-        "text": "Ask another question ? ☺️",
-        "next": "math_en"
-      },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
 
   {
-    "id": "physics_en",
-    "question": "Physics Department:\n\nEstablished: 1950\nHead: Prof. Mohamed Ali\nLocation: Building C, 2nd Floor\n\nSpecializations include Theoretical, Nuclear, and Solid State Physics.",
-    "options": [
-      { "text": "Courses", "next": "courses_physics_en" },
-      { "text": "Research Labs", "next": "labs_physics_en" },
-      { "text": "Career Paths", "next": "careers_physics_en" },
-      { "text": "Faculty Members", "next": "faculty_physics_en" },
-      { "text": "Back", "next": "departments_en" }
-    ]
-  },
-  {
-    "id": "courses_physics_en",
-    "question": "Physics Courses:\n\nCore:\n- Classical Mechanics\n- Electromagnetism\n- Quantum Mechanics\n- Thermodynamics\n- Statistical Mechanics\n\nElectives:\n- Nuclear Physics\n- Astrophysics\n- Condensed Matter\n- Particle Physics\n- Computational Physics",
+    "id": "careers_physics_computer_science_en",
+    "question": "Career Opportunities for Physics and Computer Science graduates:\n\n- Software Developer\n- Data Scientist\n- AI Researcher\n- Systems Architect\n- Computational Physicist\n\nWould you like to know more about a specific career?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "physics_en"
+        "next": "physics_computer_science_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "labs_physics_en",
-    "question": "Physics Research Labs:\n\n1. Advanced Materials Lab\n2. Nuclear Physics Lab\n3. Quantum Optics Lab\n4. Computational Physics Lab\n5. Astrophysics Observatory\n\nEquipment includes:\n- Electron Microscopes\n- Particle Accelerators\n- Spectrometers\n- Supercomputing Cluster",
+    "id": "department_goals_physics_computer_science_en",
+    "question": "Department Goals for Physics and Computer Science:\n\n- To provide strong theoretical and practical knowledge in both physics and computer science.\n- To encourage research and innovation.\n- To develop problem-solving skills in real-world applications.\n- To prepare students for careers in academia, research, and industry.",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "physics_en"
+        "next": "physics_computer_science_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "careers_physics_en",
-    "question": "Physics Career Paths:\n\n1. Research Scientist\n2. Medical Physicist\n3. Radiation Protection\n4. Aerospace Engineer\n5. Data Analyst\n6. University Professor\n7. Renewable Energy Specialist\n\nAverage Salary Range: $40,000-$80,000",
+    "id": "graduation_requirements_physics_computer_science_en",
+    "question": "Graduation Requirements for Physics and Computer Science:\n\n- Total Credits: 140 hours\n- Project: Yes, a graduation project is required\n- Internship: Yes, mandatory internship during the program\n\nWould you like more details on any specific requirement?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "physics_en"
+        "next": "physics_computer_science_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "faculty_physics_en",
-    "question": "Physics Faculty Members:\n\n1. Prof. Mohamed Ali (Theoretical Physics)\n2. Dr. Hanaa Said (Nuclear Physics)\n3. Prof. Adel Kamel (Solid State)\n4. Dr. Rania Farid (Astrophysics)\n5. Dr. Omar Ibrahim (Quantum Physics)\n\nOffice Hours: Sun-Thu 9AM-1PM\nEmail: physics.faculty@sci.asu.edu.eg",
+    "id": "internship_physics_computer_science_en",
+    "question": "Internship in Physics and Computer Science:\n\nYes, an internship is mandatory during the program to gain practical experience in the field.\n\nWould you like to know more about the internship?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "physics_en"
+        "next": "physics_computer_science_en"
       },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "graduation_project_physics_computer_science_en",
+    "question": "Graduation Project in Physics and Computer Science:\n\nYes, a graduation project is required. Students must complete a research or development project related to the field.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "physics_computer_science_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+
+  {
+    "id": "pure_computer_science_en",
+    "question": "Pure and Computer Science Programs:\n\nWould you like to know more about any of the following?\n- Courses\n- Career Opportunities\n- Department Goals\n- Graduation Requirements\n- Internship\n- Graduation Project",
+    "options": [
+      { "text": "Courses", "next": "courses_pure_computer_science_en" },
+      { "text": "Career Opportunities", "next": "careers_pure_computer_science_en" },
+      { "text": "Department Goals", "next": "department_goals_pure_computer_science_en" },
+      { "text": "Graduation Requirements", "next": "graduation_requirements_pure_computer_science_en" },
+      { "text": "Internship", "next": "internship_pure_computer_science_en" },
+      { "text": "Graduation Project", "next": "graduation_project_pure_computer_science_en" },
+      { "text": "Ask another question", "next": "departments_en" },
       { "text": "Back to menu", "next": "start_en" },
       { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
 
   {
-    "id": "chemistry_en",
-    "question": "Chemistry Department:\n\nEstablished: 1952\nHead: Prof. Samira Abdelaziz\nLocation: Building D, 1st Floor\n\nSpecializations: Organic, Inorganic, Physical, and Analytical Chemistry.",
-    "options": [
-      { "text": "Courses", "next": "courses_chemistry_en" },
-      { "text": "Labs", "next": "labs_chemistry_en" },
-      { "text": "Careers", "next": "careers_chemistry_en" },
-      { "text": "Faculty", "next": "faculty_chemistry_en" },
-      { "text": "Back", "next": "departments_en" }
-    ]
-  },
-  {
-    "id": "courses_chemistry_en",
-    "question": "Chemistry Courses:\n\nCore:\n- Organic Chemistry I-III\n- Inorganic Chemistry\n- Physical Chemistry\n- Analytical Chemistry\n- Biochemistry\n\nElectives:\n- Polymer Chemistry\n- Environmental Chemistry\n- Pharmaceutical Chemistry\n- Nanochemistry",
+    "id": "courses_pure_computer_science_en",
+    "question": "Courses in the Pure and Computer Science Department include:\n\n- Calculus\n- Linear Algebra\n- Discrete Mathematics\n- Programming (C++, Java, Python)\n- Data Structures and Algorithms\n- Numerical Analysis\n\nWould you like to explore something else?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "chemistry_en"
+        "next": "pure_computer_science_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "careers_pure_computer_science_en",
+    "question": "Graduates from the Pure and Computer Science Department can work as:\n\n- Software Developers\n- Data Analysts\n- System Analysts\n- Teachers or Academics\n- Financial Analysts\n\nThey often work in tech companies, banks, research institutions, or education.\n\nWould you like to explore another topic?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "pure_computer_science_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "department_goals_pure_computer_science_en",
+    "question": "The goals of the Pure and Computer Science Department include:\n\n- Providing strong foundations in both mathematics and computer science.\n- Preparing students for careers in industry or research.\n- Encouraging logical thinking and problem-solving skills.\n\nWould you like to know more?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "pure_computer_science_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "graduation_requirements_pure_computer_science_en",
+    "question": "To graduate from the Pure and Computer Science Department, students must complete around 136 credit hours.\n\nWould you like to ask about something else?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "pure_computer_science_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "internship_pure_computer_science_en",
+    "question": "Yes, students are usually required to complete a mandatory internship during the summer of their third year. It helps in gaining real-world experience.\n\nWould you like to ask another question?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "pure_computer_science_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "graduation_project_pure_computer_science_en",
+    "question": "Yes, the department requires a graduation project in the final year. Students work in teams to apply what they've learned to real-life problems.\n\nWould you like to ask another question?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "pure_computer_science_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+      ]
+  },
+
+  {
+    "id": "statistics_en",
+    "question": "Welcome to the Statistics and Computer Science Department. What would you like to know?",
+    "options": [
+      { "text": "Courses", "next": "courses_statistics_en" },
+      { "text": "Career Opportunities", "next": "careers_statistics_en" },
+      { "text": "Department Goals", "next": "department_goals_statistics_en" },
+      { "text": "Graduation Requirements", "next": "graduation_requirements_statistics_en" },
+      { "text": "Internship", "next": "internship_statistics_en" },
+      { "text": "Graduation Project", "next": "graduation_project_statistics_en" },
+      { "text": "Back to Departments", "next": "departments_en" },
       { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
-    "id": "labs_chemistry_en",
-    "question": "Chemistry Labs:\n\n1. Organic Synthesis Lab\n2. Spectroscopy Lab\n3. Chromatography Lab\n4. Electrochemistry Lab\n5. Nanotechnology Lab\n\nSafety Level: BSL-2 Certified\nOpen Hours: 8AM-8PM Daily",
+    "id": "courses_statistics_en",
+    "question": "Courses in the Statistics and Computer Science Department include:\n\n- Probability Theory\n- Statistical Inference\n- Regression Analysis\n- Time Series Analysis\n- Data Mining\n- Machine Learning\n- Programming Languages (Python, R)\n- Database Systems\n- Algorithms and Data Structures\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "chemistry_en"
+        "next": "statistics_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+      ]
+  },
+  {
+    "id": "careers_statistics_en",
+    "question": "Graduates from the Statistics and Computer Science Department can pursue careers as:\n\n- Data Analysts\n- Statistical Consultants\n- Business Intelligence Analysts\n- Data Scientists\n- Software Developers\n- Research Analysts\n\nThey often find opportunities in sectors like finance, healthcare, technology, and government agencies.\n\nWould you like to explore another topic?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "statistics_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "careers_chemistry_en",
-    "question": "Chemistry Careers:\n\nGraduates of the Chemistry Department can pursue careers in:\n- Research and Development\n- Pharmaceutical Industry\n- Environmental Consulting\n- Forensic Science\n- Education and Academia\n- Chemical Engineering",
+    "id": "department_goals_statistics_en",
+    "question": "The goals of the Statistics and Computer Science Department include:\n\n- Providing a strong foundation in statistical methods and computational techniques.\n- Preparing students for analytical roles in various industries.\n- Encouraging research and development in data analysis and computing.\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "chemistry_en"
+        "next": "statistics_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "faculty_chemistry_en",
-    "question": "Faculty of Chemistry Department:\n\nProf. Samira Abdelaziz - Head of Department\nDr. Khaled Ahmed - Organic Chemistry\nDr. Mona Ali - Inorganic Chemistry\nDr. Sarah Hassan - Physical Chemistry\nDr. Omar Fouad - Analytical Chemistry\nDr. Youssef Ibrahim - Biochemistry",
+    "id": "graduation_requirements_statistics_en",
+    "question": "To graduate from the Statistics and Computer Science Department, students must complete approximately 136 credit hours.\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
-        "next": "chemistry_en"
+        "next": "statistics_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
+  {
+    "id": "internship_statistics_en",
+    "question": "Yes, students are typically required to complete a mandatory internship during the summer of their third year. This provides practical experience in applying statistical and computational skills in real-world settings.\n\nWould you like to explore another topic?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "statistics_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "graduation_project_statistics_en",
+    "question": "Yes, a graduation project is a requirement in the final year. Students work on a comprehensive project that integrates statistical analysis and computational methods to solve real-world problems.\n\nWould you like to explore another topic?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "statistics_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+
   {
     "id": "cs_en",
-    "question": "Computer Science Department:\n\nEstablished: 1980\nHead: Prof. Mohamed Ibrahim\nLocation: Building F, 4th Floor\n\nCovers Algorithms, Software Engineering, and Artificial Intelligence. What would you like to know?",
+    "question": "Computer Science Programs:\n\nWould you like to know more about any of the following?\n- Courses\n- Career Opportunities\n- Department Goals\n- Graduation Requirements\n- Internship\n- Graduation Project",
     "options": [
-      { "text": "Courses Offered", "next": "courses_cs_en" },
-      { "text": "Career Options", "next": "careers_cs_en" },
-      { "text": "Specializations", "next": "specializations_cs_en" },
-      { "text": "Research Areas", "next": "research_cs_en" },
-      { "text": "Faculty Members", "next": "faculty_cs_en" },
-      { "text": "Back to menu", "next": "departments_en" }
+      { "text": "Courses", "next": "courses_cs_en" },
+      { "text": "Career Opportunities", "next": "careers_cs_en" },
+      { "text": "Department Goals", "next": "department_goals_cs_en" },
+      { "text": "Graduation Requirements", "next": "graduation_requirements_cs_en" },
+      { "text": "Internship", "next": "internship_cs_en" },
+      { "text": "Graduation Project", "next": "graduation_project_cs_en" },
+      { "text": "Ask another question", "next": "departments_en" },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "courses_cs_en",
+    "question": "Courses in the Computer Science Department typically include:\n\n- Programming (Python, Java, C++)\n- Data Structures and Algorithms\n- Operating Systems\n- Computer Networks\n- Database Systems\n- Artificial Intelligence\n- Machine Learning\n- Software Engineering\n- Web Development\n- Cybersecurity\n\nWould you like to explore another topic?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "cs_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
     "id": "careers_cs_en",
-    "question": "Career options for Computer Science graduates include:\n\n- Software Engineer\n- Data Scientist\n- AI Researcher\n- Systems Architect\n- IT Consultant\n\nThese careers involve developing software, analyzing data, researching AI, designing systems, and advising businesses on technology solutions. Would you like to know more about a specific career?",
+    "question": "Graduates in Computer Science can work in roles such as:\n\n- Software Developer\n- Web Developer\n- Mobile App Developer\n- Systems Analyst\n- Data Scientist\n- AI Engineer\n- Cybersecurity Specialist\n- IT Consultant\n\nThey find opportunities in tech companies, banks, startups, and even government agencies.\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
         "next": "cs_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "specializations_cs_en",
-    "question": "Specializations in Computer Science include:\n\n- Artificial Intelligence: Focusing on creating intelligent systems.\n- Software Engineering: Involves the design and development of software.\n- Cybersecurity: Protecting systems and data from threats.\n- Data Science: Extracting insights from complex data.\n- Machine Learning: Developing algorithms that allow computers to learn from data.\n\nWould you like to explore any specific specialization in more detail?",
+    "id": "department_goals_cs_en",
+    "question": "The goals of the Computer Science Department include:\n\n- Building strong foundations in programming and computer systems.\n- Encouraging innovation in fields like AI and cybersecurity.\n- Preparing students for careers in technology and research.\n- Equipping students with the skills needed for the modern digital world.\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
         "next": "cs_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+
     ]
   },
   {
-    "id": "research_cs_en",
-    "question": "Research areas in Computer Science include:\n\n- Quantum Computing: Utilizing quantum-mechanical phenomena to process information.\n- Machine Learning: Teaching computers to make predictions based on data.\n- Natural Language Processing: Enabling computers to understand and interact using human languages.\n- Robotics: Designing and building robots to automate tasks.\n- Cybersecurity: Researching ways to protect systems from digital threats.\n\nWould you like to know more about a specific research area?",
+    "id": "graduation_requirements_cs_en",
+    "question": "To graduate from the Computer Science Department, students must complete approximately 136 credit hours, depending on the university.\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
         "next": "cs_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
   {
-    "id": "faculty_cs_en",
-    "question": "Some of the faculty members in the Computer Science Department include:\n\n- Prof. Mohamed Ibrahim: Expert in Artificial Intelligence.\n- Dr. Sarah Ahmed: Specializes in Cybersecurity.\n- Dr. Khaled Osama: Focuses on Data Science and Big Data.\n\nWould you like to know more about any specific faculty member?",
+    "id": "internship_cs_en",
+    "question": "Yes, there is usually a mandatory internship, typically during the summer before the final year. It helps students gain practical experience in real-world IT or software development environments.\n\nWould you like to explore another topic?",
     "options": [
       {
         "text": "Ask another question ? ☺️",
         "next": "cs_en"
       },
-      { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
+    ]
+  },
+  {
+    "id": "graduation_project_cs_en",
+    "question": "Yes, a graduation project is required in the final year. Students must build and present a full software project that applies the skills they have learned (e.g., an app, system, or AI model).\n\nWould you like to explore another topic?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "cs_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation_en"
+      }
     ]
   },
 
@@ -711,7 +953,7 @@
         "next": "study_system_en"
       },
       { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      { "text": "End Conversation", "next": "end_conversation_en" }
     ]
   },
   {
@@ -723,7 +965,7 @@
         "next": "study_system_en"
       },
       { "text": "Back to menu", "next": "start_en" },
-      { "text": "End Conversation", "next": "end_conversation" }
+      { "text": "End Conversation", "next": "end_conversation_en" }
     ]
   },
 
@@ -755,8 +997,6 @@
       { "text": "نظام الدراسة", "next": "study_system_ar" },
       { "text": "فرص العمل", "next": "careers_ar" },
       { "text": "شروط القبول", "next": "admission_ar" },
-      { "text": "مرافق الكلية", "next": "facilities_ar" },
-      { "text": "مراكز الأبحاث", "next": "research_ar" },
       { "text": "رجوع", "next": "language_selection" }
     ]
   },
@@ -817,7 +1057,7 @@
     "question": "المعدل التراكمى هو متوسط درجات مقرراتك مع الاخذ فى الاعتبار عدد الساعات المعتمده لكل مقرر ",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -826,7 +1066,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
       ]
   },
@@ -835,7 +1075,7 @@
     "question": "لحساب المعدل التراكمى :\n المعدل = (مجموع (النقاط × الساعات المعتمدة)) ÷ (إجمالي الساعات المعتمدة)",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -844,7 +1084,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -853,7 +1093,7 @@
     "question": "المعدل التركمى الفصلى : متوسط درجاتكفى مقررات فصل دراسى واحد\n المعدل التركمى الكلي : متوسط درجاتك فى جميع المقررات حتى الفصل الحالى  ",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -862,7 +1102,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -871,7 +1111,7 @@
     "question": "لتحسين معدلك: احضر المحاضرات، ركز على المقررات ذات الساعات الأعلى، ذاكر بانتظام، اهتم بالواجبات، وإذا كان مسموحًا، أعد المقررات التي حصلت فيها على درجات منخفضة",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -880,7 +1120,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -889,7 +1129,7 @@
     "question": "نعم، يمكنك اعادة المقرر، وقد يتم استبدال الدرجه القديمه بالدرجه الجديده في حساب المعدل، بمجال سياسه الجامعية",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -898,7 +1138,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -907,7 +1147,7 @@
     "question": "رموز الدرجات وقيمها:\\nA = 4.0\\nB+ = 3.6\\nB = 3.0\\nC+ = 2.6\\nC = 2.3\\nD = 2.0\\nF = 0.0",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -916,7 +1156,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -925,7 +1165,7 @@
     "question": "نعم الرسوب يخفض معدلك, خاصه اذا كان المقرر يحتوى على عدد كبير من الساعات (f) ",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -934,7 +1174,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -943,7 +1183,7 @@
     "question": "لا، الانسحاب  الرسمى من مقرر لا يؤثر على المعدل التراكمى، ولكن  قد يظهرفى السجل الاكاديمى ك 'W' ",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -952,7 +1192,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -961,7 +1201,7 @@
     "question": "إذا انخفض معدلك التراكمي عن 2.0، فقد يُسمح لك فقط بتسجيل 12 ساعة في الفصل التالي. هذا الإجراء يهدف لمساعدتك على تحسين الأداء بتقليل العبء.  ",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -970,7 +1210,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -979,7 +1219,7 @@
     "question": "يمكن لك تسجيل ساعات كامله في الفصل التالي اذا كان معدلك التراكمي على 2.0 او اكثر. ",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -988,7 +1228,7 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -997,7 +1237,7 @@
     "question": "نعم، في بعض الحالات. إذا كان معدلك مرتفعًا (مثلاً، فوق 3.0)، فقد يُسمح لك بتسجيل ساعات أكثر من المعتاد — ولكن فقط بموافقة المرشد الأكاديمي.",
     "options": [
       {
-        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "text": "هل لديك سؤال آخر؟ ☺️",
         "next": "gpa_ar"
       },
       {
@@ -1006,16 +1246,14 @@
       },
       {
         "text": "انهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
   {
-    "id": "end_conversation",
+    "id": "end_conversation_ar",
     "question": "شكرًا لتواصلك معنا! إذا كنت بحاجة إلى مزيد من المعلومات، لا تتردد في الرجوع إلينا في أي وقت. نتمنى لك يومًا سعيدًا!",
     "options": [
-      { "text": "زورنا مرة أخرى", "next": "start_ar" },
-      { "text": "مع السلامة", "next": "end_conversation" }
     ]
   },
   {
@@ -1090,7 +1328,7 @@
       },
       {
         "text": "إنهاء المحادثة",
-        "next": "end_conversation"
+        "next": "end_conversation_ar"
       }
     ]
   },
@@ -1101,63 +1339,290 @@
     "id": "departments_ar",
     "question": "إليك أهم أقسام كلية العلوم:",
     "options": [
-      { "text": "الرياضيات", "next": "math_ar" },
-      { "text": "الفيزياء", "next": "physics_ar" },
-      { "text": "الكيمياء", "next": "chemistry_ar" },
-      { "text": "الأحياء", "next": "biology_ar" },
-      { "text": "الجيولوجيا", "next": "geology_ar" },
+      { "text": "الفيزياء وعلوم الحاسب", "next": "physics_computer_science_ar" },
+      { "text": "الرياضيات البحتة وعلوم الحاسب", "next": "pure_computer_science_ar" },
+      { "text": "الإحصاء وعلوم الحاسب", "next": "statistics_computer_science_ar" },
       { "text": "علوم الحاسب", "next": "cs_ar" },
-      { "text": "علوم البيئة", "next": "env_science_ar" },
-      { "text": "علوم الفلك والفضاء", "next": "astronomy_ar" },
-      { "text": "رجوع", "next": "start_ar" }
+      { "text": "العودة إلى القائمة", "next": "start_ar" }
     ]
   },
 
   {
-    "id": "math_ar",
-    "question": "قسم الرياضيات:\n\nسنة التأسيس: ١٩٥٠\nرئيس القسم: أ.د. أحمد سمير\nالمكان: المبنى ب، الطابق الثالث\n\nيشمل الرياضيات البحتة، التطبيقية، والإحصاء. ماذا تريد أن تعرف؟",
+    "id": "physics_computer_science_ar",
+    "question": "برامج قسم الفيزياء وعلوم الحاسوب:\n\nهل ترغب في معرفة المزيد عن أي مما يلي؟\n- المقررات الدراسية\n- فرص العمل\n- أهداف القسم\n- متطلبات التخرج\n- التدريب الميداني\n- مشروع التخرج",
     "options": [
-      { "text": "المقررات الدراسية", "next": "courses_math_ar" },
-      { "text": "فرص العمل", "next": "careers_math_ar" },
-      { "text": "التخصصات", "next": "specializations_math_ar" },
-      { "text": "مجالات البحث", "next": "research_math_ar" },
-      { "text": "أعضاء هيئة التدريس", "next": "faculty_math_ar" },
-      { "text": "رجوع", "next": "departments_ar" }
+      { "text": "المقررات الدراسية", "next": "courses_physics_computer_science_ar" },
+      { "text": "فرص العمل", "next": "careers_physics_computer_science_ar" },
+      { "text": "أهداف القسم", "next": "department_goals_physics_computer_science_ar" },
+      { "text": "متطلبات التخرج", "next": "graduation_requirements_physics_computer_science_ar" },
+      { "text": "التدريب الميداني", "next": "internship_physics_computer_science_ar" },
+      { "text": "مشروع التخرج", "next": "graduation_project_physics_computer_science_ar" },
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "departments_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
     ]
   },
   {
-    "id": "courses_math_ar",
-    "question": "مقررات قسم الرياضيات:\n\nالمقررات الأساسية:\n- التفاضل والتكامل ١-٤\n- الجبر الخطي\n- الجبر المجرد\n- التحليل الحقيقي\n- التحليل المركب\n- المعادلات التفاضلية\n\nالمقررات الاختيارية:\n- نظرية الأعداد\n- الطوبولوجيا\n- التحليل العددي\n- بحوث العمليات\n- نظرية الاحتمالات",
+    "id": "courses_physics_computer_science_ar",
+    "question": "المقررات المقدمة في قسم الفيزياء وعلوم الحاسوب:\n\n- الميكانيكا الكلاسيكية\n- الفيزياء الكمية\n- هندسة البرمجيات\n- الخوارزميات\n- هياكل البيانات\n- الذكاء الاصطناعي",
     "options": [
-      { "text": "رجوع", "next": "math_ar" }
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "physics_computer_science_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
     ]
   },
   {
-    "id": "careers_math_ar",
-    "question": "مجالات عمل خريجي الرياضيات:\n\n١. التدريس الأكاديمي\n٢. علم البيانات والتحليل\n٣. العلوم الاكتوارية\n٤. التشفير وأمن المعلومات\n٥. بحوث العمليات\n٦. النمذجة المالية\n٧. مراكز الأبحاث\n٨. الإحصاء الحكومي\n\nمتوسط الراتب المبدئي: ٥٥٠-٩٠٠ ألف جنيه سنويًا",
+    "id": "careers_physics_computer_science_ar",
+    "question": "فرص العمل لخريجي قسم الفيزياء وعلوم الحاسوب:\n\n- مطور برمجيات\n- عالم بيانات\n- باحث في الذكاء الاصطناعي\n- مهندس نظم\n- فيزيائي حاسوبي\n\nهل تود معرفة المزيد عن مسار وظيفي معين؟",
     "options": [
-      { "text": "رجوع", "next": "math_ar" }
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "physics_computer_science_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
     ]
   },
   {
-    "id": "specializations_math_ar",
-    "question": "تخصصات الرياضيات:\n\n١. رياضيات بحتة:\n   - الجبر\n   - التحليل\n   - الهندسة\n   - الطوبولوجيا\n\n٢. رياضيات تطبيقية:\n   - الفيزياء الرياضية\n   - ديناميكا الموائع\n   - الأحياء الرياضية\n\n٣. الإحصاء والاحتمالات:\n   - تحليل البيانات\n   - العمليات العشوائية\n   - النمذجة الإحصائية",
+    "id": "department_goals_physics_computer_science_ar",
+    "question": "أهداف قسم الفيزياء وعلوم الحاسوب:\n\n- تقديم معرفة نظرية وعملية قوية في مجالي الفيزياء وعلوم الحاسوب.\n- تشجيع البحث والابتكار.\n- تنمية مهارات حل المشكلات في التطبيقات الواقعية.\n- إعداد الطلاب للعمل في مجالات البحث، التعليم، والصناعة.",
     "options": [
-      { "text": "رجوع", "next": "math_ar" }
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "physics_computer_science_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
     ]
   },
   {
-    "id": "research_math_ar",
-    "question": "مجالات البحث العلمي:\n\n- الهندسة الجبرية\n- التحليل الدالي\n- النمذجة الرياضية\n- نظرية المخططات\n- الرياضيات المالية\n- تحليل السلاسل الزمنية\n\nتعاون بحثي مع:\n- معهد ماساتشوستس للتكنولوجيا\n- معهد ماكس بلانك\n- جامعة الملك عبدالله",
+    "id": "graduation_requirements_physics_computer_science_ar",
+    "question": "متطلبات التخرج لقسم الفيزياء وعلوم الحاسوب:\n\n- إجمالي الساعات: 180 ساعة معتمدة\n- المشروع: نعم، مطلوب مشروع تخرج\n- التدريب: نعم، تدريب ميداني إلزامي خلال البرنامج\n\nهل ترغب في معرفة المزيد عن أحد المتطلبات؟",
     "options": [
-      { "text": "رجوع", "next": "math_ar" }
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "physics_computer_science_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
     ]
   },
   {
-    "id": "faculty_math_ar",
-    "question": "أعضاء هيئة التدريس:\n\n١. أ.د. أحمد سمير (الجبر)\n٢. أ.د. منى حسن (التحليل)\n٣. د. يوسف علي (الإحصاء)\n٤. د. ليلى محمد (التحليل العددي)\n٥. أ.د. كريم فاروق (الطوبولوجيا)\n\nساعات العمل: الأحد-الأربعاء ١٠ص-٢م\nالبريد الإلكتروني: math.faculty@sci.asu.edu.eg",
+    "id": "internship_physics_computer_science_ar",
+    "question": "التدريب الميداني في قسم الفيزياء وعلوم الحاسوب:\n\nنعم، التدريب الميداني إلزامي خلال البرنامج لاكتساب الخبرة العملية في المجال.\n\nهل ترغب في معرفة المزيد عن التدريب؟",
     "options": [
-      { "text": "رجوع", "next": "math_ar" }
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "physics_computer_science_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_project_physics_computer_science_ar",
+    "question": "مشروع التخرج في قسم الفيزياء وعلوم الحاسوب:\n\nنعم، مشروع التخرج مطلوب. يجب على الطلاب تنفيذ مشروع بحثي أو تطويري في مجال التخصص.\n\nهل ترغب في معرفة المزيد عن المشروع؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "physics_computer_science_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+
+  {
+  "id": "pure_computer_science_ar",
+  "question": "برامج الرياضيات البحتة وعلوم الحاسب:\n\nهل تود معرفة المزيد عن أي من المواضيع التالية؟\n- المقررات الدراسية\n- الفرص الوظيفية\n- أهداف القسم\n- متطلبات التخرج\n- التدريب الصيفي\n- مشروع التخرج",
+  "options": [
+  { "text": "المقررات الدراسية", "next": "courses_pure_computer_science_ar" },
+  { "text": "الفرص الوظيفية", "next": "careers_pure_computer_science_ar" },
+  { "text": "أهداف القسم", "next": "department_goals_pure_computer_science_ar" },
+  { "text": "متطلبات التخرج", "next": "graduation_requirements_pure_computer_science_ar" },
+  { "text": "التدريب الصيفي", "next": "internship_pure_computer_science_ar" },
+  { "text": "مشروع التخرج", "next": "graduation_project_pure_computer_science_ar" },
+  { "text": "اسأل سؤالاً آخر", "next": "departments_ar" },
+  { "text": "العودة للقائمة", "next": "start_ar" },
+  { "text": "إنهاء المحادثة", "next": "end_conversation" }
+]
+  },
+  {
+    "id": "courses_pure_computer_science_ar",
+    "question": "تشمل المقررات الدراسية في قسم الرياضيات البحتة وعلوم الحاسب:\n\n- التفاضل والتكامل\n- الجبر الخطي\n- الرياضيات المتقطعة\n- البرمجة (C++، Java، Python)\n- هياكل البيانات والخوارزميات\n- التحليل العددي\n\nهل ترغب في استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ؟ ☺️", "next": "pure_computer_science_ar" },
+      { "text": "العودة للقائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "careers_pure_computer_science_ar",
+    "question": "يمكن لخريجي قسم الرياضيات البحتة وعلوم الحاسب العمل في المجالات التالية:\n\n- مطورو برمجيات\n- محللو بيانات\n- محللو نظم\n- مدرسون أو أكاديميون\n- محللو ماليون\n\nوغالبًا ما يعملون في شركات التقنية، البنوك، مؤسسات البحث، أو قطاع التعليم.\n\nهل ترغب في استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ؟ ☺️", "next": "pure_computer_science_ar" },
+      { "text": "العودة للقائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "department_goals_pure_computer_science_ar",
+    "question": "تشمل أهداف قسم الرياضيات البحتة وعلوم الحاسب:\n\n- توفير أساس قوي في كل من الرياضيات وعلوم الحاسب.\n- إعداد الطلاب للعمل في الصناعة أو البحث العلمي.\n- تعزيز التفكير المنطقي ومهارات حل المشكلات.\n\nهل ترغب في معرفة المزيد؟",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ؟ ☺️", "next": "pure_computer_science_ar" },
+      { "text": "العودة للقائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_requirements_pure_computer_science_ar",
+    "question": "للتخرج من قسم الرياضيات البحتة وعلوم الحاسب، يجب على الطالب إكمال حوالي 140 ساعة معتمدة.",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ؟ ☺️", "next": "pure_computer_science_ar" },
+      { "text": "العودة للقائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "internship_pure_computer_science_ar",
+    "question": "نعم، يُطلب من الطلاب عادةً إكمال تدريب صيفي إلزامي في صيف السنة الثالثة، مما يساعدهم على اكتساب خبرة عملية.\n\nهل ترغب في طرح سؤال آخر؟",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ؟ ☺️", "next": "pure_computer_science_ar" },
+      { "text": "العودة للقائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_project_pure_computer_science_ar",
+    "question": "نعم، يتطلب القسم مشروع تخرج في السنة النهائية، حيث يعمل الطلاب ضمن فرق لتطبيق ما تعلموه على مشكلات واقعية.\n\nهل ترغب في طرح سؤال آخر؟",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ؟ ☺️", "next": "pure_computer_science_ar" },
+      { "text": "العودة للقائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+
+  {
+    "id": "statistics_ar",
+    "question": "مرحبًا بك في قسم الإحصاء وعلوم الحاسب. ماذا تود أن تعرف؟",
+    "options": [
+      { "text": "المقررات", "next": "courses_statistics_ar" },
+      { "text": "فرص العمل", "next": "careers_statistics_ar" },
+      { "text": "أهداف القسم", "next": "department_goals_statistics_ar" },
+      { "text": "متطلبات التخرج", "next": "graduation_requirements_statistics_ar" },
+      { "text": "التدريب الصيفي", "next": "internship_statistics_ar" },
+      { "text": "مشروع التخرج", "next": "graduation_project_statistics_ar" },
+      { "text": "العودة إلى الأقسام", "next": "departments_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "courses_statistics_ar",
+    "question": "تشمل المقررات في قسم الإحصاء وعلوم الحاسب:\n\n- نظرية الاحتمالات\n- الاستدلال الإحصائي\n- تحليل الانحدار\n- تحليل السلاسل الزمنية\n- التنقيب عن البيانات\n- تعلم الآلة\n- لغات البرمجة (Python، R)\n- أنظمة قواعد البيانات\n- الخوارزميات وهياكل البيانات\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "statistics_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "careers_statistics_ar",
+    "question": "يمكن لخريجي قسم الإحصاء وعلوم الحاسب العمل كـ:\n\n- محللي بيانات\n- مستشارين إحصائيين\n- محللي ذكاء الأعمال\n- علماء بيانات\n- مطوري برمجيات\n- محللي أبحاث\n\nوغالبًا ما يجدون فرص عمل في قطاعات مثل المالية، والرعاية الصحية، والتكنولوجيا، والجهات الحكومية.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "statistics_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "department_goals_statistics_ar",
+    "question": "تشمل أهداف قسم الإحصاء وعلوم الحاسب:\n\n- توفير أساس قوي في الطرق الإحصائية والتقنيات الحاسوبية.\n- إعداد الطلاب للأدوار التحليلية في مختلف الصناعات.\n- تشجيع البحث والتطوير في تحليل البيانات والحوسبة.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "statistics_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_requirements_statistics_ar",
+    "question": "للتخرج من قسم الإحصاء وعلوم الحاسب، يجب على الطلاب إكمال حوالي 136 ساعة معتمدة.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "statistics_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "internship_statistics_ar",
+    "question": "نعم، يُطلب عادةً من الطلاب إكمال تدريب صيفي إلزامي في صيف السنة الثالثة. ويهدف ذلك إلى اكتساب خبرة عملية في تطبيق المهارات الإحصائية والحاسوبية في الواقع.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "statistics_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_project_statistics_ar",
+    "question": "نعم، يشترط القسم تنفيذ مشروع تخرج في السنة النهائية. حيث يعمل الطلاب على مشروع شامل يدمج التحليل الإحصائي والأساليب الحاسوبية لحل مشكلات واقعية.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "statistics_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+
+  {
+    "id": "cs_ar",
+    "question": "برامج علوم الحاسب:\n\nهل ترغب في معرفة المزيد عن أي من المواضيع التالية؟\n- المقررات\n- فرص العمل\n- أهداف القسم\n- متطلبات التخرج\n- التدريب الصيفي\n- مشروع التخرج",
+    "options": [
+      { "text": "المقررات", "next": "courses_cs_ar" },
+      { "text": "فرص العمل", "next": "careers_cs_ar" },
+      { "text": "أهداف القسم", "next": "department_goals_cs_ar" },
+      { "text": "متطلبات التخرج", "next": "graduation_requirements_cs_ar" },
+      { "text": "التدريب الصيفي", "next": "internship_cs_ar" },
+      { "text": "مشروع التخرج", "next": "graduation_project_cs_ar" },
+      { "text": "هل لديك سؤال آخر", "next": "departments_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "courses_cs_ar",
+    "question": "تشمل المقررات في قسم علوم الحاسب عادةً:\n\n- البرمجة (Python، Java، C++)\n- هياكل البيانات والخوارزميات\n- أنظمة التشغيل\n- شبكات الكمبيوتر\n- أنظمة قواعد البيانات\n- الذكاء الاصطناعي\n- تعلم الآلة\n- هندسة البرمجيات\n- تطوير الويب\n- الأمن السيبراني\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "cs_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "careers_cs_ar",
+    "question": "يمكن لخريجي علوم الحاسب العمل في الأدوار التالية:\n\n- مطور برامج\n- مطور ويب\n- مطور تطبيقات موبايل\n- محلل نظم\n- عالم بيانات\n- مهندس ذكاء اصطناعي\n- متخصص في الأمن السيبراني\n- مستشار تكنولوجيا المعلومات\n\nيجدون الفرص في شركات التكنولوجيا، والبنوك، والشركات الناشئة، وحتى الهيئات الحكومية.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "cs_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "department_goals_cs_ar",
+    "question": "تشمل أهداف قسم علوم الحاسب:\n\n- بناء أساس قوي في البرمجة وأنظمة الكمبيوتر.\n- تشجيع الابتكار في مجالات مثل الذكاء الاصطناعي والأمن السيبراني.\n- إعداد الطلاب للعمل في مجالات التكنولوجيا والبحث.\n- تجهيز الطلاب بالمهارات اللازمة للعالم الرقمي الحديث.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "cs_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_requirements_cs_ar",
+    "question": "للتخرج من قسم علوم الحاسب، يجب على الطلاب إكمال حوالي 136 ساعة معتمدة، حسب الجامعة.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "cs_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "internship_cs_ar",
+    "question": "نعم، هناك عادة تدريب إلزامي، عادة في الصيف قبل السنة النهائية. يساعد هذا التدريب الطلاب في اكتساب خبرة عملية في بيئات تكنولوجيا المعلومات أو تطوير البرمجيات.\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "cs_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "graduation_project_cs_ar",
+    "question": "نعم، يشترط مشروع تخرج في السنة النهائية. يجب على الطلاب بناء وتقديم مشروع برمجي كامل يطبق المهارات التي تعلموها (مثل تطبيق أو نظام أو نموذج ذكاء اصطناعي).\n\nهل تود استكشاف موضوع آخر؟",
+    "options": [
+      { "text": "هل لديك سؤال آخر؟ ☺️", "next": "cs_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
     ]
   },
 
@@ -1174,31 +1639,52 @@
     "id": "calendar_ar",
     "question": "التقويم الأكاديمي ٢٠٢٣/٢٠٢٤:\n\nالفصل الدراسي الأول:\n- البداية: ١٧ سبتمبر ٢٠٢٣\n- النهاية: ١٨ يناير ٢٠٢٤\n\nالفصل الدراسي الثاني:\n- البداية: ١٠ فبراير ٢٠٢٤\n- النهاية: ٦ يونيو ٢٠٢٤\n\nالفصل الصيفي (اختياري):\n- ١ يوليو - ٢٠ أغسطس ٢٠٢٤",
     "options": [
-      { "text": "رجوع", "next": "study_system_ar" }
+      {
+        "text": "هل لديك سؤال آخر؟ ☺️",
+        "next": "study_system_ar"
+      },
+      {
+        "text": "العودة إلى القائمة",
+        "next": "start_ar"
+      },
+      {
+        "text": "إنهاء المحادثة",
+        "next": "end_conversation_ar"
+      }
     ]
   },
   {
     "id": "grading_ar",
     "question": "سياسة التقييم:\n\n- الحضور: ١٠٪\n- الامتحان النصفي: ٢٠٪\n- الواجبات: ٢٠٪\n- الامتحان النهائي: ٥٠٪\n\nالدرجة النهائية للنجاح: ٦٠٪\nقائمة الشرف: ٩٠٪+ كمجموع",
     "options": [
-      { "text": "رجوع", "next": "study_system_ar" }
+      {
+        "text": "هل لديك سؤال آخر؟ ☺️",
+        "next": "study_system_ar"
+      },
+      {
+        "text": "العودة إلى القائمة",
+        "next": "start_ar"
+      },
+      {
+        "text": "إنهاء المحادثة",
+        "next": "end_conversation_ar"
+      }
     ]
   },
 
   {
-    "id": "facilities_ar",
-    "question": "مرافق الكلية:\n\n١. المكتبة المركزية (٢٠٠ ألف مجلد)\n٢. ١٥ معمل أبحاث\n٣. مركز الحاسبات (٣٠٠ جهاز)\n٤. قاعة مؤتمرات (٥٠٠ فرد)\n٥. مركز الأنشطة الطلابية\n٦. وحدة المجاهر المتقدمة\n٧. معمل الرنين المغناطيسي\n٨. القبة السماوية",
+    "id": "careers_ar",
+    "question": "فرص العمل:\n\nيعمل خريجو كليات العلوم في المجالات التالية:\n1. التعليم والأكاديميا\n2. البحث والتطوير\n3. الرعاية الصحية والصناعات الدوائية\n4. الطاقة والبيئة\n5. التكنولوجيا وتكنولوجيا المعلومات\n6. الهيئات الحكومية\n\nتشمل خدمات مركز التوظيف:\n- ورش عمل لكتابة السيرة الذاتية\n- معارض التوظيف\n- برامج التدريب الصيفي\n\nهل ترغب في معرفة المزيد عن أي من هذه المجالات أو خدمات مركز التوظيف؟",
     "options": [
-      { "text": "خدمات المكتبة", "next": "library_ar" },
-      { "text": "أجهزة المعامل", "next": "equipment_ar" },
-      { "text": "رجوع", "next": "start_ar" }
+      { "text": "شركاء التدريب", "next": "internships_ar" },
+      { "text": "العوده الى القائمه", "next": "start_ar" }
     ]
   },
   {
-    "id": "library_ar",
-    "question": "خدمات المكتبة:\n\n- ساعات العمل: ٨ص-٨م يوميًا\n- ٥٠ جهاز كمبيوتر\n- قواعد بيانات علمية\n- خدمة الاستعارة: ١٠ كتب لمدة أسبوعين\n- قاعات دراسة جماعية\n- مكتبة رقمية تضم ٥٠٠٠٠ كتاب إلكتروني",
+    "id": "internships_ar",
+    "question": "شركاء التدريب:\n\n1. معهد بحوث البترول المصري\n2. المركز القومي للبحوث\n3. شركة IBM مصر\n4. شركة باير للأدوية\n5. جهاز شؤون البيئة المصري\n\nآخر موعد للتقديم: 1 مايو من كل عام.\n\nهل ترغب في معرفة المزيد عن أي من هؤلاء الشركاء أو عن خطوات التقديم؟",
     "options": [
-      { "text": "رجوع", "next": "facilities_ar" }
+      { "text": "العوده الى القائمه", "next": "start_ar" }
     ]
   }
 ]

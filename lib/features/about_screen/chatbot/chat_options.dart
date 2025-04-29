@@ -35,8 +35,8 @@ class ChatOptions extends ChatItem {
             children: options
                 .map(
                   (option) => ChoiceChip(
-                backgroundColor: Color(0xff769BC6),
-                label: Text(option),
+                backgroundColor: Color(0xFF4A739F),
+                label: Text(option, style: const TextStyle(color: Colors.white)),
                 selected: false,
                 onSelected: (selected) => onOptionSelected(option),
               ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grad_proj/features//about_screen/chatbot/question_model.dart';
+import 'package:grad_proj/widgets/orgappbar.dart';
 import 'chat_item.dart';
 import 'chat_message.dart';
 import 'chat_options.dart';
@@ -14,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ChatItem> _messages = [];
   final TextEditingController _controller = TextEditingController();
 
@@ -113,7 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('What is your question?')),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "SciMate",),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
@@ -127,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             const SizedBox(height: 16.0),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 6.0),
               child: Row(
                 children: [
                   Flexible(
@@ -136,24 +138,26 @@ class _ChatScreenState extends State<ChatScreen> {
                       onSubmitted: _handleSubmitted,
                       decoration: InputDecoration(
                         hintText: 'Ask a question...',
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24.0),
-                          borderSide: const BorderSide(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide(
                             color: Colors.grey,
-                            width: 2.0,
+                            width: 1.0,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                           borderSide: const BorderSide(
                             color: Color(0xff2E5077),
-                            width: 2.0,
+                            width: 1.0,
                           ),
                         ),
                       ),
                     ),
                   ),
                   IconButton(
+                    color: Color(0xff2E5077),
                     icon: const Icon(Icons.send),
                     onPressed: () => _handleSubmitted(_controller.text),
                   ),
