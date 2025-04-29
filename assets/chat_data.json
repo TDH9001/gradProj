@@ -13,6 +13,7 @@
     "question": "Welcome to Ain Shams University Faculty of Science Guide! What would you like to explore?",
     "options": [
       {"text": "GPA ", "next": "gpa_en"},
+      { "text": "Reasons for graduation", "next": "graduation_reasons_en" },
       { "text": "Departments", "next": "departments_en" },
       { "text": "Study System", "next": "study_system_en" },
       { "text": "Career Opportunities", "next": "careers_en" },
@@ -83,16 +84,13 @@
     "question": "GPA is a weighted average of your course grades. The weight is determined by the course credit hours. What would you like to know?",
     "options": [
       {
-        "text": "how to calculate gpa",
-        "next": "how to calculate gpa_en"
-      },
-      {
-        "text": "What's the difference between Semester GPA and Cumulative GPA?",
-        "next": "What's the difference between Semester GPA and Cumulative GPA? gpa_en"
-      },
-      {
-        "text": "Back to menu",
+        "text": "Ask another question ? ☺️",
         "next": "gpa_en"
+      },
+
+           {
+        "text": "Back to menu",
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -105,16 +103,13 @@
     "question": "To calculate GPA:\nGPA = (Sum of (grade points × course credit hours)) ÷ (Total credit hours)",
     "options": [
       {
-        "text": "What's the difference between Semester GPA and Cumulative GPA?",
-        "next": "What's the difference between Semester GPA and Cumulative GPA? gpa_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
-      {
-        "text": "How to improve GPA?",
-        "next": "how to improve gpa_en"
-      },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -127,16 +122,13 @@
     "question": "Semester GPA: The average of your grades for all courses in a semester.\nCumulative GPA: The average of your grades for all courses up to the current semester.",
     "options": [
       {
-        "text": "How to improve GPA?",
-        "next": "how to improve gpa_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
-      {
-        "text": "Can I retake a course?",
-        "next": "can i retake a course_en"
-      },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -149,16 +141,13 @@
     "question": "To improve your GPA: attend lectures,.you should take courses with higher course credit hours, study regularly, focus on assignments, and if allowed, retake low-grade courses. ",
     "options": [
       {
-        "text": "Can I retake a course?",
-        "next": "can i retake a course_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
-      {
-        "text": "Grade Symbols & Values",
-        "next": "grade symbols and values_en"
-      },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -171,16 +160,13 @@
     "question": "Yes. You can usually retake a course. The new grade might replace the old one in your GPA calculation, depending on university rules.",
     "options": [
       {
-        "text": "Grade Symbols & Values",
-        "next": "grade symbols and values_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
-      {
-        "text": "Does failing a course affect GPA?",
-        "next": "does failing a course affect gpa_en"
-      },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -193,16 +179,13 @@
     "question": "Grade Symbols:\\nA = 4.0\\nB+ = 3.5\\nB = 3.0\\nC+ = 2.5\\nC = 2.0\\nD = 1.0\\nF = 0.0",
     "options": [
       {
-        "text": "Does failing a course affect GPA?",
-        "next": "does failing a course affect gpa_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
-      {
-        "text": "Do withdrawals affect GPA?",
-        "next": "do withdrawals affect gpa_en"
-      },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -215,17 +198,13 @@
     "question": "Yes. A failing grade (F) lowers your GPA, especially if the course has many credit hours.",
     "options": [
       {
-        "text": "Do withdrawals affect GPA?",
-        "next": "do withdrawals affect gpa_en"
-      },
-      {
-        "text": "When can I register only 12 credit hours?",
-        "next": "when can i register only 12 credit hours_en"
-      },
-      {
-
-        "text": "Back to menu",
+        "text": "Ask another question ? ☺️",
         "next": "gpa_en"
+      },
+
+      {
+        "text": "Back to menu",
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -238,21 +217,14 @@
     "question": "No. Withdrawing from a course officially will not affect your GPA, but it might show on your transcript as 'W'.",
     "options": [
       {
-        "text": "When can I register only 12 credit hours?",
-        "next": "when can i register only 12 credit hours_en"
-      },
-      {
-        "text": "When can I register full credit hours?",
-        "next": "register_full_hours_en"
-
-      },
-
-      {
-
-        "text": "Back to menu",
+        "text": "Ask another question ? ☺️",
         "next": "gpa_en"
       },
 
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
       {
         "text": "End Conversation",
         "next": "end_conversation"
@@ -264,16 +236,13 @@
     "question": "If your GPA drops below 2.0, you may be limited to registering only 12 credit hours in the following semester. This policy is designed to help students improve their academic performance by reducing their course load.",
     "options": [
       {
-        "text": "When can I register full credit hours?",
-        "next": "register_full_hours_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
-      {
-        "text": "Can I register more than the usual credit hours?",
-        "next": "register_more_hours_en"
-      },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -286,12 +255,13 @@
     "question": "You can register for full credit hours in the following semester if your GPA is at least 2.0.",
     "options": [
       {
-        "text": "Can I register more than the usual credit hours?",
-        "next": "register_more_hours_en"
+        "text": "Ask another question ? ☺️",
+        "next": "gpa_en"
       },
+
       {
         "text": "Back to menu",
-        "next": "gpa_en"
+        "next": "start_en"
       },
       {
         "text": "End Conversation",
@@ -304,17 +274,154 @@
     "question": "Yes, in some cases. If your GPA is high (for example, above 3.0 ), you may be allowed to take more credit hours than usual — but only with academic advisor approval.",
     "options": [
       {
-        "text": "Back to menu",
+        "text": "Ask another question ? ☺️",
         "next": "gpa_en"
+      },
+
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
       }
     ]
   },
   {
     "id": "end_conversation",
     "question": "Thank you for chatting with us! If you need more information, feel free to come back anytime. Have a great day!",
-    "options": []
+    "options": [
+      { "text": "Visit us again", "next": "start_en" },
+      { "text": "Goodbye", "next": "end_conversation" }
+    ]
   },
+  {
+    "id": "graduation_reasons_en",
+    "question": "Here are some reasons for graduation:",
+    "options": [
+      { "text": "Graduation requirements", "next": "graduation_requirements_en" },
+      { "text": "Degree requirements", "next": "degree_requirements_en" },
+      { "text": "Completing all coursework", "next": "completing_coursework_en" },
+      { "text": "Meeting credit hour requirements", "next": "credit_hour_requirements_en" },
+      { "text": "Personal goals and achievements", "next": "personal_goals_en" },
+      { "text": "Registering one extra course for graduation", "next": "extra_course_graduation_reason_en" },
+      { "text": "Back to menu", "next": "start_en" }
+    ]
+  },
+  {
+    "id": "graduation_requirements_en",
+    "question": "Graduation requirements include completing all required courses, meeting the minimum GPA, and fulfilling any program-specific obligations. You must complete all mandatory courses and pass them with the required GPA, including core and elective courses specific to your program. You may also need to complete internships or projects depending on your degree program.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "graduation_reasons_en"
+      },
 
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "degree_requirements_en",
+    "question": "Degree requirements refer to the total number of credit hours needed to complete your degree. It includes both core and elective courses. Typically, a Bachelor's degree requires 120-130 credit hours, which include general education, core courses, and electives.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "graduation_reasons_en"
+      },
+
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "completing_coursework_en",
+    "question": "Completing all required coursework includes attending classes, completing assignments, and passing exams for all your courses. To successfully complete your coursework, stay on top of your assignments, participate in class activities, and consult with professors if you have any doubts.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "graduation_reasons_en"
+      },
+
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "credit_hour_requirements_en",
+    "question": "To graduate, you must meet the minimum credit hour requirements set by your program. Typically, a Bachelor's degree requires 120 to 130 credit hours. These credit hours include both core and elective courses. Each course has a certain number of credit hours, and to graduate, you need to accumulate the required number of hours as specified by your program.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "graduation_reasons_en"
+      },
+
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "personal_goals_en",
+    "question": "Personal goals and achievements can also be key reasons for graduation. Completing your degree can help you achieve personal milestones such as financial independence, career advancement, or personal fulfillment. Graduating from university signifies the culmination of years of hard work, learning, and growth, and can be a source of pride.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "graduation_reasons_en"
+      },
+
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
+  {
+    "id": "extra_course_graduation_reason_en",
+    "question": "Sometimes, students are allowed to register one extra course under graduation reasons. This usually applies when a student has completed all required credit hours but needs one final course to graduate. In such cases, universities may allow the student to exceed the standard course load, provided they get approval from the academic department or college.",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "graduation_reasons_en"
+      },
+      {
+        "text": "Back to menu",
+        "next": "start_en"
+      },
+      {
+        "text": "End Conversation",
+        "next": "end_conversation"
+      }
+    ]
+  },
   {
     "id": "departments_en",
     "question": "Here are the main departments in the Faculty of Science:",
@@ -322,6 +429,7 @@
       { "text": "Mathematics", "next": "math_en" },
       { "text": "Physics", "next": "physics_en" },
       { "text": "Chemistry", "next": "chemistry_en" },
+      {"text":"computer science", "next": "cs_en" },
       { "text": "Biology", "next": "biology_en" },
       { "text": "Geology", "next": "geology_en" },
       { "text": "Computer Science", "next": "cs_en" },
@@ -340,42 +448,68 @@
       { "text": "Specializations", "next": "specializations_math_en" },
       { "text": "Research Areas", "next": "research_math_en" },
       { "text": "Faculty Members", "next": "faculty_math_en" },
-      { "text": "Back", "next": "departments_en" }
+      { "text": "Back to menu", "next": "departments_en" }
     ]
   },
   {
     "id": "courses_math_en",
     "question": "Mathematics Courses:\n\nCore Courses:\n- Calculus I-IV\n- Linear Algebra\n- Abstract Algebra\n- Real Analysis\n- Complex Analysis\n- Differential Equations\n\nElectives:\n- Number Theory\n- Topology\n- Numerical Analysis\n- Operations Research\n- Probability Theory",
     "options": [
-      { "text": "Back", "next": "math_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "math_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "careers_math_en",
     "question": "Career Paths for Math Graduates:\n\n1. Academia & Teaching\n2. Data Science & Analytics\n3. Actuarial Science\n4. Cryptography & Cybersecurity\n5. Operations Research\n6. Financial Modeling\n7. Research Institutions\n8. Government Statistics\n\nAverage starting salary: $35,000-$60,000",
     "options": [
-      { "text": "Back", "next": "math_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "math_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+
     ]
   },
   {
     "id": "specializations_math_en",
     "question": "Mathematics Specializations:\n\n1. Pure Mathematics:\n   - Algebra\n   - Analysis\n   - Geometry\n   - Topology\n\n2. Applied Mathematics:\n   - Mathematical Physics\n   - Fluid Dynamics\n   - Mathematical Biology\n\n3. Statistics & Probability:\n   - Data Analysis\n   - Stochastic Processes\n   - Statistical Modeling",
     "options": [
-      { "text": "Back", "next": "math_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "math_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "research_math_en",
     "question": "Active Research Areas:\n\n- Algebraic Geometry\n- Functional Analysis\n- Mathematical Modeling\n- Graph Theory\n- Financial Mathematics\n- Time Series Analysis\n\nCollaborations with:\n- MIT Math Department\n- Max Planck Institute\n- KAUST",
     "options": [
-      { "text": "Back", "next": "math_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "math_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "faculty_math_en",
     "question": "Mathematics Faculty Members:\n\n1. Prof. Ahmed Samir (Algebra)\n2. Prof. Mona Hassan (Analysis)\n3. Dr. Youssef Ali (Statistics)\n4. Dr. Leila Mohamed (Numerical Analysis)\n5. Prof. Karim Farouk (Topology)\n\nOffice Hours: Sun-Wed 10AM-2PM\nEmail: math.faculty@sci.asu.edu.eg",
     "options": [
-      { "text": "Back", "next": "math_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "math_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
 
@@ -394,28 +528,48 @@
     "id": "courses_physics_en",
     "question": "Physics Courses:\n\nCore:\n- Classical Mechanics\n- Electromagnetism\n- Quantum Mechanics\n- Thermodynamics\n- Statistical Mechanics\n\nElectives:\n- Nuclear Physics\n- Astrophysics\n- Condensed Matter\n- Particle Physics\n- Computational Physics",
     "options": [
-      { "text": "Back", "next": "physics_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "physics_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "labs_physics_en",
     "question": "Physics Research Labs:\n\n1. Advanced Materials Lab\n2. Nuclear Physics Lab\n3. Quantum Optics Lab\n4. Computational Physics Lab\n5. Astrophysics Observatory\n\nEquipment includes:\n- Electron Microscopes\n- Particle Accelerators\n- Spectrometers\n- Supercomputing Cluster",
     "options": [
-      { "text": "Back", "next": "physics_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "physics_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "careers_physics_en",
     "question": "Physics Career Paths:\n\n1. Research Scientist\n2. Medical Physicist\n3. Radiation Protection\n4. Aerospace Engineer\n5. Data Analyst\n6. University Professor\n7. Renewable Energy Specialist\n\nAverage Salary Range: $40,000-$80,000",
     "options": [
-      { "text": "Back", "next": "physics_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "physics_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "faculty_physics_en",
     "question": "Physics Faculty Members:\n\n1. Prof. Mohamed Ali (Theoretical Physics)\n2. Dr. Hanaa Said (Nuclear Physics)\n3. Prof. Adel Kamel (Solid State)\n4. Dr. Rania Farid (Astrophysics)\n5. Dr. Omar Ibrahim (Quantum Physics)\n\nOffice Hours: Sun-Thu 9AM-1PM\nEmail: physics.faculty@sci.asu.edu.eg",
     "options": [
-      { "text": "Back", "next": "physics_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "physics_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
 
@@ -434,19 +588,110 @@
     "id": "courses_chemistry_en",
     "question": "Chemistry Courses:\n\nCore:\n- Organic Chemistry I-III\n- Inorganic Chemistry\n- Physical Chemistry\n- Analytical Chemistry\n- Biochemistry\n\nElectives:\n- Polymer Chemistry\n- Environmental Chemistry\n- Pharmaceutical Chemistry\n- Nanochemistry",
     "options": [
-      { "text": "Back", "next": "chemistry_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "chemistry_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "labs_chemistry_en",
     "question": "Chemistry Labs:\n\n1. Organic Synthesis Lab\n2. Spectroscopy Lab\n3. Chromatography Lab\n4. Electrochemistry Lab\n5. Nanotechnology Lab\n\nSafety Level: BSL-2 Certified\nOpen Hours: 8AM-8PM Daily",
     "options": [
-      { "text": "Back", "next": "chemistry_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "chemistry_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
-
-
-
+  {
+    "id": "careers_chemistry_en",
+    "question": "Chemistry Careers:\n\nGraduates of the Chemistry Department can pursue careers in:\n- Research and Development\n- Pharmaceutical Industry\n- Environmental Consulting\n- Forensic Science\n- Education and Academia\n- Chemical Engineering",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "chemistry_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "faculty_chemistry_en",
+    "question": "Faculty of Chemistry Department:\n\nProf. Samira Abdelaziz - Head of Department\nDr. Khaled Ahmed - Organic Chemistry\nDr. Mona Ali - Inorganic Chemistry\nDr. Sarah Hassan - Physical Chemistry\nDr. Omar Fouad - Analytical Chemistry\nDr. Youssef Ibrahim - Biochemistry",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "chemistry_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "cs_en",
+    "question": "Computer Science Department:\n\nEstablished: 1980\nHead: Prof. Mohamed Ibrahim\nLocation: Building F, 4th Floor\n\nCovers Algorithms, Software Engineering, and Artificial Intelligence. What would you like to know?",
+    "options": [
+      { "text": "Courses Offered", "next": "courses_cs_en" },
+      { "text": "Career Options", "next": "careers_cs_en" },
+      { "text": "Specializations", "next": "specializations_cs_en" },
+      { "text": "Research Areas", "next": "research_cs_en" },
+      { "text": "Faculty Members", "next": "faculty_cs_en" },
+      { "text": "Back to menu", "next": "departments_en" }
+    ]
+  },
+  {
+    "id": "careers_cs_en",
+    "question": "Career options for Computer Science graduates include:\n\n- Software Engineer\n- Data Scientist\n- AI Researcher\n- Systems Architect\n- IT Consultant\n\nThese careers involve developing software, analyzing data, researching AI, designing systems, and advising businesses on technology solutions. Would you like to know more about a specific career?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "cs_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "specializations_cs_en",
+    "question": "Specializations in Computer Science include:\n\n- Artificial Intelligence: Focusing on creating intelligent systems.\n- Software Engineering: Involves the design and development of software.\n- Cybersecurity: Protecting systems and data from threats.\n- Data Science: Extracting insights from complex data.\n- Machine Learning: Developing algorithms that allow computers to learn from data.\n\nWould you like to explore any specific specialization in more detail?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "cs_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "research_cs_en",
+    "question": "Research areas in Computer Science include:\n\n- Quantum Computing: Utilizing quantum-mechanical phenomena to process information.\n- Machine Learning: Teaching computers to make predictions based on data.\n- Natural Language Processing: Enabling computers to understand and interact using human languages.\n- Robotics: Designing and building robots to automate tasks.\n- Cybersecurity: Researching ways to protect systems from digital threats.\n\nWould you like to know more about a specific research area?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "cs_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
+  {
+    "id": "faculty_cs_en",
+    "question": "Some of the faculty members in the Computer Science Department include:\n\n- Prof. Mohamed Ibrahim: Expert in Artificial Intelligence.\n- Dr. Sarah Ahmed: Specializes in Cybersecurity.\n- Dr. Khaled Osama: Focuses on Data Science and Big Data.\n\nWould you like to know more about any specific faculty member?",
+    "options": [
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "cs_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
+    ]
+  },
 
   {
     "id": "study_system_en",
@@ -461,20 +706,30 @@
     "id": "calendar_en",
     "question": "Academic Calendar 2023/2024:\n\nFall Semester:\n- Start: Sep 17, 2023\n- End: Jan 18, 2024\n\nSpring Semester:\n- Start: Feb 10, 2024\n- End: Jun 6, 2024\n\nSummer Term (optional):\n- Jul 1 - Aug 20, 2024",
     "options": [
-      { "text": "Back", "next": "study_system_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "study_system_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
   {
     "id": "grading_en",
     "question": "Grading Policy:\n\n- Attendance: 10%\n- Midterm: 20%\n- Assignments: 20%\n- Final Exam: 50%\n\nMinimum passing grade: 60%\nDean's List: 90%+ average",
     "options": [
-      { "text": "Back", "next": "study_system_en" }
+      {
+        "text": "Ask another question ? ☺️",
+        "next": "study_system_en"
+      },
+      { "text": "Back to menu", "next": "start_en" },
+      { "text": "End Conversation", "next": "end_conversation" }
     ]
   },
 
   {
     "id": "careers_en",
-    "question": "Career Opportunities:\n\nScience graduates work in:\n1. Education & Academia\n2. Research & Development\n3. Healthcare & Pharmaceuticals\n4. Energy & Environment\n5. Technology & IT\n6. Government Agencies\n\nCareer Center Services:\n- Resume Workshops\n- Job Fairs\n- Internship Programs",
+    "question": "Career Opportunities:\n\nScience graduates work in:\n1. Education & Academia\n2. Research & Development\n3. Healthcare & Pharmaceuticals\n4. Energy & Environment\n5. Technology & IT\n6. Government Agencies\n\nCareer Center Services include:\n- Resume Workshops\n- Job Fairs\n- Internship Programs\n\nWould you like more details on any of these career fields or career center services?",
     "options": [
       { "text": "Internship Partners", "next": "internships_en" },
       { "text": "Alumni Network", "next": "alumni_en" },
@@ -483,17 +738,19 @@
   },
   {
     "id": "internships_en",
-    "question": "Internship Partners:\n\n1. Egyptian Petroleum Research Institute\n2. National Research Centre\n3. IBM Egypt\n4. Bayer Pharmaceuticals\n5. Egyptian Environmental Affairs Agency\n\nApplication Deadline: May 1st annually",
+    "question": "Internship Partners:\n\n1. Egyptian Petroleum Research Institute\n2. National Research Centre\n3. IBM Egypt\n4. Bayer Pharmaceuticals\n5. Egyptian Environmental Affairs Agency\n\nApplication Deadline: May 1st annually.\n\nWould you like more information about any of these partners or the application process?",
     "options": [
       { "text": "Back", "next": "careers_en" }
     ]
   },
+
 
   {
     "id": "start_ar",
     "question": "مرحبًا بك في دليل كلية العلوم – جامعة عين شمس! ماذا تريد أن تستكشف؟",
     "options": [
       {"text": "المعدل التراكمي", "next": "gpa_ar"},
+      { "text": "دواعى التخرج", "next": "graduation_ar" },
       { "text": "الأقسام", "next": "departments_ar" },
       { "text": "نظام الدراسة", "next": "study_system_ar" },
       { "text": "فرص العمل", "next": "careers_ar" },
@@ -560,19 +817,15 @@
     "question": "المعدل التراكمى هو متوسط درجات مقرراتك مع الاخذ فى الاعتبار عدد الساعات المعتمده لكل مقرر ",
     "options": [
       {
-        "text": "كيف يتم حساب المعدل التراكمي؟",
-        "next": "how to calculate gpa_ar"
-      },
-      {
-        "text": "ما الفرق بين المعدل الفصلي والمعدل التراكمي؟",
-        "next": "difference between semester and cumulative gpa_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
       ]
@@ -582,20 +835,16 @@
     "question": "لحساب المعدل التراكمى :\n المعدل = (مجموع (النقاط × الساعات المعتمدة)) ÷ (إجمالي الساعات المعتمدة)",
     "options": [
       {
-          "text": "ما الفرق بين المعدل الفصلي والمعدل التراكمي؟",
-          "next": "difference between semester and cumulative gpa_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
-          "text": "كيف يمكننى تحسين معدلى ؟",
-          "next": "how to improve gpa_ar"
+        "text": "العوده الى القائمة الرئيسية",
+        "next": "gpa_ar"
       },
       {
-          "text": "العوده الى القائمة الرئيسية",
-          "next": "gpa_ar"
-      },
-      {
-          "text": "الخروج من المحادثة",
-          "next": "end_conversation"
+        "text": "انهاء المحادثة",
+        "next": "end_conversation"
       }
     ]
   },
@@ -604,19 +853,15 @@
     "question": "المعدل التركمى الفصلى : متوسط درجاتكفى مقررات فصل دراسى واحد\n المعدل التركمى الكلي : متوسط درجاتك فى جميع المقررات حتى الفصل الحالى  ",
     "options": [
       {
-        "text": "كيف يمكننى تحسين معدلى ؟",
-        "next": "how to improve gpa_ar"
-      },
-      {
-        "text": "هل يمكننى اعاده مقرر ؟",
-        "next": "can i retake a course_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -626,19 +871,15 @@
     "question": "لتحسين معدلك: احضر المحاضرات، ركز على المقررات ذات الساعات الأعلى، ذاكر بانتظام، اهتم بالواجبات، وإذا كان مسموحًا، أعد المقررات التي حصلت فيها على درجات منخفضة",
     "options": [
       {
-        "text": "هل يمكننى اعاده مقرر ؟",
-        "next": "can i retake a course_ar"
-      },
-      {
-        "text": "رموز الدرجات وقيمها",
-        "next": "grade symbols and values_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -648,19 +889,15 @@
     "question": "نعم، يمكنك اعادة المقرر، وقد يتم استبدال الدرجه القديمه بالدرجه الجديده في حساب المعدل، بمجال سياسه الجامعية",
     "options": [
       {
-        "text": "رموز الدرجات وقيمها",
-        "next": "grade symbols and values_ar"
-      },
-      {
-        "text": "هل الرسزب فى مقرر يؤثر على المعدل التراكمى؟",
-        "next": "does failing a course affect gpa_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -670,20 +907,15 @@
     "question": "رموز الدرجات وقيمها:\\nA = 4.0\\nB+ = 3.6\\nB = 3.0\\nC+ = 2.6\\nC = 2.3\\nD = 2.0\\nF = 0.0",
     "options": [
       {
-        "text": "هل الرسزب فى مقرر يؤثر على المعدل التراكمى؟",
-        "next": "does failing a course affect gpa_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
-      {
-        "text": "هل الانسحاب من مقرر يؤثر على المعدل التراكمى ",
-        "next": "do withdrawals affect gpa_ar "
-      },
-
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -693,19 +925,15 @@
     "question": "نعم الرسوب يخفض معدلك, خاصه اذا كان المقرر يحتوى على عدد كبير من الساعات (f) ",
     "options": [
       {
-        "text": "هل الانسحاب من مقرر يؤثر على المعدل التراكمى ",
-        "next": "do withdrawals affect gpa_ar"
-      },
-      {
-        "text": "متى يمكننى تسجيل 12 ساعه فقط؟",
-        "next": "register_12_hours_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -715,19 +943,15 @@
     "question": "لا، الانسحاب  الرسمى من مقرر لا يؤثر على المعدل التراكمى، ولكن  قد يظهرفى السجل الاكاديمى ك 'W' ",
     "options": [
       {
-        "text": "متى يمكننى تسجيل 12 ساعه فقط؟",
-        "next": "register_12_hours_ar"
-      },
-      {
-        "text": "متى يمكننى تسجيل ساعات كامله؟",
-        "next": "register_full_hours_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -737,19 +961,15 @@
     "question": "إذا انخفض معدلك التراكمي عن 2.0، فقد يُسمح لك فقط بتسجيل 12 ساعة في الفصل التالي. هذا الإجراء يهدف لمساعدتك على تحسين الأداء بتقليل العبء.  ",
     "options": [
       {
-        "text": "متى يمكننى تسجيل ساعات كامله؟",
-        "next": "register_full_hours_ar"
-      },
-      {
-        "text": "هل يمكننى تسجيل اكثر من الساعات المعتاده؟",
-        "next": "register_more_hours_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -759,15 +979,15 @@
     "question": "يمكن لك تسجيل ساعات كامله في الفصل التالي اذا كان معدلك التراكمي على 2.0 او اكثر. ",
     "options": [
       {
-        "text": "هل يمكننى تسجيل اكثر من الساعات المعتاده؟",
-        "next": "register_more_hours_ar"
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
       },
       {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
@@ -777,20 +997,104 @@
     "question": "نعم، في بعض الحالات. إذا كان معدلك مرتفعًا (مثلاً، فوق 3.0)، فقد يُسمح لك بتسجيل ساعات أكثر من المعتاد — ولكن فقط بموافقة المرشد الأكاديمي.",
     "options": [
       {
+        "text": " سؤال اخر ؟☺\uFE0F " ,
+        "next": "gpa_ar"
+      },
+      {
         "text": "العوده الى القائمة الرئيسية",
         "next": "gpa_ar"
       },
       {
-        "text": "الخروج من المحادثة",
+        "text": "انهاء المحادثة",
         "next": "end_conversation"
       }
     ]
   },
   {
-    "id": "end_conversation_ar",
-    "question": "شكرًا لمحادثتك معنا! إذا كنت بحاجة لمزيد من المعلومات، لا تتردد في العودة في أي وقت. يومك سعيد!",
-    "options": []
+    "id": "end_conversation",
+    "question": "شكرًا لتواصلك معنا! إذا كنت بحاجة إلى مزيد من المعلومات، لا تتردد في الرجوع إلينا في أي وقت. نتمنى لك يومًا سعيدًا!",
+    "options": [
+      { "text": "زورنا مرة أخرى", "next": "start_ar" },
+      { "text": "مع السلامة", "next": "end_conversation" }
+    ]
   },
+  {
+    "id": "graduation_ar",
+    "question": "دواعى التخرج:",
+    "options": [
+      { "text": " متطلبات التخرج", "next": "graduation_requirements_ar" },
+      { "text": "متطلبات الدرجة العلمية", "next": "degree_requirements_ar" },
+      { "text": "إنهاء جميع المقررات الدراسية", "next": "completing_coursework_ar" },
+      { "text": "استيفاء عدد الساعات المعتمدة", "next": "credit_hour_requirements_ar" },
+      { "text": "تحقيق الأهداف والطموحات الشخصية", "next": "personal_goals_ar" },
+      { "text": "تسجيل مقرر إضافي ضمن دواعى التخرج", "next": "extra_course_graduation_reason_ar" },
+      { "text": "رجوع", "next": "start_ar" }
+    ]
+  },
+  {
+    "id": "graduation_requirements_ar",
+    "question": "تشمل متطلبات التخرج إنهاء جميع المقررات الدراسية المطلوبة، وتحقيق الحد الأدنى من المعدل التراكمي (GPA)، بالإضافة إلى استيفاء أي متطلبات خاصة بالبرنامج الدراسي. يجب عليك إنهاء جميع المقررات الأساسية والاختيارية بنجاح، وقد يُطلب منك أيضاً إتمام تدريب عملي أو مشروع تخرج حسب تخصصك.",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ☺️", "next": "graduation_reasons_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "degree_requirements_ar",
+    "question": "تشير متطلبات الدرجة العلمية إلى إجمالي عدد الساعات المعتمدة اللازمة للحصول على الدرجة. وتشمل هذه الساعات المقررات الأساسية والاختيارية. عادةً ما تتطلب درجة البكالوريوس من 120 إلى 130 ساعة معتمدة، تشمل التعليم العام والمقررات المتخصصة.",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ☺️", "next": "graduation_reasons_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "completing_coursework_ar",
+    "question": "يتضمن إتمام المقررات الدراسية المطلوبة حضور المحاضرات، وإنجاز الواجبات، واجتياز الامتحانات. وللنجاح في ذلك، يجب عليك الالتزام بالحضور، وإنهاء المهام في وقتها، والمشاركة في الأنشطة الصفية، واستشارة الأساتذة عند الحاجة.",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ☺️", "next": "graduation_reasons_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "credit_hour_requirements_ar",
+    "question": "للتخرج، يجب استيفاء الحد الأدنى من الساعات المعتمدة المطلوبة في البرنامج. وعادةً ما تتراوح الساعات المطلوبة للحصول على درجة البكالوريوس بين 120 و130 ساعة معتمدة، وتشمل المقررات الأساسية والاختيارية. كل مقرر له عدد محدد من الساعات، ويجب تجميع العدد الكافي منها حسب متطلبات البرنامج.",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ☺️", "next": "graduation_reasons_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "personal_goals_ar",
+    "question": "يمكن أن تكون الأهداف والطموحات الشخصية سببًا أساسيًا للتخرج. إن إكمال الدرجة العلمية يساعد في تحقيق إنجازات شخصية مثل الاستقلال المالي، التقدم المهني، أو الشعور بالرضا الذاتي. فالتخرج يُعد تتويجًا لسنوات من الجهد والتعلّم والنمو، ويمثل مصدر فخر للطالب.",
+    "options": [
+      { "text": "اسأل سؤالاً آخر ☺️", "next": "graduation_reasons_ar" },
+      { "text": "العودة إلى القائمة", "next": "start_ar" },
+      { "text": "إنهاء المحادثة", "next": "end_conversation_ar" }
+    ]
+  },
+  {
+    "id": "extra_course_graduation_reason_ar",
+    "question": "في بعض الحالات، يُسمح للطالب بتسجيل مقرر إضافي ضمن دواعى التخرج. يحدث هذا عندما يكون الطالب قد أنهى جميع الساعات المعتمدة المطلوبة ولم يتبقَّ له سوى مقرر واحد للتخرج. في هذه الحالة، قد تسمح الجامعة للطالب بتجاوز العبء الدراسي المعتاد بشرط الحصول على موافقة القسم الأكاديمي أو الكلية.",
+    "options": [
+      {
+        "text": "هل لديك سؤال آخر؟ ☺️",
+        "next": "graduation_reasons_ar"
+      },
+      {
+        "text": "العودة إلى القائمة",
+        "next": "start_ar"
+      },
+      {
+        "text": "إنهاء المحادثة",
+        "next": "end_conversation"
+      }
+    ]
+  },
+
 
 
   {
