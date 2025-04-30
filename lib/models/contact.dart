@@ -6,7 +6,7 @@ class Contact {
   final int year;
   final bool isComplete;
   final String phoneNumber;
-  final String? seatNumber;
+  final int? seatNumber;
   Contact(
       {required this.id,
       required this.seatNumber,
@@ -25,7 +25,7 @@ class Contact {
       firstName: snap["firstName"],
       lastName: snap["lastName"],
       classes: snap["classes"],
-      year: snap["year"],
+      year: snap["academicYear"],
       isComplete: snap["isComplete"],
       phoneNumber: snap["phoneNumber"],
     );

@@ -27,7 +27,7 @@ abstract class HiveCashingService {
     } else {
       return Contact(
           id: "",
-          seatNumber: "0",
+          seatNumber: 0,
           firstName: "",
           lastName: "",
           classes: [],

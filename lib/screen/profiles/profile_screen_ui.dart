@@ -61,8 +61,8 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                 children: [
                   _buildTextField("Name", userData?.firstName, isDarkMode),
                   _buildTextField("Email", auth.user!.email, isDarkMode),
-                  _buildTextField(
-                      "seat Number", userData?.seatNumber, isDarkMode),
+                  _buildTextField("seat Number",
+                      userData?.seatNumber.toString(), isDarkMode),
                   _buildPhoneField(userData?.phoneNumber, isDarkMode),
                   _buildTextField(
                       "Academic Year", userData?.year.toString(), isDarkMode),

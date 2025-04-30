@@ -56,7 +56,7 @@ class DBService {
       });
       HiveCashingService.updateUserContactData(Contact(
               id: userId,
-              seatNumber: "yet to be added",
+              seatNumber: 0,
               firstName: firstName,
               lastName: lastname,
               classes: [],
@@ -84,6 +84,19 @@ class DBService {
         "isComplete": true,
         "seatNumber": seatNumber
       });
+      Contact currData = await HiveCashingService.getUserContactData();
+      HiveCashingService.updateUserContactData(Contact(
+              id: userId,
+              seatNumber: seatNumber,
+              firstName: currData.firstName,
+              lastName: currData.lastName,
+              classes: classes,
+              year: year,
+              isComplete: true,
+              phoneNumber: currData.phoneNumber)
+          .toJson());
+      print(await HiveCashingService.getUserContactData());
+
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
       print(e);
