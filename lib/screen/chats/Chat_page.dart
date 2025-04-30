@@ -16,6 +16,7 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/image_message_button.da
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
+import 'package:grad_proj/services/caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -34,15 +35,13 @@ class ChatPage extends StatefulWidget {
   ChatPage({super.key, required this.chatID, required this.admins});
   final String id = "ChatPage";
   String chatID;
-  late AuthProvider _auth;
+  //late AuthProvider _auth;
   GlobalKey<FormState> GK = GlobalKey<FormState>();
   String textTosend = "";
   final ScrollController _LVC = ScrollController();
   List<String> admins;
   final TextEditingController txt = TextEditingController();
-  late String memberName;
   final record = AudioRecorder();
-  bool isRecording = false;
   late AudioPlayer audioPlayer = AudioPlayer();
   // PlatformDispatcher.
 
@@ -55,13 +54,14 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   double _height = 0;
   double _width = 0;
+  bool isRecording = false;
   //late Future<List<String>> chatMembersFuture;
 
   @override
   void initState() {
     super.initState();
+
     // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
-    widget._auth = context.read<AuthProvider>();
 
     //  _audioPlayer = AudioPlayer();
     // Call the method during initialization
@@ -73,7 +73,7 @@ class _ChatPageState extends State<ChatPage> {
     if (await rec.hasPermission()) {
       await rec.start(RecordConfig(), path: location.path + fileName + '.m4a');
       setState(() {
-        widget.isRecording = true;
+        isRecording = true;
       });
     }
   }
@@ -81,7 +81,7 @@ class _ChatPageState extends State<ChatPage> {
   Future<String?> stopRecord(AudioRecorder rec) async {
     String? finalPath = await rec.stop();
     setState(() {
-      widget.isRecording = false;
+      isRecording = false;
     });
     if (finalPath != null) {
       var _result = await CloudStorageService.instance.uploadVoice(
@@ -121,7 +121,6 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _chatPageUI() {
     return Builder(builder: (context) {
-      widget._auth = Provider.of<AuthProvider>(context);
       return Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
@@ -171,7 +170,8 @@ class _ChatPageState extends State<ChatPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment:
-                        widget._auth.user!.uid == bubbles[index].senderID
+                        HiveCashingService.getUserContactData().id ==
+                                bubbles[index].senderID
                             ? MainAxisAlignment.end
                             : MainAxisAlignment.start,
                     children: [
@@ -179,8 +179,9 @@ class _ChatPageState extends State<ChatPage> {
                           ? chatMessageBubble(
                               message: ChatdataOfCurrentChat.messageContent
                                   .toString(),
-                              isOurs: widget._auth.user!.uid ==
-                                  bubbles[index].senderID,
+                              isOurs:
+                                  HiveCashingService.getUserContactData().id ==
+                                      bubbles[index].senderID,
                               ts: bubbles[index].timestamp,
                               senderName: bubbles[index].senderName,
                             )
@@ -189,8 +190,10 @@ class _ChatPageState extends State<ChatPage> {
                                   FileAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),
-                                  isOurs: widget._auth.user!.uid ==
-                                      bubbles[index].senderID,
+                                  isOurs:
+                                      HiveCashingService.getUserContactData()
+                                              .id ==
+                                          bubbles[index].senderID,
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 )
@@ -198,8 +201,10 @@ class _ChatPageState extends State<ChatPage> {
                                   AudioAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),
-                                  isOurs: widget._auth.user!.uid ==
-                                      bubbles[index].senderID,
+                                  isOurs:
+                                      HiveCashingService.getUserContactData()
+                                              .id ==
+                                          bubbles[index].senderID,
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 ),
@@ -213,6 +218,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget MessageField(BuildContext _context) {
+    print(widget.admins);
+    print(HiveCashingService.getUserContactData().id.trim());
     return Container(
       // height: _height * 0.1,
       width: _width,
@@ -226,7 +233,8 @@ class _ChatPageState extends State<ChatPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: widget.admins.contains(widget._auth.user!.uid)
+            children: widget.admins
+                    .contains(HiveCashingService.getUserContactData().id.trim())
                 ? [
                     _messageTextField(widget.txt),
                     _sendMessageButton(_context, widget.txt),
@@ -273,24 +281,25 @@ class _ChatPageState extends State<ChatPage> {
       child: IconButton(
         icon: Icon(
             widget.txt.text.isEmpty
-                ? (widget.isRecording ? Icons.stop : Icons.mic)
+                ? (isRecording ? Icons.stop : Icons.mic)
                 : Icons.send,
             color: LightTheme.primary),
         onPressed: () async {
           if (widget.txt.text.isEmpty) {
-            if (!widget.isRecording) {
+            if (isRecording) {
               startRecord(widget.record);
             } else {
               String? VoiceUrl = await stopRecord(widget.record);
               DBService.instance.addMessageInChat(
                   chatId: widget.chatID,
                   messageData: Message(
-                      senderID: widget._auth.user!.uid,
+                      senderID: HiveCashingService.getUserContactData().id,
                       messageContent: VoiceUrl!,
                       timestamp: Timestamp.now(),
                       type: "voice",
                       //TODO: here after making databse > make it so here it sends the current user data in DB
-                      senderName: widget.memberName));
+                      senderName:
+                          "${HiveCashingService.getUserContactData().firstName} ${HiveCashingService.getUserContactData().lastName}"));
             }
           } else if (widget.GK.currentState!.validate() &&
               widget.txt.text.isNotEmpty) {
@@ -298,12 +307,13 @@ class _ChatPageState extends State<ChatPage> {
             DBService.instance.addMessageInChat(
                 chatId: widget.chatID,
                 messageData: Message(
-                    senderID: widget._auth.user!.uid,
+                    senderID: HiveCashingService.getUserContactData().id,
                     messageContent: txt.text.trim(),
                     timestamp: Timestamp.now(),
                     type: "text",
                     //TODO: here after making databse > make it so here it sends the current user data in DB
-                    senderName: widget.memberName));
+                    senderName:
+                        "${HiveCashingService.getUserContactData().firstName} ${HiveCashingService.getUserContactData().lastName}"));
           }
           txt.text = "";
           FocusScope.of(context).unfocus();
