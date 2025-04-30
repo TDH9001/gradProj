@@ -78,7 +78,6 @@ class DBService {
       required String userId,
       required int seatNumber}) async {
     try {
-      print(year);
       await _db.collection(_UserCollection).doc(userId).update({
         "academicYear": year,
         "classes": classes,
@@ -86,7 +85,7 @@ class DBService {
         "seatNumber": seatNumber
       });
       Contact currData = await HiveCashingService.getUserContactData();
-    
+
       HiveCashingService.updateUserContactData(Contact(
               id: userId,
               seatNumber: seatNumber,
@@ -97,7 +96,6 @@ class DBService {
               isComplete: true,
               phoneNumber: currData.phoneNumber)
           .toJson());
-      print((await HiveCashingService.getUserContactData()).toJson());
 
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
@@ -111,7 +109,6 @@ class DBService {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
       Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
-      print(Contact.fromJson(id: _snap.id, snap: _snap.data()!));
       return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });
   }
@@ -120,7 +117,6 @@ class DBService {
     var ref =
         _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
     return ref.snapshots().map((_snap) {
-      //print(ChatSnipits.fromFirestore(_snap));
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
       }).toList();
@@ -178,9 +174,9 @@ class DBService {
       print(mem);
       return mem;
     } else {
-      print("ERRRRORRRORROROROROROORORORROOR");
-
-      throw Exception('Document does not exist');
+      print("ERRRRORRRORROROROROROORORORROOR , Document does not exist");
+      return [];
+      //throw Exception('Document does not exist');
     }
   }
 

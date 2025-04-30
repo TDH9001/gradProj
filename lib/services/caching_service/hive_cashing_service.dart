@@ -22,8 +22,7 @@ abstract class HiveCashingService {
 
   static Contact getUserContactData() {
     final data = _userContactData.get(CashingServiceHiveKeys.userContactData);
-    print(data);
-    print(Map<String, dynamic>.from(data));
+    
     if (data != null && data is Map) {
       final mappedData = Map<String, dynamic>.from(data);
       return Contact.fromJson(id: mappedData["id"], snap: mappedData);

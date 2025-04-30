@@ -63,8 +63,7 @@ class AuthProvider extends ChangeNotifier {
       SnackBarService.instance
           .showsSnackBarSucces(text: "password Rest Email sent to your inbox");
     } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print(e.message);
+    
       SnackBarService.instance
           .showsSnackBarError(text: "PasswordRest failed ${e.message}");
     }
@@ -112,7 +111,6 @@ class AuthProvider extends ChangeNotifier {
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${instance.user?.email}");
     } catch (e) {
-      print(e);
       status = AuthStatus.ERROR;
       instance.user = null;
 

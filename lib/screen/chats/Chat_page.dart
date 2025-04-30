@@ -71,7 +71,6 @@ class _ChatPageState extends State<ChatPage> {
       setState(() {
         widget.isRecording = true;
       });
-      print("recordStarted ");
     }
   }
 
@@ -80,7 +79,6 @@ class _ChatPageState extends State<ChatPage> {
     setState(() {
       widget.isRecording = false;
     });
-    print("record stopped");
     if (finalPath != null) {
       var _result = await CloudStorageService.instance.uploadVoice(
           uid: AuthProvider.instance.user!.uid, fileData: File(finalPath));

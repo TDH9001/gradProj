@@ -37,7 +37,6 @@ class _UpdateUserDataState extends State<CompleteProfile> {
 
   @override
   Widget build(BuildContext _context) {
-    print(HiveCashingService.getUserContactData());
     // var _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
     final bool isDarkMode = themeProvider.isDarkMode;
@@ -58,7 +57,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
           child: ListView(
             padding: EdgeInsets.all(12),
             children: [
-              SizedBox(height: 200),
+              //   SizedBox(height: 200),
               Text('Please register your academic year and courses',
                   style: TextStyle(
                     fontSize: 18,
