@@ -5,9 +5,9 @@ class SemesterModel {
   final String semesterYear;
   final String semesterName;
   final int semesterNumber;
-  late int totalCreditHours;
-  late double semmesterGpa;
-  late double semesterGrade;
+  late int totalCreditHours; //  in the semester
+  late double semmesterGpa; //
+  late Grades semesterGrade;
 
   SemesterModel(
       this.courses, this.semesterYear, this.semesterName, this.semesterNumber) {
