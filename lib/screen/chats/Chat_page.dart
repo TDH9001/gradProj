@@ -14,6 +14,7 @@ import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_message_button.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/message_list_view_chat_lsit.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/caching_service/hive_cashing_service.dart';
@@ -124,7 +125,10 @@ class _ChatPageState extends State<ChatPage> {
       return Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
-          _messageLsitView(),
+          MessageListViewChatLsit(
+            LVC: widget._LVC,
+            chatID: widget.chatID,
+          ),
           Align(
               child: MessageField(context), alignment: Alignment.bottomCenter),
         ],
@@ -132,94 +136,7 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  Widget _messageLsitView() {
-    return Container(
-      height: _height * 0.815,
-      child: StreamBuilder<ChatData>(
-        stream: DBService.instance.getChat(this.widget.chatID),
-        builder: (_context, _snapshot) {
-          var _data = _snapshot.data;
-
-          //used to tell the builder to start from the end
-          if (_snapshot.connectionState == ConnectionState.waiting ||
-              _snapshot.connectionState == ConnectionState.none) {
-            return Center(
-                child: Image(image: AssetImage('assets/images/splash.png')));
-          }
-          if (_snapshot.hasError) {
-            return Center(
-                child: Text(
-                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-          }
-          //FIXME: possibly not working after a large enough amount of data is sent
-          List bubbles = _data!.messages.reversed.toList();
-          return ListView.builder(
-            itemCount: _snapshot.data!.messages.length, controller: widget._LVC,
-            physics: BouncingScrollPhysics(), reverse: true,
-            scrollDirection: Axis.vertical,
-            // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
-            itemBuilder: (_Context, index) {
-              var ChatdataOfCurrentChat = bubbles[index];
-
-              return Padding(
-                  padding: EdgeInsets.only(
-                    top: 3,
-                    bottom: 10,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment:
-                        HiveCashingService.getUserContactData().id ==
-                                bubbles[index].senderID
-                            ? MainAxisAlignment.end
-                            : MainAxisAlignment.start,
-                    children: [
-                      bubbles[index].type == "text"
-                          ? chatMessageBubble(
-                              message: ChatdataOfCurrentChat.messageContent
-                                  .toString(),
-                              isOurs:
-                                  HiveCashingService.getUserContactData().id ==
-                                      bubbles[index].senderID,
-                              ts: bubbles[index].timestamp,
-                              senderName: bubbles[index].senderName,
-                            )
-                          : bubbles[index].type == "image"
-                              ? ImageMessageBubble(
-                                  FileAdress: ChatdataOfCurrentChat
-                                      .messageContent
-                                      .toString(),
-                                  isOurs:
-                                      HiveCashingService.getUserContactData()
-                                              .id ==
-                                          bubbles[index].senderID,
-                                  ts: bubbles[index].timestamp,
-                                  senderName: bubbles[index].senderName,
-                                )
-                              : VoiceBubble(
-                                  AudioAdress: ChatdataOfCurrentChat
-                                      .messageContent
-                                      .toString(),
-                                  isOurs:
-                                      HiveCashingService.getUserContactData()
-                                              .id ==
-                                          bubbles[index].senderID,
-                                  ts: bubbles[index].timestamp,
-                                  senderName: bubbles[index].senderName,
-                                ),
-                    ],
-                  ));
-            },
-          );
-        },
-      ),
-    );
-  }
-
   Widget MessageField(BuildContext _context) {
-    print(widget.admins);
-    print(HiveCashingService.getUserContactData().id.trim());
     return Container(
       // height: _height * 0.1,
       width: _width,
@@ -266,7 +183,7 @@ class _ChatPageState extends State<ChatPage> {
         cursorColor: Colors.black,
         autocorrect: false,
         decoration: InputDecoration(
-            border: InputBorder.none, hintText: "type Massage ... "),
+            border: InputBorder.none, hintText: "type a Massage ... "),
       ),
     );
   }
@@ -297,7 +214,6 @@ class _ChatPageState extends State<ChatPage> {
                       messageContent: VoiceUrl!,
                       timestamp: Timestamp.now(),
                       type: "voice",
-                      //TODO: here after making databse > make it so here it sends the current user data in DB
                       senderName:
                           "${HiveCashingService.getUserContactData().firstName} ${HiveCashingService.getUserContactData().lastName}"));
             }
@@ -311,7 +227,6 @@ class _ChatPageState extends State<ChatPage> {
                     messageContent: txt.text.trim(),
                     timestamp: Timestamp.now(),
                     type: "text",
-                    //TODO: here after making databse > make it so here it sends the current user data in DB
                     senderName:
                         "${HiveCashingService.getUserContactData().firstName} ${HiveCashingService.getUserContactData().lastName}"));
           }
