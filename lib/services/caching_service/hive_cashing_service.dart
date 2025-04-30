@@ -25,7 +25,8 @@ abstract class HiveCashingService {
     print(data);
     print(Map<String, dynamic>.from(data));
     if (data != null && data is Map) {
-      return Contact.fromJson(id: '', snap: Map<String, dynamic>.from(data));
+      final mappedData = Map<String, dynamic>.from(data);
+      return Contact.fromJson(id: mappedData["id"], snap: mappedData);
     } else {
       return Contact(
           id: "",

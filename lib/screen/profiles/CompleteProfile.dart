@@ -38,16 +38,16 @@ class _UpdateUserDataState extends State<CompleteProfile> {
   @override
   Widget build(BuildContext _context) {
     print(HiveCashingService.getUserContactData());
-    var _auth = Provider.of<AuthProvider>(_context);
+    // var _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
     final bool isDarkMode = themeProvider.isDarkMode;
     SnackBarService.instance.buildContext = _context;
 
-    if (_auth.user == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
+    // if (_auth.user == null) {
+    //   return Center(
+    //     child: CircularProgressIndicator(),
+    //   );
+    // }
 
     return Scaffold(
       appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Complete Profile"),
@@ -108,15 +108,16 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                             .map((item) => item.value.trim())
                             .toList(),
                         year: int.parse(_yearController.text),
-                        userId: _auth.user!.uid,
+                        userId:
+                            HiveCashingService.getUserContactData().id.trim(),
                         seatNumber: int.parse(_seatIdController.text));
                     for (int i = 0; i < selectedItems.length; i++) {
                       await DBService.instance.addChatsToUser(
-                        _auth.user!.uid,
+                        HiveCashingService.getUserContactData().id.trim(),
                         selectedItems[i].value,
                       );
                       await DBService.instance.addMembersToChat(
-                        _auth.user!.uid,
+                        HiveCashingService.getUserContactData().id.trim(),
                         selectedItems[i].value,
                       );
                       SnackBarService.instance.showsSnackBarSucces(
