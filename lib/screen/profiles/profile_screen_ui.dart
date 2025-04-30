@@ -36,7 +36,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
     if (auth.user == null) {
       navigationService.instance.navigateToReplacement(LoginScreen.id);
     }
-    return StreamBuilder<contact>(
+    return StreamBuilder<Contact>(
       stream: DBService.instance.getUserData(auth.user!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {

@@ -1,4 +1,4 @@
-class contact {
+class Contact {
   final String id;
   final String firstName;
   final String lastName;
@@ -7,7 +7,7 @@ class contact {
   final bool isComplete;
   final String phoneNumber;
   final String? seatNumber;
-  contact(
+  Contact(
       {required this.id,
       required this.seatNumber,
       required this.firstName,
@@ -17,9 +17,9 @@ class contact {
       required this.isComplete,
       required this.phoneNumber});
 
-  factory contact.fromJson(
+  factory Contact.fromJson(
       {required Map<String, dynamic> snap, required String id}) {
-    return contact(
+    return Contact(
       id: id,
       seatNumber: snap["seatNumber"],
       firstName: snap["firstName"],

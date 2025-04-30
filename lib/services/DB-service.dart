@@ -80,11 +80,11 @@ class DBService {
   }
 
 //how to get a file from the cloud as a model
-  Stream<contact> getUserData(String _uid) {
+  Stream<Contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
-      print(contact.fromJson(id: _snap.id, snap: _snap.data()!));
-      return contact.fromJson(id: _snap.id, snap: _snap.data()!);
+      print(Contact.fromJson(id: _snap.id, snap: _snap.data()!));
+      return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });
   }
 
@@ -156,7 +156,7 @@ class DBService {
     }
   }
 
-  Stream<List<contact>> getChatMembersData(String chatId) {
+  Stream<List<Contact>> getChatMembersData(String chatId) {
     return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
       if (userIds.isEmpty) {
         return Stream.value([]); // Return empty list if no members
@@ -168,7 +168,7 @@ class DBService {
           .where(FieldPath.documentId, whereIn: userIds) // very efficiant
           .snapshots()
           .map((snapshot) => snapshot.docs
-              .map((doc) => contact.fromJson(id: doc.id, snap: doc.data()))
+              .map((doc) => Contact.fromJson(id: doc.id, snap: doc.data()))
               .toList());
     });
   }
