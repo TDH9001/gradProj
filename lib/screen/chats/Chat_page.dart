@@ -2,21 +2,13 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:appbar_dropdown/appbar_dropdown.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/models/Chats.dart';
-import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_message_button.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_list_view_chat_lsit.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
-import 'package:grad_proj/screen/splash/splash_screen.dart';
 import 'package:grad_proj/services/caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -28,7 +20,6 @@ import 'package:uuid/uuid.dart';
 import '../../theme/light_theme.dart';
 import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +27,6 @@ class ChatPage extends StatefulWidget {
   ChatPage({super.key, required this.chatID, required this.admins});
   final String id = "ChatPage";
   String chatID;
-  //late AuthProvider _auth;
   GlobalKey<FormState> GK = GlobalKey<FormState>();
   String textTosend = "";
   final ScrollController _LVC = ScrollController();
@@ -270,6 +260,5 @@ class AppbarGestureDetector extends StatelessWidget
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(56.0);
 }
