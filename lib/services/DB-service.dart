@@ -78,6 +78,7 @@ class DBService {
       required String userId,
       required int seatNumber}) async {
     try {
+      print(year);
       await _db.collection(_UserCollection).doc(userId).update({
         "academicYear": year,
         "classes": classes,
@@ -85,6 +86,7 @@ class DBService {
         "seatNumber": seatNumber
       });
       Contact currData = await HiveCashingService.getUserContactData();
+    
       HiveCashingService.updateUserContactData(Contact(
               id: userId,
               seatNumber: seatNumber,
@@ -95,7 +97,7 @@ class DBService {
               isComplete: true,
               phoneNumber: currData.phoneNumber)
           .toJson());
-      print(await HiveCashingService.getUserContactData());
+      print((await HiveCashingService.getUserContactData()).toJson());
 
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
@@ -108,6 +110,7 @@ class DBService {
   Stream<Contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
+      Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
       print(Contact.fromJson(id: _snap.id, snap: _snap.data()!));
       return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });

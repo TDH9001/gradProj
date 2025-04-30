@@ -136,7 +136,10 @@ class _MyWidgetState extends State<Universaltextformfield> {
               return 'Phone number cannot be empty.';
             }
             if (!RegExp(r'^\d+$').hasMatch(data)) {
-              return 'Year number must contain digits.';
+              return 'Year number must only contain digits.';
+            }
+            if (data.trim().length > 6) {
+              return "the max length for seat number is 6 digits.";
             }
           } //username , phone , etc
         },

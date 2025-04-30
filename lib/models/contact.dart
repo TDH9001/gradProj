@@ -24,10 +24,10 @@ class Contact {
       seatNumber: snap["seatNumber"],
       firstName: snap["firstName"],
       lastName: snap["lastName"],
-      classes: snap["classes"],
+      classes: List<String>.from(snap["classes"] ?? []),
       year: snap["academicYear"],
       isComplete: snap["isComplete"],
-      phoneNumber: snap["phoneNumber"],
+      phoneNumber: snap["PhoneNumber"] ?? "THERE IS AN ERROR HEREE",
     );
   }
 
@@ -36,7 +36,7 @@ class Contact {
         "firstName": firstName,
         "lastName": lastName,
         "classes": classes,
-        "year": year,
+        "academicYear": year,
         "isComplete": isComplete,
         "phoneNumber": phoneNumber,
         "seatNumber": seatNumber

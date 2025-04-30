@@ -20,10 +20,12 @@ abstract class HiveCashingService {
     await _userContactData.put(CashingServiceHiveKeys.userContactData, data);
   }
 
-  static Future<Contact> getUserContactData() async {
-    var data = _userContactData.get(CashingServiceHiveKeys.userContactData);
-    if (data.isNotEmpty && data != null) {
-      return Contact.fromJson(id: '', snap: data);
+  static Contact getUserContactData() {
+    final data = _userContactData.get(CashingServiceHiveKeys.userContactData);
+    print(data);
+    print(Map<String, dynamic>.from(data));
+    if (data != null && data is Map) {
+      return Contact.fromJson(id: '', snap: Map<String, dynamic>.from(data));
     } else {
       return Contact(
           id: "",
@@ -37,6 +39,4 @@ abstract class HiveCashingService {
     }
     //the ID should always be provided by the AuthProvider > if the user is signed in
   }
-
-  //TODO: add (updateUserdata) to the (getUserContactDAta) function in DBservice
 }
