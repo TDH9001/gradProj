@@ -1,6 +1,8 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
+import "package:grad_proj/models/contact.dart";
+import "package:grad_proj/services/DB-service.dart";
 import "package:grad_proj/services/caching_service/hive_cashing_service.dart";
 import "package:grad_proj/widgets/bottom_navegation_bar_screen.dart";
 import "package:grad_proj/screen/splash/splash_screen.dart";
@@ -78,6 +80,9 @@ class AuthProvider extends ChangeNotifier {
       instance.user = _result.user!;
       //update last seen time
       status = AuthStatus.Authenticated;
+      HiveCashingService.updateUserContactData(
+          (await DBService.instance.getUserData(_result.user!.uid).first)
+              .toJson());
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
       navigationService.instance.navigateToReplacement("HomeScreen");
