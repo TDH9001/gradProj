@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/features/auth/login_screen.dart';
@@ -26,8 +27,8 @@ class ResetpasswordScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 40),
-              const Text(
-                'New Password',
+               Text(
+                'New_pass'.tr(),
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w600,
@@ -36,11 +37,11 @@ class ResetpasswordScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 40, right: 40, top: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40, top: 10),
                 child: Text(
-                  'Your new password must be different from previously used password',
-                  style: TextStyle(
+                  'pass_require'.tr(),
+                  style: const TextStyle(
                     fontSize: 19,
                     color: Colors.black54,
                   ),
@@ -66,7 +67,7 @@ class ResetpasswordScreen extends StatelessWidget {
               // ),
               const SizedBox(height: 40),
               PrimaryButton(
-                buttontext: 'Create New Password',
+                buttontext: 'create_pass'.tr(),
                 func: () {
                   AuthProvider.instance
                       .sendResetPassword(email: t1.text.trim());

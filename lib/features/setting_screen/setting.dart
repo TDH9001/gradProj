@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/custom_card.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
@@ -23,7 +24,7 @@ class _SettingState extends State<Setting> {
     return Scaffold(
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
-        title: "Setting",
+        title: "setting_title".tr(),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -37,7 +38,7 @@ class _SettingState extends State<Setting> {
           const SizedBox(height: 8),
           CustomCard(
             icon: Icons.brightness_6,
-            title: "Theme",
+            title: "setting_theme".tr(),
             onTap: () {
               showModalBottomSheet(
                 context: context,
@@ -47,7 +48,7 @@ class _SettingState extends State<Setting> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       RadioListTile<ThemeModeType>(
-                        title: const Text("Light"),
+                        title:  Text("setting_light_mode".tr()),
                         value: ThemeModeType.light,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {
@@ -56,7 +57,7 @@ class _SettingState extends State<Setting> {
                         },
                       ),
                       RadioListTile<ThemeModeType>(
-                        title: const Text("Dark"),
+                        title: const Text("setting_dark_mode"),
                         value: ThemeModeType.dark,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {
@@ -65,7 +66,7 @@ class _SettingState extends State<Setting> {
                         },
                       ),
                       RadioListTile<ThemeModeType>(
-                        title: const Text("System"),
+                        title: const Text("setting_system_mode"),
                         value: ThemeModeType.system,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {

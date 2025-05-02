@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/features/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
@@ -31,10 +32,10 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
   ];
 
   final List<String> appBarTitles = [
-    'Home',
-    'Chats', // Title for RecentChats()
-    'Table', // Title for TableScreen()
-    'About',
+    'aapp_title_home'.tr(),
+    'app_title_chats'.tr(), // Title for RecentChats()
+    'app_title_table'.tr(), // Title for TableScreen()
+    'app_title_about'.tr(),
   ];
 
   @override

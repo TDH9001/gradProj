@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:grad_proj/features/about_screen/question_screen.dart';
 import 'package:grad_proj/features/chats/chat_data_screen.dart';
 import 'package:grad_proj/features/onboarding_screen/onboarding_screen.dart';
@@ -26,10 +26,22 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MultiProvider(providers: [
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('ar' ),
+      child:
+      MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
-  ], child: homePage()));
+  ],
+          child: homePage()
+      ),
+    ),
+    );
 }
 
 class homePage extends StatelessWidget {
@@ -54,11 +66,10 @@ class homePage extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFF1C1C1C)
         //Color(0xFF2E3B55),
       ),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
 
-      // theme: themeProvider.lightTheme,
-      // darkTheme: themeProvider.darkTheme,
-
-      //darkTheme: ThemeData.dark(),
       //FIXME: fix the isseus with levels in the ABOUT screens
       //FIXME: make a model for the table
       //FIXME: implement the table screen and its stuff

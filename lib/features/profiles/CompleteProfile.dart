@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
-import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -66,19 +66,14 @@ class _UpdateUserDataState extends State<CompleteProfile> {
             padding: EdgeInsets.all(12),
             children: [
               SizedBox(height: 200),
-              Text('Please register your academic year and courses',
+              Text('profile_no_course'.tr(),
                   style: TextStyle(
                     fontSize: 18,
                     color:  isDarkMode ? Colors.white : Color(0xFF9CA3AF),
                   )),
-              // TextHeader(
-              //   largeText: "Course Register ",
-              //   littleText: "Please register your academic year and courses",
-              //   height: 140,
-              // ),
               SizedBox(height: 20),
               _buildInfoCard(
-                label: "Academic Year",
+                label: "profile_academicyear".tr(),
                 child: Universaltextformfield(
                   label: "Academic Year",
                   Password: false,
@@ -87,7 +82,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               ),
               SizedBox(height: 20),
               _buildInfoCard(
-                label: "Courses",
+                label: "profile_courses".tr(),
                 child: DropdownSelect(
                   data: courses,
                   cont: _Listcontroller,
@@ -95,7 +90,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               ),
               SizedBox(height: 40),
               PrimaryButton(
-                buttontext: "Validate and Submit",
+                buttontext: "profile_submit".tr(),
                 func: () async {
                   if (CompleteProfile._GK.currentState?.validate() ?? false) {
                     final selectedItems = _Listcontroller.selectedItems;

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../theme/theme_provider.dart';
 
 class CustomScibutton extends StatelessWidget {
   final String text;
@@ -7,6 +10,8 @@ class CustomScibutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(

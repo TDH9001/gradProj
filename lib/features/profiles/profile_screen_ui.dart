@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/features/auth/login_screen.dart';
 import 'package:grad_proj/features/profiles/CompleteProfile.dart';
@@ -17,14 +18,11 @@ class ProfileScreenUi extends StatefulWidget {
   final TextEditingController Controller;
 
   const ProfileScreenUi({super.key, required this.height, required this.length, required this.Controller});
-
   @override
   State<ProfileScreenUi> createState() => _ProfileScreenUiState();
 }
-
 class _ProfileScreenUiState extends State<ProfileScreenUi> {
   bool visible = false;
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -39,37 +37,32 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
         if (snapshot.hasError) {
           return Center(
             child: Text(
-              "Error: ${snapshot.error}\nPlease update your data.",
+              "error_message".tr(args: [snapshot.error.toString()]),
               style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
             ),
           );
         }
         if (snapshot.data == null) return SizedBox.shrink();
-
         final userData = snapshot.data;
         final isComplete = userData?.isComplete ?? false;
-
         return isComplete
             ? ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
-            _buildTextField("Name", userData?.FirstName, isDarkMode),
-            _buildTextField("Email", auth.user!.email, isDarkMode),
+            _buildTextField("profile_name".tr(), userData?.FirstName, isDarkMode),
+            _buildTextField("profile_email".tr(), auth.user!.email, isDarkMode),
             _buildPhoneField(userData?.phoneNumber, isDarkMode),
-            _buildTextField("Academic Year", userData?.Year.toString(), isDarkMode),
+            _buildTextField("profile_academic_year".tr(), userData?.Year.toString(), isDarkMode),
             _buildCoursesList(userData!.Classes, isDarkMode),
             const SizedBox(height: 20),
             PrimaryButton(
-              buttontext: "Edit Data",
+              buttontext: "profile_edit_data".tr(),
               func: () => navigationService.instance.navigateTo(CompleteProfile.id),
             ),
           ],
         )
-            : CompleteProfile();
-      },
-    );
+            : CompleteProfile();},);
   }
-
   Widget _buildTextField(String label, String? value, bool isDarkMode) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -88,7 +81,6 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
       ),
     );
   }
-
   Widget _buildPhoneField(String? phoneNumber, bool isDarkMode) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -98,24 +90,19 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
         style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
         initialCountryCode: 'EG',
         decoration: InputDecoration(
-          labelText: "Phone Number",
+          labelText: "profile_phone".tr(),
           labelStyle: TextStyle(color: isDarkMode ? Colors.white70 : Colors.black87),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: isDarkMode ? Colors.white54 : Color(0xff769BC6)),
             borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
+          ),),),
     );
   }
-
   Widget _buildCoursesList(List<String> classes, bool isDarkMode) {
     if (classes.isEmpty) {
       return Center(
-        child: Text(
-          'No courses enrolled yet.',
-          style: TextStyle(color: isDarkMode ? Colors.white60 : Colors.grey[600], fontSize: 16),
-        ),
+        child: Text('profile_no_courses'.tr(),
+          style: TextStyle(color: isDarkMode ? Colors.white60 : Colors.grey[600], fontSize: 16),),
       );
     }
     return Card(
@@ -123,16 +110,12 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ExpansionTile(
-        leading: Icon(Icons.book, color: isDarkMode ? Colors.blueAccent : Color(0xff769BC6)),
-        title: Text("Courses Enrolled", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-        children: classes
-            .map(
-              (course) => ListTile(
+        leading: Icon(Icons.book, color: isDarkMode ? Color(0xff769BC6) : Color(0xff769BC6)),
+        title: Text("profile_courses_enrolled".tr(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        children: classes.map((course) => ListTile(
             title: Text(course, style: TextStyle(color: isDarkMode ? Colors.white : Colors.black)),
           ),
-        )
-            .toList(),
-      ),
+        ).toList(),),
     );
   }
 }

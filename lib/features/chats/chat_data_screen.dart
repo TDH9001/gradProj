@@ -5,22 +5,10 @@ import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/features/chats/ChatDataScreenWidgets.dart';
-import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/Scedule_creation_service.dart';
-import 'package:grad_proj/services/navigation_Service.dart';
+
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/theme/light_theme.dart';
-import 'package:grad_proj/widgets/UniversalTextFormField.dart';
-import 'package:grad_proj/widgets/category_card.dart';
-import 'package:grad_proj/widgets/customTextField.dart';
-import 'package:grad_proj/widgets/custom_card.dart';
-import 'package:grad_proj/widgets/custom_dropdown.dart';
-import 'package:grad_proj/widgets/dropdown_select_widget.dart';
-import 'package:grad_proj/widgets/primary_button.dart';
-import 'package:grad_proj/widgets/updated_scedule_item.dart';
-import 'package:grad_proj/widgets/sceduleitem.dart';
-import 'package:multi_dropdown/multi_dropdown.dart';
-import 'package:omni_datetime_picker/omni_datetime_picker.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:provider/provider.dart';
 

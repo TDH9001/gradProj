@@ -9,11 +9,9 @@ import 'chat_options.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
-
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
-
 class _ChatScreenState extends State<ChatScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ChatItem> _messages = [];
@@ -27,7 +25,6 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     _loadQuestionsFromJson();
   }
-
   Future<void> _loadQuestionsFromJson() async {
     final String response = await rootBundle.loadString(
       'assets/chat_data.json',
@@ -37,10 +34,8 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {
       _questionMap = {for (var q in data) q['id']: QuestionModel.fromJson(q)};
     });
-
     _showCurrentQuestion();
   }
-
   void _handleSubmitted(String text) {
     if (text.isEmpty) return;
 
@@ -60,7 +55,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _showCurrentQuestion() {
     if (_currentQuestionId == null) return;
-
     final question = _questionMap[_currentQuestionId];
     if (question == null) return;
 
@@ -71,29 +65,23 @@ class _ChatScreenState extends State<ChatScreen> {
           text: question.question,
           isUser: false,
           timestamp: DateTime.now(),
-        ),
-      );
-
+        ),);
       _messages.insert(
         0,
         ChatOptions(
           options: question.options.map((o) => o.text).toList(),
           onOptionSelected: _handleOptionSelected,
           timestamp: DateTime.now(),
-        ),
-      );
+        ),);
     });
   }
-
   void _handleOptionSelected(String selectedOption) {
     final current = _questionMap[_currentQuestionId];
     final selected = current?.options.firstWhere(
           (o) => o.text == selectedOption,
       orElse: () => OptionModel(text: '', next: ''),
     );
-
     if (selected == null || selected.next.isEmpty) return;
-
     setState(() {
       _messages.insert(
         0,
@@ -123,8 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: ListView.builder(
                 reverse: true,
                 itemCount: _messages.length,
-                itemBuilder: (context, index) => _messages[index],
-              ),
+                itemBuilder: (context, index) => _messages[index],),
             ),
             const SizedBox(height: 16.0),
             Container(
@@ -142,24 +129,15 @@ class _ChatScreenState extends State<ChatScreen> {
                           borderRadius: BorderRadius.circular(20.0),
                           borderSide: BorderSide(
                             color: Colors.grey,
-                            width: 1.0,
-                          ),
-                        ),
+                            width: 1.0,),),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                           borderSide: const BorderSide(
                             color: Color(0xff2E5077),
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                    ),
+                            width: 1.0,),),),),
                   ),
-                  IconButton(
-                    color: Color(0xff2E5077),
-                    icon: const Icon(Icons.send),
-                    onPressed: () => _handleSubmitted(_controller.text),
-                  ),
+                  IconButton(color: Color(0xff2E5077), icon: const Icon(Icons.send),
+                    onPressed: () => _handleSubmitted(_controller.text),),
                 ],
               ),
             ),
