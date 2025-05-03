@@ -34,16 +34,21 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
   Future<void> _loadCachedImage() async {
     final fileInfo =
         await DefaultCacheManager().getFileFromCache(widget.FileAdress);
+    //get the thing in the DB slot
+
+    if (fileInfo != null && await fileInfo.file.exists()) {
+      setState(() {
+        cachedImage = fileInfo.file;
+      });
+      return;
+    }
+    // Check if the file is already cached
     try {
-      if (fileInfo != null && await fileInfo.file.exists()) {
-        setState(() {
-          cachedImage = fileInfo.file;
-        });
-      } else {
+      {
         // Download and cache the file if not already cached
         final downloadedFile =
             await DefaultCacheManager().getSingleFile(widget.FileAdress);
-        if (context.mounted) {
+        if (mounted) {
           setState(() {
             cachedImage = downloadedFile;
           });
