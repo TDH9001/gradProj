@@ -1,11 +1,12 @@
-import 'dart:math' as MainAxisSize;
-import 'dart:ui';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 
-class ImageMessageBubble extends StatelessWidget {
+class ImageMessageBubble extends StatefulWidget {
   ImageMessageBubble(
       {super.key,
       required this.FileAdress,
@@ -16,6 +17,50 @@ class ImageMessageBubble extends StatelessWidget {
   final bool isOurs;
   final Timestamp ts;
   final String senderName;
+
+  @override
+  State<ImageMessageBubble> createState() => _ImageMessageBubbleState();
+}
+
+@override
+class _ImageMessageBubbleState extends State<ImageMessageBubble> {
+  File? cachedImage;
+
+  void initState() {
+    super.initState();
+    _loadCachedImage();
+  }
+
+  Future<void> _loadCachedImage() async {
+    final fileInfo =
+        await DefaultCacheManager().getFileFromCache(widget.FileAdress);
+    try {
+      if (fileInfo != null && await fileInfo.file.exists()) {
+        setState(() {
+          cachedImage = fileInfo.file;
+        });
+      } else {
+        // Download and cache the file if not already cached
+        final downloadedFile =
+            await DefaultCacheManager().getSingleFile(widget.FileAdress);
+        if (context.mounted) {
+          setState(() {
+            cachedImage = downloadedFile;
+          });
+        }
+      }
+    } catch (e) {
+      print(e);
+      setState(() {
+        cachedImage = null;
+      });
+      SnackBarService.instance.buildContext = context;
+      SnackBarService.instance.showsSnackBarError(
+          text:
+              "the iamge faled to laod > please ensure you have an internet connection");
+    }
+  }
+
   final _numMap = {
     1: "jan ",
     2: "feb",
@@ -30,6 +75,7 @@ class ImageMessageBubble extends StatelessWidget {
     11: "nov",
     12: "dec"
   };
+
   final _weekmap = {
     6: "saturday",
     7: 'sunday',
@@ -39,16 +85,10 @@ class ImageMessageBubble extends StatelessWidget {
     4: "thursday",
     5: "friday"
   };
-  // List<Color> colorScheme = isOurs
-  //     ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
-  //     : [
-  //         Color(0xFFA3BFE0),
-  //         Color(0xFF769BC6),
-  //       ];
 
   @override
   Widget build(BuildContext context) {
-    List<Color> colorScheme = isOurs
+    List<Color> colorScheme = widget.isOurs
         ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
         : [
             Color(0xFFA3BFE0),
@@ -60,39 +100,47 @@ class ImageMessageBubble extends StatelessWidget {
           builder: (_) => Dialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              child: Image(image: NetworkImage(FileAdress)))),
+              child: Image(image: NetworkImage(widget.FileAdress)))),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             gradient: LinearGradient(
                 colors: colorScheme,
                 stops: [0.40, 0.70],
-                begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-                end: isOurs ? Alignment.topRight : Alignment.topLeft)),
+                begin: widget.isOurs
+                    ? Alignment.bottomLeft
+                    : Alignment.bottomRight,
+                end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(
           // mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment:
-              isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+              widget.isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
           children: [
-            Text(senderName),
+            Text(widget.senderName),
             SizedBox(
               height: 9,
             ),
+            //where image is displayed
             Container(
               height: MediaService.instance.getHeight() * 0.45,
               width: MediaService.instance.getWidth() * 0.6,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: NetworkImage(FileAdress), fit: BoxFit.fill)),
+                borderRadius: BorderRadius.circular(20),
+                image: cachedImage != null
+                    ? DecorationImage(
+                        image: FileImage(cachedImage!),
+                        fit: BoxFit.fill,
+                      )
+                    : null,
+              ),
             ),
             SizedBox(
               height: 15,
             ),
             Text(
-              "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
+              "${_weekmap[widget.ts.toDate().weekday]} ${_numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
               style: TextStyle(fontSize: 16),
             )
           ],
@@ -101,84 +149,3 @@ class ImageMessageBubble extends StatelessWidget {
     );
   }
 }
-
-// Widget _imageMessageBubble(
-//     {required FileAdress,
-//     required bool isOurs,
-//     required Timestamp ts,
-//     required String senderName}) {
-//   var _numMap = {
-//     1: "jan ",
-//     2: "feb",
-//     3: "mar",
-//     4: 'apr',
-//     5: "may",
-//     6: "jun",
-//     7: "jul",
-//     8: "aug",
-//     9: "sep",
-//     10: "oct",
-//     11: "nov",
-//     12: "dec"
-//   };
-//   var _weekmap = {
-//     6: "saturday",
-//     7: 'sunday',
-//     1: "monday",
-//     2: "tuesday",
-//     3: "wednesday",
-//     4: "thursday",
-//     5: "friday"
-//   };
-//   List<Color> colorScheme = isOurs
-//       ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
-//       : [
-//           Color(0xFFA3BFE0),
-//           Color(0xFF769BC6),
-//         ];
-//   return GestureDetector(
-//     onTap: () => showDialog(
-//         context: context,
-//         builder: (_) => Dialog(
-//             shape:
-//                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-//             child: Image(image: NetworkImage(FileAdress)))),
-//     child: Container(
-//       decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(15),
-//           gradient: LinearGradient(
-//               colors: colorScheme,
-//               stops: [0.40, 0.70],
-//               begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-//               end: isOurs ? Alignment.topRight : Alignment.topLeft)),
-//       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-//       child: Column(
-//         mainAxisSize: MainAxisSize.max,
-//         mainAxisAlignment: MainAxisAlignment.spaceAround,
-//         crossAxisAlignment:
-//             isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-//         children: [
-//           Text(senderName),
-//           SizedBox(
-//             height: 9,
-//           ),
-//           Container(
-//             height: _height * 0.45,
-//             width: _width * 0.6,
-//             decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(20),
-//                 image: DecorationImage(
-//                     image: NetworkImage(FileAdress), fit: BoxFit.fill)),
-//           ),
-//           SizedBox(
-//             height: 15,
-//           ),
-//           Text(
-//             "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
-//             style: TextStyle(fontSize: 16),
-//           )
-//         ],
-//       ),
-//     ),
-//   );
-// }

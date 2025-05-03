@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
 import "package:grad_proj/models/contact.dart";
 import "package:grad_proj/services/DB-service.dart";
-import "package:grad_proj/services/caching_service/hive_cashing_service.dart";
+import "package:grad_proj/services/hive_caching_service/hive_cashing_service.dart";
 import "package:grad_proj/widgets/bottom_navegation_bar_screen.dart";
 import "package:grad_proj/screen/splash/splash_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";

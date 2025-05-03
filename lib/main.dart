@@ -10,7 +10,7 @@ import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/setting_screen/setting.dart';
-import 'package:grad_proj/services/caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/theme/dark_theme_colors.dart';
 import 'package:grad_proj/theme/light_theme.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';

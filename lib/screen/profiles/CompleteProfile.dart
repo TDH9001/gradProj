@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';

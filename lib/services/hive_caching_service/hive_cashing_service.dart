@@ -1,5 +1,5 @@
 import 'package:grad_proj/models/contact.dart';
-import 'package:grad_proj/services/caching_service/cashing_service_hive_keys.dart';
+import 'package:grad_proj/services/hive_caching_service/cashing_service_hive_keys.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 

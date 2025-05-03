@@ -41,11 +41,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-
-    // chatMembersFuture = DBService.instance.getMembersOfChat(widget.chatID);
-
-    //  _audioPlayer = AudioPlayer();
-    // Call the method during initialization
   }
 
   @override
@@ -79,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
       return Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
-          MessageListViewChatLsit(
+          MessageListViewChatList(
             LVC: widget._LVC,
             chatID: widget.chatID,
           ),

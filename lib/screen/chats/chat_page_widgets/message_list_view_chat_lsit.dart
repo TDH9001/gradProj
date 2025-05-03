@@ -1,17 +1,14 @@
-import 'dart:math' as MainAxisSize;
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
-class MessageListViewChatLsit extends StatelessWidget {
-  MessageListViewChatLsit({super.key, required this.LVC, required this.chatID});
+class MessageListViewChatList extends StatelessWidget {
+  MessageListViewChatList({super.key, required this.LVC, required this.chatID});
   final LVC;
   final chatID;
 
