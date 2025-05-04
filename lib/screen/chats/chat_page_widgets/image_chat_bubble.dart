@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class ImageMessageBubble extends StatefulWidget {
   ImageMessageBubble(
@@ -26,10 +29,26 @@ class ImageMessageBubble extends StatefulWidget {
 @override
 class _ImageMessageBubbleState extends State<ImageMessageBubble> {
   File? cachedImage;
+  bool isLoading = false;
+  double progress = 0;
 
   void initState() {
     super.initState();
     _loadCachedImage();
+  }
+
+  @override
+  void didUpdateWidget(ImageMessageBubble oldWidget) {
+    //tis ameks sure that the iamge is not the same if another is sent
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.FileAdress != widget.FileAdress) {
+      setState(() {
+        cachedImage = null;
+        isLoading = true;
+        progress = 0.0;
+      });
+      _loadCachedImage();
+    }
   }
 
   Future<void> _loadCachedImage() async {
@@ -39,21 +58,52 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
     //get the thing in the DB slot
 
     if (fileInfo != null && await fileInfo.file.exists()) {
-      setState(() {
-        cachedImage = fileInfo.file;
-      });
+      if (mounted) {
+        setState(() {
+          cachedImage = fileInfo.file;
+        });
+      }
+
       return;
     } else if (!connectResult.contains(ConnectivityResult.none)) {
       try {
         {
-          // Download and cache the file if not already cached
-          final downloadedFile =
-              await DefaultCacheManager().getSingleFile(widget.FileAdress);
-          if (mounted) {
-            setState(() {
-              cachedImage = downloadedFile;
-            });
-          }
+          isLoading = true;
+          final downloadedFile = await DefaultCacheManager()
+              .getFileStream(widget.FileAdress, withProgress: true)
+              .listen((fileResponse) {
+            if (fileResponse is DownloadProgress) {
+              print(fileResponse.progress! / fileResponse.totalSize!);
+              if (mounted) {
+                Timer(Duration(milliseconds: 750), () {
+                  setState(() {
+                    progress = fileResponse.progress! / fileResponse.totalSize!;
+                  });
+                });
+              }
+            } else if (fileResponse is FileInfo &&
+                mounted &&
+                widget.FileAdress == fileResponse.originalUrl) {
+              if (mounted) {
+                print(
+                    "Download complete, file path: ${fileResponse.file.path}");
+                setState(() {
+                  progress = 1.0;
+                  isLoading = false;
+                  cachedImage = fileResponse.file;
+                });
+              }
+            }
+          }, onError: (e) {
+            if (mounted) {
+              print(e);
+              setState(() {
+                cachedImage = File("notFound");
+                progress = 0;
+              });
+              return;
+            }
+          });
         }
       } catch (e) {
         print(e);
@@ -140,32 +190,57 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
               height: 9,
             ),
             //where image is displayed
-            cachedImage != null // if image file is null >  do not show it
+            cachedImage !=
+                    null // if image file is null >  check if loading is true or false
                 ? Container(
                     height: MediaService.instance.getHeight() * 0.45,
                     width: MediaService.instance.getWidth() * 0.6,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                        image: FileImage(cachedImage!),
+                        image: cachedImage != File("notFound")
+                            ? FileImage(cachedImage!)
+                            : AssetImage("assets/images/file_not_found.png"),
                         fit: BoxFit.fill,
                       ),
                     ),
                   )
-                : Container(
-                    height: MediaService.instance.getHeight() * 0.2,
-                    width: MediaService.instance.getWidth() * 0.4,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/offline_image.png'),
-                          fit: BoxFit.fitWidth,
+                : isLoading ==
+                        false //if it's not loading > show placeholder image
+                    ? Container(
+                        height: MediaService.instance.getHeight() * 0.2,
+                        width: MediaService.instance.getWidth() * 0.4,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image:
+                                  AssetImage('assets/images/offline_image.png'),
+                              fit: BoxFit.fitWidth,
+                            )),
+                      )
+                    : Container(
+                        // if it's loading > show loading indicator
+                        height: MediaService.instance.getHeight() * 0.2,
+                        width: MediaService.instance.getWidth() * 0.4,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                            child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              CircularProgressIndicator(
+                                color: Colors.greenAccent,
+                              ),
+                              SizedBox(
+                                  height:
+                                      MediaService.instance.getHeight() * 0.02),
+                              Text(
+                                  "loading. : ${(progress).toString().substring(0, 6)} %")
+                            ],
+                          ),
                         )),
-                    // child: Center(
-                    //   child:
-                    //       GestureDetector(child: CircularProgressIndicator()),
-                    // ),
-                  ),
+                      ),
             SizedBox(
               height: 15,
             ),

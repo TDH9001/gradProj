@@ -67,6 +67,8 @@ class MessageListViewChatList extends StatelessWidget {
                             )
                           : bubbles[index].type == "image"
                               ? ImageMessageBubble(
+                                  key: ValueKey(
+                                      ChatdataOfCurrentChat), //this to tell flutter it's independant
                                   FileAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),
