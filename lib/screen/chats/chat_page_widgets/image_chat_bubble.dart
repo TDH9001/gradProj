@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:http/http.dart' as http;
 
 class ImageMessageBubble extends StatefulWidget {
   ImageMessageBubble(
@@ -29,10 +30,20 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
   File? cachedImage;
   bool isLoading = false;
   double progress = 0;
+  bool isFailed = false;
 
   void initState() {
     super.initState();
     _loadCachedImage();
+  }
+
+  Future<bool> urlExists(String url) async {
+    try {
+      final response = await http.head(Uri.parse(url));
+      return response.statusCode == 200;
+    } catch (_) {
+      return false;
+    }
   }
 
   @override
@@ -64,10 +75,24 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
 
       return;
     } else if (!connectResult.contains(ConnectivityResult.none)) {
+      if (!await urlExists(widget.FileAdress)) {
+        if (mounted) {
+          setState(() {
+            isFailed = true;
+            cachedImage = null;
+            isLoading = false;
+          });
+        }
+        return;
+      }
       try {
         {
-          isLoading = true;
-          final downloadedFile = await DefaultCacheManager()
+          if (mounted) {
+            setState(() {
+              isLoading = true;
+            });
+          }
+          await DefaultCacheManager()
               .getFileStream(widget.FileAdress, withProgress: true)
               .listen((fileResponse) {
             if (fileResponse is DownloadProgress) {
@@ -92,21 +117,13 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
                 });
               }
             }
-          }, onError: (e) {
-            if (mounted) {
-              print(e);
-              setState(() {
-                cachedImage = File("notFound");
-                progress = 0;
-              });
-              return;
-            }
           });
         }
       } catch (e) {
         print(e);
         setState(() {
           cachedImage = null;
+          isFailed = true;
         });
         if (mounted) {
           SnackBarService.instance.buildContext = context;
@@ -188,58 +205,68 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
               height: 9,
             ),
             //where image is displayed
-            cachedImage !=
-                    null // if image file is null >  check if loading is true or false
+            cachedImage != null &&
+                    !isFailed //if not null and no error > then image
                 ? Container(
                     height: MediaService.instance.getHeight() * 0.45,
                     width: MediaService.instance.getWidth() * 0.6,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                        image: cachedImage != null &&
-                                cachedImage == File("notFound")
-                            ? FileImage(cachedImage!)
-                            : AssetImage("assets/images/file_not_found.png"),
+                        image: FileImage(cachedImage!),
                         fit: BoxFit.fill,
                       ),
                     ),
                   )
-                : isLoading ==
-                        false //if it's not loading > show placeholder image
+                : isFailed //if it's failed > show placeholder image
                     ? Container(
                         height: MediaService.instance.getHeight() * 0.2,
                         width: MediaService.instance.getWidth() * 0.4,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
-                              image:
-                                  AssetImage('assets/images/offline_image.png'),
+                              image: AssetImage(
+                                  "assets/images/file_not_found.png"),
                               fit: BoxFit.fitWidth,
                             )),
                       )
-                    : Container(
-                        // if it's loading > show loading indicator
-                        height: MediaService.instance.getHeight() * 0.2,
-                        width: MediaService.instance.getWidth() * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                            child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              CircularProgressIndicator(
-                                color: Colors.greenAccent,
+                    : isLoading ==
+                            false //if it's not loading > show placeholder image
+                        ? Container(
+                            height: MediaService.instance.getHeight() * 0.2,
+                            width: MediaService.instance.getWidth() * 0.4,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/offline_image.png'),
+                                  fit: BoxFit.fitWidth,
+                                )),
+                          )
+                        : Container(
+                            // if it's loading > show loading indicator
+                            height: MediaService.instance.getHeight() * 0.2,
+                            width: MediaService.instance.getWidth() * 0.4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                                child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  CircularProgressIndicator(
+                                    color: Colors.greenAccent,
+                                  ),
+                                  SizedBox(
+                                      height:
+                                          MediaService.instance.getHeight() *
+                                              0.02),
+                                  Text(
+                                      "loading: ${(progress * 100).toStringAsFixed(2)} %")
+                                ],
                               ),
-                              SizedBox(
-                                  height:
-                                      MediaService.instance.getHeight() * 0.02),
-                              Text(
-                                  "loading. : ${(progress).toString().substring(0, 6)} %")
-                            ],
+                            )),
                           ),
-                        )),
-                      ),
             SizedBox(
               height: 15,
             ),
