@@ -30,7 +30,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-
+// use this to not force re-downloads
   File? cachedImage;
   bool isLoading = false;
   double progress = 0;
