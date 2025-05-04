@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class ImageMessageBubble extends StatefulWidget {
   ImageMessageBubble(
@@ -198,9 +196,12 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                        image: cachedImage != File("notFound")
-                            ? FileImage(cachedImage!)
-                            : AssetImage("assets/images/file_not_found.png"),
+                        image: cachedImage != null
+                            ? AssetImage('assets/images/offline_image.png')
+                            : cachedImage != File("notFound")
+                                ? FileImage(cachedImage!)
+                                : AssetImage(
+                                    "assets/images/file_not_found.png"),
                         fit: BoxFit.fill,
                       ),
                     ),
