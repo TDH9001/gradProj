@@ -196,12 +196,10 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
-                        image: cachedImage != null
-                            ? AssetImage('assets/images/offline_image.png')
-                            : cachedImage != File("notFound")
-                                ? FileImage(cachedImage!)
-                                : AssetImage(
-                                    "assets/images/file_not_found.png"),
+                        image: cachedImage != null &&
+                                cachedImage == File("notFound")
+                            ? FileImage(cachedImage!)
+                            : AssetImage("assets/images/file_not_found.png"),
                         fit: BoxFit.fill,
                       ),
                     ),
