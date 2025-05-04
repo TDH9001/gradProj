@@ -26,7 +26,11 @@ class ImageMessageBubble extends StatefulWidget {
 }
 
 @override
-class _ImageMessageBubbleState extends State<ImageMessageBubble> {
+class _ImageMessageBubbleState extends State<ImageMessageBubble>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   File? cachedImage;
   bool isLoading = false;
   double progress = 0;
