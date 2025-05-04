@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -32,6 +33,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
   }
 
   Future<void> _loadCachedImage() async {
+    var connectResult = await Connectivity().checkConnectivity();
     final fileInfo =
         await DefaultCacheManager().getFileFromCache(widget.FileAdress);
     //get the thing in the DB slot
@@ -43,26 +45,37 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
       return;
     }
     // Check if the file is already cached
-    try {
-      {
-        // Download and cache the file if not already cached
-        final downloadedFile =
-            await DefaultCacheManager().getSingleFile(widget.FileAdress);
+    // else {
+    //   cachedImage = null;
+    //   return;
+    // }
+    else if (!connectResult.contains(ConnectivityResult.none)) {
+      try {
+        {
+          // Download and cache the file if not already cached
+          final downloadedFile =
+              await DefaultCacheManager().getSingleFile(widget.FileAdress);
+          if (mounted) {
+            setState(() {
+              cachedImage = downloadedFile;
+            });
+          }
+        }
+      } catch (e) {
+        print(e);
+        setState(() {
+          cachedImage = null;
+        });
         if (mounted) {
-          setState(() {
-            cachedImage = downloadedFile;
-          });
+          SnackBarService.instance.buildContext = context;
+          SnackBarService.instance.showsSnackBarError(
+              text:
+                  "the iamge faled to laod > please ensure you have an internet connection");
         }
       }
-    } catch (e) {
-      print(e);
-      setState(() {
-        cachedImage = null;
-      });
-      SnackBarService.instance.buildContext = context;
-      SnackBarService.instance.showsSnackBarError(
-          text:
-              "the iamge faled to laod > please ensure you have an internet connection");
+    } else {
+      cachedImage = null;
+      return null;
     }
   }
 
@@ -101,11 +114,16 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
           ];
     return GestureDetector(
       onTap: () => showDialog(
-          context: context,
-          builder: (_) => Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Image(image: NetworkImage(widget.FileAdress)))),
+        context: context,
+        builder: (_) => Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Image(
+              image: cachedImage != null
+                  ? FileImage(cachedImage!)
+                  : AssetImage('assets/images/offline_image.png'),
+            )),
+      ),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -128,19 +146,26 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
               height: 9,
             ),
             //where image is displayed
-            Container(
-              height: MediaService.instance.getHeight() * 0.45,
-              width: MediaService.instance.getWidth() * 0.6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: cachedImage != null
-                    ? DecorationImage(
+            cachedImage != null // if image file is null >  do not show it
+                ? Container(
+                    height: MediaService.instance.getHeight() * 0.45,
+                    width: MediaService.instance.getWidth() * 0.6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
                         image: FileImage(cachedImage!),
                         fit: BoxFit.fill,
-                      )
-                    : null,
-              ),
-            ),
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: MediaService.instance.getHeight() * 0.3,
+                    width: MediaService.instance.getWidth() * 0.4,
+                    child: Center(
+                      child:
+                          GestureDetector(child: CircularProgressIndicator()),
+                    ),
+                  ),
             SizedBox(
               height: 15,
             ),
