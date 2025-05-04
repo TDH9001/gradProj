@@ -43,13 +43,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
         cachedImage = fileInfo.file;
       });
       return;
-    }
-    // Check if the file is already cached
-    // else {
-    //   cachedImage = null;
-    //   return;
-    // }
-    else if (!connectResult.contains(ConnectivityResult.none)) {
+    } else if (!connectResult.contains(ConnectivityResult.none)) {
       try {
         {
           // Download and cache the file if not already cached
@@ -159,12 +153,18 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble> {
                     ),
                   )
                 : Container(
-                    height: MediaService.instance.getHeight() * 0.3,
+                    height: MediaService.instance.getHeight() * 0.2,
                     width: MediaService.instance.getWidth() * 0.4,
-                    child: Center(
-                      child:
-                          GestureDetector(child: CircularProgressIndicator()),
-                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/offline_image.png'),
+                          fit: BoxFit.fitWidth,
+                        )),
+                    // child: Center(
+                    //   child:
+                    //       GestureDetector(child: CircularProgressIndicator()),
+                    // ),
                   ),
             SizedBox(
               height: 15,
