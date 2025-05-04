@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../theme/light_theme.dart';
 import '../../widgets/onboarding_item.dart';
 import '../auth/login_screen.dart';
 
@@ -13,7 +14,6 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   var boardController = PageController();
-
   final List<Map<String, String>> onbording = [
     {
       'image': 'assets/images/img1.png',
@@ -21,7 +21,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       'body': 'onbording_body1',
     },
     {
-      'image': 'assets/images/chatting.png',
+      'image': 'assets/images/chatting2.png',
       'title': 'onbording_title2',
       'body': 'onbording_body2',
     },
@@ -36,18 +36,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2E5077),
+        // automaticallyImplyLeading: false,
+        // flexibleSpace: Container(
+        //   decoration: const BoxDecoration(
+        //     gradient: LightTheme.backgroundGradient,
+        //   ),
+        // ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => LoginScreen()),
-                  (route) => false,
-            ),
-            child:  Text('Skip'.tr(), style: TextStyle(color: Color(0xff769BC6))),
-          ),
+                  (route) => false,),
+            child:  Text('Skip'.tr(), style: TextStyle(color: Color(0xff769BC6))),),
         ],
       ),
-      body: Padding(
+      body: Container(
+    decoration: const BoxDecoration(
+    gradient: LightTheme.backgroundGradient,
+    ),
+      child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
@@ -61,16 +70,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   title: onbording[index]['title']!.tr(),
                   body: onbording[index]['body']!.tr(),
                 ),
-              ),
-            ),
+              ),),
             const SizedBox(height: 40),
             Row(
               children: [
                 SmoothPageIndicator(
                   controller: boardController,
                   effect: const ExpandingDotsEffect(
-                    dotColor: Colors.grey,
-                    activeDotColor: Color(0xff769BC6),
+                    dotColor: Colors.white60,
+                    activeDotColor: Color(0xff2E5077),
                     dotHeight: 10,
                     dotWidth: 10,
                     spacing: 5,),
@@ -78,7 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 const Spacer(),
                 FloatingActionButton(
-                  backgroundColor: const Color(0xff769BC6),
+                  backgroundColor: const Color(0xff2E5077),
                   onPressed: () {
                     if (boardController.page == onbording.length - 1) {
                       Navigator.pushAndRemoveUntil(
@@ -90,11 +98,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       boardController.nextPage(duration: const Duration(milliseconds: 750), curve: Curves.fastLinearToSlowEaseIn,);
                     }
                   },
-                  child: const Icon(Icons.arrow_forward_ios),),
+                  child: const Icon(Icons.arrow_forward_ios,color: Colors.white60,),),
               ],
             ),
           ],
         ),
+      ),
       ),
     );
   }

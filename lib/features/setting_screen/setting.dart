@@ -57,7 +57,7 @@ class _SettingState extends State<Setting> {
                         },
                       ),
                       RadioListTile<ThemeModeType>(
-                        title: const Text("setting_dark_mode"),
+                        title:  Text("setting_dark_mode".tr()),
                         value: ThemeModeType.dark,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {
@@ -66,7 +66,7 @@ class _SettingState extends State<Setting> {
                         },
                       ),
                       RadioListTile<ThemeModeType>(
-                        title: const Text("setting_system_mode"),
+                        title:  Text("setting_system_mode".tr()),
                         value: ThemeModeType.system,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {

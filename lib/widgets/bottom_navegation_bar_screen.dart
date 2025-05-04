@@ -32,7 +32,7 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
   ];
 
   final List<String> appBarTitles = [
-    'aapp_title_home'.tr(),
+    'app_title_home'.tr(),
     'app_title_chats'.tr(), // Title for RecentChats()
     'app_title_table'.tr(), // Title for TableScreen()
     'app_title_about'.tr(),

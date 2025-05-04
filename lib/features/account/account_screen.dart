@@ -46,10 +46,10 @@ class AccountScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "ain_shams_university".tr(), style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold,
+                        'ain_shams_university'.tr(), style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold,
                         ),),
                       Text(
-                        "faculty_of_sciences".tr(),
+                        "faculty_of_science".tr(),
                         style: TextStyle(color: isDarkMode?Colors.grey[400]:Colors.white, fontSize: 14,),),],
                   ),),),
               Expanded(

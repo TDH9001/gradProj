@@ -1,16 +1,11 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/services/cloud_Storage_Service.dart';
-import 'package:grad_proj/services/media_service.dart';
-import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:grad_proj/widgets/Header_Text.dart';
-import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
+import '../../theme/light_theme.dart';
 import '../../widgets/customTextField.dart';
-import 'login_screen.dart';
 import 'package:provider/provider.dart';
 import '../../services/DB-service.dart';
 import '../../providers/auth_provider.dart';
@@ -47,31 +42,33 @@ class _SingupScreenState extends State<SingupScreen> {
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
       child: Scaffold(
-        body: SafeArea(
+        body:
+        Stack(
+        children: [Container(
+          height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+        gradient: LightTheme.backgroundGradient,
+    ),
+        child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24.0),
-            // child: ChangeNotifierProvider<AuthProvider>.value(
-            //value: AuthProvider.instance,
             child: Builder(builder: (_context) {
               _auth = Provider.of<AuthProvider>(_context);
               SnackBarService.instance.buildContext = context;
               return Form(
                 key: SingupScreen._formKey,
-                // onChanged: () {
-                // _formKey.currentState?.save();
-                // },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 40),
                     Text(
                       'create_account_signup'.tr(),
-                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Color(0xFF1F2937),),
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white,),
                       textAlign: TextAlign.center,
                       //littleText: "  we are pleased to have you",
                     ),
                     const SizedBox(height: 32),
-                    CustomTextField(hintText: 'first_name_hint '.tr(), isPassword: false, controller: _firstName,),
+                    CustomTextField(hintText: 'first_name_hint'.tr(), isPassword: false, controller: _firstName,),
                     const SizedBox(height: 18),
                     CustomTextField(hintText: 'last_name_hint'.tr(), isPassword: false, controller: _LastName,),
                     const SizedBox(height: 18),
@@ -84,7 +81,7 @@ class _SingupScreenState extends State<SingupScreen> {
                       hintText: 'pass_hint_singup'.tr(), isPassword: true, controller: _passWord,),
                     const SizedBox(height: 16),
                     CustomTextField(
-                      hintText: ' confirmpass_hint_singup'.tr(), isPassword: true, controller: _confirmPassWord,),
+                      hintText: 'confirmpass_hint_singup'.tr(), isPassword: true, controller: _confirmPassWord,),
                     const SizedBox(height: 40),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
@@ -122,7 +119,7 @@ class _SingupScreenState extends State<SingupScreen> {
                       children: [
                          Text(
                           "have_account_singup".tr(),
-                          style: TextStyle(fontSize: 12, color: Color(0xFF6B7280),),
+                          style: TextStyle(fontSize: 12, color: Colors.white70),
                           textAlign: TextAlign.center,),
                         Navigatortextbutton(
                           text: 'login_singup'.tr(),
@@ -136,6 +133,9 @@ class _SingupScreenState extends State<SingupScreen> {
           ),
         ),
       ),
+          ]
+    )
+      )
     );
   }
 }
