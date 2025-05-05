@@ -1,10 +1,13 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/voice_bubble_slider_columb.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/voice_message_bubble_base_background.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
+import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
 import 'package:grad_proj/services/media_service.dart';
-import 'package:grad_proj/theme/light_theme.dart';
 
 class VoiceBubble extends StatefulWidget {
   final String AudioAdress;
@@ -13,6 +16,7 @@ class VoiceBubble extends StatefulWidget {
   final String senderName;
 
   VoiceBubble({
+    super.key,
     required this.AudioAdress,
     required this.isOurs,
     required this.ts,
@@ -23,12 +27,33 @@ class VoiceBubble extends StatefulWidget {
   _VoiceMessageBubbleState createState() => _VoiceMessageBubbleState();
 }
 
-class _VoiceMessageBubbleState extends State<VoiceBubble> {
+class _VoiceMessageBubbleState extends State<VoiceBubble>
+    with AutomaticKeepAliveClientMixin {
   @override
-  void setState(fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
+  bool get wantKeepAlive => true;
+
+  @override
+  initState() {
+    _audioPlayer = AudioPlayer();
+    super.initState();
+    _loadAudioFileAndSet();
+
+    _audioPlayer.onPlayerComplete.listen((D) {
+      setState(() {
+        _position = Duration.zero;
+        playing = !playing;
+      });
+
+      MediaService.instance.pauseAudio(_audioPlayer);
+    });
+
+    _audioPlayer.onDurationChanged.listen((Duration d) {
+      setState(() => _duration = d);
+    });
+
+    _audioPlayer.onPositionChanged.listen((Duration p) {
+      setState(() => _position = p);
+    });
   }
 
   bool playing = false;
@@ -36,26 +61,64 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
   Duration _duration = const Duration();
   Duration _position = const Duration();
   bool _isAudioLoaded = false;
+//adding data used for file fetching
+  File? _cachedAudioFile;
+  bool _isLoadingFile = false;
+  double _downloadProgress = 0.0;
+  bool _isFailed = false;
 
-  Future<void> _loadAudio() async {
-    if (!_isAudioLoaded) {
-      try {
-        await _audioPlayer.setSourceUrl(widget.AudioAdress);
+  void _loadAudioFileAndSet() async {
+    ChatFileCachingService.loadCachedImage(fileAdress: widget.AudioAdress)
+        .listen((StreamResponse) async {
+      //i can not use builders as there are many auto-playing functions here
+      if (StreamResponse.isFailed == true) {
+        // when file fails to load > deleted from DB
+        setState(() {
+          _isLoadingFile = false;
+          _isFailed = true;
+          _cachedAudioFile = null;
+          _isAudioLoaded = false;
+        });
+      } else if (StreamResponse.isFailed == false &&
+          StreamResponse.isLoading == false &&
+          StreamResponse.file != null) {
+        //when fetching is complete
+        _cachedAudioFile = StreamResponse.file;
+        await _audioPlayer.setSourceDeviceFile(StreamResponse.file!.path);
         Duration? d = await _audioPlayer.getDuration();
         if (d != null) {
           setState(() {
             _duration = d;
             _isAudioLoaded = true;
+            _cachedAudioFile = StreamResponse.file;
+            _isLoadingFile = false;
+            _downloadProgress = 0.0;
           });
         }
-      } catch (e) {
-        print("Error loading audio: $e");
+      } else if (StreamResponse.isLoading == true) {
+        print(_downloadProgress = StreamResponse.progress / 100);
+        //when it is loading
+        setState(() {
+          _isLoadingFile = true;
+          _isFailed = false;
+          _cachedAudioFile = null;
+          _isAudioLoaded = false;
+          _downloadProgress = StreamResponse.progress;
+          // _position = Duration(seconds: StreamResponse.progress.toInt() / 100);
+        });
       }
+    });
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
     }
   }
 
-  void _togglePlayPause() async {
-    if (!_isAudioLoaded) await _loadAudio();
+  void togglePlayPause() async {
+    // if (!_isAudioLoaded) await _loadAudio();
 
     if (playing) {
       MediaService.instance.pauseAudio(_audioPlayer);
@@ -63,9 +126,12 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
       if (_position > Duration.zero) {
         MediaService.instance.resumeAudio(_audioPlayer);
       } else {
-        MediaService.instance.playAudio(_audioPlayer, widget.AudioAdress);
+        if (_cachedAudioFile != null) {
+          MediaService.instance.playAudio(_audioPlayer, _cachedAudioFile!.path);
+        }
       }
     }
+
     setState(() {
       playing = !playing;
     });
@@ -78,26 +144,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
   }
 
   @override
-  initState() {
-    _audioPlayer = AudioPlayer();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    _audioPlayer.onPlayerComplete.listen((D) {
-      setState(() {
-        _position = Duration.zero;
-        playing = !playing;
-      });
-      MediaService.instance.pauseAudio(_audioPlayer);
-    });
-    _audioPlayer.onDurationChanged.listen((Duration d) {
-      setState(() => _duration = d);
-    });
-    _audioPlayer.onPositionChanged.listen((Duration p) {
-      setState(() => _position = p);
-    });
     List<Color> colorScheme = widget.isOurs
         ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
         : [
@@ -105,69 +152,40 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
             Color(0xFF769BC6),
           ];
 
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-              colors: colorScheme,
-              stops: [0.40, 0.70],
-              begin:
-                  widget.isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-              end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment:
-            widget.isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-        children: [
+    return VoiceMessageBaseBAckground(
+        colorScheme: colorScheme,
+        widget: widget,
+        child: [
           Text(widget.senderName),
           Row(
             children: [
               IconButton(
-                splashColor: playing ? LightTheme.primary : Colors.red,
-                onPressed: () {
-                  _togglePlayPause();
-                },
+                //splashColor: playing ? LightTheme.primary : Colors.red,
+                onPressed: _isFailed || _isLoadingFile ? null : togglePlayPause,
                 icon: Icon(
-                  playing ? Icons.pause : Icons.play_arrow,
+                  _isLoadingFile
+                      ? Icons.downloading
+                      : _isFailed
+                          ? Icons.error
+                          : playing
+                              ? Icons.pause
+                              : Icons.play_arrow,
                 ),
               ),
-              Column(
-                children: [
-                  Slider(
-                    value: _position.inSeconds.toDouble(),
-                    onChanged: (value) async {
-                      try {
-                        await _audioPlayer
-                            .seek(Duration(seconds: value.toInt()));
-
-                        setState(() {});
-                      } catch (e) {
-                        print(e);
-                      }
-                    },
-                    min: 0,
-                    max: _duration.inSeconds.toDouble() > 0.0
-                        ? _duration.inSeconds.toDouble()
-                        : 1.0,
-                    activeColor: LightTheme.primary,
-                    inactiveColor: LightTheme.secondary,
-                  ),
-                  Text("${(_position).toString()} / ${_duration.toString()}"),
-                ],
+              _isFailed ? Text("voice message could not be found") : SizedBox(),
+              VoiceButtonSlicerColumb(
+                position: _position,
+                audioPlayer: _audioPlayer,
+                duration: _duration,
+                isLoadingFile: _isLoadingFile,
+                isFailed: _isFailed,
               )
             ],
           ),
-          // SizedBox(
-          //   height: 6,
-          // ),
           Text(
-            "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+            "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
             style: TextStyle(fontSize: 16),
           )
-        ],
-      ),
-    );
+        ]);
   }
 }

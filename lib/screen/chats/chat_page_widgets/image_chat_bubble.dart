@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_response.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/Image_widget_files/image_hero_container.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/Image_bubble_widgets/image_hero_container.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.dart';
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';

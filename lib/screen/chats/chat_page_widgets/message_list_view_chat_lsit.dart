@@ -80,6 +80,7 @@ class MessageListViewChatList extends StatelessWidget {
                                   senderName: bubbles[index].senderName,
                                 )
                               : VoiceBubble(
+                                  key: ValueKey(ChatdataOfCurrentChat),
                                   AudioAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),

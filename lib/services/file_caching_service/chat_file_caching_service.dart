@@ -33,8 +33,6 @@ class ChatFileCachingService {
         //.listen((fileResponse) {
         {
           if (fileResponse is DownloadProgress) {
-            //     await Future.delayed(Duration(milliseconds: 750));
-            //   Timer(Duration(milliseconds: 750), () {});
             if (fileResponse.progress! - lastyieldedProgress > 0.05) {
               lastyieldedProgress = fileResponse.progress!;
               yield CachedFileResult(
