@@ -20,8 +20,8 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 class _LoginScreenState extends State<LoginScreen> {
-  // double? _DeviceWidth;
-  // double? _DeviceHeight;
+  double? _DeviceWidth;
+  double? _DeviceHeight;
   String _email = "";
   String _password = "";
   TextEditingController t1 = TextEditingController();
@@ -33,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
-    // _DeviceHeight = MediaQuery.of(context).size.height;
-    // _DeviceWidth = MediaQuery.of(context).size.width;
+    _DeviceHeight = MediaQuery.of(context).size.height;
+    _DeviceWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(

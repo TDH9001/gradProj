@@ -59,5 +59,4 @@ class ThemeToggleButton extends StatelessWidget {
       ),
     );
   }
-
 }
