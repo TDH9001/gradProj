@@ -23,9 +23,9 @@ class Navigatortextbutton extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.normal,
               decoration: TextDecoration.underline,
-              decorationColor: Color(0xff769BC6),
+              decorationColor: Color(0xff2E5077),
               decorationThickness: 2,
-              color: Color(0xff769BC6)),
+              color: Color(0xff2E5077)),
         ));
   }
 }

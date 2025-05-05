@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
-import '../providers/theme_provider.dart';
+import '../theme/theme_provider.dart';
 
 class PrimaryButton extends StatelessWidget {
   PrimaryButton({super.key, required this.buttontext, required this.func});
@@ -20,7 +21,8 @@ class PrimaryButton extends StatelessWidget {
      child:  ElevatedButton(
       onPressed: func,
       style: ElevatedButton.styleFrom(
-        backgroundColor:isDarkMode ? Color(0xFF2E5077) :   LightTheme.primary,
+        backgroundColor:isDarkMode ? DarkThemeColors.buttonColor :   LightTheme.primary,
+        //0xFF2E5077
         // padding: const EdgeInsets.symmetric(vertical: 16),
         // shape: RoundedRectangleBorder(
         //   borderRadius: BorderRadius.circular(8),

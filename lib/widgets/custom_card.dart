@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/theme/dark_theme_colors.dart';
+import 'package:grad_proj/theme/light_theme.dart';
 import 'package:provider/provider.dart';
-import '../providers/theme_provider.dart';
+import '../theme/theme_provider.dart';
 class CustomCard extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -29,18 +31,18 @@ class CustomCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         child: ListTile(
-          leading: Icon(icon, color: isDarkMode ?Color(0xFF4A739F)  : Color(0xff769BC6)),
-          // Colors.lightBlueAccent
+          leading: Icon(icon, color: isDarkMode ? DarkThemeColors.iconColor  : LightTheme.secondary),
+          // Colors.lightBlueAccent  0xFF4A739F
           title: Text(
             title,
             style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 12,
-              color: isDarkMode ? Colors.white70 : Colors.black,
+              color: isDarkMode ?DarkThemeColors.textcolor : LightTheme.textcolor,
             ),
           ),
           trailing: Icon(Icons.arrow_forward_ios, size: 16,
-            color: isDarkMode ? Colors.white70: Color(0xff769BC6),
+            color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,
 
           ),
           onTap: onTap,
