@@ -6,6 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
+import 'package:grad_proj/services/Network_checker_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:http/http.dart' as http;
@@ -42,15 +43,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
     _loadCachedImage();
   }
 
-  Future<bool> urlExists(String url) async {
-    try {
-      final response = await http.head(Uri.parse(url));
-      return response.statusCode == 200;
-    } catch (_) {
-      return false;
-    }
-  }
-
   @override
   void didUpdateWidget(ImageMessageBubble oldWidget) {
     //tis ameks sure that the iamge is not the same if another is sent
@@ -80,7 +72,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
 
       return;
     } else if (!connectResult.contains(ConnectivityResult.none)) {
-      if (!await urlExists(widget.FileAdress)) {
+      if (!await NetworkCheckerService.urlExists(widget.FileAdress)) {
         if (mounted) {
           setState(() {
             isFailed = true;
@@ -103,11 +95,10 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
             if (fileResponse is DownloadProgress) {
               print(fileResponse.progress! / fileResponse.totalSize!);
               if (mounted) {
-                Timer(Duration(milliseconds: 750), () {
-                  setState(() {
-                    progress = fileResponse.progress! / fileResponse.totalSize!;
-                  });
+                setState(() {
+                  progress = fileResponse.progress! / fileResponse.totalSize!;
                 });
+                Timer(Duration(milliseconds: 750), () {});
               }
             } else if (fileResponse is FileInfo &&
                 mounted &&

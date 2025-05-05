@@ -26,12 +26,12 @@ class VoiceBubble extends StatefulWidget {
 class _VoiceMessageBubbleState extends State<VoiceBubble> {
   @override
   void setState(fn) {
-    if (this.mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-  bool Playing = false;
+  bool playing = false;
   late AudioPlayer _audioPlayer;
   Duration _duration = const Duration();
   Duration _position = const Duration();
@@ -57,7 +57,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
   void _togglePlayPause() async {
     if (!_isAudioLoaded) await _loadAudio();
 
-    if (Playing) {
+    if (playing) {
       MediaService.instance.pauseAudio(_audioPlayer);
     } else {
       if (_position > Duration.zero) {
@@ -67,7 +67,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
       }
     }
     setState(() {
-      Playing = !Playing;
+      playing = !playing;
     });
   }
 
@@ -88,7 +88,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
     _audioPlayer.onPlayerComplete.listen((D) {
       setState(() {
         _position = Duration.zero;
-        Playing = !Playing;
+        playing = !playing;
       });
       MediaService.instance.pauseAudio(_audioPlayer);
     });
@@ -125,12 +125,12 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
           Row(
             children: [
               IconButton(
-                splashColor: Playing ? LightTheme.primary : Colors.red,
+                splashColor: playing ? LightTheme.primary : Colors.red,
                 onPressed: () {
                   _togglePlayPause();
                 },
                 icon: Icon(
-                  Playing ? Icons.pause : Icons.play_arrow,
+                  playing ? Icons.pause : Icons.play_arrow,
                 ),
               ),
               Column(
@@ -154,8 +154,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
                     activeColor: LightTheme.primary,
                     inactiveColor: LightTheme.secondary,
                   ),
-                  Text(
-                      "${(_position).inSeconds.toStringAsFixed(2)} / ${_duration.inSeconds.toStringAsFixed(2)}")
+                  Text("${(_position).toString()} / ${_duration.toString()}"),
                 ],
               )
             ],
