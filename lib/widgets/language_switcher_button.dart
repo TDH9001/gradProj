@@ -19,7 +19,7 @@ class LanguageSwitcherButton extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("choose_language".tr(),
+                Text('login_language_button'.tr(),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
                 ListTile(

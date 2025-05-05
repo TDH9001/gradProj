@@ -9,6 +9,7 @@
   "app_login_but": "Login",
   "app_reset_pass_tex": "Don't have an account?",
   "app_creat_acc": "Sign up",
+  "login_language_button": "Choose language",
 
   "New_pass": "New Password",
   "pass_require": "Your new password must be different from previously used password",
