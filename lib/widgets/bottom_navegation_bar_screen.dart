@@ -1,15 +1,14 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/features/chats/chats_screen.dart';
+import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
-import 'package:grad_proj/features/table/table_screen.dart';
+import 'package:grad_proj/screen/table/table_screen.dart';
 import 'package:provider/provider.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
-import '../theme/theme_provider.dart';
-import '../features/home/home_screen.dart';
-import '../features/account/account_screen.dart';
+import '../providers/theme_provider.dart';
+import '../screen/home/home_screen.dart';
+import '../screen/account/account_screen.dart';
 class BottomNavegationBarScreen extends StatefulWidget {
   BottomNavegationBarScreen({super.key});
 
@@ -32,10 +31,10 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
   ];
 
   final List<String> appBarTitles = [
-    'app_title_home'.tr(),
-    'app_title_chats'.tr(), // Title for RecentChats()
-    'app_title_table'.tr(), // Title for TableScreen()
-    'app_title_about'.tr(),
+    'Home',
+    'Chats', // Title for RecentChats()
+    'Table', // Title for TableScreen()
+    'About',
   ];
 
   @override
@@ -72,24 +71,23 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
           Icon(
             Icons.chat,
             size: 30,
-            color:Colors.white,
+            color:isDarkMode ? Colors.white: Colors.white,
           ),
           Icon(
             Icons.table_view_outlined,
             size: 30,
-            color: Colors.white,
+            color: isDarkMode ? Colors.white : Colors.white,
           ),
           Icon(
             Icons.menu,
             size: 30,
-            color: Colors.white,
+            color:isDarkMode ? Colors.white : Colors.white,
           ),
         ],
         color: isDarkMode ? DarkThemeColors.primary:  LightTheme.primary,
         //Color(0xFF2E5077)
         backgroundColor:isDarkMode ? Colors.transparent: Colors.white10,
-        buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor: LightTheme.secondary,
-        //Color(0xFF4A739F)  or 0xFF90A9D3
+        buttonBackgroundColor: isDarkMode ? Color(0xFF4A739F): Color(0xff769BC6),
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {

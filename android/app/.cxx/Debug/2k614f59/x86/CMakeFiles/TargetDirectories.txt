@@ -1,2 +1,0 @@
-C:/Users/Al4san/OneDrive/Documents/GitHub/gradProj/android/app/.cxx/Debug/2k614f59/x86/CMakeFiles/edit_cache.dir
-C:/Users/Al4san/OneDrive/Documents/GitHub/gradProj/android/app/.cxx/Debug/2k614f59/x86/CMakeFiles/rebuild_cache.dir

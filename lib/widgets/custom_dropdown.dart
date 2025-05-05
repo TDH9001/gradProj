@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../UI/text_style.dart';
-import '../theme/theme_provider.dart';
+import '../providers/theme_provider.dart';
 
 class CustomDropdownField<T> extends StatelessWidget {
   final String label;

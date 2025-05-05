@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../UI/text_style.dart';
-import '../theme/theme_provider.dart';
+import '../providers/theme_provider.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
 class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
@@ -27,7 +27,7 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
         child: Text(
           title,
           style: TextStyles.appBarText.copyWith(
-            color:Colors.white,
+            color: isDarkMode ? Colors.white : Colors.white,
           ),
         ),
       ),
@@ -36,7 +36,7 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
-            backgroundColor: isDarkMode ? DarkThemeColors.backgroundImage: LightTheme.backgroundImage,
+            backgroundColor: isDarkMode ? Colors.white70 : Colors.white,
             backgroundImage: const AssetImage('assets/images/science.png'),
             radius: 20,
           ),

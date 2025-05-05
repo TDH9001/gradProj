@@ -15,11 +15,7 @@ import firebase_core
 import firebase_storage
 import path_provider_foundation
 import record_darwin
-<<<<<<< HEAD
 import sqflite_darwin
-=======
-import shared_preferences_foundation
->>>>>>> origin/newcomplete
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AudioplayersDarwinPlugin.register(with: registry.registrar(forPlugin: "AudioplayersDarwinPlugin"))
@@ -32,9 +28,5 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseStoragePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseStoragePlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   RecordPlugin.register(with: registry.registrar(forPlugin: "RecordPlugin"))
-<<<<<<< HEAD
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
-=======
-  SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
->>>>>>> origin/newcomplete
 }

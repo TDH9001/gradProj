@@ -86,7 +86,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
 
     return TextFormField(
-
+      // enabled: widget.hintText == "Start Time" ||
+      //         widget.hintText == "Start Time" ||
+      //         widget.hintText == "End Date"
+      //     ? false
+      //     : true,
       readOnly: widget.hintText == "Start Time" ||
           widget.hintText == "End Time" ||
           widget.hintText == "End Date",
@@ -94,22 +98,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       autocorrect: false,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 15.0, 20.0, 15.0),
+        contentPadding: const EdgeInsets.fromLTRB(20, 10.0, 20.0, 10.0),
         hintText: widget.hintText,
-        hintStyle: const TextStyle(color:Colors.blueGrey),
-        //color: Color(0xFF9CA3AF)
+        hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
         filled: true,
         fillColor: Colors.grey[50],
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(60),
           borderSide: const BorderSide(color: LightTheme.primary),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(60),
           borderSide: const BorderSide(color: LightTheme.primary),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(60),
           borderSide: const BorderSide(
             color: LightTheme.primary,
           ),
@@ -125,11 +128,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 icon: widget.isObscure
                     ? const Icon(
                         Icons.visibility_off,
-                        color: Color(0xff2E5077),
+                        color: Colors.black,
                       )
                     : const Icon(
                         Icons.visibility,
-                        color: Color(0xff2E5077),
+                        color: Colors.black,
                       ),
               )
             : null,
