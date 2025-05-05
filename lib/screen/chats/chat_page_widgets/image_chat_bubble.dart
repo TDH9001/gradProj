@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/Network_checker_service.dart';
+import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:http/http.dart' as http;
 
 class ImageMessageBubble extends StatefulWidget {
   ImageMessageBubble(
@@ -57,6 +57,14 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
     }
   }
 
+/*************  ✨ Windsurf Command ⭐  *************/
+  /// This function will check if the image is cached, if not it will check if the user has an internet connection
+  /// and if the image is available on the server if yes it will download and cache it
+  /// if not it will show an error snackbar
+  /// if the image is cached it will load it from the cache
+  /// if the image is loading it will show a progress bar
+  /// if the image fails to load it will show an error snackbar
+/*******  b72076f9-bc07-47d4-983d-aa3d902fdc49  *******/
   Future<void> _loadCachedImage() async {
     var connectResult = await Connectivity().checkConnectivity();
     final fileInfo =
@@ -143,17 +151,21 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
             Color(0xFF769BC6),
           ];
     return GestureDetector(
-      onTap: () => showDialog(
-        context: context,
-        builder: (_) => Dialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      onTap: () {
+        AnimatedHeroDialog.showAnimatedWidgetTransition(
+          context: context,
+          heroID: widget.FileAdress,
+          displayedWidget: ClipRRect(
             child: Image(
-              image: cachedImage != null
-                  ? FileImage(cachedImage!)
-                  : AssetImage('assets/images/offline_image.png'),
-            )),
-      ),
+                image: cachedImage != null && !isFailed
+                    ? FileImage(cachedImage!)
+                    : isFailed
+                        ? AssetImage("assets/images/file_not_found.png")
+                        : AssetImage(
+                            'assets/images/offline_image.png')), //does not display when loading though
+          ),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -166,7 +178,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                 end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(
-          // mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment:
               widget.isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
@@ -178,17 +189,19 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
             //where image is displayed
             cachedImage != null &&
                     !isFailed //if not null and no error > then image
-                ? Container(
-                    height: MediaService.instance.getHeight() * 0.45,
-                    width: MediaService.instance.getWidth() * 0.6,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: FileImage(cachedImage!),
-                        fit: BoxFit.fill,
+                ? Hero(
+                    tag: widget.FileAdress,
+                    child: Container(
+                      height: MediaService.instance.getHeight() * 0.45,
+                      width: MediaService.instance.getWidth() * 0.6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: FileImage(cachedImage!),
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    ),
-                  )
+                    ))
                 : isFailed //if it's failed > show placeholder image
                     ? Container(
                         height: MediaService.instance.getHeight() * 0.2,
