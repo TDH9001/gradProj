@@ -25,7 +25,7 @@ class LanguageSwitcherButton extends StatelessWidget {
                 const SizedBox(height: 10),
                 ListTile(
                   leading: const Icon(Icons.language, color: Color(0xff2E5077)),
-                  title: const Text("English", style: TextStyle(fontSize: 18)),
+                  title:  Text('login_language_english'.tr(), style: TextStyle(fontSize: 18)),
                   onTap: () {
                     context.setLocale(const Locale('en'));
                     Navigator.pop(context);
@@ -33,7 +33,7 @@ class LanguageSwitcherButton extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.language, color: Color(0xff769BC6)),
-                  title: const Text("العربية", style: TextStyle(fontSize: 18)),
+                  title:Text('login_language_arabic'.tr(), style: TextStyle(fontSize: 18)),
                   onTap: () {
                     context.setLocale(const Locale('ar'));
                     Navigator.pop(context);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../features/theme/theme_provider.dart';
@@ -19,7 +20,7 @@ class ThemeToggleButton extends StatelessWidget {
           isDarkMode ? Icons.dark_mode : Icons.light_mode,
           color: Colors.white,
         ),
-        tooltip: 'Change Theme',
+        tooltip: 'login_chane_theme'.tr(),
         onSelected: (mode) {
           themeProvider.setTheme(mode);
         },
@@ -27,30 +28,30 @@ class ThemeToggleButton extends StatelessWidget {
           PopupMenuItem(
             value: ThemeModeType.light,
             child: Row(
-              children: const [
+              children:  [
                 Icon(Icons.light_mode, color: Color(0xff769BC6)),
                 SizedBox(width: 8),
-                Text('Light Theme'),
+                Text('login_light_mode'.tr(),),
               ],
             ),
           ),
           PopupMenuItem(
             value: ThemeModeType.dark,
             child: Row(
-              children: const [
+              children:  [
                 Icon(Icons.dark_mode, color: Color(0xFF323232)),
                 SizedBox(width: 8),
-                Text('Dark Theme'),
+                Text('login_dark_mode'.tr(),)
               ],
             ),
           ),
           PopupMenuItem(
             value: ThemeModeType.system,
             child: Row(
-              children: const [
+              children:  [
                 Icon(Icons.settings, color: Colors.grey),
                 SizedBox(width: 8),
-                Text('System Default'),
+                Text('login_system_mode'.tr()),
               ],
             ),
           ),

@@ -10,6 +10,12 @@
   "app_reset_pass_tex": "Don't have an account?",
   "app_creat_acc": "Sign up",
   "login_language_button": "Choose language",
+  "login_language_english": "English",
+  "login_language_arabic": "Arabic",
+  "login_chane_theme": "Change Theme",
+  "login_light_mode": "Light Theme",
+  "login_dark_mode": "Dark Theme",
+  "login_system_mode": "System Default",
 
   "New_pass": "New Password",
   "pass_require": "Your new password must be different from previously used password",
