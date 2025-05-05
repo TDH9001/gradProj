@@ -51,15 +51,14 @@ class homePage extends StatelessWidget {
       ),
 
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Color(0xFF1C1C1C)
-        //Color(0xFF2E3B55),
-      ),
           brightness: Brightness.dark,
-          primaryColor: DarkThemeColors.primary,
           scaffoldBackgroundColor: Color(0xFF1C1C1C)
           //Color(0xFF2E3B55),
           ),
+      // brightness: Brightness.dark,
+      // primaryColor: DarkThemeColors.primary,
+      // scaffoldBackgroundColor: Color(0xFF1C1C1C),
+      // //Color(0xFF2E3B55),
 
       // theme: themeProvider.lightTheme,
       // darkTheme: themeProvider.darkTheme,
