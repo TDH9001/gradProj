@@ -8,13 +8,14 @@ import '../../widgets/customTextField.dart';
 import 'package:provider/provider.dart';
 import '../../services/DB-service.dart';
 import '../../providers/auth_provider.dart';
+import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
+import '../theme/theme_provider.dart';
 
 class SingupScreen extends StatefulWidget {
   SingupScreen({super.key});
 
   static String id = "SingupScreen";
-
   double? _DeviceWidth;
   double? _DeviceHeight;
   static GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -34,6 +35,8 @@ class _SingupScreenState extends State<SingupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     widget._DeviceHeight = MediaQuery.of(context).size.height;
     widget._DeviceWidth = MediaQuery.of(context).size.width;
     File? _imageFileExample;
@@ -46,8 +49,8 @@ class _SingupScreenState extends State<SingupScreen> {
         Stack(
         children: [Container(
           height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-        gradient: LightTheme.backgroundGradient,
+        decoration: BoxDecoration(
+        gradient:isDarkMode? DarkThemeColors.backgroundGradient: LightTheme.backgroundGradient,
     ),
         child: SafeArea(
           child: SingleChildScrollView(
