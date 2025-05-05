@@ -1,6 +1,9 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
+import "package:grad_proj/models/contact.dart";
+import "package:grad_proj/services/DB-service.dart";
+import "package:grad_proj/services/hive_caching_service/hive_cashing_service.dart";
 import "package:grad_proj/widgets/bottom_navegation_bar_screen.dart";
 import "package:grad_proj/screen/splash/splash_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
@@ -38,9 +41,10 @@ class AuthProvider extends ChangeNotifier {
     navigationService.instance.navigateToReplacement(SplashScreen.id);
   }
 
-  void signOut() {
+  void signOut() async {
     _auth.signOut();
     user = null;
+    await HiveCashingService.resetUserContactData();
   }
 
 //firebase has it's own login-indecators > very usefll
@@ -59,8 +63,7 @@ class AuthProvider extends ChangeNotifier {
       SnackBarService.instance
           .showsSnackBarSucces(text: "password Rest Email sent to your inbox");
     } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print(e.message);
+    
       SnackBarService.instance
           .showsSnackBarError(text: "PasswordRest failed ${e.message}");
     }
@@ -68,10 +71,6 @@ class AuthProvider extends ChangeNotifier {
 
 //provider Functions
   void loginUserWithEmailAndPassword(String _email, String _password) async {
-    //tells the app we are currently working on signing in the user
-    //notifies all rpovider that are intrested int he process of status
-    //does the code
-    //eventualy navigates
     status = AuthStatus.Authenticating;
     notifyListeners();
     try {
@@ -80,6 +79,9 @@ class AuthProvider extends ChangeNotifier {
       instance.user = _result.user!;
       //update last seen time
       status = AuthStatus.Authenticated;
+      HiveCashingService.updateUserContactData(
+          (await DBService.instance.getUserData(_result.user!.uid).first)
+              .toJson());
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
       navigationService.instance.navigateToReplacement("HomeScreen");
@@ -106,11 +108,9 @@ class AuthProvider extends ChangeNotifier {
       instance.user = _result.user;
       status = AuthStatus.Authenticated;
       await onSucces!(instance.user!.uid.toString());
-      //comment to update the alst seen time
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${instance.user?.email}");
     } catch (e) {
-      print(e);
       status = AuthStatus.ERROR;
       instance.user = null;
 

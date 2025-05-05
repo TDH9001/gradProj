@@ -2,6 +2,7 @@ C/C++ Structured LogS
 Q
 OC:\flutter\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ÇìÉ¶è2§ ÿ˜ˆá2V
 T
 RE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\additional_project_files.txt	ÈìÉ¶è2 ÅÇ¤»å2S
@@ -26,3 +27,29 @@ J
 HE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\prefab_config.json	ÈìÉ¶è2( ÏÇ¤»å2Q
 O
 ME:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\symbol_folder_index.txt	ÈìÉ¶è2D ÏÇ¤»å2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ýŒ×ê2§ ÿ˜ˆá2V
+T
+RE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\additional_project_files.txt	ýŒ×ê2 ûñâ·è2S
+Q
+OE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\android_gradle_build.json	ýŒ×ê2… €òâ·è2X
+V
+TE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\android_gradle_build_mini.json	ýŒ×ê2à òâ·è2E
+C
+AE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\build.ninja	ýŒ×ê2¹Ó §ñâ·è2I
+G
+EE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\build.ninja.txt	ýŒ×ê2N
+L
+JE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\build_file_index.txt	ýŒ×ê2O ™òâ·è2O
+M
+KE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\compile_commands.json	ýŒ×ê2	S
+Q
+OE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\compile_commands.json.bin	ýŒ×ê2
+Y
+W
+UE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\metadata_generation_command.txt	ýŒ×ê2ˆ ˜òâ·è2L
+J
+HE:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\prefab_config.json	ýŒ×ê2( ˜òâ·è2Q
+O
+ME:\gradProj\android\app\.cxx\Debug\3tf3i374\arm64-v8a\symbol_folder_index.txt	ýŒ×ê2D ˜òâ·è2
+>>>>>>> origin/Cashing-and-local-storage

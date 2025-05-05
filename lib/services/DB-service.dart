@@ -1,19 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/feed_Items.dart';
-import 'package:grad_proj/models/feed_items_models/file_feed_item.dart';
-import 'package:grad_proj/models/feed_items_models/image_feed_item.dart';
-import 'package:grad_proj/models/feed_items_models/message_feed_Item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
-import 'package:grad_proj/models/feed_items_models/video_feed_item.dart';
 import 'package:grad_proj/models/schedule.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:grad_proj/widgets/sceduleitem.dart';
+import 'package:hive/hive.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
@@ -59,6 +54,16 @@ class DBService {
         "classes": [],
         "academicYear": 0,
       });
+      HiveCashingService.updateUserContactData(Contact(
+              id: userId,
+              seatNumber: 0,
+              firstName: firstName,
+              lastName: lastname,
+              classes: [],
+              year: 0,
+              isComplete: false,
+              phoneNumber: phoneNumber)
+          .toJson());
       navigationService.instance
           .navigateToReplacement(BottomNavegationBarScreen.id);
     } catch (e) {
@@ -67,14 +72,31 @@ class DBService {
     }
   }
 
-  void addUserClasesAndYear({
-    required List<String> classes,
-    required int year,
-    required String userId,
-  }) async {
+  void completeUserProfile(
+      {required List<String> classes,
+      required int year,
+      required String userId,
+      required int seatNumber}) async {
     try {
-      await _db.collection(_UserCollection).doc(userId).update(
-          {"academicYear": year, "classes": classes, "isComplete": true});
+      await _db.collection(_UserCollection).doc(userId).update({
+        "academicYear": year,
+        "classes": classes,
+        "isComplete": true,
+        "seatNumber": seatNumber
+      });
+      Contact currData = await HiveCashingService.getUserContactData();
+
+      HiveCashingService.updateUserContactData(Contact(
+              id: userId,
+              seatNumber: seatNumber,
+              firstName: currData.firstName,
+              lastName: currData.lastName,
+              classes: classes,
+              year: year,
+              isComplete: true,
+              phoneNumber: currData.phoneNumber)
+          .toJson());
+
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
       print(e);
@@ -83,11 +105,11 @@ class DBService {
   }
 
 //how to get a file from the cloud as a model
-  Stream<contact> getUserData(String _uid) {
+  Stream<Contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
-      print(contact.fromFirestore(_snap));
-      return contact.fromFirestore(_snap);
+      Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
+      return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });
   }
 
@@ -95,7 +117,6 @@ class DBService {
     var ref =
         _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
     return ref.snapshots().map((_snap) {
-      //print(ChatSnipits.fromFirestore(_snap));
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
       }).toList();
@@ -153,13 +174,13 @@ class DBService {
       print(mem);
       return mem;
     } else {
-      print("ERRRRORRRORROROROROROORORORROOR");
-
-      throw Exception('Document does not exist');
+      print("ERRRRORRRORROROROROROORORORROOR , Document does not exist");
+      return [];
+      //throw Exception('Document does not exist');
     }
   }
 
-  Stream<List<contact>> getChatMembersData(String chatId) {
+  Stream<List<Contact>> getChatMembersData(String chatId) {
     return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
       if (userIds.isEmpty) {
         return Stream.value([]); // Return empty list if no members
@@ -170,8 +191,9 @@ class DBService {
           .collection(_UserCollection)
           .where(FieldPath.documentId, whereIn: userIds) // very efficiant
           .snapshots()
-          .map((snapshot) =>
-              snapshot.docs.map((doc) => contact.fromFirestore(doc)).toList());
+          .map((snapshot) => snapshot.docs
+              .map((doc) => Contact.fromJson(id: doc.id, snap: doc.data()))
+              .toList());
     });
   }
 

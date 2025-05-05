@@ -81,7 +81,6 @@ class AccountScreen extends StatelessWidget {
                       icon: Icons.person,
                       title: "Profile",
                       onTap: () {
-                        print("Profile Tapped");
                         navigationService.instance.navigateTo(ProfileScreen.id);
                       },
                     ),

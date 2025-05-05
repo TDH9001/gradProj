@@ -10,6 +10,7 @@ import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/setting_screen/setting.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/theme/dark_theme_colors.dart';
 import 'package:grad_proj/theme/light_theme.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
@@ -27,6 +28,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  HiveCashingService.initHive();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
@@ -48,15 +50,14 @@ class homePage extends StatelessWidget {
         brightness: Brightness.light,
         primaryColor: LightTheme.primary,
         scaffoldBackgroundColor: Colors.white,
-
       ),
 
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: DarkThemeColors .primary,
-        scaffoldBackgroundColor: Color(0xFF1C1C1C)
-        //Color(0xFF2E3B55),
-      ),
+          brightness: Brightness.dark,
+          primaryColor: DarkThemeColors.primary,
+          scaffoldBackgroundColor: Color(0xFF1C1C1C)
+          //Color(0xFF2E3B55),
+          ),
 
       // theme: themeProvider.lightTheme,
       // darkTheme: themeProvider.darkTheme,
@@ -74,7 +75,7 @@ class homePage extends StatelessWidget {
       //TODO: make the audi be laoded froma  file and solve the network crisis
 
       routes: {
-      //  ChatDataScreen.id: (context) => ChatDataScreen(),
+        //  ChatDataScreen.id: (context) => ChatDataScreen(),
         SplashScreen.id: (context) => SplashScreen(),
         Determine.id: (context) => Determine(),
         "OnboardingScreen": (context) => OnboardingScreen(),

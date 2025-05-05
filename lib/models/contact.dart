@@ -1,33 +1,44 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class contact {
-  final String Id;
-  final String FirstName;
-  final String LastName;
-  final List<String> Classes;
-  final int Year;
+class Contact {
+  final String id;
+  final String firstName;
+  final String lastName;
+  final List<String> classes;
+  final int year;
   final bool isComplete;
   final String phoneNumber;
-  contact(
-      {required this.Id,
-      required this.FirstName,
-      required this.LastName,
-      required this.Classes,
-      required this.Year,
+  final int? seatNumber;
+  Contact(
+      {required this.id,
+      required this.seatNumber,
+      required this.firstName,
+      required this.lastName,
+      required this.classes,
+      required this.year,
       required this.isComplete,
       required this.phoneNumber});
 
-  factory contact.fromFirestore(DocumentSnapshot _snap) {
-    return contact(
-        Id: _snap.id,
-        FirstName: _snap["firstName"],
-        LastName: _snap["lastName"],
-        Classes: (_snap["classes"] as List<dynamic>)
-            .map((e) => e.toString())
-            .toList(),
-        // LastSeet: _snap["lastSeen"],
-        Year: _snap["academicYear"],
-        isComplete: _snap["isComplete"],
-        phoneNumber: _snap["PhoneNumber"]);
+  factory Contact.fromJson(
+      {required Map<String, dynamic> snap, required String id}) {
+    return Contact(
+      id: id,
+      seatNumber: snap["seatNumber"],
+      firstName: snap["firstName"],
+      lastName: snap["lastName"],
+      classes: List<String>.from(snap["classes"] ?? []),
+      year: snap["academicYear"],
+      isComplete: snap["isComplete"],
+      phoneNumber: snap["PhoneNumber"] ?? "THERE IS AN ERROR HEREE",
+    );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "classes": classes,
+        "academicYear": year,
+        "isComplete": isComplete,
+        "phoneNumber": phoneNumber,
+        "seatNumber": seatNumber
+      };
 }

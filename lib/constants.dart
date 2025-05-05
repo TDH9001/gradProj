@@ -42,7 +42,6 @@ class TextStyles {
   );
 
   void addProfileImage() {
-    print("PUT INT HE REGESTRATION PAGE");
     // try {
     // _imageFileExample = await MediaService.instance
     //     .getImageFromLibrary();

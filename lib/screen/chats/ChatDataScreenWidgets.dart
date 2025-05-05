@@ -290,7 +290,7 @@ class ChatMembersList extends StatelessWidget {
   Widget build(BuildContext context) {
     SnackBarService.instance.buildContext = context;
 
-    return StreamBuilder<List<contact>>(
+    return StreamBuilder<List<Contact>>(
         stream: DBService.instance.getChatMembersData(widget.cahtId),
         builder: (context, _snapshot) {
           if (_snapshot.connectionState == ConnectionState.waiting ||
@@ -352,7 +352,7 @@ class ChatMembersList extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 2),
                             child: Column(
                               children: [
-                                Text(_snapshot.data![index].FirstName),
+                                Text(_snapshot.data![index].firstName),
                               ],
                             ),
                           );
