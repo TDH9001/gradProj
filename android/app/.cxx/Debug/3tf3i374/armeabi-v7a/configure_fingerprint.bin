@@ -2,54 +2,27 @@ C/C++ Structured LogS
 Q
 OC:\flutter\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txtC
 A
-<<<<<<< HEAD
-?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	áìÉ¶è2§ ÿ˜ˆá2X
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ÇÅÏ“ê2§ ÿ˜ˆá2X
 V
-TE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\additional_project_files.txt	áìÉ¶è2 ëĞ¤»å2U
+TE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\additional_project_files.txt	ÇÅÏ“ê2 ÄÅÏ“ê2U
 S
-QE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\android_gradle_build.json	áìÉ¶è2‰ ìĞ¤»å2Z
+QE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\android_gradle_build.json	ÇÅÏ“ê2‰ ÅÅÏ“ê2Z
 X
-VE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\android_gradle_build_mini.json	áìÉ¶è2ä íĞ¤»å2G
+VE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\android_gradle_build_mini.json	ÇÅÏ“ê2ä ÆÅÏ“ê2G
 E
-CE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build.ninja	áìÉ¶è2ÃÓ ¨Ğ¤»å2K
+CE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build.ninja	ÇÅÏ“ê2ÃÓ ƒÅÏ“ê2K
 I
-GE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build.ninja.txt	áìÉ¶è2P
+GE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build.ninja.txt	ÇÅÏ“ê2P
 N
-LE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build_file_index.txt	áìÉ¶è2O îĞ¤»å2Q
+LE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build_file_index.txt	ÇÅÏ“ê2O ÇÅÏ“ê2Q
 O
-ME:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\compile_commands.json	áìÉ¶è2	U
+ME:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\compile_commands.json	ÇÅÏ“ê2	U
 S
-QE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\compile_commands.json.bin	áìÉ¶è2
+QE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\compile_commands.json.bin	ÇÅÏ“ê2
 [
 Y
-WE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\metadata_generation_command.txt	áìÉ¶è2’ íĞ¤»å2N
+WE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\metadata_generation_command.txt	ÇÅÏ“ê2’ ÆÅÏ“ê2N
 L
-JE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\prefab_config.json	áìÉ¶è2( íĞ¤»å2S
+JE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\prefab_config.json	ÈÅÏ“ê2( ÆÅÏ“ê2S
 Q
-OE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\symbol_folder_index.txt	áìÉ¶è2F íĞ¤»å2
-=======
-?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	×ê2§ ÿ˜ˆá2X
-V
-TE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\additional_project_files.txt	×ê2 òùâ·è2U
-S
-QE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\android_gradle_build.json	‘×ê2‰ óùâ·è2Z
-X
-VE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\android_gradle_build_mini.json	‘×ê2ä ôùâ·è2G
-E
-CE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build.ninja	‘×ê2ÃÓ ¼ùâ·è2K
-I
-GE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build.ninja.txt	‘×ê2P
-N
-LE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\build_file_index.txt	‘×ê2O öùâ·è2Q
-O
-ME:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\compile_commands.json	‘×ê2	U
-S
-QE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\compile_commands.json.bin	‘×ê2
-[
-Y
-WE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\metadata_generation_command.txt	‘×ê2’ õùâ·è2N
-L
-JE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\prefab_config.json	‘×ê2( öùâ·è2S
-Q
-OE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\symbol_folder_index.txt	‘×ê2F öùâ·è2
->>>>>>> origin/Cashing-and-local-storage
+OE:\gradProj\android\app\.cxx\Debug\3tf3i374\armeabi-v7a\symbol_folder_index.txt	ÈÅÏ“ê2F ÇÅÏ“ê2

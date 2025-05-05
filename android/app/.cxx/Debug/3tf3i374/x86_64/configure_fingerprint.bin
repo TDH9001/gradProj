@@ -2,54 +2,27 @@ C/C++ Structured LogS
 Q
 OC:\flutter\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txtC
 A
-<<<<<<< HEAD
-?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	€íÉ¶è2§ ÿ˜ˆá2S
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	•ÖÏ“ê2§ ÿ˜ˆá2S
 Q
-OE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\additional_project_files.txt	€íÉ¶è2 Ãâ¤»å2P
+OE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\additional_project_files.txt	•ÖÏ“ê2 ’ÖÏ“ê2P
 N
-LE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\android_gradle_build.json	€íÉ¶è2ÿ Äâ¤»å2U
+LE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\android_gradle_build.json	•ÖÏ“ê2ÿ “ÖÏ“ê2U
 S
-QE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\android_gradle_build_mini.json	€íÉ¶è2Ú Åâ¤»å2B
+QE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\android_gradle_build_mini.json	•ÖÏ“ê2Ú ”ÖÏ“ê2B
 @
->E:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build.ninja	€íÉ¶è2ªÓ üá¤»å2F
+>E:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build.ninja	•ÖÏ“ê2ªÓ ÖÕÏ“ê2F
 D
-BE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build.ninja.txt	€íÉ¶è2K
+BE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build.ninja.txt	•ÖÏ“ê2K
 I
-GE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build_file_index.txt	€íÉ¶è2O Æâ¤»å2L
+GE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build_file_index.txt	•ÖÏ“ê2O ”ÖÏ“ê2L
 J
-HE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\compile_commands.json	€íÉ¶è2	P
+HE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\compile_commands.json	•ÖÏ“ê2	P
 N
-LE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\compile_commands.json.bin	€íÉ¶è2
+LE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\compile_commands.json.bin	•ÖÏ“ê2
 V
 T
-RE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\metadata_generation_command.txt	€íÉ¶è2ù Åâ¤»å2I
+RE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\metadata_generation_command.txt	•ÖÏ“ê2ù ”ÖÏ“ê2I
 G
-EE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\prefab_config.json	€íÉ¶è2( Åâ¤»å2N
+EE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\prefab_config.json	•ÖÏ“ê2( ”ÖÏ“ê2N
 L
-JE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\symbol_folder_index.txt	€íÉ¶è2A Æâ¤»å2
-=======
-?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	«×ê2§ ÿ˜ˆá2S
-Q
-OE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\additional_project_files.txt	«×ê2 ¢‰ã·è2P
-N
-LE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\android_gradle_build.json	«×ê2ÿ £‰ã·è2U
-S
-QE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\android_gradle_build_mini.json	«×ê2Ú ¦‰ã·è2B
-@
->E:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build.ninja	«×ê2ªÓ ßˆã·è2F
-D
-BE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build.ninja.txt	«×ê2K
-I
-GE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\build_file_index.txt	«×ê2O ¨‰ã·è2L
-J
-HE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\compile_commands.json	«×ê2	P
-N
-LE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\compile_commands.json.bin	«×ê2
-V
-T
-RE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\metadata_generation_command.txt	«×ê2ù ¦‰ã·è2I
-G
-EE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\prefab_config.json	«×ê2( §‰ã·è2N
-L
-JE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\symbol_folder_index.txt	«×ê2A §‰ã·è2
->>>>>>> origin/Cashing-and-local-storage
+JE:\gradProj\android\app\.cxx\Debug\3tf3i374\x86_64\symbol_folder_index.txt	•ÖÏ“ê2A ”ÖÏ“ê2
