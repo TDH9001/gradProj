@@ -8,9 +8,8 @@ import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
-
-import '../../theme/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
+import '../theme/theme_provider.dart';
 
 class CompleteProfile extends StatefulWidget {
   CompleteProfile({super.key});

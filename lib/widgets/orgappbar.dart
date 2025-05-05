@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../UI/text_style.dart';
-import '../theme/theme_provider.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import '../features/theme/dark_theme_colors.dart';
+import '../features/theme/light_theme.dart';
+import '../features/theme/theme_provider.dart';
 class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final String title;

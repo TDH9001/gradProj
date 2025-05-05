@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
-import '../../theme/light_theme.dart';
 import '../../widgets/customTextField.dart';
 import 'package:provider/provider.dart';
 import '../../services/DB-service.dart';
 import '../../providers/auth_provider.dart';
+import '../theme/light_theme.dart';
 
 class SingupScreen extends StatefulWidget {
   SingupScreen({super.key});

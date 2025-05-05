@@ -8,9 +8,10 @@ import 'package:grad_proj/features/auth/resetpassword_screen.dart';
 import 'package:grad_proj/features/auth/singup_screen.dart';
 import '../../providers/auth_provider.dart';
 import '../../services/snackbar_service.dart';
-import '../../theme/light_theme.dart';
+
 import '../../widgets/customtextfield.dart';
 import '../../widgets/language_switcher_button.dart';
+import '../theme/light_theme.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/sceduleitem.dart';
 import 'package:provider/provider.dart';
-import '../../theme/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
+import '../theme/theme_provider.dart';
 
 
 class TableformScreen extends StatelessWidget {

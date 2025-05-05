@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
-import 'package:grad_proj/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import '../../theme/theme_provider.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
+import '../theme/theme_provider.dart';
 
 class ScheduleItem {
   final String courseName;

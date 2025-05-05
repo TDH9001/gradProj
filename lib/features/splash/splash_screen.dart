@@ -9,6 +9,9 @@ import 'package:grad_proj/features/splash/determine.dart';
 import 'package:grad_proj/features/splash/no_internet_page.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
+import '../theme/theme_provider.dart';
 
 
 
@@ -73,17 +76,21 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<ThemeProvider>(context);
-    // final isDarkMode = themeProvider.isDarkMode;
-
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Scaffold(
-        // backgroundColor: Colors.white,
-        backgroundColor: Color(0xff769BC6),
-        body: Center(
+
+        body: Container(
+        decoration: BoxDecoration(
+        gradient: isDarkMode ? DarkThemeColors.backgroundGradient: LightTheme.backgroundGradient,
+    ),
+        child: Center(
           child: Image(image: const AssetImage('assets/images/splash.png'),
             color: null,
             colorBlendMode: null,
           ),
-        ));
+    ),
+        )
+    );
   }
 }

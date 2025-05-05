@@ -14,12 +14,12 @@ import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/features/splash/determine.dart';
 import 'package:grad_proj/features/splash/no_internet_page.dart';
 import 'package:provider/provider.dart';
+import 'features/theme/theme_provider.dart';
 import 'firebase_options.dart';
 import 'package:grad_proj/features/auth/login_screen.dart';
 import 'package:grad_proj/features/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
-import 'theme/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

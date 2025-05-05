@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
-import '../theme/theme_provider.dart';
+import '../features/theme/dark_theme_colors.dart';
+import '../features/theme/light_theme.dart';
+import '../features/theme/theme_provider.dart';
 
 class PrimaryButton extends StatelessWidget {
   PrimaryButton({super.key, required this.buttontext, required this.func});

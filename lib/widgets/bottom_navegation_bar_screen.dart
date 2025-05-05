@@ -5,9 +5,9 @@ import 'package:grad_proj/features/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'package:grad_proj/features/table/table_screen.dart';
 import 'package:provider/provider.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
-import '../theme/theme_provider.dart';
+import '../features/theme/dark_theme_colors.dart';
+import '../features/theme/light_theme.dart';
+import '../features/theme/theme_provider.dart';
 import '../features/home/home_screen.dart';
 import '../features/account/account_screen.dart';
 class BottomNavegationBarScreen extends StatefulWidget {

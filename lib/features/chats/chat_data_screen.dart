@@ -7,10 +7,11 @@ import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/features/chats/ChatDataScreenWidgets.dart';
 
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:grad_proj/theme/light_theme.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:provider/provider.dart';
+
+import '../theme/light_theme.dart';
 
 class ChatDataScreen extends StatefulWidget {
   ChatDataScreen({super.key, required this.cahtId, required this.adminList});

@@ -9,8 +9,9 @@ import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
-import '../../theme/theme_provider.dart';
+
 import '../../services/navigation_Service.dart';
+import '../theme/theme_provider.dart';
 
 class ProfileScreenUi extends StatefulWidget {
   final double length;

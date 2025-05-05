@@ -6,7 +6,7 @@ import 'package:grad_proj/widgets/custom_scibutton.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'package:provider/provider.dart';
 
-import '../../theme/theme_provider.dart';
+import '../theme/theme_provider.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});

@@ -19,14 +19,15 @@ import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
-import '../../theme/theme_provider.dart';
-import '../../theme/dark_theme_colors.dart';
-import '../../theme/light_theme.dart';
 import '../../UI/text_style.dart';
 import '../../services/DB-service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
+import '../theme/theme_provider.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key, required this.chatID, required this.admins});

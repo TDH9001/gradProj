@@ -8,7 +8,6 @@ import 'package:grad_proj/features/table/tableform_screen.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Scedule_creation_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
 import 'package:grad_proj/widgets/customTextField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -16,8 +15,8 @@ import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
-import '../../theme/light_theme.dart';
-import '../../theme/theme_provider.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/theme_provider.dart';
 class TableScreen extends StatefulWidget {
   TableScreen({super.key});
   final MultiSelectController<String> dayController =

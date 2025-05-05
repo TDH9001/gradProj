@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../theme/theme_provider.dart';
+import '../features/theme/theme_provider.dart';
 
 class CustomScibutton extends StatelessWidget {
   final String text;
