@@ -82,7 +82,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
         body: Container(
         decoration: BoxDecoration(
-        gradient: isDarkMode ? DarkThemeColors.backgroundGradient: LightTheme.backgroundGradient,
+        gradient:  LightTheme.backgroundGradient,
+          // isDarkMode ? DarkThemeColors.backgroundGradient:
     ),
         child: Center(
           child: Image(image: const AssetImage('assets/images/splash.png'),
