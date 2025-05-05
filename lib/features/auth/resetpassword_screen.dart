@@ -5,8 +5,11 @@ import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/customTextField.dart';
+import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
+import '../theme/theme_provider.dart';
 
 class ResetpasswordScreen extends StatelessWidget {
   ResetpasswordScreen({super.key});
@@ -16,14 +19,17 @@ class ResetpasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     SnackBarService.instance.buildContext = context;
+
     return Scaffold(
       body: Stack(
         children: [
           Container(
             height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
-              gradient: LightTheme.backgroundGradient,
+            decoration: BoxDecoration(
+              gradient:isDarkMode? DarkThemeColors.backgroundGradient: LightTheme.backgroundGradient,
             ),
             child: SafeArea(
               child: SingleChildScrollView(
@@ -56,40 +62,15 @@ class ResetpasswordScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 40),
-
-                    // TextFields in a white card
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        gradient: LightTheme.backgroundGradient,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 10,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Column(
                         children: [
                           CustomTextField(
                             controller: t1,
-                            hintText: 'Email',
+                            hintText: 'reset_email'.tr(),
                           ),
-                          const SizedBox(height: 16),
-                          CustomTextField(
-                            controller: TextEditingController(),
-                            hintText: 'Password',
-                            isPassword: true,
-                          ),
-                          const SizedBox(height: 16),
-                          CustomTextField(
-                            controller: TextEditingController(),
-                            hintText: 'Confirm Password',
-                            isPassword: true,
-                          ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 40),
                           PrimaryButton(
                             buttontext: 'create_pass'.tr(),
                             func: () {
@@ -111,4 +92,3 @@ class ResetpasswordScreen extends StatelessWidget {
     );
   }
 }
-

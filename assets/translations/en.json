@@ -20,6 +20,7 @@
   "New_pass": "New Password",
   "pass_require": "Your new password must be different from previously used password",
   "create_pass": "Create New Password",
+  "reset_email": "Email",
 
   "create_account_signup": "Create Account",
   "first_name_hint": "First Name",
