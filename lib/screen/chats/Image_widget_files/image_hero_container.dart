@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/services/media_service.dart';
 
 class ImageContainerHeroWidget extends StatelessWidget {
-  const ImageContainerHeroWidget({
-    super.key,
-    required this.fileAdress,
-    required this.imageToShow,
-  });
+  ImageContainerHeroWidget(
+      {super.key,
+      required this.fileAdress,
+      required this.imageToShow,
+      this.possibleChild});
 
   final String fileAdress;
   final ImageProvider imageToShow;
+  Widget? possibleChild ;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,14 @@ class ImageContainerHeroWidget extends StatelessWidget {
           width: MediaService.instance.getWidth() * 0.5,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: imageToShow,
-              fit: BoxFit.fill,
-            ),
+            image: possibleChild == null
+                ? DecorationImage(
+                    image: imageToShow,
+                    fit: BoxFit.fill,
+                  )
+                : null,
           ),
+          child: possibleChild,
         ));
   }
 }
