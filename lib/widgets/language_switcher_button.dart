@@ -6,9 +6,8 @@ class LanguageSwitcherButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.language, color: Color(0xFF1F2937)),
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         showModalBottomSheet(
           context: context,
           shape: const RoundedRectangleBorder(
@@ -19,20 +18,22 @@ class LanguageSwitcherButton extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('login_language_button'.tr(),
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(
+                  'login_language_button'.tr(),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
                 ListTile(
-                  leading: const Icon(Icons.language),
-                  title: const Text("English"),
+                  leading: const Icon(Icons.language, color: Color(0xff2E5077)),
+                  title: const Text("English", style: TextStyle(fontSize: 18)),
                   onTap: () {
                     context.setLocale(const Locale('en'));
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.language),
-                  title: const Text("العربية"),
+                  leading: const Icon(Icons.language, color: Color(0xff769BC6)),
+                  title: const Text("العربية", style: TextStyle(fontSize: 18)),
                   onTap: () {
                     context.setLocale(const Locale('ar'));
                     Navigator.pop(context);
@@ -43,6 +44,14 @@ class LanguageSwitcherButton extends StatelessWidget {
           ),
         );
       },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        child: const Icon(
+          Icons.language,
+          color: Colors.white,
+          size: 28,
+        ),
+      ),
     );
   }
 }

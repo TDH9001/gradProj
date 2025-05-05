@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../features/theme/theme_provider.dart';
 
 class ThemeToggleButton extends StatelessWidget {
