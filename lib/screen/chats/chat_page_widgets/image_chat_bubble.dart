@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:http/http.dart' as http;
@@ -142,31 +143,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
     }
   }
 
-  final _numMap = {
-    1: "jan ",
-    2: "feb",
-    3: "mar",
-    4: 'apr',
-    5: "may",
-    6: "jun",
-    7: "jul",
-    8: "aug",
-    9: "sep",
-    10: "oct",
-    11: "nov",
-    12: "dec"
-  };
-
-  final _weekmap = {
-    6: "saturday",
-    7: 'sunday',
-    1: "monday",
-    2: "tuesday",
-    3: "wednesday",
-    4: "thursday",
-    5: "friday"
-  };
-
   @override
   Widget build(BuildContext context) {
     List<Color> colorScheme = widget.isOurs
@@ -275,7 +251,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
               height: 15,
             ),
             Text(
-              "${_weekmap[widget.ts.toDate().weekday]} ${_numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+              "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
               style: TextStyle(fontSize: 16),
             )
           ],

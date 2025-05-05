@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/media_service.dart';
 
 Widget chatMessageBubble(
@@ -10,29 +11,6 @@ Widget chatMessageBubble(
     required bool isOurs,
     required Timestamp ts,
     required String senderName}) {
-  var _numMap = {
-    1: "jan",
-    2: "feb",
-    3: "mar",
-    4: 'apr',
-    5: "may",
-    6: "jun",
-    7: "jul",
-    8: "aug",
-    9: "sep",
-    10: "oct",
-    11: "nov",
-    12: "dec"
-  };
-  var _weekmap = {
-    6: "saturday",
-    7: 'sunday',
-    1: "monday",
-    2: "tuesday",
-    3: "wednesday",
-    4: "thursday",
-    5: "friday"
-  };
   List<Color> colorScheme = isOurs
       ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
       : [Color(0xFF769BC6), Color(0xFFA3BFE0)];
@@ -63,7 +41,7 @@ Widget chatMessageBubble(
         //   height: 15,
         // ),
         Text(
-          "${_weekmap[ts.toDate().weekday]} ${_numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
+          "${MonthAndWeekMap.weekmap[ts.toDate().weekday]} ${MonthAndWeekMap.numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
           style: TextStyle(fontSize: 16),
         )
       ],

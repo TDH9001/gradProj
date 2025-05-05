@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/theme/light_theme.dart';
 
@@ -35,30 +36,6 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
   Duration _duration = const Duration();
   Duration _position = const Duration();
   bool _isAudioLoaded = false;
-
-  final _numMap = {
-    1: "jan",
-    2: "feb",
-    3: "mar",
-    4: 'apr',
-    5: "may",
-    6: "jun",
-    7: "jul",
-    8: "aug",
-    9: "sep",
-    10: "oct",
-    11: "nov",
-    12: "dec"
-  };
-  final _weekmap = {
-    6: "saturday",
-    7: 'sunday',
-    1: "monday",
-    2: "tuesday",
-    3: "wednesday",
-    4: "thursday",
-    5: "friday"
-  };
 
   Future<void> _loadAudio() async {
     if (!_isAudioLoaded) {
@@ -177,7 +154,8 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
                     activeColor: LightTheme.primary,
                     inactiveColor: LightTheme.secondary,
                   ),
-                  Text("${_position.toString()} / ${_duration.toString()}")
+                  Text(
+                      "${(_position).inSeconds.toStringAsFixed(2)} / ${_duration.inSeconds.toStringAsFixed(2)}")
                 ],
               )
             ],
@@ -186,7 +164,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble> {
           //   height: 6,
           // ),
           Text(
-            "${_weekmap[widget.ts.toDate().weekday]} ${_numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+            "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
             style: TextStyle(fontSize: 16),
           )
         ],
