@@ -65,7 +65,7 @@ class VoiceButtonSlicerColumb extends StatelessWidget {
                         .greenAccent // when downloading file > عشانيك اما تشتغلي يا ساره
                     : LightTheme.secondary),
         _isFailed ? Text("failed to laod file") : SizedBox(),
-        _isFailed
+        !_isFailed
             ? Text(
                 "${(_position).inMinutes.toStringAsFixed(0)} : ${(_position).inSeconds.toString()} / ${_duration.inMinutes.toStringAsFixed(0)} : ${(_duration).inSeconds.toString()}")
             : SizedBox(),
