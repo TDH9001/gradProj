@@ -31,7 +31,12 @@ class VoiceButtonSlicerColumb extends StatelessWidget {
             value: _position.inSeconds.toDouble(),
             onChanged: (value) async {
               try {
-                await _audioPlayer.seek(Duration(seconds: value.toInt()));
+                await _audioPlayer
+                    .seek(Duration(seconds: value.toInt()))
+                    .timeout(
+                      Duration(seconds: 5),
+                      onTimeout: () => print("timed out but no errors"),
+                    );
 
                 // setState(() {});
               } catch (e) {
@@ -59,8 +64,11 @@ class VoiceButtonSlicerColumb extends StatelessWidget {
                     ? Colors
                         .greenAccent // when downloading file > عشانيك اما تشتغلي يا ساره
                     : LightTheme.secondary),
-        Text(
-            "${(_position).inMinutes.toStringAsFixed(0)} : ${(_position).inSeconds.toString()} / ${_duration.inMinutes.toStringAsFixed(0)} : ${(_duration).inSeconds.toString()}"),
+        _isFailed ? Text("failed to laod file") : SizedBox(),
+        _isFailed
+            ? Text(
+                "${(_position).inMinutes.toStringAsFixed(0)} : ${(_position).inSeconds.toString()} / ${_duration.inMinutes.toStringAsFixed(0)} : ${(_duration).inSeconds.toString()}")
+            : SizedBox(),
       ],
     );
   }

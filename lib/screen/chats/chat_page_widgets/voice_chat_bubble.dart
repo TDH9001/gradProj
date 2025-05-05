@@ -60,7 +60,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
   late AudioPlayer _audioPlayer;
   Duration _duration = const Duration();
   Duration _position = const Duration();
-  bool _isAudioLoaded = false;
+  // bool _isAudioLoaded = false;
 //adding data used for file fetching
   File? _cachedAudioFile;
   bool _isLoadingFile = false;
@@ -77,7 +77,6 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
           _isLoadingFile = false;
           _isFailed = true;
           _cachedAudioFile = null;
-          _isAudioLoaded = false;
         });
       } else if (StreamResponse.isFailed == false &&
           StreamResponse.isLoading == false &&
@@ -89,7 +88,6 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
         if (d != null) {
           setState(() {
             _duration = d;
-            _isAudioLoaded = true;
             _cachedAudioFile = StreamResponse.file;
             _isLoadingFile = false;
             _downloadProgress = 0.0;
@@ -102,7 +100,6 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
           _isLoadingFile = true;
           _isFailed = false;
           _cachedAudioFile = null;
-          _isAudioLoaded = false;
           _downloadProgress = StreamResponse.progress;
           // _position = Duration(seconds: StreamResponse.progress.toInt() / 100);
         });
@@ -172,7 +169,6 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
                               : Icons.play_arrow,
                 ),
               ),
-              _isFailed ? Text("voice message could not be found") : SizedBox(),
               VoiceButtonSlicerColumb(
                 position: _position,
                 audioPlayer: _audioPlayer,
