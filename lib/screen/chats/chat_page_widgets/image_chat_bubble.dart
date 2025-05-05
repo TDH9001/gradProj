@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:grad_proj/screen/chats/Image_widget_files/image_hero_container.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/Network_checker_service.dart';
 import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.dart';
@@ -57,14 +58,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
     }
   }
 
-/*************  ✨ Windsurf Command ⭐  *************/
-  /// This function will check if the image is cached, if not it will check if the user has an internet connection
-  /// and if the image is available on the server if yes it will download and cache it
-  /// if not it will show an error snackbar
-  /// if the image is cached it will load it from the cache
-  /// if the image is loading it will show a progress bar
-  /// if the image fails to load it will show an error snackbar
-/*******  b72076f9-bc07-47d4-983d-aa3d902fdc49  *******/
   Future<void> _loadCachedImage() async {
     var connectResult = await Connectivity().checkConnectivity();
     final fileInfo =
@@ -166,99 +159,81 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
           ),
         );
       },
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: LinearGradient(
-                colors: colorScheme,
-                stops: [0.40, 0.70],
-                begin: widget.isOurs
-                    ? Alignment.bottomLeft
-                    : Alignment.bottomRight,
-                end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment:
-              widget.isOurs ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-          children: [
-            Text(widget.senderName),
-            SizedBox(
-              height: 9,
-            ),
-            //where image is displayed
-            cachedImage != null &&
-                    !isFailed //if not null and no error > then image
-                ? Hero(
-                    tag: widget.FileAdress,
-                    child: Container(
-                      height: MediaService.instance.getHeight() * 0.45,
-                      width: MediaService.instance.getWidth() * 0.6,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: FileImage(cachedImage!),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ))
-                : isFailed //if it's failed > show placeholder image
-                    ? Container(
-                        height: MediaService.instance.getHeight() * 0.2,
-                        width: MediaService.instance.getWidth() * 0.4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/file_not_found.png"),
-                              fit: BoxFit.fitWidth,
-                            )),
-                      )
-                    : isLoading ==
-                            false //if it's not loading > show placeholder image
-                        ? Container(
-                            height: MediaService.instance.getHeight() * 0.2,
-                            width: MediaService.instance.getWidth() * 0.4,
-                            decoration: BoxDecoration(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(3, 1, 3, 1),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                  colors: colorScheme,
+                  stops: [0.40, 0.70],
+                  begin: widget.isOurs
+                      ? Alignment.bottomLeft
+                      : Alignment.bottomRight,
+                  end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: widget.isOurs
+                ? CrossAxisAlignment.start
+                : CrossAxisAlignment.end,
+            children: [
+              Text(widget.senderName),
+              SizedBox(
+                height: 4,
+              ),
+              //where image is displayed
+              cachedImage != null &&
+                      !isFailed //if not null and no error > then image
+                  ? ImageContainerHeroWidget(
+                      fileAdress: widget.FileAdress,
+                      imageToShow: FileImage(cachedImage!))
+                  : isFailed //if it's failed > show placeholder image
+                      ? ImageContainerHeroWidget(
+                          imageToShow:
+                              AssetImage("assets/images/file_not_found.png"),
+                          fileAdress: widget.FileAdress,
+                        )
+                      : isLoading ==
+                              false //if it's not loading > show placeholder image
+                          ? ImageContainerHeroWidget(
+                              fileAdress: widget.FileAdress,
+                              imageToShow:
+                                  AssetImage('assets/images/offline_image.png'),
+                            )
+                          : Container(
+                              // if it's loading > show loading indicator
+                              height: MediaService.instance.getHeight() * 0.35,
+                              width: MediaService.instance.getWidth() * 0.5,
+                              decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/offline_image.png'),
-                                  fit: BoxFit.fitWidth,
-                                )),
-                          )
-                        : Container(
-                            // if it's loading > show loading indicator
-                            height: MediaService.instance.getHeight() * 0.2,
-                            width: MediaService.instance.getWidth() * 0.4,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                                child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  CircularProgressIndicator(
-                                    color: Colors.greenAccent,
-                                  ),
-                                  SizedBox(
-                                      height:
-                                          MediaService.instance.getHeight() *
-                                              0.02),
-                                  Text(
-                                      "loading: ${(progress * 100).toStringAsFixed(2)} %")
-                                ],
                               ),
-                            )),
-                          ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-              "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
-              style: TextStyle(fontSize: 16),
-            )
-          ],
+                              child: Center(
+                                  child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    CircularProgressIndicator(
+                                      color: Colors.greenAccent,
+                                    ),
+                                    SizedBox(
+                                        height:
+                                            MediaService.instance.getHeight() *
+                                                0.02),
+                                    Text(
+                                        "loading: ${(progress * 100).toStringAsFixed(2)} %")
+                                  ],
+                                ),
+                              )),
+                            ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+                style: TextStyle(fontSize: 16),
+              )
+            ],
+          ),
         ),
       ),
     );
