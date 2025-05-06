@@ -8,6 +8,8 @@ import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/theme_provider.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
 
 Future<bool> checkInternetConnection(List<ConnectivityResult> data) async {
   if (data.contains(ConnectivityResult.none)) {
@@ -72,14 +74,19 @@ class _SplashScreenState extends State<SplashScreen> {
     final isDarkMode = themeProvider.isDarkMode;
 
     return Scaffold(
-        // backgroundColor: Colors.white,
-        backgroundColor: isDarkMode ? Color(0xFF121212) : Color(0xff769BC6),
-        body: Center(
+
+        body:  Container(
+        decoration:  BoxDecoration(
+        gradient: isDarkMode ? DarkThemeColors.backgroundGradient : LightTheme.backgroundGradient,
+    ),
+        child: Center(
           child: Image(
             image: const AssetImage('assets/images/splash.png'),
             color: isDarkMode ? Colors.white70 : null,
             colorBlendMode: isDarkMode ? BlendMode.modulate : null,
           ),
-        ));
+        ),
+        ),
+    );
   }
 }
