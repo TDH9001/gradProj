@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grad_proj/screen/about_screen/chatbot/question_model.dart';
+import 'package:grad_proj/widgets/orgappbar.dart';
+import 'package:grad_proj/widgets/text_field_chatbot.dart';
 import 'chat_item.dart';
 import 'chat_message.dart';
 import 'chat_options.dart';
@@ -12,6 +14,7 @@ class ChatScreen extends StatefulWidget {
   State<ChatScreen> createState() => _ChatScreenState();
 }
 class _ChatScreenState extends State<ChatScreen> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ChatItem> _messages = [];
   final TextEditingController _controller = TextEditingController();
   Map<String, QuestionModel> _questionMap = {};
@@ -94,7 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('What is your question?')),
+      appBar:Orgappbar(scaffoldKey:scaffoldKey, title: "SciMeta",),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
@@ -107,40 +110,41 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: TextField(
-                      controller: _controller,
-                      onSubmitted: _handleSubmitted,
-                      decoration: InputDecoration(
-                        hintText: 'Ask a question...',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24.0),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                            width: 2.0,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: const BorderSide(
-                            color: Color(0xff2E5077),
-                            width: 2.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () => _handleSubmitted(_controller.text),
-                  ),
-                ],
-              ),
-            ),
+            TextFieldChatbot(controller: _controller, onSubmitted: _handleSubmitted,),
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 6.0),
+            //   child: Row(
+            //     children: [
+            //       Flexible(
+            //         child: TextField(
+            //           controller: _controller,
+            //           onSubmitted: _handleSubmitted,
+            //           decoration: InputDecoration(
+            //             hintText: 'Ask a question...',
+            //             border: OutlineInputBorder(
+            //               borderRadius: BorderRadius.circular(24.0),
+            //               borderSide: const BorderSide(
+            //                 color: Colors.grey,
+            //                 width: 2.0,
+            //               ),
+            //             ),
+            //             focusedBorder: OutlineInputBorder(
+            //               borderRadius: BorderRadius.circular(20.0),
+            //               borderSide: const BorderSide(
+            //                 color: Color(0xff2E5077),
+            //                 width: 2.0,
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       IconButton(
+            //         icon: const Icon(Icons.send),
+            //         onPressed: () => _handleSubmitted(_controller.text),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const SizedBox(height: 16.0),
           ],
         ),
