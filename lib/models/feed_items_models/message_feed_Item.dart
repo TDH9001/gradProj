@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
-import 'package:grad_proj/theme/light_theme.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import '../../screen/theme/dark_theme_colors.dart';
+import '../../screen/theme/light_theme.dart';
 
 class MessageFeedItem extends FeedItems {
   final String messageContent;

@@ -9,11 +9,11 @@ import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import '../../providers/theme_provider.dart';
-import '../../theme/dark_theme_colors.dart';
-import '../../theme/light_theme.dart';
 import '../../UI/text_style.dart';
 import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../theme/light_theme.dart';
 
 class ChatPage extends StatefulWidget {
   ChatPage({super.key, required this.chatID, required this.admins});

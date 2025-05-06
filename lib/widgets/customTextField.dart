@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/theme/light_theme.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
+
+import '../screen/theme/light_theme.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;

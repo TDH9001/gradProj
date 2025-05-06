@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../theme/light_theme.dart';
+import '../screen/theme/light_theme.dart';
 
 class SnackBarService {
   // to use aon a certain page > at the top  > add the following

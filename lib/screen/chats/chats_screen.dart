@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -10,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../screen/chats/Chat_page.dart';
+import '../theme/dark_theme_colors.dart';
 
 class RecentChats extends StatelessWidget {
   RecentChats({super.key});

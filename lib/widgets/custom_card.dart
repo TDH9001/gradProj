@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
-import 'package:grad_proj/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
+import '../screen/theme/dark_theme_colors.dart';
+import '../screen/theme/light_theme.dart';
 class CustomCard extends StatelessWidget {
   final IconData icon;
   final String title;

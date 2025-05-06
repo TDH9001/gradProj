@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
-import '../../theme/light_theme.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/custom_card.dart';
 import '../about_screen/question_screen.dart';
@@ -13,6 +11,8 @@ import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
 import '../setting_screen/setting.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
 
 class AccountScreen extends StatelessWidget {
   AccountScreen({super.key});

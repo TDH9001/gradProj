@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/theme/light_theme.dart';
+import '../../../theme/light_theme.dart';
 
 class VoiceButtonSlicerColumb extends StatelessWidget {
   const VoiceButtonSlicerColumb(
