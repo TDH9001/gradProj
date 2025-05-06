@@ -41,7 +41,7 @@ class VideoFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
+    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
     final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
     final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
@@ -98,7 +98,7 @@ class VideoFeedItem extends FeedItems {
                 children: [
                   // Video thumbnail would go here in a real implementation
                   Container(
-                    color: primaryColor.withOpacity(0.8),
+                    color: Color(0xFF323232).withOpacity(0.8),
                     width: double.infinity,
                     height: double.infinity,
                   ),

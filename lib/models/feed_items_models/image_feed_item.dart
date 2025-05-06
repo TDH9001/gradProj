@@ -40,7 +40,7 @@ class ImageFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
+    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
     final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
     final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
