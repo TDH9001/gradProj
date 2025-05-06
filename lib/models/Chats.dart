@@ -4,9 +4,9 @@ import '../models/message.dart';
 
 class ChatSnipits {
   final String id;
-  final String chatId;
-  final String lastMessage;
-  final String senderName;
+  final String Chatid;
+  final String LastMessage;
+  final String Sendername;
   final int unseenCount;
   final Timestamp timestamp;
   final List<String> adminId;
@@ -14,9 +14,9 @@ class ChatSnipits {
 
   ChatSnipits(
       {required this.id,
-      required this.chatId,
-      required this.lastMessage,
-      required this.senderName,
+      required this.Chatid,
+      required this.LastMessage,
+      required this.Sendername,
       required this.unseenCount,
       required this.timestamp,
       required this.adminId,
@@ -26,11 +26,11 @@ class ChatSnipits {
     var _data = _snap.data();
     return ChatSnipits(
       id: _snap.id,
-      chatId: _snap["chatID"],
-      lastMessage: _snap["lastMessage"] ?? "",
+      Chatid: _snap["chatID"],
+      LastMessage: _snap["lastMessage"] ?? "",
       timestamp: _snap["timestamp"],
       unseenCount: _snap["unseenCount"],
-      senderName: _snap["senderName"],
+      Sendername: _snap["senderName"],
       type: _snap["type"] is int
           ? MessageType.values[_snap["type"]].name
           : _snap["type"],
@@ -41,12 +41,12 @@ class ChatSnipits {
 }
 
 class ChatData {
-  final String chatid;
+  final String Chatid;
   final List<String> members;
   final List<String> owners;
   final List<Message> messages;
   ChatData(
-      {required this.chatid,
+      {required this.Chatid,
       required this.members,
       required this.messages,
       required this.owners});
@@ -90,7 +90,7 @@ class ChatData {
     }
 
     return ChatData(
-      chatid: _snap.id,
+      Chatid: _snap.id,
       members:
           (_snap["members"] as List<dynamic>).map((e) => e.toString()).toList(),
       owners:

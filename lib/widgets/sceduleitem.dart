@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/theme_provider.dart';
+import '../theme/theme_provider.dart';
 class Sceduleitem extends StatelessWidget {
   final String title;
   final String subtitle;

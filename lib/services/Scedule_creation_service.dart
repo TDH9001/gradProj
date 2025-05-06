@@ -2,15 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
+import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/customTextField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
 class SceduleCreationService {
   static SceduleCreationService instance = SceduleCreationService();
-  final GlobalKey<FormState> validatescheduleItem = GlobalKey();
+  final GlobalKey<FormState> validateSceduleItem = GlobalKey();
   final MultiSelectController<String> dayController =
       MultiSelectController<String>();
   final TextEditingController locationController = TextEditingController();
@@ -48,7 +50,7 @@ class SceduleCreationService {
                   title: Text(
                       "add a ${itemType == 1 ? "permanat" : itemType == 2 ? "temporary" : "personal"} scedule"),
                   content: Form(
-                    key: validatescheduleItem,
+                    key: validateSceduleItem,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -79,7 +81,7 @@ class SceduleCreationService {
                         PrimaryButton(
                             buttontext: "add the items",
                             func: () async {
-                              if (validatescheduleItem.currentState!
+                              if (validateSceduleItem.currentState!
                                   .validate()) {
                                 DateTime endDateData = DateTime.now();
                                 List<String> startTimeList =

@@ -1,16 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
-import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/theme_provider.dart';
+import '../../theme/theme_provider.dart';
 import '../../widgets/orgappbar.dart';
 
 class CompleteProfile extends StatefulWidget {
@@ -31,25 +30,34 @@ class _UpdateUserDataState extends State<CompleteProfile> {
     DropdownItem(label: 'math 103', value: "math103"),
     DropdownItem(label: 'math 105', value: "math 105"),
   ];
-  final _listController = MultiSelectController<String>();
+  final _Listcontroller = MultiSelectController<String>();
   final _yearController = TextEditingController();
-  final _seatIdController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext _context) {
-    // var _auth = Provider.of<AuthProvider>(_context);
+    var _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
     final bool isDarkMode = themeProvider.isDarkMode;
-    SnackBarService.instance.buildContext = _context;
 
-    // if (_auth.user == null) {
-    //   return Center(
-    //     child: CircularProgressIndicator(),
-    //   );
-    // }
+    if (_auth.user == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
 
     return Scaffold(
-      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Complete Profile"),
+      // appBar: Orgappbar(
+      //   scaffoldKey: scaffoldKey,
+      //   title: "Course Register",
+      //   leading: IconButton(
+      //     icon: Icon(Icons.arrow_back, color: Colors.white),
+      //     onPressed: () {
+      //       Navigator.pop(_context);
+      //     },
+      //   ),
+      // ),
       body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
         child: Form(
@@ -57,20 +65,15 @@ class _UpdateUserDataState extends State<CompleteProfile> {
           child: ListView(
             padding: EdgeInsets.all(12),
             children: [
-              //   SizedBox(height: 200),
-              Text('Please register your academic year and courses',
+              SizedBox(height: 200),
+              Text('profile_no_course'.tr(),
                   style: TextStyle(
                     fontSize: 18,
-                    color: isDarkMode ? Colors.white : Color(0xFF9CA3AF),
+                    color:  isDarkMode ? Colors.white : Color(0xFF9CA3AF),
                   )),
-              // TextHeader(
-              //   largeText: "Course Register ",
-              //   littleText: "Please register your academic year and courses",
-              //   height: 140,
-              // ),
               SizedBox(height: 20),
               _buildInfoCard(
-                label: "Academic Year",
+                label: "profile_academicyear".tr(),
                 child: Universaltextformfield(
                   label: "Academic Year",
                   Password: false,
@@ -79,48 +82,34 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               ),
               SizedBox(height: 20),
               _buildInfoCard(
-                label: "Seat Number",
-                child: Universaltextformfield(
-                  label: "Seat Number",
-                  keaboardType: TextInputType.number,
-                  Password: false,
-                  controller: _seatIdController,
-                ),
-              ),
-              SizedBox(height: 20),
-              _buildInfoCard(
-                label: "Courses",
+                label: "profile_courses".tr(),
                 child: DropdownSelect(
                   data: courses,
-                  cont: _listController,
+                  cont: _Listcontroller,
                 ),
               ),
               SizedBox(height: 40),
               PrimaryButton(
-                buttontext: "Validate and Submit",
+                buttontext: "profile_submit".tr(),
                 func: () async {
                   if (CompleteProfile._GK.currentState?.validate() ?? false) {
-                    final selectedItems = _listController.selectedItems;
+                    final selectedItems = _Listcontroller.selectedItems;
 
-                    DBService.instance.completeUserProfile(
-                        classes: selectedItems
-                            .map((item) => item.value.trim())
-                            .toList(),
-                        year: int.parse(_yearController.text),
-                        userId:
-                            HiveCashingService.getUserContactData().id.trim(),
-                        seatNumber: int.parse(_seatIdController.text));
+                    DBService.instance.addUserClasesAndYear(
+                      classes: selectedItems
+                          .map((item) => item.value.trim())
+                          .toList(),
+                      year: int.parse(_yearController.text),
+                      userId: _auth.user!.uid,
+                    );
                     for (int i = 0; i < selectedItems.length; i++) {
                       await DBService.instance.addChatsToUser(
-                        HiveCashingService.getUserContactData().id.trim(),
+                        _auth.user!.uid,
                         selectedItems[i].value,
                       );
                       await DBService.instance.addMembersToChat(
-                        HiveCashingService.getUserContactData().id.trim(),
+                        _auth.user!.uid,
                         selectedItems[i].value,
-                      );
-                      SnackBarService.instance.showsSnackBarSucces(
-                        text: "Profile succesfully updated ",
                       );
                     }
 
@@ -154,7 +143,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
               label,
               style: TextStyle(
                 fontSize: 14,
-                color: isDarkMode ? Colors.white : Colors.grey[600],
+                color:  isDarkMode ? Colors.white : Colors.grey[600],
                 fontWeight: FontWeight.bold,
               ),
             ),

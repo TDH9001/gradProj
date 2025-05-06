@@ -8,8 +8,8 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
-import '../../providers/theme_provider.dart';
-import '../../screen/chats/Chat_page.dart';
+import '../../theme/theme_provider.dart';
+import 'Chat_page.dart';
 
 class RecentChats extends StatelessWidget {
   RecentChats({super.key});
@@ -31,7 +31,7 @@ class RecentChats extends StatelessWidget {
 
 Widget _RecentChats() {
   return Builder(builder: (_context) {
-    final _auth = Provider.of<AuthProvider>(_context);
+    var _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
     final isDarkMode = themeProvider.isDarkMode;
 
@@ -66,14 +66,14 @@ Widget _RecentChats() {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {
                             return ChatPage(
-                              chatID: data[index].chatId,
+                              chatID: data[index].Chatid,
                               admins: data[index].adminId,
                             );
                           }));
                           DBService.instance.resetUnseenCount(
-                              _auth.user!.uid, data[index].chatId);
+                              _auth.user!.uid, data[index].Chatid);
                         },
-                        title: Text(data[index].chatId),
+                        title: Text(data[index].Chatid),
                         subtitle: data[index].type == "image"
                             ? Row(
                                 children: [
@@ -94,7 +94,7 @@ Widget _RecentChats() {
                                       ),
                                     ],
                                   )
-                                : Text(data[index].lastMessage),
+                                : Text(data[index].LastMessage),
                         leading: Container(
                           width: 50,
                           height: 50,

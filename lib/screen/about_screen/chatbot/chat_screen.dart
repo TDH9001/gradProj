@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grad_proj/screen/about_screen/chatbot/question_model.dart';
+import 'package:grad_proj/widgets/orgappbar.dart';
 import 'chat_item.dart';
 import 'chat_message.dart';
 import 'chat_options.dart';
@@ -12,10 +13,13 @@ class ChatScreen extends StatefulWidget {
   State<ChatScreen> createState() => _ChatScreenState();
 }
 class _ChatScreenState extends State<ChatScreen> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ChatItem> _messages = [];
   final TextEditingController _controller = TextEditingController();
+
   Map<String, QuestionModel> _questionMap = {};
   String? _currentQuestionId = 'language_selection';
+
   @override
   void initState() {
     super.initState();
@@ -30,26 +34,30 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {
       _questionMap = {for (var q in data) q['id']: QuestionModel.fromJson(q)};
     });
-
     _showCurrentQuestion();
   }
   void _handleSubmitted(String text) {
     if (text.isEmpty) return;
+
     setState(() {
       _messages.insert(
         0,
         ChatMessage(text: text, isUser: true, timestamp: DateTime.now()),
       );
     });
+
     _controller.clear();
+
     Future.delayed(const Duration(milliseconds: 500), () {
       _showCurrentQuestion();
     });
   }
+
   void _showCurrentQuestion() {
     if (_currentQuestionId == null) return;
     final question = _questionMap[_currentQuestionId];
     if (question == null) return;
+
     setState(() {
       _messages.insert(
         0,
@@ -57,16 +65,14 @@ class _ChatScreenState extends State<ChatScreen> {
           text: question.question,
           isUser: false,
           timestamp: DateTime.now(),
-        ),
-      );
+        ),);
       _messages.insert(
         0,
         ChatOptions(
           options: question.options.map((o) => o.text).toList(),
           onOptionSelected: _handleOptionSelected,
           timestamp: DateTime.now(),
-        ),
-      );
+        ),);
     });
   }
   void _handleOptionSelected(String selectedOption) {
@@ -87,14 +93,16 @@ class _ChatScreenState extends State<ChatScreen> {
       );
       _currentQuestionId = selected.next;
     });
+
     Future.delayed(const Duration(milliseconds: 500), () {
       _showCurrentQuestion();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('What is your question?')),
+      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "SciMate",),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
@@ -103,12 +111,11 @@ class _ChatScreenState extends State<ChatScreen> {
               child: ListView.builder(
                 reverse: true,
                 itemCount: _messages.length,
-                itemBuilder: (context, index) => _messages[index],
-              ),
+                itemBuilder: (context, index) => _messages[index],),
             ),
             const SizedBox(height: 16.0),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 6.0),
               child: Row(
                 children: [
                   Flexible(
@@ -117,27 +124,20 @@ class _ChatScreenState extends State<ChatScreen> {
                       onSubmitted: _handleSubmitted,
                       decoration: InputDecoration(
                         hintText: 'Ask a question...',
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24.0),
-                          borderSide: const BorderSide(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide(
                             color: Colors.grey,
-                            width: 2.0,
-                          ),
-                        ),
+                            width: 1.0,),),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                           borderSide: const BorderSide(
                             color: Color(0xff2E5077),
-                            width: 2.0,
-                          ),
-                        ),
-                      ),
-                    ),
+                            width: 1.0,),),),),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () => _handleSubmitted(_controller.text),
-                  ),
+                  IconButton(color: Color(0xff2E5077), icon: const Icon(Icons.send),
+                    onPressed: () => _handleSubmitted(_controller.text),),
                 ],
               ),
             ),

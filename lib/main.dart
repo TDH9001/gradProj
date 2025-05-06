@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/providers/theme_provider.dart';
 import 'package:grad_proj/screen/about_screen/question_screen.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
@@ -10,8 +10,6 @@ import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/setting_screen/setting.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
-
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
@@ -21,17 +19,29 @@ import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
+import 'theme/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  HiveCashingService.initHive();
-  runApp(MultiProvider(providers: [
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('ar' ),
+      child:
+      MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
-  ], child: homePage()));
+  ],
+          child: homePage()
+      ),
+    ),
+    );
 }
 
 class homePage extends StatelessWidget {
@@ -48,22 +58,18 @@ class homePage extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
+
       ),
 
       darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: Color(0xFF1C1C1C)
-          //Color(0xFF2E3B55),
-          ),
-      // brightness: Brightness.dark,
-      // primaryColor: DarkThemeColors.primary,
-      // scaffoldBackgroundColor: Color(0xFF1C1C1C),
-      // //Color(0xFF2E3B55),
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Color(0xFF1C1C1C)
+        //Color(0xFF2E3B55),
+      ),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
 
-      // theme: themeProvider.lightTheme,
-      // darkTheme: themeProvider.darkTheme,
-
-      //darkTheme: ThemeData.dark(),
       //FIXME: fix the isseus with levels in the ABOUT screens
       //FIXME: make a model for the table
       //FIXME: implement the table screen and its stuff
@@ -76,7 +82,7 @@ class homePage extends StatelessWidget {
       //TODO: make the audi be laoded froma  file and solve the network crisis
 
       routes: {
-        //  ChatDataScreen.id: (context) => ChatDataScreen(),
+      //  ChatDataScreen.id: (context) => ChatDataScreen(),
         SplashScreen.id: (context) => SplashScreen(),
         Determine.id: (context) => Determine(),
         "OnboardingScreen": (context) => OnboardingScreen(),

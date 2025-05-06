@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
@@ -6,7 +7,7 @@ import 'package:grad_proj/screen/table/table_screen.dart';
 import 'package:provider/provider.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
-import '../providers/theme_provider.dart';
+import '../theme/theme_provider.dart';
 import '../screen/home/home_screen.dart';
 import '../screen/account/account_screen.dart';
 class BottomNavegationBarScreen extends StatefulWidget {
@@ -31,10 +32,10 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
   ];
 
   final List<String> appBarTitles = [
-    'Home',
-    'Chats', // Title for RecentChats()
-    'Table', // Title for TableScreen()
-    'About',
+    'app_title_home'.tr(),
+    'app_title_chats'.tr(), // Title for RecentChats()
+    'app_title_table'.tr(), // Title for TableScreen()
+    'app_title_about'.tr(),
   ];
 
   @override

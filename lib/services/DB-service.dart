@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grad_proj/models/feed_Items.dart';
-import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
-import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
-import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
+import 'package:flutter/material.dart';
+import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/schedule.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:hive/hive.dart';
+import 'package:grad_proj/widgets/sceduleitem.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
@@ -26,9 +23,6 @@ class DBService {
 //collection sit he name of the Field i want to acces in firebase
   String _UserCollection = "Users";
   String _ChatCollection = "Chats";
-  String _FeedCollection = "Feed";
-  String _PersonalFeed = "PersonalFeed";
-  String _StaredFeed = "StaredFeed";
 
   Future<void> createUserInDB({
     required String userId,
@@ -54,16 +48,6 @@ class DBService {
         "classes": [],
         "academicYear": 0,
       });
-      HiveCashingService.updateUserContactData(Contact(
-              id: userId,
-              seatNumber: 0,
-              firstName: firstName,
-              lastName: lastname,
-              classes: [],
-              year: 0,
-              isComplete: false,
-              phoneNumber: phoneNumber)
-          .toJson());
       navigationService.instance
           .navigateToReplacement(BottomNavegationBarScreen.id);
     } catch (e) {
@@ -72,31 +56,14 @@ class DBService {
     }
   }
 
-  void completeUserProfile(
-      {required List<String> classes,
-      required int year,
-      required String userId,
-      required int seatNumber}) async {
+  void addUserClasesAndYear({
+    required List<String> classes,
+    required int year,
+    required String userId,
+  }) async {
     try {
-      await _db.collection(_UserCollection).doc(userId).update({
-        "academicYear": year,
-        "classes": classes,
-        "isComplete": true,
-        "seatNumber": seatNumber
-      });
-      Contact currData = await HiveCashingService.getUserContactData();
-
-      HiveCashingService.updateUserContactData(Contact(
-              id: userId,
-              seatNumber: seatNumber,
-              firstName: currData.firstName,
-              lastName: currData.lastName,
-              classes: classes,
-              year: year,
-              isComplete: true,
-              phoneNumber: currData.phoneNumber)
-          .toJson());
-
+      await _db.collection(_UserCollection).doc(userId).update(
+          {"academicYear": year, "classes": classes, "isComplete": true});
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
     } catch (e) {
       print(e);
@@ -105,11 +72,11 @@ class DBService {
   }
 
 //how to get a file from the cloud as a model
-  Stream<Contact> getUserData(String _uid) {
+  Stream<contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
-      Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
-      return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
+      print(contact.fromFirestore(_snap));
+      return contact.fromFirestore(_snap);
     });
   }
 
@@ -117,6 +84,7 @@ class DBService {
     var ref =
         _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
     return ref.snapshots().map((_snap) {
+      //print(ChatSnipits.fromFirestore(_snap));
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
       }).toList();
@@ -174,13 +142,13 @@ class DBService {
       print(mem);
       return mem;
     } else {
-      print("ERRRRORRRORROROROROROORORORROOR , Document does not exist");
-      return [];
-      //throw Exception('Document does not exist');
+      print("ERRRRORRRORROROROROROORORORROOR");
+
+      throw Exception('Document does not exist');
     }
   }
 
-  Stream<List<Contact>> getChatMembersData(String chatId) {
+  Stream<List<contact>> getChatMembersData(String chatId) {
     return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
       if (userIds.isEmpty) {
         return Stream.value([]); // Return empty list if no members
@@ -191,9 +159,8 @@ class DBService {
           .collection(_UserCollection)
           .where(FieldPath.documentId, whereIn: userIds) // very efficiant
           .snapshots()
-          .map((snapshot) => snapshot.docs
-              .map((doc) => Contact.fromJson(id: doc.id, snap: doc.data()))
-              .toList());
+          .map((snapshot) =>
+              snapshot.docs.map((doc) => contact.fromFirestore(doc)).toList());
     });
   }
 
@@ -247,7 +214,7 @@ class DBService {
     try {
       if (scl.type == 1) {
         //permanantScedules
-        ref.update({
+        return ref.update({
           "permanantScedules": FieldValue.arrayUnion([
             {
               "name": scl.name,
@@ -263,7 +230,7 @@ class DBService {
         });
       } else if (scl.type == 2) {
         //temporaryScedule
-        ref.update({
+        return ref.update({
           "temporaryScedule": FieldValue.arrayUnion([
             {
               "name": scl.name,
@@ -281,7 +248,7 @@ class DBService {
       } else if (scl.type == 3) {
         //personalScedules
         var userRef = _db.collection(_UserCollection).doc(uid);
-        userRef.update({
+        return userRef.update({
           "personalScedules": FieldValue.arrayUnion([
             {
               "name": scl.name,
@@ -297,14 +264,6 @@ class DBService {
           ])
         });
       }
-      await DBService.instance.addFeedItemToChatUsers(
-          SceduleCreateFeedItem(
-              chatID: chatID,
-              senderID: uid,
-              senderName: "PLACEHOLDER FOR NAME",
-              timestamp: Timestamp.now(),
-              scheduleItem: scl),
-          chatID);
     } catch (e) {
       print(e);
     }
@@ -316,7 +275,7 @@ class DBService {
     try {
       if (scl.type == 1) {
         //permanantScedules
-        ref.update({
+        return ref.update({
           "permanantScedules": FieldValue.arrayRemove([
             {
               "name": scl.name,
@@ -331,7 +290,7 @@ class DBService {
           ])
         });
       } else if (scl.type == 2) {
-        ref.update({
+        return ref.update({
           //temporaryScedule
           "temporaryScedule": FieldValue.arrayRemove([
             {
@@ -350,7 +309,7 @@ class DBService {
       } else if (scl.type == 3) {
         //personalScedules
         var userRef = _db.collection(_UserCollection).doc(uid);
-        userRef.update({
+        return userRef.update({
           "personalScedules": FieldValue.arrayRemove([
             {
               "name": scl.name,
@@ -366,14 +325,6 @@ class DBService {
           ])
         });
       }
-      await DBService.instance.addFeedItemToChatUsers(
-          ScheduleDeleteFeedItem(
-              chatID: chatId,
-              senderID: uid,
-              senderName: "PLACEHOLDER FOR NAME",
-              timestamp: Timestamp.now(),
-              scheduleItem: scl),
-          chatId);
     } catch (e) {
       print(e);
     }
@@ -385,15 +336,6 @@ class DBService {
       var ref = _db.collection(_ChatCollection).doc(chatId);
       await DBService.instance.removeSceduleItem(oldscl, uid, chatId);
       await DBService.instance.addSceduleItem(uid, chatId, newscl);
-      await DBService.instance.addFeedItemToChatUsers(
-          ScheduleUpdateItem(
-              chatID: chatId,
-              senderID: uid,
-              senderName: newscl.creatorName,
-              timestamp: Timestamp.now(),
-              newScheduleItem: newscl,
-              oldScheduleItem: oldscl),
-          chatId);
     } catch (e) {
       print(e);
     }
@@ -465,13 +407,14 @@ class DBService {
           .map((chatData) {
         // caht data here is the chatDocument
         List<ScheduleItemClass> finalData = [];
+        //chatData.docs.map((doc){List<ScheduleItemClass> = ScheduleItemClass.fromFirestore(doc.) })
         for (int i = 0; i < chatData.docs.length; i++) {
           if (chatData.docs[i].data().containsKey("permanantScedules")) {
             var scheduleList =
                 chatData.docs[i]["permanantScedules"] as List<dynamic>? ?? null;
             if (scheduleList != null) {
               finalData.addAll(scheduleList
-                  .map((item) => ScheduleItemClass.fromMap(item))
+                  .map((item) => ScheduleItemClass.fromFirestore(item))
                   .toList());
             }
           } else {
@@ -499,13 +442,14 @@ class DBService {
           .map((chatData) {
         // caht data here is the chatDocument
         List<ScheduleItemClass> finalData = [];
+        //chatData.docs.map((doc){List<ScheduleItemClass> = ScheduleItemClass.fromFirestore(doc.) })
         for (int i = 0; i < chatData.docs.length; i++) {
           if (chatData.docs[i].data().containsKey("temporaryScedule")) {
             var scheduleList =
                 chatData.docs[i]["temporaryScedule"] as List<dynamic>? ?? null;
             if (scheduleList != null) {
               finalData.addAll(scheduleList
-                  .map((item) => ScheduleItemClass.fromMap(item))
+                  .map((item) => ScheduleItemClass.fromFirestore(item))
                   .toList());
             }
           } else {
@@ -543,103 +487,6 @@ class DBService {
         }
       } else {
         print("this user does not have any personal Scedules");
-        return [];
-      }
-    });
-  }
-
-  Future<void> addFeedItemToUser(FeedItems feedItem, String uid) async {
-    try {
-      _db
-          .collection(_UserCollection)
-          .doc(uid)
-          .collection(_FeedCollection)
-          .doc(_PersonalFeed)
-          .update({
-        "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> addStaredFeedItemToUser(FeedItems feedItem, String uid) async {
-    try {
-      _db
-          .collection(_UserCollection)
-          .doc(uid)
-          .collection(_FeedCollection)
-          .doc()
-          .set({
-        "StaredFeed": FieldValue.arrayUnion([feedItem.toMap()])
-      }, SetOptions(merge: true));
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> addFeedItemToChatUsers(FeedItems feedItem, String chatID) async {
-    try {
-      List<String> userIDs = await getMembersOfChat(chatID);
-      print(userIDs);
-      for (int i = 0; i < userIDs.length; i++) {
-        _db
-            .collection(_UserCollection)
-            .doc(userIDs[i])
-            .collection(_FeedCollection)
-            .doc(_PersonalFeed)
-            .set({
-          "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
-        }, SetOptions(merge: true));
-        print(
-            'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Stream<List<FeedItems>> getUserFeed(String uid) {
-    return _db
-        .collection(_UserCollection)
-        .doc(uid)
-        .collection(_FeedCollection)
-        .doc(_PersonalFeed)
-        .snapshots()
-        .map((snap) {
-      if (snap.exists) {
-        if (snap.data()!.containsKey("PersonalFeed")) {
-          List<dynamic> currentData = snap["PersonalFeed"];
-          return currentData.map((item) {
-            return FeedItems.getFeedItemFromSubClass(item);
-          }).toList();
-        } else {
-          return [];
-        }
-      } else {
-        return [];
-      }
-    });
-  }
-
-  Stream<List<FeedItems>> getUserStaredFeed(String uid) {
-    return _db
-        .collection(_UserCollection)
-        .doc(uid)
-        .collection(_FeedCollection)
-        .doc(_StaredFeed)
-        .snapshots()
-        .map((snap) {
-      if (snap.exists) {
-        if (snap.data()!.containsKey("StaredFeed")) {
-          List<dynamic> currentData = snap["StaredFeed"];
-          return currentData.map((item) {
-            return FeedItems.getFeedItemFromSubClass(item);
-          }).toList();
-        } else {
-          return [];
-        }
-      } else {
         return [];
       }
     });

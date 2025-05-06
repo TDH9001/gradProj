@@ -2,18 +2,18 @@ import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/about_screen/question_screen.dart';
+import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
+import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/theme_provider.dart';
 
-Future<bool> checkInternetConnection(List<ConnectivityResult> data) async {
-  if (data.contains(ConnectivityResult.none)) {
-    print("No network interface at all");
-    return false;
-  }
+
+
+Future<bool> checkInternetConnection() async {
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -43,9 +43,14 @@ Future<bool> check() async {
   var connectResult = await Connectivity().checkConnectivity();
   print("Connectivity result: $connectResult"); // Debug info
 
-  return await checkInternetConnection(connectResult);
+  if (connectResult == ConnectivityResult.none) {
+    print("No network detected");
+    return false;
+  }
+
+  // Check for actual internet access
+  return await checkInternetConnection();
 }
-// Check for actual internet access
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -68,17 +73,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDarkMode = themeProvider.isDarkMode;
+    // final themeProvider = Provider.of<ThemeProvider>(context);
+    // final isDarkMode = themeProvider.isDarkMode;
 
     return Scaffold(
         // backgroundColor: Colors.white,
-        backgroundColor: isDarkMode ? Color(0xFF121212) : Color(0xff769BC6),
+        backgroundColor: Color(0xff769BC6),
         body: Center(
-          child: Image(
-            image: const AssetImage('assets/images/splash.png'),
-            color: isDarkMode ? Colors.white70 : null,
-            colorBlendMode: isDarkMode ? BlendMode.modulate : null,
+          child: Image(image: const AssetImage('assets/images/splash.png'),
+            color: null,
+            colorBlendMode: null,
           ),
         ));
   }
