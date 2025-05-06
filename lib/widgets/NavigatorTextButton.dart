@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 import '../services/navigation_Service.dart';
 
 class Navigatortextbutton extends StatelessWidget {
@@ -8,6 +10,8 @@ class Navigatortextbutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return TextButton(
         onPressed: () {
           if (location != "pop") {
@@ -19,13 +23,13 @@ class Navigatortextbutton extends StatelessWidget {
         },
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.normal,
               decoration: TextDecoration.underline,
-              decorationColor: Color(0xff769BC6),
+              decorationColor:  isDarkMode ? Color(0xff769BC6) : Color(0xff2E5077),
               decorationThickness: 2,
-              color: Color(0xff769BC6)),
+              color: isDarkMode ? Color(0xff769BC6) : Color(0xff2E5077)),
         ));
   }
 }
