@@ -19,7 +19,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F7FA),
       key: scaffoldKey,
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
