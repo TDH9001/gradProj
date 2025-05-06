@@ -1,0 +1,77 @@
+{
+  "name_of_app": "SciConnect",
+  "app_login": "LOGIN",
+  "app_email":"Email",
+  "hint_email": "Email",
+  "hint_pass": "Password",
+  "app_forget_pass": "Forget password ?",
+  "app_reset_pass": "Reset password ",
+  "app_login_but": "Login",
+  "app_reset_pass_tex": "Don't have an account?",
+  "app_creat_acc": "Sign up",
+
+  "New_pass": "New Password",
+  "pass_require": "Your new password must be different from previously used password",
+  "create_pass": "Create New Password",
+
+  "create_account_signup": "Create Account",
+  "first_name_hint": "First Name",
+  "last_name_hint": "last Name",
+  "email_hint_singup": "Email",
+  "phone_hint_singup":"Phone Number",
+  "pass_hint_singup": "Password",
+  "confirmpass_hint_singup": "Confirm Password",
+  "create_account_but_singup": "Create the account",
+  "have_account_singup": "Already have an account ?",
+  "login_singup": "Login",
+
+  "onbording_title1": "Welcome to SciConnect",
+  "onbording_body1": "An app that bridges science and communication...",
+  "onbording_title2": "Seamless Collaboration",
+  "onbording_body2":"Connect with your team through dedicated chat rooms...",
+  "onbording_title3": "Smart Task Management",
+  "onbording_body3":"Use the table feature to manage your projects...",
+  "skip": "Skip",
+
+  "app_title_home": "Home",
+  "app_title_table": "Table",
+  "app_title_chats": "Chats",
+  "app_title_about": "About",
+  "app_title_profile": "Profile",
+
+ "ain_shams_university":"Ain Shams University",
+ "faculty_of_science": "Faculty of Science",
+  "card_profile": "Profile",
+  "card_settings": "Settings",
+  "card_logout": "Logout",
+  "card_questions": "Questions",
+  "profile_name": "Name",
+  "profile_email": "Email",
+  "profile_phone": "Phone Number",
+  "profile_academic_year": "Academic Year",
+  "profile_courses_enrolled": "Courses Enrolled",
+  "profile_edit_data": "Edit Data",
+  "profile_no_courses": "No courses enrolled yet.",
+  "error_message": "Error: {} \nPlease update your data.",
+  "profile_no_course": "Please register your academic year and courses",
+  "profile_academicyear": "Academic Year",
+  "profile_courses": "Courses",
+  "profile_submit": "Validate and Submit",
+
+  "question_title": "Questions",
+  "question_text1": "Welcome to Ain Shams University Faculty of Science Guide!",
+  "question_text2": "I'm here to help you find the best courses and career paths \"\n\"for your studies at Ain Shams University. \uD83C\uDF93\\n\\n\"\n\"Would you like to start a conversation with our smart assistant?",
+  "question_scimate": "chat with sciMate",
+  "question_cancel": "Cancel",
+
+  "setting_title": "Setting",
+  "setting_theme": "Theme",
+  "setting_light_mode": "Light",
+  "setting_dark_mode": "Dark",
+  "setting_system_mode": "System"
+
+
+
+
+
+}

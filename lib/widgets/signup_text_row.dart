@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../screen/auth/singup_screen.dart';
+import '../features/auth/singup_screen.dart';
 
 class SignupTextRow extends StatelessWidget {
   const SignupTextRow({super.key});

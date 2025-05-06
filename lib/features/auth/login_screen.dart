@@ -4,6 +4,8 @@ import 'package:grad_proj/widgets/forget_password_row.dart';
 import 'package:grad_proj/widgets/signup_text_row.dart';
 import 'package:provider/provider.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
+import 'package:grad_proj/features/auth/resetpassword_screen.dart';
+import 'package:grad_proj/features/auth/singup_screen.dart';
 import '../../providers/auth_provider.dart';
 import '../../services/snackbar_service.dart';
 import '../../theme/light_theme.dart';

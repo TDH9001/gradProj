@@ -4,7 +4,7 @@ import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/chats/ChatDataScreenWidgets.dart';
+import 'package:grad_proj/features/chats/ChatDataScreenWidgets.dart';
 
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/theme/light_theme.dart';

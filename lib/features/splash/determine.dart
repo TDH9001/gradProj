@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/features/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
+import 'package:grad_proj/features/onboarding_screen/onboarding_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import 'package:grad_proj/providers/auth_provider.dart';

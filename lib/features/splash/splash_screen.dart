@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/features/about_screen/question_screen.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
-import 'package:grad_proj/screen/splash/determine.dart';
-import 'package:grad_proj/screen/splash/no_internet_page.dart';
+import 'package:grad_proj/features/onboarding_screen/onboarding_screen.dart';
+import 'package:grad_proj/features/splash/determine.dart';
+import 'package:grad_proj/features/splash/no_internet_page.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 

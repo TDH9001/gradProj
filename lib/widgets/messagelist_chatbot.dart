@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/about_screen/chatbot/chat_item.dart';
+import 'package:grad_proj/features/about_screen/chatbot/chat_item.dart';
 
 class MessagelistChatbot extends StatelessWidget {
   final ScrollController scrollController;

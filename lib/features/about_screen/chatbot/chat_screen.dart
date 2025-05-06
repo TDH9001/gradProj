@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:grad_proj/screen/about_screen/chatbot/question_model.dart';
+import 'package:grad_proj/features//about_screen/chatbot/question_model.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'chat_item.dart';
 import 'chat_message.dart';

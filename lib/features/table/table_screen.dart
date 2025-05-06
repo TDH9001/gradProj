@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/features/table/Course_disaplay_Lists.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/chats/chat_data_screen.dart';
+import 'package:grad_proj/features/chats/chat_data_screen.dart';
+import 'package:grad_proj/features/table/Course_disaplay_Lists.dart';
+import 'package:grad_proj/features/table/tableform_screen.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Scedule_creation_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
@@ -17,7 +18,6 @@ import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import '../../theme/light_theme.dart';
 import '../../theme/theme_provider.dart';
-
 class TableScreen extends StatefulWidget {
   TableScreen({super.key});
   final MultiSelectController<String> dayController =
@@ -49,8 +49,7 @@ class _TableScreenState extends State<TableScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
     return Scaffold(
-        backgroundColor:
-            isDarkMode ? DarkThemeColors.background : Color(0xFFF7F9FC),
+        backgroundColor: isDarkMode ? DarkThemeColors.background : Color(0xFFF7F9FC),
         body: ChangeNotifierProvider.value(
             value: AuthProvider.instance,
             child: CustomScrollView(
