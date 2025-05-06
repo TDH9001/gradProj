@@ -12,5 +12,14 @@ abstract class DarkThemeColors {
   static const  arrowColor = Colors.white70;
   static const backgroundImage = Colors.white70;
   static const buttonColor = Color(0xFF2E5077);
+  static const LinearGradient backgroundGradient = LinearGradient(
+    colors: [
+      Color(0xFF1C1C1C),
+      Color(0xFF2E3B55),
+      secondary,
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 
 }

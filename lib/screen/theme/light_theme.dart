@@ -8,4 +8,9 @@ abstract class LightTheme{
   static const textcolor = Color(0xff000000);
   static const backimg = Color(0xFF2E3B55);
   static const backgroundImage = Colors.white;
+  static const LinearGradient backgroundGradient = LinearGradient(
+    colors: [primary, secondary],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
 }
