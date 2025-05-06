@@ -25,7 +25,7 @@ class ChatOptions extends ChatItem {
             padding: const EdgeInsets.only(left: 8.0, bottom: 4.0),
             child: Text(
               '${timestamp.hour}:${timestamp.minute.toString().padLeft(2, '0')}',
-              style: const TextStyle(color: Colors.grey, fontSize: 10),
+              style: const TextStyle(color: Colors.white, fontSize: 10),
             ),
           ),
           // Options
@@ -35,7 +35,8 @@ class ChatOptions extends ChatItem {
             children: options
                 .map(
                   (option) => ChoiceChip(
-                label: Text(option),
+                    backgroundColor: Color(0xFF4A739F),
+                label: Text(option , style: const TextStyle(color: Colors.white)),
                 selected: false,
                 onSelected: (selected) => onOptionSelected(option),
               ),
