@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../providers/theme_provider.dart';
+import '../../widgets/onboarding_item.dart';
 import '../auth/login_screen.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
 
 class OnbordingModel {
   final String image;
@@ -32,7 +37,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ' Explore innovative tools to organize your work,collaborate with peers, and achieve your goals.',
     ),
     OnbordingModel(
-      image: 'assets/images/chatting.png',
+      image: 'assets/images/chatting2.png',
       title: 'Seamless Collaboration',
       body:
           'Connect with your team through dedicated chat rooms. Share ideas, discussions, and files all in one place.',
@@ -50,6 +55,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2E5077),
         actions: [
           TextButton(
             onPressed: () {
@@ -66,7 +72,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ],
       ),
-      body: Padding(
+      body: Container(
+         decoration:  BoxDecoration(
+         gradient: LightTheme.backgroundGradient,
+    ),
+      child: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Column(
           children: [
@@ -74,22 +84,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: PageView.builder(
                 physics: BouncingScrollPhysics(),
                 controller: boardController,
-                onPageChanged: (int index) {
-                  if (index == onbording.length - 1) {
-                    setState(() {
-                      isLast = true;
-                    });
-                  } else {
-                    setState(() {
-                      isLast = false;
-                    });
-                  }
-                },
-                itemBuilder: (context, index) =>
-                    buildBoardingItem(onbording[index]),
+                onPageChanged: (index) => setState(() {
+                  isLast = index == onbording.length - 1;
+                }),
                 itemCount: onbording.length,
+                itemBuilder: (context, index) => OnboardingItem(
+                  image: onbording[index].image,
+                  title: onbording[index].title,
+                  body: onbording[index].body,),
+                ),
               ),
-            ),
             SizedBox(
               height: 40,
             ),
@@ -98,8 +102,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 SmoothPageIndicator(
                   controller: boardController,
                   effect: ExpandingDotsEffect(
-                    dotColor: Colors.grey,
-                    activeDotColor: Color(0xff769BC6),
+                    dotColor: Colors.white60,
+                    activeDotColor: Color(0xff2E5077),
                     dotHeight: 10,
                     expansionFactor: 4,
                     dotWidth: 10,
@@ -109,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 Spacer(),
                 FloatingActionButton(
-                  backgroundColor: Color(0xff769BC6),
+                  backgroundColor: Color(0xff2E5077),
                   onPressed: () {
                     if (isLast) {
                       Navigator.pushAndRemoveUntil(
@@ -127,13 +131,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     }
                   },
                   child: Icon(
-                    Icons.arrow_forward_ios,
+                    Icons.arrow_forward_ios,color: Colors.white60,
                   ),
                 ),
               ],
             ),
           ],
         ),
+      ),
       ),
     );
   }
