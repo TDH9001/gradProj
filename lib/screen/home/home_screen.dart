@@ -24,7 +24,11 @@ class _HomeScreenState extends State<HomeScreen>
         value: AuthProvider.instance,
         child: (Scaffold(
             appBar: AppBar(
-              title: Text("Home"),
+              title: Text(
+                'PLACEHOLDER FOR NAME',style: TextStyle(fontSize: 15),
+                softWrap: true,
+                overflow: TextOverflow.visible,
+              ),
               actions: [
                 IconButton(
                   icon: Icon(Icons.view_list),

@@ -45,7 +45,7 @@ class ScheduleUpdateItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
+    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
     final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
     final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
@@ -133,7 +133,7 @@ class ScheduleUpdateItem extends FeedItems {
 
   Widget _buildScheduleComparisonRow(BuildContext context, String label, String oldValue, String newValue) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
+    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
     final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
     
@@ -162,7 +162,8 @@ class ScheduleUpdateItem extends FeedItems {
                           oldValue,
                           style: TextStyle(
                             decoration: TextDecoration.lineThrough,
-                            color: secondaryColor,
+                            color: Colors.white,
+                            //secondaryColor
                           ),
                         ),
                       ),
