@@ -7,8 +7,12 @@ import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/refactored/resetform_screen.dart';
+import 'package:provider/provider.dart';
 import '../../UI/text_style.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/customTextField.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
 
 class ResetpasswordScreen extends StatelessWidget {
   ResetpasswordScreen({super.key});
@@ -17,9 +21,16 @@ class ResetpasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     SnackBarService.instance.buildContext = context;
     return Scaffold(
-      body: SafeArea(
+      body:  Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+        gradient: isDarkMode? DarkThemeColors.backgroundGradient: LightTheme.backgroundGradient,
+    ),
+      child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -31,7 +42,7 @@ class ResetpasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF1F2937),
+                  color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -42,8 +53,9 @@ class ResetpasswordScreen extends StatelessWidget {
                   'Your new password must be different from previously used password',
                   style: TextStyle(
                     fontSize: 19,
-                    color: Colors.black54,
+                    color: Colors.white70,
                   ),
+                  maxLines: 3,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -76,6 +88,7 @@ class ResetpasswordScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }
