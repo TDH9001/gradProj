@@ -8,7 +8,7 @@ class SemesterModel {
   late int totalCreditHours;
   late double semmesterGpa;
   late Grades semesterGrade;
-  late String level; // <-- Add this variable
+  late String level;
 
   SemesterModel(
     this.courses,
@@ -16,10 +16,10 @@ class SemesterModel {
     this.semesterName,
     this.semesterNumber,
   ) {
-    // Calculate total credit hours
+
     totalCreditHours = courses.fold(0, (sum, course) => sum + course.creditHours);
 
-    // Calculate weighted GPA
+
     double totalWeightedGrade = 0;
     int totalCredits = 0;
     for (var course in courses) {
@@ -28,10 +28,9 @@ class SemesterModel {
     }
     semmesterGpa = totalCredits > 0 ? totalWeightedGrade / totalCredits : 0;
 
-    // Map GPA to semesterGrade (adjust thresholds as needed)
     semesterGrade = _getGradeFromGpa(semmesterGpa);
 
-    // Set the level based on totalCreditHours
+
     if (totalCreditHours < 33) {
       level = "الأول";
     } else if (totalCreditHours < 67) {
@@ -52,5 +51,30 @@ class SemesterModel {
     if (gpa >= 2.0) return Grades.C;
     if (gpa >= 1.0) return Grades.D;
     return Grades.F;
+  }
+
+
+  factory SemesterModel.fromJson(Map<String, dynamic> json) {
+    return SemesterModel(
+      (json['courses'] as List<dynamic>)
+          .map((c) => CourseModel.fromJson(c as Map<String, dynamic>))
+          .toList(),
+      json['semesterYear'] ?? '',
+      json['semesterName'] ?? '',
+      json['semesterNumber'] ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'courses': courses.map((c) => c.toJson()).toList(),
+      'semesterYear': semesterYear,
+      'semesterName': semesterName,
+      'semesterNumber': semesterNumber,
+      'totalCreditHours': totalCreditHours,
+      'semmesterGpa': semmesterGpa,
+      'semesterGrade': semesterGrade.toString(),
+      'level': level,
+    };
   }
 }

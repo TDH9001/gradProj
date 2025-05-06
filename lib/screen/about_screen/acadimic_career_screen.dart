@@ -18,13 +18,39 @@ class AcademicCareerScreen extends StatefulWidget {
 class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
   int selectedSemesterIndex = 0;
 
-  
   final TextEditingController _courseNameController = TextEditingController();
   final TextEditingController _courseCodeController = TextEditingController();
   final TextEditingController _gradeController = TextEditingController();
   final TextEditingController _creditHoursController = TextEditingController();
   final TextEditingController _courseScoreController = TextEditingController();
   final TextEditingController _gradeLetterController = TextEditingController();
+
+  Grades? _parseGradeLetter(String? input) {
+    switch (input?.toUpperCase()) {
+      case "A":
+        return Grades.A;
+      case "A-":
+      case "A_MINUS":
+        return Grades.A_Minus;
+      case "B+":
+      case "B_PLUS":
+        return Grades.B_Plus;
+      case "B-":
+      case "B_MINUS":
+        return Grades.B_Minus;
+      case "C+":
+      case "C_PLUS":
+        return Grades.C_Plus;
+      case "C":
+        return Grades.C;
+      case "D":
+        return Grades.D;
+      case "F":
+        return Grades.F;
+      default:
+        return null;
+    }
+  }
 
   @override
   void dispose() {
@@ -96,15 +122,15 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
                     CourseModel(
                       courseCode: _courseCodeController.text,
                       courseName: _courseNameController.text,
-                      grade: double.tryParse(_gradeController.text) ?? 0, // <-- changed to double
+                      grade: double.tryParse(_gradeController.text) ?? 0,
                       creditHours: int.tryParse(_creditHoursController.text) ?? 0,
                       courseScore: double.tryParse(_courseScoreController.text) ?? 0,
-                      gradeLetter: _gradeLetterController.text,
+                      gradeLetter: _parseGradeLetter(_gradeLetterController.text),
                     ),
                   );
-                  
+
                   semester.totalCreditHours = semester.courses.fold(0, (sum, course) => sum + course.creditHours);
-                  
+
                   if (semester.totalCreditHours < 33) {
                     semester.level = "الأول";
                   } else if (semester.totalCreditHours < 67) {
@@ -131,7 +157,7 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
     );
   }
 
-  late AcademicCareer mockCareer; 
+  late AcademicCareer mockCareer;
 
   @override
   void initState() {
@@ -146,7 +172,7 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
               grade: 3,
               creditHours: 3,
               courseScore: 122.0,
-              gradeLetter: "B+",
+              gradeLetter: _parseGradeLetter("B+"),
             ),
             CourseModel(
               courseCode: "CHEM 103",
@@ -154,7 +180,7 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
               grade: 2,
               creditHours: 1,
               courseScore: 44.0,
-              gradeLetter: "A-",
+              gradeLetter: _parseGradeLetter("A-"),
             ),
           ],
           "2021-2022",
@@ -169,14 +195,13 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
               grade: 4,
               creditHours: 3,
               courseScore: 130.0,
-              gradeLetter: "A",
+              gradeLetter: _parseGradeLetter("A"),
             ),
           ],
           "2021-2022",
           "فبراير",
           2,
         ),
-        
       ],
       succesHours: 16,
       seatNumber: "210237",
@@ -374,7 +399,7 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
                   style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
                 DataCell(Text(course.creditHours.toStringAsFixed(2), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
                 DataCell(Text(course.courseScore.toStringAsFixed(2), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
-                DataCell(Text(course.gradeLetter ?? "", style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
+                DataCell(Text(course.gradeLetter != null ? course.gradeLetter.toString().split('.').last : "", style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
                 DataCell(Text(course.courseName, style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
                 DataCell(Text(course.courseCode, style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor))),
               ],
@@ -389,7 +414,9 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
     double gpa = semester.courses.isNotEmpty
         ? semester.courses.fold(0.0, (sum, c) => sum + c.grade) / semester.courses.length
         : 0;
-    String gradeLetter = semester.courses.isNotEmpty ? (semester.courses.first.gradeLetter ?? "") : "";
+    String gradeLetter = semester.courses.isNotEmpty && semester.courses.first.gradeLetter != null
+        ? semester.courses.first.gradeLetter.toString().split('.').last
+        : "";
 
     return Container(
       width: double.infinity,
@@ -415,7 +442,9 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
     double gpa = semester.courses.isNotEmpty
         ? semester.courses.fold(0.0, (sum, c) => sum + c.grade) / semester.courses.length
         : 0;
-    String gradeLetter = semester.courses.isNotEmpty ? (semester.courses.first.gradeLetter ?? "") : "";
+    String gradeLetter = semester.courses.isNotEmpty && semester.courses.first.gradeLetter != null
+        ? semester.courses.first.gradeLetter.toString().split('.').last
+        : "";
 
     return Card(
       elevation: 4,
