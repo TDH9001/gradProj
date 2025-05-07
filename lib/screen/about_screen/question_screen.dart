@@ -7,7 +7,7 @@ import 'package:grad_proj/widgets/orgappbar.dart';
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
 
-  static String id = "AboutScreen";
+  static String id = "AboutScreen";//
 
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
