@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
+import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
@@ -32,8 +34,9 @@ class MessageListViewChatList extends StatelessWidget {
                 child: Text(
                     "Error: ${_snapshot.error} \n please update your data and the data field mising"));
           }
-          //FIXME: possibly not working after a large enough amount of data is sent
-          List bubbles = _data!.messages.reversed.toList();
+          List<Message> bubbles = _data!.messages.reversed.toList();
+          HiveCahtMessaegsCachingService.addChatData(chatID, bubbles);
+          //storing the data of the current chat into the box
           return ListView.builder(
             itemCount: _snapshot.data!.messages.length, controller: LVC,
             physics: BouncingScrollPhysics(), reverse: true,

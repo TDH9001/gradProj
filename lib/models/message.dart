@@ -15,8 +15,8 @@ class Message {
       required this.timestamp,
       required this.type,
       required this.senderName});
-  factory Message.fromJson(Map<String, dynamic> _snap) {
-    // var _data = _snap.data();
+  factory Message.fromFireBase(Map<String, dynamic> _snap) {
+    // used when dealing withFireabse > as they can translate timemstamps
     return Message(
       messageContent: _snap["message"],
       senderID: _snap["senderID"],
@@ -27,13 +27,32 @@ class Message {
       senderName: _snap["senderName"],
     );
   }
-  Map<String, dynamic> toMap() {
+  factory Message.fromJson(Map<String, dynamic> json) {
+    //usd when dealing with hive as hey can nto deal with timestamp
+    return Message(
+      messageContent: json["message"],
+      senderID: json["senderID"],
+      type: json["type"] is int
+          ? MessageType.values[json["type"]].name
+          : json["type"],
+      timestamp: json["timestamp"] is DateTime
+          ? Timestamp.fromDate(json["timestamp"])
+          : json["timestamp"],
+      senderName: json["senderName"],
+    );
+  }
+  Map<String, dynamic> toJson() {
     return {
       "senderID": senderID,
-      "timestamp": timestamp,
+      "timestamp": timestamp.toDate(),
       "senderName": senderName,
       "message": messageContent,
       "type": MessageType.values.byName(type).index,
     };
+  }
+
+  @override
+  String toString() {
+    return 'Message{messageContent: $messageContent, senderID: $senderID, timestamp: $timestamp, type: $type, senderName: $senderName}';
   }
 }

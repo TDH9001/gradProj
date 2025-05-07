@@ -21,14 +21,16 @@ class HiveCahtMessaegsCachingService {
     if (data != null && data is Map) {
       final mappedData = Map<String, dynamic>.from(
           data); //all im going to store is the lsit of messages
-      return mappedData.values.map((e) => Message.fromJson(e)).toList();
+      return mappedData.values.map((e) => Message.fromFireBase(e)).toList();
     } else {
       return [];
     }
   }
 
   static void addChatData(String cahtId, List<Message> message) {
-    Map<String, dynamic> messages = {"messageList": message};
+    Map<String, dynamic> messages = {
+      "messageList": message.map((e) => e.toJson()).toList()
+    };
     print(messages);
     //gets a Map<String,Dynamic> ad stores it
     _chatDataBox.put(
