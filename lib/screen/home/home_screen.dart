@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen>
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GetUsersStream(),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -59,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
                   },
                   child: Text('Test Academic Career Screen'),
                 ),
+                GetUsersStream(),
               ],
             ))));
   }
