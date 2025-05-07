@@ -2,10 +2,10 @@ import 'package:grad_proj/models/Semester_logs_models/semester_model.dart';
 
 class AcademicCareer {
   final List<SemesterModel> semesters;
-  final int succesHours;
+  late int succesHours;
   late double gpa;
   late int totalGrade;
-  final String seatNumber;
+  late String seatNumber;
 
   AcademicCareer({
     required this.semesters,
