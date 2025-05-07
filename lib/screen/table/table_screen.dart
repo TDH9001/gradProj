@@ -63,7 +63,7 @@ class _TableScreenState extends State<TableScreen> {
                       ),
                       Text(
                         "Add permanant scedule item ",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 16),
                       ),
                       Spacer(
                         flex: 3,

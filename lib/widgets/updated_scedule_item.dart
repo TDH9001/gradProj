@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../providers/theme_provider.dart';
+
 Widget updatedSceduleItem(ScheduleItemClass scl) {
+ //final themeProvider = Provider.of<ThemeProvider>(context);
+  //final bool isDarkMode = themeProvider.isDarkMode;
 //  final ScheduleItemClass scl;
   // print(scl.endDate.toString());
   // if (scl.type == 2) {
@@ -11,14 +16,15 @@ Widget updatedSceduleItem(ScheduleItemClass scl) {
   // print("////////////////////////");
 
   return Padding(
+
     padding: const EdgeInsets.only(bottom: 12),
     child: Container(
       decoration: BoxDecoration(
         color: scl.type == 1
-            ? const Color(0xff769BC6)
+            ? const Color(0xFF4A739F)
             : scl.type == 2
-                ? Colors.red
-                : Colors.lightGreen,
+                ?  Colors.redAccent
+                : Colors.lightGreen[300],
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
