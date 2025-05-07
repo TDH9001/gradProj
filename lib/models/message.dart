@@ -15,8 +15,8 @@ class Message {
       required this.timestamp,
       required this.type,
       required this.senderName});
-  factory Message.fromFirestore(DocumentSnapshot _snap) {
-    var _data = _snap.data();
+  factory Message.fromJson(Map<String, dynamic> _snap) {
+    // var _data = _snap.data();
     return Message(
       messageContent: _snap["message"],
       senderID: _snap["senderID"],
@@ -27,5 +27,13 @@ class Message {
       senderName: _snap["senderName"],
     );
   }
-
+  Map<String, dynamic> toMap() {
+    return {
+      "senderID": senderID,
+      "timestamp": timestamp,
+      "senderName": senderName,
+      "message": messageContent,
+      "type": MessageType.values.byName(type).index,
+    };
+  }
 }

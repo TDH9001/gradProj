@@ -4,7 +4,7 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart'
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
 class MessageListViewChatList extends StatelessWidget {
@@ -50,7 +50,7 @@ class MessageListViewChatList extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment:
-                        HiveCashingService.getUserContactData().id ==
+                        HiveUserContactCashingService.getUserContactData().id ==
                                 bubbles[index].senderID
                             ? MainAxisAlignment.end
                             : MainAxisAlignment.start,
@@ -59,9 +59,10 @@ class MessageListViewChatList extends StatelessWidget {
                           ? chatMessageBubble(
                               message: ChatdataOfCurrentChat.messageContent
                                   .toString(),
-                              isOurs:
-                                  HiveCashingService.getUserContactData().id ==
-                                      bubbles[index].senderID,
+                              isOurs: HiveUserContactCashingService
+                                          .getUserContactData()
+                                      .id ==
+                                  bubbles[index].senderID,
                               ts: bubbles[index].timestamp,
                               senderName: bubbles[index].senderName,
                             )
@@ -72,10 +73,10 @@ class MessageListViewChatList extends StatelessWidget {
                                   FileAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),
-                                  isOurs:
-                                      HiveCashingService.getUserContactData()
-                                              .id ==
-                                          bubbles[index].senderID,
+                                  isOurs: HiveUserContactCashingService
+                                              .getUserContactData()
+                                          .id ==
+                                      bubbles[index].senderID,
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 )
@@ -84,10 +85,10 @@ class MessageListViewChatList extends StatelessWidget {
                                   AudioAdress: ChatdataOfCurrentChat
                                       .messageContent
                                       .toString(),
-                                  isOurs:
-                                      HiveCashingService.getUserContactData()
-                                              .id ==
-                                          bubbles[index].senderID,
+                                  isOurs: HiveUserContactCashingService
+                                              .getUserContactData()
+                                          .id ==
+                                      bubbles[index].senderID,
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 ),

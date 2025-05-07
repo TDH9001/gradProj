@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
@@ -50,7 +50,7 @@ class _MyWidgetState extends State<SendMessageButton> {
     });
     if (finalPath != null) {
       var _result = await CloudStorageService.instance.uploadVoice(
-          uid: HiveCashingService.getUserContactData().id,
+          uid: HiveUserContactCashingService.getUserContactData().id,
           fileData: File(finalPath));
       return await _result!.ref.getDownloadURL();
     } else {
@@ -80,12 +80,13 @@ class _MyWidgetState extends State<SendMessageButton> {
               DBService.instance.addMessageInChat(
                   chatId: widget.chatID,
                   messageData: Message(
-                      senderID: HiveCashingService.getUserContactData().id,
+                      senderID:
+                          HiveUserContactCashingService.getUserContactData().id,
                       messageContent: VoiceUrl!,
                       timestamp: Timestamp.now(),
                       type: "voice",
                       senderName:
-                          "${HiveCashingService.getUserContactData().firstName} ${HiveCashingService.getUserContactData().lastName}"));
+                          "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}"));
             }
           } else if (widget.GK.currentState!.validate() &&
               widget.txt.text.isNotEmpty) {
@@ -93,12 +94,13 @@ class _MyWidgetState extends State<SendMessageButton> {
             DBService.instance.addMessageInChat(
                 chatId: widget.chatID,
                 messageData: Message(
-                    senderID: HiveCashingService.getUserContactData().id,
+                    senderID:
+                        HiveUserContactCashingService.getUserContactData().id,
                     messageContent: widget.txt.text.trim(),
                     timestamp: Timestamp.now(),
                     type: "text",
                     senderName:
-                        "${HiveCashingService.getUserContactData().firstName} ${HiveCashingService.getUserContactData().lastName}"));
+                        "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}"));
           }
           widget.txt.text = "";
           FocusScope.of(context).unfocus();

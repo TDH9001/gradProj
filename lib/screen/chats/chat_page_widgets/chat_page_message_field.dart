@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_message_button.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/send_message_button.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
 class MessageField extends StatefulWidget {
@@ -39,8 +39,10 @@ class _MessageFieldState extends State<MessageField> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: widget.admins
-                    .contains(HiveCashingService.getUserContactData().id.trim())
+            children: widget.admins.contains(
+                    HiveUserContactCashingService.getUserContactData()
+                        .id
+                        .trim())
                 ? [
                     _messageTextField(widget.txt),
                     SendMessageButton(

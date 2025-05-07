@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
@@ -108,15 +108,21 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                             .toList(),
                         year: int.parse(_yearController.text),
                         userId:
-                            HiveCashingService.getUserContactData().id.trim(),
+                            HiveUserContactCashingService.getUserContactData()
+                                .id
+                                .trim(),
                         seatNumber: int.parse(_seatIdController.text));
                     for (int i = 0; i < selectedItems.length; i++) {
                       await DBService.instance.addChatsToUser(
-                        HiveCashingService.getUserContactData().id.trim(),
+                        HiveUserContactCashingService.getUserContactData()
+                            .id
+                            .trim(),
                         selectedItems[i].value,
                       );
                       await DBService.instance.addMembersToChat(
-                        HiveCashingService.getUserContactData().id.trim(),
+                        HiveUserContactCashingService.getUserContactData()
+                            .id
+                            .trim(),
                         selectedItems[i].value,
                       );
                       SnackBarService.instance.showsSnackBarSucces(

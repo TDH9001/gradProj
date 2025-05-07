@@ -4,7 +4,7 @@ import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
 import 'package:grad_proj/models/schedule.dart';
-import 'package:grad_proj/services/hive_caching_service/hive_cashing_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
@@ -54,7 +54,7 @@ class DBService {
         "classes": [],
         "academicYear": 0,
       });
-      HiveCashingService.updateUserContactData(Contact(
+      HiveUserContactCashingService.updateUserContactData(Contact(
               id: userId,
               seatNumber: 0,
               firstName: firstName,
@@ -84,9 +84,10 @@ class DBService {
         "isComplete": true,
         "seatNumber": seatNumber
       });
-      Contact currData = await HiveCashingService.getUserContactData();
+      Contact currData =
+          await HiveUserContactCashingService.getUserContactData();
 
-      HiveCashingService.updateUserContactData(Contact(
+      HiveUserContactCashingService.updateUserContactData(Contact(
               id: userId,
               seatNumber: seatNumber,
               firstName: currData.firstName,

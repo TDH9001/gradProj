@@ -3,7 +3,7 @@ import 'package:grad_proj/services/hive_caching_service/cashing_service_hive_key
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
-abstract class HiveCashingService {
+abstract class HiveUserContactCashingService {
   static late Box _userContactData;
 
   static Future<void> initHive() async {
@@ -22,7 +22,7 @@ abstract class HiveCashingService {
 
   static Contact getUserContactData() {
     final data = _userContactData.get(CashingServiceHiveKeys.userContactData);
-    
+
     if (data != null && data is Map) {
       final mappedData = Map<String, dynamic>.from(data);
       return Contact.fromJson(id: mappedData["id"], snap: mappedData);
