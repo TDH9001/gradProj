@@ -61,7 +61,9 @@ Widget _RecentChats() {
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                        tileColor:  isDarkMode ? DarkThemeColors.background: Colors.white,
+                        tileColor: isDarkMode
+                            ? DarkThemeColors.background
+                            : Colors.white,
                         onTap: () {
                           navigationService.instance.navigateToRoute(
                               MaterialPageRoute(builder: (_context) {
@@ -94,7 +96,10 @@ Widget _RecentChats() {
                                       ),
                                     ],
                                   )
-                                : Text(data[index].lastMessage),
+                                : Text(
+                                    data[index].lastMessage,
+                                    maxLines: 2,
+                                  ),
                         leading: Container(
                           width: 50,
                           height: 50,
