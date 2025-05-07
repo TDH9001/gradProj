@@ -40,7 +40,7 @@ class _MyWidgetState extends State<DropdownSelect> {
         ),
         fieldDecoration: FieldDecoration(
           hintText: 'Courses',
-          hintStyle:  TextStyle(color:isDarkMode ? Colors.white54 : Colors.black87),
+          hintStyle:  TextStyle(color:isDarkMode ? Colors.white : Colors.black87),
           prefixIcon: const Icon(Icons.add_circle_rounded, color: Colors.grey),
           showClearIcon: false,
           border: OutlineInputBorder(

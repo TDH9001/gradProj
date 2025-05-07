@@ -150,7 +150,7 @@ class SceduleCreateFeedItem extends FeedItems {
             child: Text(
               value,
               style: TextStyle(
-                color: Colors.white,
+                color:  textColor,
                 fontWeight: FontWeight.w500,
               ),
             ),

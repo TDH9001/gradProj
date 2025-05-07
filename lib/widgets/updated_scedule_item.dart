@@ -23,8 +23,8 @@ Widget updatedSceduleItem(ScheduleItemClass scl) {
         color: scl.type == 1
             ? const Color(0xFF4A739F)
             : scl.type == 2
-                ?  Colors.redAccent
-                : Colors.lightGreen[300],
+                ?  Color(0xffF44336)
+                : Color(0xFF388E3C),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
