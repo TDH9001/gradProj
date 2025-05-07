@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/about_screen/acadimic_career_screen.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/custom_card.dart';
 import '../about_screen/question_screen.dart';
@@ -35,7 +36,9 @@ class AccountScreen extends StatelessWidget {
               Container(
                 height: 150,
                 decoration: BoxDecoration(
-                  color: isDarkMode?DarkThemeColors.background:LightTheme.primary,
+                  color: isDarkMode
+                      ? DarkThemeColors.background
+                      : LightTheme.primary,
                   //isDarkMode?Color(0xFF2E3B55):ColorsApp.primary,
                 ),
                 child: Center(
@@ -44,8 +47,10 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 35,
-                       backgroundColor: isDarkMode ?  DarkThemeColors.background:LightTheme.backimg,
-                       //isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
+                        backgroundColor: isDarkMode
+                            ? DarkThemeColors.background
+                            : LightTheme.backimg,
+                        //isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
                         child: ClipOval(
                           child: Image.asset(
                             'assets/images/AinShamsUniv.png',
@@ -65,7 +70,7 @@ class AccountScreen extends StatelessWidget {
                       Text(
                         "science faculty",
                         style: TextStyle(
-                          color: isDarkMode?Colors.grey[400]:Colors.white,
+                          color: isDarkMode ? Colors.grey[400] : Colors.white,
                           fontSize: 14,
                         ),
                       ),
@@ -102,7 +107,8 @@ class AccountScreen extends StatelessWidget {
                     CustomCard(
                       icon: Icons.question_mark_outlined,
                       title: "Questions",
-                      onTap: () => navigationService.instance.navigateTo(QuestionScreen.id),
+                      onTap: () => navigationService.instance
+                          .navigateTo(QuestionScreen.id),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(
@@ -112,6 +118,17 @@ class AccountScreen extends StatelessWidget {
                         _auth.signOut();
                         navigationService.instance.navigateTo(LoginScreen.id);
                       },
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AcademicCareerScreen(),
+                          ),
+                        );
+                      },
+                      child: Text('Test Academic Career Screen'),
                     ),
                   ],
                 ),

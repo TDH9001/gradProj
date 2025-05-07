@@ -367,8 +367,8 @@ class _AcademicCareerScreenState extends State<AcademicCareerScreen> {
         Container(
           decoration: BoxDecoration(
             color: isDarkMode
-                ? DarkThemeColors.secondary.withOpacity(0.15)
-                : LightTheme.secondary.withOpacity(0.15),
+                ? DarkThemeColors.secondary.withValues(alpha: 0.15)
+                : LightTheme.secondary.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(8),
           ),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),

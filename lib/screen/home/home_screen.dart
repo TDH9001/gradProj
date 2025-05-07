@@ -44,23 +44,24 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AcademicCareerScreen(),
-                      ),
-                    );
-                  },
-                  child: Text('Test Academic Career Screen'),
-                ),
-                GetUsersStream(),
-              ],
-            ))));
+            body: GetUsersStream()
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     ElevatedButton(
+            //       onPressed: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => AcademicCareerScreen(),
+            //           ),
+            //         );
+            //       },
+            //       child: Text('Test Academic Career Screen'),
+            //     ),
+            //   ],
+            // ))));
+            )));
   }
 }
 
