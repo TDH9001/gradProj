@@ -32,16 +32,16 @@ class SendMessageButton extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<SendMessageButton> {
-  // void startRecord(AudioRecorder rec) async {
-  //   var location = await getApplicationDocumentsDirectory();
-  //   String fileName = Uuid().v4();
-  //   if (await rec.hasPermission()) {
-  //     await rec.start(RecordConfig(), path: location.path + fileName + '.m4a');
-  //     setState(() {
-  //       widget.isRecording = true;
-  //     });
-  //   }
-  // }
+  void startRecord(AudioRecorder rec) async {
+    var location = await getApplicationDocumentsDirectory();
+    String fileName = Uuid().v4();
+    if (await rec.hasPermission()) {
+      await rec.start(RecordConfig(), path: location.path + fileName + '.m4a');
+      setState(() {
+        widget.isRecording = true;
+      });
+    }
+  }
 
   Future<String?> stopRecord(AudioRecorder rec) async {
     String? finalPath = await rec.stop();
@@ -74,7 +74,7 @@ class _MyWidgetState extends State<SendMessageButton> {
         onPressed: () async {
           if (widget.txt.text.isEmpty) {
             if (!widget.isRecording) {
-              //  startRecord(widget.record);
+              startRecord(widget.record);
             } else {
               String? VoiceUrl = await stopRecord(widget.record);
               DBService.instance.addMessageInChat(
