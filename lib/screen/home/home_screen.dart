@@ -6,6 +6,7 @@ import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/screen/feed_test_screen.dart';
+import 'package:grad_proj/screen/about_screen/acadimic_career_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -25,7 +26,8 @@ class _HomeScreenState extends State<HomeScreen>
         child: (Scaffold(
             appBar: AppBar(
               title: Text(
-                'PLACEHOLDER FOR NAME',style: TextStyle(fontSize: 15),
+                'PLACEHOLDER FOR NAME',
+                style: TextStyle(fontSize: 15),
                 softWrap: true,
                 overflow: TextOverflow.visible,
               ),
@@ -42,7 +44,23 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-            body: GetUsersStream())));
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GetUsersStream(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AcademicCareerScreen(),
+                      ),
+                    );
+                  },
+                  child: Text('Test Academic Career Screen'),
+                ),
+              ],
+            ))));
   }
 }
 

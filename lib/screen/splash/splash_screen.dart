@@ -6,6 +6,7 @@ import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
+import 'package:grad_proj/providers/theme_provider.dart';
 
 import '../../providers/theme_provider.dart';
 import '../theme/dark_theme_colors.dart';
