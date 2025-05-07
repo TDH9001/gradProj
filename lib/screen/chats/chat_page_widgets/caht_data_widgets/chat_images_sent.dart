@@ -99,6 +99,9 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                     height: MediaService.instance.getHeight() * 2 / 3,
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 5.0,
+                          crossAxisSpacing: 5.0,
+                          childAspectRatio: 1 / 1.5,
                           crossAxisCount: 2),
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
@@ -111,10 +114,11 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                                 context: context,
                                 heroID: data[index].toString(),
                                 displayedWidget: ClipRRect(
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
+                                  child: Center(
                                     child: Image(
+                                        width: 200,
+                                        height: 200,
+                                        fit: BoxFit.cover,
                                         image: FileImage(data[
                                             index]) //does not display when loading though
                                         ),
