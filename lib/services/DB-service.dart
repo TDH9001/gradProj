@@ -302,7 +302,8 @@ class DBService {
           SceduleCreateFeedItem(
               chatID: chatID,
               senderID: uid,
-              senderName: "PLACEHOLDER FOR NAME",
+              senderName:
+                  "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}",
               timestamp: Timestamp.now(),
               scheduleItem: scl),
           chatID);
@@ -371,7 +372,8 @@ class DBService {
           ScheduleDeleteFeedItem(
               chatID: chatId,
               senderID: uid,
-              senderName: "PLACEHOLDER FOR NAME",
+              senderName:
+                  "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}",
               timestamp: Timestamp.now(),
               scheduleItem: scl),
           chatId);
@@ -592,8 +594,7 @@ class DBService {
             .set({
           "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
         }, SetOptions(merge: true));
-        print(
-            'CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+        print('failed to add');
       }
     } catch (e) {
       print(e);

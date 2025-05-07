@@ -44,24 +44,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-            body: GetUsersStream()
-            // Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     ElevatedButton(
-            //       onPressed: () {
-            //         Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (context) => AcademicCareerScreen(),
-            //           ),
-            //         );
-            //       },
-            //       child: Text('Test Academic Career Screen'),
-            //     ),
-            //   ],
-            // ))));
-            )));
+            body: GetUsersStream())));
   }
 }
 
@@ -79,8 +62,6 @@ class GetUsersStream extends StatelessWidget {
     return StreamBuilder<List<FeedItems>>(
       stream: DBService().getUserFeed(_auth.user!.uid),
       builder: (context, _snapshot) {
-        var data = _snapshot.data;
-
         if (_snapshot.connectionState == ConnectionState.waiting ||
             _snapshot.connectionState == ConnectionState.none) {
           return Center(child: CircularProgressIndicator());
@@ -90,7 +71,10 @@ class GetUsersStream extends StatelessWidget {
               child: Text(
                   "Error: ${_snapshot.error} \n please update your data and the data field mising"));
         }
-        print(data);
+        // print(data);
+        var items = _snapshot.data;
+        var data = items?.reversed.toList();
+
         return ListView.builder(
             itemCount: data!.length,
             itemBuilder: (context, index) {

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/customTextField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
@@ -111,7 +112,8 @@ class SceduleCreationService {
 
                                 Navigator.of(cont).pop(ScheduleItemClass(
                                     creatorId: AuthProvider.instance.user!.uid,
-                                    creatorName: "User name ",
+                                    creatorName:
+                                        "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}",
                                     day: days.values
                                         .byName(dayController
                                             .selectedItems[0].value
