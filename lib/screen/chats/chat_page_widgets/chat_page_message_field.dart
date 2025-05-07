@@ -53,7 +53,7 @@ class _MessageFieldState extends State<MessageField> {
                     ),
                     ImageMessageButton(
                       chatID: widget.chatID,
-                    )
+                    ),
                   ]
                 : [
                     Text("only admins can contribute to this chat"),
