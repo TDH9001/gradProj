@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theme_provider.dart';
 
 class CustomContainer extends StatelessWidget {
   final double width;
@@ -8,12 +12,14 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Container(
         width: width,
         height: height,
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDarkMode ? DarkThemeColors.primary :Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -23,7 +29,7 @@ class CustomContainer extends StatelessWidget {
             ),
           ],
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.grey, width: 1.5),
+          border: Border.all(color: isDarkMode ? DarkThemeColors.primary : Colors.grey, width: 1.5),
         ),
         child: child
     );;

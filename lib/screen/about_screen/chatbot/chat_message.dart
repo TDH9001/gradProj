@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/theme_provider.dart';
+import '../../theme/dark_theme_colors.dart';
 import 'chat_item.dart';
 
 class ChatMessage extends ChatItem {
@@ -16,6 +19,8 @@ class ChatMessage extends ChatItem {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
       child: Row(
@@ -25,7 +30,7 @@ class ChatMessage extends ChatItem {
         children: [
           if (!isUser)
             CircleAvatar(
-              backgroundColor: Color((0xff769BC6),),
+              backgroundColor: Color((0xFF4A739F),),
               child: Image.asset(
                 'assets/images/robot.png',
                 fit: BoxFit.cover,
@@ -42,7 +47,8 @@ class ChatMessage extends ChatItem {
               alignment: isUser ? Alignment.topRight : Alignment.topLeft,
               margin: const EdgeInsets.only(top: 20),
               backGroundColor:
-              isUser ? Color(0xff2E5077) : Colors.grey[200],
+              isUser ?(isDarkMode ? DarkThemeColors.secondary : Color(0xFF4A739F))
+                : (isDarkMode ? Colors.grey[800] : Colors.grey[200]!),
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -54,7 +60,7 @@ class ChatMessage extends ChatItem {
                       text,
                       style: TextStyle(
                         fontSize: 18,
-                        color: isUser ? Colors.white : Colors.black,
+                        color: isUser ? Colors.white : (isDarkMode ? Colors.white : Colors.black87),
                       ),
                     ),
                     const SizedBox(height: 4),

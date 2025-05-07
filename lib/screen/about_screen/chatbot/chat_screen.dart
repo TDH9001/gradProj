@@ -97,7 +97,14 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:Orgappbar(scaffoldKey:scaffoldKey, title: "SciMeta",),
+      appBar:Orgappbar(scaffoldKey:scaffoldKey, title: "SciMeta",
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
