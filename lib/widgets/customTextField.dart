@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/theme_provider.dart';
 import '../screen/theme/light_theme.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -27,6 +29,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   var timeData;
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
+
     void initstate() {
       super.initState();
       widget.isObscure = widget.isPassword;
@@ -99,21 +104,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       autocorrect: false,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(20, 10.0, 20.0, 10.0),
+        contentPadding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
         hintText: widget.hintText,
-        hintStyle: const TextStyle(color: Color(0xFF9CA3AF)),
+        hintStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
         filled: true,
-        fillColor: Colors.grey[50],
+        fillColor:isDarkMode ? Colors.grey[800] : Colors.grey[50],
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(60),
+          borderRadius: BorderRadius.circular(18),
           borderSide: const BorderSide(color: LightTheme.primary),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(60),
+          borderRadius: BorderRadius.circular(18),
           borderSide: const BorderSide(color: LightTheme.primary),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(60),
+          borderRadius: BorderRadius.circular(18),
           borderSide: const BorderSide(
             color: LightTheme.primary,
           ),
@@ -129,11 +134,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 icon: widget.isObscure
                     ? const Icon(
                         Icons.visibility_off,
-                        color: Colors.black,
+                        color: LightTheme.primary,
                       )
                     : const Icon(
                         Icons.visibility,
-                        color: Colors.black,
+                        color:LightTheme.primary,
                       ),
               )
             : null,
@@ -141,7 +146,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 widget.hintText == "End Date" ||
                 widget.hintText == "End Time")
             ? IconButton(
-                icon: const Icon(Icons.calendar_today, color: Colors.black),
+                icon: const Icon(Icons.calendar_today, color: Colors.grey),
                 onPressed: () {
                   if (widget.hintText == "Start Time") {
                     _pickStartTime();

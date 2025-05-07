@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theme_provider.dart';
 
 class DropdownSelect extends StatefulWidget {
   DropdownSelect({
@@ -20,7 +23,10 @@ class DropdownSelect extends StatefulWidget {
 class _MyWidgetState extends State<DropdownSelect> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return MultiDropdown<String>(
+
         items: widget.data,
         maxSelections: widget.maxSelections,
         enabled: true,
@@ -34,8 +40,8 @@ class _MyWidgetState extends State<DropdownSelect> {
         ),
         fieldDecoration: FieldDecoration(
           hintText: 'Courses',
-          hintStyle: const TextStyle(color: Colors.black87),
-          prefixIcon: const Icon(Icons.add_circle_rounded),
+          hintStyle:  TextStyle(color:isDarkMode ? Colors.white54 : Colors.black87),
+          prefixIcon: const Icon(Icons.add_circle_rounded, color: Colors.grey),
           showClearIcon: false,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),

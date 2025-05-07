@@ -47,7 +47,7 @@ class SceduleCreationService {
           builder: (context) => SingleChildScrollView(
                 child: AlertDialog(
                   title: Text(
-                      "add a ${itemType == 1 ? "permanat" : itemType == 2 ? "temporary" : "personal"} scedule"),
+                      "Add a ${itemType == 1 ? "permanat" : itemType == 2 ? "temporary" : "personal"} scedule",style: TextStyle(fontSize: 16),),
                   content: Form(
                     key: validatescheduleItem,
                     child: Column(
@@ -59,13 +59,17 @@ class SceduleCreationService {
                           maxSelections: 1,
                           isSearchable: false,
                         ),
+                        SizedBox(height: 15,),
                         CustomTextField(
-                            hintText: "scedule Name", controller: sceduleName),
+                            hintText: "scedule Name",controller: sceduleName),
+                        SizedBox(height: 15,),
                         CustomTextField(
                             hintText: "location",
                             controller: locationController),
+                        SizedBox(height: 15,),
                         CustomTextField(
                             hintText: "Start Time", controller: startTime),
+                        SizedBox(height: 15,),
                         CustomTextField(
                           hintText: "End Time",
                           controller: endTime,
@@ -75,7 +79,7 @@ class SceduleCreationService {
                             ? CustomTextField(
                                 hintText: "End Date", controller: endDate)
                             : SizedBox(
-                                height: 0,
+                                height: 15,
                               ),
                         PrimaryButton(
                             buttontext: "add the items",
