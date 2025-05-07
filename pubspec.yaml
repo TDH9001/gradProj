@@ -63,6 +63,7 @@ dependencies:
   animate_do: ^3.0.2
   flutter_chat_bubble: ^2.0.2
   font_awesome_flutter: ^10.8.0
+  syncfusion_flutter_pdfviewer: ^29.1.41
 
 
   
@@ -95,6 +96,7 @@ flutter:
   assets:
     - assets/images/
     - assets/chat_data.json
+    - assets/pdf/student_guide.pdf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

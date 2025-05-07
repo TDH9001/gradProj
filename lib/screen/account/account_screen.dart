@@ -11,6 +11,7 @@ import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 
+import '../pdf/student_guide_screen.dart';
 import '../setting_screen/setting.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
@@ -34,7 +35,7 @@ class AccountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 150,
+                height: 140,
                 decoration: BoxDecoration(
                   color: isDarkMode
                       ? DarkThemeColors.background
@@ -109,6 +110,14 @@ class AccountScreen extends StatelessWidget {
                       title: "Questions",
                       onTap: () => navigationService.instance
                           .navigateTo(QuestionScreen.id),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomCard(
+                      icon: Icons.picture_as_pdf_outlined,
+                      title: "Student guide",
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StudentGuideScreen()));
+                      },
                     ),
                     const SizedBox(height: 8),
                     CustomCard(
