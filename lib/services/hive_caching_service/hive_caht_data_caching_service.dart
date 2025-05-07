@@ -21,7 +21,10 @@ class HiveCahtMessaegsCachingService {
     if (data != null && data is Map) {
       final mappedData = Map<String, dynamic>.from(
           data); //all im going to store is the lsit of messages
-      return mappedData.values.map((e) => Message.fromFireBase(e)).toList();
+      return List<Map<String, dynamic>>.from(mappedData["messageList"])
+          .map((e) => Message.fromJson(e))
+          .toList();
+      // return mappedData["messageList"].map((e) => Message.fromJson(e)).toList();
     } else {
       return [];
     }

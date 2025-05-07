@@ -4,6 +4,7 @@ import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/chats/ChatDataScreenWidgets.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_images_sent.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
 
@@ -53,6 +54,7 @@ class _MyWidgetState extends State<ChatDataScreen> {
           ChatMembersList(widget: widget, deviceHeight: deviceHeight),
           PermanatChatScedulesList(widget: widget),
           TemporaryChatSceleList(widget: widget),
+          ChatImagesSent(cahtId: widget.cahtId),
           //TODO: use the stored chat data to send the user to a page that displays all images and files sent
           //TODO: should be jsut makign 3 tabs > each with a grid view of files > and use the hero i already made
         ],
