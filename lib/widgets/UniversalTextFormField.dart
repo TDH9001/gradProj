@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theme_provider.dart';
 
 class Universaltextformfield extends StatefulWidget {
   Universaltextformfield(
@@ -21,6 +24,8 @@ class Universaltextformfield extends StatefulWidget {
 class _MyWidgetState extends State<Universaltextformfield> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 5,
@@ -33,7 +38,7 @@ class _MyWidgetState extends State<Universaltextformfield> {
         obscureText: widget.Password ? widget.isObscure : false,
         decoration: InputDecoration(
             labelText: widget.label,
-            labelStyle: const TextStyle(color: Colors.black),
+            labelStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.grey[600],),
             focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.black),
             ),

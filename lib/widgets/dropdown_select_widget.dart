@@ -3,6 +3,7 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/theme_provider.dart';
+import '../screen/theme/dark_theme_colors.dart';
 
 class DropdownSelect extends StatefulWidget {
   DropdownSelect({
@@ -43,6 +44,7 @@ class _MyWidgetState extends State<DropdownSelect> {
           hintStyle:  TextStyle(color:isDarkMode ? Colors.white : Colors.black87),
           prefixIcon: const Icon(Icons.add_circle_rounded, color: Colors.grey),
           showClearIcon: false,
+
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(color: Colors.grey),
@@ -54,10 +56,11 @@ class _MyWidgetState extends State<DropdownSelect> {
             ),
           ),
         ),
-        dropdownDecoration: const DropdownDecoration(
+        dropdownDecoration: DropdownDecoration(
+          backgroundColor: isDarkMode ? DarkThemeColors.primary : Colors.white,
           marginTop: 2,
           maxHeight: 500,
-          header: Padding(
+          header: const Padding(
             padding: EdgeInsets.all(8),
             child: Text(
               'Select Your Courses',

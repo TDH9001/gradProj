@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -29,7 +30,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
     DropdownItem(label: 'math 101', value: "math101"),
     DropdownItem(label: 'math 102', value: "math102"),
     DropdownItem(label: 'math 103', value: "math103"),
-    DropdownItem(label: 'math 105', value: "math 105"),
+    DropdownItem(label: 'math 105', value: "math105"),
   ];
   final _listController = MultiSelectController<String>();
   final _yearController = TextEditingController();
@@ -37,16 +38,9 @@ class _UpdateUserDataState extends State<CompleteProfile> {
 
   @override
   Widget build(BuildContext _context) {
-    // var _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
     final bool isDarkMode = themeProvider.isDarkMode;
     SnackBarService.instance.buildContext = _context;
-
-    // if (_auth.user == null) {
-    //   return Center(
-    //     child: CircularProgressIndicator(),
-    //   );
-    // }
 
     return Scaffold(
       appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Complete Profile"),
@@ -55,20 +49,19 @@ class _UpdateUserDataState extends State<CompleteProfile> {
         child: Form(
           key: CompleteProfile._GK,
           child: ListView(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.all(16),
             children: [
-              //   SizedBox(height: 200),
-              Text('Please register your academic year and courses',
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  'Please register your academic year and courses',
                   style: TextStyle(
-                    fontSize: 18,
-                    color: isDarkMode ? Colors.white : Color(0xFF9CA3AF),
-                  )),
-              // TextHeader(
-              //   largeText: "Course Register ",
-              //   littleText: "Please register your academic year and courses",
-              //   height: 140,
-              // ),
-              SizedBox(height: 20),
+                    fontSize: 13,
+                    color: isDarkMode ? Colors.white60 : Colors.black54,
+                  ),
+                ),
+              ),
+              SizedBox(height: 16),
               _buildInfoCard(
                 label: "Academic Year",
                 child: Universaltextformfield(
@@ -77,7 +70,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                   controller: _yearController,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 16),
               _buildInfoCard(
                 label: "Seat Number",
                 child: Universaltextformfield(
@@ -87,7 +80,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                   controller: _seatIdController,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 16),
               _buildInfoCard(
                 label: "Courses",
                 child: DropdownSelect(
@@ -95,7 +88,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                   cont: _listController,
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 32),
               PrimaryButton(
                 buttontext: "Validate and Submit",
                 func: () async {
@@ -103,34 +96,27 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                     final selectedItems = _listController.selectedItems;
 
                     DBService.instance.completeUserProfile(
-                        classes: selectedItems
-                            .map((item) => item.value.trim())
-                            .toList(),
-                        year: int.parse(_yearController.text),
-                        userId:
-                            HiveUserContactCashingService.getUserContactData()
-                                .id
-                                .trim(),
-                        seatNumber: int.parse(_seatIdController.text));
+                      classes: selectedItems.map((item) => item.value.trim()).toList(),
+                      year: int.parse(_yearController.text),
+                      userId: HiveUserContactCashingService.getUserContactData().id.trim(),
+                      seatNumber: int.parse(_seatIdController.text),
+                    );
+
                     for (int i = 0; i < selectedItems.length; i++) {
                       await DBService.instance.addChatsToUser(
-                        HiveUserContactCashingService.getUserContactData()
-                            .id
-                            .trim(),
+                        HiveUserContactCashingService.getUserContactData().id.trim(),
                         selectedItems[i].value,
                       );
                       await DBService.instance.addMembersToChat(
-                        HiveUserContactCashingService.getUserContactData()
-                            .id
-                            .trim(),
+                        HiveUserContactCashingService.getUserContactData().id.trim(),
                         selectedItems[i].value,
-                      );
-                      SnackBarService.instance.showsSnackBarSucces(
-                        text: "Profile succesfully updated ",
                       );
                     }
 
-                    debugPrint(selectedItems.toString());
+                    SnackBarService.instance.showsSnackBarSucces(
+                      text: "Profile successfully updated",
+                    );
+
                     navigationService.instance.goBack();
                   }
                 },
@@ -145,26 +131,28 @@ class _UpdateUserDataState extends State<CompleteProfile> {
   Widget _buildInfoCard({required String label, required Widget child}) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
+
     return Card(
-      elevation: 4,
+      elevation: 2,
+      margin: EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      color: Colors.white,
+      color: isDarkMode ? DarkThemeColors.primary.withOpacity(0.9) : Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               label,
               style: TextStyle(
-                fontSize: 14,
-                color: isDarkMode ? Colors.white : Colors.grey[600],
-                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                color: isDarkMode ? Colors.white70 : Colors.grey[800],
+                fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 6),
             child,
           ],
         ),
