@@ -90,34 +90,35 @@ class AccountScreen extends StatelessWidget {
                       onTap: () {
                         navigationService.instance.navigateTo(ProfileScreen.id);
                       },
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.settings,
                       title: "Settings",
-                      onTap: () =>
-                          navigationService.instance.navigateTo(Setting.id),
+                      onTap: () => navigationService.instance.navigateTo(Setting.id),
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
-                    const SizedBox(height: 8),
-                    CustomCard(
-                      icon: Icons.notifications,
-                      title: "Notifications",
-                      onTap: () => print("Notification Tapped"),
-                    ),
+                    // const SizedBox(height: 8),
+                    // CustomCard(
+                    //   icon: Icons.notifications,
+                    //   title: "Notifications",
+                    //   onTap: () => print("Notification Tapped"),
+                    // ),
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.question_mark_outlined,
                       title: "Questions",
-                      onTap: () => navigationService.instance
-                          .navigateTo(QuestionScreen.id),
+                      onTap: () => navigationService.instance.navigateTo(QuestionScreen.id),
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.picture_as_pdf_outlined,
                       title: "Student guide",
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => StudentGuideScreen()));
-                      },
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StudentGuideScreen()));},
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(
@@ -125,8 +126,8 @@ class AccountScreen extends StatelessWidget {
                       title: "Logout",
                       onTap: () {
                         _auth.signOut();
-                        navigationService.instance.navigateTo(LoginScreen.id);
-                      },
+                        navigationService.instance.navigateTo(LoginScreen.id);},
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -134,14 +135,11 @@ class AccountScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => AcademicCareerScreen(),
-                          ),
-                        );
+                          ),);
                       },
-                      child: Text('Test Academic Career Screen'),
-                    ),
+                      child: Text('Test Academic Career Screen'),),
                   ],
-                ),
-              ),
+                ),),
             ],
           ),
         ),
