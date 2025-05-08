@@ -22,7 +22,6 @@ class StudentInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate weighted cumulative GPA
     double totalWeightedGrade = 0.0;
     int totalCredits = 0;
     for (var semester in career.semesters) {
@@ -33,7 +32,6 @@ class StudentInfoCard extends StatelessWidget {
     }
     double cumulativeGPA = totalCredits > 0 ? totalWeightedGrade / totalCredits : 0.0;
 
-    // Calculate total credit hours
     int totalCreditHours = career.semesters.fold(
         0, (sum, semester) => sum + semester.courses.fold(0, (sum, course) => sum + course.creditHours));
 
@@ -119,8 +117,8 @@ class StudentInfoCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(
                 color: isDarkMode 
-                    ? DarkThemeColors.primary.withOpacity(0.2) 
-                    : LightTheme.primary.withOpacity(0.2),
+                    ? DarkThemeColors.primary.withValues(alpha: 0.2) 
+                    : LightTheme.primary.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(

@@ -143,8 +143,8 @@ class _SemesterDialogState extends State<SemesterDialog> {
               "${course.courseCode} - ${course.creditHours} hrs - Grade: ${course.grade}",
               style: TextStyle(
                 color: isDarkMode 
-                    ? DarkThemeColors.textcolor.withOpacity(0.7) 
-                    : LightTheme.textcolor.withOpacity(0.7),
+                    ? DarkThemeColors.textcolor.withValues(alpha: 0.7) 
+                    : LightTheme.textcolor.withValues(alpha: 0.7),
               ),
             ),
             trailing: IconButton(

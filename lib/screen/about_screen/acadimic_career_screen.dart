@@ -32,7 +32,6 @@ class AcademicCareerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize with sample data if none provided
     final sampleCareer = academicCareer ?? _createSampleCareer();
     return ChangeNotifierProvider(
       create: (_) => AcademicCareerProvider()..initializeCareer(sampleCareer),
@@ -40,7 +39,7 @@ class AcademicCareerScreen extends StatelessWidget {
     );
   }
 
-  // Create sample academic career data for testing
+  // for testing
   AcademicCareer _createSampleCareer() {
     final courses = [
       CourseModel(

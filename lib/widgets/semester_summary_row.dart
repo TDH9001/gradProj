@@ -25,8 +25,8 @@ class SemesterSummaryRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
         color: isDarkMode
-            ? DarkThemeColors.secondary.withOpacity(0.10)
-            : LightTheme.secondary.withOpacity(0.10),
+            ? DarkThemeColors.secondary.withValues(alpha: 0.10)
+            : LightTheme.secondary.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(

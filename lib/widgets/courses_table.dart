@@ -27,9 +27,9 @@ class CoursesTable extends StatelessWidget {
       child: DataTable(
         headingRowColor: WidgetStateProperty.all(
             isDarkMode
-                ? DarkThemeColors.secondary.withOpacity(0.2)
-                : LightTheme.secondary.withOpacity(0.2)),
-        dataRowColor: MaterialStateProperty.all(
+                ? DarkThemeColors.secondary.withValues(alpha: 0.2)
+                : LightTheme.secondary.withValues(alpha: 0.2)),
+        dataRowColor: WidgetStateProperty.all(
             isDarkMode
                 ? DarkThemeColors.background
                 : LightTheme.background),

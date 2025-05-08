@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
 import '../models/Semester_logs_models/semester_model.dart';
-import '../models/Semester_logs_models/course_model.dart';
 
 class SemesterSection extends StatelessWidget {
   final SemesterModel semester;
@@ -26,8 +25,8 @@ class SemesterSection extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: isDarkMode
-                ? DarkThemeColors.secondary.withOpacity(0.15)
-                : LightTheme.secondary.withOpacity(0.15),
+                ? DarkThemeColors.secondary.withValues(alpha: 0.15)
+                : LightTheme.secondary.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(8),
           ),
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),

@@ -26,8 +26,8 @@ class SummarySectionForSemester extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
         color: isDarkMode
-            ? DarkThemeColors.secondary.withOpacity(0.10)
-            : LightTheme.secondary.withOpacity(0.10),
+            ? DarkThemeColors.secondary.withValues(alpha: 0.10)
+            : LightTheme.secondary.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
