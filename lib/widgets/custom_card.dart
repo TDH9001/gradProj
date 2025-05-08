@@ -7,7 +7,8 @@ class CustomCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final VoidCallback onTap;
-  CustomCard({super.key, required this.icon, required this.title, required this.onTap});
+ final Widget? trailing;
+  CustomCard({super.key, required this.icon, required this.title, required this.onTap, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +42,11 @@ class CustomCard extends StatelessWidget {
               color: isDarkMode ?DarkThemeColors.textcolor : LightTheme.textcolor,
             ),
           ),
-          trailing: Icon(Icons.arrow_forward_ios, size: 16,
-            color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,
-
-          ),
+          trailing: trailing,
+          // trailing: Icon(Icons.arrow_forward_ios, size: 16,
+          //   color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,
+          //
+          // ),
           onTap: onTap,
         ),
       ),
