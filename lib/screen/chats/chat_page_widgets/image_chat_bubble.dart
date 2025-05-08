@@ -71,15 +71,16 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    gradient: LinearGradient(
-                        colors: colorScheme,
-                        stops: [0.40, 0.70],
-                        begin: widget.isOurs
-                            ? Alignment.bottomLeft
-                            : Alignment.bottomRight,
-                        end: widget.isOurs
-                            ? Alignment.topRight
-                            : Alignment.topLeft)),
+                    color: Colors.grey.shade400),
+                    // gradient: LinearGradient(
+                    //     colors: colorScheme,
+                    //     stops: [0.40, 0.70],
+                    //     begin: widget.isOurs
+                    //         ? Alignment.bottomLeft
+                    //         : Alignment.bottomRight,
+                    //     end: widget.isOurs
+                    //         ? Alignment.topRight
+                    //         : Alignment.topLeft)),
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

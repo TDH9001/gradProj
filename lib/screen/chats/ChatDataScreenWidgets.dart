@@ -39,31 +39,40 @@ class TemporaryChatSceleList extends StatelessWidget {
           // var data = _snapshot.data;
           return SliverToBoxAdapter(
             child: Card(
-              elevation: 4,
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              elevation: 6,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: Container(
+              child:  Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.blue.shade50, Colors.white],
+                    colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: true,
-                  leading: const Icon(Icons.book, color: Color(0xff769BC6)),
+                  leading: const Icon(Icons.table_chart, color: Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(16),
+
                   ),
                   title: const Text(
                     "Temporary scedule items",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,color: Colors.white
                     ),
                   ),
                   children: [
@@ -74,7 +83,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                         ),
                         Text(
                           "Add temporary scedule item ",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 16,color: Colors.white),
                         ),
                         Spacer(
                           flex: 3,
@@ -100,7 +109,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                               }
                             },
                             icon: Icon(
-                              Icons.add_alert_sharp,
+                              Icons.add_alert_sharp,color: Color(0xff2E5077),
                             )),
                         Spacer(
                           flex: 2,
@@ -169,42 +178,58 @@ class PermanatChatScedulesList extends StatelessWidget {
           }
           return SliverToBoxAdapter(
             child: Card(
-              elevation: 4,
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              elevation: 6,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.blue.shade50, Colors.white],
+                    colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: true,
-                  leading: Icon(Icons.book, color: Color(0xff769BC6)),
+                  leading: Icon(Icons.table_view_outlined, color: Color(0xff2E5077) ),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   title: Text(
-                    "Permanat scedule items",
+                    "Permanat Scedule Items",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,
+                      color: Colors.white,
                     ),
                   ),
                   children: [
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Colors.blue.shade50, Colors.white],
+                          colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 6,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
                       ),
                     ),
                     Row(
@@ -214,7 +239,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                         ),
                         Text(
                           "Add permanant scedule item ",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                         Spacer(
                           flex: 3,
@@ -246,7 +271,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                               //     data!);
                             },
                             icon: Icon(
-                              Icons.add_alert_sharp,
+                              Icons.add_alert_sharp,color: Color(0xff2E5077),
                             )),
                         Spacer(
                           flex: 2,
@@ -258,14 +283,19 @@ class PermanatChatScedulesList extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: _snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 2),
+                        return Container(
+                          margin: const EdgeInsets.symmetric(vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                           child: SelectableScheduleItem(
                             cont: context,
                             scheduleItem: _snapshot.data![index],
                           ),
                         );
                       },
+
                     )
                   ],
                 ),
@@ -309,25 +339,40 @@ class ChatMembersList extends StatelessWidget {
           }
           return SliverToBoxAdapter(
             child: Card(
-              elevation: 4,
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              elevation: 6,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.blue.shade50, Colors.white],
+                    colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(15),
+                  //color: Color(0xff769BC6),
+                  // gradient: LinearGradient(
+                  //   colors: [Colors.blue.shade50, Colors.white],
+                  //   begin: Alignment.topLeft,
+                  //   end: Alignment.bottomRight,
+                  // ),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: true,
-                  leading: const Icon(Icons.book, color: Color(0xff769BC6)),
+                  leading: const Icon(Icons.library_books_sharp,
+                      color: Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   title: Row(
                     children: [
@@ -335,7 +380,8 @@ class ChatMembersList extends StatelessWidget {
                         "Course members",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 16,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -348,15 +394,69 @@ class ChatMembersList extends StatelessWidget {
                         physics: BouncingScrollPhysics(),
                         itemCount: _snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 2),
-                            child: Column(
-                              children: [
-                                Text(_snapshot.data![index].firstName),
-                              ],
+                          final member = _snapshot.data![index];
+                          return Card(
+                            color: Colors.transparent,
+                            elevation: 3,
+                            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xff2E5077),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: ExpansionTile(
+                                leading: Icon(Icons.person, color: Colors.white),
+                                iconColor: Colors.white,
+                                collapsedIconColor: Colors.white70,
+                                title: Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(
+                                    member.firstName,
+                                    style: TextStyle(color: Colors.white, fontSize: 14),
+                                  ),
+                                ),
+                                childrenPadding: EdgeInsets.only(left: 24, bottom: 12, right: 12),
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.badge, color: Colors.white70, size: 16),
+                                      SizedBox(width: 8),
+                                      Text("Last Name: ${member.lastName}", style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.phone, color: Colors.white70, size: 16),
+                                      SizedBox(width: 8),
+                                      Text("Phone: ${member.phoneNumber}", style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6),
+                                  // Row(
+                                  //   children: [
+                                  //     Icon(Icons.email, color: Colors.white70, size: 16),
+                                  //     SizedBox(width: 8),
+                                  //     Text("Email: ${member.email}", style: TextStyle(color: Colors.white)),
+                                  //   ],
+                                  // ),
+                                   SizedBox(height: 6),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.badge, color: Colors.white70, size: 16),
+                                      SizedBox(width: 8),
+                                      Text("SeatNumber: ${member.seatNumber}", style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
+
                       ),
                     )
                   ],

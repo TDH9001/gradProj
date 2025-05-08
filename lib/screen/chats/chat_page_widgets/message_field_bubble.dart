@@ -17,11 +17,12 @@ Widget chatMessageBubble(
   return Container(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        gradient: LinearGradient(
-            colors: colorScheme,
-            stops: [0.40, 0.70],
-            begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-            end: isOurs ? Alignment.topRight : Alignment.topLeft)),
+        color: Colors.grey.shade400),
+        // gradient: LinearGradient(
+        //     colors: colorScheme,
+        //     stops: [0.40, 0.70],
+        //     begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
+        //     end: isOurs ? Alignment.topRight : Alignment.topLeft)),
     padding: EdgeInsets.symmetric(horizontal: 15),
     // height:
     //     _height * 0.13 + ((message.length * 3.5 + senderName.length) / 10),

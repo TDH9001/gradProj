@@ -122,6 +122,13 @@ class AppbarGestureDetector extends StatelessWidget
         backgroundColor: LightTheme.primary,
         title: Text(widget.chatID, style: TextStyles.appBarText),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => navigationService.instance.goBack(),
+        ),
       ),
     );
   }
