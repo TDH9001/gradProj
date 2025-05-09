@@ -38,6 +38,7 @@ void main() async {
           supportedLocales: [Locale('en'), Locale('ar')],
           path: 'assets/translations', // <-- change the path of the translation files
           fallbackLocale: Locale('en'),
+          saveLocale: true,
       child: MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),

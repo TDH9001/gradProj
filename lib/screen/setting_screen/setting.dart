@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/widgets/custom_card.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
@@ -79,6 +80,37 @@ class _SettingState extends State<Setting> {
               );
             },
           ),
+          CustomCard(
+            icon: Icons.language,
+            title: "Language",
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        title: const Text("English"),
+                        onTap: () {
+                          context.setLocale(const Locale('en'));
+                          Navigator.pop(context);
+                        },
+                      ),
+                      ListTile(
+                        title: const Text("العربية"),
+                        onTap: () {
+                          context.setLocale(const Locale('ar'));
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+
         ],
       ),
     );
