@@ -54,97 +54,96 @@ Widget _RecentChats() {
       );
     }
     return StreamBuilder<List<ChatSnipits>>(
-        stream: DBService.instance.getUserChats(
-            AuthProvider.instance.user!.uid.toString()), //_auth.user!.uid),
-        builder: (context, _snapshot) {
-          var data = _snapshot.data;
+      stream: DBService.instance.getUserChats(
+          AuthProvider.instance.user!.uid.toString()), //_auth.user!.uid),
+      builder: (context, _snapshot) {
+        var data = _snapshot.data;
 
-          if (_snapshot.connectionState == ConnectionState.waiting ||
-              _snapshot.connectionState == ConnectionState.none) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (_snapshot.hasError) {
-            return Center(
-                child: Text(
-                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
-          }
+        if (_snapshot.connectionState == ConnectionState.waiting ||
+            _snapshot.connectionState == ConnectionState.none) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (_snapshot.hasError) {
+          return Center(
+              child: Text(
+                  "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+        }
 
-          return data!.length != 0
-              ? ListView.builder(
-                  itemCount: data!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                        tileColor: isDarkMode
-                            ? DarkThemeColors.background
-                            : Colors.white,
-                        onTap: () {
-                          navigationService.instance.navigateToRoute(
-                              MaterialPageRoute(builder: (_context) {
-                            return ChatPage(
-                              chatID: data[index].chatId,
-                              admins: data[index].adminId,
-                              chatAccesability: data[index].chatAccesability,
-                              leaders: data[index].leaders,
-                            );
-                          }));
-                          DBService.instance.resetUnseenCount(
-                              _auth.user!.uid, data[index].chatId);
-                        },
-                        title: Text(data[index].chatId),
-                        subtitle: data[index].type == "image"
+        return data!.length != 0
+            ? ListView.builder(
+                itemCount: data!.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    tileColor:
+                        isDarkMode ? DarkThemeColors.background : Colors.white,
+                    onTap: () {
+                      navigationService.instance.navigateToRoute(
+                          MaterialPageRoute(builder: (_context) {
+                        return ChatPage(
+                          chatID: data[index].chatId,
+                          admins: data[index].adminId,
+                          chatAccesability: data[index].chatAccesability,
+                          leaders: data[index].leaders,
+                        );
+                      }));
+                      DBService.instance.resetUnseenCount(
+                          _auth.user!.uid, data[index].chatId);
+                    },
+                    title: Text(data[index].chatId),
+                    subtitle: data[index].type == "image"
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("Image "),
+                              Icon(
+                                Icons.image,
+                                size: 16, // Adjusted icon size
+                                color: Color(0xff7AB2D3),
+                              ),
+                            ],
+                          )
+                        : data[index].type == "voice"
                             ? Row(
-                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text("Image "),
+                                  Text("Voice attachment"),
                                   Icon(
-                                    Icons.image,
-                                    size: 16, // Adjusted icon size
+                                    Icons.music_note,
                                     color: Color(0xff7AB2D3),
                                   ),
                                 ],
                               )
-                            : data[index].type == "voice"
-                                ? Row(
-                                    children: [
-                                      Text("Voice attachment"),
-                                      Icon(
-                                        Icons.music_note,
-                                        color: Color(0xff7AB2D3),
-                                      ),
-                                    ],
-                                  )
-                                : Text(
-                                    data[index].lastMessage,
-                                    maxLines: 2,
-                                  ),
-                      ]));
-              // leading: Container(
-              //   width: 50,
-              //   height: 50,
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(100),
-              //     image: DecorationImage(
-              //         image: AssetImage("assets/images/chat.png")),
-              //   ),
-              // ),
-              // trailing: Container(
-              //     width: 100,
-              //     child: ChatScreenTrailingiwdget(
-              //         data[index].timestamp,
-              //         data[index].unseenCount >= 1,
-              //         data[index].unseenCount))
-            },
-          );
-          // : Center(
-          //     child: Padding(
-          //       padding: EdgeInsets.only(left: 20.0),
-          //       child: Text(
-          //         "no chats please go to the profile and add courses....",
-          //         style: TextStyle(fontSize: 18),
-          //       ),
-          //     ),
-          //   );
-        });
+                            : Text(
+                                data[index].lastMessage,
+                                maxLines: 2,
+                              ),
+                  );
+                })
+            : Center(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "no chats please go to the profile and add courses....",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              );
+        // leading: Container(
+        //   width: 50,
+        //   height: 50,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(100),
+        //     image: DecorationImage(
+        //         image: AssetImage("assets/images/chat.png")),
+        //   ),
+        // ),
+        // trailing: Container(
+        //     width: 100,
+        //     child: ChatScreenTrailingiwdget(
+        //         data[index].timestamp,
+        //         data[index].unseenCount >= 1,
+        //         data[index].unseenCount))
+      },
+    );
   });
 }
 
