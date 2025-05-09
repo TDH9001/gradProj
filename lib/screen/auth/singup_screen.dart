@@ -1,11 +1,11 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:grad_proj/widgets/Header_Text.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/NavigatorTextButton.dart';
@@ -70,37 +70,37 @@ class _SingupScreenState extends State<SingupScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 40),
-                    const Text(
-                      'Create Account',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white,),
+                    const SizedBox(height: 60),
+                     Text(
+                      'Signup.title'.tr(),
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white,),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 32),
                     CustomTextField(
-                      hintText: 'First Name', isPassword: false, controller: _firstName,),
+                      hintText: 'Signup.first_name'.tr(), isPassword: false, controller: _firstName,),
                     const SizedBox(height: 18),
                     CustomTextField(
-                      hintText: 'last Name', isPassword: false, controller: _LastName,),
+                      hintText: 'Signup.last_name'.tr(), isPassword: false, controller: _LastName,),
                     const SizedBox(height: 18),
                     CustomTextField(
-                      hintText: 'Email', isPassword: false, controller: _email,),
+                      hintText: 'Signup.email'.tr(), isPassword: false, controller: _email,),
                     const SizedBox(height: 18),
-                    CustomTextField(hintText: 'Phone Number', isPassword: false, controller: _phoneNumber,
+                    CustomTextField(hintText: 'Signup.phone_number'.tr(), isPassword: false, controller: _phoneNumber,
                     ),
                     const SizedBox(height: 18),
                     CustomTextField(
-                      hintText: 'Password', isPassword: true, controller: _passWord,),
+                      hintText: 'Signup.password'.tr(), isPassword: true, controller: _passWord,),
                     const SizedBox(height: 16),
                     CustomTextField(
-                      hintText: ' Confirm Password', isPassword: true, controller: _confirmPassWord,),
+                      hintText: 'Signup.confirm_password'.tr(), isPassword: true, controller: _confirmPassWord,),
                     const SizedBox(height: 40),
                     _auth.status == AuthStatus.Authenticating
                         ? const Align(
                             alignment: Alignment.center,
                             child: CircularProgressIndicator())
                         : PrimaryButton(
-                            buttontext: "Create the account",
+                            buttontext: 'Signup.signup_button'.tr(),
                             func: () async {
                               if (SingupScreen._formKey.currentState!
                                   .validate()) {
@@ -127,12 +127,12 @@ class _SingupScreenState extends State<SingupScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Already have an account ?",
+                         Text(
+                          'Signup.already_account'.tr(),
                           style: TextStyle(fontSize: 12, color: Colors.white70),
                           textAlign: TextAlign.center,
                         ),
-                        Navigatortextbutton(text: 'Login', location: "pop",),
+                        Navigatortextbutton(text: 'Signup.login_button'.tr(), location: "pop",),
                       ],
                     ),
                   ],
