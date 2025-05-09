@@ -77,4 +77,49 @@ class SemesterModel {
       'level': level,
     };
   }
+
+  // Remove a course by index or by course code
+  void removeCourseAt(int index) {
+    if (index >= 0 && index < courses.length) {
+      courses.removeAt(index);
+      _recalculate();
+    }
+  }
+
+  void removeCourseByCode(String courseCode) {
+    courses.removeWhere((course) => course.courseCode == courseCode);
+    _recalculate();
+  }
+
+  // Edit a course by index
+  void editCourseAt(int index, CourseModel newCourse) {
+    if (index >= 0 && index < courses.length) {
+      courses[index] = newCourse;
+      _recalculate();
+    }
+  }
+
+  // Helper to recalculate semester stats after changes
+  void _recalculate() {
+    totalCreditHours = courses.fold(0, (sum, course) => sum + course.creditHours);
+
+    double totalWeightedGrade = 0;
+    int totalCredits = 0;
+    for (var course in courses) {
+      totalWeightedGrade += course.grade * course.creditHours;
+      totalCredits += course.creditHours;
+    }
+    semmesterGpa = totalCredits > 0 ? totalWeightedGrade / totalCredits : 0;
+    semesterGrade = _getGradeFromGpa(semmesterGpa);
+
+    if (totalCreditHours < 33) {
+      level = "الأول";
+    } else if (totalCreditHours < 67) {
+      level = "الثاني";
+    } else if (totalCreditHours < 101) {
+      level = "الثالث";
+    } else {
+      level = "الرابع";
+    }
+  }
 }
