@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
@@ -55,6 +56,7 @@ class DBService {
         "academicYear": 0,
       });
       HiveUserContactCashingService.updateUserContactData(Contact(
+              email: email,
               id: userId,
               seatNumber: 0,
               firstName: firstName,
@@ -88,6 +90,7 @@ class DBService {
           await HiveUserContactCashingService.getUserContactData();
 
       HiveUserContactCashingService.updateUserContactData(Contact(
+              email: currData.email,
               id: userId,
               seatNumber: seatNumber,
               firstName: currData.firstName,
@@ -109,11 +112,12 @@ class DBService {
   Stream<Contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
-      Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
+      //  Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
       return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });
   }
 
+//edit getUserChats to work differently when admin
   Stream<List<ChatSnipits>> getUserChats(String _uid) {
     var ref =
         _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
@@ -216,7 +220,8 @@ class DBService {
     return ref.update({"unseenCount": 0});
   }
 
-  Future<void> addChatsToUser(String uid, String chatID) {
+  Future<void> addChatsToUser(String uid, String chatID) async {
+    var chat = await _db.collection(_ChatCollection).doc(chatID).get();
     var ref = _db
         .collection(_UserCollection)
         .doc(uid)
@@ -226,13 +231,15 @@ class DBService {
       "chatID": chatID,
       "name": chatID,
       "unseenCount": 0,
-      "admins": [],
+      "admins": chat["admins"],
       "lastMessage": "welcome New User",
       "senderID": "",
-      "senderName": "dev_lead",
+      "senderName": "",
       "timestamp": Timestamp.now(),
-      "type": "text"
-    });
+      "type": 0,
+      "chatAccesability": chat["ChatAccesability"],
+      "leaders": chat["leaders"],
+    }, SetOptions(merge: true));
   }
 
   Future<void> addMembersToChat(String uid, String chatID) {
@@ -644,6 +651,27 @@ class DBService {
       } else {
         return [];
       }
+    });
+  }
+
+  Future<void> changeChatAccesabilitySetting(
+      String chatId, int newSetting, BuildContext context) async {
+    print(newSetting);
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    try {
+      ref.update({"ChatAccesability": newSetting});
+      SnackBarService.instance.buildContext = context;
+      SnackBarService.instance
+          .showsSnackBarSucces(text: "Chat Accesability Updated Succesfully");
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> makeUserChatLeader(String chatId, String uid) {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    return ref.update({
+      "leaders": FieldValue.arrayUnion([uid])
     });
   }
 }

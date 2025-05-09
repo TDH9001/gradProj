@@ -2,13 +2,14 @@ import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
+import 'package:grad_proj/screen/chats/caht_cubit/caht_cubit.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_page_message_field.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_list_view_chat_lsit.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import '../../providers/theme_provider.dart';
 import '../../UI/text_style.dart';
 import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
@@ -16,16 +17,22 @@ import 'package:provider/provider.dart';
 import '../theme/light_theme.dart';
 
 class ChatPage extends StatefulWidget {
-  ChatPage({super.key, required this.chatID, required this.admins});
+  ChatPage(
+      {super.key,
+      required this.chatID,
+      required this.admins,
+      required this.leaders,
+      required this.chatAccesability});
   final String id = "ChatPage";
+  final List<String> leaders;
+  final String chatAccesability;
   String chatID;
   GlobalKey<FormState> GK = GlobalKey<FormState>();
   String textTosend = "";
   final ScrollController _LVC = ScrollController();
   List<String> admins;
-  final TextEditingController txt = TextEditingController();
+  //final TextEditingController txt = TextEditingController();
   //final record = AudioRecorder();
-  late AudioPlayer audioPlayer = AudioPlayer();
   // PlatformDispatcher.
 
   @override
@@ -62,11 +69,14 @@ class _ChatPageState extends State<ChatPage> {
 //thsi cahnge notifier may be redundant
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
-      child: Scaffold(
-        //resizeToAvoidBottomInset: false,
-        appBar: AppbarGestureDetector(widget: widget),
-        body: ChangeNotifierProvider<AuthProvider>.value(
-            value: AuthProvider.instance, child: _chatPageUI()),
+      child: BlocProvider(
+        create: (context) => ChatCubit(),
+        child: Scaffold(
+          //resizeToAvoidBottomInset: false,
+          appBar: AppbarGestureDetector(widget: widget),
+          body: ChangeNotifierProvider<AuthProvider>.value(
+              value: AuthProvider.instance, child: _chatPageUI()),
+        ),
       ),
     );
   }
@@ -83,11 +93,13 @@ class _ChatPageState extends State<ChatPage> {
           Align(
               alignment: Alignment.bottomCenter,
               child: MessageField(
+                chatAccesability: widget.chatAccesability,
+                leaders: widget.leaders,
                 GK: widget.GK,
                 chatID: widget.chatID,
                 admins: widget.admins,
                 isRecording: isRecording,
-                txt: widget.txt,
+                //  txt: CahtCubit.get(context).txt // widget.txt,
               )),
         ],
       );
@@ -112,6 +124,8 @@ class AppbarGestureDetector extends StatelessWidget
           navigationService.instance
               .navigateToRoute(MaterialPageRoute(builder: (context) {
             return ChatDataScreen(
+              chatAccesability: widget.chatAccesability,
+              leaders: widget.leaders,
               adminList: widget.admins,
               cahtId: widget.chatID,
             );

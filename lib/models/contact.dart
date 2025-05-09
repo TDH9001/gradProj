@@ -1,4 +1,5 @@
 class Contact {
+  final String email;
   final String id;
   final String firstName;
   final String lastName;
@@ -9,6 +10,7 @@ class Contact {
   final int? seatNumber;
   Contact(
       {required this.id,
+      required this.email,
       required this.seatNumber,
       required this.firstName,
       required this.lastName,
@@ -20,6 +22,7 @@ class Contact {
   factory Contact.fromJson(
       {required Map<String, dynamic> snap, required String id}) {
     return Contact(
+      email: snap["Email"],
       id: id,
       seatNumber: snap["seatNumber"],
       firstName: snap["firstName"],
@@ -39,6 +42,7 @@ class Contact {
         "academicYear": year,
         "isComplete": isComplete,
         "phoneNumber": phoneNumber,
-        "seatNumber": seatNumber
+        "seatNumber": seatNumber,
+        "Email": email
       };
 }

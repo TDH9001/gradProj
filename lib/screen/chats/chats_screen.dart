@@ -69,60 +69,29 @@ Widget _RecentChats() {
                     "Error: ${_snapshot.error} \n please update your data and the data field mising"));
           }
 
-          if (data == null || data.isEmpty) {
-            // Handle null or empty data
-            return Center(
-              child: Text(
-                "No recent chats.",
-                style: TextStyle(
-                    color: isDarkMode ? Colors.white70 : Colors.black54),
-              ),
-            );
-          }
-          return ListView.builder(
-            itemCount: data.length, // Use data.length directly
-            itemBuilder: (context, index) {
-              final chatSnipit = data[index]; // More descriptive variable name
-              return ListTile(
-                  tileColor:
-                      isDarkMode ? DarkThemeColors.background : Colors.white,
-                  onTap: () {
-                    navigationService.instance
-                        .navigateToRoute(// Use correct class name
-                            MaterialPageRoute(builder: (_context) {
-                      return ChatPage(
-                        chatID: chatSnipit.chatId,
-                        admins: chatSnipit.adminId,
-                      );
-                    }));
-                    DBService.instance
-                        .resetUnseenCount(_auth.user!.uid, chatSnipit.chatId);
-                  },
-                  leading: CircleAvatar(
-                    // Added a leading avatar for better UI
-                    backgroundColor: isDarkMode
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context).primaryColor,
-                    child: Text(
-                      chatSnipit.chatId.isNotEmpty
-                          ? chatSnipit.chatId[0].toUpperCase()
-                          : "?",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  title: Text(chatSnipit.chatId), // Use chatSnipit
-                  subtitle: Column(
-                      // Use column for better layout of subtitle and time
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (chatSnipit.lastMessage
-                            .isNotEmpty) // Check if last message exists
-                          Text(
-                            chatSnipit.lastMessage,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        chatSnipit.type == "image"
+          return data!.length != 0
+              ? ListView.builder(
+                  itemCount: data!.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                        tileColor: isDarkMode
+                            ? DarkThemeColors.background
+                            : Colors.white,
+                        onTap: () {
+                          navigationService.instance.navigateToRoute(
+                              MaterialPageRoute(builder: (_context) {
+                            return ChatPage(
+                              chatID: data[index].chatId,
+                              admins: data[index].adminId,
+                              chatAccesability: data[index].chatAccesability,
+                              leaders: data[index].leaders,
+                            );
+                          }));
+                          DBService.instance.resetUnseenCount(
+                              _auth.user!.uid, data[index].chatId);
+                        },
+                        title: Text(data[index].chatId),
+                        subtitle: data[index].type == "image"
                             ? Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [

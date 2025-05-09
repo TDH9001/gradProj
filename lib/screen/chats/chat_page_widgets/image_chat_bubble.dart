@@ -143,7 +143,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                       height: 5,
                     ),
                     Text(
-                      "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+                      "  , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
                       style: TextStyle(fontSize: 16),
                     )
                   ],

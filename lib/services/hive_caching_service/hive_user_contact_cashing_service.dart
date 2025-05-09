@@ -28,6 +28,7 @@ abstract class HiveUserContactCashingService {
       return Contact.fromJson(id: mappedData["id"], snap: mappedData);
     } else {
       return Contact(
+          email: "",
           id: "",
           seatNumber: 0,
           firstName: "",

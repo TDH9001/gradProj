@@ -39,7 +39,11 @@ exports.onChatCreated = firestore.onDocumentCreated(
                       name : ChatID,
                       senderName: userData.firstName.concat(" ",userData.lastName,),
                       unseenCount: 0,
-                      admins:ownerIDs
+                      admins:ownerIDs,
+                      ChatAccesability:1,
+                      temporaryScedule:null,
+                      permanantScedules:null,
+                      leaders:null
                     });
                 }
                 return null;
@@ -81,6 +85,9 @@ exports.onChatCreated = firestore.onDocumentCreated(
               senderID: lastMessage.senderID,
               senderName: lastMessage.senderName,
               admins: data.ownerID,
+              ChatAccesability: data.ChatAccesability,
+              leaders: data.leaders
+
             })
             .catch((error) => {
               console.error(`Failed to update Chats for user ${currentUserID}:`, error);

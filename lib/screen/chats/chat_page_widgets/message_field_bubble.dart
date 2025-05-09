@@ -42,7 +42,7 @@ Widget chatMessageBubble(
         //   height: 15,
         // ),
         Text(
-          "${MonthAndWeekMap.weekmap[ts.toDate().weekday]} ${MonthAndWeekMap.numMap[ts.toDate().month]} ${ts.toDate().day} , ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
+          " ${ts.toDate().hour % 12}: ${ts.toDate().minute % 60} ${ts.toDate().hour < 12 ? "pm" : "am"}        ",
           style: TextStyle(fontSize: 16),
         )
       ],
