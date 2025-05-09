@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/caht_cubit/caht_cubit.dart';
+import 'package:grad_proj/screen/chats/caht_cubit/caht_cubit.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_page_message_field.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_list_view_chat_lsit.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -31,9 +31,8 @@ class ChatPage extends StatefulWidget {
   String textTosend = "";
   final ScrollController _LVC = ScrollController();
   List<String> admins;
-  final TextEditingController txt = TextEditingController();
+  //final TextEditingController txt = TextEditingController();
   //final record = AudioRecorder();
-  late AudioPlayer audioPlayer = AudioPlayer();
   // PlatformDispatcher.
 
   @override
@@ -71,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
       child: BlocProvider(
-        create: (context) => CahtCubit(),
+        create: (context) => ChatCubit(),
         child: Scaffold(
           //resizeToAvoidBottomInset: false,
           appBar: AppbarGestureDetector(widget: widget),
@@ -100,7 +99,7 @@ class _ChatPageState extends State<ChatPage> {
                 chatID: widget.chatID,
                 admins: widget.admins,
                 isRecording: isRecording,
-                txt: widget.txt,
+                //  txt: CahtCubit.get(context).txt // widget.txt,
               )),
         ],
       );
