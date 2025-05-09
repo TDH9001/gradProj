@@ -36,9 +36,9 @@ void main() async {
   runApp(
       EasyLocalization(
           supportedLocales: [Locale('en'), Locale('ar')],
-          path: 'assets/translations', // <-- change the path of the translation files
+          path: 'assets/translate', 
           fallbackLocale: Locale('en'),
-          saveLocale: true,
+          startLocale: Locale('en'),
       child: MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),

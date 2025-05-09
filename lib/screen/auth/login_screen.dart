@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:grad_proj/constants.dart';
@@ -82,24 +83,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 20),
                     Image(image: AssetImage('assets/images/login.jpeg')),
-                    const Text(
-                      'SciConnect',
-                      style: TextStyle(
+                    Text(
+                      'Login.welcome'.tr(),
+                      style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                       textAlign: TextAlign.center,),
                     const SizedBox(height: 40),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: const Text(
-                        'LOGIN',
+                      child:  Text(
+                        'Login.title'.tr(),
                         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,),),
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
-                      controller: t1, hintText: 'Email',),
+                      controller: t1, hintText: 'Login.email'.tr(),),
                     const SizedBox(height: 16),
                     CustomTextField(
-                      controller: t2, hintText: 'Password', isPassword: true,),
+                      controller: t2, hintText: 'Login.password'.tr(), isPassword: true,),
                     const SizedBox(height: 40),
                     ForgetPassRow(),
                     SizedBox(height: 30),
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     _email, _password);
                               }
                             },
-                            buttontext: 'Login',
+                            buttontext: 'Login.login_button'.tr(),
                           ),
                     const SizedBox(height: 40),
                    HaveAccRow(),

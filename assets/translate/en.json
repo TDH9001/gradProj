@@ -1,0 +1,13 @@
+{ "Login":
+  {
+    "welcome": "SciConnect",
+    "title": "LOGIN",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot Password?",
+    "reset_button": "Reset Password",
+    "login_button": "Login",
+    "dont_account": "Don't have an account?",
+    "sign_up_button": "Sign Up"
+  }
+}

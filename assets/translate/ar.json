@@ -1,0 +1,14 @@
+{
+  "Login":
+  {
+    "welcome": "SciConnect",
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgot": "هل نسيت كلمة المرور؟",
+    "reset_button": "إعادة تعيين كلمة المرور",
+    "login_button": "تسجيل الدخول",
+    "dont_account": "ليس لديك حساب؟",
+    "sign_up_button": "إنشاء حساب"
+  }
+}

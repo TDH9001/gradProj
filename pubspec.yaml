@@ -95,11 +95,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/translate/en.json
+    - assets/translate/ar.json
     - assets/images/
     - assets/chat_data.json
     - assets/pdf/student_guide.pdf
-    - assets/translate/en.json
-    - assets/translate/ar.json
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
