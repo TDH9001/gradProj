@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/about_screen/acadimic_career_screen.dart';
 import '../../providers/theme_provider.dart';
@@ -61,7 +62,7 @@ class AccountScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "Ain Shams University",
+                        'Account.university'.tr(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -69,7 +70,7 @@ class AccountScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "science faculty",
+                        'Account.faculty'.tr(),
                         style: TextStyle(
                           color: isDarkMode ? Colors.grey[400] : Colors.white,
                           fontSize: 14,
@@ -86,7 +87,7 @@ class AccountScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.person,
-                      title: "Profile",
+                      title:'Account.profile'.tr() ,
                       onTap: () {
                         navigationService.instance.navigateTo(ProfileScreen.id);
                       },
@@ -95,7 +96,7 @@ class AccountScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.settings,
-                      title: "Settings",
+                      title: 'Account.setting'.tr(),
                       onTap: () => navigationService.instance.navigateTo(Setting.id),
                       trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
@@ -108,14 +109,14 @@ class AccountScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.question_mark_outlined,
-                      title: "Questions",
+                      title: 'Account.question'.tr(),
                       onTap: () => navigationService.instance.navigateTo(QuestionScreen.id),
                       trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.picture_as_pdf_outlined,
-                      title: "Student guide",
+                      title: 'Account.stutent_guide'.tr(),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => StudentGuideScreen()));},
                       trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
@@ -123,7 +124,7 @@ class AccountScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.logout,
-                      title: "Logout",
+                      title: 'Account.logout'.tr(),
                       onTap: () {
                         _auth.signOut();
                         navigationService.instance.navigateTo(LoginScreen.id);},

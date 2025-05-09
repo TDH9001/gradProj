@@ -27,5 +27,15 @@
     "signup_button": "Sign Up",
     "already_account": "Already have an account?",
     "login_button": "Login"
+  },
+  "Account":
+  {
+    "university": "Ain Shams University",
+    "faculty": "Faculty of Science",
+    "profile": "Profile",
+    "setting": "Setting",
+    "question": "Questions",
+    "stutent_guide": "Student Guide",
+    "logout": "Logout"
   }
 }

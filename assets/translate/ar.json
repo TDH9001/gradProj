@@ -28,6 +28,15 @@
     "signup_button": "تسجيل حساب",
     "already_account": "هل لديك حساب بالفعل؟",
     "login_button": "تسجيل الدخول"
+  },
+  "Account": {
+    "university": "جامعة عين شمس",
+    "faculty": "كلية العلوم",
+    "profile": "الملف الشخصي",
+    "setting": "الإعدادات",
+    "question": "الأسئلة",
+    "stutent_guide": "دليل الطالب",
+    "logout": "تسجيل الخروج"
   }
 
 
