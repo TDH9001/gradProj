@@ -61,7 +61,6 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
           }
           List<File> data = snapshot.data!;
 
-          int count = data.length;
           return Card(
             elevation: 4,
             shape: RoundedRectangleBorder(
@@ -99,14 +98,10 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                     height: MediaService.instance.getHeight() * 2 / 3,
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisSpacing: 5.0,
-                          crossAxisSpacing: 5.0,
-                          childAspectRatio: 1 / 1.5,
                           crossAxisCount: 2),
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
                       itemCount: data.length,
-                      //issue is that [index] is from 1-n > but it is not like this in the count
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
@@ -116,8 +111,6 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                                 displayedWidget: ClipRRect(
                                   child: Center(
                                     child: Image(
-                                        width: 200,
-                                        height: 200,
                                         fit: BoxFit.cover,
                                         image: FileImage(data[
                                             index]) //does not display when loading though
@@ -125,14 +118,33 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                                   ),
                                 ));
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              children: [Image(image: FileImage(data[index]))],
-                            ),
-                          ),
+                          child: Hero(
+                              tag: data[index].toString(),
+                              child: Container(
+                                padding: EdgeInsets.all(3),
+                                height:
+                                    MediaService.instance.getHeight() * 0.35,
+                                width: MediaService.instance.getWidth() * 0.5,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.black87, width: 2),
+                                  // borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image: FileImage(data[index]),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              )),
+                          // child: Container(
+                          //   decoration: BoxDecoration(
+                          //     image: DecorationImage(
+                          //         image: FileImage(data[index])),
+                          //     borderRadius: BorderRadius.circular(15),
+                          //   ),
+                          //   child: Column(
+                          //     children: [Image(image: FileImage(data[index]))],
+                          //   ),
+                          // ),
                         );
                       },
                     ),
