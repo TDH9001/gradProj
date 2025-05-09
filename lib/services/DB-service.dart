@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
@@ -651,5 +652,19 @@ class DBService {
         return [];
       }
     });
+  }
+
+  Future<void> changeChatAccesabilitySetting(
+      String chatId, int newSetting, BuildContext context) async {
+    print(newSetting);
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    try {
+      ref.update({"ChatAccesability": newSetting});
+      SnackBarService.instance.buildContext = context;
+      SnackBarService.instance
+          .showsSnackBarSucces(text: "Chat Accesability Updated Succesfully");
+    } catch (e) {
+      print(e);
+    }
   }
 }

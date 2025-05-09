@@ -49,14 +49,14 @@ class _MessageFieldState extends State<MessageField> {
                             .id
                             .trim()) || // adminsa re always allowed
                     (widget.chatAccesability ==
-                            ChatAccesabilityEnum.allowLeaders.name &&
+                            ChatAccesabilityEnum.allow_Leaders.name &&
                         widget.leaders.contains(
                             HiveUserContactCashingService.getUserContactData()
                                 .id
                                 .trim())) // leaders are allowed when spicified
                     ||
                     widget.chatAccesability ==
-                        ChatAccesabilityEnum.allowAll
+                        ChatAccesabilityEnum.allow_All
                             .name // if it's y name > all can contribute
                     ||
                     HiveUserContactCashingService.getUserContactData()

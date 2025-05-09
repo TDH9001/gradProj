@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import '../models/message.dart';
 
-enum ChatAccesabilityEnum { adminOnly, allowLeaders, allowAll }
+enum ChatAccesabilityEnum { admin_only, allow_Leaders, allow_All }
 
 class ChatSnipits {
   final String id;
@@ -34,8 +34,8 @@ class ChatSnipits {
       leaders:
           (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),
       chatAccesability: _snap["ChatAccesability"] is int
-          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].toString() ??
-              ChatAccesabilityEnum.adminOnly.toString()
+          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name ??
+              ChatAccesabilityEnum.admin_only.name
           : _snap["ChatAccesability"],
       id: _snap.id,
       chatId: _snap["chatID"],
@@ -110,8 +110,8 @@ class ChatData {
       leaders:
           (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),
       chatAccesability: _snap["ChatAccesability"] is int
-          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].toString() ??
-              ChatAccesabilityEnum.adminOnly.toString()
+          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name ??
+              ChatAccesabilityEnum.admin_only.name
           : _snap["CahtAccesability"],
       chatid: _snap.id,
       members:
