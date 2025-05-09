@@ -64,6 +64,7 @@ dependencies:
   flutter_chat_bubble: ^2.0.2
   font_awesome_flutter: ^10.8.0
   syncfusion_flutter_pdfviewer: ^29.1.41
+  easy_localization: ^3.0.7+1
 
 
   
