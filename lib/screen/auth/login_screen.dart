@@ -8,6 +8,7 @@ import 'package:grad_proj/widgets/NavigatorTextButton.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/forget_pass_row.dart';
 import 'package:grad_proj/widgets/have_acc_row.dart';
+import 'package:grad_proj/widgets/language_login_button.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
 import 'package:grad_proj/screen/auth/singup_screen.dart';
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: const [
-                         // LanguageSwitcherButton(),
+                         LanguageLoginButton(),
                           SizedBox(width: 8),
                           ThemeButtonLogin(),
                         ],
