@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import '../models/message.dart';
 
+enum ChatAccesabilityEnum { adminOnly, allowLeaders, allowAll }
+
 class ChatSnipits {
   final String id;
+  final List<String> leaders;
   final String chatId;
   final String lastMessage;
   final String senderName;
@@ -11,9 +14,12 @@ class ChatSnipits {
   final Timestamp timestamp;
   final List<String> adminId;
   final String type;
+  final String chatAccesability;
 
   ChatSnipits(
       {required this.id,
+      required this.leaders,
+      required this.chatAccesability,
       required this.chatId,
       required this.lastMessage,
       required this.senderName,
@@ -25,6 +31,12 @@ class ChatSnipits {
   factory ChatSnipits.fromFirestore(DocumentSnapshot _snap) {
     var _data = _snap.data();
     return ChatSnipits(
+      leaders:
+          (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),
+      chatAccesability: _snap["ChatAccesability"] is int
+          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].toString() ??
+              ChatAccesabilityEnum.adminOnly.toString()
+          : _snap["ChatAccesability"],
       id: _snap.id,
       chatId: _snap["chatID"],
       lastMessage: _snap["lastMessage"] ?? "",
@@ -42,11 +54,16 @@ class ChatSnipits {
 
 class ChatData {
   final String chatid;
+  final List<String> leaders;
   final List<String> members;
   final List<String> owners;
   final List<Message> messages;
+  final String chatAccesability;
+
   ChatData(
       {required this.chatid,
+      required this.leaders,
+      required this.chatAccesability,
       required this.members,
       required this.messages,
       required this.owners});
@@ -90,6 +107,12 @@ class ChatData {
     }
 
     return ChatData(
+      leaders:
+          (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),
+      chatAccesability: _snap["ChatAccesability"] is int
+          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].toString() ??
+              ChatAccesabilityEnum.adminOnly.toString()
+          : _snap["CahtAccesability"],
       chatid: _snap.id,
       members:
           (_snap["members"] as List<dynamic>).map((e) => e.toString()).toList(),

@@ -116,6 +116,7 @@ class DBService {
     });
   }
 
+//edit getUserChats to work differently when admin
   Stream<List<ChatSnipits>> getUserChats(String _uid) {
     var ref =
         _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
@@ -231,10 +232,10 @@ class DBService {
       "admins": [],
       "lastMessage": "welcome New User",
       "senderID": "",
-      "senderName": "dev_lead",
+      "senderName": "",
       "timestamp": Timestamp.now(),
       "type": "text"
-    });
+    }, SetOptions(merge: true));
   }
 
   Future<void> addMembersToChat(String uid, String chatID) {
