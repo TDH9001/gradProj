@@ -16,8 +16,15 @@ import 'package:provider/provider.dart';
 import '../theme/light_theme.dart';
 
 class ChatPage extends StatefulWidget {
-  ChatPage({super.key, required this.chatID, required this.admins});
+  ChatPage(
+      {super.key,
+      required this.chatID,
+      required this.admins,
+      required this.leaders,
+      required this.chatAccesability});
   final String id = "ChatPage";
+  final List<String> leaders;
+  final String chatAccesability;
   String chatID;
   GlobalKey<FormState> GK = GlobalKey<FormState>();
   String textTosend = "";
@@ -83,6 +90,8 @@ class _ChatPageState extends State<ChatPage> {
           Align(
               alignment: Alignment.bottomCenter,
               child: MessageField(
+                chatAccesability: widget.chatAccesability,
+                leaders: widget.leaders,
                 GK: widget.GK,
                 chatID: widget.chatID,
                 admins: widget.admins,

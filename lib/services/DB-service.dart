@@ -219,7 +219,8 @@ class DBService {
     return ref.update({"unseenCount": 0});
   }
 
-  Future<void> addChatsToUser(String uid, String chatID) {
+  Future<void> addChatsToUser(String uid, String chatID) async {
+    var chat = await _db.collection(_ChatCollection).doc(chatID).get();
     var ref = _db
         .collection(_UserCollection)
         .doc(uid)
@@ -229,12 +230,14 @@ class DBService {
       "chatID": chatID,
       "name": chatID,
       "unseenCount": 0,
-      "admins": [],
+      "admins": chat["admins"],
       "lastMessage": "welcome New User",
       "senderID": "",
       "senderName": "",
       "timestamp": Timestamp.now(),
-      "type": "text"
+      "type": 0,
+      "chatAccesability": chat["ChatAccesability"],
+      "leaders": chat["leaders"],
     }, SetOptions(merge: true));
   }
 

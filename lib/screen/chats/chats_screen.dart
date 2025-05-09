@@ -70,6 +70,8 @@ Widget _RecentChats() {
                             return ChatPage(
                               chatID: data[index].chatId,
                               admins: data[index].adminId,
+                              chatAccesability: data[index].chatAccesability,
+                              leaders: data[index].leaders,
                             );
                           }));
                           DBService.instance.resetUnseenCount(
