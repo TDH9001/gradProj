@@ -1,0 +1,41 @@
+{ "Login":
+  {
+    "welcome": "SciConnect",
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot Password?",
+    "reset_button": "Reset Password",
+    "login_button": "Login",
+    "dont_account": "Don't have an account?",
+    "sign_up_button": "Sign Up"
+  },
+  "Resetpassword": {
+    "title": "Reset Your Password",
+    "pass_required": "Your new password must be different from any previously used passwords.",
+    "Email": "Email Address",
+    "reset_button": "Reset Password"
+  },
+  "Signup": {
+    "title": "Create Account",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "phone_number": "Phone Number",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "signup_button": "Sign Up",
+    "already_account": "Already have an account?",
+    "login_button": "Login"
+  },
+  "Account":
+  {
+    "university": "Ain Shams University",
+    "faculty": "Faculty of Science",
+    "profile": "Profile",
+    "setting": "Setting",
+    "question": "Questions",
+    "stutent_guide": "Student Guide",
+    "logout": "Logout"
+  }
+}

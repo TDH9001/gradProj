@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
@@ -32,39 +33,37 @@ class ResetpasswordScreen extends StatelessWidget {
     ),
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 40),
-              const Text(
-                'New Password',
+              const SizedBox(height: 60),
+               Text(
+                'Resetpassword.title'.tr(),
                 style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 40, right: 40, top: 10),
+              SizedBox(height: 70),
+               Padding(
+                padding: EdgeInsets.only(left: 25, right: 25, top: 20),
                 child: Text(
-                  'Your new password must be different from previously used password',
+                  'Resetpassword.pass_required'.tr(),
                   style: TextStyle(
-                    fontSize: 19,
+                    fontSize: 16,
                     color: Colors.white70,
                   ),
-                  maxLines: 3,
+                  maxLines: 2,
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 50),
               CustomTextField(
                 controller: t1,
-                hintText: 'Email',
+                hintText: 'Resetpassword.Email'.tr(),
               ),
-              const SizedBox(height: 16),
               // CustomTextField(
               //   controller: TextEditingController(),
               //   hintText: 'Password',
@@ -76,9 +75,9 @@ class ResetpasswordScreen extends StatelessWidget {
               //   hintText: 'Confirm Password',
               //   isPassword: true,
               // ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 80),
               PrimaryButton(
-                buttontext: 'Create New Password',
+                buttontext: 'Resetpassword.reset_button'.tr(),
                 func: () {
                   AuthProvider.instance
                       .sendResetPassword(email: t1.text.trim());

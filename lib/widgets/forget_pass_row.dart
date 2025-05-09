@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +15,8 @@ class ForgetPassRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text(
-          "Forget password ? ",
+         Text(
+         'Login.forgot'.tr(),
           style: TextStyle(color: Colors.white70),
         ),
         TextButton(
@@ -28,7 +29,7 @@ class ForgetPassRow extends StatelessWidget {
             );
           },
           child: Text(
-            'Reset password ',
+            'Login.reset_button'.tr(),
             style: TextStyle(
               color:  isDarkMode ? Color(0xff769BC6) : Color(0xff2E5077),
               fontWeight: FontWeight.w600,

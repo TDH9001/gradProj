@@ -1,0 +1,43 @@
+{
+  "Login":
+  {
+    "welcome": "SciConnect",
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "forgot": "هل نسيت كلمة المرور؟",
+    "reset_button": "إعادة تعيين كلمة المرور",
+    "login_button": "تسجيل الدخول",
+    "dont_account": "ليس لديك حساب؟",
+    "sign_up_button": "إنشاء حساب"
+  },
+  "Resetpassword": {
+    "title": "إعادة تعيين كلمة المرور",
+    "pass_required": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمات المرور التي استخدمتها سابقًا",
+    "Email": "البريد الإلكتروني",
+    "reset_button": "إعادة تعيين كلمة المرور"
+  },
+  "Signup": {
+    "title": "إنشاء حساب",
+    "first_name": "الاسم الأول",
+    "last_name": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "phone_number": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "signup_button": "تسجيل حساب",
+    "already_account": "هل لديك حساب بالفعل؟",
+    "login_button": "تسجيل الدخول"
+  },
+  "Account": {
+    "university": "جامعة عين شمس",
+    "faculty": "كلية العلوم",
+    "profile": "الملف الشخصي",
+    "setting": "الإعدادات",
+    "question": "الأسئلة",
+    "stutent_guide": "دليل الطالب",
+    "logout": "تسجيل الخروج"
+  }
+
+
+}

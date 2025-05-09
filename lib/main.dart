@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
@@ -26,15 +27,22 @@ import '../services/navigation_Service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   HiveUserContactCashingService.initHive();
   HiveCahtMessaegsCachingService.initHive();
-  runApp(MultiProvider(providers: [
+  runApp(
+      EasyLocalization(
+          supportedLocales: [Locale('en'), Locale('ar')],
+          path: 'assets/translate',
+          fallbackLocale: Locale('en'),
+          startLocale: Locale('en'),
+      child: MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
-  ], child: homePage()));
+  ], child: homePage())));
 }
 
 class homePage extends StatelessWidget {
@@ -45,6 +53,9 @@ class homePage extends StatelessWidget {
     var _auth = Provider.of<AuthProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       navigatorKey: navigationService.instance.navKey, //added the nav service
       title: "Sci.Connect",
       themeMode: themeProvider.getEffectiveThemeMode(),
