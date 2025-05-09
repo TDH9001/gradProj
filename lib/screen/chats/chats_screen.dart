@@ -10,6 +10,7 @@ import '../../providers/auth_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../screen/chats/Chat_page.dart';
 import 'package:grad_proj/widgets/dialogs/add_chat_dialog.dart'; 
+import 'package:grad_proj/utils/qr_display_utils.dart';
 
 class RecentChats extends StatelessWidget {
   RecentChats({super.key});
@@ -76,7 +77,6 @@ Widget _RecentChats() {
               ),
             );
           }
-
           return ListView.builder(
                   itemCount: data.length, // Use data.length directly
                   itemBuilder: (context, index) {
