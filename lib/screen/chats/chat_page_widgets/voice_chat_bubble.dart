@@ -179,7 +179,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
             ],
           ),
           Text(
-            "${MonthAndWeekMap.weekmap[widget.ts.toDate().weekday]} ${MonthAndWeekMap.numMap[widget.ts.toDate().month]} ${widget.ts.toDate().day} , ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
+            "  ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
             style: TextStyle(fontSize: 16),
           )
         ]);

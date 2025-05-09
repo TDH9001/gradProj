@@ -1,3 +1,4 @@
+import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/message.dart';
@@ -50,31 +51,36 @@ class MessageListViewChatList extends StatelessWidget {
                     top: 3,
                     bottom: 10,
                   ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment:
-                        HiveUserContactCashingService.getUserContactData().id ==
-                                bubbles[index].senderID
-                            ? MainAxisAlignment.end
-                            : MainAxisAlignment.start,
-                    children: [
-                      bubbles[index].type == "text"
-                          ? chatMessageBubble(
-                              message: ChatdataOfCurrentChat.messageContent
-                                  .toString(),
-                              isOurs: HiveUserContactCashingService
-                                          .getUserContactData()
-                                      .id ==
-                                  bubbles[index].senderID,
-                              ts: bubbles[index].timestamp,
-                              senderName: bubbles[index].senderName,
+                  child: Column(
+                    children: <Widget>[
+                      bubbles[index].timestamp.toDate().year !=
+                                  bubbles[index + 1].timestamp.toDate().year ||
+                              bubbles[index].timestamp.toDate().month !=
+                                  bubbles[index + 1].timestamp.toDate().month ||
+                              bubbles[index].timestamp.toDate().day !=
+                                  bubbles[index + 1].timestamp.toDate().day
+                          ? Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Center(
+                                child: DateChip(
+                                  date: bubbles[index].timestamp.toDate(),
+                                  color: Colors.grey,
+                                ),
+                              ),
                             )
-                          : bubbles[index].type == "image"
-                              ? ImageMessageBubble(
-                                  key: ValueKey(
-                                      ChatdataOfCurrentChat), //this to tell flutter it's independant
-                                  FileAdress: ChatdataOfCurrentChat
-                                      .messageContent
+                          : SizedBox(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment:
+                            HiveUserContactCashingService.getUserContactData()
+                                        .id ==
+                                    bubbles[index].senderID
+                                ? MainAxisAlignment.end
+                                : MainAxisAlignment.start,
+                        children: [
+                          bubbles[index].type == "text"
+                              ? chatMessageBubble(
+                                  message: ChatdataOfCurrentChat.messageContent
                                       .toString(),
                                   isOurs: HiveUserContactCashingService
                                               .getUserContactData()
@@ -83,18 +89,34 @@ class MessageListViewChatList extends StatelessWidget {
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 )
-                              : VoiceBubble(
-                                  key: ValueKey(ChatdataOfCurrentChat),
-                                  AudioAdress: ChatdataOfCurrentChat
-                                      .messageContent
-                                      .toString(),
-                                  isOurs: HiveUserContactCashingService
-                                              .getUserContactData()
-                                          .id ==
-                                      bubbles[index].senderID,
-                                  ts: bubbles[index].timestamp,
-                                  senderName: bubbles[index].senderName,
-                                ),
+                              : bubbles[index].type == "image"
+                                  ? ImageMessageBubble(
+                                      key: ValueKey(
+                                          ChatdataOfCurrentChat), //this to tell flutter it's independant
+                                      FileAdress: ChatdataOfCurrentChat
+                                          .messageContent
+                                          .toString(),
+                                      isOurs: HiveUserContactCashingService
+                                                  .getUserContactData()
+                                              .id ==
+                                          bubbles[index].senderID,
+                                      ts: bubbles[index].timestamp,
+                                      senderName: bubbles[index].senderName,
+                                    )
+                                  : VoiceBubble(
+                                      key: ValueKey(ChatdataOfCurrentChat),
+                                      AudioAdress: ChatdataOfCurrentChat
+                                          .messageContent
+                                          .toString(),
+                                      isOurs: HiveUserContactCashingService
+                                                  .getUserContactData()
+                                              .id ==
+                                          bubbles[index].senderID,
+                                      ts: bubbles[index].timestamp,
+                                      senderName: bubbles[index].senderName,
+                                    ),
+                        ],
+                      ),
                     ],
                   ));
             },
