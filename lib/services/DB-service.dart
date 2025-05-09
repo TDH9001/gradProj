@@ -55,6 +55,7 @@ class DBService {
         "academicYear": 0,
       });
       HiveUserContactCashingService.updateUserContactData(Contact(
+              email: email,
               id: userId,
               seatNumber: 0,
               firstName: firstName,
@@ -88,6 +89,7 @@ class DBService {
           await HiveUserContactCashingService.getUserContactData();
 
       HiveUserContactCashingService.updateUserContactData(Contact(
+              email: currData.email,
               id: userId,
               seatNumber: seatNumber,
               firstName: currData.firstName,
@@ -109,7 +111,7 @@ class DBService {
   Stream<Contact> getUserData(String _uid) {
     var ref = _db.collection(_UserCollection).doc(_uid);
     return ref.snapshots().map((_snap) {
-      Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
+      //  Contact data = Contact.fromJson(id: _snap.id, snap: _snap.data()!);
       return Contact.fromJson(id: _snap.id, snap: _snap.data()!);
     });
   }
