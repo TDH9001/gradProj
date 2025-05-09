@@ -36,7 +36,7 @@ void main() async {
   runApp(
       EasyLocalization(
           supportedLocales: [Locale('en'), Locale('ar')],
-          path: 'assets/translate', 
+          path: 'assets/translate',
           fallbackLocale: Locale('en'),
           startLocale: Locale('en'),
       child: MultiProvider(providers: [

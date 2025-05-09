@@ -7,7 +7,7 @@ class LanguageLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.language, color: Color(0xFF1F2937)),
+      icon: const Icon(Icons.language, color: Colors.white),
       onPressed: () {
         showModalBottomSheet(
           context: context,
