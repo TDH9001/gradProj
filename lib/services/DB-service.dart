@@ -667,4 +667,11 @@ class DBService {
       print(e);
     }
   }
+
+  Future<void> makeUserChatLeader(String chatId, String uid) {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    return ref.update({
+      "leaders": FieldValue.arrayUnion([uid])
+    });
+  }
 }

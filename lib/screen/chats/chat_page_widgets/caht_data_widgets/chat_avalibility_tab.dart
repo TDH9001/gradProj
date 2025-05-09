@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 
@@ -102,11 +103,18 @@ class ChatAvalibilitySlider extends StatelessWidget {
                       child: PrimaryButton(
                           buttontext:
                               "set to : ${ChatAccesabilityEnum.allow_All.name} ",
-                          func: () => DBService.instance
-                              .changeChatAccesabilitySetting(
-                                  chatId,
-                                  ChatAccesabilityEnum.allow_All.index,
-                                  context)),
+                          func: () {
+                            DBService.instance.changeChatAccesabilitySetting(
+                                chatId,
+                                ChatAccesabilityEnum.allow_All.index,
+                                context);
+                            DBService.instance.makeUserChatLeader(
+                                chatId,
+                                HiveUserContactCashingService
+                                        .getUserContactData()
+                                    .id
+                                    .trim());
+                          }),
                     )
                   ])
                 ]),
