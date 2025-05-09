@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 import '../models/Semester_logs_models/semester_model.dart';
 
 class SemesterSummaryRow extends StatelessWidget {
@@ -15,7 +15,8 @@ class SemesterSummaryRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double totalCreditHours = semester.courses.fold(0, (sum, c) => sum + c.creditHours);
+    double totalCreditHours =
+        semester.courses.fold(0, (sum, c) => sum + c.creditHours);
     double gpa = semester.semmesterGpa;
     String gradeLetter = semester.semesterGrade.toString().split('.').last;
 

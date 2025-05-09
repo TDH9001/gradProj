@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
+import 'package:grad_proj/widgets/dialogs/add_chat_dialog.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -18,7 +19,7 @@ class RecentChats extends StatelessWidget {
   void _showAddChatDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (BuildContext dialogContext) {
         return const AddChatDialog();
       },
@@ -28,7 +29,7 @@ class RecentChats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChangeNotifierProvider<AuthProvider>.value( 
+      body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
         child: _RecentChats(),
       ),
@@ -67,53 +68,62 @@ Widget _RecentChats() {
                 child: Text(
                     "Error: ${_snapshot.error} \n please update your data and the data field mising"));
           }
-          
-          if (data == null || data.isEmpty) { // Handle null or empty data
+
+          if (data == null || data.isEmpty) {
+            // Handle null or empty data
             return Center(
               child: Text(
                 "No recent chats.",
-                style: TextStyle(color: isDarkMode ? Colors.white70 : Colors.black54),
+                style: TextStyle(
+                    color: isDarkMode ? Colors.white70 : Colors.black54),
               ),
             );
           }
           return ListView.builder(
-                  itemCount: data.length, // Use data.length directly
-                  itemBuilder: (context, index) {
-                    final chatSnipit = data[index]; // More descriptive variable name
-                    return ListTile(
-                        tileColor: isDarkMode
-                            ? DarkThemeColors.background
-                            : Colors.white,
-                        onTap: () {
-                          navigationService.instance.navigateToRoute( // Use correct class name
-                              MaterialPageRoute(builder: (_context) {
-                            return ChatPage(
-                              chatID: chatSnipit.chatId,
-                              admins: chatSnipit.adminId,
-                            );
-                          }));
-                          DBService.instance.resetUnseenCount(
-                              _auth.user!.uid, chatSnipit.chatId);
-                        },
-                        leading: CircleAvatar( // Added a leading avatar for better UI
-                          backgroundColor: isDarkMode ? Theme.of(context).colorScheme.secondary : Theme.of(context).primaryColor,
-                          child: Text(
-                            chatSnipit.chatId.isNotEmpty ? chatSnipit.chatId[0].toUpperCase() : "?",
-                            style: TextStyle(color: Colors.white),
+            itemCount: data.length, // Use data.length directly
+            itemBuilder: (context, index) {
+              final chatSnipit = data[index]; // More descriptive variable name
+              return ListTile(
+                  tileColor:
+                      isDarkMode ? DarkThemeColors.background : Colors.white,
+                  onTap: () {
+                    navigationService.instance
+                        .navigateToRoute(// Use correct class name
+                            MaterialPageRoute(builder: (_context) {
+                      return ChatPage(
+                        chatID: chatSnipit.chatId,
+                        admins: chatSnipit.adminId,
+                      );
+                    }));
+                    DBService.instance
+                        .resetUnseenCount(_auth.user!.uid, chatSnipit.chatId);
+                  },
+                  leading: CircleAvatar(
+                    // Added a leading avatar for better UI
+                    backgroundColor: isDarkMode
+                        ? Theme.of(context).colorScheme.secondary
+                        : Theme.of(context).primaryColor,
+                    child: Text(
+                      chatSnipit.chatId.isNotEmpty
+                          ? chatSnipit.chatId[0].toUpperCase()
+                          : "?",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  title: Text(chatSnipit.chatId), // Use chatSnipit
+                  subtitle: Column(
+                      // Use column for better layout of subtitle and time
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (chatSnipit.lastMessage
+                            .isNotEmpty) // Check if last message exists
+                          Text(
+                            chatSnipit.lastMessage,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        title: Text(chatSnipit.chatId), // Use chatSnipit
-                        subtitle: Column( // Use column for better layout of subtitle and time
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (chatSnipit.lastMessage.isNotEmpty) // Check if last message exists
-                              Text(
-                                chatSnipit.lastMessage,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            if (chatSnipit.type == "image")
-                              Row(
+                        chatSnipit.type == "image"
+                            ? Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text("Image "),
@@ -138,32 +148,33 @@ Widget _RecentChats() {
                                     data[index].lastMessage,
                                     maxLines: 2,
                                   ),
-                        leading: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/chat.png")),
-                          ),
-                        ),
-                        trailing: Container(
-                            width: 100,
-                            child: ChatScreenTrailingiwdget(
-                                data[index].timestamp,
-                                data[index].unseenCount >= 1,
-                                data[index].unseenCount)));
-                  },
-                )
-              : Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20.0),
-                    child: Text(
-                      "no chats please go to the profile and add courses....",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                );
+                      ]));
+              // leading: Container(
+              //   width: 50,
+              //   height: 50,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(100),
+              //     image: DecorationImage(
+              //         image: AssetImage("assets/images/chat.png")),
+              //   ),
+              // ),
+              // trailing: Container(
+              //     width: 100,
+              //     child: ChatScreenTrailingiwdget(
+              //         data[index].timestamp,
+              //         data[index].unseenCount >= 1,
+              //         data[index].unseenCount))
+            },
+          );
+          // : Center(
+          //     child: Padding(
+          //       padding: EdgeInsets.only(left: 20.0),
+          //       child: Text(
+          //         "no chats please go to the profile and add courses....",
+          //         style: TextStyle(fontSize: 18),
+          //       ),
+          //     ),
+          //   );
         });
   });
 }

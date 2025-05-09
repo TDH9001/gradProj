@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 import '../models/Semester_logs_models/semester_model.dart';
 
 class SemesterSection extends StatelessWidget {
@@ -35,9 +35,8 @@ class SemesterSection extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              color: isDarkMode
-                  ? DarkThemeColors.secondary
-                  : LightTheme.secondary,
+              color:
+                  isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,
             ),
           ),
         ),

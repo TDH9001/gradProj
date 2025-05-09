@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 import '../models/Semester_logs_models/semester_model.dart';
 
 class SemesterSelector extends StatelessWidget {
@@ -23,8 +23,10 @@ class SemesterSelector extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: DropdownButton<int>(
         value: selectedIndex,
-        dropdownColor: isDarkMode ? DarkThemeColors.primary : LightTheme.background,
-        iconEnabledColor: isDarkMode ? DarkThemeColors.secondary : LightTheme.primary,
+        dropdownColor:
+            isDarkMode ? DarkThemeColors.primary : LightTheme.background,
+        iconEnabledColor:
+            isDarkMode ? DarkThemeColors.secondary : LightTheme.primary,
         style: TextStyle(
           color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
           fontWeight: FontWeight.bold,
@@ -38,7 +40,9 @@ class SemesterSelector extends StatelessWidget {
               child: Text(
                 "${sem.semesterName} ${sem.semesterYear}",
                 style: TextStyle(
-                  color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+                  color: isDarkMode
+                      ? DarkThemeColors.textcolor
+                      : LightTheme.textcolor,
                 ),
               ),
             );

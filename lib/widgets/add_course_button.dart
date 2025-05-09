@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 
 class AddCourseButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -20,12 +20,10 @@ class AddCourseButton extends StatelessWidget {
         icon: const Icon(Icons.add),
         label: const Text('إضافة مقرر جديد'),
         style: ElevatedButton.styleFrom(
-          backgroundColor: isDarkMode
-              ? DarkThemeColors.secondary
-              : LightTheme.secondary,
-          foregroundColor: isDarkMode
-              ? DarkThemeColors.textcolor
-              : LightTheme.textcolor,
+          backgroundColor:
+              isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,
+          foregroundColor:
+              isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
           padding: const EdgeInsets.symmetric(vertical: 14),
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),

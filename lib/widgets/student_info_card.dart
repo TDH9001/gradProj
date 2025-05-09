@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Semester_logs_models/academic_career.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 import 'info_row.dart';
 
 class StudentInfoCard extends StatelessWidget {
@@ -30,10 +30,15 @@ class StudentInfoCard extends StatelessWidget {
         totalCredits += course.creditHours;
       }
     }
-    double cumulativeGPA = totalCredits > 0 ? totalWeightedGrade / totalCredits : 0.0;
+    double cumulativeGPA =
+        totalCredits > 0 ? totalWeightedGrade / totalCredits : 0.0;
 
     int totalCreditHours = career.semesters.fold(
-        0, (sum, semester) => sum + semester.courses.fold(0, (sum, course) => sum + course.creditHours));
+        0,
+        (sum, semester) =>
+            sum +
+            semester.courses
+                .fold(0, (sum, course) => sum + course.creditHours));
 
     return Card(
       color: isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,
@@ -50,14 +55,18 @@ class StudentInfoCard extends StatelessWidget {
                 Text(
                   "معلومات الطالب",
                   style: TextStyle(
-                    color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+                    color: isDarkMode
+                        ? DarkThemeColors.textcolor
+                        : LightTheme.textcolor,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
                 ),
                 Icon(
                   Icons.school,
-                  color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+                  color: isDarkMode
+                      ? DarkThemeColors.textcolor
+                      : LightTheme.textcolor,
                   size: 24,
                 ),
               ],
@@ -116,15 +125,17 @@ class StudentInfoCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(
-                color: isDarkMode 
-                    ? DarkThemeColors.primary.withValues(alpha: 0.2) 
+                color: isDarkMode
+                    ? DarkThemeColors.primary.withValues(alpha: 0.2)
                     : LightTheme.primary.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 _getStudentStatus(cumulativeGPA),
                 style: TextStyle(
-                  color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+                  color: isDarkMode
+                      ? DarkThemeColors.textcolor
+                      : LightTheme.textcolor,
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                 ),
@@ -136,7 +147,7 @@ class StudentInfoCard extends StatelessWidget {
       ),
     );
   }
-  
+
   String _getStudentStatus(double gpa) {
     if (gpa >= 3.7) {
       return "الحالة: ممتاز مع مرتبة الشرف";

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Semester_logs_models/course_model.dart';
 import 'package:grad_proj/models/Semester_logs_models/semester_model.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
-import 'package:grad_proj/theme/dark_theme_colors.dart';
-import 'package:grad_proj/theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 import 'package:grad_proj/widgets/add_course_button.dart';
 import 'package:provider/provider.dart';
 import 'course_dialog.dart';
@@ -23,7 +23,8 @@ class SemesterDialog extends StatefulWidget {
 class _SemesterDialogState extends State<SemesterDialog> {
   final TextEditingController _semesterYearController = TextEditingController();
   final TextEditingController _semesterNameController = TextEditingController();
-  final TextEditingController _semesterNumberController = TextEditingController();
+  final TextEditingController _semesterNumberController =
+      TextEditingController();
   List<CourseModel> newCourses = [];
 
   @override
@@ -136,14 +137,16 @@ class _SemesterDialogState extends State<SemesterDialog> {
             title: Text(
               course.courseName,
               style: TextStyle(
-                color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+                color: isDarkMode
+                    ? DarkThemeColors.textcolor
+                    : LightTheme.textcolor,
               ),
             ),
             subtitle: Text(
               "${course.courseCode} - ${course.creditHours} hrs - Grade: ${course.grade}",
               style: TextStyle(
-                color: isDarkMode 
-                    ? DarkThemeColors.textcolor.withValues(alpha: 0.7) 
+                color: isDarkMode
+                    ? DarkThemeColors.textcolor.withValues(alpha: 0.7)
                     : LightTheme.textcolor.withValues(alpha: 0.7),
               ),
             ),
@@ -154,7 +157,8 @@ class _SemesterDialogState extends State<SemesterDialog> {
                   newCourses.removeAt(index);
                 });
               },
-              color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+              color:
+                  isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
             ),
           );
         },

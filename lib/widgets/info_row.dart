@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../theme/dark_theme_colors.dart';
-import '../theme/light_theme.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 
 class InfoRow extends StatelessWidget {
   final String label;
