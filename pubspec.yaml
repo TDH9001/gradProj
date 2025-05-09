@@ -32,6 +32,7 @@ dependencies:
   appbar_dropdown: ^0.0.4
   audioplayers: ^6.1.2
   bloc: ^9.0.0
+  flutter_bloc: ^9.1.0
   calendar_view: ^1.4.0
   chat_bubbles: ^1.6.0
   cloud_firestore: ^5.5.0

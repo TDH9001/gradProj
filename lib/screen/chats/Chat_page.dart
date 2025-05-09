@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/caht_cubit/caht_cubit.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_page_message_field.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/message_list_view_chat_lsit.dart';
 import 'package:grad_proj/services/media_service.dart';
@@ -68,11 +70,14 @@ class _ChatPageState extends State<ChatPage> {
 //thsi cahnge notifier may be redundant
     return ChangeNotifierProvider<AuthProvider>.value(
       value: AuthProvider.instance,
-      child: Scaffold(
-        //resizeToAvoidBottomInset: false,
-        appBar: AppbarGestureDetector(widget: widget),
-        body: ChangeNotifierProvider<AuthProvider>.value(
-            value: AuthProvider.instance, child: _chatPageUI()),
+      child: BlocProvider(
+        create: (context) => CahtCubit(),
+        child: Scaffold(
+          //resizeToAvoidBottomInset: false,
+          appBar: AppbarGestureDetector(widget: widget),
+          body: ChangeNotifierProvider<AuthProvider>.value(
+              value: AuthProvider.instance, child: _chatPageUI()),
+        ),
       ),
     );
   }
