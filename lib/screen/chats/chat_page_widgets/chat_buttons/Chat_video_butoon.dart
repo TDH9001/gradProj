@@ -16,6 +16,7 @@ class ChatVideoButoon extends StatelessWidget {
               await FilePicker.platform.pickFiles(type: FileType.video);
           if (result != null) {
             File file = File(result.files.single.path!);
+            //returnthe size as BYTES result.files.single.size;
           } else {
             SnackBarService.instance.buildContext = context;
             SnackBarService.instance

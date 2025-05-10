@@ -12,7 +12,8 @@ class ChatFileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
         onPressed: () async {
-          FilePickerResult? result = await FilePicker.platform.pickFiles();
+          FilePickerResult? result =
+              await FilePicker.platform.pickFiles(type: FileType.any);
           if (result != null) {
             File file = File(result.files.single.path!);
           } else {

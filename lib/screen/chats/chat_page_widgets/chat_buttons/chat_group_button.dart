@@ -56,9 +56,7 @@ class ChatGroupButton extends StatelessWidget {
         );
       },
       child: Icon(
-        IconData(
-          0xf732,
-        ),
+        Icons.attach_file,
       ),
     );
   }

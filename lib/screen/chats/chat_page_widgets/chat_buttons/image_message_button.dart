@@ -13,8 +13,8 @@ class ImageMessageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: MediaService.instance.getHeight() * 0.07,
-        width: MediaService.instance.getWidth() * 0.1,
+        // height: MediaService.instance.getHeight() * 0.07,
+        // width: MediaService.instance.getWidth() * 0.1,
         child: IconButton(
             onPressed: () async {
               var _image = await MediaService.instance.getImageFromLibrary();
