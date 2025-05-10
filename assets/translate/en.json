@@ -67,5 +67,10 @@
     "body":"  \"body\": \"I'm here to help you find the best courses and career paths \n    for your studies at Ain Shams University. \uD83C\uDF93\\n\\n\"\n    Would you like to start a conversation with our smart assistant?\"\n  }",
     "chat_button": "chat with sciMate",
     "cancel_button": "Cancel"
+  },
+  "Chatbot":
+  {
+    "title": "SciMeta",
+    "ask_question": "Ask a question..."
   }
 }
