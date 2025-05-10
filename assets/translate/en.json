@@ -48,5 +48,16 @@
     "edit_data_button": "Edit Data",
     "no_course": "No courses enrolled yet.",
     "course_enroll": "Courses Enrolled"
+  },
+  "Setting":
+  {
+    "title": "Setting",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language",
+    "english": "English",
+    "arabic": "Arabic"
   }
 }

@@ -4,6 +4,8 @@ import 'package:grad_proj/widgets/custom_card.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
 import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
+import '../theme/dark_theme_colors.dart';
+import '../theme/light_theme.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -20,11 +22,11 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Scaffold(
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
-        title: "Setting",
+        title: 'Setting.title'.tr(),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -38,7 +40,7 @@ class _SettingState extends State<Setting> {
           const SizedBox(height: 8),
           CustomCard(
             icon: Icons.brightness_6,
-            title: "Theme",
+            title: 'Setting.theme'.tr(),
             onTap: () {
               showModalBottomSheet(
                 context: context,
@@ -48,7 +50,7 @@ class _SettingState extends State<Setting> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       RadioListTile<ThemeModeType>(
-                        title: const Text("Light"),
+                        title:  Text('Setting.light'.tr()),
                         value: ThemeModeType.light,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {
@@ -57,7 +59,7 @@ class _SettingState extends State<Setting> {
                         },
                       ),
                       RadioListTile<ThemeModeType>(
-                        title: const Text("Dark"),
+                        title:  Text('Setting.dark'.tr()),
                         value: ThemeModeType.dark,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {
@@ -66,7 +68,7 @@ class _SettingState extends State<Setting> {
                         },
                       ),
                       RadioListTile<ThemeModeType>(
-                        title: const Text("System"),
+                        title:  Text('Setting.system'.tr()),
                         value: ThemeModeType.system,
                         groupValue: themeProvider.themeMode,
                         onChanged: (value) {
@@ -79,10 +81,11 @@ class _SettingState extends State<Setting> {
                 },
               );
             },
+            trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
           ),
           CustomCard(
             icon: Icons.language,
-            title: "Language",
+            title:'Setting.language'.tr(),
             onTap: () {
               showModalBottomSheet(
                 context: context,
@@ -91,14 +94,14 @@ class _SettingState extends State<Setting> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ListTile(
-                        title: const Text("English"),
+                        title:  Text('Setting.english'.tr()),
                         onTap: () {
                           context.setLocale(const Locale('en'));
                           Navigator.pop(context);
                         },
                       ),
                       ListTile(
-                        title: const Text("العربية"),
+                        title:  Text('Setting.arabic'.tr()),
                         onTap: () {
                           context.setLocale(const Locale('ar'));
                           Navigator.pop(context);
@@ -109,6 +112,7 @@ class _SettingState extends State<Setting> {
                 },
               );
             },
+            trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
           ),
 
         ],
