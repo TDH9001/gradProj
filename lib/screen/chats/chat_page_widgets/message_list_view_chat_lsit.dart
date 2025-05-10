@@ -2,10 +2,11 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/message.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/chat_file_message.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/message_bubble.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/caht_Video_message.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_file_message.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/image_chat_bubble.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/message_bubble.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
@@ -117,19 +118,36 @@ class MessageListViewChatList extends StatelessWidget {
                                           ts: bubbles[index].timestamp,
                                           senderName: bubbles[index].senderName,
                                         )
-                                      : ChatFileMessage(
-                                          key: ValueKey(
-                                              ChatdataOfCurrentChat), //this to tell flutter it's independant
-                                          FileAdress: ChatdataOfCurrentChat
-                                              .messageContent
-                                              .toString(),
-                                          isOurs: HiveUserContactCashingService
-                                                      .getUserContactData()
-                                                  .id ==
-                                              bubbles[index].senderID,
-                                          ts: bubbles[index].timestamp,
-                                          senderName: bubbles[index].senderName,
-                                        ),
+                                      : bubbles[index].type ==
+                                              messageType.file.name
+                                          ? ChatFileMessage(
+                                              key: ValueKey(
+                                                  ChatdataOfCurrentChat), //this to tell flutter it's independant
+                                              FileAdress: ChatdataOfCurrentChat
+                                                  .messageContent
+                                                  .toString(),
+                                              isOurs: HiveUserContactCashingService
+                                                          .getUserContactData()
+                                                      .id ==
+                                                  bubbles[index].senderID,
+                                              ts: bubbles[index].timestamp,
+                                              senderName:
+                                                  bubbles[index].senderName,
+                                            )
+                                          : ChatVideoMessage(
+                                              key: ValueKey(
+                                                  ChatdataOfCurrentChat), //this to tell flutter it's independant
+                                              FileAdress: ChatdataOfCurrentChat
+                                                  .messageContent
+                                                  .toString(),
+                                              isOurs: HiveUserContactCashingService
+                                                          .getUserContactData()
+                                                      .id ==
+                                                  bubbles[index].senderID,
+                                              ts: bubbles[index].timestamp,
+                                              senderName:
+                                                  bubbles[index].senderName,
+                                            ),
                         ],
                       ),
                     ],

@@ -7,9 +7,10 @@ import 'package:grad_proj/services/file_caching_service/chat_file_caching_servic
 import 'package:grad_proj/services/media_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:universal_file_viewer/universal_file_viewer.dart';
+import 'package:video_player/video_player.dart';
 
-class ChatFileMessage extends StatefulWidget {
-  ChatFileMessage(
+class ChatVideoMessage extends StatefulWidget {
+  ChatVideoMessage(
       {super.key,
       required this.FileAdress,
       required this.isOurs,
@@ -21,10 +22,10 @@ class ChatFileMessage extends StatefulWidget {
   final String senderName;
 
   @override
-  State<ChatFileMessage> createState() => _ChatFileMessageState();
+  State<ChatVideoMessage> createState() => _ChatVideoMessageState();
 }
 
-class _ChatFileMessageState extends State<ChatFileMessage>
+class _ChatVideoMessageState extends State<ChatVideoMessage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -43,12 +44,12 @@ class _ChatFileMessageState extends State<ChatFileMessage>
           );
         }
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
             if (snapshot.data!.isFailed == false &&
                 snapshot.data!.file != null) {
-              //String Extenshion = p.extension(snapshot.data!.file!.path);
-              // print(Extenshion);
-              //should preview he file when expanded
+              final videoPlayerController =
+                  VideoPlayerController.file(snapshot.data!.file!);
+              await videoPlayerController.initialize();
               AnimatedHeroDialog.showAnimatedWidgetTransition(
                   context: context,
                   heroID: widget.FileAdress,
@@ -81,9 +82,9 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                   height: 5,
                 ), //WIDGET HEREEEEEEEEEE
                 !snapshot.data!.isLoading
-                    ? Container(
-                        width: 100,
-                        height: 100,
+                    ? SizedBox(
+                        width: MediaService.instance.getWidth() * 0.63,
+                        height: MediaService.instance.getHeight() * 0.38,
                         child: Column(children: [
                           snapshot.data!.isFailed == false &&
                                   snapshot.data!.file != null

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/voice_chat_bubble.dart';
 
 class VoiceMessageBaseBAckground extends StatelessWidget {
   const VoiceMessageBaseBAckground(

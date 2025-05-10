@@ -32,11 +32,9 @@ class ChatVideoButoon extends StatelessWidget {
                         HiveUserContactCashingService.getUserContactData().id,
                     messageContent: fileUrl,
                     timestamp: Timestamp.now(),
-                    type: "file",
+                    type: messageType.video.name,
                     senderName:
                         "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}"));
-            //     FocusScope.of(context).unfocus();
-            //returnthe size as BYTES result.files.single.size;
           } else {
             SnackBarService.instance.buildContext = context;
             SnackBarService.instance
