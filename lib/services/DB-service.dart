@@ -14,7 +14,7 @@ import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
 
-enum MessageType { text, image, voice, file }
+enum MessageType { text, image, voice, file, video }
 
 class DBService {
   static DBService instance = DBService();

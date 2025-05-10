@@ -17,8 +17,14 @@ class ChatFileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
         onPressed: () async {
-          FilePickerResult? result =
-              await FilePicker.platform.pickFiles(type: FileType.any);
+          FilePickerResult? result = await FilePicker.platform
+              .pickFiles(type: FileType.custom, allowedExtensions: [
+            // All common types except video formats
+            'pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx',
+            'txt', 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'mp3', 'wav',
+            'zip', 'rar', '7z', 'json', 'csv', 'xml', 'html', 'css', 'js'
+            // Excludes: mp4, mov, avi, mkv, etc.
+          ]);
           if (result != null) {
             File file = File(result.files.single.path!);
             var _resilt = await CloudStorageService.instance.uploadChatFile(

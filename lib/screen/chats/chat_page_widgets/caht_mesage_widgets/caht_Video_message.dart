@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_response.dart';
@@ -21,6 +22,9 @@ class ChatVideoMessage extends StatefulWidget {
   final Timestamp ts;
   final String senderName;
 
+  late VideoPlayerController videoPlayerController;
+  late ChewieController chewieController;
+
   @override
   State<ChatVideoMessage> createState() => _ChatVideoMessageState();
 }
@@ -29,6 +33,18 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+  void initPlayer(AsyncSnapshot<CachedFileResult> snapshot) {
+    if (snapshot.data!.isFailed == false && snapshot.data!.file != null) {
+      widget.videoPlayerController =
+          VideoPlayerController.file(snapshot.data!.file!);
+      //  widget.videoPlayerController.initialize();
+      widget.chewieController = ChewieController(
+        videoPlayerController: widget.videoPlayerController,
+        autoPlay: false,
+        looping: true,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +59,20 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
             imageToShow: AssetImage("assets/images/splash.png"),
           );
         }
+        if (snapshot.data!.isFailed == false && snapshot.data!.file != null) {
+          initPlayer(snapshot);
+        }
         return GestureDetector(
-          onTap: () async {
+          onTap: () {
             if (snapshot.data!.isFailed == false &&
                 snapshot.data!.file != null) {
-              final videoPlayerController =
-                  VideoPlayerController.file(snapshot.data!.file!);
-              await videoPlayerController.initialize();
               AnimatedHeroDialog.showAnimatedWidgetTransition(
                   context: context,
                   heroID: widget.FileAdress,
                   displayedWidget: snapshot.data!.isFailed == false &&
                           snapshot.data!.file != null
-                      ? UniversalFileViewer(
-                          file: snapshot.data!.file!,
+                      ? Chewie(
+                          controller: widget.chewieController,
                         )
                       : Image(
                           image:
@@ -98,8 +114,15 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                           ),
                           snapshot.data!.isFailed == false &&
                                   snapshot.data!.file != null
-                              ? UniversalFileViewer(
-                                  file: snapshot.data!.file!,
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  width: MediaService.instance.getWidth() * 0.6,
+                                  height:
+                                      MediaService.instance.getHeight() * 0.35,
+                                  child: Chewie(
+                                    controller: widget.chewieController,
+                                  ),
                                 )
                               : Image(
                                   image: AssetImage(

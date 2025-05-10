@@ -68,7 +68,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey.shade400),
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 6),
             child: Column(
               //mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -76,9 +76,12 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                   ? CrossAxisAlignment.start
                   : CrossAxisAlignment.end,
               children: [
-                Text(widget.senderName),
+                Text(
+                  widget.senderName,
+                  maxLines: 1,
+                ),
                 SizedBox(
-                  height: 5,
+                  height: 2,
                 ), //WIDGET HEREEEEEEEEEE
                 !snapshot.data!.isLoading
                     ? SizedBox(
@@ -88,13 +91,12 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                           snapshot.data!.isFailed == false &&
                                   snapshot.data!.file != null
                               ? Text(
-                                  p.basename(snapshot.data!.file!.path),
+                                  p.basename(
+                                    snapshot.data!.file!.path,
+                                  ),
                                   maxLines: 1,
                                 )
                               : SizedBox(),
-                          SizedBox(
-                            height: 5,
-                          ),
                           snapshot.data!.isFailed == false &&
                                   snapshot.data!.file != null
                               ? UniversalFileViewer(
@@ -105,7 +107,6 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                                       'assets/images/file_not_found.png')),
                         ]))
                     : FittedBox(
-                        //while loading
                         child: Column(children: [
                         Text(
                             "loading : ${(snapshot.data!.progress).toStringAsFixed(2)} %"),
