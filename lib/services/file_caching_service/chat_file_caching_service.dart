@@ -45,9 +45,9 @@ class ChatFileCachingService {
             }
           } else if (fileResponse is FileInfo &&
               fileAdress == fileResponse.originalUrl) {
-            await FileSaver.instance.saveFile(
-                name: p.basename(fileResponse.file.path),
-                file: fileResponse.file);
+            // await FileSaver.instance.saveFile(
+            //     name: p.basename(fileResponse.file.path),
+            //     file: fileResponse.file);
 
             yield CachedFileResult(
               isFailed: false,

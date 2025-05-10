@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_response.dart';
@@ -65,11 +63,12 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             }
           },
           child: Container(
+            height: MediaService.instance.getHeight() * 0.45,
+            width: MediaService.instance.getWidth() * 0.7,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey.shade400),
             padding: EdgeInsets.symmetric(horizontal: 15),
-            width: MediaService.instance.getWidth() * 0.80,
             child: Column(
               //mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -81,30 +80,30 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                 SizedBox(
                   height: 5,
                 ), //WIDGET HEREEEEEEEEEE
-                snapshot.data!.isLoading
-                    ? FittedBox(
-                        // width: 200,
-                        // height: 200,
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.circular(15),
-                        // ),
+                !snapshot.data!.isLoading
+                    ? Container(
+                        width: 100,
+                        height: 100,
                         child: Column(children: [
-                        snapshot.data!.isFailed == false &&
-                                snapshot.data!.file != null
-                            ? Text(p.basename(snapshot.data!.file!.path))
-                            : SizedBox(),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        snapshot.data!.isFailed == false &&
-                                snapshot.data!.file != null
-                            ? UniversalFileViewer(
-                                file: snapshot.data!.file!,
-                              )
-                            : Image(
-                                image: AssetImage(
-                                    'assets/images/file_not_found.png')),
-                      ]))
+                          snapshot.data!.isFailed == false &&
+                                  snapshot.data!.file != null
+                              ? Text(
+                                  p.basename(snapshot.data!.file!.path),
+                                  maxLines: 1,
+                                )
+                              : SizedBox(),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          snapshot.data!.isFailed == false &&
+                                  snapshot.data!.file != null
+                              ? UniversalFileViewer(
+                                  file: snapshot.data!.file!,
+                                )
+                              : Image(
+                                  image: AssetImage(
+                                      'assets/images/file_not_found.png')),
+                        ]))
                     : FittedBox(
                         //while loading
                         child: Column(children: [

@@ -77,6 +77,7 @@ dependencies:
   file_saver: ^0.2.14
   file_picker: ^10.1.7
   custom_pop_up_menu: ^1.2.4
+  chewie: ^1.11.3
   
 
 
