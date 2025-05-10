@@ -37,7 +37,17 @@
     "question": "الأسئلة",
     "stutent_guide": "دليل الطالب",
     "logout": "تسجيل الخروج"
+  },
+  "Profile":
+  {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "seat_number": "رقم الجلوس",
+    "phone_number": "رقم الهاتف",
+    "academic_year": "السنة الدراسية",
+    "edit_data_button": "تعديل البيانات",
+    "no_course": "لا توجد مقررات مسجلة بعد.",
+    "course_enroll": "المقررات المسجلة"
   }
-
 
 }

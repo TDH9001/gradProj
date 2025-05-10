@@ -37,5 +37,16 @@
     "question": "Questions",
     "stutent_guide": "Student Guide",
     "logout": "Logout"
+  },
+  "Profile":
+  {
+    "name": "Name",
+    "email": "Email",
+    "seat_number": "Seat Number",
+    "phone_number": "Phone Number",
+    "academic_year": "Academic Year",
+    "edit_data_button": "Edit Data",
+    "no_course": "No courses enrolled yet.",
+    "course_enroll": "Courses Enrolled"
   }
 }

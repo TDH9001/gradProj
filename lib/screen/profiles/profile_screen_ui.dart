@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/navigation_Service.dart';
 import '../theme/light_theme.dart';
-import '../../widgets/custom_card.dart'; // تأكد أنك تستورد ملف الكارد
+import '../../widgets/custom_card.dart';
 
 class ProfileScreenUi extends StatefulWidget {
   final double length;
@@ -65,38 +66,48 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
           children: [
             CustomCard(
               icon: Icons.person,
-              title: "Name: ${userData?.firstName ?? ""}",
+              // title: ("'Profile ${userData?.firstName ?? ""}")
+              title: "${'Profile.name'.tr()}: ${userData?.firstName ?? ""}",
+
               onTap: () {},
             ),
             SizedBox(height: 8),
             CustomCard(
               icon: Icons.email,
-              title: "Email: ${auth.user!.email ?? ""}",
+             //title:( "Email: ${auth.user!.email ?? ""}").tr(),
+              title: "${'Profile.email'.tr()}: ${auth.user?.email ?? ""}",
+
               onTap: () {},
             ),
             SizedBox(height: 8),
             CustomCard(
               icon: Icons.badge,
-              title: "Seat Number: ${userData?.seatNumber ?? ""}",
+              //title: "Seat Number: ${userData?.seatNumber ?? ""}",
+              title: "${'Profile.seat_number'.tr()}: ${userData?.seatNumber ?? ""}",
+
               onTap: () {},
             ),
             SizedBox(height: 8),
             CustomCard(
               icon: Icons.phone,
-              title: "Phone: ${userData?.phoneNumber ?? ""}",
+             // title: "Phone: ${userData?.phoneNumber ?? ""}",
+              title: "${'Profile.phone_number'.tr()}: ${userData?.phoneNumber ?? ""}",
+
               onTap: () {},
             ),
             SizedBox(height: 8),
             CustomCard(
               icon: Icons.school,
-              title: "Academic Year: ${userData?.year ?? ""}",
+              //title: "Academic Year: ${userData?.year ?? ""}",
+              title: "${'Profile.academic_year'.tr()}: ${userData?.year ?? ""}",
+
               onTap: () {},
             ),
             const SizedBox(height: 20),
             _buildCoursesList(userData!.classes, isDarkMode),
             const SizedBox(height: 50),
             PrimaryButton(
-              buttontext: "Edit Data",
+              buttontext: 'Profile.edit_data_button'.tr(),
               func: () =>
                   navigationService.instance
                       .navigateTo(CompleteProfile.id),
@@ -112,7 +123,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
     if (classes.isEmpty) {
       return Center(
         child: Text(
-          'No courses enrolled yet.',
+          'Profile.no_course'.tr(),
           style: TextStyle(
               color: isDarkMode ? Colors.white60 : Colors.grey[600],
               fontSize: 16),
@@ -121,7 +132,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
     }
 
     return Card(
-      color: isDarkMode ? Colors.grey[900] : Colors.white,
+      color: isDarkMode ? Color(0xFF323232) : Colors.white,
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Theme(
@@ -130,7 +141,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
         child: ExpansionTile(
           leading: Icon(Icons.menu_book, color: Color(0xff769BC6)),
           title: Text(
-            "Courses Enrolled",
+            'Profile.course_enroll'.tr(),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           children: classes
