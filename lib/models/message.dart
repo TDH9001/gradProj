@@ -1,7 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:grad_proj/services/DB-service.dart";
 
-// enum messageType { Text, image, file }
+enum messageType { Text, image, voice, file }
 
 class Message {
   final String messageContent;

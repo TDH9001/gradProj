@@ -23,7 +23,7 @@ class Feed {
       required this.senderName,
       required this.timestamp});
 
-        factory Feed.fromFirestore(DocumentSnapshot _snap) {
+  factory Feed.fromFirestore(DocumentSnapshot _snap) {
     var _data = _snap.data();
     return Feed(
       senderID: _snap.id,
@@ -32,7 +32,6 @@ class Feed {
       content: _snap["FeedContent"],
       senderName: _snap["senderName"],
       type: _snap["type"],
-    
     );
   }
 }
