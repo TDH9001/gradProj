@@ -32,12 +32,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
 
   @override
   Widget build(BuildContext context) {
-    List<Color> colorScheme = widget.isOurs
-        ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
-        : [
-            Color(0xFFA3BFE0),
-            Color(0xFF769BC6),
-          ];
     return StreamBuilder<CachedFileResult>(
         stream: ChatFileCachingService.loadCachedImage(
             fileAdress: widget.FileAdress),
@@ -72,15 +66,15 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.grey.shade400),
-                    // gradient: LinearGradient(
-                    //     colors: colorScheme,
-                    //     stops: [0.40, 0.70],
-                    //     begin: widget.isOurs
-                    //         ? Alignment.bottomLeft
-                    //         : Alignment.bottomRight,
-                    //     end: widget.isOurs
-                    //         ? Alignment.topRight
-                    //         : Alignment.topLeft)),
+                // gradient: LinearGradient(
+                //     colors: colorScheme,
+                //     stops: [0.40, 0.70],
+                //     begin: widget.isOurs
+                //         ? Alignment.bottomLeft
+                //         : Alignment.bottomRight,
+                //     end: widget.isOurs
+                //         ? Alignment.topRight
+                //         : Alignment.topLeft)),
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

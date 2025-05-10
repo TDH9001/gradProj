@@ -9,6 +9,10 @@
 	<key>NSMicrophoneUsageDescription</key>
     <string>acces device microphone</string>
 	<key>NSCameraUsageDescription</key>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<string>Access Device Camers</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Access Device Microphone</string>
