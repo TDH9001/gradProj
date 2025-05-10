@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/screen/chats/caht_cubit/caht_cubit.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/chat_bloc_consumer.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/image_message_button.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/chat_bloc_consumer.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/chat_group_button.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/image_message_button.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
@@ -68,7 +69,10 @@ class _MessageFieldState extends State<MessageField> {
                     Spacer(
                       flex: 1,
                     ),
-                    ImageMessageButton(
+                    // ImageMessageButton(
+                    //   chatID: widget.chatID,
+                    // ),
+                    ChatGroupButton(
                       chatID: widget.chatID,
                     ),
                     _messageTextField(ChatCubit.get(context).txt),
