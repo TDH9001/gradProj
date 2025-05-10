@@ -6,7 +6,9 @@ import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_respon
 import 'package:grad_proj/screen/chats/chat_page_widgets/Image_bubble_widgets/image_hero_container.dart';
 import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.dart';
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
+import 'package:grad_proj/services/media_service.dart';
 import 'package:path/path.dart' as p;
+import 'package:universal_file_viewer/universal_file_viewer.dart';
 
 class ChatFileMessage extends StatefulWidget {
   ChatFileMessage(
@@ -42,26 +44,87 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             imageToShow: AssetImage("assets/images/splash.png"),
           );
         }
-        return GestureDetector(onTap: () {
-          // AnimatedHeroDialog.showAnimatedWidgetTransition(
-          //   context: context,
-          //   heroID: widget.FileAdress,
-          //   displayedWidget: ClipRRect(
-          //     child: Image(
-          //         image: snapshot.data!.file != null &&
-          //                 snapshot.data!.isFailed == false
-          //             ? FileImage(snapshot.data!.file!)
-          //             : snapshot.data!.isFailed == true
-          //                 ? AssetImage("assets/images/file_not_found.png")
-          //                 : AssetImage(
-          //                     'assets/images/offline_image.png')), //does not display when loading though
-          //   ),
-          // );
-          if (snapshot.data!.isFailed == false && snapshot.data!.file != null) {
-            String Extenshion = p.extension(snapshot.data!.file!.path);
-            print(Extenshion);
-          }
-        });
+        return GestureDetector(
+          onTap: () {
+            if (snapshot.data!.isFailed == false &&
+                snapshot.data!.file != null) {
+              //String Extenshion = p.extension(snapshot.data!.file!.path);
+              // print(Extenshion);
+              //should preview he file when expanded
+              AnimatedHeroDialog.showAnimatedWidgetTransition(
+                  context: context,
+                  heroID: widget.FileAdress,
+                  displayedWidget: snapshot.data!.isFailed == false &&
+                          snapshot.data!.file != null
+                      ? UniversalFileViewer(
+                          file: snapshot.data!.file!,
+                        )
+                      : Image(
+                          image:
+                              AssetImage('assets/images/file_not_found.png')));
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.grey.shade400),
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            width: MediaService.instance.getWidth() * 0.80,
+            child: Column(
+              //mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: widget.isOurs
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.end,
+              children: [
+                Text(widget.senderName),
+                SizedBox(
+                  height: 5,
+                ), //WIDGET HEREEEEEEEEEE
+                snapshot.data!.isLoading
+                    ? FittedBox(
+                        // width: 200,
+                        // height: 200,
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(15),
+                        // ),
+                        child: Column(children: [
+                        snapshot.data!.isFailed == false &&
+                                snapshot.data!.file != null
+                            ? Text(p.basename(snapshot.data!.file!.path))
+                            : SizedBox(),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        snapshot.data!.isFailed == false &&
+                                snapshot.data!.file != null
+                            ? UniversalFileViewer(
+                                file: snapshot.data!.file!,
+                              )
+                            : Image(
+                                image: AssetImage(
+                                    'assets/images/file_not_found.png')),
+                      ]))
+                    : FittedBox(
+                        //while loading
+                        child: Column(children: [
+                        Text(
+                            "loading : ${(snapshot.data!.progress).toStringAsFixed(2)} %"),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        CircularProgressIndicator(
+                          color: Colors.greenAccent,
+                        ),
+                      ])),
+                Text(
+                  " ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "pm" : "am"}        ",
+                  style: TextStyle(fontSize: 16),
+                )
+              ],
+            ),
+          ),
+        );
       },
     );
   }

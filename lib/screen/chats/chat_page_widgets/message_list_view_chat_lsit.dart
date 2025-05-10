@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/image_chat_bubble.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/message_field_bubble.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/message_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/voice_chat_bubble.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
