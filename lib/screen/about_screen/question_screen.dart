@@ -30,13 +30,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
         title: 'Question.title'.tr(),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_forward , color: Colors.white,),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: Icon(
+        //     Icons.arrow_forward , color: Colors.white,),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: Center(
         child: Stack(

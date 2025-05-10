@@ -27,12 +27,12 @@ class _SettingState extends State<Setting> {
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
         title: 'Setting.title'.tr(),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
