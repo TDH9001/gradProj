@@ -33,8 +33,8 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
 
   final List<String> appBarTitles = [
     'Home',
-    'Chats', // Title for RecentChats()
-    'Table', // Title for TableScreen()
+    'Chats',
+    'Table',
     'About',
   ];
 
@@ -48,55 +48,36 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
         title: appBarTitles[currentIndex],
-        // leading: (currentIndex == 2 ||
-        //         currentIndex == 1) // Show back button on Table and Chats screen
-        //     ? IconButton(
-        //         icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white.withOpacity(0.85): Colors.white),
-        //         onPressed: () {
-        //           setState(() {
-        //             currentIndex =
-        //                 0; // Go back to the Home screen or any other screen
-        //           });
-        //         },
-        //       )
-        //     : null, // No back button for other screens
       ),
       body: screens[currentIndex],
-      bottomNavigationBar: CurvedNavigationBar(
-        items: <Widget>[
-          Icon(
-            Icons.home,
-            size: 30,
-            color:Colors.white,
-          ),
-          Icon(
-            Icons.chat,
-            size: 30,
-            color:Colors.white,
-          ),
-          Icon(
-            Icons.table_view_outlined,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.menu,
-            size: 30,
-            color: Colors.white,
-          ),
-        ],
-        color: isDarkMode ? DarkThemeColors.primary:  LightTheme.primary,
-        //Color(0xFF2E5077)
-        backgroundColor:isDarkMode ? Colors.transparent: Colors.white10,
-        buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor: LightTheme.secondary,
-        //Color(0xFF4A739F)  or 0xFF90A9D3
-        animationCurve: Curves.easeInOut,
-        animationDuration: const Duration(milliseconds: 300),
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+      bottomNavigationBar: Directionality(
+        textDirection: TextDirection.ltr,
+        child: CurvedNavigationBar(
+          items: <Widget>[
+            Icon(Icons.home,
+                size: 30,
+                color: Colors.white),
+            Icon(Icons.chat,
+                size: 30,
+                color: Colors.white),
+            Icon(Icons.table_view_outlined,
+                size: 30, color:
+                Colors.white),
+            Icon(Icons.menu,
+                size: 30,
+                color: Colors.white),
+          ],
+          color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+          backgroundColor: isDarkMode ? Colors.transparent : Colors.white10,
+          buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor : LightTheme.secondary,
+          animationCurve: Curves.easeInOut,
+          animationDuration: const Duration(milliseconds: 300),
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
