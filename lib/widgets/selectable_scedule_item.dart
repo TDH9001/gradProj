@@ -48,7 +48,7 @@ class _SelectableScheduleItemState extends State<SelectableScheduleItem> {
               boxShadow: isSelected
                   ? [
                       BoxShadow(
-                        color: Colors.blue.withOpacity(0.5),
+                        color: Colors.blue.withValues(alpha: 0.5),
                         blurRadius: 8,
                         spreadRadius: 2,
                       )

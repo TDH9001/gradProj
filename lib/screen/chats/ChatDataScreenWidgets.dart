@@ -5,7 +5,9 @@ import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Scedule_creation_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/selectable_scedule_item.dart';
 import 'package:grad_proj/widgets/updated_scedule_item.dart';
 
@@ -44,7 +46,7 @@ class TemporaryChatSceleList extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              child:  Container(
+              child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
@@ -62,18 +64,18 @@ class TemporaryChatSceleList extends StatelessWidget {
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: true,
-                  leading: const Icon(Icons.table_chart, color: Color(0xff2E5077)),
+                  leading:
+                      const Icon(Icons.table_chart, color: Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-
                   ),
                   title: const Text(
                     "Temporary scedule items",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,color: Colors.white
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white),
                   ),
                   children: [
                     Row(
@@ -83,7 +85,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                         ),
                         Text(
                           "Add temporary scedule item ",
-                          style: TextStyle(fontSize: 16,color: Colors.white),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                         Spacer(
                           flex: 3,
@@ -109,7 +111,8 @@ class TemporaryChatSceleList extends StatelessWidget {
                               }
                             },
                             icon: Icon(
-                              Icons.add_alert_sharp,color: Color(0xff2E5077),
+                              Icons.add_alert_sharp,
+                              color: Color(0xff2E5077),
                             )),
                         Spacer(
                           flex: 2,
@@ -201,7 +204,8 @@ class PermanatChatScedulesList extends StatelessWidget {
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: true,
-                  leading: Icon(Icons.table_view_outlined, color: Color(0xff2E5077) ),
+                  leading:
+                      Icon(Icons.table_view_outlined, color: Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -271,7 +275,8 @@ class PermanatChatScedulesList extends StatelessWidget {
                               //     data!);
                             },
                             icon: Icon(
-                              Icons.add_alert_sharp,color: Color(0xff2E5077),
+                              Icons.add_alert_sharp,
+                              color: Color(0xff2E5077),
                             )),
                         Spacer(
                           flex: 2,
@@ -295,7 +300,6 @@ class PermanatChatScedulesList extends StatelessWidget {
                           ),
                         );
                       },
-
                     )
                   ],
                 ),
@@ -307,14 +311,19 @@ class PermanatChatScedulesList extends StatelessWidget {
 }
 
 class ChatMembersList extends StatelessWidget {
-  const ChatMembersList({
-    super.key,
-    required this.widget,
-    required this.deviceHeight,
-  });
+  const ChatMembersList(
+      {super.key,
+      required this.widget,
+      required this.deviceHeight,
+      required this.admins,
+      required this.leaders,
+      required this.chatId});
 
   final ChatDataScreen widget;
   final double deviceHeight;
+  final String chatId;
+  final List<String> admins;
+  final List<String> leaders;
 
   @override
   Widget build(BuildContext context) {
@@ -351,12 +360,6 @@ class ChatMembersList extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  //color: Color(0xff769BC6),
-                  // gradient: LinearGradient(
-                  //   colors: [Colors.blue.shade50, Colors.white],
-                  //   begin: Alignment.topLeft,
-                  //   end: Alignment.bottomRight,
-                  // ),
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -398,7 +401,8 @@ class ChatMembersList extends StatelessWidget {
                           return Card(
                             color: Colors.transparent,
                             elevation: 3,
-                            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 6),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -407,56 +411,167 @@ class ChatMembersList extends StatelessWidget {
                                 color: Color(0xff2E5077),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: ExpansionTile(
-                                leading: Icon(Icons.person, color: Colors.white),
-                                iconColor: Colors.white,
-                                collapsedIconColor: Colors.white70,
-                                title: Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: Text(
-                                    member.firstName,
-                                    style: TextStyle(color: Colors.white, fontSize: 14),
-                                  ),
-                                ),
-                                childrenPadding: EdgeInsets.only(left: 24, bottom: 12, right: 12),
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(Icons.badge, color: Colors.white70, size: 16),
-                                      SizedBox(width: 8),
-                                      Text("Last Name: ${member.lastName}", style: TextStyle(color: Colors.white)),
-                                    ],
-                                  ),
-                                  SizedBox(height: 6),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.phone, color: Colors.white70, size: 16),
-                                      SizedBox(width: 8),
-                                      Text("Phone: ${member.phoneNumber}", style: TextStyle(color: Colors.white)),
-                                    ],
-                                  ),
-                                  SizedBox(height: 6),
-                                  // Row(
-                                  //   children: [
-                                  //     Icon(Icons.email, color: Colors.white70, size: 16),
-                                  //     SizedBox(width: 8),
-                                  //     Text("Email: ${member.email}", style: TextStyle(color: Colors.white)),
-                                  //   ],
-                                  // ),
-                                   SizedBox(height: 6),
-                                  Row(
-                                    children: [
-                                      Icon(Icons.badge, color: Colors.white70, size: 16),
-                                      SizedBox(width: 8),
-                                      Text("SeatNumber: ${member.seatNumber}", style: TextStyle(color: Colors.white)),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                              child: admins.contains(
+                                          HiveUserContactCashingService
+                                                  .getUserContactData()
+                                              .id
+                                              .trim()) ||
+                                      HiveUserContactCashingService
+                                                  .getUserContactData()
+                                              .id
+                                              .trim()
+                                              .length <
+                                          10
+                                  ? ExpansionTile(
+                                      leading: Icon(Icons.person,
+                                          color: Colors.white),
+                                      iconColor: Colors.white,
+                                      collapsedIconColor: Colors.white70,
+                                      title: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          member.firstName,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14),
+                                        ),
+                                      ),
+                                      childrenPadding: EdgeInsets.only(
+                                          left: 24, bottom: 12, right: 12),
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.badge,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text(
+                                                "Last Name: ${member.lastName}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(height: 6),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.phone,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text("Phone: ${member.phoneNumber}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.badge,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text(
+                                                "SeatNumber: ${member.seatNumber}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.email_outlined,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text("Email: ${member.email}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.leaderboard,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text("SeatNumber: ${member.email}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                        admins.contains(
+                                                    HiveUserContactCashingService
+                                                            .getUserContactData()
+                                                        .id
+                                                        .trim()) ||
+                                                HiveUserContactCashingService
+                                                            .getUserContactData()
+                                                        .id
+                                                        .trim()
+                                                        .length <
+                                                    10
+                                            ? Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: PrimaryButton(
+                                                        buttontext: !widget
+                                                                .adminList
+                                                                .contains(member.id
+                                                                    .trim())
+                                                            ? "make admin"
+                                                            : "already An admin",
+                                                        func: () => !widget
+                                                                .adminList
+                                                                .contains(member
+                                                                    .id
+                                                                    .trim())
+                                                            ? DBService.instance
+                                                                .makeAdmin(
+                                                                    member.id.trim(),
+                                                                    widget.cahtId)
+                                                            : {}),
+                                                  ),
+                                                  Spacer(
+                                                    flex: 1,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: PrimaryButton(
+                                                        buttontext: !widget
+                                                                .leaders
+                                                                .contains(member
+                                                                    .id
+                                                                    .trim())
+                                                            ? "make Leader"
+                                                            : "already a leader",
+                                                        func: () => !widget
+                                                                .leaders
+                                                                .contains(member
+                                                                    .id
+                                                                    .trim())
+                                                            ? DBService.instance
+                                                                .makeUserChatLeader(
+                                                                    chatId,
+                                                                    member.id.trim())
+                                                            : {}),
+                                                  )
+                                                ],
+                                              )
+                                            : SizedBox()
+                                      ],
+                                    )
+                                  : SizedBox(),
                             ),
                           );
                         },
-
                       ),
                     )
                   ],

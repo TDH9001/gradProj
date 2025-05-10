@@ -59,7 +59,13 @@ class _MyWidgetState extends State<ChatDataScreen> {
               title: Center(child: Text(widget.cahtId, style: TextStyles.text)),
             ),
           ),
-          ChatMembersList(widget: widget, deviceHeight: deviceHeight),
+          ChatMembersList(
+            widget: widget,
+            deviceHeight: deviceHeight,
+            chatId: widget.cahtId,
+            admins: widget.adminList,
+            leaders: widget.leaders,
+          ),
           ChatAvalibilitySlider(
             chatId: widget.cahtId,
             chatAccesability: widget.chatAccesability,

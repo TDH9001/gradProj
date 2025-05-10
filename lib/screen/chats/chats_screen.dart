@@ -74,6 +74,12 @@ Widget _RecentChats() {
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   return ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: isDarkMode
+                          ? Theme.of(context).colorScheme.secondary
+                          : Theme.of(context).primaryColor,
+                      child: Image(image: AssetImage("assets/images/chat.png")),
+                    ),
                     tileColor:
                         isDarkMode ? DarkThemeColors.background : Colors.white,
                     onTap: () {

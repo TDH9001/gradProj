@@ -23,7 +23,7 @@ Future<bool> checkInternetConnection(List<ConnectivityResult> data) async {
       print("Internet is accessible");
       return true;
     }
-  } on SocketException catch (_) {
+  } on SocketException {
     print("No internet access");
   } catch (_) {
     print("No internet access");
@@ -75,11 +75,12 @@ class _SplashScreenState extends State<SplashScreen> {
     final isDarkMode = themeProvider.isDarkMode;
 
     return Scaffold(
-
-        body:  Container(
-        decoration:  BoxDecoration(
-        gradient: isDarkMode ? DarkThemeColors.backgroundGradient : LightTheme.backgroundGradient,
-    ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: isDarkMode
+              ? DarkThemeColors.backgroundGradient
+              : LightTheme.backgroundGradient,
+        ),
         child: Center(
           child: Image(
             image: const AssetImage('assets/images/splash.png'),
@@ -87,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
             colorBlendMode: isDarkMode ? BlendMode.modulate : null,
           ),
         ),
-        ),
+      ),
     );
   }
 }
