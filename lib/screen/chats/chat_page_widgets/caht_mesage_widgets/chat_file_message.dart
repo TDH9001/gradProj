@@ -42,6 +42,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             imageToShow: AssetImage("assets/images/splash.png"),
           );
         }
+
         return GestureDetector(
           onTap: () {
             if (snapshot.data!.isFailed == false &&
@@ -84,28 +85,42 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                   height: 2,
                 ), //WIDGET HEREEEEEEEEEE
                 !snapshot.data!.isLoading
-                    ? SizedBox(
-                        width: MediaService.instance.getWidth() * 0.63,
-                        height: MediaService.instance.getHeight() * 0.3,
-                        child: Column(children: [
-                          snapshot.data!.isFailed == false &&
-                                  snapshot.data!.file != null
-                              ? Text(
-                                  p.basename(
-                                    snapshot.data!.file!.path,
+                    ? Column(children: [
+                        snapshot.data!.isFailed == false &&
+                                snapshot.data!.file != null
+                            ? Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaService.instance.getWidth() * 0.4,
+                                    child: Text(
+                                      p.basename(
+                                        snapshot.data!.file!.path,
+                                      ),
+                                      maxLines: 1,
+                                    ),
                                   ),
-                                  maxLines: 1,
-                                )
-                              : SizedBox(),
-                          snapshot.data!.isFailed == false &&
-                                  snapshot.data!.file != null
-                              ? UniversalFileViewer(
+                                  Text(
+                                      "  ${p.extension(snapshot.data!.file!.path)}")
+                                ],
+                              )
+                            : SizedBox(),
+                        snapshot.data!.isFailed == false &&
+                                snapshot.data!.file != null
+                            ? Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15)),
+                                width: MediaService.instance.getWidth() * 0.6,
+                                height:
+                                    MediaService.instance.getHeight() * 0.35,
+                                child: UniversalFileViewer(
                                   file: snapshot.data!.file!,
-                                )
-                              : Image(
-                                  image: AssetImage(
-                                      'assets/images/file_not_found.png')),
-                        ]))
+                                ),
+                              )
+                            : Image(
+                                image: AssetImage(
+                                    'assets/images/file_not_found.png')),
+                      ])
                     : FittedBox(
                         child: Column(children: [
                         Text(
