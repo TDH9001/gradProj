@@ -109,21 +109,7 @@ class homePage extends StatelessWidget {
       //make it splash later
       initialRoute: SplashScreen.id,
       debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return Directionality(
-          textDirection: ui.TextDirection.ltr, // تثبيت الاتجاه من اليسار لليمين
-          child: child!,
-        );
-      },
-
-      // builder: (context, child) {
-    // هنا بنضيف الخاصية Directionality لتثبيت اتجاه النص
-    // return Directionality(
-    //   textDirection: TextDirection.ltr,
-    //   // النص من اليسار لليمين
-    // child: child!,
-    // );
-    // },
+    
     );
   }
 }

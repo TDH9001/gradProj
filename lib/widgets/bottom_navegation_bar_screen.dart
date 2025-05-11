@@ -52,31 +52,34 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
         title: appBarTitles[currentIndex],
       ),
       body: screens[currentIndex],
-      bottomNavigationBar: CurvedNavigationBar(
-        items: <Widget>[
-          Icon(Icons.home,
-              size: 30,
-              color: Colors.white),
-          Icon(Icons.chat,
-              size: 30,
-              color: Colors.white),
-          Icon(Icons.table_view_outlined,
-              size: 30, color:
-              Colors.white),
-          Icon(Icons.menu,
-              size: 30,
-              color: Colors.white),
-        ],
-        color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
-        backgroundColor: isDarkMode ? Colors.transparent : Colors.white10,
-        buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor : LightTheme.secondary,
-        animationCurve: Curves.easeInOut,
-        animationDuration: const Duration(milliseconds: 300),
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+      bottomNavigationBar: Directionality(
+        textDirection: ui.TextDirection.ltr,
+        child: CurvedNavigationBar(
+          items: <Widget>[
+            Icon(Icons.home,
+                size: 30,
+                color: Colors.white),
+            Icon(Icons.chat,
+                size: 30,
+                color: Colors.white),
+            Icon(Icons.table_view_outlined,
+                size: 30, color:
+                Colors.white),
+            Icon(Icons.menu,
+                size: 30,
+                color: Colors.white),
+          ],
+          color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+          backgroundColor: isDarkMode ? Colors.transparent : Colors.white10,
+          buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor : LightTheme.secondary,
+          animationCurve: Curves.easeInOut,
+          animationDuration: const Duration(milliseconds: 300),
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
