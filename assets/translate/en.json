@@ -95,5 +95,12 @@
   "Pdf":
   {
     "title": "Student Guide"
+  },
+  "ThemeButtonLogin":
+  {
+    "title": "Theme ",
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "system": "System"
   }
 }

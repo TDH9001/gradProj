@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class ThemeButtonLogin extends StatelessWidget {
     isDarkMode ? Icons.dark_mode : Icons.light_mode,
     color: Colors.white,
     ),
-    tooltip: 'Theme',
+    tooltip: 'ThemeButtonLogin.title'.tr(),
     onSelected: (mode) {
         themeProvider.setTheme(mode);
     },
@@ -31,7 +32,7 @@ class ThemeButtonLogin extends StatelessWidget {
             children:  [
               Icon(Icons.light_mode, color: Color(0xff769BC6)),
               SizedBox(width: 8),
-              Text('light mode',),
+              Text('ThemeButtonLogin.light'.tr(),),
             ],
           ),
         ),
@@ -39,9 +40,9 @@ class ThemeButtonLogin extends StatelessWidget {
           value: ThemeModeType.dark,
           child: Row(
             children:  [
-              Icon(Icons.dark_mode, color: Color(0xFF323232)),
+              Icon(Icons.dark_mode, color: Color(0xff2E5077)),
               SizedBox(width: 8),
-              Text('dark mode')
+              Text('ThemeButtonLogin.dark'.tr(),),
             ],
           ),
         ),
@@ -51,7 +52,7 @@ class ThemeButtonLogin extends StatelessWidget {
             children:  [
               Icon(Icons.settings, color: Colors.grey),
               SizedBox(width: 8),
-              Text('system'),
+              Text('ThemeButtonLogin.system'.tr(),),
             ],
           ),
         ),
