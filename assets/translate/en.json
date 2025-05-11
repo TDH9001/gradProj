@@ -91,7 +91,9 @@
     "friday": "Friday",
     "add_schedule": "Add Permanent Schedule Item ",
     "error": "Error Adding Schedule, Please Try Again"
-
-
+  },
+  "Pdf":
+  {
+    "title": "Student Guide"
   }
 }
