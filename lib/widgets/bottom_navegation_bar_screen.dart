@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/widgets/orgappbar.dart';
@@ -9,6 +10,7 @@ import '../screen/theme/light_theme.dart';
 import '../providers/theme_provider.dart';
 import '../screen/home/home_screen.dart';
 import '../screen/account/account_screen.dart';
+import 'dart:ui' as ui;
 
 class BottomNavegationBarScreen extends StatefulWidget {
   BottomNavegationBarScreen({super.key});
@@ -32,10 +34,10 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
   ];
 
   final List<String> appBarTitles = [
-    'Home',
-    'Chats',
-    'Table',
-    'About',
+    'BottomNavigationBarScreen.home'.tr(),
+    'BottomNavigationBarScreen.chats'.tr(),
+    'BottomNavigationBarScreen.table'.tr(),
+    'BottomNavigationBarScreen.about'.tr(),
   ];
 
   @override
@@ -50,34 +52,31 @@ class _BottomNavegationBarScreenState extends State<BottomNavegationBarScreen> {
         title: appBarTitles[currentIndex],
       ),
       body: screens[currentIndex],
-      bottomNavigationBar: Directionality(
-        textDirection: TextDirection.ltr,
-        child: CurvedNavigationBar(
-          items: <Widget>[
-            Icon(Icons.home,
-                size: 30,
-                color: Colors.white),
-            Icon(Icons.chat,
-                size: 30,
-                color: Colors.white),
-            Icon(Icons.table_view_outlined,
-                size: 30, color:
-                Colors.white),
-            Icon(Icons.menu,
-                size: 30,
-                color: Colors.white),
-          ],
-          color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
-          backgroundColor: isDarkMode ? Colors.transparent : Colors.white10,
-          buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor : LightTheme.secondary,
-          animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(milliseconds: 300),
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
+      bottomNavigationBar: CurvedNavigationBar(
+        items: <Widget>[
+          Icon(Icons.home,
+              size: 30,
+              color: Colors.white),
+          Icon(Icons.chat,
+              size: 30,
+              color: Colors.white),
+          Icon(Icons.table_view_outlined,
+              size: 30, color:
+              Colors.white),
+          Icon(Icons.menu,
+              size: 30,
+              color: Colors.white),
+        ],
+        color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+        backgroundColor: isDarkMode ? Colors.transparent : Colors.white10,
+        buttonBackgroundColor: isDarkMode ? DarkThemeColors.buttonBackgroundColor : LightTheme.secondary,
+        animationCurve: Curves.easeInOut,
+        animationDuration: const Duration(milliseconds: 300),
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
       ),
     );
   }

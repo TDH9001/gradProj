@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
-
 import 'package:grad_proj/screen/about_screen/question_screen.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/screen/onboarding_screen/onboarding_screen.dart';
@@ -14,7 +13,6 @@ import 'package:grad_proj/screen/chats/chats_screen.dart';
 import 'package:grad_proj/screen/setting_screen/setting.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
-
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/screen/splash/determine.dart';
 import 'package:grad_proj/screen/splash/no_internet_page.dart';
@@ -24,6 +22,8 @@ import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/screen/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
+import 'dart:ui' as ui;
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -109,6 +109,21 @@ class homePage extends StatelessWidget {
       //make it splash later
       initialRoute: SplashScreen.id,
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return Directionality(
+          textDirection: ui.TextDirection.ltr, // تثبيت الاتجاه من اليسار لليمين
+          child: child!,
+        );
+      },
+
+      // builder: (context, child) {
+    // هنا بنضيف الخاصية Directionality لتثبيت اتجاه النص
+    // return Directionality(
+    //   textDirection: TextDirection.ltr,
+    //   // النص من اليسار لليمين
+    // child: child!,
+    // );
+    // },
     );
   }
 }

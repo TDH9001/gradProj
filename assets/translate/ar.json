@@ -72,6 +72,13 @@
   {
     "title": "SciMeta",
     "ask_question": "اسال سؤال ..."
+  },
+  "BottomNavigationBarScreen":
+  {
+    "home": "الصفحة الرئيسية",
+    "chats": "الدردشة",
+    "table": "الجدول",
+    "about": "حول"
   }
 
 }

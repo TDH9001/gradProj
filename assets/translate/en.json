@@ -72,5 +72,12 @@
   {
     "title": "SciMeta",
     "ask_question": "Ask a question..."
+  },
+ "BottomNavigationBarScreen":
+  {
+    "home": "Home",
+    "chats": "Chats",
+    "tabel": "Tabel",
+    "about": "About"
   }
 }
