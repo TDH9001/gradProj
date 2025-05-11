@@ -79,5 +79,19 @@
     "chats": "Chats",
     "table": "Table",
     "about": "About"
+  },
+  "TableScreen":
+  {
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "add_schedule": "Add Permanent Schedule Item ",
+    "error": "Error Adding Schedule, Please Try Again"
+
+
   }
 }
