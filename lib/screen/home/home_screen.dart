@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen>
         child: (Scaffold(
             appBar: AppBar(
               title: Text(
-                'PLACEHOLDER FOR NAME',
+                'HomeScreen.title'.tr(),
                 style: TextStyle(fontSize: 15),
                 softWrap: true,
                 overflow: TextOverflow.visible,
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
               actions: [
                 IconButton(
                   icon: Icon(Icons.view_list),
-                  tooltip: "Test All Feed Items",
+                  tooltip: 'HomeScreen.important'.tr(),
                   onPressed: () {
                     Navigator.push(
                       context,

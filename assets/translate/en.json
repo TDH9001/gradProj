@@ -102,5 +102,12 @@
     "light": "Light Mode",
     "dark": "Dark Mode",
     "system": "System"
+  },
+  "HomeScreen": {
+    "title": "Hello there ☺️",
+    "important": "Important",
+    "no_data": "No Data Available"
   }
+
+
 }
