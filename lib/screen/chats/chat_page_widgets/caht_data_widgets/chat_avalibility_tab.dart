@@ -15,18 +15,26 @@ class ChatAvalibilitySlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Card(
-        elevation: 4,
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        elevation: 6,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue.shade50, Colors.white],
+              colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: ExpansionTile(
             initiallyExpanded: true,
@@ -76,16 +84,15 @@ class ChatAvalibilitySlider extends StatelessWidget {
                     )
                   ]),
                   Row(children: [
-                    Text(
-                        "set mode to :${ChatAccesabilityEnum.allow_Leaders.name}"),
+                    Text("set mode to "),
                     Spacer(
                       flex: 1,
                     ),
                     SizedBox(
-                      width: 200,
+                      width: MediaService.instance.getWidth() * 0.5,
                       child: PrimaryButton(
                           buttontext:
-                              "set to : ${ChatAccesabilityEnum.allow_Leaders.name} ",
+                              "set: ${ChatAccesabilityEnum.allow_Leaders.name} ",
                           func: () => DBService.instance
                               .changeChatAccesabilitySetting(
                                   chatId,
@@ -99,7 +106,7 @@ class ChatAvalibilitySlider extends StatelessWidget {
                       flex: 1,
                     ),
                     SizedBox(
-                      width: 200,
+                      width: MediaService.instance.getWidth() * 0.5,
                       child: PrimaryButton(
                           buttontext:
                               "set to : ${ChatAccesabilityEnum.allow_All.name} ",
