@@ -107,6 +107,11 @@
     "title": "Hello there ☺️",
     "important": "Important",
     "no_data": "No Data Available"
+  },
+  "ScheduleDeleteFeedItem":
+  {
+    "schedule_deleted": "Schedule Deleted",
+    "deleted_schedule_details": "Deleted Schedule Details"
   }
 
 

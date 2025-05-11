@@ -26,11 +26,14 @@ class _HomeScreenState extends State<HomeScreen>
         value: AuthProvider.instance,
         child: (Scaffold(
             appBar: AppBar(
-              title: Text(
-                'HomeScreen.title'.tr(),
-                style: TextStyle(fontSize: 15),
-                softWrap: true,
-                overflow: TextOverflow.visible,
+             // backgroundColor: Color(0xFF1C1C1C),
+              title: Center(
+                child: Text(
+                  'HomeScreen.title'.tr(),
+                  style: TextStyle(fontSize: 15),
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                ),
               ),
               actions: [
                 IconButton(
