@@ -7,6 +7,7 @@ import 'package:grad_proj/screen/chats/ChatDataScreenWidgets.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_avalibility_tab.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_files_sent.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_images_sent.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_video_sent.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
 
@@ -73,7 +74,8 @@ class _MyWidgetState extends State<ChatDataScreen> {
           PermanatChatScedulesList(widget: widget),
           TemporaryChatSceleList(widget: widget),
           ChatImagesSent(cahtId: widget.cahtId),
-          ChatFilesSent(cahtId: widget.cahtId)
+          ChatFilesSent(cahtId: widget.cahtId),
+          ChatVideosSent(cahtId: widget.cahtId),
         ],
       ),
     );
