@@ -109,7 +109,7 @@ class homePage extends StatelessWidget {
       //make it splash later
       initialRoute: SplashScreen.id,
       debugShowCheckedModeBanner: false,
-    
+
     );
   }
 }
