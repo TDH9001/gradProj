@@ -34,7 +34,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<CachedFileResult>(
-        stream: ChatFileCachingService.loadCachedImage(
+        stream: ChatFileCachingService.loadCachedFile(
             fileAdress: widget.FileAdress),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

@@ -3,27 +3,29 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/DB-service.dart';
-import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.dart';
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path/path.dart' as p;
+import 'package:universal_file_viewer/universal_file_viewer.dart';
 
-class ChatImagesSent extends StatefulWidget {
-  const ChatImagesSent({super.key, required this.cahtId});
+class ChatFilesSent extends StatefulWidget {
+  const ChatFilesSent({super.key, required this.cahtId});
   final String cahtId;
 
   @override
-  State<ChatImagesSent> createState() => _ChatImagesSentState();
+  State<ChatFilesSent> createState() => _ChatFilesSentState();
 }
 
-class _ChatImagesSentState extends State<ChatImagesSent> {
+class _ChatFilesSentState extends State<ChatFilesSent> {
   late Future<List<File>> _validImagesFuture;
   Future<List<File>> getValidMessages() async {
     List<Message> allMessages =
         HiveCahtMessaegsCachingService.getChatData(widget.cahtId);
 
     List<Message> ImageMessages = allMessages
-        .where((element) => element.type == MessageType.image.name)
+        .where((element) => element.type == MessageType.file.name)
         .toList();
 
     List<File> validMessages = [];
@@ -59,7 +61,9 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
             return const Center(child: CircularProgressIndicator());
           }
           data = snapshot.data!;
-
+          for (int i = 0; i < data.length; i++) {
+            print(p.basename(data[0].path));
+          }
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             elevation: 6,
@@ -92,7 +96,7 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                 title: Row(
                   children: [
                     Text(
-                      "images Sent",
+                      "Files Sent",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -105,48 +109,58 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                     : [
                         SizedBox(
                           height: MediaService.instance.getHeight() * 2 / 3,
-                          child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
-                            //        shrinkWrap: true,
+                          child: ListView.builder(
+                            //  shrinkWrap: true,
                             physics: BouncingScrollPhysics(),
                             itemCount: data.length,
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
-                                  AnimatedHeroDialog
-                                      .showAnimatedWidgetTransition(
-                                          context: context,
-                                          heroID: data[index].toString(),
-                                          displayedWidget: ClipRRect(
-                                            child: Center(
-                                              child: Image(
-                                                  fit: BoxFit.cover,
-                                                  image: FileImage(data[
-                                                      index]) //does not display when loading though
-                                                  ),
-                                            ),
-                                          ));
+                                  OpenFile.open(data[index].path);
                                 },
                                 child: Hero(
                                     tag: data[index].toString(),
-                                    child: Container(
-                                      padding: EdgeInsets.all(3),
-                                      height:
-                                          MediaService.instance.getHeight() *
-                                              0.35,
-                                      width: MediaService.instance.getWidth() *
-                                          0.5,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black87, width: 2),
-                                        // borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                          image: FileImage(data[index]),
-                                          fit: BoxFit.fill,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            width: MediaService.instance
+                                                    .getWidth() *
+                                                0.4,
+                                            height: MediaService.instance
+                                                    .getHeight() *
+                                                0.25,
+                                            child: p.extension(
+                                                        data[index].path) ==
+                                                    ".xlsx"
+                                                ? Image(
+                                                    image: AssetImage(
+                                                        'assets/images/xlsx.png'))
+                                                : p.extension(data[index].path) ==
+                                                            ".ppt" ||
+                                                        p.extension(data[index].path) ==
+                                                            ".pptx"
+                                                    ? Image(
+                                                        image: AssetImage(
+                                                            "assets/images/ppt.png"),
+                                                      )
+                                                    : UniversalFileViewer(
+                                                        file: data[index])),
+                                        Spacer(
+                                          flex: 1,
                                         ),
-                                      ),
+                                        SizedBox(
+                                          width:
+                                              MediaService.instance.getWidth() *
+                                                  0.5,
+                                          child: Text(
+                                            "${p.extension(data[index].path)} : ${p.basename(data[index].path)}",
+                                            maxLines: 1,
+                                          ),
+                                        )
+                                      ],
                                     )),
                               );
                             },

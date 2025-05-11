@@ -7,7 +7,7 @@ import 'package:grad_proj/services/Network_checker_service.dart';
 import 'package:path/path.dart' as p;
 
 class ChatFileCachingService {
-  static Stream<CachedFileResult> loadCachedImage(
+  static Stream<CachedFileResult> loadCachedFile(
       {required String fileAdress}) async* {
     double lastyieldedProgress = 0.0;
     var connectResult = await Connectivity().checkConnectivity();

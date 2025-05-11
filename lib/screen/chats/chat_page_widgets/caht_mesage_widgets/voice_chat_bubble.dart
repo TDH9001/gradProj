@@ -68,7 +68,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
   bool _isFailed = false;
 
   void _loadAudioFileAndSet() async {
-    ChatFileCachingService.loadCachedImage(fileAdress: widget.AudioAdress)
+    ChatFileCachingService.loadCachedFile(fileAdress: widget.AudioAdress)
         .listen((StreamResponse) async {
       //i can not use builders as there are many auto-playing functions here
       if (StreamResponse.isFailed == true) {
