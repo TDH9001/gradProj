@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_response.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/Image_bubble_widgets/image_hero_container.dart';
-import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.dart';
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:path/path.dart' as p;
+
+import 'package:open_file/open_file.dart';
 import 'package:universal_file_viewer/universal_file_viewer.dart';
 
 class ChatFileMessage extends StatefulWidget {
@@ -42,25 +43,23 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             imageToShow: AssetImage("assets/images/splash.png"),
           );
         }
-
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
             if (snapshot.data!.isFailed == false &&
                 snapshot.data!.file != null) {
-              //String Extenshion = p.extension(snapshot.data!.file!.path);
-              // print(Extenshion);
-              //should preview he file when expanded
-              AnimatedHeroDialog.showAnimatedWidgetTransition(
-                  context: context,
-                  heroID: widget.FileAdress,
-                  displayedWidget: snapshot.data!.isFailed == false &&
-                          snapshot.data!.file != null
-                      ? UniversalFileViewer(
-                          file: snapshot.data!.file!,
-                        )
-                      : Image(
-                          image:
-                              AssetImage('assets/images/file_not_found.png')));
+              OpenFile.open(snapshot.data!.file!.path);
+
+              // AnimatedHeroDialog.showAnimatedWidgetTransition(
+              //     context: context,
+              //     heroID: widget.FileAdress,
+              //     displayedWidget: snapshot.data!.isFailed == false &&
+              //             snapshot.data!.file != null
+              //         ? Image(
+              //             image: AssetImage("assets/images/xlsx.png"),
+              //           )
+              //         : Image(
+              //             image:
+              //                 AssetImage('assets/images/file_not_found.png')));
             }
           },
           child: Container(
@@ -113,13 +112,25 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                                 width: MediaService.instance.getWidth() * 0.6,
                                 height:
                                     MediaService.instance.getHeight() * 0.35,
-                                child: UniversalFileViewer(
-                                  file: snapshot.data!.file!,
-                                ),
-                              )
+                                child: p.extension(snapshot.data!.file!.path) ==
+                                        ".xlsx"
+                                    ? Image(
+                                        image: AssetImage(
+                                            'assets/images/xlsx.png'))
+                                    : p.extension(snapshot.data!.file!.path) ==
+                                                ".ppt" ||
+                                            p.extension(snapshot
+                                                    .data!.file!.path) ==
+                                                ".pptx"
+                                        ? Image(
+                                            image: AssetImage(
+                                                "assets/images/ppt.png"),
+                                          )
+                                        : UniversalFileViewer(
+                                            file: snapshot.data!.file!))
                             : Image(
                                 image: AssetImage(
-                                    'assets/images/file_not_found.png')),
+                                    'assets/images/file_not_found.png'))
                       ])
                     : FittedBox(
                         child: Column(children: [

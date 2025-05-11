@@ -7,7 +7,6 @@ import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.da
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:path/path.dart' as p;
-import 'package:universal_file_viewer/universal_file_viewer.dart';
 import 'package:video_player/video_player.dart';
 
 class ChatVideoMessage extends StatefulWidget {

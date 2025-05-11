@@ -1027,7 +1027,7 @@ packages:
     source: hosted
     version: "2.1.1"
   open_file:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: open_file
       sha256: d17e2bddf5b278cb2ae18393d0496aa4f162142ba97d1a9e0c30d476adf99c0e

@@ -73,12 +73,13 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^29.1.41
   easy_localization: ^3.0.7+1
   path: ^1.9.1
-  universal_file_viewer: ^0.1.1
   file_saver: ^0.2.14
   file_picker: ^10.1.7
   custom_pop_up_menu: ^1.2.4
   chewie: ^1.11.3
   video_player: ^2.9.5
+  open_file: ^3.5.10
+  universal_file_viewer: ^0.1.1
   
 
 
