@@ -43,14 +43,16 @@ class QrCodeDisplayWidget extends StatelessWidget {
 }
 
 /// Shows a dialog displaying a QR code generated from the given [dataString].
-Future<void> showQrCodeDialog(BuildContext context, String dataString, {String title = 'Scan QR Code'}) async {
+Future<void> showQrCodeDialog(BuildContext context, String dataString,
+    {String title = 'Scan QR Code'}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: true, // User can dismiss by tapping outside
     builder: (BuildContext dialogContext) {
       return AlertDialog(
         title: Text(title),
-        content: SingleChildScrollView( // In case the content is too large
+        content: SingleChildScrollView(
+          // In case the content is too large
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[

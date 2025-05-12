@@ -98,7 +98,8 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
               ),
               child: ExpansionTile(
                 initiallyExpanded: true,
-                leading: const Icon(Icons.book, color: Color(0xff769BC6)),
+                leading: const Icon(Icons.video_collection,
+                    color: Color(0xff2E5077)),
                 // elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),

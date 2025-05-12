@@ -4,6 +4,7 @@ import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/chats/ChatDataScreenWidgets.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/add_user_QR_tab.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_avalibility_tab.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_files_sent.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_images_sent.dart';
@@ -67,6 +68,11 @@ class _MyWidgetState extends State<ChatDataScreen> {
             chatId: widget.cahtId,
             admins: widget.adminList,
             leaders: widget.leaders,
+          ),
+          SliverToBoxAdapter(
+            child: AddUserQrTab(
+              chatID: widget.cahtId,
+            ),
           ),
           widget.adminList.contains(
                       HiveUserContactCashingService.getUserContactData().id) ||
