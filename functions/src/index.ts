@@ -40,7 +40,7 @@ exports.onChatCreated = firestore.onDocumentCreated(
                       senderName: userData.firstName.concat(" ",userData.lastName,),
                       unseenCount: 0,
                       admins:ownerIDs,
-                      ChatAccesability:1,
+                      ChatAccesability:0,
                       temporaryScedule:null,
                       permanantScedules:null,
                       leaders:null

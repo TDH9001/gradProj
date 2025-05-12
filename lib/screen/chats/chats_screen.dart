@@ -2,7 +2,6 @@ import 'dart:developer' as devtools;
 
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/chats_screen_search_bar.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/dialogs/add_chat_dialog.dart';
 import 'package:timeago/timeago.dart' as timeago;

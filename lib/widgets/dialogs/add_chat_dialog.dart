@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/qr_scan_screen/qr_scan_screen.dart';
+import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer' as dev;
 
 class AddChatDialog extends StatefulWidget {
   const AddChatDialog({Key? key}) : super(key: key);
@@ -39,7 +43,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
   }
 
   Future<void> _addChat() async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    // final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String courseLink = _courseLinkController.text.trim();
 
     if (courseLink.isEmpty) {
@@ -48,7 +52,8 @@ class _AddChatDialogState extends State<AddChatDialog> {
       );
       return;
     }
-    if (authProvider.user == null) {
+    if (HiveUserContactCashingService.getUserContactData().id == null ||
+        HiveUserContactCashingService.getUserContactData().id.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text('User not logged in. Please log in and try again.')),
@@ -61,8 +66,44 @@ class _AddChatDialogState extends State<AddChatDialog> {
     });
 
     try {
-      print(
-          'Attempting to join chat with link: $courseLink for user: ${authProvider.user!.uid}');
+      if ((await FirebaseFirestore.instance
+              .collection('Chats')
+              .doc(courseLink)
+              .get())
+          .exists) {
+        DBService.instance.addChatToUser(
+            HiveUserContactCashingService.getUserContactData().id, courseLink);
+        DBService.instance.addMembersToChat(
+          HiveUserContactCashingService.getUserContactData().id.trim(),
+          courseLink.trim(),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Successfully joined chat: $courseLink !')),
+        );
+        Navigator.of(context).pop();
+      } else {
+        DBService.instance.makeChat(
+            courseLink, HiveUserContactCashingService.getUserContactData().id);
+        DBService.instance.addChatToUser(
+            HiveUserContactCashingService.getUserContactData().id, courseLink);
+        DBService.instance.addMembersToChat(
+          HiveUserContactCashingService.getUserContactData().id.trim(),
+          courseLink.trim(),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content:
+                  Text('Successfully joined the created chat: $courseLink !')),
+        );
+      }
+      // DBService.instance.addChatToUser(
+      //     HiveUserContactCashingService.getUserContactData().id, courseLink);
+      // DBService.instance.addMembersToChat(
+      //   HiveUserContactCashingService.getUserContactData().id.trim(),
+      //   courseLink.trim(),
+      // );
+      dev.log(
+          'Attempting to join chat with link: $courseLink for user: ${HiveUserContactCashingService.getUserContactData().id}');
 
       // --- This is where you call your actual DBService method ---
       // Example: String? chatId = await DBService.instance.joinChatByLink(courseLink, authProvider.user!.uid);
@@ -74,10 +115,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
       if (!mounted) return;
 
       if (chatId != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Successfully joined chat: $chatId!')),
-        );
-        Navigator.of(context).pop(); // Close the dialog on success
+        // Close the dialog on success
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

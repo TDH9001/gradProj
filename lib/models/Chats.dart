@@ -29,7 +29,6 @@ class ChatSnipits {
       required this.type});
 
   factory ChatSnipits.fromFirestore(DocumentSnapshot _snap) {
-    var _data = _snap.data();
     return ChatSnipits(
       leaders:
           (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),

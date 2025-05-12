@@ -9,7 +9,6 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:hive/hive.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
@@ -119,6 +118,20 @@ class DBService {
   }
 
 //edit getUserChats to work differently when admin
+  Future<void> makeChat(String chatId, String _uid) async {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    devtools.log("create he brand new : $chatId");
+    await ref.set({
+      "ChatAccesability": ChatAccesabilityEnum.admin_only.index,
+      "leaders": [],
+      "members": [],
+      "messages": [],
+      "ownerID": [""],
+      "permanantScedules": [],
+      "temporaryScedule": []
+    }, SetOptions(merge: true));
+  }
+
   Stream<List<ChatSnipits>> getUserChats(String _uid, String searched) {
     List<String> generateSubstrings(String text) {
       text = text.toLowerCase().trim();
@@ -240,30 +253,44 @@ class DBService {
     return ref.update({"unseenCount": 0});
   }
 
-  Future<void> addChatsToUser(String uid, String chatID) async {
+  Future<void> addChatToUser(String uid, String chatID) async {
     var chat = await _db.collection(_ChatCollection).doc(chatID).get();
+    if (!chat.exists) {
+      // Optionally throw an exception or handle this case gracefully
+      devtools.log("Chat with ID '$chatID' does not exist.");
+      return;
+    }
+
     var ref = _db
         .collection(_UserCollection)
         .doc(uid)
         .collection(_ChatCollection)
         .doc(chatID);
+
     return ref.set({
       "chatID": chatID,
       "name": chatID,
       "unseenCount": 0,
-      "admins": chat["admins"],
+      "admins": (chat.data()) == null ? [] : (chat.data())!["admins"],
       "lastMessage": "welcome New User",
       "senderID": "",
       "senderName": "",
       "timestamp": Timestamp.now(),
       "type": 0,
-      "chatAccesability": chat["ChatAccesability"],
-      "leaders": chat["leaders"],
+      "chatAccesability": (chat.data()) == null
+          ? ChatAccesabilityEnum.admin_only.name
+          : (chat.data())!["ChatAccesability"],
+      "leaders": (chat.data()) == null ? [] : (chat.data())!["leaders"],
     }, SetOptions(merge: true));
   }
 
-  Future<void> addMembersToChat(String uid, String chatID) {
+  Future<void> addMembersToChat(String uid, String chatID) async {
     var ref2 = _db.collection(_ChatCollection).doc(chatID);
+    if (!(await ref2.get()).exists) {
+      // Optionally throw an exception or handle this case gracefully
+      devtools.log("Chat with ID '$chatID' does not exist. > to add user");
+      return;
+    }
     return ref2.update({
       "members": FieldValue.arrayUnion([uid]),
     });

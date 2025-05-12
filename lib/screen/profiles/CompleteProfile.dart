@@ -96,19 +96,27 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                     final selectedItems = _listController.selectedItems;
 
                     DBService.instance.completeUserProfile(
-                      classes: selectedItems.map((item) => item.value.trim()).toList(),
+                      classes: selectedItems
+                          .map((item) => item.value.trim())
+                          .toList(),
                       year: int.parse(_yearController.text),
-                      userId: HiveUserContactCashingService.getUserContactData().id.trim(),
+                      userId: HiveUserContactCashingService.getUserContactData()
+                          .id
+                          .trim(),
                       seatNumber: int.parse(_seatIdController.text),
                     );
 
                     for (int i = 0; i < selectedItems.length; i++) {
-                      await DBService.instance.addChatsToUser(
-                        HiveUserContactCashingService.getUserContactData().id.trim(),
+                      await DBService.instance.addChatToUser(
+                        HiveUserContactCashingService.getUserContactData()
+                            .id
+                            .trim(),
                         selectedItems[i].value,
                       );
                       await DBService.instance.addMembersToChat(
-                        HiveUserContactCashingService.getUserContactData().id.trim(),
+                        HiveUserContactCashingService.getUserContactData()
+                            .id
+                            .trim(),
                         selectedItems[i].value,
                       );
                     }
@@ -138,7 +146,8 @@ class _UpdateUserDataState extends State<CompleteProfile> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      color: isDarkMode ? DarkThemeColors.primary.withOpacity(0.9) : Colors.white,
+      color:
+          isDarkMode ? DarkThemeColors.primary.withOpacity(0.9) : Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
