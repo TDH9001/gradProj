@@ -53,7 +53,6 @@ class TextStyles {
     //   var _imageLink = CloudStorageService
     //       .instance.baseRef
     //       .getDownloadURL();
-    //   print(_imageLink);
     // } catch (e) {
     //   SnackBarService.instance
     //       .showsSnackBarError(

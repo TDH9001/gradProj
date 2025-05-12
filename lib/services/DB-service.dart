@@ -13,6 +13,7 @@ import 'package:hive/hive.dart';
 import '../models/contact.dart';
 import '../models/Chats.dart';
 import '../models/message.dart';
+import 'dart:developer' as devtools show log;
 
 enum MessageType { text, image, voice, file, video }
 
@@ -118,11 +119,28 @@ class DBService {
   }
 
 //edit getUserChats to work differently when admin
-  Stream<List<ChatSnipits>> getUserChats(String _uid) {
+  Stream<List<ChatSnipits>> getUserChats(String _uid, String searched) {
+    List<String> generateSubstrings(String text) {
+      text = text.toLowerCase().trim();
+      final substrings = <String>{};
+      for (int i = 0; i < text.length; i++) {
+        for (int j = i + 1; j <= text.length; j++) {
+          substrings.add(text.substring(i, j));
+        }
+      }
+      devtools.log(substrings.toList().toString());
+      return substrings.toList();
+    }
+
+    //print();
     //, String name
-    var ref =
-        _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
-    //.where("name", arrayContains: name);
+    var ref = _db
+        .collection(_UserCollection)
+        .doc(_uid)
+        .collection(_ChatCollection)
+        //.where("name", arrayContains: generateSubstrings(searched));
+        .where("name", isGreaterThanOrEqualTo: searched)
+        .where("name", isLessThan: "${searched}z");
     return ref.snapshots().map((_snap) {
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
