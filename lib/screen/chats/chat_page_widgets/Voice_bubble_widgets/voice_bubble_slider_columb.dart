@@ -39,7 +39,7 @@ class VoiceButtonSlicerColumb extends StatelessWidget {
                     );
 
                 // setState(() {});
-              } catch (e) {
+              } on Exception catch (e) {
                 if (kDebugMode) {
                   print(e);
                 }

@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
-import 'package:grad_proj/screen/auth/login_screen.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/chats_screen_search_bar.dart';
+import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/dialogs/add_chat_dialog.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:grad_proj/services/DB-service.dart';
@@ -12,10 +12,17 @@ import '../../providers/theme_provider.dart';
 import '../../screen/chats/Chat_page.dart';
 import '../theme/dark_theme_colors.dart';
 
-class RecentChats extends StatelessWidget {
+class RecentChats extends StatefulWidget {
   RecentChats({super.key});
   static String id = "RecentChats";
 
+  final TextEditingController chatsTextController = TextEditingController();
+
+  @override
+  State<RecentChats> createState() => _RecentChatsState();
+}
+
+class _RecentChatsState extends State<RecentChats> {
   void _showAddChatDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -31,7 +38,16 @@ class RecentChats extends StatelessWidget {
     return Scaffold(
       body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
-        child: _RecentChats(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ChatsScreenSearchBar(
+                txt: widget.chatsTextController,
+              ),
+              _RecentChats(widget.chatsTextController.text.trim()),
+            ],
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddChatDialog(context),
@@ -42,7 +58,7 @@ class RecentChats extends StatelessWidget {
   }
 }
 
-Widget _RecentChats() {
+Widget _RecentChats(String caht_name) {
   return Builder(builder: (_context) {
     final _auth = Provider.of<AuthProvider>(_context);
     final themeProvider = Provider.of<ThemeProvider>(_context);
@@ -55,7 +71,8 @@ Widget _RecentChats() {
     }
     return StreamBuilder<List<ChatSnipits>>(
       stream: DBService.instance.getUserChats(
-          AuthProvider.instance.user!.uid.toString()), //_auth.user!.uid),
+        AuthProvider.instance.user!.uid.toString(),
+      ), //_auth.user!.uid),
       builder: (context, _snapshot) {
         var data = _snapshot.data;
 
@@ -70,60 +87,68 @@ Widget _RecentChats() {
         }
 
         return data!.length != 0
-            ? ListView.builder(
-                itemCount: data!.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: isDarkMode
-                          ? Theme.of(context).colorScheme.secondary
-                          : Theme.of(context).primaryColor,
-                      child: Image(image: AssetImage("assets/images/chat.png")),
-                    ),
-                    tileColor:
-                        isDarkMode ? DarkThemeColors.background : Colors.white,
-                    onTap: () {
-                      navigationService.instance.navigateToRoute(
-                          MaterialPageRoute(builder: (_context) {
-                        return ChatPage(
-                          chatID: data[index].chatId,
-                          admins: data[index].adminId,
-                          chatAccesability: data[index].chatAccesability,
-                          leaders: data[index].leaders,
-                        );
-                      }));
-                      DBService.instance.resetUnseenCount(
-                          _auth.user!.uid, data[index].chatId);
-                    },
-                    title: Text(data[index].chatId),
-                    subtitle: data[index].type == "image"
-                        ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text("Image "),
-                              Icon(
-                                Icons.image,
-                                size: 16, // Adjusted icon size
-                                color: Color(0xff7AB2D3),
-                              ),
-                            ],
-                          )
-                        : data[index].type == "voice"
+            ? Container(
+                height: MediaService.instance.getHeight() * 0.75,
+                child: ListView.builder(
+                    itemCount: data!.length,
+                    itemBuilder: (context, index) {
+                      if (!data[index].chatId.contains(caht_name)) {
+                        SizedBox();
+                      }
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: isDarkMode
+                              ? Theme.of(context).colorScheme.secondary
+                              : Theme.of(context).primaryColor,
+                          child: Image(
+                              image: AssetImage("assets/images/chat.png")),
+                        ),
+                        tileColor: isDarkMode
+                            ? DarkThemeColors.background
+                            : Colors.white,
+                        onTap: () {
+                          navigationService.instance.navigateToRoute(
+                              MaterialPageRoute(builder: (_context) {
+                            return ChatPage(
+                              chatID: data[index].chatId,
+                              admins: data[index].adminId,
+                              chatAccesability: data[index].chatAccesability,
+                              leaders: data[index].leaders,
+                            );
+                          }));
+                          DBService.instance.resetUnseenCount(
+                              _auth.user!.uid, data[index].chatId);
+                        },
+                        title: Text(data[index].chatId),
+                        subtitle: data[index].type == "image"
                             ? Row(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text("Voice attachment"),
+                                  Text("Image "),
                                   Icon(
-                                    Icons.music_note,
+                                    Icons.image,
+                                    size: 16, // Adjusted icon size
                                     color: Color(0xff7AB2D3),
                                   ),
                                 ],
                               )
-                            : Text(
-                                data[index].lastMessage,
-                                maxLines: 2,
-                              ),
-                  );
-                })
+                            : data[index].type == "voice"
+                                ? Row(
+                                    children: [
+                                      Text("Voice attachment"),
+                                      Icon(
+                                        Icons.music_note,
+                                        color: Color(0xff7AB2D3),
+                                      ),
+                                    ],
+                                  )
+                                : Text(
+                                    data[index].lastMessage,
+                                    maxLines: 2,
+                                  ),
+                      );
+                    }),
+              )
             : Center(
                 child: Padding(
                   padding: EdgeInsets.only(left: 20.0),
@@ -184,10 +209,7 @@ class ChatScreenTrailingiwdget extends StatelessWidget {
                   ),
                 ),
               )
-            : Container(
-                height: 0,
-                width: 0,
-              )
+            : SizedBox()
       ],
     );
   }

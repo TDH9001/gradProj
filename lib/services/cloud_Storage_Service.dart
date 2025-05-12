@@ -27,7 +27,10 @@ class CloudStorageService {
       {required String uid, required File image}) async {
     try {
       return await baseRef.child(_profileimages).child(uid).putFile(image);
-    } catch (e) {
+    } on Exception catch (e) {
+      if (e is SocketException) {
+        print(e);
+      }
       print(e);
     }
   }
@@ -45,7 +48,7 @@ class CloudStorageService {
           .child(_images)
           .child(_Filename)
           .putFile(fileData);
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -64,7 +67,7 @@ class CloudStorageService {
           .putFile(fileData);
       print("uploaded");
       return data;
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }

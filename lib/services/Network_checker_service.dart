@@ -5,7 +5,7 @@ class NetworkCheckerService {
     try {
       final response = await http.head(Uri.parse(url));
       return response.statusCode == 200;
-    } catch (_) {
+    } on Exception catch (_) {
       return false;
     }
   }

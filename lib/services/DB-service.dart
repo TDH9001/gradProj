@@ -68,7 +68,7 @@ class DBService {
           .toJson());
       navigationService.instance
           .navigateToReplacement(BottomNavegationBarScreen.id);
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
       SnackBarService.instance.showsSnackBarError(text: "Creation error");
     }
@@ -102,7 +102,7 @@ class DBService {
           .toJson());
 
       //SnackBarService.instance.showsSnackBarSucces(text: "data Updated");
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
       //SnackBarService.instance.showsSnackBarError(text: "error Happened");
     }
@@ -119,8 +119,10 @@ class DBService {
 
 //edit getUserChats to work differently when admin
   Stream<List<ChatSnipits>> getUserChats(String _uid) {
+    //, String name
     var ref =
         _db.collection(_UserCollection).doc(_uid).collection(_ChatCollection);
+    //.where("name", arrayContains: name);
     return ref.snapshots().map((_snap) {
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
@@ -314,7 +316,7 @@ class DBService {
               timestamp: Timestamp.now(),
               scheduleItem: scl),
           chatID);
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -384,7 +386,7 @@ class DBService {
               timestamp: Timestamp.now(),
               scheduleItem: scl),
           chatId);
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -404,7 +406,7 @@ class DBService {
               newScheduleItem: newscl,
               oldScheduleItem: oldscl),
           chatId);
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -568,7 +570,7 @@ class DBService {
           .update({
         "PersonalFeed": FieldValue.arrayUnion([feedItem.toMap()])
       });
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -583,7 +585,7 @@ class DBService {
           .set({
         "StaredFeed": FieldValue.arrayUnion([feedItem.toMap()])
       }, SetOptions(merge: true));
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -603,7 +605,7 @@ class DBService {
         }, SetOptions(merge: true));
         print('failed to add');
       }
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }
@@ -663,7 +665,7 @@ class DBService {
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
           .showsSnackBarSucces(text: "Chat Accesability Updated Succesfully");
-    } catch (e) {
+    } on Exception catch (e) {
       print(e);
     }
   }

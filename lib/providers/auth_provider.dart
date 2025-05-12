@@ -1,3 +1,5 @@
+import "dart:io";
+
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:grad_proj/constants.dart";
@@ -7,6 +9,7 @@ import "package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import "package:grad_proj/widgets/bottom_navegation_bar_screen.dart";
 import "package:grad_proj/screen/splash/splash_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
+import "package:path/path.dart";
 import '../services/snackbar_service.dart';
 
 //when Authprovider si called > then it will tell all listener in app > SOMETHING HAPPEND
@@ -62,9 +65,11 @@ class AuthProvider extends ChangeNotifier {
       await _auth.sendPasswordResetEmail(email: email);
       SnackBarService.instance
           .showsSnackBarSucces(text: "password Rest Email sent to your inbox");
-    } on FirebaseAuthException catch (e) {
-      SnackBarService.instance
-          .showsSnackBarError(text: "PasswordRest failed ${e.message}");
+    } on Exception catch (e) {
+      if (e is FirebaseAuthException) {
+        SnackBarService.instance
+            .showsSnackBarError(text: "PasswordRest failed ${e.message}");
+      }
     }
   }
 
@@ -84,7 +89,10 @@ class AuthProvider extends ChangeNotifier {
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
       navigationService.instance.navigateToReplacement("HomeScreen");
-    } catch (e) {
+    } on Exception catch (e) {
+      if (e is SocketException) {
+        print(e);
+      }
       status = AuthStatus.ERROR;
       instance.user = null;
       SnackBarService.instance.showsSnackBarError(text: "Error authenticating");
@@ -109,7 +117,12 @@ class AuthProvider extends ChangeNotifier {
       await onSucces!(instance.user!.uid.toString());
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${instance.user?.email}");
-    } catch (e) {
+    } on Exception catch (e) {
+      if (e is SocketException) {
+        navigationService.instance.goBack();
+        SnackBarService.instance
+            .showsSnackBarError(text: "error connecting to server");
+      }
       status = AuthStatus.ERROR;
       instance.user = null;
 

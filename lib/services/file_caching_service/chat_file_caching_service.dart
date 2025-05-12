@@ -58,7 +58,7 @@ class ChatFileCachingService {
             return;
           }
         }
-      } catch (e) {
+      } on Exception catch (e) {
         print(e);
       }
     } else {

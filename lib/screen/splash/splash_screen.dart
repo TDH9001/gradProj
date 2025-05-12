@@ -8,7 +8,6 @@ import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
 
-import '../../providers/theme_provider.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
 
@@ -23,9 +22,12 @@ Future<bool> checkInternetConnection(List<ConnectivityResult> data) async {
       print("Internet is accessible");
       return true;
     }
-  } on SocketException {
-    print("No internet access");
-  } catch (_) {
+    // } on SocketException {
+    //   print("No internet access");
+  } on Exception catch (e) {
+    if (e is SocketException) {
+      print("No internet access but is connected to a network");
+    }
     print("No internet access");
   }
 

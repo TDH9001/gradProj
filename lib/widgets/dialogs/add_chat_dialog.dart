@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/qr_scan_screen/qr_scan_screen.dart'; 
+import 'package:grad_proj/screen/qr_scan_screen/qr_scan_screen.dart';
 import 'package:provider/provider.dart';
-
 
 class AddChatDialog extends StatefulWidget {
   const AddChatDialog({Key? key}) : super(key: key);
@@ -51,7 +50,8 @@ class _AddChatDialogState extends State<AddChatDialog> {
     }
     if (authProvider.user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User not logged in. Please log in and try again.')),
+        const SnackBar(
+            content: Text('User not logged in. Please log in and try again.')),
       );
       return;
     }
@@ -61,13 +61,14 @@ class _AddChatDialogState extends State<AddChatDialog> {
     });
 
     try {
-      print('Attempting to join chat with link: $courseLink for user: ${authProvider.user!.uid}');
-      
+      print(
+          'Attempting to join chat with link: $courseLink for user: ${authProvider.user!.uid}');
+
       // --- This is where you call your actual DBService method ---
       // Example: String? chatId = await DBService.instance.joinChatByLink(courseLink, authProvider.user!.uid);
-      
+
       await Future.delayed(const Duration(seconds: 2)); // Simulate network call
-      String? chatId = "simulated_chat_id_for_$courseLink"; 
+      String? chatId = "simulated_chat_id_for_$courseLink";
       // String? chatId = null; // Simulate failure
 
       if (!mounted) return;
@@ -79,10 +80,12 @@ class _AddChatDialogState extends State<AddChatDialog> {
         Navigator.of(context).pop(); // Close the dialog on success
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to join chat. Link might be invalid or an error occurred.')),
+          const SnackBar(
+              content: Text(
+                  'Failed to join chat. Link might be invalid or an error occurred.')),
         );
       }
-    } catch (e) {
+    } on Exception catch (e) {
       if (!mounted) return;
       print('Error joining chat: $e');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -106,7 +109,8 @@ class _AddChatDialogState extends State<AddChatDialog> {
         children: <Widget>[
           TextField(
             controller: _courseLinkController,
-            decoration: const InputDecoration(hintText: 'Enter course link or scan QR'),
+            decoration:
+                const InputDecoration(hintText: 'Enter course link or scan QR'),
             enabled: !_isAddingChat,
           ),
           const SizedBox(height: 20),
@@ -123,9 +127,11 @@ class _AddChatDialogState extends State<AddChatDialog> {
       actions: <Widget>[
         TextButton(
           child: const Text('Cancel'),
-          onPressed: _isAddingChat ? null : () {
-            Navigator.of(context).pop();
-          },
+          onPressed: _isAddingChat
+              ? null
+              : () {
+                  Navigator.of(context).pop();
+                },
         ),
         TextButton(
           child: _isAddingChat
