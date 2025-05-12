@@ -119,12 +119,17 @@ class DBService {
 
 //edit getUserChats to work differently when admin
   Future<void> makeChat(String chatId, String _uid) async {
-    var ref = _db.collection(_ChatCollection).doc(chatId);
+    var ref = await _db.collection(_ChatCollection).doc(chatId);
+    if ((await _db.collection(_ChatCollection).doc(chatId).get()).exists) {
+      devtools.log("chat already exists : $chatId");
+      return;
+    }
+
     devtools.log("create he brand new : $chatId");
-    await ref.set({
+    return await ref.set({
       "ChatAccesability": ChatAccesabilityEnum.admin_only.index,
       "leaders": [],
-      "members": [],
+      "members": [_uid],
       "messages": [],
       "ownerID": [""],
       "permanantScedules": [],
@@ -219,6 +224,9 @@ class DBService {
   }
 
   Stream<List<Contact>> getChatMembersData(String chatId) {
+    devtools.log((Stream.fromFuture(getMembersOfChat(chatId)))
+        .asyncExpand((data) {})
+        .toString());
     return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
       if (userIds.isEmpty) {
         return Stream.value([]); // Return empty list if no members
@@ -271,13 +279,13 @@ class DBService {
       "chatID": chatID,
       "name": chatID,
       "unseenCount": 0,
-      "admins": (chat.data()) == null ? [] : (chat.data())!["admins"],
+      "admins": (chat.data()) == null ? [] : (chat.data())!["admins"] ?? [],
       "lastMessage": "welcome New User",
       "senderID": "",
       "senderName": "",
       "timestamp": Timestamp.now(),
       "type": 0,
-      "chatAccesability": (chat.data()) == null
+      "ChatAccesability": (chat.data()) == null
           ? ChatAccesabilityEnum.admin_only.name
           : (chat.data())!["ChatAccesability"],
       "leaders": (chat.data()) == null ? [] : (chat.data())!["leaders"],

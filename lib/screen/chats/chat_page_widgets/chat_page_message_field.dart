@@ -88,7 +88,10 @@ class _MessageFieldState extends State<MessageField> {
                     ),
                   ]
                 : [
-                    Text("you are not able to contribute to this Chat"),
+                    Text(
+                      "  you are not able to contribute to this Chat",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ],
           )),
     );

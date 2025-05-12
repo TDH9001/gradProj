@@ -55,21 +55,29 @@ class MessageListViewChatList extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
-                      bubbles[index].timestamp.toDate().year !=
-                                  bubbles[index + 1].timestamp.toDate().year ||
-                              bubbles[index].timestamp.toDate().month !=
-                                  bubbles[index + 1].timestamp.toDate().month ||
-                              bubbles[index].timestamp.toDate().day !=
-                                  bubbles[index + 1].timestamp.toDate().day
-                          ? Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Center(
-                                child: DateChip(
-                                  date: bubbles[index].timestamp.toDate(),
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            )
+                      bubbles.length > 1
+                          ? bubbles[index].timestamp.toDate().year !=
+                                      bubbles[index + 1]
+                                          .timestamp
+                                          .toDate()
+                                          .year ||
+                                  bubbles[index].timestamp.toDate().month !=
+                                      bubbles[index + 1]
+                                          .timestamp
+                                          .toDate()
+                                          .month ||
+                                  bubbles[index].timestamp.toDate().day !=
+                                      bubbles[index + 1].timestamp.toDate().day
+                              ? Padding(
+                                  padding: EdgeInsets.all(5.0),
+                                  child: Center(
+                                    child: DateChip(
+                                      date: bubbles[index].timestamp.toDate(),
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox()
                           : SizedBox(),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,

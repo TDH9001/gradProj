@@ -32,10 +32,13 @@ class ChatSnipits {
     return ChatSnipits(
       leaders:
           (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),
-      chatAccesability: _snap["ChatAccesability"] is int
-          ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name ??
-              ChatAccesabilityEnum.admin_only.name
-          : _snap["ChatAccesability"],
+      chatAccesability:
+          ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name,
+      //  _snap["ChatAccesability"] is int
+      //     ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name ??
+      //         ChatAccesabilityEnum.admin_only.name
+      //     :
+      //      _snap["ChatAccesability"],
       id: _snap.id,
       chatId: _snap["chatID"],
       lastMessage: _snap["lastMessage"] ?? "",
