@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:linkfy_text/linkfy_text.dart';
 
 Widget chatMessageBubble(
     {required String message,
@@ -34,7 +35,9 @@ Widget chatMessageBubble(
         SizedBox(
           height: 5,
         ),
-        Text(message),
+        LinkifyText(
+          message,
+        ),
         // SizedBox(
         //   height: 15,
         // ),

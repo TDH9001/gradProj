@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/voice_bubble_slider_columb.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/voice_message_bubble_base_background.dart';
@@ -150,36 +151,48 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
             Color(0xFF769BC6),
           ];
 
-    return VoiceMessageBaseBAckground(widget: widget, child: [
-      Text(widget.senderName),
-      Row(
-        children: [
-          IconButton(
-            //splashColor: playing ? LightTheme.primary : Colors.red,
-            onPressed: _isFailed || _isLoadingFile ? null : togglePlayPause,
-            icon: Icon(
-              _isLoadingFile
-                  ? Icons.downloading
-                  : _isFailed
-                      ? Icons.error
-                      : playing
-                          ? Icons.pause
-                          : Icons.play_arrow,
-            ),
+    return CustomPopupMenu(
+      pressType: PressType.longPress,
+      menuBuilder: () {
+        return Container(
+          height: MediaService.instance.getHeight() * 0.05,
+          color: Colors.blueGrey,
+          child: Row(
+            children: [],
           ),
-          VoiceButtonSlicerColumb(
-            position: _position,
-            audioPlayer: _audioPlayer,
-            duration: _duration,
-            isLoadingFile: _isLoadingFile,
-            isFailed: _isFailed,
-          )
-        ],
-      ),
-      Text(
-        "  ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
-        style: TextStyle(fontSize: 16),
-      )
-    ]);
+        );
+      },
+      child: VoiceMessageBaseBAckground(widget: widget, child: [
+        Text(widget.senderName),
+        Row(
+          children: [
+            IconButton(
+              //splashColor: playing ? LightTheme.primary : Colors.red,
+              onPressed: _isFailed || _isLoadingFile ? null : togglePlayPause,
+              icon: Icon(
+                _isLoadingFile
+                    ? Icons.downloading
+                    : _isFailed
+                        ? Icons.error
+                        : playing
+                            ? Icons.pause
+                            : Icons.play_arrow,
+              ),
+            ),
+            VoiceButtonSlicerColumb(
+              position: _position,
+              audioPlayer: _audioPlayer,
+              duration: _duration,
+              isLoadingFile: _isLoadingFile,
+              isFailed: _isFailed,
+            )
+          ],
+        ),
+        Text(
+          "  ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
+          style: TextStyle(fontSize: 16),
+        )
+      ]),
+    );
   }
 }
