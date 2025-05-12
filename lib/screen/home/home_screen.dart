@@ -1,13 +1,10 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/screen/feed_test_screen.dart';
-import 'package:grad_proj/screen/about_screen/acadimic_career_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
