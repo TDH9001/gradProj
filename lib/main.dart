@@ -78,16 +78,7 @@ class homePage extends StatelessWidget {
       // darkTheme: themeProvider.darkTheme,
 
       //darkTheme: ThemeData.dark(),
-      //FIXME: fix the isseus with levels in the ABOUT screens
-      //FIXME: make a model for the table
-      //FIXME: implement the table screen and its stuff
 
-      //TODO: add logic for user to be added to thier classes after finishing
-      //TODO: add local storage to store user current data
-      //TODO: make chat be stored localy > then allow acces of images , files
-      //TODO: make caht be loaded from DB then from cloud
-      //TODO: handle files being added to the chat > probably needs storage
-      //TODO: make the audi be laoded froma  file and solve the network crisis
 
       routes: {
         //  ChatDataScreen.id: (context) => ChatDataScreen(),

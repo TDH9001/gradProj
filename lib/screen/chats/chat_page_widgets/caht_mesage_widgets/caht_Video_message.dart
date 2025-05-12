@@ -15,11 +15,13 @@ class ChatVideoMessage extends StatefulWidget {
       required this.FileAdress,
       required this.isOurs,
       required this.ts,
-      required this.senderName});
+      required this.senderName,
+      required this.isImportant});
   final String FileAdress;
   final bool isOurs;
   final Timestamp ts;
   final String senderName;
+  final bool isImportant;
 
   late VideoPlayerController videoPlayerController;
   late ChewieController chewieController;
@@ -83,7 +85,9 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
             width: MediaService.instance.getWidth() * 0.7,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.grey.shade400),
+                color: widget.isImportant
+                    ? Color(0xFFE7CD78)
+                    : Colors.grey.shade400),
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               //mainAxisSize: MainAxisSize.max,

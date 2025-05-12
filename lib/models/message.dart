@@ -9,7 +9,7 @@ class Message {
   final Timestamp timestamp;
   final String type;
   final String senderName;
-  final bool? isImportant;
+  final bool isImportant;
 
   Message(
       {required this.senderID,

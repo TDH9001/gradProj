@@ -88,8 +88,10 @@ class MessageListViewChatList extends StatelessWidget {
                                 ? MainAxisAlignment.end
                                 : MainAxisAlignment.start,
                         children: [
-                          bubbles[index].type == "text"
+                          bubbles[index].type == messageType.Text.name
                               ? chatMessageBubble(
+                                  isImportant:
+                                      ChatdataOfCurrentChat.isImportant,
                                   message: ChatdataOfCurrentChat.messageContent
                                       .toString(),
                                   isOurs: HiveUserContactCashingService
@@ -99,8 +101,10 @@ class MessageListViewChatList extends StatelessWidget {
                                   ts: bubbles[index].timestamp,
                                   senderName: bubbles[index].senderName,
                                 )
-                              : bubbles[index].type == "image"
+                              : bubbles[index].type == messageType.image.name
                                   ? ImageMessageBubble(
+                                      isImportant:
+                                          ChatdataOfCurrentChat.isImportant,
                                       key: ValueKey(
                                           ChatdataOfCurrentChat), //this to tell flutter it's independant
                                       FileAdress: ChatdataOfCurrentChat
@@ -113,8 +117,11 @@ class MessageListViewChatList extends StatelessWidget {
                                       ts: bubbles[index].timestamp,
                                       senderName: bubbles[index].senderName,
                                     )
-                                  : bubbles[index].type == "voice"
+                                  : bubbles[index].type ==
+                                          messageType.voice.name
                                       ? VoiceBubble(
+                                          isImportant:
+                                              ChatdataOfCurrentChat.isImportant,
                                           key: ValueKey(ChatdataOfCurrentChat),
                                           AudioAdress: ChatdataOfCurrentChat
                                               .messageContent
@@ -129,6 +136,8 @@ class MessageListViewChatList extends StatelessWidget {
                                       : bubbles[index].type ==
                                               messageType.file.name
                                           ? ChatFileMessage(
+                                              isImportant: ChatdataOfCurrentChat
+                                                  .isImportant,
                                               key: ValueKey(
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
                                               FileAdress: ChatdataOfCurrentChat
@@ -143,6 +152,8 @@ class MessageListViewChatList extends StatelessWidget {
                                                   bubbles[index].senderName,
                                             )
                                           : ChatVideoMessage(
+                                              isImportant: ChatdataOfCurrentChat
+                                                  .isImportant,
                                               key: ValueKey(
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
                                               FileAdress: ChatdataOfCurrentChat

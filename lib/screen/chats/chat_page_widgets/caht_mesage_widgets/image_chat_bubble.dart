@@ -14,11 +14,13 @@ class ImageMessageBubble extends StatefulWidget {
       required this.FileAdress,
       required this.isOurs,
       required this.ts,
-      required this.senderName});
+      required this.senderName,
+      required this.isImportant});
   final String FileAdress;
   final bool isOurs;
   final Timestamp ts;
   final String senderName;
+  final bool isImportant;
 
   @override
   State<ImageMessageBubble> createState() => _ImageMessageBubbleState();
@@ -76,7 +78,9 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey.shade400),
+                    color: widget.isImportant
+                        ? Color(0xFFE7CD78)
+                        : Colors.grey.shade400),
                 // gradient: LinearGradient(
                 //     colors: colorScheme,
                 //     stops: [0.40, 0.70],

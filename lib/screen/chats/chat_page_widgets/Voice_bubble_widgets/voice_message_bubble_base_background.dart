@@ -3,12 +3,8 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/voi
 
 class VoiceMessageBaseBAckground extends StatelessWidget {
   const VoiceMessageBaseBAckground(
-      {super.key,
-      required this.colorScheme,
-      required this.widget,
-      required this.child});
+      {super.key, required this.widget, required this.child});
 
-  final List<Color> colorScheme;
   final VoiceBubble widget;
   final List<Widget> child;
   @override
@@ -16,14 +12,7 @@ class VoiceMessageBaseBAckground extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.grey.shade400),
-          //color: Color(0xff769BC6)),
-          // gradient: LinearGradient(
-          //     colors: colorScheme,
-          //     stops: [0.40, 0.70],
-          //     begin:
-          //         widget.isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-          //     end: widget.isOurs ? Alignment.topRight : Alignment.topLeft)),
+          color: widget.isImportant ? Color(0xFFE7CD78) : Colors.grey.shade400),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

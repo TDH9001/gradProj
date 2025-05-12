@@ -14,14 +14,15 @@ class VoiceBubble extends StatefulWidget {
   final bool isOurs;
   final Timestamp ts;
   final String senderName;
+  final bool isImportant;
 
-  VoiceBubble({
-    super.key,
-    required this.AudioAdress,
-    required this.isOurs,
-    required this.ts,
-    required this.senderName,
-  });
+  VoiceBubble(
+      {super.key,
+      required this.AudioAdress,
+      required this.isOurs,
+      required this.ts,
+      required this.senderName,
+      required this.isImportant});
 
   @override
   _VoiceMessageBubbleState createState() => _VoiceMessageBubbleState();
@@ -149,39 +150,36 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
             Color(0xFF769BC6),
           ];
 
-    return VoiceMessageBaseBAckground(
-        colorScheme: colorScheme,
-        widget: widget,
-        child: [
-          Text(widget.senderName),
-          Row(
-            children: [
-              IconButton(
-                //splashColor: playing ? LightTheme.primary : Colors.red,
-                onPressed: _isFailed || _isLoadingFile ? null : togglePlayPause,
-                icon: Icon(
-                  _isLoadingFile
-                      ? Icons.downloading
-                      : _isFailed
-                          ? Icons.error
-                          : playing
-                              ? Icons.pause
-                              : Icons.play_arrow,
-                ),
-              ),
-              VoiceButtonSlicerColumb(
-                position: _position,
-                audioPlayer: _audioPlayer,
-                duration: _duration,
-                isLoadingFile: _isLoadingFile,
-                isFailed: _isFailed,
-              )
-            ],
+    return VoiceMessageBaseBAckground(widget: widget, child: [
+      Text(widget.senderName),
+      Row(
+        children: [
+          IconButton(
+            //splashColor: playing ? LightTheme.primary : Colors.red,
+            onPressed: _isFailed || _isLoadingFile ? null : togglePlayPause,
+            icon: Icon(
+              _isLoadingFile
+                  ? Icons.downloading
+                  : _isFailed
+                      ? Icons.error
+                      : playing
+                          ? Icons.pause
+                          : Icons.play_arrow,
+            ),
           ),
-          Text(
-            "  ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
-            style: TextStyle(fontSize: 16),
+          VoiceButtonSlicerColumb(
+            position: _position,
+            audioPlayer: _audioPlayer,
+            duration: _duration,
+            isLoadingFile: _isLoadingFile,
+            isFailed: _isFailed,
           )
-        ]);
+        ],
+      ),
+      Text(
+        "  ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
+        style: TextStyle(fontSize: 16),
+      )
+    ]);
   }
 }

@@ -3,26 +3,23 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/media_service.dart';
 
 Widget chatMessageBubble(
     {required String message,
     required bool isOurs,
     required Timestamp ts,
-    required String senderName}) {
-  List<Color> colorScheme = isOurs
-      ? [Color(0xFFA3BFE0), Color(0xFF769BC6)]
-      : [Color(0xFF769BC6), Color(0xFFA3BFE0)];
+    required String senderName,
+    required bool isImportant}) {
   return Container(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.grey.shade400),
-        // gradient: LinearGradient(
-        //     colors: colorScheme,
-        //     stops: [0.40, 0.70],
-        //     begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
-        //     end: isOurs ? Alignment.topRight : Alignment.topLeft)),
+        color: isImportant ? Color(0xFFE7CD78) : Colors.grey.shade400),
+    // gradient: LinearGradient(
+    //     colors: colorScheme,
+    //     stops: [0.40, 0.70],
+    //     begin: isOurs ? Alignment.bottomLeft : Alignment.bottomRight,
+    //     end: isOurs ? Alignment.topRight : Alignment.topLeft)),
     padding: EdgeInsets.symmetric(horizontal: 15),
     // height:
     //     _height * 0.13 + ((message.length * 3.5 + senderName.length) / 10),

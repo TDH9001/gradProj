@@ -15,11 +15,13 @@ class ChatFileMessage extends StatefulWidget {
       required this.FileAdress,
       required this.isOurs,
       required this.ts,
-      required this.senderName});
+      required this.senderName,
+      required this.isImportant});
   final String FileAdress;
   final bool isOurs;
   final Timestamp ts;
   final String senderName;
+  final bool isImportant;
 
   @override
   State<ChatFileMessage> createState() => _ChatFileMessageState();
@@ -48,18 +50,6 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             if (snapshot.data!.isFailed == false &&
                 snapshot.data!.file != null) {
               OpenFile.open(snapshot.data!.file!.path);
-
-              // AnimatedHeroDialog.showAnimatedWidgetTransition(
-              //     context: context,
-              //     heroID: widget.FileAdress,
-              //     displayedWidget: snapshot.data!.isFailed == false &&
-              //             snapshot.data!.file != null
-              //         ? Image(
-              //             image: AssetImage("assets/images/xlsx.png"),
-              //           )
-              //         : Image(
-              //             image:
-              //                 AssetImage('assets/images/file_not_found.png')));
             }
           },
           child: Container(
@@ -67,7 +57,9 @@ class _ChatFileMessageState extends State<ChatFileMessage>
             width: MediaService.instance.getWidth() * 0.7,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.grey.shade400),
+                color: widget.isImportant
+                    ? Color(0xFFE7CD78)
+                    : Colors.grey.shade400),
             padding: EdgeInsets.symmetric(horizontal: 6),
             child: Column(
               //mainAxisSize: MainAxisSize.max,
