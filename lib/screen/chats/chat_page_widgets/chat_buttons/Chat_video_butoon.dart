@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
@@ -10,13 +11,17 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/snackbar_service.dart';
 
 class ChatVideoButoon extends StatelessWidget {
-  const ChatVideoButoon.ChatVideoButton({super.key, required this.chatID});
+  const ChatVideoButoon.ChatVideoButton(
+      {super.key, required this.chatID, required this.cst});
   final String chatID;
+  final CustomPopupMenuController cst;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
         onPressed: () async {
+          cst.hideMenu();
+
           FilePickerResult? result =
               await FilePicker.platform.pickFiles(type: FileType.video);
           if (result != null) {

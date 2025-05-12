@@ -5,11 +5,13 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/chat_File_
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/image_message_button.dart';
 
 class ChatGroupButton extends StatelessWidget {
-  const ChatGroupButton({super.key, required this.chatID});
+  ChatGroupButton({super.key, required this.chatID});
   final String chatID;
+  final CustomPopupMenuController cst = CustomPopupMenuController();
   @override
   Widget build(BuildContext context) {
     return CustomPopupMenu(
+      controller: cst,
       pressType: PressType.singleClick,
       menuBuilder: () {
         return Container(
@@ -19,7 +21,7 @@ class ChatGroupButton extends StatelessWidget {
           child: Row(
             children: [
               Column(children: [
-                ImageMessageButton(chatID: chatID),
+                ImageMessageButton(chatID: chatID, cst: cst),
                 SizedBox(
                   height: 2,
                 ),
@@ -30,7 +32,7 @@ class ChatGroupButton extends StatelessWidget {
               ),
               Column(
                 children: [
-                  ChatFileButton(chatID: chatID),
+                  ChatFileButton(chatID: chatID, cst: cst),
                   SizedBox(
                     height: 2,
                   ),
@@ -42,9 +44,7 @@ class ChatGroupButton extends StatelessWidget {
               ),
               Column(
                 children: [
-                  ChatVideoButoon.ChatVideoButton(
-                    chatID: chatID,
-                  ),
+                  ChatVideoButoon.ChatVideoButton(chatID: chatID, cst: cst),
                   SizedBox(
                     height: 2,
                   ),

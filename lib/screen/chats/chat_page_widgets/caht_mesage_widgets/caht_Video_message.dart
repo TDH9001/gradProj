@@ -122,7 +122,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                                       borderRadius: BorderRadius.circular(15)),
                                   width: MediaService.instance.getWidth() * 0.6,
                                   height:
-                                      MediaService.instance.getHeight() * 0.35,
+                                      MediaService.instance.getHeight() * 0.3,
                                   child: Chewie(
                                     controller: widget.chewieController,
                                   ),

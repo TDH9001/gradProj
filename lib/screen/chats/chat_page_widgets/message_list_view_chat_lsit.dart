@@ -11,6 +11,7 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'dart:developer' as dev;
 
 class MessageListViewChatList extends StatelessWidget {
   MessageListViewChatList({super.key, required this.LVC, required this.chatID});
@@ -47,6 +48,7 @@ class MessageListViewChatList extends StatelessWidget {
             // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
             itemBuilder: (_Context, index) {
               var ChatdataOfCurrentChat = bubbles[index];
+              dev.log(ChatdataOfCurrentChat.toString());
 
               return Padding(
                   padding: EdgeInsets.only(
@@ -55,29 +57,19 @@ class MessageListViewChatList extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
-                      bubbles.length > 1
-                          ? bubbles[index].timestamp.toDate().year !=
-                                      bubbles[index + 1]
-                                          .timestamp
-                                          .toDate()
-                                          .year ||
-                                  bubbles[index].timestamp.toDate().month !=
-                                      bubbles[index + 1]
-                                          .timestamp
-                                          .toDate()
-                                          .month ||
-                                  bubbles[index].timestamp.toDate().day !=
-                                      bubbles[index + 1].timestamp.toDate().day
-                              ? Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Center(
-                                    child: DateChip(
-                                      date: bubbles[index].timestamp.toDate(),
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                )
-                              : SizedBox()
+                      (index > 0 &&
+                              index < bubbles.length - 1 &&
+                              bubbles[index].timestamp.toDate().day !=
+                                  bubbles[index + 1].timestamp.toDate().day)
+                          ? Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Center(
+                                child: DateChip(
+                                  date: bubbles[index].timestamp.toDate(),
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            )
                           : SizedBox(),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -88,7 +80,7 @@ class MessageListViewChatList extends StatelessWidget {
                                 ? MainAxisAlignment.end
                                 : MainAxisAlignment.start,
                         children: [
-                          bubbles[index].type == messageType.Text.name
+                          bubbles[index].type == messageType.text.name
                               ? chatMessageBubble(
                                   isImportant:
                                       ChatdataOfCurrentChat.isImportant,
@@ -136,13 +128,12 @@ class MessageListViewChatList extends StatelessWidget {
                                       : bubbles[index].type ==
                                               messageType.file.name
                                           ? ChatFileMessage(
+                                              message: ChatdataOfCurrentChat,
+                                              chatId: chatID,
                                               isImportant: ChatdataOfCurrentChat
                                                   .isImportant,
                                               key: ValueKey(
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
-                                              FileAdress: ChatdataOfCurrentChat
-                                                  .messageContent
-                                                  .toString(),
                                               isOurs: HiveUserContactCashingService
                                                           .getUserContactData()
                                                       .id ==

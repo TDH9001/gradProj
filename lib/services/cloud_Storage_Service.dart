@@ -40,7 +40,7 @@ class CloudStorageService {
     var _timestamp = Timestamp.now();
     var _Filename = p.basename(
         fileData.path); //for when the file is not taken from the galary
-    _Filename += "_${_timestamp.toString()}";
+    // _Filename += "_${_timestamp.toString()}";
     try {
       return baseRef
           .child(_messageFiles)

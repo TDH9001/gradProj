@@ -196,17 +196,7 @@ class DBService {
 
     return ref.update({
       //when adding a value to an array
-      "messages": FieldValue.arrayUnion([
-        {
-          "message": messageData.messageContent,
-          "senderID": messageData.senderID,
-          "senderName": messageData.senderName,
-          "timestamp": messageData.timestamp,
-          "type": MessageType.values
-              .byName(messageData.type)
-              .index //messageData.type
-        }
-      ])
+      "messages": FieldValue.arrayUnion([messageData.toJson()])
     });
   }
 
@@ -728,5 +718,30 @@ class DBService {
     return ref.update({
       "leaders": FieldValue.arrayUnion([uid])
     });
+  }
+
+  Future<void> deleteMessageFromChat(String chatId, Message message) async {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    // var dt = (await _db.collection(_ChatCollection).doc(chatId).get()).data();
+    // if (!(dt as Map<String, dynamic>).containsKey("IsImportant")) {
+    //   var finalData = message.toJson().remove("IsImportant");
+    //   devtools.log(finalData.toString());
+    //   return ref.update({
+    //     "messages": FieldValue.arrayRemove([finalData])
+    //   });
+    // }
+    var js = message.toJson();
+    var data = js.remove("IsImportant");
+
+    ref.update({
+      "messages": FieldValue.arrayRemove([js])
+    });
+    devtools.log(js.toString());
+    ref.update({
+      "messages": FieldValue.arrayRemove([message.toJson()])
+    });
+    devtools.log(message.toJson().toString());
+
+    return;
   }
 }
