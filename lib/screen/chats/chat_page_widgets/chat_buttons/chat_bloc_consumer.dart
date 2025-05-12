@@ -42,6 +42,7 @@ class ChatBlocConsumer extends StatelessWidget {
                 DBService.instance.addMessageInChat(
                     chatId: chatID,
                     messageData: Message(
+                        isImportant: false,
                         senderID:
                             HiveUserContactCashingService.getUserContactData()
                                 .id,
@@ -67,6 +68,7 @@ class ChatBlocConsumer extends StatelessWidget {
                   DBService.instance.addMessageInChat(
                       chatId: chatID,
                       messageData: Message(
+                          isImportant: false,
                           senderID:
                               HiveUserContactCashingService.getUserContactData()
                                   .id,

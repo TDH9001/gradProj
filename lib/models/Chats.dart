@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import '../models/message.dart';
+import 'dart:developer' as dev;
 
 enum ChatAccesabilityEnum { admin_only, allow_Leaders, allow_All }
 
@@ -34,11 +35,6 @@ class ChatSnipits {
           (_snap["leaders"] as List<dynamic>).map((e) => e.toString()).toList(),
       chatAccesability:
           ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name,
-      //  _snap["ChatAccesability"] is int
-      //     ? ChatAccesabilityEnum.values[_snap["ChatAccesability"]].name ??
-      //         ChatAccesabilityEnum.admin_only.name
-      //     :
-      //      _snap["ChatAccesability"],
       id: _snap.id,
       chatId: _snap["chatID"],
       lastMessage: _snap["lastMessage"] ?? "",
@@ -70,12 +66,29 @@ class ChatData {
       required this.messages,
       required this.owners});
   factory ChatData.fromFirestore(DocumentSnapshot _snap) {
-    var _data = _snap.data();
+    var _data = _snap.data() as Map<String, dynamic>?;
+    if (_data == null) {
+      dev.log("message document is empoty");
+      return ChatData(
+          chatAccesability: ChatAccesabilityEnum.admin_only.name,
+          chatid: _snap.id,
+          leaders: [],
+          members: [],
+          messages: [],
+          owners: []);
+    }
+
+    final bool isImportant = _data!.containsKey("isImportant");
 
     List<dynamic> rawMessages = _snap["messages"] ?? [];
 
     List<Message> MessageDataCurr = rawMessages.map((message) {
+      final dt = message as Map<String, dynamic>;
+      // return Message.fromJson(message);
+
       return Message(
+        isImportant:
+            dt.containsKey("IsImportant") ? message["IsImportant"] : false,
         senderID: message["senderID"] ?? "",
         senderName: message["senderName"] ?? "",
         messageContent: message["message"] ?? "",
@@ -91,6 +104,7 @@ class ChatData {
       MessageDataCurr = MessageDataCurr.map((_m) {
         //handle files being sent
         return Message(
+            isImportant: _m.isImportant,
             senderID: _m.senderID,
             senderName: _m.senderName,
             messageContent: _m.messageContent,
@@ -100,6 +114,7 @@ class ChatData {
     } else {
       MessageDataCurr = <Message>[
         Message(
+            isImportant: false,
             messageContent: "there is no chat data here",
             senderID: "",
             senderName: "",

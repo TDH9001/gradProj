@@ -34,6 +34,7 @@ class ChatFileButton extends StatelessWidget {
             await DBService.instance.addMessageInChat(
                 chatId: chatID,
                 messageData: Message(
+                    isImportant: false,
                     senderID:
                         HiveUserContactCashingService.getUserContactData().id,
                     messageContent: fileUrl,
