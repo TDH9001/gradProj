@@ -4,7 +4,7 @@ import 'package:grad_proj/models/feed_items_models/file_feed_item.dart';
 import 'package:grad_proj/models/feed_items_models/image_feed_item.dart';
 import 'package:grad_proj/models/feed_items_models/message_feed_Item.dart';
 import 'package:grad_proj/models/feed_items_models/video_feed_item.dart';
-import 'package:grad_proj/models/feed_items_models/voice_feed_tem.dart';
+import 'package:grad_proj/models/feed_items_models/voice_feed_item.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:flutter/services.dart';
@@ -75,13 +75,47 @@ class PopupWidgetHandler extends StatelessWidget {
                     onPressed: () {
                       cst.hideMenu();
                       DBService.instance.addStaredFeedItemToUser(
-                          MessageFeedItem(
-                            chatID: ChatId,
-                            messageContent: message.messageContent,
-                            senderID: message.senderID,
-                            senderName: message.senderName,
-                            timestamp: message.timestamp,
-                          ),
+                          message.type == MessageType.text.name
+                              ? MessageFeedItem(
+                                  chatID: ChatId,
+                                  messageContent: message.messageContent,
+                                  senderID: message.senderID,
+                                  senderName: message.senderName,
+                                  timestamp: message.timestamp,
+                                )
+                              : message.type == MessageType.image.name
+                                  ? ImageFeedItem(
+                                      chatID: ChatId,
+                                      messageContent: message.messageContent,
+                                      senderID: message.senderID,
+                                      senderName: message.senderName,
+                                      timestamp: message.timestamp,
+                                    )
+                                  : message.type == MessageType.voice.name
+                                      ? VoiceFeedItem(
+                                          chatID: ChatId,
+                                          messageContent:
+                                              message.messageContent,
+                                          senderID: message.senderID,
+                                          senderName: message.senderName,
+                                          timestamp: message.timestamp,
+                                        )
+                                      : message.type == MessageType.video.name
+                                          ? VideoFeedItem(
+                                              chatID: ChatId,
+                                              messagecontent:
+                                                  message.messageContent,
+                                              senderID: message.senderID,
+                                              senderName: message.senderName,
+                                              timestamp: message.timestamp,
+                                            )
+                                          : FileFeedItem(
+                                              senderID: message.senderID,
+                                              timestamp: message.timestamp,
+                                              chatID: ChatId,
+                                              messageContent:
+                                                  message.messageContent,
+                                              senderName: message.senderName),
                           HiveUserContactCashingService.getUserContactData()
                               .id);
                       SnackBarService.instance.buildContext = context;
@@ -143,6 +177,7 @@ class PopupWidgetHandler extends StatelessWidget {
                                                   message.messageContent,
                                               senderName: message.senderName),
                           ChatId);
+                      DBService.instance.makeMessageIImportant(ChatId, message);
                       SnackBarService.instance.buildContext = context;
                       SnackBarService.instance
                           .showsSnackBarSucces(text: "added to feed");

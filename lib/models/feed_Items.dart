@@ -7,6 +7,7 @@ import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
 import 'package:grad_proj/models/feed_items_models/video_feed_item.dart';
+import 'package:grad_proj/models/feed_items_models/voice_feed_item.dart';
 
 enum feedItemsEnum {
   message,
@@ -52,6 +53,8 @@ abstract class FeedItems {
         return ScheduleUpdateItem.fromMap(item);
       case feedItemsEnum.sceduleDelete:
         return ScheduleDeleteFeedItem.fromMap(item);
+      case feedItemsEnum.voice:
+        return VoiceFeedItem.fromMap(item);
 
       // Add other cases here
       default:

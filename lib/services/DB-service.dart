@@ -731,4 +731,20 @@ class DBService {
     });
     return;
   }
+
+  Future<void> makeMessageIImportant(String chatId, Message message) async {
+    var modefiedMessage = Message(
+        senderID: message.senderID,
+        messageContent: message.messageContent,
+        timestamp: message.timestamp,
+        type: message.type,
+        senderName: message.senderName,
+        isImportant: true);
+
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    DBService.instance.deleteMessageFromChat(chatId, message);
+    ref.update({
+      "messages": FieldValue.arrayUnion([modefiedMessage.toJson()])
+    });
+  }
 }

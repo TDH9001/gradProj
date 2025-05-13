@@ -5,25 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/message.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_file_message.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/voice_chat_bubble.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
 import '../../screen/theme/dark_theme_colors.dart';
 import '../../screen/theme/light_theme.dart';
 
-class FileFeedItem extends FeedItems {
+class VoiceFeedItem extends FeedItems {
   final String messageContent;
-  FileFeedItem(
-      {required super.senderID,
-      required super.timestamp,
-      required super.chatID,
-      required this.messageContent,
-      required super.senderName})
-      : super(type: feedItemsEnum.file.name);
+  VoiceFeedItem({
+    required super.senderID,
+    required super.timestamp,
+    required super.senderName,
+    required super.chatID,
+    required this.messageContent,
+  }) : super(type: feedItemsEnum.voice.name);
 
-  factory FileFeedItem.fromMap(Map<String, dynamic> map) {
+  factory VoiceFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
-      return FileFeedItem(
+      return VoiceFeedItem(
         senderID: map["senderID"],
         timestamp: map["timestamp"],
         senderName: map["senderName"],
@@ -31,7 +30,7 @@ class FileFeedItem extends FeedItems {
         chatID: map["chatID"],
       );
     } else {
-      return FileFeedItem(
+      return VoiceFeedItem(
         senderID: "",
         timestamp: Timestamp.now(),
         senderName: "",
@@ -40,6 +39,18 @@ class FileFeedItem extends FeedItems {
       );
     }
   }
+
+  @override
+  Map<String, dynamic> toMap() => {
+        "senderID": senderID,
+        "timestamp": timestamp,
+        "senderName": senderName,
+        "messageContent": messageContent,
+        "type": feedItemsEnum.values.byName(type).index,
+        "chatID": chatID
+      };
+  //to get the type corect > switch(map["type"]){case 0: message(map) nad so on
+  //AKA > depeding on the type, it selects the right class and type is auto injected
 
   @override
   Widget present({required BuildContext context}) {
@@ -51,31 +62,6 @@ class FileFeedItem extends FeedItems {
     final backgroundColor =
         isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
-
-    // Determine file type icon
-    IconData fileIcon = Icons.insert_drive_file;
-    String fileType = "File";
-
-    if (messageContent.toLowerCase().endsWith('.pdf')) {
-      fileIcon = Icons.picture_as_pdf;
-      fileType = "PDF";
-    } else if (messageContent.toLowerCase().endsWith('.doc') ||
-        messageContent.toLowerCase().endsWith('.docx')) {
-      fileIcon = Icons.description;
-      fileType = "Document";
-    } else if (messageContent.toLowerCase().endsWith('.xls') ||
-        messageContent.toLowerCase().endsWith('.xlsx')) {
-      fileIcon = Icons.table_chart;
-      fileType = "Spreadsheet";
-    } else if (messageContent.toLowerCase().endsWith('.ppt') ||
-        messageContent.toLowerCase().endsWith('.pptx')) {
-      fileIcon = Icons.slideshow;
-      fileType = "Presentation";
-    } else if (messageContent.toLowerCase().endsWith('.zip') ||
-        messageContent.toLowerCase().endsWith('.rar')) {
-      fileIcon = Icons.folder_zip;
-      fileType = "Archive";
-    }
 
     return Card(
       elevation: 2,
@@ -108,7 +94,7 @@ class FileFeedItem extends FeedItems {
                           color: textColor),
                     ),
                     Text(
-                      "Shared a file • ${timeago.format(timestamp.toDate())}",
+                      "Recorder a message • ${timeago.format(timestamp.toDate())}",
                       style: TextStyle(
                           color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
@@ -124,30 +110,19 @@ class FileFeedItem extends FeedItems {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: secondaryColor.withOpacity(0.3)),
               ),
-              child: ChatFileMessage(
-                chatId: chatID,
-                message: Message(
-                    senderID: senderID,
-                    messageContent: messageContent,
-                    timestamp: timestamp,
-                    type: type,
-                    senderName: senderName,
-                    isImportant: true),
-              ),
+              child: VoiceBubble(
+                  chatID: chatID,
+                  message: Message(
+                      senderID: senderID,
+                      messageContent: messageContent,
+                      timestamp: timestamp,
+                      type: type,
+                      senderName: senderName,
+                      isImportant: true)),
             ),
           ],
         ),
       ),
     );
   }
-
-  @override
-  Map<String, dynamic> toMap() => {
-        "senderID": senderID,
-        "timestamp": timestamp,
-        "senderName": senderName,
-        "messageContent": messageContent,
-        "type": feedItemsEnum.values.byName(type).index,
-        "chatID": chatID
-      };
 }

@@ -103,18 +103,8 @@ class MessageListViewChatList extends StatelessWidget {
                                   : bubbles[index].type ==
                                           messageType.voice.name
                                       ? VoiceBubble(
-                                          isImportant:
-                                              ChatdataOfCurrentChat.isImportant,
-                                          key: ValueKey(ChatdataOfCurrentChat),
-                                          AudioAdress: ChatdataOfCurrentChat
-                                              .messageContent
-                                              .toString(),
-                                          isOurs: HiveUserContactCashingService
-                                                      .getUserContactData()
-                                                  .id ==
-                                              bubbles[index].senderID,
-                                          ts: bubbles[index].timestamp,
-                                          senderName: bubbles[index].senderName,
+                                          message: ChatdataOfCurrentChat,
+                                          chatID: chatID,
                                         )
                                       : bubbles[index].type ==
                                               messageType.file.name
