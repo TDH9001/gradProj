@@ -99,6 +99,7 @@ class VideoFeedItem extends FeedItems {
                 border: Border.all(color: secondaryColor.withOpacity(0.3)),
               ),
               child: ChatVideoMessage(
+                  admins: [],
                   chatID: chatID,
                   message: Message(
                       senderID: senderID,

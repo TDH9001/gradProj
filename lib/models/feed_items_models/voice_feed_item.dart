@@ -111,6 +111,7 @@ class VoiceFeedItem extends FeedItems {
                 border: Border.all(color: secondaryColor.withOpacity(0.3)),
               ),
               child: VoiceBubble(
+                  admins: [],
                   chatID: chatID,
                   message: Message(
                       senderID: senderID,

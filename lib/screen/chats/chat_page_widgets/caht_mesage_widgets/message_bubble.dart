@@ -10,15 +10,15 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/media_service.dart';
 import 'package:linkfy_text/linkfy_text.dart';
 
-Widget chatMessageBubble({
-  required String chatID,
-  required Message message,
-}) {
+Widget chatMessageBubble(
+    {required String chatID,
+    required Message message,
+    required List<String> admins}) {
   final CustomPopupMenuController cst = CustomPopupMenuController();
   return CustomPopupMenu(
     pressType: PressType.longPress,
-    menuBuilder: () =>
-        ChatPopupMenuBuilderButons.popupMenuBuilder(cst, chatID, message),
+    menuBuilder: () => ChatPopupMenuBuilderButons.popupMenuBuilder(
+        cst, chatID, message, admins),
     child: Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),

@@ -91,6 +91,7 @@ class ImageFeedItem extends FeedItems {
             ),
             SizedBox(height: 12),
             ImageMessageBubble(
+                admins: [],
                 chatID: chatID,
                 message: Message(
                     senderID: senderID,

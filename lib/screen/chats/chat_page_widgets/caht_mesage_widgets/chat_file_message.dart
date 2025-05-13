@@ -13,16 +13,16 @@ import 'package:open_file/open_file.dart';
 import 'package:universal_file_viewer/universal_file_viewer.dart';
 
 class ChatFileMessage extends StatefulWidget {
-  ChatFileMessage({
-    super.key,
-    required this.message,
-    required this.chatId,
-  });
+  ChatFileMessage(
+      {super.key,
+      required this.message,
+      required this.chatId,
+      required this.admins});
 
   final Message message;
   final String chatId;
   final CustomPopupMenuController controller = CustomPopupMenuController();
-
+  final List<String> admins;
   @override
   State<ChatFileMessage> createState() => _ChatFileMessageState();
 }
@@ -49,7 +49,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
           controller: widget.controller,
           pressType: PressType.longPress,
           menuBuilder: () => ChatPopupMenuBuilderButons.popupMenuBuilder(
-              widget.controller, widget.chatId, widget.message),
+              widget.controller, widget.chatId, widget.message, widget.admins),
           child: GestureDetector(
             onTap: () async {
               if (snapshot.data!.isFailed == false &&

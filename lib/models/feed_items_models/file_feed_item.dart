@@ -125,6 +125,7 @@ class FileFeedItem extends FeedItems {
                 border: Border.all(color: secondaryColor.withOpacity(0.3)),
               ),
               child: ChatFileMessage(
+                admins: [],
                 chatId: chatID,
                 message: Message(
                     senderID: senderID,

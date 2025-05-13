@@ -12,18 +12,20 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/snackbar_service.dart';
 
 class ChatPopupMenuBuilderButons {
-  static Widget popupMenuBuilder(
-      CustomPopupMenuController cst, String ChatId, Message message) {
-    return PopupWidgetHandler(cst, ChatId, message);
+  static Widget popupMenuBuilder(CustomPopupMenuController cst, String ChatId,
+      Message message, List<String> admins) {
+    return PopupWidgetHandler(cst, ChatId, message, admins);
   }
 }
 
 class PopupWidgetHandler extends StatelessWidget {
-  const PopupWidgetHandler(this.cst, this.ChatId, this.message, {super.key});
+  const PopupWidgetHandler(this.cst, this.ChatId, this.message, this.admins,
+      {super.key});
 
   final CustomPopupMenuController cst;
   final String ChatId;
   final Message message;
+  final List<String> admins;
 
   @override
   Widget build(BuildContext context) {
@@ -126,66 +128,71 @@ class PopupWidgetHandler extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                IconButton(
-                    icon: Icon(Icons.push_pin_outlined),
-                    onPressed: () {
-                      cst.hideMenu();
-                      DBService.instance.addFeedItemToChatUsers(
-                          message.type == MessageType.text.name
-                              ? MessageFeedItem(
-                                  chatID: ChatId,
-                                  messageContent: message.messageContent,
-                                  senderID: message.senderID,
-                                  senderName: message.senderName,
-                                  timestamp: message.timestamp,
-                                )
-                              : message.type == MessageType.image.name
-                                  ? ImageFeedItem(
-                                      chatID: ChatId,
-                                      messageContent: message.messageContent,
-                                      senderID: message.senderID,
-                                      senderName: message.senderName,
-                                      timestamp: message.timestamp,
-                                    )
-                                  : message.type == MessageType.voice.name
-                                      ? VoiceFeedItem(
-                                          chatID: ChatId,
-                                          messageContent:
-                                              message.messageContent,
-                                          senderID: message.senderID,
-                                          senderName: message.senderName,
-                                          timestamp: message.timestamp,
-                                        )
-                                      : message.type == MessageType.video.name
-                                          ? VideoFeedItem(
-                                              chatID: ChatId,
-                                              messagecontent:
-                                                  message.messageContent,
-                                              senderID: message.senderID,
-                                              senderName: message.senderName,
-                                              timestamp: message.timestamp,
-                                            )
-                                          : FileFeedItem(
-                                              senderID: message.senderID,
-                                              timestamp: message.timestamp,
-                                              chatID: ChatId,
-                                              messageContent:
-                                                  message.messageContent,
-                                              senderName: message.senderName),
-                          ChatId);
-                      DBService.instance.makeMessageIImportant(ChatId, message);
-                      SnackBarService.instance.buildContext = context;
-                      SnackBarService.instance
-                          .showsSnackBarSucces(text: "added to feed");
-                    }),
-                Text("pin to feed")
-              ],
+          if (HiveUserContactCashingService.getUserContactData().id.length <
+                  10 ||
+              admins.contains(
+                  HiveUserContactCashingService.getUserContactData().id))
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                children: [
+                  IconButton(
+                      icon: Icon(Icons.push_pin_outlined),
+                      onPressed: () {
+                        cst.hideMenu();
+                        DBService.instance.addFeedItemToChatUsers(
+                            message.type == MessageType.text.name
+                                ? MessageFeedItem(
+                                    chatID: ChatId,
+                                    messageContent: message.messageContent,
+                                    senderID: message.senderID,
+                                    senderName: message.senderName,
+                                    timestamp: message.timestamp,
+                                  )
+                                : message.type == MessageType.image.name
+                                    ? ImageFeedItem(
+                                        chatID: ChatId,
+                                        messageContent: message.messageContent,
+                                        senderID: message.senderID,
+                                        senderName: message.senderName,
+                                        timestamp: message.timestamp,
+                                      )
+                                    : message.type == MessageType.voice.name
+                                        ? VoiceFeedItem(
+                                            chatID: ChatId,
+                                            messageContent:
+                                                message.messageContent,
+                                            senderID: message.senderID,
+                                            senderName: message.senderName,
+                                            timestamp: message.timestamp,
+                                          )
+                                        : message.type == MessageType.video.name
+                                            ? VideoFeedItem(
+                                                chatID: ChatId,
+                                                messagecontent:
+                                                    message.messageContent,
+                                                senderID: message.senderID,
+                                                senderName: message.senderName,
+                                                timestamp: message.timestamp,
+                                              )
+                                            : FileFeedItem(
+                                                senderID: message.senderID,
+                                                timestamp: message.timestamp,
+                                                chatID: ChatId,
+                                                messageContent:
+                                                    message.messageContent,
+                                                senderName: message.senderName),
+                            ChatId);
+                        DBService.instance
+                            .makeMessageIImportant(ChatId, message);
+                        SnackBarService.instance.buildContext = context;
+                        SnackBarService.instance
+                            .showsSnackBarSucces(text: "added to feed");
+                      }),
+                  Text("pin to feed")
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );

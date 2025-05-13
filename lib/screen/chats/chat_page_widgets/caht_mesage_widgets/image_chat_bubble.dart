@@ -12,12 +12,12 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/media_service.dart';
 
 class ImageMessageBubble extends StatefulWidget {
-  ImageMessageBubble({
-    super.key,
-    required this.chatID,
-    required this.message,
-  });
-
+  ImageMessageBubble(
+      {super.key,
+      required this.chatID,
+      required this.message,
+      required this.admins});
+  final List<String> admins;
   final String chatID;
   final Message message;
   final CustomPopupMenuController cst = CustomPopupMenuController();
@@ -49,7 +49,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
           return CustomPopupMenu(
             pressType: PressType.longPress,
             menuBuilder: () => ChatPopupMenuBuilderButons.popupMenuBuilder(
-                widget.cst, widget.chatID, widget.message),
+                widget.cst, widget.chatID, widget.message, widget.admins),
             child: GestureDetector(
               onTap: () {
                 AnimatedHeroDialog.showAnimatedWidgetTransition(

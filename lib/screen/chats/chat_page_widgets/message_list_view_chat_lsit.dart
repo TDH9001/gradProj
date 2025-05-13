@@ -14,9 +14,14 @@ import 'package:grad_proj/services/media_service.dart';
 import 'dart:developer' as dev;
 
 class MessageListViewChatList extends StatelessWidget {
-  MessageListViewChatList({super.key, required this.LVC, required this.chatID});
+  MessageListViewChatList(
+      {super.key,
+      required this.LVC,
+      required this.chatID,
+      required this.admins});
   final LVC;
   final chatID;
+  final List<String> admins;
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +87,12 @@ class MessageListViewChatList extends StatelessWidget {
                         children: [
                           bubbles[index].type == messageType.text.name
                               ? chatMessageBubble(
+                                  admins: admins,
                                   chatID: chatID,
                                   message: ChatdataOfCurrentChat)
                               : bubbles[index].type == messageType.image.name
                                   ? ImageMessageBubble(
+                                      admins: admins,
                                       message: ChatdataOfCurrentChat,
                                       chatID: chatID,
                                       key: ValueKey(
@@ -94,12 +101,14 @@ class MessageListViewChatList extends StatelessWidget {
                                   : bubbles[index].type ==
                                           messageType.voice.name
                                       ? VoiceBubble(
+                                          admins: admins,
                                           message: ChatdataOfCurrentChat,
                                           chatID: chatID,
                                         )
                                       : bubbles[index].type ==
                                               messageType.file.name
                                           ? ChatFileMessage(
+                                              admins: admins,
                                               message: ChatdataOfCurrentChat,
                                               chatId: chatID,
 
@@ -107,6 +116,7 @@ class MessageListViewChatList extends StatelessWidget {
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
                                             )
                                           : ChatVideoMessage(
+                                              admins: admins,
                                               key: ValueKey(
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
                                               message: ChatdataOfCurrentChat,

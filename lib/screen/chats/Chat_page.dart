@@ -87,6 +87,7 @@ class _ChatPageState extends State<ChatPage> {
         clipBehavior: Clip.none,
         children: <Widget>[
           MessageListViewChatList(
+            admins: widget.admins,
             LVC: widget._LVC,
             chatID: widget.chatID,
           ),

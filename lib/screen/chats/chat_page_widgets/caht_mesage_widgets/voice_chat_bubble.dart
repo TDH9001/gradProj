@@ -1,14 +1,11 @@
 import 'dart:io';
-import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/voice_bubble_slider_columb.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/Voice_bubble_widgets/voice_message_bubble_base_background.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_popup_menu_builder_butons.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/months_and_week_map.dart';
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
@@ -16,8 +13,9 @@ class VoiceBubble extends StatefulWidget {
   final String chatID;
   final Message message;
   final CustomPopupMenuController cst = CustomPopupMenuController();
-
+  final List<String> admins;
   VoiceBubble({
+    required this.admins,
     super.key,
     required this.message,
     required this.chatID,
@@ -146,7 +144,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
     return CustomPopupMenu(
       pressType: PressType.longPress,
       menuBuilder: () => ChatPopupMenuBuilderButons.popupMenuBuilder(
-          widget.cst, widget.chatID, widget.message),
+          widget.cst, widget.chatID, widget.message, widget.admins),
       child: VoiceMessageBaseBAckground(widget: widget, child: [
         Text(widget.message.senderName.trim()),
         Row(

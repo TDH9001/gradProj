@@ -14,12 +14,12 @@ import 'package:path/path.dart' as p;
 import 'package:video_player/video_player.dart';
 
 class ChatVideoMessage extends StatefulWidget {
-  ChatVideoMessage({
-    super.key,
-    required this.chatID,
-    required this.message,
-  });
-
+  ChatVideoMessage(
+      {super.key,
+      required this.chatID,
+      required this.message,
+      required this.admins});
+  final List<String> admins;
   final String chatID;
   final Message message;
   final CustomPopupMenuController cst = CustomPopupMenuController();
@@ -66,7 +66,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
         return CustomPopupMenu(
           pressType: PressType.longPress,
           menuBuilder: () => ChatPopupMenuBuilderButons.popupMenuBuilder(
-              widget.cst, widget.chatID, widget.message),
+              widget.cst, widget.chatID, widget.message, widget.admins),
           child: GestureDetector(
             onTap: () {
               if (snapshot.data!.isFailed == false &&
