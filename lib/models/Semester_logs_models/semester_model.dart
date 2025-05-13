@@ -1,4 +1,5 @@
 import 'package:grad_proj/models/Semester_logs_models/course_model.dart';
+import 'package:grad_proj/utils/grade_utils.dart';
 
 class SemesterModel {
   final List<CourseModel> courses;
@@ -17,42 +18,11 @@ class SemesterModel {
     this.semesterNumber,
   ) {
 
-    totalCreditHours = courses.fold(0, (sum, course) => sum + course.creditHours);
-
-
-    double totalWeightedGrade = 0;
-    int totalCredits = 0;
-    for (var course in courses) {
-      totalWeightedGrade += course.grade * course.creditHours;
-      totalCredits += course.creditHours;
-    }
-    semmesterGpa = totalCredits > 0 ? totalWeightedGrade / totalCredits : 0;
-
-    semesterGrade = _getGradeFromGpa(semmesterGpa);
-
-
-    if (totalCreditHours < 33) {
-      level = "الأول";
-    } else if (totalCreditHours < 67) {
-      level = "الثاني";
-    } else if (totalCreditHours < 101) {
-      level = "الثالث";
-    } else {
-      level = "الرابع";
-    }
+    totalCreditHours = GradeUtils.calculateCurrentSemesterCreditHours(this);
+    semmesterGpa = GradeUtils.calculateSemesterGPA(this);
+    semesterGrade = GradeUtils.getSemesterLetterFromGPA(semmesterGpa);
+    level = GradeUtils.calculateSemesterLevel(totalCreditHours);
   }
-
-  Grades _getGradeFromGpa(double gpa) {
-    if (gpa >= 3.7) return Grades.A;
-    if (gpa >= 3.3) return Grades.A_Minus;
-    if (gpa >= 3.0) return Grades.B_Plus;
-    if (gpa >= 2.7) return Grades.B_Minus;
-    if (gpa >= 2.3) return Grades.C_Plus;
-    if (gpa >= 2.0) return Grades.C;
-    if (gpa >= 1.0) return Grades.D;
-    return Grades.F;
-  }
-
 
   factory SemesterModel.fromJson(Map<String, dynamic> json) {
     return SemesterModel(
@@ -78,7 +48,13 @@ class SemesterModel {
     };
   }
 
-  // Remove a course by index or by course code
+
+  void addCourse(CourseModel course) {
+    courses.add(course);
+    _recalculate();
+  }
+
+
   void removeCourseAt(int index) {
     if (index >= 0 && index < courses.length) {
       courses.removeAt(index);
@@ -91,7 +67,6 @@ class SemesterModel {
     _recalculate();
   }
 
-  // Edit a course by index
   void editCourseAt(int index, CourseModel newCourse) {
     if (index >= 0 && index < courses.length) {
       courses[index] = newCourse;
@@ -99,27 +74,10 @@ class SemesterModel {
     }
   }
 
-  // Helper to recalculate semester stats after changes
   void _recalculate() {
-    totalCreditHours = courses.fold(0, (sum, course) => sum + course.creditHours);
-
-    double totalWeightedGrade = 0;
-    int totalCredits = 0;
-    for (var course in courses) {
-      totalWeightedGrade += course.grade * course.creditHours;
-      totalCredits += course.creditHours;
-    }
-    semmesterGpa = totalCredits > 0 ? totalWeightedGrade / totalCredits : 0;
-    semesterGrade = _getGradeFromGpa(semmesterGpa);
-
-    if (totalCreditHours < 33) {
-      level = "الأول";
-    } else if (totalCreditHours < 67) {
-      level = "الثاني";
-    } else if (totalCreditHours < 101) {
-      level = "الثالث";
-    } else {
-      level = "الرابع";
-    }
+    totalCreditHours = GradeUtils.calculateCurrentSemesterCreditHours(this);
+    semmesterGpa = GradeUtils.calculateSemesterGPA(this);
+    semesterGrade = GradeUtils.getSemesterLetterFromGPA(semmesterGpa);
+    level = GradeUtils.calculateSemesterLevel(totalCreditHours);
   }
 }

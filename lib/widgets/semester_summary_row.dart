@@ -30,7 +30,7 @@ class SemesterSummaryRow extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
-        "عدد الساعات المعتمدة المجتازة: ${totalCreditHours.toStringAsFixed(1)} ، معدل درجات الفصل الدراسي: ${gpa.toStringAsFixed(3)} بتقدير: $gradeLetter",
+        "عدد الساعات المعتمدة المجتازة: ${totalCreditHours.toStringAsFixed(1)} ، معدل درجات الفصل الدراسي: ${gpa.toStringAsFixed(2)} بتقدير: $gradeLetter",
         style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 14,

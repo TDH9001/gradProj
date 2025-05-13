@@ -49,6 +49,7 @@ class AcademicCareerScreen extends StatelessWidget {
         creditHours: 3,
         courseScore: 85.0,
         gradeLetter: Grades.A,
+        academicCredits: 3,
       ),
       CourseModel(
         courseCode: "PHYS101",
@@ -57,6 +58,7 @@ class AcademicCareerScreen extends StatelessWidget {
         creditHours: 4,
         courseScore: 80.0,
         gradeLetter: Grades.B_Plus,
+        academicCredits: 4,
       ),
     ];
 

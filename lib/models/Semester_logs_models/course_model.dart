@@ -1,4 +1,4 @@
-enum Grades { A, A_Minus, B_Plus, B_Minus, C_Plus, C, D, F }
+enum Grades { A, A_Minus, B_Plus, B, C_Plus, C, D, F, P }
 
 class CourseModel {
   final String courseCode;
@@ -7,6 +7,7 @@ class CourseModel {
   final int creditHours;
   final double courseScore;
   final Grades? gradeLetter;
+  final int academicCredits;
 
   CourseModel({
     required this.courseCode,
@@ -15,6 +16,7 @@ class CourseModel {
     required this.creditHours,
     required this.courseScore,
     this.gradeLetter,
+    required this.academicCredits,
   });
 
   factory CourseModel.fromJson(Map<String, dynamic> json) {
@@ -29,9 +31,8 @@ class CourseModel {
         case 'B_PLUS':
         case 'B+':
           return Grades.B_Plus;
-        case 'B_MINUS':
-        case 'B-':
-          return Grades.B_Minus;
+        case 'B':
+          return Grades.B;
         case 'C_PLUS':
         case 'C+':
           return Grades.C_Plus;
@@ -41,6 +42,8 @@ class CourseModel {
           return Grades.D;
         case 'F':
           return Grades.F;
+        case 'P':
+          return Grades.P;
         default:
           return null;
       }
@@ -53,6 +56,7 @@ class CourseModel {
       creditHours: json['creditHours'] ?? 0,
       courseScore: (json['courseScore'] as num?)?.toDouble() ?? 0.0,
       gradeLetter: parseGradeLetter(json['gradeLetter']),
+      academicCredits: json['academicCredits'] ?? json['creditHours'] ?? 0,
     );
   }
 
@@ -64,6 +68,7 @@ class CourseModel {
       'creditHours': creditHours,
       'courseScore': courseScore,
       'gradeLetter': gradeLetter?.toString(),
+      'academicCredits': academicCredits,
     };
   }
 }
