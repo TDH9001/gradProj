@@ -6,6 +6,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../screen/theme/dark_theme_colors.dart';
 import '../../screen/theme/light_theme.dart';
+import 'dart:developer' as dev;
 
 class SceduleCreateFeedItem extends FeedItems {
   final ScheduleItemClass scheduleItem;
@@ -19,6 +20,7 @@ class SceduleCreateFeedItem extends FeedItems {
       : super(type: feedItemsEnum.sceduleCreate.name);
   factory SceduleCreateFeedItem.fromMap(Map<String, dynamic> map) {
     if (map.isNotEmpty) {
+      dev.log(map.toString());
       return SceduleCreateFeedItem(
         scheduleItem: ScheduleItemClass.fromMap(map["sceduleItem"]),
         senderID: map["senderID"],
@@ -41,8 +43,10 @@ class SceduleCreateFeedItem extends FeedItems {
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
-    final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final backgroundColor =
+        isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
     final successColor = Colors.green;
 
@@ -80,14 +84,14 @@ class SceduleCreateFeedItem extends FeedItems {
                     Text(
                       "New Schedule Created",
                       style: TextStyle(
-                        fontWeight: FontWeight.bold, 
-                        fontSize: 16,
-                        color: textColor
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: textColor),
                     ),
                     Text(
                       "$senderName • ${timeago.format(timestamp.toDate())}",
-                      style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
                   ],
                 ),
@@ -107,17 +111,20 @@ class SceduleCreateFeedItem extends FeedItems {
                   Text(
                     "Schedule Details",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      fontSize: 14,
-                      color: textColor
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: textColor),
                   ),
                   Divider(color: successColor.withOpacity(0.3)),
                   _buildScheduleDetailRow(context, "Course", scheduleItem.name),
-                  _buildScheduleDetailRow(context, "Day", getDayName(scheduleItem.day)),
-                  _buildScheduleDetailRow(context, "Time", "${formatTime(scheduleItem.startTime)} - ${formatTime(scheduleItem.endTime)}"),
-                  _buildScheduleDetailRow(context, "Location", scheduleItem.location),
-                  _buildScheduleDetailRow(context, "Instructor", scheduleItem.creatorName),
+                  _buildScheduleDetailRow(
+                      context, "Day", getDayName(scheduleItem.day)),
+                  _buildScheduleDetailRow(context, "Time",
+                      "${formatTime(scheduleItem.startTime)} - ${formatTime(scheduleItem.endTime)}"),
+                  _buildScheduleDetailRow(
+                      context, "Location", scheduleItem.location),
+                  _buildScheduleDetailRow(
+                      context, "Instructor", scheduleItem.creatorName),
                 ],
               ),
             ),
@@ -127,11 +134,12 @@ class SceduleCreateFeedItem extends FeedItems {
     );
   }
 
-  Widget _buildScheduleDetailRow(BuildContext context, String label, String value) {
+  Widget _buildScheduleDetailRow(
+      BuildContext context, String label, String value) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -140,17 +148,14 @@ class SceduleCreateFeedItem extends FeedItems {
             width: 80,
             child: Text(
               "$label:",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: textColor
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500, color: textColor),
             ),
           ),
           Expanded(
             child: Text(
               value,
               style: TextStyle(
-                color:  textColor,
+                color: textColor,
                 fontWeight: FontWeight.w500,
               ),
             ),

@@ -624,7 +624,7 @@ class DBService {
           .collection(_UserCollection)
           .doc(uid)
           .collection(_FeedCollection)
-          .doc()
+          .doc(_PersonalFeed)
           .set({
         "StaredFeed": FieldValue.arrayUnion([feedItem.toMap()])
       }, SetOptions(merge: true));
@@ -722,26 +722,13 @@ class DBService {
 
   Future<void> deleteMessageFromChat(String chatId, Message message) async {
     var ref = _db.collection(_ChatCollection).doc(chatId);
-    // var dt = (await _db.collection(_ChatCollection).doc(chatId).get()).data();
-    // if (!(dt as Map<String, dynamic>).containsKey("IsImportant")) {
-    //   var finalData = message.toJson().remove("IsImportant");
-    //   devtools.log(finalData.toString());
-    //   return ref.update({
-    //     "messages": FieldValue.arrayRemove([finalData])
-    //   });
-    // }
+
     var js = message.toJson();
     var data = js.remove("IsImportant");
 
     ref.update({
-      "messages": FieldValue.arrayRemove([js])
-    });
-    devtools.log(js.toString());
-    ref.update({
       "messages": FieldValue.arrayRemove([message.toJson()])
     });
-    devtools.log(message.toJson().toString());
-
     return;
   }
 }

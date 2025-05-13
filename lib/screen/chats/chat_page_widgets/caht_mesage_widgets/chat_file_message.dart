@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_response.dart';
@@ -6,6 +5,7 @@ import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/Image_bubble_widgets/image_hero_container.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_popup_menu_builder_butons.dart';
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:path/path.dart' as p;
 
@@ -13,20 +13,13 @@ import 'package:open_file/open_file.dart';
 import 'package:universal_file_viewer/universal_file_viewer.dart';
 
 class ChatFileMessage extends StatefulWidget {
-  ChatFileMessage(
-      {super.key,
-      required this.message,
-      required this.chatId,
-      //   required this.FileAdress,
-      required this.isOurs,
-      required this.ts,
-      required this.senderName,
-      required this.isImportant});
-  // final String FileAdress;
-  final bool isOurs;
-  final Timestamp ts;
-  final String senderName;
-  final bool isImportant;
+  ChatFileMessage({
+    super.key,
+    required this.message,
+    required this.chatId,
+
+  });
+ 
   final Message message;
   final String chatId;
   final CustomPopupMenuController controller = CustomPopupMenuController();
@@ -70,19 +63,20 @@ class _ChatFileMessageState extends State<ChatFileMessage>
               width: MediaService.instance.getWidth() * 0.7,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: widget.isImportant
+                  color: widget.message.isImportant
                       ? Color(0xFFE7CD78)
                       : Colors.grey.shade400),
               padding: EdgeInsets.symmetric(horizontal: 6),
               child: Column(
                 //mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: widget.isOurs
+                crossAxisAlignment: widget.message.senderID ==
+                        HiveUserContactCashingService.getUserContactData().id
                     ? CrossAxisAlignment.start
                     : CrossAxisAlignment.end,
                 children: [
                   Text(
-                    widget.senderName,
+                    widget.message.senderName,
                     maxLines: 1,
                   ),
                   SizedBox(
@@ -151,7 +145,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                           ),
                         ])),
                   Text(
-                    " ${widget.ts.toDate().hour % 12}: ${widget.ts.toDate().minute % 60} ${widget.ts.toDate().hour < 12 ? "am" : "pm"}        ",
+                    " ${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
                     style: TextStyle(fontSize: 16),
                   )
                 ],

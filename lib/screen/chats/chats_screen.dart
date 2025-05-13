@@ -154,11 +154,11 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                   _auth.user!.uid, data[index].chatId);
                             },
                             title: Text(data[index].chatId),
-                            subtitle: data[index].type == "image"
+                            subtitle: data[index].type == MessageType.image.name
                                 ? Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text("Image "),
+                                      Text("Image attachment"),
                                       Icon(
                                         Icons.image,
                                         size: 16, // Adjusted icon size
@@ -166,7 +166,7 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                       ),
                                     ],
                                   )
-                                : data[index].type == "voice"
+                                : data[index].type == MessageType.voice.name
                                     ? Row(
                                         children: [
                                           Text("Voice attachment"),
@@ -176,10 +176,31 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                           ),
                                         ],
                                       )
-                                    : Text(
-                                        data[index].lastMessage,
-                                        maxLines: 2,
-                                      ),
+                                    : data[index].type == MessageType.video.name
+                                        ? Row(
+                                            children: [
+                                              Text("Video attachment"),
+                                              Icon(
+                                                Icons.ondemand_video_outlined,
+                                                color: Color(0xff7AB2D3),
+                                              )
+                                            ],
+                                          )
+                                        : data[index].type ==
+                                                MessageType.file.name
+                                            ? Row(
+                                                children: [
+                                                  Text("File attachment"),
+                                                  Icon(
+                                                    Icons.file_present_outlined,
+                                                    color: Color(0xff7AB2D3),
+                                                  )
+                                                ],
+                                              )
+                                            : Text(
+                                                data[index].lastMessage,
+                                                maxLines: 1,
+                                              ),
                           );
                         }),
                   )
@@ -192,21 +213,6 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                       ),
                     ),
                   );
-            // leading: Container(
-            //   width: 50,
-            //   height: 50,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(100),
-            //     image: DecorationImage(
-            //         image: AssetImage("assets/images/chat.png")),
-            //   ),
-            // ),
-            // trailing: Container(
-            //     width: 100,
-            //     child: ChatScreenTrailingiwdget(
-            //         data[index].timestamp,
-            //         data[index].unseenCount >= 1,
-            //         data[index].unseenCount))
           },
         ),
       ],
@@ -214,10 +220,7 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
   }
 }
 
-// Widget _RecentChats(String caht_name) {
 
-//   return Builder(builder: (_context));
-// }
 
 class ChatScreenTrailingiwdget extends StatelessWidget {
   final ChatSnipits chat;

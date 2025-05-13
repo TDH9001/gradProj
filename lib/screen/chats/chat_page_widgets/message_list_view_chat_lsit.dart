@@ -82,17 +82,8 @@ class MessageListViewChatList extends StatelessWidget {
                         children: [
                           bubbles[index].type == messageType.text.name
                               ? chatMessageBubble(
-                                  isImportant:
-                                      ChatdataOfCurrentChat.isImportant,
-                                  message: ChatdataOfCurrentChat.messageContent
-                                      .toString(),
-                                  isOurs: HiveUserContactCashingService
-                                              .getUserContactData()
-                                          .id ==
-                                      bubbles[index].senderID,
-                                  ts: bubbles[index].timestamp,
-                                  senderName: bubbles[index].senderName,
-                                )
+                                  chatID: chatID,
+                                  message: ChatdataOfCurrentChat)
                               : bubbles[index].type == messageType.image.name
                                   ? ImageMessageBubble(
                                       isImportant:
@@ -130,17 +121,9 @@ class MessageListViewChatList extends StatelessWidget {
                                           ? ChatFileMessage(
                                               message: ChatdataOfCurrentChat,
                                               chatId: chatID,
-                                              isImportant: ChatdataOfCurrentChat
-                                                  .isImportant,
+
                                               key: ValueKey(
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
-                                              isOurs: HiveUserContactCashingService
-                                                          .getUserContactData()
-                                                      .id ==
-                                                  bubbles[index].senderID,
-                                              ts: bubbles[index].timestamp,
-                                              senderName:
-                                                  bubbles[index].senderName,
                                             )
                                           : ChatVideoMessage(
                                               isImportant: ChatdataOfCurrentChat

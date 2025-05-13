@@ -16,6 +16,7 @@ enum feedItemsEnum {
   sceduleCreate,
   sceduleChange,
   sceduleDelete,
+  voice
 }
 
 abstract class FeedItems {
