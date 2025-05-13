@@ -16,6 +16,7 @@ class AddChatDialog extends StatefulWidget {
 
 class _AddChatDialogState extends State<AddChatDialog> {
   final TextEditingController _courseLinkController = TextEditingController();
+  final TextEditingController _courseIDController = TextEditingController();
   bool _isAddingChat = false;
 
   @override
@@ -147,8 +148,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
         children: <Widget>[
           TextField(
             controller: _courseLinkController,
-            decoration:
-                const InputDecoration(hintText: 'Enter course link or scan QR'),
+            decoration: const InputDecoration(hintText: '([name][code])'),
             enabled: !_isAddingChat,
           ),
           const SizedBox(height: 20),
