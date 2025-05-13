@@ -82,7 +82,7 @@ class VideoFeedItem extends FeedItems {
                           color: textColor),
                     ),
                     Text(
-                      "Recorder a message • ${timeago.format(timestamp.toDate())}",
+                      "Recorder a video • ${timeago.format(timestamp.toDate())}",
                       style: TextStyle(
                           color: textColor.withOpacity(0.6), fontSize: 12),
                     ),

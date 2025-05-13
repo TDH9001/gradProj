@@ -86,19 +86,10 @@ class MessageListViewChatList extends StatelessWidget {
                                   message: ChatdataOfCurrentChat)
                               : bubbles[index].type == messageType.image.name
                                   ? ImageMessageBubble(
-                                      isImportant:
-                                          ChatdataOfCurrentChat.isImportant,
+                                      message: ChatdataOfCurrentChat,
+                                      chatID: chatID,
                                       key: ValueKey(
                                           ChatdataOfCurrentChat), //this to tell flutter it's independant
-                                      FileAdress: ChatdataOfCurrentChat
-                                          .messageContent
-                                          .toString(),
-                                      isOurs: HiveUserContactCashingService
-                                                  .getUserContactData()
-                                              .id ==
-                                          bubbles[index].senderID,
-                                      ts: bubbles[index].timestamp,
-                                      senderName: bubbles[index].senderName,
                                     )
                                   : bubbles[index].type ==
                                           messageType.voice.name

@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
+import 'package:grad_proj/models/message.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/image_chat_bubble.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../screen/theme/dark_theme_colors.dart';
 import '../../screen/theme/light_theme.dart';
@@ -40,9 +42,12 @@ class ImageFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
-    final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
+    final primaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.primary;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final backgroundColor =
+        isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
 
     return Card(
@@ -71,56 +76,29 @@ class ImageFeedItem extends FeedItems {
                     Text(
                       senderName,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold, 
-                        fontSize: 16,
-                        color: textColor
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: textColor),
                     ),
                     Text(
                       "Shared an image • ${timeago.format(timestamp.toDate())}",
-                      style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
                   ],
                 ),
               ],
             ),
             SizedBox(height: 12),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                messageContent,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Container(
-                    height: 200,
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator(
-                      color: primaryColor,
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) => Container(
-                  height: 200,
-                  color: secondaryColor.withOpacity(0.1),
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.broken_image, size: 40, color: secondaryColor),
-                      SizedBox(height: 8),
-                      Text("Image could not be loaded",
-                          style: TextStyle(color: textColor.withOpacity(0.6))),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            ImageMessageBubble(
+                chatID: chatID,
+                message: Message(
+                    senderID: senderID,
+                    messageContent: messageContent,
+                    timestamp: timestamp,
+                    type: type,
+                    senderName: senderName,
+                    isImportant: true)),
           ],
         ),
       ),
