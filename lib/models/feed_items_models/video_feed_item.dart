@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
+import 'package:grad_proj/models/message.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_Video_message.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../screen/theme/dark_theme_colors.dart';
@@ -41,9 +43,12 @@ class VideoFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
-    final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
+    final primaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.primary;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final backgroundColor =
+        isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
 
     return Card(
@@ -72,14 +77,14 @@ class VideoFeedItem extends FeedItems {
                     Text(
                       senderName,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold, 
-                        fontSize: 16,
-                        color: textColor
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: textColor),
                     ),
                     Text(
-                      "Shared a video • ${timeago.format(timestamp.toDate())}",
-                      style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                      "Recorder a message • ${timeago.format(timestamp.toDate())}",
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
                   ],
                 ),
@@ -87,43 +92,21 @@ class VideoFeedItem extends FeedItems {
             ),
             SizedBox(height: 12),
             Container(
-              height: 200,
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: primaryColor,
+                color: secondaryColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: secondaryColor.withOpacity(0.3)),
               ),
-              alignment: Alignment.center,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Video thumbnail would go here in a real implementation
-                  Container(
-                    color: Color(0xFF323232).withOpacity(0.8),
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                  Icon(
-                    Icons.play_circle_fill,
-                    size: 60,
-                    color: backgroundColor.withOpacity(0.8),
-                  ),
-                  Positioned(
-                    bottom: 8,
-                    right: 8,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Text(
-                        "Video",
-                        style: TextStyle(color: backgroundColor, fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: ChatVideoMessage(
+                  chatID: chatID,
+                  message: Message(
+                      senderID: senderID,
+                      messageContent: messagecontent,
+                      timestamp: timestamp,
+                      type: type,
+                      senderName: senderName,
+                      isImportant: true)),
             ),
           ],
         ),

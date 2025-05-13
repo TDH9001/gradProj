@@ -2,7 +2,7 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/models/message.dart';
-import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/caht_Video_message.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_Video_message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_file_message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/image_chat_bubble.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/message_bubble.dart';
@@ -116,20 +116,10 @@ class MessageListViewChatList extends StatelessWidget {
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
                                             )
                                           : ChatVideoMessage(
-                                              isImportant: ChatdataOfCurrentChat
-                                                  .isImportant,
                                               key: ValueKey(
                                                   ChatdataOfCurrentChat), //this to tell flutter it's independant
-                                              FileAdress: ChatdataOfCurrentChat
-                                                  .messageContent
-                                                  .toString(),
-                                              isOurs: HiveUserContactCashingService
-                                                          .getUserContactData()
-                                                      .id ==
-                                                  bubbles[index].senderID,
-                                              ts: bubbles[index].timestamp,
-                                              senderName:
-                                                  bubbles[index].senderName,
+                                              message: ChatdataOfCurrentChat,
+                                              chatID: chatID,
                                             ),
                         ],
                       ),
