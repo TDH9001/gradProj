@@ -2,6 +2,7 @@ import 'dart:developer' as devtools;
 
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/dialogs/add_chat_dialog.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -51,11 +52,14 @@ class _RecentChatsState extends State<RecentChats> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddChatDialog(context),
-        child: const Icon(Icons.add_comment_outlined),
-        tooltip: 'Add New Chat',
-      ),
+      floatingActionButton:
+          HiveUserContactCashingService.getUserContactData().id.length < 10
+              ? null
+              : FloatingActionButton(
+                  onPressed: () => _showAddChatDialog(context),
+                  child: const Icon(Icons.add_comment_outlined),
+                  tooltip: 'Add New Chat',
+                ),
     );
   }
 }
@@ -219,8 +223,6 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
     );
   }
 }
-
-
 
 class ChatScreenTrailingiwdget extends StatelessWidget {
   final ChatSnipits chat;

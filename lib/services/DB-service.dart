@@ -747,4 +747,18 @@ class DBService {
       "messages": FieldValue.arrayUnion([modefiedMessage.toJson()])
     });
   }
+
+  Future<void> removeAdminFromChat(String chatId, String uid) async {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    return ref.update({
+      "ownerID": FieldValue.arrayRemove([uid])
+    });
+  }
+
+  Future<void> removeLeaderFromChat(String chatId, String uid) async {
+    var ref = _db.collection(_ChatCollection).doc(chatId);
+    return ref.update({
+      "leaders": FieldValue.arrayRemove([uid])
+    });
+  }
 }

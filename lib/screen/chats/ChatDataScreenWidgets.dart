@@ -428,145 +428,167 @@ class ChatMembersList extends StatelessWidget {
                                 ),
                                 childrenPadding: EdgeInsets.only(
                                     left: 24, bottom: 12, right: 12),
-                                children:
-                                    admins.contains(
-                                                HiveUserContactCashingService
-                                                        .getUserContactData()
-                                                    .id
-                                                    .trim()) ||
+                                children: admins.contains(
                                             HiveUserContactCashingService
-                                                        .getUserContactData()
-                                                    .id
-                                                    .trim()
-                                                    .length <
-                                                10
-                                        ? [
-                                            Row(
-                                              children: [
-                                                Icon(Icons.badge,
-                                                    color: Colors.white70,
-                                                    size: 16),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                    "Last Name: ${member.lastName}",
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
-                                              ],
-                                            ),
-                                            SizedBox(height: 6),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.phone,
-                                                    color: Colors.white70,
-                                                    size: 16),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                    "Phone: ${member.phoneNumber}",
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
-                                              ],
-                                            ),
-                                            SizedBox(height: 12),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.badge,
-                                                    color: Colors.white70,
-                                                    size: 16),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                    "SeatNumber: ${member.seatNumber}",
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
-                                              ],
-                                            ),
-                                            SizedBox(height: 12),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.email_outlined,
-                                                    color: Colors.white70,
-                                                    size: 16),
-                                                SizedBox(width: 8),
-                                                Text("Email: ${member.email}",
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 12,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(Icons.leaderboard,
-                                                    color: Colors.white70,
-                                                    size: 16),
-                                                SizedBox(width: 8),
-                                                Text(
-                                                    "SeatNumber: ${member.email}",
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 12,
-                                            ),
-                                            admins.contains(HiveUserContactCashingService
+                                                    .getUserContactData()
+                                                .id
+                                                .trim()) ||
+                                        HiveUserContactCashingService
+                                                    .getUserContactData()
+                                                .id
+                                                .trim()
+                                                .length <
+                                            10
+                                    ? [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.badge,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text(
+                                                "Last Name: ${member.lastName}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(height: 6),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.phone,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text("Phone: ${member.phoneNumber}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.badge,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text(
+                                                "SeatNumber: ${member.seatNumber}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(height: 12),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.email_outlined,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text("Email: ${member.email}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.leaderboard,
+                                                color: Colors.white70,
+                                                size: 16),
+                                            SizedBox(width: 8),
+                                            Text("SeatNumber: ${member.email}",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 12,
+                                        ),
+                                        admins.contains(
+                                                    HiveUserContactCashingService
                                                             .getUserContactData()
                                                         .id
                                                         .trim()) ||
-                                                    HiveUserContactCashingService
-                                                                .getUserContactData()
-                                                            .id
-                                                            .trim()
-                                                            .length <
-                                                        10
-                                                ? Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 150,
-                                                        child: PrimaryButton(
-                                                            buttontext: !widget
-                                                                    .adminList
-                                                                    .contains(member.id
+                                                HiveUserContactCashingService
+                                                            .getUserContactData()
+                                                        .id
+                                                        .trim()
+                                                        .length <
+                                                    10
+                                            ? Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: PrimaryButton(
+                                                        buttontext: !widget
+                                                                .adminList
+                                                                .contains(member.id
+                                                                    .trim())
+                                                            ? "make admin"
+                                                            : "already An admin",
+                                                        func: () => !widget
+                                                                .adminList
+                                                                .contains(member
+                                                                    .id
+                                                                    .trim())
+                                                            ? DBService.instance
+                                                                .makeAdmin(
+                                                                    member.id.trim(),
+                                                                    widget.cahtId)
+                                                            : {}),
+                                                  ),
+                                                  Spacer(
+                                                    flex: 1,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 150,
+                                                    child: PrimaryButton(
+                                                        buttontext: !widget.leaders.contains(member.id.trim())
+                                                            ? "make Leader"
+                                                            : "Remove Leader",
+                                                        func: () => !widget.leaders
+                                                                .contains(member.id
+                                                                    .trim())
+                                                            ? DBService.instance
+                                                                .makeUserChatLeader(
+                                                                    chatId,
+                                                                    member.id
                                                                         .trim())
-                                                                ? "make admin"
-                                                                : "already An admin",
-                                                            func: () => !widget
-                                                                    .adminList
-                                                                    .contains(member.id
-                                                                        .trim())
-                                                                ? DBService.instance
-                                                                    .makeAdmin(
-                                                                        member.id.trim(),
-                                                                        widget.cahtId)
-                                                                : {}),
-                                                      ),
-                                                      Spacer(
-                                                        flex: 1,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 150,
-                                                        child: PrimaryButton(
-                                                            buttontext: !widget
-                                                                    .leaders
-                                                                    .contains(member.id
-                                                                        .trim())
-                                                                ? "make Leader"
-                                                                : "already a leader",
-                                                            func: () => !widget
-                                                                    .leaders
-                                                                    .contains(member.id
-                                                                        .trim())
-                                                                ? DBService.instance
-                                                                    .makeUserChatLeader(
+                                                            : {
+                                                                DBService
+                                                                    .instance
+                                                                    .removeLeaderFromChat(
                                                                         chatId,
-                                                                        member.id.trim())
-                                                                : {}),
-                                                      )
-                                                    ],
-                                                  )
-                                                : SizedBox()
-                                          ]
-                                        : [],
+                                                                        member
+                                                                            .id
+                                                                            .trim())
+                                                              }),
+                                                  ),
+                                                ],
+                                              )
+                                            : SizedBox(),
+                                        if (HiveUserContactCashingService
+                                                    .getUserContactData()
+                                                .id
+                                                .trim()
+                                                .length <
+                                            10)
+                                          Row(
+                                            children: [
+                                              PrimaryButton(
+                                                buttontext: "remove the admin",
+                                                func: () => DBService.instance
+                                                    .removeAdminFromChat(
+                                                  chatId,
+                                                  member.id.trim(),
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                      ]
+                                    : [],
                               ),
                             ),
                           );

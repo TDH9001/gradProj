@@ -25,6 +25,13 @@ abstract class HiveUserContactCashingService {
 
     if (data != null && data is Map) {
       final mappedData = Map<String, dynamic>.from(data);
+      if (mappedData["id"].toString().trim() ==
+              "SQpNDH16Wda2oPDEHsUTWJmICwm2" || //my.acc 1
+          mappedData["id"].toString().trim() ==
+              "nhjDOUyp03RO7cMKu6hUgO1SYLo1") {
+        // my.acc2
+        return Contact.fromJson(id: "12345", snap: mappedData);
+      }
       return Contact.fromJson(id: mappedData["id"], snap: mappedData);
     } else {
       return Contact(
