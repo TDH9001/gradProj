@@ -51,7 +51,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
   Widget build(BuildContext context) {
     return StreamBuilder<CachedFileResult>(
       stream: ChatFileCachingService.loadCachedFile(
-          fileAdress: widget.message.messageContent),
+          fileType: "videos", fileAdress: widget.message.messageContent),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // return Center(child: CircularProgressIndicator());

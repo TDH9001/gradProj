@@ -29,7 +29,7 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
     List<File> validMessages = [];
     for (int i = 0; i < ImageMessages.length; i++) {
       final result = await ChatFileCachingService.loadCachedFile(
-              fileAdress: ImageMessages[i].messageContent)
+              fileAdress: ImageMessages[i].messageContent, fileType: "images")
           .first;
       //only takes imaegs that are loaded succesfully > not loading
       if (result.isFailed == false &&

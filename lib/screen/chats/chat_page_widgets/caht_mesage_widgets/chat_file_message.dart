@@ -17,9 +17,8 @@ class ChatFileMessage extends StatefulWidget {
     super.key,
     required this.message,
     required this.chatId,
-
   });
- 
+
   final Message message;
   final String chatId;
   final CustomPopupMenuController controller = CustomPopupMenuController();
@@ -37,7 +36,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
   Widget build(BuildContext context) {
     return StreamBuilder<CachedFileResult>(
       stream: ChatFileCachingService.loadCachedFile(
-          fileAdress: widget.message.messageContent),
+          fileType: "files", fileAdress: widget.message.messageContent),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // return Center(child: CircularProgressIndicator());

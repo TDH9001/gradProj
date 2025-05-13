@@ -69,7 +69,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
 
   void _loadAudioFileAndSet() async {
     ChatFileCachingService.loadCachedFile(
-            fileAdress: widget.message.messageContent)
+            fileType: "voice_notes", fileAdress: widget.message.messageContent)
         .listen((StreamResponse) async {
       //i can not use builders as there are many auto-playing functions here
       if (StreamResponse.isFailed == true) {

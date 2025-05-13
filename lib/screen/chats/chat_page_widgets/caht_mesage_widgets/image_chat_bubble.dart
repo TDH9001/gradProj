@@ -37,7 +37,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
   Widget build(BuildContext context) {
     return StreamBuilder<CachedFileResult>(
         stream: ChatFileCachingService.loadCachedFile(
-            fileAdress: widget.message.messageContent),
+            fileType: "images", fileAdress: widget.message.messageContent),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // return Center(child: CircularProgressIndicator());
