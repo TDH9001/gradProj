@@ -159,6 +159,7 @@ class DBService {
         //.where("name", arrayContains: generateSubstrings(searched));
         .where("name", isGreaterThanOrEqualTo: searched)
         .where("name", isLessThan: "${searched}z");
+
     return ref.snapshots().map((_snap) {
       return _snap.docs.map((_doc) {
         return ChatSnipits.fromFirestore(_doc);
@@ -759,6 +760,37 @@ class DBService {
     var ref = _db.collection(_ChatCollection).doc(chatId);
     return ref.update({
       "leaders": FieldValue.arrayRemove([uid])
+    });
+  }
+
+  Stream<List<ChatSnipits>> getAllChatsForAdmin(String chatName) {
+    final normalized = chatName.toLowerCase();
+
+    var ref = _db.collection(_ChatCollection);
+
+    return ref.snapshots().map((_snap) {
+      return _snap.docs
+          .where((doc) => doc.id.toLowerCase().contains(normalized))
+          .map((_doc) {
+        return ChatSnipits(
+          id: _doc.id,
+          leaders: (_doc["leaders"] as List<dynamic>)
+              .map((e) => e.toString())
+              .toList(),
+          chatAccesability: ChatAccesabilityEnum
+              .values[_doc["ChatAccesability"]]
+              .name, // _doc["ChatAccesability"],
+          chatId: _doc.id,
+          lastMessage: "",
+          senderName: "",
+          unseenCount: 0,
+          timestamp: Timestamp.now(),
+          adminId: (_doc["ownerID"] as List<dynamic>)
+              .map((e) => e.toString())
+              .toList(),
+          type: MessageType.text.name,
+        );
+      }).toList();
     });
   }
 }

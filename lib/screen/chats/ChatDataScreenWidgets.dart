@@ -12,6 +12,8 @@ import 'package:grad_proj/widgets/selectable_scedule_item.dart';
 import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'dart:developer' as dev;
 
+import 'package:hive_flutter/adapters.dart';
+
 class TemporaryChatSceleList extends StatelessWidget {
   const TemporaryChatSceleList({
     super.key,
@@ -101,7 +103,9 @@ class TemporaryChatSceleList extends StatelessWidget {
                                           cont: context);
                               if (data != null) {
                                 DBService.instance.addSceduleItem(
-                                    AuthProvider.instance.user!.uid,
+                                    HiveUserContactCashingService
+                                            .getUserContactData()
+                                        .id,
                                     widget.cahtId,
                                     data);
                               } else {
@@ -131,7 +135,8 @@ class TemporaryChatSceleList extends StatelessWidget {
                             1) {
                           DBService.instance.removeSceduleItem(
                               _snapshot.data![index],
-                              AuthProvider.instance.user!.uid,
+                              HiveUserContactCashingService.getUserContactData()
+                                  .id,
                               widget.cahtId);
                         } else {
                           return Padding(
@@ -261,7 +266,9 @@ class PermanatChatScedulesList extends StatelessWidget {
                                   data.startTime > 0 &&
                                   data.endTime > 0) {
                                 DBService.instance.addSceduleItem(
-                                    AuthProvider.instance.user!.uid,
+                                    HiveUserContactCashingService
+                                            .getUserContactData()
+                                        .id,
                                     widget.cahtId,
                                     data);
                               } else {
@@ -270,10 +277,6 @@ class PermanatChatScedulesList extends StatelessWidget {
                                     text:
                                         "Error adding scedule, please try again");
                               }
-                              // DBService.instance.addSceduleItem(
-                              //     AuthProvider.instance.user!.uid,
-                              //     widget.cahtId,
-                              //     data!);
                             },
                             icon: Icon(
                               Icons.add_alert_sharp,
@@ -569,12 +572,16 @@ class ChatMembersList extends StatelessWidget {
                                                 ],
                                               )
                                             : SizedBox(),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
                                         if (HiveUserContactCashingService
-                                                    .getUserContactData()
-                                                .id
-                                                .trim()
-                                                .length <
-                                            10)
+                                                        .getUserContactData()
+                                                    .id
+                                                    .trim()
+                                                    .length <
+                                                10 &&
+                                            admins.contains(member.id.trim()))
                                           Row(
                                             children: [
                                               PrimaryButton(

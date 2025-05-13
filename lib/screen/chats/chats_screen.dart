@@ -5,6 +5,7 @@ import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/dialogs/add_chat_dialog.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -39,17 +40,14 @@ class _RecentChatsState extends State<RecentChats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChangeNotifierProvider<AuthProvider>.value(
-        value: AuthProvider.instance,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // ChatsScreenSearchBar(
-              //   txt: widget.chatsTextController,
-              // ),
-              RecentChatsreturn(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // ChatsScreenSearchBar(
+            //   txt: widget.chatsTextController,
+            // ),
+            RecentChatsreturn(),
+          ],
         ),
       ),
       floatingActionButton:
@@ -75,15 +73,8 @@ class RecentChatsreturn extends StatefulWidget {
 class _RecentChatsreturnState extends State<RecentChatsreturn> {
   @override
   Widget build(BuildContext context) {
-    final _auth = Provider.of<AuthProvider>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
-
-    if (_auth.user == null) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
 
     return Column(
       children: [
@@ -109,9 +100,12 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
               ),
             )),
         StreamBuilder<List<ChatSnipits>>(
-          stream: DBService.instance.getUserChats(
-              AuthProvider.instance.user!.uid.toString(),
-              widget.searchText), //_auth.user!.uid),
+          stream:
+              HiveUserContactCashingService.getUserContactData().id.length < 10
+                  ? DBService.instance.getAllChatsForAdmin(widget.searchText)
+                  : DBService.instance.getUserChats(
+                      HiveUserContactCashingService.getUserContactData().id,
+                      widget.searchText), //_auth.user!.uid),
           builder: (context, _snapshot) {
             var data = _snapshot.data;
             devtools.log(widget.searchText);
@@ -154,8 +148,17 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                   leaders: data[index].leaders,
                                 );
                               }));
-                              DBService.instance.resetUnseenCount(
-                                  _auth.user!.uid, data[index].chatId);
+                              if (HiveUserContactCashingService
+                                          .getUserContactData()
+                                      .id
+                                      .length >
+                                  10) {
+                                DBService.instance.resetUnseenCount(
+                                    HiveUserContactCashingService
+                                            .getUserContactData()
+                                        .id,
+                                    data[index].chatId);
+                              }
                             },
                             title: Text(data[index].chatId),
                             subtitle: data[index].type == MessageType.image.name

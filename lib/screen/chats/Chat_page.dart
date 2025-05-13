@@ -11,7 +11,6 @@ import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import '../../UI/text_style.dart';
-import '../../providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../theme/light_theme.dart';
@@ -57,26 +56,14 @@ class _ChatPageState extends State<ChatPage> {
     SnackBarService.instance.buildContext = context;
     _height = MediaService.instance.getHeight();
     _width = MediaService.instance.getWidth();
-    //widget._auth = context.read<AuthProvider>();
 
-    if (AuthProvider.instance.user == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-    //  widget.memberName = AuthProvider.instance.user!.email!;
-    //   widget.currID = widget._auth.user!.uid;
-//thsi cahnge notifier may be redundant
-    return ChangeNotifierProvider<AuthProvider>.value(
-      value: AuthProvider.instance,
-      child: BlocProvider(
-        create: (context) => ChatCubit(),
-        child: Scaffold(
-          //resizeToAvoidBottomInset: false,
-          appBar: AppbarGestureDetector(widget: widget),
-          body: ChangeNotifierProvider<AuthProvider>.value(
-              value: AuthProvider.instance, child: _chatPageUI()),
-        ),
+   
+    return BlocProvider(
+      create: (context) => ChatCubit(),
+      child: Scaffold(
+        //resizeToAvoidBottomInset: false,
+        appBar: AppbarGestureDetector(widget: widget),
+        body: _chatPageUI(),
       ),
     );
   }
