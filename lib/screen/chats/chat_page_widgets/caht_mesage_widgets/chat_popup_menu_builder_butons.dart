@@ -35,20 +35,37 @@ class PopupWidgetHandler extends StatelessWidget {
       child: Wrap(
         direction: Axis.horizontal,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      cst.hideMenu();
-                      DBService.instance.deleteMessageFromChat(ChatId, message);
-                    }),
-                Text("delete"),
-              ],
+          if ((message.senderID ==
+                          HiveUserContactCashingService.getUserContactData()
+                              .id &&
+                      message.timestamp
+                              .toDate()
+                              .add(Duration(hours: 12))
+                              .compareTo(DateTime
+                                  .now()) > // if its the same person and within 12 hours
+                          0) ||
+                  admins.contains(
+                      HiveUserContactCashingService.getUserContactData()
+                          .id) //or admin
+                  ||
+                  HiveUserContactCashingService.getUserContactData().id.length <
+                      10 // global admin
+              )
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                children: [
+                  IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        cst.hideMenu();
+                        DBService.instance
+                            .deleteMessageFromChat(ChatId, message);
+                      }),
+                  Text("delete"),
+                ],
+              ),
             ),
-          ),
           if (message.type == MessageType.text.name)
             Padding(
               padding: const EdgeInsets.all(5.0),
