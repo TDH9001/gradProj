@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/about_screen/chatbot/chat_screen.dart';
 import 'package:grad_proj/widgets/custom_container.dart';
@@ -28,13 +29,14 @@ class _QuestionScreenState extends State<QuestionScreen> {
       key: scaffoldKey,
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
-        title: " Questions",
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        title: 'Question.title'.tr(),
+        // leading: IconButton(
+        //   icon: Icon(
+        //     Icons.arrow_forward , color: Colors.white,),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: Center(
         child: Stack(
@@ -44,25 +46,24 @@ class _QuestionScreenState extends State<QuestionScreen> {
         child: Column(
         mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 80,),
           Text(
-          'Welcome to Ain Shams University Faculty of Science Guide!',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold ,color: isDarkMode ? Colors.white : Colors.black),
+          'Question.welcome'.tr(),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold ,color: isDarkMode ? Colors.white : Colors.black),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         Text(
-          "I'm here to help you find the best courses and career paths "
-              "for your studies at Ain Shams University. 🎓\n\n"
-              "Would you like to start a conversation with our smart assistant?",
-          style: TextStyle(fontSize: 16, color:isDarkMode ? Colors.white70 : Colors.grey[700]),
+        'Question.body'.tr(),
+          style: TextStyle(fontSize: 14, color:isDarkMode ? Colors.white70 : Colors.grey[700]),
           textAlign: TextAlign.center,
         ),
         Spacer(),
-        CustomScibutton(text: 'chat with sciMate', onPressed: () {
+        CustomScibutton(text: 'Question.chat_button'.tr(), onPressed: () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => ChatScreen()));
       },),
-        SizedBox(height: 10),
-        CustomScibutton(text: 'Cancel', onPressed: () {
+        SizedBox(height: 20),
+        CustomScibutton(text: 'Question.cancel_button'.tr(), onPressed: () {
         Navigator.pop(context);
       },),
           ],

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/schedule.dart';
@@ -76,7 +77,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Schedule Deleted",
+                      'ScheduleDeleteFeedItem.schedule_deleted'.tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold, 
                         fontSize: 16,
@@ -103,7 +104,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Deleted Schedule Details",
+                   'ScheduleDeleteFeedItem.deleted_schedule_details'.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold, 
                       fontSize: 14,

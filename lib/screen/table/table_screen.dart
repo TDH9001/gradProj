@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
@@ -28,13 +29,13 @@ class TableScreen extends StatefulWidget {
   final TextEditingController endTime = TextEditingController();
   final TextEditingController endDate = TextEditingController();
   final List<DropdownItem<String>> daysList = [
-    DropdownItem(label: "saturday", value: "saturday"),
-    DropdownItem(label: "sunday", value: "sunday"),
-    DropdownItem(label: "monday", value: "monday"),
-    DropdownItem(label: "tuesday", value: "tuesday"),
-    DropdownItem(label: "wednesday", value: "wednesday"),
-    DropdownItem(label: "thursday", value: "thursday"),
-    DropdownItem(label: "friday", value: "friday"),
+    DropdownItem(label: 'TableScreen.saturday'.tr(), value: "saturday"),
+    DropdownItem(label: 'TableScreen.sunday'.tr(), value: "sunday"),
+    DropdownItem(label: 'TableScreen.monday'.tr(), value: "monday"),
+    DropdownItem(label: 'TableScreen.tuesday'.tr(), value: "tuesday"),
+    DropdownItem(label: 'TableScreen.wednesday'.tr(), value: "wednesday"),
+    DropdownItem(label: 'TableScreen.thursday'.tr(), value: "thursday"),
+    DropdownItem(label: 'TableScreen.friday'.tr(), value: "friday"),
   ];
   final GlobalKey<FormState> validateSceduleItemForPersonalUse =
       GlobalKey<FormState>();
@@ -62,7 +63,7 @@ class _TableScreenState extends State<TableScreen> {
                         flex: 1,
                       ),
                       Text(
-                        "Add permanant scedule item ",
+                        'TableScreen.add_schedule'.tr(),
                         style: TextStyle(fontSize: 16),
                       ),
                       Spacer(
@@ -82,7 +83,7 @@ class _TableScreenState extends State<TableScreen> {
                             } else {
                               SnackBarService.instance.showsSnackBarError(
                                   text:
-                                      "error adding scedule, please try again");
+                                    'TableScreen.error'.tr());
                             }
                           },
                           icon: Icon(

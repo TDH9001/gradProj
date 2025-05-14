@@ -20,29 +20,32 @@ class Orgappbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
-    return AppBar(
-      backgroundColor: isDarkMode ?DarkThemeColors.primary: LightTheme.primary,
-      //Color(0xFF2E5077)
-      title: Center (
-        child: Text(
-          title,
-          style: TextStyles.appBarText.copyWith(
-            color:Colors.white,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: AppBar(
+        backgroundColor: isDarkMode ?DarkThemeColors.primary: LightTheme.primary,
+        //Color(0xFF2E5077)
+        title: Center (
+          child: Text(
+            title,
+            style: TextStyles.appBarText.copyWith(
+              color:Colors.white,
+            ),
           ),
         ),
+        leading: leading,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundColor: isDarkMode ? DarkThemeColors.backgroundImage: LightTheme.backgroundImage,
+              backgroundImage: const AssetImage('assets/images/science.png'),
+              radius: 20,
+            ),
+          ),
+          const SizedBox(width: 10),
+        ],
       ),
-      leading: leading,
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: isDarkMode ? DarkThemeColors.backgroundImage: LightTheme.backgroundImage,
-            backgroundImage: const AssetImage('assets/images/science.png'),
-            radius: 20,
-          ),
-        ),
-        const SizedBox(width: 10),
-      ],
     );
   }
 

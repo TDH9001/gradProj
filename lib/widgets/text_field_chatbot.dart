@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldChatbot extends StatelessWidget {
@@ -16,7 +17,7 @@ class TextFieldChatbot extends StatelessWidget {
               controller: controller,
               onSubmitted: onSubmitted,
               decoration: InputDecoration(
-                hintText: 'Ask a question...',
+                hintText: 'Chatbot.ask_question'.tr(),
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                   suffixIcon: IconButton(
                   icon: Icon(Icons.send, color: Color(0xff2E5077)),

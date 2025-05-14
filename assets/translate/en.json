@@ -37,5 +37,82 @@
     "question": "Questions",
     "stutent_guide": "Student Guide",
     "logout": "Logout"
+  },
+  "Profile":
+  {
+    "name": "Name",
+    "email": "Email",
+    "seat_number": "Seat Number",
+    "phone_number": "Phone Number",
+    "academic_year": "Academic Year",
+    "edit_data_button": "Edit Data",
+    "no_course": "No courses enrolled yet.",
+    "course_enroll": "Courses Enrolled"
+  },
+  "Setting":
+  {
+    "title": "Setting",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language",
+    "english": "English",
+    "arabic": "Arabic"
+  },
+  "Question":
+  {
+    "title": "Questions",
+    "welcome": "Welcome to Ain Shams University Faculty of Science Guide!",
+    "body":"  \"body\": \"I'm here to help you find the best courses and career paths \n    for your studies at Ain Shams University. \uD83C\uDF93\\n\\n\"\n    Would you like to start a conversation with our smart assistant?\"\n  }",
+    "chat_button": "chat with sciMate",
+    "cancel_button": "Cancel"
+  },
+  "Chatbot":
+  {
+    "title": "SciMeta",
+    "ask_question": "Ask a question..."
+  },
+ "BottomNavigationBarScreen":
+  {
+    "home": "Home",
+    "chats": "Chats",
+    "table": "Table",
+    "about": "About"
+  },
+  "TableScreen":
+  {
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "add_schedule": "Add Permanent Schedule Item ",
+    "error": "Error Adding Schedule, Please Try Again"
+  },
+  "Pdf":
+  {
+    "title": "Student Guide"
+  },
+  "ThemeButtonLogin":
+  {
+    "title": "Theme ",
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "system": "System"
+  },
+  "HomeScreen": {
+    "title": "Hello there ☺️",
+    "important": "Important",
+    "no_data": "No Data Available"
+  },
+  "ScheduleDeleteFeedItem":
+  {
+    "schedule_deleted": "Schedule Deleted",
+    "deleted_schedule_details": "Deleted Schedule Details"
   }
+
+
 }

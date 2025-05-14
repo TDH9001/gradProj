@@ -26,12 +26,12 @@ class TableformScreen extends StatelessWidget {
       appBar: Orgappbar(
         scaffoldKey: scaffoldKey,
         title: "Schedule Table",
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        // ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

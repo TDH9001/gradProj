@@ -1,12 +1,10 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/screen/feed_test_screen.dart';
-import 'package:grad_proj/screen/about_screen/acadimic_career_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -25,16 +23,19 @@ class _HomeScreenState extends State<HomeScreen>
         value: AuthProvider.instance,
         child: (Scaffold(
             appBar: AppBar(
-              title: Text(
-                'PLACEHOLDER FOR NAME',
-                style: TextStyle(fontSize: 15),
-                softWrap: true,
-                overflow: TextOverflow.visible,
+             // backgroundColor: Color(0xFF1C1C1C),
+              title: Center(
+                child: Text(
+                  'HomeScreen.title'.tr(),
+                  style: TextStyle(fontSize: 15),
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                ),
               ),
               actions: [
                 IconButton(
                   icon: Icon(Icons.view_list),
-                  tooltip: "Test All Feed Items",
+                  tooltip: 'HomeScreen.important'.tr(),
                   onPressed: () {
                     Navigator.push(
                       context,
