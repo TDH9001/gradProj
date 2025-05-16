@@ -81,49 +81,60 @@ class TemporaryChatSceleList extends StatelessWidget {
                         color: Colors.white),
                   ),
                   children: [
-                    Row(
-                      children: [
-                        Spacer(
-                          flex: 1,
-                        ),
-                        Text(
-                          "Add temporary scedule item ",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                        Spacer(
-                          flex: 3,
-                        ),
-                        IconButton(
-                            onPressed: () async {
-                              final ScheduleItemClass? data =
-                                  await SceduleCreationService.instance
-                                      .createSceduleItem(
-                                          chatID: widget.cahtId,
-                                          itemType: 2,
-                                          cont: context);
-                              if (data != null) {
-                                DBService.instance.addSceduleItem(
-                                    HiveUserContactCashingService
-                                            .getUserContactData()
-                                        .id,
-                                    widget.cahtId,
-                                    data);
-                              } else {
-                                SnackBarService.instance.buildContext = context;
-                                SnackBarService.instance.showsSnackBarError(
-                                    text:
-                                        "Error adding scedule, please try again");
-                              }
-                            },
-                            icon: Icon(
-                              Icons.add_alert_sharp,
-                              color: Color(0xff2E5077),
-                            )),
-                        Spacer(
-                          flex: 2,
-                        )
-                      ],
-                    ),
+                    if (widget.adminList.contains(
+                            HiveUserContactCashingService.getUserContactData()
+                                .id) ||
+                        widget.leaders.contains(
+                            HiveUserContactCashingService.getUserContactData()
+                                .id) ||
+                        HiveUserContactCashingService.getUserContactData()
+                                .id
+                                .length <
+                            10)
+                      Row(
+                        children: [
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Text(
+                            "Add temporary scedule item ",
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                          Spacer(
+                            flex: 3,
+                          ),
+                          IconButton(
+                              onPressed: () async {
+                                final ScheduleItemClass? data =
+                                    await SceduleCreationService.instance
+                                        .createSceduleItem(
+                                            chatID: widget.cahtId,
+                                            itemType: 2,
+                                            cont: context);
+                                if (data != null) {
+                                  DBService.instance.addSceduleItem(
+                                      HiveUserContactCashingService
+                                              .getUserContactData()
+                                          .id,
+                                      widget.cahtId,
+                                      data);
+                                } else {
+                                  SnackBarService.instance.buildContext =
+                                      context;
+                                  SnackBarService.instance.showsSnackBarError(
+                                      text:
+                                          "Error adding scedule, please try again");
+                                }
+                              },
+                              icon: Icon(
+                                Icons.add_alert_sharp,
+                                color: Color(0xff2E5077),
+                              )),
+                          Spacer(
+                            flex: 2,
+                          )
+                        ],
+                      ),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -242,51 +253,62 @@ class PermanatChatScedulesList extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        Spacer(
-                          flex: 1,
-                        ),
-                        Text(
-                          "Add permanant scedule item ",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                        Spacer(
-                          flex: 3,
-                        ),
-                        IconButton(
-                            onPressed: () async {
-                              final ScheduleItemClass? data =
-                                  await SceduleCreationService.instance
-                                      .createSceduleItem(
-                                          chatID: widget.cahtId,
-                                          cont: context,
-                                          itemType: 1);
-                              if (data != null &&
-                                  data.startTime > 0 &&
-                                  data.endTime > 0) {
-                                DBService.instance.addSceduleItem(
-                                    HiveUserContactCashingService
-                                            .getUserContactData()
-                                        .id,
-                                    widget.cahtId,
-                                    data);
-                              } else {
-                                SnackBarService.instance.buildContext = context;
-                                SnackBarService.instance.showsSnackBarError(
-                                    text:
-                                        "Error adding scedule, please try again");
-                              }
-                            },
-                            icon: Icon(
-                              Icons.add_alert_sharp,
-                              color: Color(0xff2E5077),
-                            )),
-                        Spacer(
-                          flex: 2,
-                        )
-                      ],
-                    ),
+                    if (widget.adminList.contains(
+                            HiveUserContactCashingService.getUserContactData()
+                                .id) ||
+                        widget.leaders.contains(
+                            HiveUserContactCashingService.getUserContactData()
+                                .id) ||
+                        HiveUserContactCashingService.getUserContactData()
+                                .id
+                                .length <
+                            10)
+                      Row(
+                        children: [
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Text(
+                            "Add permanant scedule item ",
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                          Spacer(
+                            flex: 3,
+                          ),
+                          IconButton(
+                              onPressed: () async {
+                                final ScheduleItemClass? data =
+                                    await SceduleCreationService.instance
+                                        .createSceduleItem(
+                                            chatID: widget.cahtId,
+                                            cont: context,
+                                            itemType: 1);
+                                if (data != null &&
+                                    data.startTime > 0 &&
+                                    data.endTime > 0) {
+                                  DBService.instance.addSceduleItem(
+                                      HiveUserContactCashingService
+                                              .getUserContactData()
+                                          .id,
+                                      widget.cahtId,
+                                      data);
+                                } else {
+                                  SnackBarService.instance.buildContext =
+                                      context;
+                                  SnackBarService.instance.showsSnackBarError(
+                                      text:
+                                          "Error adding scedule, please try again");
+                                }
+                              },
+                              icon: Icon(
+                                Icons.add_alert_sharp,
+                                color: Color(0xff2E5077),
+                              )),
+                          Spacer(
+                            flex: 2,
+                          )
+                        ],
+                      ),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),

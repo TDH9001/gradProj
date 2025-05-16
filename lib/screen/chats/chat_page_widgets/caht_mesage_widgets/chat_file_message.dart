@@ -82,7 +82,10 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                     height: 2,
                   ), //WIDGET HEREEEEEEEEEE
                   !snapshot.data!.isLoading
-                      ? Column(children: [
+                      ? Row(children: [
+                          Spacer(
+                            flex: 1,
+                          ),
                           snapshot.data!.isFailed == false &&
                                   snapshot.data!.file != null
                               ? Container(
@@ -111,7 +114,10 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                                               file: snapshot.data!.file!))
                               : Image(
                                   image: AssetImage(
-                                      'assets/images/file_not_found.png'))
+                                      'assets/images/file_not_found.png')),
+                          Spacer(
+                            flex: 1,
+                          )
                         ])
                       : FittedBox(
                           child: Column(children: [

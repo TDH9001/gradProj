@@ -9,6 +9,7 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_files_sent.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_images_sent.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_video_sent.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_spreadsheets_manager.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:provider/provider.dart';
@@ -73,6 +74,9 @@ class _MyWidgetState extends State<ChatDataScreen> {
             child: AddUserQrTab(
               chatID: widget.cahtId,
             ),
+          ),
+          ChatSpreadSheetsSlider(
+            widget: widget,
           ),
           widget.adminList.contains(
                       HiveUserContactCashingService.getUserContactData().id) ||
