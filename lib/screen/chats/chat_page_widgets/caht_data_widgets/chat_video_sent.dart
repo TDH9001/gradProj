@@ -127,56 +127,48 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
                             itemBuilder: (context, index) {
                               ChewieController chewieController =
                                   ChewieController(
+                                autoInitialize: true,
                                 videoPlayerController:
                                     VideoPlayerController.file(data[index]),
                                 autoPlay: false,
                                 allowMuting: true,
                                 looping: true,
                               );
-                              return GestureDetector(
-                                onTap: () {
-                                  // AnimatedHeroDialog
-                                  //     .showAnimatedWidgetTransition(
-                                  //         context: context,
-                                  //         heroID: data[index].toString(),
-                                  //         displayedWidget: Chewie(
-                                  //           controller: chewieController,
-                                  //         ));
-                                },
-                                child: Hero(
-                                    tag: data[index].toString(),
-                                    child: Row(
-                                      children: [
-                                        //video
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          width:
-                                              MediaService.instance.getWidth() *
-                                                  0.6,
-                                          height: MediaService.instance
-                                                  .getHeight() *
-                                              0.2,
-                                          child: Chewie(
-                                            controller: chewieController,
-                                          ),
+                              return Hero(
+                                  tag: data[index].toString(),
+                                  child: Row(
+                                    children: [
+                                      Spacer(
+                                        flex: 1,
+                                      ),
+                                      //video
+                                      Container(
+                                        padding: EdgeInsets.all(2),
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black12,
+                                                blurRadius: 6,
+                                                offset: Offset(0, 3),
+                                              ),
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        width:
+                                            MediaService.instance.getWidth() *
+                                                0.9,
+                                        height:
+                                            MediaService.instance.getHeight() *
+                                                0.3,
+                                        child: Chewie(
+                                          controller: chewieController,
                                         ),
-                                        Spacer(
-                                          flex: 1,
-                                        ),
-                                        SizedBox(
-                                          width:
-                                              MediaService.instance.getWidth() *
-                                                  0.3,
-                                          child: Text(
-                                            "${p.extension(data[index].path)} : ${p.basename(data[index].path)}",
-                                            maxLines: 1,
-                                          ),
-                                        )
-                                      ],
-                                    )),
-                              );
+                                      ),
+                                      Spacer(
+                                        flex: 1,
+                                      ),
+                                    ],
+                                  ));
                             },
                           ),
                         )

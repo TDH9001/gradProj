@@ -45,10 +45,10 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
           VideoPlayerController.file(snapshot.data!.file!);
       //  widget.videoPlayerController.initialize();
       widget.chewieController = ChewieController(
-        videoPlayerController: widget.videoPlayerController,
-        autoPlay: false,
-        looping: true,
-      );
+          videoPlayerController: widget.videoPlayerController,
+          autoPlay: false,
+          looping: true,
+          autoInitialize: true);
     }
   }
 

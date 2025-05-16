@@ -122,43 +122,39 @@ class _ChatFilesSentState extends State<ChatFilesSent> {
                                     tag: data[index].toString(),
                                     child: Row(
                                       children: [
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15)),
-                                            width: MediaService.instance
-                                                    .getWidth() *
-                                                0.4,
-                                            height: MediaService.instance
-                                                    .getHeight() *
-                                                0.25,
-                                            child: p.extension(
-                                                        data[index].path) ==
-                                                    ".xlsx"
-                                                ? Image(
-                                                    image: AssetImage(
-                                                        'assets/images/xlsx.png'))
-                                                : p.extension(data[index].path) ==
-                                                            ".ppt" ||
-                                                        p.extension(data[index].path) ==
-                                                            ".pptx"
-                                                    ? Image(
-                                                        image: AssetImage(
-                                                            "assets/images/ppt.png"),
-                                                      )
-                                                    : UniversalFileViewer(
-                                                        file: data[index])),
+                                        Spacer(flex: 1),
+                                        Center(
+                                          child: Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100)),
+                                              width:
+                                                  MediaService.instance.getWidth() *
+                                                      0.8,
+                                              height: MediaService.instance
+                                                      .getHeight() *
+                                                  0.3,
+                                              child: p.extension(
+                                                          data[index].path) ==
+                                                      ".xlsx"
+                                                  ? Image(
+                                                      image: AssetImage(
+                                                          'assets/images/xlsx.png'))
+                                                  : p.extension(data[index].path) ==
+                                                              ".ppt" ||
+                                                          p.extension(data[index].path) ==
+                                                              ".pptx"
+                                                      ? Image(
+                                                          image: AssetImage(
+                                                              "assets/images/ppt.png"),
+                                                        )
+                                                      : UniversalFileViewer(
+                                                          file: data[index])),
+                                        ),
                                         Spacer(
                                           flex: 1,
-                                        ),
-                                        SizedBox(
-                                          width:
-                                              MediaService.instance.getWidth() *
-                                                  0.5,
-                                          child: Text(
-                                            "${p.extension(data[index].path)} : ${p.basename(data[index].path)}",
-                                            maxLines: 1,
-                                          ),
                                         )
                                       ],
                                     )),
