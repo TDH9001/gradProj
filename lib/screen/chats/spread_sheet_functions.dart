@@ -6,9 +6,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:excel/excel.dart';
 import 'package:external_path/external_path.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:grad_proj/models/contact.dart';
+import 'package:grad_proj/screen/chats/chat_data_result_page/spreadsheet_result_page.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Network_checker_service.dart';
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
@@ -147,6 +149,12 @@ class SpreadSheetFunctions {
         }
         dev.log(firstRow.toString());
         dev.log(targetRow.toString());
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return SpreadSheetResult(
+            base: firstRow,
+            result: targetRow,
+          );
+        }));
       }
     } on Exception catch (e) {
       SnackBarService.instance.buildContext = context;
