@@ -16,6 +16,7 @@ class CloudStorageService {
   final String _messageFiles = "messageFiles of chats";
   final String _images = "images";
   final String _voice = "voices";
+  final String _courseSpreadsheet = "courseSpreadsheet";
 
   CloudStorageService() {
     _storage = FirebaseStorage.instance;
@@ -68,6 +69,22 @@ class CloudStorageService {
       print("uploaded");
       return data;
     } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future<TaskSnapshot?> uploadCourseSpreadsheet({
+    required String chatID,
+    required File fileData,
+  }) async {
+    try {
+      var data = await baseRef
+          .child(_courseSpreadsheet)
+          .child(chatID)
+          .child(p.basename("spreadSheet.xlsx"))
+          .putFile(fileData);
+      return data;
+    } catch (e) {
       print(e);
     }
   }

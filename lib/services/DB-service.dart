@@ -800,4 +800,13 @@ class DBService {
       }).toList();
     });
   }
+
+  Future<void> addSpreadsheetToChat(String chatId, String link) async {
+    var ref = _db
+        .collection(_ChatCollection)
+        .doc(chatId)
+        .collection("spreadsheet")
+        .doc("courseSheet");
+    return ref.set({"SpreadSheetLink": link}, SetOptions(merge: true));
+  }
 }

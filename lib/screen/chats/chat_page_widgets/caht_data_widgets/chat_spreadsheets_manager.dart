@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
+import 'package:grad_proj/screen/chats/spread_sheet_functions.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -34,7 +35,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
             ],
           ),
           child: ExpansionTile(
-              initiallyExpanded: true,
+              initiallyExpanded: false,
               leading: const Icon(Icons.image, color: Color(0xff2E5077)),
               // elevation: 4,
               shape: RoundedRectangleBorder(
@@ -53,7 +54,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
               ),
               children: [
                 SizedBox(
-                  height: MediaService.instance.getHeight() * 0.3,
+                  height: MediaService.instance.getHeight() * 0.25,
                   child: Column(
                     children: [
                       if (widget.adminList.contains(
@@ -76,6 +77,9 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                               child: PrimaryButton(
                                   buttontext: "base sheet", func: () {}))
                         ]),
+                      Spacer(
+                        flex: 1,
+                      ),
                       if (widget.adminList.contains(
                               HiveUserContactCashingService.getUserContactData()
                                   .id) ||
@@ -94,8 +98,15 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                           Container(
                               width: MediaService.instance.getWidth() * 0.5,
                               child: PrimaryButton(
-                                  buttontext: "submit sheet", func: () {}))
+                                  buttontext: "submit sheet",
+                                  func: () {
+                                    SpreadSheetFunctions().pickSpreadSheet(
+                                        context, widget.cahtId);
+                                  }))
                         ]),
+                      Spacer(
+                        flex: 1,
+                      ),
                       Row(children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -109,6 +120,9 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                             child: PrimaryButton(
                                 buttontext: "view sheet", func: () {}))
                       ]),
+                      Spacer(
+                        flex: 1,
+                      ),
                     ],
                   ),
                 )

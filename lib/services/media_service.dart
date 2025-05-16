@@ -3,9 +3,6 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:record/record.dart';
-import 'package:uuid/uuid.dart';
 
 // import '../services/media_service.dart';
 // import 'dart:io';

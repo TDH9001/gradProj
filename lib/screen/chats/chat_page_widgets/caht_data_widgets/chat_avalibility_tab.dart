@@ -36,7 +36,7 @@ class ChatAvalibilitySlider extends StatelessWidget {
             ],
           ),
           child: ExpansionTile(
-            initiallyExpanded: true,
+            initiallyExpanded: false,
             leading:
                 const Icon(Icons.open_in_browser, color: Color(0xff769BC6)),
             // elevation: 4,

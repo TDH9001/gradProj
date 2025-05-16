@@ -83,7 +83,7 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                 ],
               ),
               child: ExpansionTile(
-                initiallyExpanded: true,
+                initiallyExpanded: false,
                 leading: const Icon(Icons.image, color: Color(0xff2E5077)),
                 // elevation: 4,
                 shape: RoundedRectangleBorder(

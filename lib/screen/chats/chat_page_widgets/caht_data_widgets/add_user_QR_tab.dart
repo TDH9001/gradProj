@@ -30,7 +30,7 @@ class AddUserQrTab extends StatelessWidget {
           ],
         ),
         child: ExpansionTile(
-            initiallyExpanded: true,
+            initiallyExpanded: false,
             leading: const Icon(Icons.qr_code, color: Color(0xff2E5077)),
             // elevation: 4,
             shape: RoundedRectangleBorder(

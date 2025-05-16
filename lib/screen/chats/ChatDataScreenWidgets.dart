@@ -66,7 +66,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                   ],
                 ),
                 child: ExpansionTile(
-                  initiallyExpanded: true,
+                  initiallyExpanded: false,
                   leading:
                       const Icon(Icons.table_chart, color: Color(0xff2E5077)),
                   // elevation: 4,
@@ -220,7 +220,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                   ],
                 ),
                 child: ExpansionTile(
-                  initiallyExpanded: true,
+                  initiallyExpanded: false,
                   leading:
                       Icon(Icons.table_view_outlined, color: Color(0xff2E5077)),
                   // elevation: 4,

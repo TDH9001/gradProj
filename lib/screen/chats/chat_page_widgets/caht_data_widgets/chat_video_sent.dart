@@ -97,7 +97,7 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
                 ],
               ),
               child: ExpansionTile(
-                initiallyExpanded: true,
+                initiallyExpanded: false,
                 leading: const Icon(Icons.video_collection,
                     color: Color(0xff2E5077)),
                 // elevation: 4,

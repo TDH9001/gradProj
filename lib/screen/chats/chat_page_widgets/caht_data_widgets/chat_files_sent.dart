@@ -87,7 +87,7 @@ class _ChatFilesSentState extends State<ChatFilesSent> {
                 ],
               ),
               child: ExpansionTile(
-                initiallyExpanded: true,
+                initiallyExpanded: false,
                 leading: const Icon(Icons.file_copy, color: Color(0xff2E5077)),
                 // elevation: 4,
                 shape: RoundedRectangleBorder(
