@@ -113,7 +113,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                   !snapshot.data!.isLoading
                       ? SizedBox(
                           width: MediaService.instance.getWidth() * 0.65,
-                          height: MediaService.instance.getHeight() * 0.40,
+                          height: MediaService.instance.getHeight() * 0.35,
                           child: Column(children: [
                             snapshot.data!.isFailed == false &&
                                     snapshot.data!.file != null
@@ -123,8 +123,8 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                                             BorderRadius.circular(15)),
                                     width:
                                         MediaService.instance.getWidth() * 0.6,
-                                    height:
-                                        MediaService.instance.getHeight() * 0.3,
+                                    height: MediaService.instance.getHeight() *
+                                        0.35,
                                     child: Chewie(
                                       controller: widget.chewieController,
                                     ),

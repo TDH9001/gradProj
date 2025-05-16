@@ -654,7 +654,9 @@ class DBService {
     }
   }
 
-  Stream<List<FeedItems>> getUserFeed(String uid) {
+  /// Retrieves a stream of the user's personal feed items from the database.
+  ///
+  Stream<List<FeedItems>> getUserFeed(String uid, String searched) {
     return _db
         .collection(_UserCollection)
         .doc(uid)
@@ -665,7 +667,12 @@ class DBService {
       if (snap.exists) {
         if (snap.data()!.containsKey("PersonalFeed")) {
           List<dynamic> currentData = snap["PersonalFeed"];
-          return currentData.map((item) {
+          return currentData
+              .where((item) => item["chatID"]
+                  .toString()
+                  .toLowerCase()
+                  .contains(searched.toLowerCase()))
+              .map((item) {
             return FeedItems.getFeedItemFromSubClass(item);
           }).toList();
         } else {

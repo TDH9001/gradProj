@@ -106,9 +106,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                       Text(
                         widget.message.senderName,
                       ),
-                      SizedBox(
-                        height: 4,
-                      ),
                       //where image is displayed
                       snapshot.data!.file != null &&
                               !snapshot.data!
@@ -161,7 +158,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                         height: 5,
                       ),
                       Text(
-                        "  , ${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
+                        "${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
                         style: TextStyle(fontSize: 16),
                       )
                     ],
