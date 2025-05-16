@@ -85,25 +85,6 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                       ? Column(children: [
                           snapshot.data!.isFailed == false &&
                                   snapshot.data!.file != null
-                              ? Row(
-                                  children: [
-                                    SizedBox(
-                                      width: MediaService.instance.getWidth() *
-                                          0.4,
-                                      child: Text(
-                                        p.basename(
-                                          snapshot.data!.file!.path,
-                                        ),
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    Text(
-                                        "  ${p.extension(snapshot.data!.file!.path)}")
-                                  ],
-                                )
-                              : SizedBox(),
-                          snapshot.data!.isFailed == false &&
-                                  snapshot.data!.file != null
                               ? Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15)),

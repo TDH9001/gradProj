@@ -1,5 +1,4 @@
 import 'package:chewie/chewie.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/cached_file_rsponse/cahed_item_set_state_response.dart';
@@ -10,7 +9,6 @@ import 'package:grad_proj/services/animated_hero_service/animated_hero_dialog.da
 import 'package:grad_proj/services/file_caching_service/chat_file_caching_service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
-import 'package:path/path.dart' as p;
 import 'package:video_player/video_player.dart';
 
 class ChatVideoMessage extends StatefulWidget {
@@ -32,6 +30,13 @@ class ChatVideoMessage extends StatefulWidget {
 
 class _ChatVideoMessageState extends State<ChatVideoMessage>
     with AutomaticKeepAliveClientMixin {
+  @override
+  void dispose() {
+    widget.chewieController.dispose();
+    widget.videoPlayerController.dispose();
+    super.dispose();
+  }
+
   @override
   bool get wantKeepAlive => true;
   void initPlayer(AsyncSnapshot<CachedFileResult> snapshot) {
@@ -103,23 +108,13 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                 children: [
                   Text(widget.message.senderName.trim()),
                   SizedBox(
-                    height: 5,
+                    height: 4,
                   ), //WIDGET HEREEEEEEEEEE
                   !snapshot.data!.isLoading
                       ? SizedBox(
-                          width: MediaService.instance.getWidth() * 0.63,
-                          height: MediaService.instance.getHeight() * 0.38,
+                          width: MediaService.instance.getWidth() * 0.65,
+                          height: MediaService.instance.getHeight() * 0.40,
                           child: Column(children: [
-                            snapshot.data!.isFailed == false &&
-                                    snapshot.data!.file != null
-                                ? Text(
-                                    p.basename(snapshot.data!.file!.path),
-                                    maxLines: 1,
-                                  )
-                                : SizedBox(),
-                            SizedBox(
-                              height: 5,
-                            ),
                             snapshot.data!.isFailed == false &&
                                     snapshot.data!.file != null
                                 ? Container(
@@ -151,7 +146,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                           ),
                         ])),
                   Text(
-                    " ${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
+                    "${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}",
                     style: TextStyle(fontSize: 16),
                   )
                 ],

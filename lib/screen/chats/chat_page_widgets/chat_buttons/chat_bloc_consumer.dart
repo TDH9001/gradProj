@@ -34,24 +34,30 @@ class ChatBlocConsumer extends StatelessWidget {
           return SizedBox(
             // height: _height * 0.1,
             width: MediaService.instance.getWidth() * 0.09,
-            child: IconButton(
-              icon: Icon(Icons.stop, color: LightTheme.primary),
-              onPressed: () async {
-                String? VoiceUrl = await ChatCubit.get(context)
-                    .stopRecord(ChatCubit.get(context).record);
-                DBService.instance.addMessageInChat(
-                    chatId: chatID,
-                    messageData: Message(
-                        isImportant: false,
-                        senderID:
-                            HiveUserContactCashingService.getUserContactData()
-                                .id,
-                        messageContent: VoiceUrl!,
-                        timestamp: Timestamp.now(),
-                        type: "voice",
-                        senderName:
-                            "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}"));
-              },
+            child: Container(
+              color: Colors.redAccent,
+              child: IconButton(
+                icon: Icon(
+                  Icons.stop,
+                  color: LightTheme.primary,
+                ),
+                onPressed: () async {
+                  String? VoiceUrl = await ChatCubit.get(context)
+                      .stopRecord(ChatCubit.get(context).record);
+                  DBService.instance.addMessageInChat(
+                      chatId: chatID,
+                      messageData: Message(
+                          isImportant: false,
+                          senderID:
+                              HiveUserContactCashingService.getUserContactData()
+                                  .id,
+                          messageContent: VoiceUrl!,
+                          timestamp: Timestamp.now(),
+                          type: "voice",
+                          senderName:
+                              "${HiveUserContactCashingService.getUserContactData().firstName} ${HiveUserContactCashingService.getUserContactData().lastName}"));
+                },
+              ),
             ),
           );
         } else if (state is ChatCubitTyping) {
