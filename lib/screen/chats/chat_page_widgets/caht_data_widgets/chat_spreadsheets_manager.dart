@@ -75,7 +75,11 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                           SizedBox(
                               width: MediaService.instance.getWidth() * 0.5,
                               child: PrimaryButton(
-                                  buttontext: "base sheet", func: () {}))
+                                  buttontext: "base sheet",
+                                  func: () {
+                                    SpreadSheetFunctions().downloadBaseSheet(
+                                        context, widget.cahtId);
+                                  }))
                         ]),
                       Spacer(
                         flex: 1,

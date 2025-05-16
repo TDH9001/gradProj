@@ -4,8 +4,6 @@ import 'dart:ui';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:image_picker/image_picker.dart';
 
-// import '../services/media_service.dart';
-// import 'dart:io';
 
 class MediaService {
   double getWidth() {

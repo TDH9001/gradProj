@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
-import 'package:grad_proj/screen/chats/ChatDataScreenWidgets.dart';
+import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/ChatDataScreenWidgets.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/add_user_QR_tab.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_avalibility_tab.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_files_sent.dart';
