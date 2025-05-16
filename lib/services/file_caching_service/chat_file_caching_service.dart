@@ -53,10 +53,11 @@ class ChatFileCachingService {
               String downloadsPath =
                   await ExternalPath.getExternalStoragePublicDirectory(
                       ExternalPath.DIRECTORY_DOWNLOAD);
-              dev.log(downloadsPath);
+            //  dev.log(downloadsPath);
               String targetDir = "$downloadsPath/Sci-Connecet/$fileType";
               await Directory(targetDir)
                   .create(recursive: true); 
+                  
               String pathToStoreIn =
                   "$downloadsPath/Sci-Connecet/$fileType/${p.basename(fileResponse.file.path)}";
               File newFile = await fileResponse.file.copy(pathToStoreIn);

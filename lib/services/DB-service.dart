@@ -121,11 +121,9 @@ class DBService {
   Future<void> makeChat(String chatId, String _uid) async {
     var ref = await _db.collection(_ChatCollection).doc(chatId);
     if ((await _db.collection(_ChatCollection).doc(chatId).get()).exists) {
-      devtools.log("chat already exists : $chatId");
       return;
     }
 
-    devtools.log("create he brand new : $chatId");
     return await ref.set({
       "ChatAccesability": ChatAccesabilityEnum.admin_only.index,
       "leaders": [],
@@ -146,7 +144,6 @@ class DBService {
           substrings.add(text.substring(i, j));
         }
       }
-      devtools.log(substrings.toList().toString());
       return substrings.toList();
     }
 
@@ -215,9 +212,6 @@ class DBService {
   }
 
   Stream<List<Contact>> getChatMembersData(String chatId) {
-    devtools.log((Stream.fromFuture(getMembersOfChat(chatId)))
-        .asyncExpand((data) {})
-        .toString());
     return Stream.fromFuture(getMembersOfChat(chatId)).asyncExpand((userIds) {
       if (userIds.isEmpty) {
         return Stream.value([]); // Return empty list if no members
@@ -256,7 +250,6 @@ class DBService {
     var chat = await _db.collection(_ChatCollection).doc(chatID).get();
     if (!chat.exists) {
       // Optionally throw an exception or handle this case gracefully
-      devtools.log("Chat with ID '$chatID' does not exist.");
       return;
     }
 
@@ -287,7 +280,6 @@ class DBService {
     var ref2 = _db.collection(_ChatCollection).doc(chatID);
     if (!(await ref2.get()).exists) {
       // Optionally throw an exception or handle this case gracefully
-      devtools.log("Chat with ID '$chatID' does not exist. > to add user");
       return;
     }
     return ref2.update({
@@ -808,5 +800,20 @@ class DBService {
         .collection("spreadsheet")
         .doc("courseSheet");
     return ref.set({"SpreadSheetLink": link}, SetOptions(merge: true));
+  }
+
+  Future<String> getSpreadSheetLink(String chatId) async {
+    var ref = _db
+        .collection(_ChatCollection)
+        .doc(chatId)
+        .collection("spreadsheet")
+        .doc("courseSheet");
+    var snap = await ref.get();
+    if (snap.exists) {
+      devtools.log(snap["SpreadSheetLink"]);
+      return snap["SpreadSheetLink"];
+    } else {
+      return "";
+    }
   }
 }

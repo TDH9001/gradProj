@@ -94,6 +94,34 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                         Row(children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
+                            child: Text("get current file"),
+                          ),
+                          Spacer(
+                            flex: 1,
+                          ),
+                          SizedBox(
+                              width: MediaService.instance.getWidth() * 0.5,
+                              child: PrimaryButton(
+                                  buttontext: "current sheet",
+                                  func: () {
+                                    SpreadSheetFunctions()
+                                        .downloadCurrentSpreadSheet(
+                                            context, widget.cahtId);
+                                  }))
+                        ]),
+                      Spacer(
+                        flex: 1,
+                      ),
+                      if (widget.adminList.contains(
+                              HiveUserContactCashingService.getUserContactData()
+                                  .id) ||
+                          HiveUserContactCashingService.getUserContactData()
+                                  .id
+                                  .length <
+                              10)
+                        Row(children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text("Submit a spreadsheet"),
                           ),
                           Spacer(
@@ -122,7 +150,11 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                         Container(
                             width: MediaService.instance.getWidth() * 0.5,
                             child: PrimaryButton(
-                                buttontext: "view sheet", func: () {}))
+                                buttontext: "view sheet",
+                                func: () {
+                                  SpreadSheetFunctions().getUserFromSpreadSheet(
+                                      context, widget.cahtId);
+                                }))
                       ]),
                       Spacer(
                         flex: 1,
