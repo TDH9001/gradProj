@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/models/schedule.dart';
@@ -82,7 +83,7 @@ class SceduleCreateFeedItem extends FeedItems {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "New Schedule Created",
+                      'SceduleCreateFeedItem.schedule_created'.tr(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -109,22 +110,22 @@ class SceduleCreateFeedItem extends FeedItems {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Schedule Details",
+                    'SceduleCreateFeedItem.schedule_details'.tr(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                         color: textColor),
                   ),
                   Divider(color: successColor.withOpacity(0.3)),
-                  _buildScheduleDetailRow(context, "Course", scheduleItem.name),
+                  _buildScheduleDetailRow(context, 'SceduleCreateFeedItem.course'.tr(), scheduleItem.name),
                   _buildScheduleDetailRow(
-                      context, "Day", getDayName(scheduleItem.day)),
+                      context, 'SceduleCreateFeedItem.day'.tr(), getDayName(scheduleItem.day)),
                   _buildScheduleDetailRow(context, "Time",
                       "${formatTime(scheduleItem.startTime)} - ${formatTime(scheduleItem.endTime)}"),
                   _buildScheduleDetailRow(
-                      context, "Location", scheduleItem.location),
+                      context, 'SceduleCreateFeedItem.location'.tr(), scheduleItem.location),
                   _buildScheduleDetailRow(
-                      context, "Instructor", scheduleItem.creatorName),
+                      context,'SceduleCreateFeedItem.instructor'.tr(), scheduleItem.creatorName),
                 ],
               ),
             ),

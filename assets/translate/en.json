@@ -116,7 +116,18 @@
     "day": "Day",
     "time": "Time",
     "location": "Location"
+  },
+  "SceduleCreateFeedItem":
+  {
+    "schedule_created": "Schedule Created",
+    "created_schedule_details": "Created Schedule Details",
+    "course": "Course",
+    "day": "Day",
+    "time": "Time",
+    "location": "Location",
+    "instructor": "Instructor"
   }
+
 
 
 }

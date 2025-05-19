@@ -114,6 +114,16 @@
     "day": "اليوم",
     "time": "الوقت",
     "location": "الموقع"
+  },
+  "SceduleCreateFeedItem": {
+    "schedule_created": "تم إنشاء الجدول",
+    "created_schedule_details": "تفاصيل الجدول المُنشأ",
+    "course": "المقرر",
+    "day": "اليوم",
+    "time": "الوقت",
+    "location": "الموقع",
+    "instructor": "المحاضر"
   }
+
 
 }
