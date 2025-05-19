@@ -111,7 +111,11 @@
   "ScheduleDeleteFeedItem":
   {
     "schedule_deleted": "Schedule Deleted",
-    "deleted_schedule_details": "Deleted Schedule Details"
+    "deleted_schedule_details": "Deleted Schedule Details",
+    "course": "Course",
+    "day": "Day",
+    "time": "Time",
+    "location": "Location"
   }
 
 

@@ -107,11 +107,13 @@
     "important": "هام",
     "no_data": "لا توجد بيانات "
   },
-  "ScheduleDeleteFeedItem":
-  {
+  "ScheduleDeleteFeedItem": {
     "schedule_deleted": "تم حذف الجدول",
-    "deleted_schedule_details": "تفاصيل الجدول المحذوف"
+    "deleted_schedule_details": "تفاصيل الجدول المحذوف",
+    "course": "المقرر",
+    "day": "اليوم",
+    "time": "الوقت",
+    "location": "الموقع"
   }
-
 
 }
