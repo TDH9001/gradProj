@@ -139,5 +139,13 @@
   "home": {
     "search_for_courses": "Search for Courses",
     "no_data": "No Data Available"
+  },
+  "chats": {
+    "add_new_chat": "Add New Chat",
+    "image_attachment": "Image attachment",
+    "voice_attachment": "Voice attachment",
+    "video_attachment": "Video attachment",
+    "file_attachment": "File attachment",
+    "no_chat": "no chats please go to the profile and add courses...."
   }
 }

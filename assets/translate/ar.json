@@ -135,6 +135,16 @@
   "home": {
     "search_for_courses": "ابحث عن المقررات",
     "no_data": "لا توجد بيانات متاحة"
+  },
+  "chats": {
+    "add_new_chat": "إضافة محادثة جديدة",
+    "image_attachment": "إرفاق صورة",
+    "voice_attachment": "إرفاق صوت",
+    "video_attachment": "إرفاق فيديو",
+    "file_attachment": "إرفاق ملف",
+    "no_chat": "لا توجد محادثات، يُرجى الذهاب إلى الملف الشخصي وإضافة مقررات..."
   }
+
+
 
 }

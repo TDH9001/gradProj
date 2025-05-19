@@ -55,9 +55,10 @@ class _RecentChatsState extends State<RecentChats> {
           HiveUserContactCashingService.getUserContactData().id.length < 10
               ? null
               : FloatingActionButton(
+                  backgroundColor: Color(0xff2E5077),
                   onPressed: () => _showAddChatDialog(context),
-                  child: const Icon(Icons.add_comment_outlined),
-                  tooltip: 'Add New Chat',
+                  child: const Icon(Icons.add_comment_outlined, color: Colors.white),
+                  tooltip: 'chats.add_new_chat'.tr(),
                 ),
     );
   }
@@ -175,7 +176,7 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                 ? Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text("Image attachment"),
+                                      Text('chats.image_attachment'.tr()),
                                       Icon(
                                         Icons.image,
                                         size: 16, // Adjusted icon size
@@ -186,7 +187,7 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                 : data[index].type == MessageType.voice.name
                                     ? Row(
                                         children: [
-                                          Text("Voice attachment"),
+                                          Text('chats.voice_attachment'.tr()),
                                           Icon(
                                             Icons.music_note,
                                             color: Color(0xff7AB2D3),
@@ -196,9 +197,9 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                     : data[index].type == MessageType.video.name
                                         ? Row(
                                             children: [
-                                              Text("Video attachment"),
+                                              Text('chats.video_attachment'.tr()),
                                               Icon(
-                                                Icons.ondemand_video_outlined,
+                                                Icons.video_collection_sharp,
                                                 color: Color(0xff7AB2D3),
                                               )
                                             ],
@@ -207,9 +208,9 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                                                 MessageType.file.name
                                             ? Row(
                                                 children: [
-                                                  Text("File attachment"),
+                                                  Text('chats.file_attachment'.tr()),
                                                   Icon(
-                                                    Icons.file_present_outlined,
+                                                    Icons.file_copy_outlined,
                                                     color: Color(0xff7AB2D3),
                                                   )
                                                 ],
@@ -225,8 +226,8 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 20.0),
                       child: Text(
-                        "no chats please go to the profile and add courses....",
-                        style: TextStyle(fontSize: 18),
+                        'chats.no_chats'.tr(),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   );
