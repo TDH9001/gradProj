@@ -110,7 +110,7 @@ class SceduleCreateFeedItem extends FeedItems {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'SceduleCreateFeedItem.schedule_details'.tr(),
+                    'SceduleCreateFeedItem.created_schedule_details'.tr(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,

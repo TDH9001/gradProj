@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_proj/models/feed_Items.dart';
@@ -82,7 +83,7 @@ class ScheduleUpdateItem extends FeedItems {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Schedule Updated",
+                      'ScheduleUpdateItem.schedule_updated'.tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold, 
                         fontSize: 16,
@@ -109,7 +110,7 @@ class ScheduleUpdateItem extends FeedItems {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Updated Schedule",
+                    'ScheduleUpdateItem.updated_schedule_details'.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold, 
                       fontSize: 14,
@@ -117,11 +118,11 @@ class ScheduleUpdateItem extends FeedItems {
                     ),
                   ),
                   Divider(color: secondaryColor.withOpacity(0.3)),
-                  _buildScheduleComparisonRow(context, "Course", oldScheduleItem.name, newScheduleItem.name),
-                  _buildScheduleComparisonRow(context, "Day", getDayName(oldScheduleItem.day), getDayName(newScheduleItem.day)),
-                  _buildScheduleComparisonRow(context, "Time", "${formatTime(oldScheduleItem.startTime)} - ${formatTime(oldScheduleItem.endTime)}", 
+                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.course'.tr(), oldScheduleItem.name, newScheduleItem.name),
+                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.day'.tr(), getDayName(oldScheduleItem.day), getDayName(newScheduleItem.day)),
+                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.time'.tr(), "${formatTime(oldScheduleItem.startTime)} - ${formatTime(oldScheduleItem.endTime)}",
                                                      "${formatTime(newScheduleItem.startTime)} - ${formatTime(newScheduleItem.endTime)}"),
-                  _buildScheduleComparisonRow(context, "Location", oldScheduleItem.location, newScheduleItem.location),
+                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.location'.tr(), oldScheduleItem.location, newScheduleItem.location),
                 ],
               ),
             ),

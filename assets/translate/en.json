@@ -126,8 +126,14 @@
     "time": "Time",
     "location": "Location",
     "instructor": "Instructor"
+  },
+  "ScheduleUpdateItem":
+  {
+    "schedule_updated": "Schedule Updated",
+    "updated_schedule_details": "Updated Schedule Details",
+    "course": "Course",
+    "day": "Day",
+    "time": "Time",
+    "location": "Location"
   }
-
-
-
 }
