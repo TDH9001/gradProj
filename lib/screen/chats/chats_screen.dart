@@ -1,5 +1,6 @@
 import 'dart:developer' as devtools;
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
@@ -78,27 +79,36 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
 
     return Column(
       children: [
-        Container(
+        SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Container(
             width: double.infinity,
             height: MediaService.instance.getHeight() * 0.06,
-            child: TextFormField(
-              onChanged: (str) {
-                widget.searchText = str;
-                // dev.log(ChatsScreenSearchBar.chatSearch = str);
-                setState(() {});
-              },
-              //   controller: widget.txt,
-              keyboardType: TextInputType.text,
-              autocorrect: false,
-              decoration: InputDecoration(
-                //label: Text("Search"),
-                icon: Icon(Icons.search),
-                labelText: "Search for courses",
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Color(0xff769BC6)),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 12),
+            child: Center(
+              child: TextFormField(
+                onChanged: (str) {
+                  widget.searchText = str;
+                  setState(() {});
+                },
+                keyboardType: TextInputType.text,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  hintText: 'home.search_for_courses'.tr(),
+                  hintStyle: TextStyle(color: Colors.grey.shade600),
+                  prefixIcon: Icon(Icons.search, color: Colors.grey.shade700),
+                  border: InputBorder.none,
                 ),
               ),
-            )),
+            ),
+          ),
+        ),
         StreamBuilder<List<ChatSnipits>>(
           stream:
               HiveUserContactCashingService.getUserContactData().id.length < 10
