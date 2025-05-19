@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_Items.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
@@ -66,27 +67,36 @@ class _GetUsersStreamState extends State<GetUsersStream> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-              width: double.infinity,
-              height: MediaService.instance.getHeight() * 0.06,
-              child: TextFormField(
-                onChanged: (str) {
-                  widget.searchText = str;
-                  // dev.log(ChatsScreenSearchBar.chatSearch = str);
-                  setState(() {});
-                },
-                //   controller: widget.txt,
-                keyboardType: TextInputType.text,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  //label: Text("Search"),
-                  icon: Icon(Icons.search),
-                  labelText: "Search for courses",
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+          SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Container(
+                  width: double.infinity,
+                  height: MediaService.instance.getHeight() * 0.06,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Color(0xff769BC6)),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Center(
+                    child: TextFormField(
+                      onChanged: (str) {
+                        widget.searchText = str;
+                        setState(() {});
+                      },
+                      keyboardType: TextInputType.text,
+                      autocorrect: false,
+                      decoration: InputDecoration(
+                        hintText: 'home.search_for_courses'.tr(),
+                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        prefixIcon: Icon(Icons.search, color: Colors.grey.shade700),
+                        border: InputBorder.none,
+                      ),
+                    ),
                   ),
                 ),
-              )),
+              ),
           Container(
             height: MediaService.instance.getHeight() * 0.75,
             child: StreamBuilder<List<FeedItems>>(
@@ -110,7 +120,7 @@ class _GetUsersStreamState extends State<GetUsersStream> {
                     itemCount: data!.length,
                     itemBuilder: (context, index) {
                       if (data.isEmpty) {
-                        return Center(child: Text("No data"));
+                        return Center(child: Text('home.no_data'.tr()));
                       } else {
                         return data[index].present(context: context);
                       }

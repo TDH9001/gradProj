@@ -135,5 +135,9 @@
     "day": "Day",
     "time": "Time",
     "location": "Location"
+  },
+  "home": {
+    "search_for_courses": "Search for Courses",
+    "no_data": "No Data Available"
   }
 }
