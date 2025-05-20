@@ -10,7 +10,10 @@ import 'package:grad_proj/services/file_caching_service/chat_file_caching_servic
 import 'package:grad_proj/services/hive_caching_service/hive_caht_data_caching_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:path/path.dart' as p;
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../../providers/theme_provider.dart';
 
 class ChatVideosSent extends StatefulWidget {
   ChatVideosSent({super.key, required this.cahtId});
@@ -64,6 +67,8 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return SliverToBoxAdapter(
       child: FutureBuilder<List<File>>(
         future: _validImagesFuture,
@@ -84,7 +89,7 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+                  colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -99,8 +104,8 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
               ),
               child: ExpansionTile(
                 initiallyExpanded: false,
-                leading: const Icon(Icons.video_collection,
-                    color: Color(0xff2E5077)),
+                leading:  Icon(Icons.video_collection,
+                    color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
                 // elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
