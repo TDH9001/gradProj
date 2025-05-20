@@ -166,7 +166,11 @@
   },
   "ChatImagesSent": {
     "images_Sent": "الصور المرسلة"
+  },
+  "ChatFilesSent": {
+    "files_Sent": "الملفات المرسلة"
   }
+
 
 
 

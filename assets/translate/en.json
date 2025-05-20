@@ -180,5 +180,9 @@
   "ChatImagesSent":
   {
     "images_Sent": "Images Sent"
+  },
+  "ChatFilesSent":
+  {
+    "files_Sent": "Files Sent"
   }
 }
