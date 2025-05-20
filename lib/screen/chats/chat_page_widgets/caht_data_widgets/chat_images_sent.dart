@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/DB-service.dart';
@@ -92,7 +93,7 @@ class _ChatImagesSentState extends State<ChatImagesSent> {
                 title: Row(
                   children: [
                     Text(
-                      "images Sent",
+                      'ChatImagesSent.images_Sent'.tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,

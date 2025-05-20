@@ -176,5 +176,9 @@
     "temporary_schedule_items": "Temporary schedule items",
     "add_temporary_schedule_item": "Add temporary schedule item",
     "error2": "Error adding schedule, please try again"
+  },
+  "ChatImagesSent":
+  {
+    "images_Sent": "Images Sent"
   }
 }
