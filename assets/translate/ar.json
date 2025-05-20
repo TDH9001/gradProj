@@ -156,7 +156,15 @@
     "scan_qr": "مسح رمز QR",
     "cancel": "إلغاء",
     "add": "إضافة"
+  },
+  "ChatDataScreen": {
+    "permanent_schedule_items": "عناصر الجدول الدائم",
+    "add_permanent_schedule_item": "إضافة عنصر جدول دائم",
+    "error": "حدث خطأ أثناء إضافة الجدول، يرجى المحاولة مرة أخرى",
+    "course_members": "أعضاء الكورس",
+    "remove_the_admin": "إزالة المسؤول"
   }
+
 
 
 

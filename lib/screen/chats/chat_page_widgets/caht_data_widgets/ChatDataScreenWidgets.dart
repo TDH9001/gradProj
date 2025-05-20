@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
@@ -73,8 +74,8 @@ class TemporaryChatSceleList extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  title: const Text(
-                    "Temporary scedule items",
+                  title:  Text(
+                   'ChatDataScreen.temporary_schedule_items'.tr(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -97,7 +98,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                             flex: 1,
                           ),
                           Text(
-                            "Add temporary scedule item ",
+                           'ChatDataScreen.add_temporary_schedule_item'.tr(),
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           Spacer(
@@ -123,7 +124,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                                       context;
                                   SnackBarService.instance.showsSnackBarError(
                                       text:
-                                          "Error adding scedule, please try again");
+                                          'ChatDataScreen.error2'.tr());
                                 }
                               },
                               icon: Icon(
@@ -228,7 +229,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   title: Text(
-                    "Permanat Scedule Items",
+                   'ChatDataScreen.permanent_schedule_items'.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -269,7 +270,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                             flex: 1,
                           ),
                           Text(
-                            "Add permanant scedule item ",
+                           'ChatDataScreen.add_permanent_schedule_item'.tr(),
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           Spacer(
@@ -297,7 +298,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                                       context;
                                   SnackBarService.instance.showsSnackBarError(
                                       text:
-                                          "Error adding scedule, please try again");
+                                         'ChatDataScreen.error'.tr());
                                 }
                               },
                               icon: Icon(
@@ -406,7 +407,7 @@ class ChatMembersList extends StatelessWidget {
                   title: Row(
                     children: [
                       Text(
-                        "Course members",
+                        'ChatDataScreen.course_members'.tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -472,7 +473,8 @@ class ChatMembersList extends StatelessWidget {
                                                 size: 16),
                                             SizedBox(width: 8),
                                             Text(
-                                                "Last Name: ${member.lastName}",
+                                                //"Last Name: ${member.lastName}",
+                                                "${"ChatDataScreen.last_name".tr()}: ${member.lastName}",
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ],
@@ -484,7 +486,9 @@ class ChatMembersList extends StatelessWidget {
                                                 color: Colors.white70,
                                                 size: 16),
                                             SizedBox(width: 8),
-                                            Text("Phone: ${member.phoneNumber}",
+                                            Text(
+                                                //"Phone: ${member.phoneNumber}",
+                                                "${"ChatDataScreen.phone_number".tr()}: ${member.phoneNumber}",
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ],
@@ -497,7 +501,8 @@ class ChatMembersList extends StatelessWidget {
                                                 size: 16),
                                             SizedBox(width: 8),
                                             Text(
-                                                "SeatNumber: ${member.seatNumber}",
+                                               // "SeatNumber: ${member.seatNumber}",
+                                                "${"ChatDataScreen.seat_number".tr()}: ${member.seatNumber}",
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ],
@@ -509,7 +514,9 @@ class ChatMembersList extends StatelessWidget {
                                                 color: Colors.white70,
                                                 size: 16),
                                             SizedBox(width: 8),
-                                            Text("Email: ${member.email}",
+                                            Text(
+                                                //"Email: ${member.email}",
+                                                "${"ChatDataScreen.email".tr()}: ${member.email}",
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ],
@@ -607,7 +614,7 @@ class ChatMembersList extends StatelessWidget {
                                           Row(
                                             children: [
                                               PrimaryButton(
-                                                buttontext: "remove the admin",
+                                                buttontext: 'ChatDataScreen.remove_the_admin'.tr(),
                                                 func: () => DBService.instance
                                                     .removeAdminFromChat(
                                                   chatId,

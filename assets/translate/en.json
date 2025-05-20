@@ -161,5 +161,20 @@
     "scan_qr": "Scan QR Code",
     "cancel": "Cancel",
     "add": "Add"
+  },
+  "ChatDataScreen":
+  {
+    "permanent_schedule_items": "Permanent Schedule Items",
+    "add_permanent_schedule_item": "Add permanent schedule item",
+    "error": "Error adding schedule, please try again",
+    "course_members": "Course members",
+    "last_name:": "Last Name:",
+    "email:": "Email:",
+    "phone_number:": "Phone Number:",
+    "seat_number:": "Seat Number:",
+    "remove_the_admin": "Remove The Admin",
+    "temporary_schedule_items": "Temporary schedule items",
+    "add_temporary_schedule_item": "Add temporary schedule item",
+    "error2": "Error adding schedule, please try again"
   }
 }
