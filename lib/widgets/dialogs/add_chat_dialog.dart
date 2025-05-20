@@ -8,6 +8,8 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:provider/provider.dart';
 import 'dart:developer' as dev;
 
+import '../../providers/theme_provider.dart';
+
 class AddChatDialog extends StatefulWidget {
   const AddChatDialog({Key? key}) : super(key: key);
 
@@ -150,8 +152,10 @@ class _AddChatDialogState extends State<AddChatDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.isDarkMode;
     return AlertDialog(
-      title:  Text('AddChatDialog.title'.tr(), style: TextStyle(color: Colors.black, fontSize: 16)),
+      title:  Text('AddChatDialog.title'.tr(), style: TextStyle(color: isDarkMode ? Colors.white : Colors.black, fontSize: 16)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -174,7 +178,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
       ),
       actions: <Widget>[
         TextButton(
-          child:  Text('AddChatDialog.cancel'.tr() , style: TextStyle(color: Colors.black54),),
+          child:  Text('AddChatDialog.cancel'.tr() , style: TextStyle(color: isDarkMode ? Colors.white70 : Colors.black54),),
           onPressed: _isAddingChat
               ? null
               : () {
@@ -188,7 +192,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
                   width: 20,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              :  Text('AddChatDialog.add'.tr(), style: TextStyle(color: Colors.black54)),
+              :  Text('AddChatDialog.add'.tr(), style: TextStyle(color: isDarkMode ? Colors.white70 : Colors.black54)),
           onPressed: _isAddingChat ? null : _addChat,
         ),
       ],

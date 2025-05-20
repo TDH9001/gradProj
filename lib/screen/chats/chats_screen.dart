@@ -87,9 +87,9 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
             width: double.infinity,
             height: MediaService.instance.getHeight() * 0.06,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
+              color:isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Color(0xff769BC6)),
+              border: Border.all(color: isDarkMode ? Colors.white60 : Color(0xff769BC6)),
             ),
             padding: EdgeInsets.symmetric(horizontal: 12),
             child: Center(
@@ -102,8 +102,8 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                 autocorrect: false,
                 decoration: InputDecoration(
                   hintText: 'home.search_for_courses'.tr(),
-                  hintStyle: TextStyle(color: Colors.grey.shade600),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey.shade700),
+                  hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.grey.shade600),
+                  prefixIcon: Icon(Icons.search, color:isDarkMode ? Colors.white60 : Colors.grey.shade700),
                   border: InputBorder.none,
                 ),
               ),
