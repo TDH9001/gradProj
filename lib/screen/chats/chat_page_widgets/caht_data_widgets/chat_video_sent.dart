@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chewie/chewie.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/services/DB-service.dart';
@@ -107,7 +108,7 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
                 title: Row(
                   children: [
                     Text(
-                      "Videos Sent",
+                      'ChatVideosSent.videos_Sent'.tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
