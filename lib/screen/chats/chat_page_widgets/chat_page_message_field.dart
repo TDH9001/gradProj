@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Chats.dart';
 import 'package:grad_proj/screen/chats/caht_cubit/caht_cubit.dart';
@@ -6,6 +7,9 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/chat_group
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/image_message_button.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/theme_provider.dart';
 
 class MessageField extends StatefulWidget {
   MessageField(
@@ -31,11 +35,13 @@ class MessageField extends StatefulWidget {
 class _MessageFieldState extends State<MessageField> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Container(
       // height: _height * 0.1,
       width: MediaService.instance.getWidth(),
       decoration: BoxDecoration(
-          color: Colors.grey[200], borderRadius: BorderRadius.circular(22)),
+          color: isDarkMode ? Colors.grey[800] : Colors.grey[200], borderRadius: BorderRadius.circular(22)),
       margin: EdgeInsets.symmetric(
           horizontal: MediaService.instance.getWidth() * 0.02,
           vertical: MediaService.instance.getHeight() * 0.02),
@@ -89,8 +95,8 @@ class _MessageFieldState extends State<MessageField> {
                   ]
                 : [
                     Text(
-                      "  you are not able to contribute to this Chat",
-                      style: TextStyle(color: Colors.black),
+                      'MessageField.no_chat'.tr(),
+                      style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                     ),
                   ],
           )),
@@ -98,24 +104,32 @@ class _MessageFieldState extends State<MessageField> {
   }
 
   Widget _messageTextField(final TextEditingController txt) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return SizedBox(
       width: MediaService.instance.getWidth() * 0.7,
       child: TextFormField(
+
         controller: txt,
         onTap: () {
           txt.text += " ";
         },
         validator: (data) {
           if (data == null || data.trim().isEmpty) {
-            return "The message cannot be empty";
+            return 'MessageField.error'.tr();
           }
           return null;
         },
-        cursorColor: Colors.black,
+        cursorColor: isDarkMode ? Colors.white : Colors.black,
         autocorrect: false,
         onChanged: ChatCubit.get(context).onTextChanged,
         decoration: InputDecoration(
-            border: InputBorder.none, hintText: "type a Massage ... "),
+            border: InputBorder.none, hintText: 'MessageField.message_sent'.tr(),hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+        filled: true,
+        fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+
+        ),
       ),
     );
   }

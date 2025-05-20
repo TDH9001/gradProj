@@ -201,6 +201,12 @@
     "view_your_spreadsheet": "View your Spreadsheet",
     "view_button": "View Sheet"
 
+  },
+  "MessageField":
+  {
+    "no_chat": " You Are Not Able To Contribute To This Chat",
+    "error": "The Message Cannot Be Empty",
+    "message_sent": "type a Massage ..."
   }
 
 }

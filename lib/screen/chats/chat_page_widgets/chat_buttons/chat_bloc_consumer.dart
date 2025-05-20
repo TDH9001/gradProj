@@ -23,7 +23,7 @@ class ChatBlocConsumer extends StatelessWidget {
             // height: _height * 0.1,
             width: MediaService.instance.getWidth() * 0.09,
             child: IconButton(
-              icon: Icon(Icons.mic, color: LightTheme.primary),
+              icon: Icon(Icons.mic, color: LightTheme.secondary),
               onPressed: () async {
                 ChatCubit.get(context)
                     .startRecord(ChatCubit.get(context).record);

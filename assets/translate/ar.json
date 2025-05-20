@@ -158,12 +158,20 @@
     "add": "إضافة"
   },
   "ChatDataScreen": {
-    "permanent_schedule_items": "عناصر الجدول الدائم",
-    "add_permanent_schedule_item": "إضافة عنصر جدول دائم",
+    "permanent_schedule_items": "الجدول الدائم",
+    "add_permanent_schedule_item": "إضافة عنصر إلى الجدول الدائم",
     "error": "حدث خطأ أثناء إضافة الجدول، يرجى المحاولة مرة أخرى",
-    "course_members": "أعضاء الكورس",
-    "remove_the_admin": "إزالة المسؤول"
+    "course_members": "أعضاء المقرر",
+    "last_name:": "الاسم الأخير:",
+    "email:": "البريد الإلكتروني:",
+    "phone_number:": "رقم الهاتف:",
+    "seat_number:": "رقم المقعد:",
+    "remove_the_admin": "إزالة المشرف",
+    "temporary_schedule_items": "الجدول المؤقت",
+    "add_temporary_schedule_item": "إضافة عنصر إلى الجدول المؤقت",
+    "error2": "حدث خطأ أثناء إضافة الجدول، يرجى المحاولة مرة أخرى"
   },
+
   "ChatImagesSent": {
     "images_Sent": "الصور المرسلة"
   },
@@ -183,7 +191,13 @@
     "submit_sheet_button": "إرسال الجدول",
     "view_your_spreadsheet": "عرض جدول البيانات الخاص بك",
     "view_button": "عرض الجدول"
+  },
+  "MessageField": {
+    "no_chat": "لا يمكنك المشاركة في هذه المحادثة",
+    "error": "لا يمكن ترك الرسالة فارغة",
+    "message_sent": "اكتب رسالة..."
   }
+
 
 
 

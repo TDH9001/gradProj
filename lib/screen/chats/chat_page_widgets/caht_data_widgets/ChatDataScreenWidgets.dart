@@ -80,7 +80,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   title:  Text(
-                   'ChatDataScreen.temporary_schedule_items'.tr(),
+                  'ChatDataScreen.temporary_schedule_items'.tr(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
