@@ -188,5 +188,19 @@
   "ChatVideosSent":
   {
     "videos_Sent": "Videos Sent"
+  },
+  "ChatSpreadSheetsSlider":
+  {
+    "spreadSheets": "SpreadSheets",
+    "get_base_spreadsheet": "Get Base Spreadsheet",
+    "base_sheet_button": "Base Sheet",
+    "get_current_file": "Get Current File",
+    "current_sheet_button": "Current Sheet",
+    "submit_a_spreadsheet": "Submit A Spreadsheet",
+    "submit_sheet_button": "Submit Sheet",
+    "view_your_spreadsheet": "View your Spreadsheet",
+    "view_button": "View Sheet"
+
   }
+
 }

@@ -14,6 +14,9 @@ import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'dart:developer' as dev;
 
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/theme_provider.dart';
 
 class TemporaryChatSceleList extends StatelessWidget {
   const TemporaryChatSceleList({
@@ -354,6 +357,8 @@ class ChatMembersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     SnackBarService.instance.buildContext = context;
 
     return StreamBuilder<List<Contact>>(
@@ -383,7 +388,7 @@ class ChatMembersList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+                    colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -398,8 +403,8 @@ class ChatMembersList extends StatelessWidget {
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: true,
-                  leading: const Icon(Icons.library_books_sharp,
-                      color: Color(0xff2E5077)),
+                  leading: Icon(Icons.library_books_sharp,
+                      color:isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -436,7 +441,7 @@ class ChatMembersList extends StatelessWidget {
                             ),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Color(0xff2E5077),
+                                color:isDarkMode? Color(0xFF2E3B55) : Color(0xff2E5077),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: ExpansionTile(

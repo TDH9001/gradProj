@@ -1,9 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/screen/chats/spread_sheet_functions.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/theme_provider.dart';
 
 class ChatSpreadSheetsSlider extends StatelessWidget {
   const ChatSpreadSheetsSlider({super.key, required this.widget});
@@ -11,6 +15,8 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return SliverToBoxAdapter(
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -21,7 +27,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+              colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -36,7 +42,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
           ),
           child: ExpansionTile(
               initiallyExpanded: false,
-              leading: const Icon(Icons.image, color: Color(0xff2E5077)),
+              leading:  Icon(Icons.image, color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
               // elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -44,7 +50,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
               title: Row(
                 children: [
                   Text(
-                    "SpreadSheets",
+                    'ChatSpreadSheetsSlider.spreadSheets'.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,color: Colors.white
@@ -67,7 +73,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                         Row(children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("get base spreadhseet"),
+                            child: Text('ChatSpreadSheetsSlider.get_base_spreadsheet'.tr()),
                           ),
                           Spacer(
                             flex: 1,
@@ -75,7 +81,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                           SizedBox(
                               width: MediaService.instance.getWidth() * 0.5,
                               child: PrimaryButton(
-                                  buttontext: "base sheet",
+                                  buttontext: 'ChatSpreadSheetsSlider.base_sheet_button'.tr(),
                                   func: () {
                                     SpreadSheetFunctions().downloadBaseSheet(
                                         context, widget.cahtId);
@@ -94,7 +100,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                         Row(children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("get current file"),
+                            child: Text('ChatSpreadSheetsSlider.get_current_file'.tr()),
                           ),
                           Spacer(
                             flex: 1,
@@ -102,7 +108,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                           SizedBox(
                               width: MediaService.instance.getWidth() * 0.5,
                               child: PrimaryButton(
-                                  buttontext: "current sheet",
+                                  buttontext:'ChatSpreadSheetsSlider.current_sheet_button'.tr(),
                                   func: () {
                                     SpreadSheetFunctions()
                                         .downloadCurrentSpreadSheet(
@@ -122,7 +128,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                         Row(children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("Submit a spreadsheet"),
+                            child: Text('ChatSpreadSheetsSlider.submit_a_spreadsheet'.tr()),
                           ),
                           Spacer(
                             flex: 1,
@@ -130,7 +136,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                           Container(
                               width: MediaService.instance.getWidth() * 0.5,
                               child: PrimaryButton(
-                                  buttontext: "submit sheet",
+                                  buttontext: 'ChatSpreadSheetsSlider.submit_sheet_button'.tr(),
                                   func: () {
                                     SpreadSheetFunctions().pickSpreadSheet(
                                         context, widget.cahtId);
@@ -142,7 +148,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                       Row(children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("View your spreadsheet"),
+                          child: Text('ChatSpreadSheetsSlider.view_your_spreadsheet'.tr()),
                         ),
                         Spacer(
                           flex: 1,
@@ -150,7 +156,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
                         Container(
                             width: MediaService.instance.getWidth() * 0.5,
                             child: PrimaryButton(
-                                buttontext: "view sheet",
+                                buttontext: 'ChatSpreadSheetsSlider.view_button'.tr(),
                                 func: () {
                                   SpreadSheetFunctions().getUserFromSpreadSheet(
                                       context, widget.cahtId);

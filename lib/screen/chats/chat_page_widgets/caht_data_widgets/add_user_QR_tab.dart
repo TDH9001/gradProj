@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:grad_proj/services/media_service.dart';
 import 'package:grad_proj/utils/qr_display_utils.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/theme_provider.dart';
 
 class AddUserQrTab extends StatelessWidget {
   const AddUserQrTab({super.key, required this.chatID});
   final String chatID;
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       elevation: 6,
@@ -16,7 +21,7 @@ class AddUserQrTab extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+            colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -31,7 +36,7 @@ class AddUserQrTab extends StatelessWidget {
         ),
         child: ExpansionTile(
             initiallyExpanded: false,
-            leading: const Icon(Icons.qr_code, color: Color(0xff2E5077)),
+            leading:  Icon(Icons.qr_code, color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
             // elevation: 4,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),

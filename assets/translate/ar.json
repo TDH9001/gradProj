@@ -172,7 +172,19 @@
   },
   "ChatVideosSent": {
     "videos_Sent": "الفيديوهات المرسلة"
+  },
+  "ChatSpreadSheetsSlider": {
+    "spreadSheets": "جداول البيانات",
+    "get_base_spreadsheet": "الحصول على جدول البيانات الأساسي",
+    "base_sheet_button": "الجدول الأساسي",
+    "get_current_file": "الحصول على الملف الحالي",
+    "current_sheet_button": "الجدول الحالي",
+    "submit_a_spreadsheet": "إرسال جدول بيانات",
+    "submit_sheet_button": "إرسال الجدول",
+    "view_your_spreadsheet": "عرض جدول البيانات الخاص بك",
+    "view_button": "عرض الجدول"
   }
+
 
 
 
