@@ -31,9 +31,9 @@ void PrintSnackBarFail(BuildContext context, String S) {
 
 class TextStyles {
   static TextStyle text = TextStyle(
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: Colors.black,
+    color: Colors.white,
   );
   static TextStyle subtext = TextStyle(
     fontSize: 15,

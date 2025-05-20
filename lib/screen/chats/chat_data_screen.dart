@@ -60,7 +60,7 @@ class _MyWidgetState extends State<ChatDataScreen> {
             backgroundColor: LightTheme.primary,
             //expandedHeight: 120.0,
             flexibleSpace: FlexibleSpaceBar(
-              title: Center(child: Text(widget.cahtId, style: TextStyles.text)),
+              title: Center(child: Text(widget.cahtId, style: TextStyle(color: Colors.white, fontSize: 16),)),
             ),
           ),
           ChatMembersList(

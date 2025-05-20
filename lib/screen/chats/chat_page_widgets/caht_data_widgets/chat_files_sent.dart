@@ -99,7 +99,8 @@ class _ChatFilesSentState extends State<ChatFilesSent> {
                       "Files Sent",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
+                        color: Colors.white
                       ),
                     ),
                   ],

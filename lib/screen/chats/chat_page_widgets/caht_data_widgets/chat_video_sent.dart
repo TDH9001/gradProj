@@ -110,7 +110,8 @@ class _ChatVideosSentState extends State<ChatVideosSent> {
                       "Videos Sent",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: 16,
+                        color: Colors.white
                       ),
                     ),
                   ],
