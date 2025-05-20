@@ -28,6 +28,8 @@ class TemporaryChatSceleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return StreamBuilder<List<ScheduleItemClass>>(
         stream: DBService.instance.getTemporarySceduleItems(widget.cahtId),
         builder: (context, _snapshot) {
@@ -56,7 +58,7 @@ class TemporaryChatSceleList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+                    colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -72,7 +74,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                 child: ExpansionTile(
                   initiallyExpanded: false,
                   leading:
-                      const Icon(Icons.table_chart, color: Color(0xff2E5077)),
+                       Icon(Icons.table_chart, color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -183,6 +185,8 @@ class PermanatChatScedulesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return StreamBuilder<List<ScheduleItemClass>>(
         stream: DBService.instance.getPermanantSceduleItems(widget.cahtId),
         builder: (context, _snapshot) {
@@ -210,7 +214,7 @@ class PermanatChatScedulesList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+                    colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -226,7 +230,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                 child: ExpansionTile(
                   initiallyExpanded: false,
                   leading:
-                      Icon(Icons.table_view_outlined, color: Color(0xff2E5077)),
+                      Icon(Icons.table_view_outlined,color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -243,7 +247,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Color(0xff769BC6), Color(0xffa6c4dd)],
+                          colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
