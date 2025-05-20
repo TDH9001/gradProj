@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/qr_scan_screen/qr_scan_screen.dart';
@@ -49,15 +50,15 @@ class _AddChatDialogState extends State<AddChatDialog> {
 
     if (courseLink.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Course link cannot be empty')),
-      );
+        SnackBar(content: Text('AddChatDialog.error1'.tr()),
+      ));
       return;
     }
     if (HiveUserContactCashingService.getUserContactData().id == null ||
         HiveUserContactCashingService.getUserContactData().id.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('User not logged in. Please log in and try again.')),
+         SnackBar(
+            content: Text('AddChatDialog.error2'.tr())),
       );
       return;
     }
@@ -79,7 +80,11 @@ class _AddChatDialogState extends State<AddChatDialog> {
           courseLink.trim(),
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Successfully joined chat: $courseLink !')),
+          SnackBar(
+            content: Text(
+                'AddChatDialog.successfully'.tr(args: [courseLink])
+            ),
+          ),
         );
         Navigator.of(context).pop();
       } else {
@@ -94,7 +99,8 @@ class _AddChatDialogState extends State<AddChatDialog> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content:
-                  Text('Successfully joined the created chat: $courseLink !')),
+                  Text('AddChatDialog.successfully_created'.tr(args: [courseLink])),
+          ),
         );
       }
       // DBService.instance.addChatToUser(
@@ -119,16 +125,19 @@ class _AddChatDialogState extends State<AddChatDialog> {
         // Close the dialog on success
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text(
-                  'Failed to join chat. Link might be invalid or an error occurred.')),
+           SnackBar(
+              content: Text('AddChatDialog.failed_to_join').tr() ),
         );
       }
     } on Exception catch (e) {
       if (!mounted) return;
       print('Error joining chat: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('An error occurred: $e')),
+        SnackBar(
+          content: Text(
+            tr('AddChatDialog.error', args: ['$e']),
+          ),
+        ),
       );
     } finally {
       if (mounted) {
@@ -142,20 +151,21 @@ class _AddChatDialogState extends State<AddChatDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Add New Chat'),
+      title:  Text('AddChatDialog.title'.tr(), style: TextStyle(color: Colors.black, fontSize: 16)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TextField(
             controller: _courseLinkController,
-            decoration: const InputDecoration(hintText: '([name][code])'),
+            decoration:  InputDecoration(hintText: 'AddChatDialog.name_code'.tr()),
             enabled: !_isAddingChat,
           ),
           const SizedBox(height: 20),
           ElevatedButton.icon(
-            icon: const Icon(Icons.qr_code_scanner),
-            label: const Text('Scan QR Code'),
+            icon: const Icon(Icons.qr_code_scanner, color: Colors.white,),
+            label:  Text('AddChatDialog.scan_qr'.tr() , style: TextStyle(color: Colors.white),),
             style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xff2E5077),
               minimumSize: const Size(double.infinity, 36),
             ),
             onPressed: _isAddingChat ? null : _scanQRCode,
@@ -164,7 +174,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
       ),
       actions: <Widget>[
         TextButton(
-          child: const Text('Cancel'),
+          child:  Text('AddChatDialog.cancel'.tr() , style: TextStyle(color: Colors.black54),),
           onPressed: _isAddingChat
               ? null
               : () {
@@ -178,7 +188,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
                   width: 20,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              : const Text('Add'),
+              :  Text('AddChatDialog.add'.tr(), style: TextStyle(color: Colors.black54)),
           onPressed: _isAddingChat ? null : _addChat,
         ),
       ],

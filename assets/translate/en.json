@@ -147,5 +147,19 @@
     "video_attachment": "Video attachment",
     "file_attachment": "File attachment",
     "no_chat": "no chats please go to the profile and add courses...."
+  },
+  "AddChatDialog":
+  {
+    "error1": "Course link cannot be empty",
+    "error2": "User not logged in. Please log in and try again.",
+    "successfully": "Successfully joined chat:{}",
+    "successfully_created": "Successfully joined the created chat:{}",
+    "failed_to_join": "Failed to join chat. Link might be invalid or an error occurred.",
+    "error": "An error occurred:{}",
+    "title": "Add New Chat",
+    "name_code": "([name][code])",
+    "scan_qr": "Scan QR Code",
+    "cancel": "Cancel",
+    "add": "Add"
   }
 }
