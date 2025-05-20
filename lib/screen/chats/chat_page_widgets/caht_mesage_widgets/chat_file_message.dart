@@ -63,8 +63,8 @@ class _ChatFileMessageState extends State<ChatFileMessage>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: widget.message.isImportant
-                      ? Color(0xFFE7CD78)
-                      : Colors.grey.shade400),
+                      ? Color(0xFF90CAF9)
+                      : Colors.grey[300]),
               padding: EdgeInsets.symmetric(horizontal: 6),
               child: Column(
                 //mainAxisSize: MainAxisSize.max,
@@ -76,7 +76,9 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                 children: [
                   Text(
                     widget.message.senderName,
+                    style: TextStyle(color: Colors.black54, fontSize: 16),
                     maxLines: 1,
+
                   ),
                   SizedBox(
                     height: 2,
@@ -132,7 +134,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
                         ])),
                   Text(
                     " ${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: Colors.black54),
                   )
                 ],
               ),

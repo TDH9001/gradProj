@@ -23,7 +23,7 @@ Widget chatMessageBubble(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color:
-              message.isImportant ? Color(0xFFE7CD78) : Colors.grey.shade400),
+              message.isImportant ? Color(0xFFE7CD78) : Colors.grey[300]),
 
       padding: EdgeInsets.symmetric(horizontal: 15),
       // height:

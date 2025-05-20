@@ -15,7 +15,7 @@ class VoiceMessageBaseBAckground extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           color: widget.message.isImportant
               ? Color(0xFFE7CD78)
-              : Colors.grey.shade400),
+              : Colors.grey[300]),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -146,7 +146,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
       menuBuilder: () => ChatPopupMenuBuilderButons.popupMenuBuilder(
           widget.cst, widget.chatID, widget.message, widget.admins),
       child: VoiceMessageBaseBAckground(widget: widget, child: [
-        Text(widget.message.senderName.trim()),
+        Text(widget.message.senderName.trim(), style: TextStyle(fontSize: 16, color: Colors.black54)),
         Row(
           children: [
             IconButton(
@@ -160,6 +160,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
                         : playing
                             ? Icons.pause
                             : Icons.play_arrow,
+                color: Colors.black54,
               ),
             ),
             VoiceButtonSlicerColumb(
@@ -173,7 +174,7 @@ class _VoiceMessageBubbleState extends State<VoiceBubble>
         ),
         Text(
           "  ${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "pm" : "am"}        ",
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16 , color: Colors.black54),
         )
       ]),
     );

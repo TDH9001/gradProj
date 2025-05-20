@@ -31,7 +31,7 @@ class PopupWidgetHandler extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: MediaService.instance.getHeight() * 0.05,
-      color: Colors.blueGrey,
+      color: Color(0xff2E5077),
       child: Wrap(
         direction: Axis.horizontal,
         children: [

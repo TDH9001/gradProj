@@ -1,4 +1,5 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/Chat_video_butoon.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/chat_buttons/chat_File_button.dart';
@@ -16,16 +17,19 @@ class ChatGroupButton extends StatelessWidget {
       menuBuilder: () {
         return Container(
           decoration: BoxDecoration(
-            color: Colors.blueGrey,
+            color: Color(0xff2E5077),
+            borderRadius: BorderRadius.circular(16),
           ),
+          padding: EdgeInsets.all(8),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(children: [
                 ImageMessageButton(chatID: chatID, cst: cst),
                 SizedBox(
                   height: 2,
                 ),
-                Text("Pick Image")
+                Text('ChatGroupButton.pick_image'.tr())
               ]),
               SizedBox(
                 width: 4,
@@ -36,7 +40,7 @@ class ChatGroupButton extends StatelessWidget {
                   SizedBox(
                     height: 2,
                   ),
-                  Text("Pick File")
+                  Text('ChatGroupButton.pick_file'.tr())
                 ],
               ),
               SizedBox(
@@ -48,7 +52,7 @@ class ChatGroupButton extends StatelessWidget {
                   SizedBox(
                     height: 2,
                   ),
-                  Text("Pick Video")
+                  Text('ChatGroupButton.pick_video'.tr())
                 ],
               )
             ],

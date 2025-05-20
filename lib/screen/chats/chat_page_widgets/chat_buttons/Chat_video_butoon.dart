@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
@@ -44,9 +45,9 @@ class ChatVideoButoon extends StatelessWidget {
           } else {
             SnackBarService.instance.buildContext = context;
             SnackBarService.instance
-                .showsSnackBarError(text: "could not uplaod the file");
+                .showsSnackBarError(text: 'chat.error'.tr());
           }
         },
-        icon: Icon(Icons.ondemand_video_sharp));
+        icon: Icon(Icons.video_collection_sharp, color: Color(0xff769BC6)));
   }
 }

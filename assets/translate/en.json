@@ -207,6 +207,14 @@
     "no_chat": " You Are Not Able To Contribute To This Chat",
     "error": "The Message Cannot Be Empty",
     "message_sent": "type a Massage ..."
+  },
+"chat": {
+  "error": "Could Not Upload The File"
+},
+  "ChatGroupButton":
+  {
+    "pick_image": "Pick Image",
+    "pick_video": "Pick Video",
+    "pick_file": "Pick File"
   }
-
 }

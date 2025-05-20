@@ -48,7 +48,7 @@ class ChatFileButton extends StatelessWidget {
           } else {
             SnackBarService.instance.buildContext = context;
             SnackBarService.instance
-                .showsSnackBarError(text: "could not uplaod the file");
+                .showsSnackBarError(text: "could not upload the file");
           }
         },
         icon: Icon(Icons.file_copy_sharp));
