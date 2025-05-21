@@ -41,7 +41,7 @@ class _MessageFieldState extends State<MessageField> {
       // height: _height * 0.1,
       width: MediaService.instance.getWidth(),
       decoration: BoxDecoration(
-          color: isDarkMode ? Colors.grey[800] : Colors.grey[200], borderRadius: BorderRadius.circular(22)),
+          color: isDarkMode ? Colors.grey[800] : Colors.grey[300], borderRadius: BorderRadius.circular(22)),
       margin: EdgeInsets.symmetric(
           horizontal: MediaService.instance.getWidth() * 0.02,
           vertical: MediaService.instance.getHeight() * 0.02),
@@ -126,7 +126,7 @@ class _MessageFieldState extends State<MessageField> {
         decoration: InputDecoration(
             border: InputBorder.none, hintText: 'MessageField.message_sent'.tr(),hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
         filled: true,
-        fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+        fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[300],
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
 
         ),

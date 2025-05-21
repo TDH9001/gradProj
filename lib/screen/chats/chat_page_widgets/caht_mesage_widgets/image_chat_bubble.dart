@@ -83,8 +83,8 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: widget.message.isImportant
-                          ? Color(0xFFE7CD78)
-                          : Colors.grey.shade400),
+                          ? Color(0xFFD3E3F1)
+                          : Colors.grey[300]),
                   // gradient: LinearGradient(
                   //     colors: colorScheme,
                   //     stops: [0.40, 0.70],
@@ -105,6 +105,8 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                     children: [
                       Text(
                         widget.message.senderName,
+                        style: TextStyle(
+                            color: Colors.black54),
                       ),
                       //where image is displayed
                       snapshot.data!.file != null &&

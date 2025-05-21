@@ -95,8 +95,8 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: widget.message.isImportant
-                      ? Color(0xFFE7CD78)
-                      : Colors.grey.shade400),
+                      ? Color(0xFFD3E3F1)
+                      : Colors.grey[300]),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 //mainAxisSize: MainAxisSize.max,
@@ -106,7 +106,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                     ? CrossAxisAlignment.start
                     : CrossAxisAlignment.end,
                 children: [
-                  Text(widget.message.senderName.trim()),
+                  Text(widget.message.senderName.trim(), style: TextStyle(color: Colors.black54),),
                   SizedBox(
                     height: 4,
                   ), //WIDGET HEREEEEEEEEEE
@@ -147,7 +147,7 @@ class _ChatVideoMessageState extends State<ChatVideoMessage>
                         ])),
                   Text(
                     "${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: Colors.black54),
                   )
                 ],
               ),

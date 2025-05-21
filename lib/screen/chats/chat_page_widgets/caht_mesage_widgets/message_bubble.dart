@@ -1,7 +1,5 @@
 import 'dart:math' as MainAxisSize;
 import 'dart:ui';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
@@ -23,7 +21,7 @@ Widget chatMessageBubble(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color:
-              message.isImportant ? Color(0xFFE7CD78) : Colors.grey[300]),
+              message.isImportant ? Color(0xFFD3E3F1) : Colors.grey[300]),
 
       padding: EdgeInsets.symmetric(horizontal: 15),
       // height:
@@ -37,7 +35,7 @@ Widget chatMessageBubble(
             ? CrossAxisAlignment.start
             : CrossAxisAlignment.end,
         children: [
-          Text(message.senderName.trim()),
+          Text(message.senderName.trim(),style: TextStyle(color: Colors.black54,fontSize: 16),),
           SizedBox(
             height: 5,
           ),

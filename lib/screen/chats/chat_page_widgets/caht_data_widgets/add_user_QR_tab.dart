@@ -47,7 +47,7 @@ class AddUserQrTab extends StatelessWidget {
                   "chat QR code : $chatID",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,color: Colors.white
+                    fontSize: 15,color: Colors.white
                   ),
                 ),
               ],

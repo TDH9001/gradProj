@@ -63,7 +63,7 @@ class _ChatFileMessageState extends State<ChatFileMessage>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: widget.message.isImportant
-                      ? Color(0xFF90CAF9)
+                      ? Color(0xFFD3E3F1)
                       : Colors.grey[300]),
               padding: EdgeInsets.symmetric(horizontal: 6),
               child: Column(
