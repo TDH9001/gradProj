@@ -204,7 +204,21 @@
     "pick_image": "اختر صورة",
     "pick_video": "اختر فيديو",
     "pick_file": "اختر ملفًا"
+  },
+  "ChatPopup": {
+    "delete": "حذف",
+    "copied_to_clipboard": "تم النسخ إلى الحافظة",
+    "copy": "نسخ النص",
+    "added_to_starred_messages": "تمت الإضافة إلى الرسائل المميزة",
+    "star_message": "تمييز الرسالة",
+    "added_to_feed": "تمت الإضافة إلى التغذية",
+    "add_to_feed": "أضف إلى التغذية"
+  },
+  "ChatCubit": {
+    "error": "تعذر رفع الملف"
   }
+
+
 
 
 

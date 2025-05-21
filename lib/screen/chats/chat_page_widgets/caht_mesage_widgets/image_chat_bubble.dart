@@ -159,7 +159,7 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                       ),
                       Text(
                         "${widget.message.timestamp.toDate().hour % 12}: ${widget.message.timestamp.toDate().minute % 60} ${widget.message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16, color: Colors.black54),
                       )
                     ],
                   ),

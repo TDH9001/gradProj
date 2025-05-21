@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grad_proj/screen/chats/caht_cubit/chat_cubit_states.dart';
@@ -53,7 +54,7 @@ class ChatCubit extends Cubit<ChatCubitStates> {
       return await _result!.ref.getDownloadURL();
     } else {
       SnackBarService.instance
-          .showsSnackBarError(text: "could not uplaod the file");
+          .showsSnackBarError(text: 'ChatCubit.error'.tr());
     }
   }
 }

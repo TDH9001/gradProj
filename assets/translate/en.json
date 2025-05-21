@@ -216,5 +216,19 @@
     "pick_image": "Pick Image",
     "pick_video": "Pick Video",
     "pick_file": "Pick File"
+  },
+  "ChatPopup":
+  {
+    "delete": "Delete",
+    "copied_to_clipboard": "Copied To Clipboard",
+    "copy": "Copy Text",
+    "added_to_starred_messages": "Added To Starred Messages",
+    "star_message": "star message",
+    "added_to_feed": "Added To Feed",
+    "add_to_feed": "Add To Feed"
+  },
+  "ChatCubit":
+  {
+    "error": "could not upload the file"
   }
 }

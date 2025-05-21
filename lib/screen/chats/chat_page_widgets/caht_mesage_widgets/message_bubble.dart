@@ -49,7 +49,7 @@ Widget chatMessageBubble(
           // ),
           Text(
             " ${message.timestamp.toDate().hour % 12}: ${message.timestamp.toDate().minute % 60} ${message.timestamp.toDate().hour < 12 ? "am" : "pm"}        ",
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16, color: Colors.black54),
           )
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/feed_items_models/file_feed_item.dart';
 import 'package:grad_proj/models/feed_items_models/image_feed_item.dart';
@@ -62,7 +63,7 @@ class PopupWidgetHandler extends StatelessWidget {
                         DBService.instance
                             .deleteMessageFromChat(ChatId, message);
                       }),
-                  Text("delete"),
+                  Text('ChatPopup.delete'.tr()),
                 ],
               ),
             ),
@@ -79,9 +80,9 @@ class PopupWidgetHandler extends StatelessWidget {
                             ClipboardData(text: message.messageContent));
                         SnackBarService.instance.buildContext = context;
                         SnackBarService.instance
-                            .showsSnackBarSucces(text: "copied to clipboard");
+                            .showsSnackBarSucces(text: 'ChatPopup.copied_to_clipboard'.tr());
                       }),
-                  Text("copy text")
+                  Text('ChatPopup.copy'.tr()),
                 ],
               ),
             ),
@@ -139,9 +140,9 @@ class PopupWidgetHandler extends StatelessWidget {
                               .id);
                       SnackBarService.instance.buildContext = context;
                       SnackBarService.instance.showsSnackBarSucces(
-                          text: "added to starred messages");
+                          text: 'ChatPopup.added_to_starred_messages'.tr());
                     }),
-                Text("star message")
+                Text('ChatPopup.star_message'.tr()),
               ],
             ),
           ),
@@ -204,9 +205,9 @@ class PopupWidgetHandler extends StatelessWidget {
                             .makeMessageIImportant(ChatId, message);
                         SnackBarService.instance.buildContext = context;
                         SnackBarService.instance
-                            .showsSnackBarSucces(text: "added to feed");
+                            .showsSnackBarSucces(text: 'ChatPopup.added_to_feed'.tr());
                       }),
-                  Text("pin to feed")
+                  Text('ChatPopup.add_to_feed'.tr()),
                 ],
               ),
             ),
