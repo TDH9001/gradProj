@@ -216,7 +216,16 @@
   },
   "ChatCubit": {
     "error": "تعذر رفع الملف"
+  },
+  "ChatAvailabilitySlider":  {
+    "available": "إعداد توفر الدردشة",
+    "current_mode :": "الوضع الحالي :",
+    "set_mode_to :": "تعيين الوضع إلى :",
+    "set_to :": "تعيين إلى :",
+    "set_to_button": "تعيين إلى:"
   }
+
+
 
 
 

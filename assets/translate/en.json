@@ -230,5 +230,13 @@
   "ChatCubit":
   {
     "error": "could not upload the file"
+  },
+  "ChatAvailabilitySlider":  {
+    "available": "Chat Availability Setting",
+    "current_mode :": "Current Mode :",
+    "set_mode_to :": "Set Mode To :",
+    "set_to :": "Set To :",
+    "set_to_button": "Set To:"
+
   }
 }

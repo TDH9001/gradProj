@@ -379,7 +379,7 @@ class ChatMembersList extends StatelessWidget {
             return SliverToBoxAdapter(
                 child: Center(
               child: Text(
-                  "Error: ${_snapshot.error} \n please update your data and the data field mising"),
+                  "Error: ${_snapshot.error} \n please update your data and the data field missing"),
             ));
           }
           return SliverToBoxAdapter(
