@@ -19,20 +19,20 @@ class LanguageLoginButton extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text("choose_language".tr(),
+                Text('Setting.language'.tr(),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
                 ListTile(
-                  leading: const Icon(Icons.language),
-                  title: const Text("English"),
+                  leading: const Icon(Icons.language,color: Color(0xFF4A739F),),
+                  title:  Text('Setting.english'.tr()),
                   onTap: () {
                     context.setLocale(const Locale('en'));
                     Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.language),
-                  title: const Text("العربية"),
+                  leading: const Icon(Icons.language,color: Color(0xFF4A739F),),
+                  title:  Text('Setting.arabic'.tr()),
                   onTap: () {
                     context.setLocale(const Locale('ar'));
                     Navigator.pop(context);
