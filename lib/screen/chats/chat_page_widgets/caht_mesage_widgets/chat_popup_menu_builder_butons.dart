@@ -11,6 +11,10 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:flutter/services.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../providers/theme_provider.dart';
+import '../../../theme/dark_theme_colors.dart';
 
 class ChatPopupMenuBuilderButons {
   static Widget popupMenuBuilder(CustomPopupMenuController cst, String ChatId,
@@ -30,189 +34,144 @@ class PopupWidgetHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
     return Container(
-      // height: MediaService.instance.getHeight() * 0.05,
-      color: Color(0xff2E5077),
+      decoration: BoxDecoration(
+        color: isDarkMode ? Color(0xff2E5077): Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 6,
+            offset: Offset(0, 2),
+          )
+        ],
+      ),
+      padding: const EdgeInsets.all(10),
       child: Wrap(
-        direction: Axis.horizontal,
+        spacing: 15,
+        runSpacing: 10,
         children: [
           if ((message.senderID ==
-                          HiveUserContactCashingService.getUserContactData()
-                              .id &&
-                      message.timestamp
-                              .toDate()
-                              .add(Duration(hours: 12))
-                              .compareTo(DateTime
-                                  .now()) > // if its the same person and within 12 hours
-                          0) ||
-                  admins.contains(
-                      HiveUserContactCashingService.getUserContactData()
-                          .id) //or admin
-                  ||
-                  HiveUserContactCashingService.getUserContactData().id.length <
-                      10 // global admin
-              )
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
-                        cst.hideMenu();
-                        DBService.instance
-                            .deleteMessageFromChat(ChatId, message);
-                      }),
-                  Text('ChatPopup.delete'.tr()),
-                ],
-              ),
-            ),
+              HiveUserContactCashingService.getUserContactData()
+                  .id &&
+              message.timestamp
+                  .toDate()
+                  .add(Duration(hours: 12))
+                  .compareTo(DateTime.now()) > 0) ||
+              admins.contains(HiveUserContactCashingService.getUserContactData().id) ||
+              HiveUserContactCashingService.getUserContactData().id.length < 10)
+            _buildIcon(context, Icons.delete, 'ChatPopup.delete'.tr(), () {
+              cst.hideMenu();
+              DBService.instance.deleteMessageFromChat(ChatId, message);
+            }),
           if (message.type == MessageType.text.name)
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.copy),
-                      onPressed: () async {
-                        cst.hideMenu();
-                        await Clipboard.setData(
-                            ClipboardData(text: message.messageContent));
-                        SnackBarService.instance.buildContext = context;
-                        SnackBarService.instance
-                            .showsSnackBarSucces(text: 'ChatPopup.copied_to_clipboard'.tr());
-                      }),
-                  Text('ChatPopup.copy'.tr()),
-                ],
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                IconButton(
-                    icon: Icon(Icons.star_border_purple500_outlined),
-                    onPressed: () {
-                      cst.hideMenu();
-                      DBService.instance.addStaredFeedItemToUser(
-                          message.type == MessageType.text.name
-                              ? MessageFeedItem(
-                                  chatID: ChatId,
-                                  messageContent: message.messageContent,
-                                  senderID: message.senderID,
-                                  senderName: message.senderName,
-                                  timestamp: message.timestamp,
-                                )
-                              : message.type == MessageType.image.name
-                                  ? ImageFeedItem(
-                                      chatID: ChatId,
-                                      messageContent: message.messageContent,
-                                      senderID: message.senderID,
-                                      senderName: message.senderName,
-                                      timestamp: message.timestamp,
-                                    )
-                                  : message.type == MessageType.voice.name
-                                      ? VoiceFeedItem(
-                                          chatID: ChatId,
-                                          messageContent:
-                                              message.messageContent,
-                                          senderID: message.senderID,
-                                          senderName: message.senderName,
-                                          timestamp: message.timestamp,
-                                        )
-                                      : message.type == MessageType.video.name
-                                          ? VideoFeedItem(
-                                              chatID: ChatId,
-                                              messagecontent:
-                                                  message.messageContent,
-                                              senderID: message.senderID,
-                                              senderName: message.senderName,
-                                              timestamp: message.timestamp,
-                                            )
-                                          : FileFeedItem(
-                                              senderID: message.senderID,
-                                              timestamp: message.timestamp,
-                                              chatID: ChatId,
-                                              messageContent:
-                                                  message.messageContent,
-                                              senderName: message.senderName),
-                          HiveUserContactCashingService.getUserContactData()
-                              .id);
-                      SnackBarService.instance.buildContext = context;
-                      SnackBarService.instance.showsSnackBarSucces(
-                          text: 'ChatPopup.added_to_starred_messages'.tr());
-                    }),
-                Text('ChatPopup.star_message'.tr()),
-              ],
-            ),
-          ),
-          if (HiveUserContactCashingService.getUserContactData().id.length <
-                  10 ||
-              admins.contains(
-                  HiveUserContactCashingService.getUserContactData().id))
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Column(
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.push_pin_outlined),
-                      onPressed: () {
-                        cst.hideMenu();
-                        DBService.instance.addFeedItemToChatUsers(
-                            message.type == MessageType.text.name
-                                ? MessageFeedItem(
-                                    chatID: ChatId,
-                                    messageContent: message.messageContent,
-                                    senderID: message.senderID,
-                                    senderName: message.senderName,
-                                    timestamp: message.timestamp,
-                                  )
-                                : message.type == MessageType.image.name
-                                    ? ImageFeedItem(
-                                        chatID: ChatId,
-                                        messageContent: message.messageContent,
-                                        senderID: message.senderID,
-                                        senderName: message.senderName,
-                                        timestamp: message.timestamp,
-                                      )
-                                    : message.type == MessageType.voice.name
-                                        ? VoiceFeedItem(
-                                            chatID: ChatId,
-                                            messageContent:
-                                                message.messageContent,
-                                            senderID: message.senderID,
-                                            senderName: message.senderName,
-                                            timestamp: message.timestamp,
-                                          )
-                                        : message.type == MessageType.video.name
-                                            ? VideoFeedItem(
-                                                chatID: ChatId,
-                                                messagecontent:
-                                                    message.messageContent,
-                                                senderID: message.senderID,
-                                                senderName: message.senderName,
-                                                timestamp: message.timestamp,
-                                              )
-                                            : FileFeedItem(
-                                                senderID: message.senderID,
-                                                timestamp: message.timestamp,
-                                                chatID: ChatId,
-                                                messageContent:
-                                                    message.messageContent,
-                                                senderName: message.senderName),
-                            ChatId);
-                        DBService.instance
-                            .makeMessageIImportant(ChatId, message);
-                        SnackBarService.instance.buildContext = context;
-                        SnackBarService.instance
-                            .showsSnackBarSucces(text: 'ChatPopup.added_to_feed'.tr());
-                      }),
-                  Text('ChatPopup.add_to_feed'.tr()),
-                ],
-              ),
-            ),
+            _buildIcon(context, Icons.copy, 'ChatPopup.copy'.tr(), () async {
+              cst.hideMenu();
+              await Clipboard.setData(
+                  ClipboardData(text: message.messageContent));
+              SnackBarService.instance.buildContext = context;
+              SnackBarService.instance.showsSnackBarSucces(
+                  text: 'ChatPopup.copied_to_clipboard'.tr());
+            }),
+          _buildIcon(context, Icons.star_border_purple500_outlined,
+              'ChatPopup.star_message'.tr(), () {
+                cst.hideMenu();
+                DBService.instance.addStaredFeedItemToUser(
+                    _buildFeedItem(message, ChatId),
+                    HiveUserContactCashingService.getUserContactData().id);
+                SnackBarService.instance.buildContext = context;
+                SnackBarService.instance.showsSnackBarSucces(
+                    text: 'ChatPopup.added_to_starred_messages'.tr());
+              }),
+          if (HiveUserContactCashingService.getUserContactData().id.length < 10 ||
+              admins.contains(HiveUserContactCashingService.getUserContactData().id))
+            _buildIcon(context, Icons.push_pin_outlined,
+                'ChatPopup.add_to_feed'.tr(), () {
+                  cst.hideMenu();
+                  DBService.instance.addFeedItemToChatUsers(
+                      _buildFeedItem(message, ChatId), ChatId);
+                  DBService.instance.makeMessageIImportant(ChatId, message);
+                  SnackBarService.instance.buildContext = context;
+                  SnackBarService.instance
+                      .showsSnackBarSucces(text: 'ChatPopup.added_to_feed'.tr());
+                }),
         ],
       ),
     );
+  }
+
+  Widget _buildIcon(
+      BuildContext context, IconData icon, String label, VoidCallback onTap) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final bool isDarkMode = themeProvider.isDarkMode;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Material(
+          color:  Color(0xffA3BFE0) ,
+          shape: CircleBorder(),
+          child: IconButton(
+            icon: Icon(icon, color: Color(0xff2E5077), size: 26),
+            onPressed: onTap,
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFD3E3F1),
+          ),
+        ),
+      ],
+    );
+  }
+
+  dynamic _buildFeedItem(Message message, String ChatId) {
+    switch (message.type) {
+      case "text":
+        return MessageFeedItem(
+          chatID: ChatId,
+          messageContent: message.messageContent,
+          senderID: message.senderID,
+          senderName: message.senderName,
+          timestamp: message.timestamp,
+        );
+      case "image":
+        return ImageFeedItem(
+          chatID: ChatId,
+          messageContent: message.messageContent,
+          senderID: message.senderID,
+          senderName: message.senderName,
+          timestamp: message.timestamp,
+        );
+      case "voice":
+        return VoiceFeedItem(
+          chatID: ChatId,
+          messageContent: message.messageContent,
+          senderID: message.senderID,
+          senderName: message.senderName,
+          timestamp: message.timestamp,
+        );
+      case "video":
+        return VideoFeedItem(
+          chatID: ChatId,
+          messagecontent: message.messageContent,
+          senderID: message.senderID,
+          senderName: message.senderName,
+          timestamp: message.timestamp,
+        );
+      default:
+        return FileFeedItem(
+          senderID: message.senderID,
+          timestamp: message.timestamp,
+          chatID: ChatId,
+          messageContent: message.messageContent,
+          senderName: message.senderName,
+        );
+    }
   }
 }

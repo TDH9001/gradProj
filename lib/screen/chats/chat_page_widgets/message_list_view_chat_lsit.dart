@@ -41,7 +41,7 @@ class MessageListViewChatList extends StatelessWidget {
           if (_snapshot.hasError) {
             return Center(
                 child: Text(
-                    "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+                    "Error: ${_snapshot.error} \n please update your data and the data field missing"));
           }
           List<Message> bubbles = _data!.messages.reversed.toList();
           HiveCahtMessaegsCachingService.addChatData(chatID, bubbles);
