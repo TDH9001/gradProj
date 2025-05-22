@@ -17,6 +17,7 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
+
     return SliverToBoxAdapter(
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -27,7 +28,9 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
+              colors: isDarkMode
+                  ? [Color(0xff2E5077), Color(0xFF2E3B55)]
+                  : [Color(0xff769BC6), Color(0xffa6c4dd)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -41,134 +44,124 @@ class ChatSpreadSheetsSlider extends StatelessWidget {
             ],
           ),
           child: ExpansionTile(
-              initiallyExpanded: false,
-              leading:  Icon(Icons.image, color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
-              // elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+            initiallyExpanded: false,
+            leading: Icon(Icons.image,
+                color: isDarkMode ? Color(0xFF4A739F) : Color(0xff2E5077)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            title: Text(
+              'ChatSpreadSheetsSlider.spreadSheets'.tr(),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.white,
               ),
-              title: Row(
-                children: [
-                  Text(
-                    'ChatSpreadSheetsSlider.spreadSheets'.tr(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,color: Colors.white
-                    ),
-                  ),
-                ],
-              ),
-              children: [
-                SizedBox(
-                  height: MediaService.instance.getHeight() * 0.25,
+            ),
+            children: [
+              SizedBox(
+                height: MediaService.instance.getHeight() * 0.35,
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(vertical: 8),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       if (widget.adminList.contains(
-                              HiveUserContactCashingService.getUserContactData()
-                                  .id) ||
-                          HiveUserContactCashingService.getUserContactData()
-                                  .id
-                                  .length <
-                              10)
-                        Row(children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('ChatSpreadSheetsSlider.get_base_spreadsheet'.tr()),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          SizedBox(
-                              width: MediaService.instance.getWidth() * 0.5,
-                              child: PrimaryButton(
-                                  buttontext: 'ChatSpreadSheetsSlider.base_sheet_button'.tr(),
-                                  func: () {
-                                    SpreadSheetFunctions().downloadBaseSheet(
-                                        context, widget.cahtId);
-                                  }))
-                        ]),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      if (widget.adminList.contains(
-                              HiveUserContactCashingService.getUserContactData()
-                                  .id) ||
-                          HiveUserContactCashingService.getUserContactData()
-                                  .id
-                                  .length <
-                              10)
-                        Row(children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('ChatSpreadSheetsSlider.get_current_file'.tr()),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          SizedBox(
-                              width: MediaService.instance.getWidth() * 0.5,
-                              child: PrimaryButton(
-                                  buttontext:'ChatSpreadSheetsSlider.current_sheet_button'.tr(),
-                                  func: () {
-                                    SpreadSheetFunctions()
-                                        .downloadCurrentSpreadSheet(
-                                            context, widget.cahtId);
-                                  }))
-                        ]),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      if (widget.adminList.contains(
-                              HiveUserContactCashingService.getUserContactData()
-                                  .id) ||
-                          HiveUserContactCashingService.getUserContactData()
-                                  .id
-                                  .length <
-                              10)
-                        Row(children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('ChatSpreadSheetsSlider.submit_a_spreadsheet'.tr()),
-                          ),
-                          Spacer(
-                            flex: 1,
-                          ),
-                          Container(
-                              width: MediaService.instance.getWidth() * 0.5,
-                              child: PrimaryButton(
-                                  buttontext: 'ChatSpreadSheetsSlider.submit_sheet_button'.tr(),
-                                  func: () {
-                                    SpreadSheetFunctions().pickSpreadSheet(
-                                        context, widget.cahtId);
-                                  }))
-                        ]),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      Row(children: [
+                          HiveUserContactCashingService.getUserContactData().id) ||
+                          HiveUserContactCashingService.getUserContactData().id.length <
+                              10) ...[
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('ChatSpreadSheetsSlider.view_your_spreadsheet'.tr()),
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          child: Text(
+                            'ChatSpreadSheetsSlider.get_base_spreadsheet'.tr(),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        Spacer(
-                          flex: 1,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: PrimaryButton(
+                            buttontext: 'ChatSpreadSheetsSlider.base_sheet_button'.tr(),
+                            func: () {
+                              SpreadSheetFunctions()
+                                  .downloadBaseSheet(context, widget.cahtId);
+                            },
+                          ),
                         ),
-                        Container(
-                            width: MediaService.instance.getWidth() * 0.5,
-                            child: PrimaryButton(
-                                buttontext: 'ChatSpreadSheetsSlider.view_button'.tr(),
-                                func: () {
-                                  SpreadSheetFunctions().getUserFromSpreadSheet(
-                                      context, widget.cahtId);
-                                }))
-                      ]),
-                      Spacer(
-                        flex: 1,
+                        SizedBox(height: 16),
+                      ],
+
+                      if (widget.adminList.contains(
+                          HiveUserContactCashingService.getUserContactData().id) ||
+                          HiveUserContactCashingService.getUserContactData().id.length <
+                              10) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          child: Text(
+                            'ChatSpreadSheetsSlider.get_current_file'.tr(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: PrimaryButton(
+                            buttontext: 'ChatSpreadSheetsSlider.current_sheet_button'.tr(),
+                            func: () {
+                              SpreadSheetFunctions()
+                                  .downloadCurrentSpreadSheet(context, widget.cahtId);
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                      ],
+
+                      if (widget.adminList.contains(
+                          HiveUserContactCashingService.getUserContactData().id) ||
+                          HiveUserContactCashingService.getUserContactData().id.length <
+                              10) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          child: Text(
+                            'ChatSpreadSheetsSlider.submit_a_spreadsheet'.tr(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: PrimaryButton(
+                            buttontext: 'ChatSpreadSheetsSlider.submit_sheet_button'.tr(),
+                            func: () {
+                              SpreadSheetFunctions()
+                                  .pickSpreadSheet(context, widget.cahtId);
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                      ],
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        child: Text(
+                          'ChatSpreadSheetsSlider.view_your_spreadsheet'.tr(),
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: PrimaryButton(
+                          buttontext: 'ChatSpreadSheetsSlider.view_button'.tr(),
+                          func: () {
+                            SpreadSheetFunctions()
+                                .getUserFromSpreadSheet(context, widget.cahtId);
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 12),
                     ],
                   ),
-                )
-              ]),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

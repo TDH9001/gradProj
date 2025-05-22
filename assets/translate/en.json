@@ -172,6 +172,10 @@
     "email:": "Email:",
     "phone_number:": "Phone Number:",
     "seat_number:": "Seat Number:",
+    "make_admin": "Make Admin",
+    "already_an_admin": "Already an Admin",
+    "make_leader": "Make Leader",
+    "remove_leader": "Remove Leader",
     "remove_the_admin": "Remove The Admin",
     "temporary_schedule_items": "Temporary schedule items",
     "add_temporary_schedule_item": "Add temporary schedule item",
@@ -231,15 +235,15 @@
   {
     "error": "could not upload the file"
   },
-  "ChatAvailabilitySlider":  {
+  "ChatAvailabilitySlider": {
     "available": "Chat Availability Setting",
-    "current_mode :": "Current Mode :",
-    "set_mode_to :": "Set Mode To :",
-    "set_to :": "Set To :",
+    "current_mode": "Current Mode:",
+    "set_mode_to": "Set Mode To:",
+    "set_to": "Set To:",
     "set_to_button": "Set To:"
-
   },
-  "ScheduleCreationService":
+
+"ScheduleCreationService":
   {
     "schedule_name": "schedule Name",
     "location": "Location",

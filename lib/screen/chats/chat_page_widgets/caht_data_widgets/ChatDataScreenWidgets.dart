@@ -483,9 +483,9 @@ class ChatMembersList extends StatelessWidget {
                                             SizedBox(width: 8),
                                             Text(
                                                 //"Last Name: ${member.lastName}",
-                                                "${"ChatDataScreen.last_name".tr()}: ${member.lastName}",
+                                                "${"ChatDataScreen.last_name:".tr()} ${member.lastName}",
                                                 style: TextStyle(
-                                                    color: Colors.white)),
+                                                    color: Colors.white, fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(height: 6),
@@ -497,9 +497,9 @@ class ChatMembersList extends StatelessWidget {
                                             SizedBox(width: 8),
                                             Text(
                                                 //"Phone: ${member.phoneNumber}",
-                                                "${"ChatDataScreen.phone_number".tr()}: ${member.phoneNumber}",
+                                                "${"ChatDataScreen.phone_number:".tr()} ${member.phoneNumber}",
                                                 style: TextStyle(
-                                                    color: Colors.white)),
+                                                    color: Colors.white, fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(height: 12),
@@ -511,9 +511,9 @@ class ChatMembersList extends StatelessWidget {
                                             SizedBox(width: 8),
                                             Text(
                                                // "SeatNumber: ${member.seatNumber}",
-                                                "${"ChatDataScreen.seat_number".tr()}: ${member.seatNumber}",
+                                                "${"ChatDataScreen.seat_number:".tr()} ${member.seatNumber}",
                                                 style: TextStyle(
-                                                    color: Colors.white)),
+                                                    color: Colors.white, fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(height: 12),
@@ -525,25 +525,25 @@ class ChatMembersList extends StatelessWidget {
                                             SizedBox(width: 8),
                                             Text(
                                                 //"Email: ${member.email}",
-                                                "${"ChatDataScreen.email".tr()}: ${member.email}",
+                                                "${"ChatDataScreen.email:".tr()} ${member.email}",
                                                 style: TextStyle(
-                                                    color: Colors.white)),
+                                                    color: Colors.white, fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(
                                           height: 12,
                                         ),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.leaderboard,
-                                                color: Colors.white70,
-                                                size: 16),
-                                            SizedBox(width: 8),
-                                            Text("SeatNumber: ${member.email}",
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     Icon(Icons.leaderboard,
+                                        //         color: Colors.white70,
+                                        //         size: 16),
+                                        //     SizedBox(width: 8),
+                                        //     Text("${"ChatDataScreen.seat_number:".tr()} ${member.seatNumber}",
+                                        //         style: TextStyle(
+                                        //             color: Colors.white)),
+                                        //   ],
+                                        // ),
                                         SizedBox(
                                           height: 12,
                                         ),
@@ -558,17 +558,17 @@ class ChatMembersList extends StatelessWidget {
                                                         .trim()
                                                         .length <
                                                     10
-                                            ? Row(
+                                            ? Column(
                                                 children: [
                                                   SizedBox(
-                                                    width: 150,
+                                                    height: 40,
                                                     child: PrimaryButton(
                                                         buttontext: !widget
                                                                 .adminList
                                                                 .contains(member.id
                                                                     .trim())
-                                                            ? "make admin"
-                                                            : "already An admin",
+                                                            ? 'ChatDataScreen.make_admin'.tr()
+                                                            : 'ChatDataScreen.already_an_admin'.tr(),
                                                         func: () => !widget
                                                                 .adminList
                                                                 .contains(member
@@ -580,15 +580,13 @@ class ChatMembersList extends StatelessWidget {
                                                                     widget.cahtId)
                                                             : {}),
                                                   ),
-                                                  Spacer(
-                                                    flex: 1,
-                                                  ),
+                                                 SizedBox(height: 12),
                                                   SizedBox(
-                                                    width: 150,
+                                                    height: 40,
                                                     child: PrimaryButton(
                                                         buttontext: !widget.leaders.contains(member.id.trim())
-                                                            ? "make Leader"
-                                                            : "Remove Leader",
+                                                            ? 'ChatDataScreen.make_leader'.tr()
+                                                            : 'ChatDataScreen.remove_leader'.tr(),
                                                         func: () => !widget.leaders
                                                                 .contains(member.id
                                                                     .trim())

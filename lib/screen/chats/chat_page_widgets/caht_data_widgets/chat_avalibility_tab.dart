@@ -75,7 +75,8 @@ class ChatAvalibilitySlider extends StatelessWidget {
                       ),
                       child: Text(
                         //"Current Mode: $chatAccesability",
-                        "${"ChatAvailabilitySlider.current_mode".tr()}: $chatAccesability",
+                        "${'ChatAvailabilitySlider.current_mode'.tr()} ${chatAccesability}",
+
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -136,7 +137,7 @@ class ChatAvalibilitySlider extends StatelessWidget {
               Expanded(
                 child: Text(
                  // "Set mode to: ${mode.name}",
-                    "${"ChatAvailabilitySlider.set_mode_to".tr()} ${mode.name}",
+                    "${'ChatAvailabilitySlider.set_mode_to'.tr()} ${mode.name}",
                   style: TextStyle(
                       fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white),
                 ),
