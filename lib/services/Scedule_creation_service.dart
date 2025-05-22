@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/schedule.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
@@ -19,14 +20,14 @@ class SceduleCreationService {
   final TextEditingController startTime = TextEditingController();
   final TextEditingController endTime = TextEditingController();
   final TextEditingController endDate = TextEditingController();
-  final List<DropdownItem<String>> daysList = [
-    DropdownItem(label: "saturday", value: "saturday"),
-    DropdownItem(label: "sunday", value: "sunday"),
-    DropdownItem(label: "monday", value: "monday"),
-    DropdownItem(label: "tuesday", value: "tuesday"),
-    DropdownItem(label: "wednesday", value: "wednesday"),
-    DropdownItem(label: "thursday", value: "thursday"),
-    DropdownItem(label: "friday", value: "friday"),
+   List<DropdownItem<String>> daysList = [
+    DropdownItem(label: 'ScheduleCreationService.saturday'.tr(), value: "saturday"),
+    DropdownItem(label: 'ScheduleCreationService.sunday'.tr(), value: "sunday"),
+    DropdownItem(label: 'ScheduleCreationService.monday'.tr(), value: "monday"),
+    DropdownItem(label: 'ScheduleCreationService.tuesday'.tr(), value: "tuesday"),
+    DropdownItem(label: 'ScheduleCreationService.wednesday'.tr(), value: "wednesday"),
+    DropdownItem(label: 'ScheduleCreationService.thursday'.tr(), value: "thursday"),
+    DropdownItem(label: 'ScheduleCreationService.friday'.tr(), value: "friday"),
   ];
 
   void ClearFields() {
@@ -47,7 +48,15 @@ class SceduleCreationService {
           builder: (context) => SingleChildScrollView(
                 child: AlertDialog(
                   title: Text(
-                      "Add a ${itemType == 1 ? "permanat" : itemType == 2 ? "temporary" : "personal"} scedule",style: TextStyle(fontSize: 16),),
+                    //  "Add a ${itemType == 1 ? "permanent" : itemType == 2 ? "temporary" : "personal"} schedule",style: TextStyle(fontSize: 16),),
+
+                    'ScheduleCreationService.add_schedule'.tr(
+                      namedArgs: {
+                        "type": 'ScheduleCreationService.${itemType == 1 ? "permanent" : itemType == 2 ? "temporary" : "personal"}'.tr()
+                      },
+                    ),
+                    style: TextStyle(fontSize: 16),
+                  ),
                   content: Form(
                     key: validatescheduleItem,
                     child: Column(
@@ -61,28 +70,28 @@ class SceduleCreationService {
                         ),
                         SizedBox(height: 15,),
                         CustomTextField(
-                            hintText: "scedule Name",controller: sceduleName),
+                            hintText: 'ScheduleCreationService.schedule_name'.tr(),controller: sceduleName),
                         SizedBox(height: 15,),
                         CustomTextField(
-                            hintText: "location",
+                            hintText:'ScheduleCreationService.location'.tr(),
                             controller: locationController),
                         SizedBox(height: 15,),
                         CustomTextField(
-                            hintText: "Start Time", controller: startTime),
+                            hintText: 'ScheduleCreationService.start_time'.tr(), controller: startTime),
                         SizedBox(height: 15,),
                         CustomTextField(
-                          hintText: "End Time",
+                          hintText: 'ScheduleCreationService.end_time'.tr(),
                           controller: endTime,
                           startTimeController: startTime,
                         ),
                         itemType == 2
                             ? CustomTextField(
-                                hintText: "End Date", controller: endDate)
+                                hintText: 'ScheduleCreationService.end_date'.tr(), controller: endDate)
                             : SizedBox(
                                 height: 15,
                               ),
                         PrimaryButton(
-                            buttontext: "add the items",
+                            buttontext: 'ScheduleCreationService.add_the_items_button'.tr(),
                             func: () async {
                               if (validatescheduleItem.currentState!
                                   .validate()) {
@@ -134,7 +143,7 @@ class SceduleCreationService {
                                         : null));
                                 SnackBarService.instance.buildContext = cont;
                                 SnackBarService.instance.showsSnackBarSucces(
-                                    text: "Scedule ahs been succesfully added");
+                                    text:'ScheduleCreationService.successfully'.tr());
                                 ClearFields();
                               }
                             })

@@ -79,7 +79,7 @@ class _TableScreenState extends State<TableScreen> {
                                         cont: context);
                             if (data != null) {
                               DBService.instance.addSceduleItem(
-                                  _auth.user!.uid, "not relavant", data!);
+                                  _auth.user!.uid, "not relevant", data!);
                             } else {
                               SnackBarService.instance.showsSnackBarError(
                                   text:

@@ -238,5 +238,31 @@
     "set_to :": "Set To :",
     "set_to_button": "Set To:"
 
+  },
+  "ScheduleCreationService":
+  {
+    "schedule_name": "schedule Name",
+    "location": "Location",
+    "start_time": "Start Time",
+    "end_time": "End Time",
+    "end_date": "End Date",
+    "add_the_items_button": "Add The Items",
+    "successfully": "Schedule Has Been Successfully Added",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "add_schedule": "Add a {type} schedule",
+    "permanent": "Permanent",
+    "temporary": "Temporary",
+    "personal": "Personal"
+  },
+  "DropdownSelect": {
+    "courses": "Courses",
+    "select_your_courses": "Select Your Courses",
+    "error": "Please Select A Course"
   }
 }

@@ -223,20 +223,31 @@
     "set_mode_to :": "تعيين الوضع إلى :",
     "set_to :": "تعيين إلى :",
     "set_to_button": "تعيين إلى:"
+  },
+  "ScheduleCreationService": {
+    "schedule_name": "اسم الجدول",
+    "location": "الموقع",
+    "start_time": "وقت البداية",
+    "end_time": "وقت النهاية",
+    "end_date": "تاريخ الانتهاء",
+    "add_the_items_button": "إضافة الجدول",
+    "successfully": "تمت إضافة الجدول بنجاح",
+    "saturday": "السبت",
+    "sunday": "الأحد",
+    "monday": "الاثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "add_schedule": "أضف جدول {type}",
+    "permanent": "دائم",
+    "temporary": "مؤقت",
+    "personal": "شخصي"
+  },
+  "DropdownSelect": {
+    "courses": "المقررات",
+    "select_your_courses": "اختر مقرراتك",
+    "error": "يرجى اختيار مقرر"
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

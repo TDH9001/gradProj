@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,7 @@ class _MyWidgetState extends State<DropdownSelect> {
           spacing: 10,
         ),
         fieldDecoration: FieldDecoration(
-          hintText: 'Courses',
+          hintText: 'DropdownSelect.courses'.tr(),
           hintStyle:  TextStyle(color:isDarkMode ? Colors.white : Colors.black87),
           prefixIcon: const Icon(Icons.add_circle_rounded, color: Colors.grey),
           showClearIcon: false,
@@ -60,10 +61,10 @@ class _MyWidgetState extends State<DropdownSelect> {
           backgroundColor: isDarkMode ? DarkThemeColors.primary : Colors.white,
           marginTop: 2,
           maxHeight: 500,
-          header: const Padding(
+          header:  Padding(
             padding: EdgeInsets.all(8),
             child: Text(
-              'Select Your Courses',
+              'DropdownSelect.select_your_courses'.tr(),
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontSize: 16,
@@ -74,7 +75,7 @@ class _MyWidgetState extends State<DropdownSelect> {
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please select a Course';
+            return 'DropdownSelect.error'.tr();
           }
           return null;
         },
