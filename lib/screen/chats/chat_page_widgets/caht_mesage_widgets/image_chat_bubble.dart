@@ -85,15 +85,6 @@ class _ImageMessageBubbleState extends State<ImageMessageBubble>
                       color: widget.message.isImportant
                           ? Color(0xFFD3E3F1)
                           : Colors.grey[300]),
-                  // gradient: LinearGradient(
-                  //     colors: colorScheme,
-                  //     stops: [0.40, 0.70],
-                  //     begin: widget.isOurs
-                  //         ? Alignment.bottomLeft
-                  //         : Alignment.bottomRight,
-                  //     end: widget.isOurs
-                  //         ? Alignment.topRight
-                  //         : Alignment.topLeft)),
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

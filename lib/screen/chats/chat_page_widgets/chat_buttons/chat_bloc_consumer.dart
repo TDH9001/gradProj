@@ -65,7 +65,7 @@ class ChatBlocConsumer extends StatelessWidget {
             // height: _height * 0.1,
             width: MediaService.instance.getWidth() * 0.09,
             child: IconButton(
-              icon: Icon(Icons.send, color: LightTheme.primary),
+              icon: Icon(Icons.send, color: LightTheme.secondary),
               onPressed: () async {
                 if (GK.currentState!.validate() &&
                     ChatCubit.get(context).txt.text.isNotEmpty) {

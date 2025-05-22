@@ -264,5 +264,9 @@
     "courses": "Courses",
     "select_your_courses": "Select Your Courses",
     "error": "Please Select A Course"
+  },
+  "ChatFileButton":
+  {
+    "could_not_upload ": "Could Not Upload The File"
   }
 }

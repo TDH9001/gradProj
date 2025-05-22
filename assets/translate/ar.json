@@ -248,6 +248,11 @@
     "courses": "المقررات",
     "select_your_courses": "اختر مقرراتك",
     "error": "يرجى اختيار مقرر"
+  },
+  "ChatFileButton":
+  {
+    "could_not_upload ": "تعذر رفع الملف"
   }
+
 
 }

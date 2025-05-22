@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/message.dart';
@@ -48,7 +49,7 @@ class ChatFileButton extends StatelessWidget {
           } else {
             SnackBarService.instance.buildContext = context;
             SnackBarService.instance
-                .showsSnackBarError(text: "could not upload the file");
+                .showsSnackBarError(text: 'ChatFileButton.could_not_upload'.tr());
           }
         },
         icon: Icon(Icons.file_copy_sharp));

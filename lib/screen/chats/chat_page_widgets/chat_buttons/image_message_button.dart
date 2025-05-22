@@ -7,6 +7,8 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/cloud_Storage_Service.dart';
 import 'package:grad_proj/services/media_service.dart';
 
+import '../../../theme/light_theme.dart';
+
 class ImageMessageButton extends StatelessWidget {
   ImageMessageButton({super.key, required this.chatID, required this.cst});
   final String chatID;
@@ -40,6 +42,6 @@ class ImageMessageButton extends StatelessWidget {
               }
               // FocusScope.of(context).unfocus();
             },
-            icon: Icon(Icons.camera_alt)));
+            icon: Icon(Icons.camera_alt, color: LightTheme.secondary)));
   }
 }
