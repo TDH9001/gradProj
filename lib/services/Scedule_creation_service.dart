@@ -20,7 +20,7 @@ class SceduleCreationService {
   final TextEditingController startTime = TextEditingController();
   final TextEditingController endTime = TextEditingController();
   final TextEditingController endDate = TextEditingController();
-   List<DropdownItem<String>> daysList = [
+ final  List<DropdownItem<String>> daysList = [
     DropdownItem(label: 'ScheduleCreationService.saturday'.tr(), value: "saturday"),
     DropdownItem(label: 'ScheduleCreationService.sunday'.tr(), value: "sunday"),
     DropdownItem(label: 'ScheduleCreationService.monday'.tr(), value: "monday"),

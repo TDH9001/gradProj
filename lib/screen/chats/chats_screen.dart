@@ -226,7 +226,7 @@ class _RecentChatsreturnState extends State<RecentChatsreturn> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 20.0),
                       child: Text(
-                        'chats.no_chats'.tr(),
+                        'chats.no_chat'.tr(),
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
