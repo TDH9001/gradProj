@@ -5,13 +5,11 @@ import 'package:grad_proj/screen/about_screen/acadimic_career_screen.dart';
 import '../../providers/theme_provider.dart';
 import '../../widgets/custom_card.dart';
 import '../about_screen/question_screen.dart';
-import '../../widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/profiles/Profile_screen.dart';
 import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:provider/provider.dart';
-
 import '../pdf/student_guide_screen.dart';
 import '../setting_screen/setting.dart';
 import '../theme/dark_theme_colors.dart';
@@ -41,7 +39,6 @@ class AccountScreen extends StatelessWidget {
                   color: isDarkMode
                       ? DarkThemeColors.background
                       : LightTheme.primary,
-                  //isDarkMode?Color(0xFF2E3B55):ColorsApp.primary,
                 ),
                 child: Center(
                   child: Column(
@@ -52,7 +49,6 @@ class AccountScreen extends StatelessWidget {
                         backgroundColor: isDarkMode
                             ? DarkThemeColors.background
                             : LightTheme.backimg,
-                        //isDarkMode?Color(0xFF2E3B55):Color(0xFF2E3B55),
                         child: ClipOval(
                           child: Image.asset(
                             'assets/images/AinShamsUniv.png',
@@ -100,12 +96,6 @@ class AccountScreen extends StatelessWidget {
                       onTap: () => navigationService.instance.navigateTo(Setting.id),
                       trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
-                    // const SizedBox(height: 8),
-                    // CustomCard(
-                    //   icon: Icons.notifications,
-                    //   title: "Notifications",
-                    //   onTap: () => print("Notification Tapped"),
-                    // ),
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.question_mark_outlined,
@@ -116,11 +106,19 @@ class AccountScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.picture_as_pdf_outlined,
-                      title: 'Account.stutent_guide'.tr(),
+                      title: 'Account.student_guide'.tr(),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => StudentGuideScreen()));},
                       trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
+                    CustomCard(
+                      icon: Icons.school_outlined,
+                      title: 'Account.academic Career'.tr(),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AcademicCareerScreen()));},
+                      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
+                    ),
+
                     const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.logout,
@@ -130,15 +128,6 @@ class AccountScreen extends StatelessWidget {
                         navigationService.instance.navigateTo(LoginScreen.id);},
                       trailing: Icon(Icons.arrow_forward_ios, size: 16, color: isDarkMode ? DarkThemeColors.arrowColor: LightTheme.secondary,),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AcademicCareerScreen(),
-                          ),);
-                      },
-                      child: Text('Test Academic Career Screen'),),
                   ],
                 ),),
             ],

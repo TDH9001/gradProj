@@ -34,9 +34,11 @@
     "profile": "الملف الشخصي",
     "setting": "الإعدادات",
     "question": "الأسئلة",
-    "stutent_guide": "دليل الطالب",
+    "student_guide": "دليل الطالب",
+    "academic Careers": "المسارات الأكاديمية",
     "logout": "تسجيل الخروج"
   },
+
   "Profile": {
     "name": "الاسم",
     "email": "البريد الإلكتروني",
