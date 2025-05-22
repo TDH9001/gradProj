@@ -268,5 +268,9 @@
   "ChatFileButton":
   {
     "could_not_upload ": "Could Not Upload The File"
+  },
+  "VoiceButtonSlicerColumn":
+  {
+    "error": "Failed To Load File"
   }
 }

@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../theme/light_theme.dart';
@@ -51,20 +52,20 @@ class VoiceButtonSlicerColumb extends StatelessWidget {
                 : 1.0,
             thumbColor: _isFailed == true
                 ? Colors
-                    .red // when it fails to load the audio file as it is missing from DB
+                    .red[300] // when it fails to load the audio file as it is missing from DB
                 : _isLoadingFile
                     ? Colors
-                        .greenAccent // when downloading file > عشانيك اما تشتغلي يا ساره
+                        .green[200] // when downloading file > عشانيك اما تشتغلي يا ساره
                     : LightTheme.secondary,
-            activeColor: _isLoadingFile ? Colors.green : LightTheme.primary,
+            activeColor: _isLoadingFile ? Colors.green[300] : LightTheme.primary,
             inactiveColor: _isFailed == true
                 ? Colors
-                    .red // when it fails to load the audio file as it is missing from DB
+                    .red[300] // when it fails to load the audio file as it is missing from DB
                 : _isLoadingFile
                     ? Colors
                         .greenAccent // when downloading file > عشانيك اما تشتغلي يا ساره
                     : LightTheme.secondary),
-        _isFailed ? Text("failed to laod file") : SizedBox(),
+        _isFailed ? Text('VoiceButtonSlicerColumn.error'.tr()) : SizedBox(),
         !_isFailed
             ? Text(
                 "${(_position).inMinutes.toStringAsFixed(0)} : ${(_position).inSeconds.toString()} / ${_duration.inMinutes.toStringAsFixed(0)} : ${(_duration).inSeconds.toString()}")
