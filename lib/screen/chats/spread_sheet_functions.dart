@@ -1,8 +1,7 @@
 import 'dart:developer' as dev;
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:excel/excel.dart';
 import 'package:external_path/external_path.dart';
 import 'package:file_picker/file_picker.dart';
@@ -26,7 +25,7 @@ class SpreadSheetFunctions {
       if (pickedFile == null) {
         SnackBarService.instance.buildContext = context;
         SnackBarService.instance
-            .showsSnackBarError(text: "failed to load file");
+            .showsSnackBarError(text:'SpreadSheetFunctions.error'.tr());
         return;
       }
       File finalFile = File(pickedFile.files.single.path!);
@@ -39,11 +38,11 @@ class SpreadSheetFunctions {
       DBService.instance.addSpreadsheetToChat(chatID, fileUrl);
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
-          .showsSnackBarSucces(text: "spreadSheet uploaded");
+          .showsSnackBarSucces(text: 'SpreadSheetFunctions.spreadSheet_uploaded'.tr());
     } on Exception catch (e) {
       print(e);
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance.showsSnackBarError(text: "failed to load file");
+      SnackBarService.instance.showsSnackBarError(text: 'SpreadSheetFunctions.error'.tr());
     }
   }
 
@@ -54,11 +53,11 @@ class SpreadSheetFunctions {
     var table = excel.sheets;
     for (var sheet in table.values) {
       sheet.appendRow([
-        TextCellValue("Email"),
-        TextCellValue("seatNumber"),
-        TextCellValue("firstName"),
-        TextCellValue("lastName"),
-        TextCellValue("phoneNumber")
+        TextCellValue('SpreadSheetFunctions.email'.tr()),
+        TextCellValue('SpreadSheetFunctions.seatNumber'.tr()),
+        TextCellValue('SpreadSheetFunctions.first_name'.tr()),
+        TextCellValue('SpreadSheetFunctions.last_name'.tr()),
+        TextCellValue('SpreadSheetFunctions.phone_number'.tr()),
       ]);
       for (var user in userList) {
         sheet.appendRow([
@@ -85,7 +84,7 @@ class SpreadSheetFunctions {
       // await file.writeAsBytes(bytes, flush: true);
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
-          .showsSnackBarSucces(text: "spreadSheet downloaded");
+          .showsSnackBarSucces(text: 'SpreadSheetFunctions.spreadSheet_downloaded'.tr());
     }
   }
 
@@ -96,7 +95,7 @@ class SpreadSheetFunctions {
       if (link == "") {
         SnackBarService.instance.buildContext = context;
         SnackBarService.instance
-            .showsSnackBarError(text: "spreadSheet not yet uploaded");
+            .showsSnackBarError(text: 'SpreadSheetFunctions.spreadSheet_not_yet_uploaded'.tr());
         return;
       }
 
@@ -108,13 +107,13 @@ class SpreadSheetFunctions {
       if (connectResult.contains(ConnectivityResult.none) && fileInfo == null) {
         SnackBarService.instance.buildContext = context;
         SnackBarService.instance
-            .showsSnackBarError(text: "cold not connect to the internet");
+            .showsSnackBarError(text: 'SpreadSheetFunctions.cold_not_connect'.tr());
         return;
       } else if (!await NetworkCheckerService.urlExists(link) &&
           fileInfo == null) {
         SnackBarService.instance.buildContext = context;
         SnackBarService.instance
-            .showsSnackBarError(text: "spreadSheet not found in server");
+            .showsSnackBarError(text:'SpreadSheetFunctions.spreadSheet_not_found'.tr());
         return;
       } else {
         //is not loaded and is connected to int
@@ -143,7 +142,7 @@ class SpreadSheetFunctions {
           if (targetRow == null) {
             SnackBarService.instance.buildContext = context;
             SnackBarService.instance
-                .showsSnackBarError(text: "user not found in spreadsheet");
+                .showsSnackBarError(text: 'SpreadSheetFunctions.user_not_found_in_spreadsheet'.tr());
             return;
           }
         }
@@ -158,7 +157,7 @@ class SpreadSheetFunctions {
       }
     } on Exception catch (e) {
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance.showsSnackBarError(text: "an error occured");
+      SnackBarService.instance.showsSnackBarError(text: 'SpreadSheetFunctions.error2'.tr());
       print(e);
     }
   }
@@ -170,7 +169,7 @@ class SpreadSheetFunctions {
     if (link == "") {
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
-          .showsSnackBarError(text: "spreadSheet not yet uploaded");
+          .showsSnackBarError(text: 'SpreadSheetFunctions.spreadSheet_not_yet_uploaded'.tr());
       return;
     }
 
@@ -182,13 +181,13 @@ class SpreadSheetFunctions {
     if (connectResult.contains(ConnectivityResult.none) && fileInfo == null) {
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
-          .showsSnackBarError(text: "cold not connect to the internet");
+          .showsSnackBarError(text:'SpreadSheetFunctions.cold_not_connect'.tr());
       return;
     } else if (!await NetworkCheckerService.urlExists(link) &&
         fileInfo == null) {
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
-          .showsSnackBarError(text: "spreadSheet not found in server");
+          .showsSnackBarError(text: 'SpreadSheetFunctions.spreadSheet_not_found_in_server'.tr());
       return;
     } else {
       //is not loaded and is connected to int
@@ -210,7 +209,7 @@ class SpreadSheetFunctions {
       File newFile = await possibleFile.copy(filePath);
       SnackBarService.instance.buildContext = context;
       SnackBarService.instance
-          .showsSnackBarSucces(text: "current spreadSheet downloaded");
+          .showsSnackBarSucces(text:'SpreadSheetFunctions.current_spreadSheet_downloaded'.tr());
       return;
       //   }
       // } on Exception catch (e) {

@@ -1,5 +1,5 @@
-{ "Login":
-  {
+{
+  "Login": {
     "welcome": "SciConnect",
     "title": "Login",
     "email": "Email",
@@ -28,8 +28,7 @@
     "already_account": "Already have an account?",
     "login_button": "Login"
   },
-  "Account":
-  {
+  "Account": {
     "university": "Ain Shams University",
     "faculty": "Faculty of Science",
     "profile": "Profile",
@@ -38,8 +37,7 @@
     "stutent_guide": "Student Guide",
     "logout": "Logout"
   },
-  "Profile":
-  {
+  "Profile": {
     "name": "Name",
     "email": "Email",
     "seat_number": "Seat Number",
@@ -49,8 +47,7 @@
     "no_course": "No courses enrolled yet.",
     "course_enroll": "Courses Enrolled"
   },
-  "Setting":
-  {
+  "Setting": {
     "title": "Setting",
     "theme": "Theme",
     "light": "Light",
@@ -60,28 +57,24 @@
     "english": "English",
     "arabic": "Arabic"
   },
-  "Question":
-  {
+  "Question": {
     "title": "Questions",
     "welcome": "Welcome to Ain Shams University Faculty of Science Guide!",
-    "body":"  \"body\": \"I'm here to help you find the best courses and career paths \n    for your studies at Ain Shams University. \uD83C\uDF93\\n\\n\"\n    Would you like to start a conversation with our smart assistant?\"\n  }",
+    "body": "  \"body\": \"I'm here to help you find the best courses and career paths \n    for your studies at Ain Shams University. \uD83C\uDF93\\n\\n\"\n    Would you like to start a conversation with our smart assistant?\"\n  }",
     "chat_button": "chat with sciMate",
     "cancel_button": "Cancel"
   },
-  "Chatbot":
-  {
+  "Chatbot": {
     "title": "SciMeta",
     "ask_question": "Ask a question..."
   },
- "BottomNavigationBarScreen":
-  {
+  "BottomNavigationBarScreen": {
     "home": "Home",
     "chats": "Chats",
     "table": "Table",
     "about": "About"
   },
-  "TableScreen":
-  {
+  "TableScreen": {
     "saturday": "Saturday",
     "sunday": "Sunday",
     "monday": "Monday",
@@ -92,12 +85,10 @@
     "add_schedule": "Add Permanent Schedule Item ",
     "error": "Error Adding Schedule, Please Try Again"
   },
-  "Pdf":
-  {
+  "Pdf": {
     "title": "Student Guide"
   },
-  "ThemeButtonLogin":
-  {
+  "ThemeButtonLogin": {
     "title": "Theme ",
     "light": "Light Mode",
     "dark": "Dark Mode",
@@ -108,8 +99,7 @@
     "important": "Important",
     "no_data": "No Data Available"
   },
-  "ScheduleDeleteFeedItem":
-  {
+  "ScheduleDeleteFeedItem": {
     "schedule_deleted": "Schedule Deleted",
     "deleted_schedule_details": "Deleted Schedule Details",
     "course": "Course",
@@ -117,8 +107,7 @@
     "time": "Time",
     "location": "Location"
   },
-  "SceduleCreateFeedItem":
-  {
+  "SceduleCreateFeedItem": {
     "schedule_created": "Schedule Created",
     "created_schedule_details": "Created Schedule Details",
     "course": "Course",
@@ -127,8 +116,7 @@
     "location": "Location",
     "instructor": "Instructor"
   },
-  "ScheduleUpdateItem":
-  {
+  "ScheduleUpdateItem": {
     "schedule_updated": "Schedule Updated",
     "updated_schedule_details": "Updated Schedule Details",
     "course": "Course",
@@ -148,8 +136,7 @@
     "file_attachment": "File attachment",
     "no_chat": "no chats please go to the profile and add courses...."
   },
-  "AddChatDialog":
-  {
+  "AddChatDialog": {
     "error1": "Course link cannot be empty",
     "error2": "User not logged in. Please log in and try again.",
     "successfully": "Successfully joined chat:{}",
@@ -162,8 +149,7 @@
     "cancel": "Cancel",
     "add": "Add"
   },
-  "ChatDataScreen":
-  {
+  "ChatDataScreen": {
     "permanent_schedule_items": "Permanent Schedule Items",
     "add_permanent_schedule_item": "Add permanent schedule item",
     "error": "Error adding schedule, please try again",
@@ -181,20 +167,16 @@
     "add_temporary_schedule_item": "Add temporary schedule item",
     "error2": "Error adding schedule, please try again"
   },
-  "ChatImagesSent":
-  {
+  "ChatImagesSent": {
     "images_Sent": "Images Sent"
   },
-  "ChatFilesSent":
-  {
+  "ChatFilesSent": {
     "files_Sent": "Files Sent"
   },
-  "ChatVideosSent":
-  {
+  "ChatVideosSent": {
     "videos_Sent": "Videos Sent"
   },
-  "ChatSpreadSheetsSlider":
-  {
+  "ChatSpreadSheetsSlider": {
     "spreadSheets": "SpreadSheets",
     "get_base_spreadsheet": "Get Base Spreadsheet",
     "base_sheet_button": "Base Sheet",
@@ -204,25 +186,21 @@
     "submit_sheet_button": "Submit Sheet",
     "view_your_spreadsheet": "View your Spreadsheet",
     "view_button": "View Sheet"
-
   },
-  "MessageField":
-  {
+  "MessageField": {
     "no_chat": " You Are Not Able To Contribute To This Chat",
     "error": "The Message Cannot Be Empty",
     "message_sent": "type a Massage ..."
   },
-"chat": {
-  "error": "Could Not Upload The File"
-},
-  "ChatGroupButton":
-  {
+  "chat": {
+    "error": "Could Not Upload The File"
+  },
+  "ChatGroupButton": {
     "pick_image": "Pick Image",
     "pick_video": "Pick Video",
     "pick_file": "Pick File"
   },
-  "ChatPopup":
-  {
+  "ChatPopup": {
     "delete": "Delete",
     "copied_to_clipboard": "Copied To Clipboard",
     "copy": "Copy Text",
@@ -231,8 +209,7 @@
     "added_to_feed": "Added To Feed",
     "add_to_feed": "Add To Feed"
   },
-  "ChatCubit":
-  {
+  "ChatCubit": {
     "error": "could not upload the file"
   },
   "ChatAvailabilitySlider": {
@@ -242,9 +219,7 @@
     "set_to": "Set To:",
     "set_to_button": "Set To:"
   },
-
-"ScheduleCreationService":
-  {
+  "ScheduleCreationService": {
     "schedule_name": "schedule Name",
     "location": "Location",
     "start_time": "Start Time",
@@ -269,12 +244,27 @@
     "select_your_courses": "Select Your Courses",
     "error": "Please Select A Course"
   },
-  "ChatFileButton":
-  {
+  "ChatFileButton": {
     "could_not_upload ": "Could Not Upload The File"
   },
-  "VoiceButtonSlicerColumn":
-  {
+  "VoiceButtonSlicerColumn": {
     "error": "Failed To Load File"
+  },
+  "SpreadSheetFunctions": {
+    "error": "Failed To Load File",
+    "spreadSheet_uploaded": "SpreadSheet Uploaded",
+    "spreadSheet_downloaded": "SpreadSheet Downloaded",
+    "cold_not_connect": "Cold Not Connect To The Internet",
+    "spreadSheet_not_found": "SpreadSheet Not Found In Server",
+    "user_not_found_in_spreadsheet": "User Not Found In Spreadsheet",
+    "error2": "An Error Occurred",
+    "spreadSheet_not_yet_uploaded": "SpreadSheet Not Yet Uploaded",
+    "spreadSheet_not_found_in_server": "SpreadSheet Not Found In Server",
+    "current_spreadSheet_downloaded": "Current SpreadSheet Downloaded",
+    "email": "Email",
+    "seatNumber": "Seat Number",
+    "phone_number": "Phone Number",
+    "first_name": "First Name",
+    "last_name": "Last Name"
   }
 }

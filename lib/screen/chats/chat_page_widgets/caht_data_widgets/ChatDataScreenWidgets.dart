@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/models/schedule.dart';
-import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/chats/chat_data_screen.dart';
 import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/Scedule_creation_service.dart';
@@ -10,7 +9,6 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/selectable_scedule_item.dart';
-import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'dart:developer' as dev;
 
 import 'package:hive_flutter/adapters.dart';
