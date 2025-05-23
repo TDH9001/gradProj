@@ -108,7 +108,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintText: widget.hintText,
         hintStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
         filled: true,
-        fillColor:isDarkMode ? Colors.grey[800] : Colors.grey[50],
+        fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[50],
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
           borderSide: const BorderSide(color: LightTheme.primary),
@@ -138,7 +138,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       )
                     : const Icon(
                         Icons.visibility,
-                        color:LightTheme.primary,
+                        color: LightTheme.primary,
                       ),
               )
             : null,
@@ -162,6 +162,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
       validator: (data) {
         final emailRegex = RegExp(r'^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$');
         if (widget.hintText == "Email" || widget.hintText == "email") {
+          if (data == null || data.trim().isEmpty) {
+            return "empty field";
+          } else if (!data.trim().contains("@")) {
+            return "the email must contain an '@' symbol";
+          } else if (data.trim().indexOf("@") != data.trim().lastIndexOf("@")) {
+            return "you can only contain one instance of '@' in your email";
+          } else if (!emailRegex.hasMatch(data.trim())) {
+            return "Invalid email format, it should be similar to 'test@example.com'";
+          } else if (!data
+              .trim()
+              .toLowerCase()
+              .contains("@sci.asu.edu.eg".trim())) {
+            return "requires academic email adress";
+          } else {
+            return null;
+          }
+          // Valid email
+        }
+        if (widget.hintText == "Email1" || widget.hintText == "email1") {
           if (data == null || data.trim().isEmpty) {
             return "empty field";
           } else if (!data.trim().contains("@")) {

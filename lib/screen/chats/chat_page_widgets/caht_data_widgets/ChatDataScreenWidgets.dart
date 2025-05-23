@@ -56,7 +56,9 @@ class TemporaryChatSceleList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
+                    colors: isDarkMode
+                        ? [Color(0xff2E5077), Color(0xFF2E3B55)]
+                        : [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -71,14 +73,15 @@ class TemporaryChatSceleList extends StatelessWidget {
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: false,
-                  leading:
-                       Icon(Icons.table_chart, color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
+                  leading: Icon(Icons.table_chart,
+                      color:
+                          isDarkMode ? Color(0xFF4A739F) : Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  title:  Text(
-                  'ChatDataScreen.temporary_schedule_items'.tr(),
+                  title: Text(
+                    'ChatDataScreen.temporary_schedule_items'.tr(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -101,7 +104,7 @@ class TemporaryChatSceleList extends StatelessWidget {
                             flex: 1,
                           ),
                           Text(
-                           'ChatDataScreen.add_temporary_schedule_item'.tr(),
+                            'ChatDataScreen.add_temporary_schedule_item'.tr(),
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           Spacer(
@@ -126,13 +129,12 @@ class TemporaryChatSceleList extends StatelessWidget {
                                   SnackBarService.instance.buildContext =
                                       context;
                                   SnackBarService.instance.showsSnackBarError(
-                                      text:
-                                          'ChatDataScreen.error2'.tr());
+                                      text: 'ChatDataScreen.error2'.tr());
                                 }
                               },
                               icon: Icon(
                                 Icons.add_alert_sharp,
-                                color: Color(0xff2E5077),
+                                color: Color.fromARGB(255, 178, 180, 182),
                               )),
                           Spacer(
                             flex: 2,
@@ -212,7 +214,9 @@ class PermanatChatScedulesList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
+                    colors: isDarkMode
+                        ? [Color(0xff2E5077), Color(0xFF2E3B55)]
+                        : [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -227,14 +231,16 @@ class PermanatChatScedulesList extends StatelessWidget {
                 ),
                 child: ExpansionTile(
                   initiallyExpanded: false,
-                  leading:
-                      Icon(Icons.table_view_outlined,color: isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
+                  leading: Icon(Icons.table_view_outlined,
+                      color: isDarkMode
+                          ? Color.fromARGB(255, 92, 133, 177)
+                          : Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   title: Text(
-                   'ChatDataScreen.permanent_schedule_items'.tr(),
+                    'ChatDataScreen.permanent_schedule_items'.tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -245,7 +251,9 @@ class PermanatChatScedulesList extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
+                          colors: isDarkMode
+                              ? [Color(0xff2E5077), Color(0xFF2E3B55)]
+                              : [Color(0xff769BC6), Color(0xffa6c4dd)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -275,7 +283,7 @@ class PermanatChatScedulesList extends StatelessWidget {
                             flex: 1,
                           ),
                           Text(
-                           'ChatDataScreen.add_permanent_schedule_item'.tr(),
+                            'ChatDataScreen.add_permanent_schedule_item'.tr(),
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           Spacer(
@@ -302,13 +310,12 @@ class PermanatChatScedulesList extends StatelessWidget {
                                   SnackBarService.instance.buildContext =
                                       context;
                                   SnackBarService.instance.showsSnackBarError(
-                                      text:
-                                         'ChatDataScreen.error'.tr());
+                                      text: 'ChatDataScreen.error'.tr());
                                 }
                               },
                               icon: Icon(
                                 Icons.add_alert_sharp,
-                                color: Color(0xff2E5077),
+                                color: Color.fromARGB(255, 178, 180, 182),
                               )),
                           Spacer(
                             flex: 2,
@@ -390,7 +397,9 @@ class ChatMembersList extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors:isDarkMode? [Color(0xff2E5077), Color(0xFF2E3B55)] : [Color(0xff769BC6), Color(0xffa6c4dd)],
+                    colors: isDarkMode
+                        ? [Color(0xff2E5077), Color(0xFF2E3B55)]
+                        : [Color(0xff769BC6), Color(0xffa6c4dd)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -406,7 +415,8 @@ class ChatMembersList extends StatelessWidget {
                 child: ExpansionTile(
                   initiallyExpanded: true,
                   leading: Icon(Icons.library_books_sharp,
-                      color:isDarkMode? Color(0xFF4A739F): Color(0xff2E5077)),
+                      color:
+                          isDarkMode ? Color(0xFF4A739F) : Color(0xff2E5077)),
                   // elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -443,7 +453,9 @@ class ChatMembersList extends StatelessWidget {
                             ),
                             child: Container(
                               decoration: BoxDecoration(
-                                color:isDarkMode? Color(0xFF2E3B55) : Color(0xff2E5077),
+                                color: isDarkMode
+                                    ? Color(0xFF2E3B55)
+                                    : Color(0xff2E5077),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: ExpansionTile(
@@ -483,7 +495,8 @@ class ChatMembersList extends StatelessWidget {
                                                 //"Last Name: ${member.lastName}",
                                                 "${"ChatDataScreen.last_name:".tr()} ${member.lastName}",
                                                 style: TextStyle(
-                                                    color: Colors.white, fontSize: 12)),
+                                                    color: Colors.white,
+                                                    fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(height: 6),
@@ -497,7 +510,8 @@ class ChatMembersList extends StatelessWidget {
                                                 //"Phone: ${member.phoneNumber}",
                                                 "${"ChatDataScreen.phone_number:".tr()} ${member.phoneNumber}",
                                                 style: TextStyle(
-                                                    color: Colors.white, fontSize: 12)),
+                                                    color: Colors.white,
+                                                    fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(height: 12),
@@ -508,10 +522,11 @@ class ChatMembersList extends StatelessWidget {
                                                 size: 16),
                                             SizedBox(width: 8),
                                             Text(
-                                               // "SeatNumber: ${member.seatNumber}",
+                                                // "SeatNumber: ${member.seatNumber}",
                                                 "${"ChatDataScreen.seat_number:".tr()} ${member.seatNumber}",
                                                 style: TextStyle(
-                                                    color: Colors.white, fontSize: 12)),
+                                                    color: Colors.white,
+                                                    fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(height: 12),
@@ -525,7 +540,8 @@ class ChatMembersList extends StatelessWidget {
                                                 //"Email: ${member.email}",
                                                 "${"ChatDataScreen.email:".tr()} ${member.email}",
                                                 style: TextStyle(
-                                                    color: Colors.white, fontSize: 12)),
+                                                    color: Colors.white,
+                                                    fontSize: 12)),
                                           ],
                                         ),
                                         SizedBox(
@@ -565,8 +581,10 @@ class ChatMembersList extends StatelessWidget {
                                                                 .adminList
                                                                 .contains(member.id
                                                                     .trim())
-                                                            ? 'ChatDataScreen.make_admin'.tr()
-                                                            : 'ChatDataScreen.already_an_admin'.tr(),
+                                                            ? 'ChatDataScreen.make_admin'
+                                                                .tr()
+                                                            : 'ChatDataScreen.already_an_admin'
+                                                                .tr(),
                                                         func: () => !widget
                                                                 .adminList
                                                                 .contains(member
@@ -578,13 +596,15 @@ class ChatMembersList extends StatelessWidget {
                                                                     widget.cahtId)
                                                             : {}),
                                                   ),
-                                                 SizedBox(height: 12),
+                                                  SizedBox(height: 12),
                                                   SizedBox(
                                                     height: 40,
                                                     child: PrimaryButton(
                                                         buttontext: !widget.leaders.contains(member.id.trim())
-                                                            ? 'ChatDataScreen.make_leader'.tr()
-                                                            : 'ChatDataScreen.remove_leader'.tr(),
+                                                            ? 'ChatDataScreen.make_leader'
+                                                                .tr()
+                                                            : 'ChatDataScreen.remove_leader'
+                                                                .tr(),
                                                         func: () => !widget.leaders
                                                                 .contains(member.id
                                                                     .trim())
@@ -619,7 +639,9 @@ class ChatMembersList extends StatelessWidget {
                                           Row(
                                             children: [
                                               PrimaryButton(
-                                                buttontext: 'ChatDataScreen.remove_the_admin'.tr(),
+                                                buttontext:
+                                                    'ChatDataScreen.remove_the_admin'
+                                                        .tr(),
                                                 func: () => DBService.instance
                                                     .removeAdminFromChat(
                                                   chatId,

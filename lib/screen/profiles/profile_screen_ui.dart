@@ -62,58 +62,61 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
 
         return isComplete
             ? ListView(
-          padding: const EdgeInsets.all(16.0),
-          children: [
-            CustomCard(
-              icon: Icons.person,
-              // title: ("'Profile ${userData?.firstName ?? ""}")
-              title: "${'Profile.name'.tr()}: ${userData?.firstName ?? ""}",
+                padding: const EdgeInsets.all(16.0),
+                children: [
+                  CustomCard(
+                    icon: Icons.person,
+                    // title: ("'Profile ${userData?.firstName ?? ""}")
+                    title:
+                        "${'Profile.name'.tr()}: ${userData?.firstName ?? ""}",
 
-              onTap: () {},
-            ),
-            SizedBox(height: 8),
-            CustomCard(
-              icon: Icons.email,
-             //title:( "Email: ${auth.user!.email ?? ""}").tr(),
-              title: "${'Profile.email'.tr()}: ${auth.user?.email ?? ""}",
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 8),
+                  CustomCard(
+                    icon: Icons.email,
+                    //title:( "Email: ${auth.user!.email ?? ""}").tr(),
+                    title: "${'Profile.email'.tr()}: ${auth.user?.email ?? ""}",
 
-              onTap: () {},
-            ),
-            SizedBox(height: 8),
-            CustomCard(
-              icon: Icons.badge,
-              //title: "Seat Number: ${userData?.seatNumber ?? ""}",
-              title: "${'Profile.seat_number'.tr()}: ${userData?.seatNumber ?? ""}",
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 8),
+                  CustomCard(
+                    icon: Icons.badge,
+                    //title: "Seat Number: ${userData?.seatNumber ?? ""}",
+                    title:
+                        "${'Profile.seat_number'.tr()}: ${userData?.seatNumber ?? ""}",
 
-              onTap: () {},
-            ),
-            SizedBox(height: 8),
-            CustomCard(
-              icon: Icons.phone,
-             // title: "Phone: ${userData?.phoneNumber ?? ""}",
-              title: "${'Profile.phone_number'.tr()}: ${userData?.phoneNumber ?? ""}",
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 8),
+                  CustomCard(
+                    icon: Icons.phone,
+                    // title: "Phone: ${userData?.phoneNumber ?? ""}",
+                    title:
+                        "${'Profile.phone_number'.tr()}: ${userData?.phoneNumber ?? ""}",
 
-              onTap: () {},
-            ),
-            SizedBox(height: 8),
-            CustomCard(
-              icon: Icons.school,
-              //title: "Academic Year: ${userData?.year ?? ""}",
-              title: "${'Profile.academic_year'.tr()}: ${userData?.year ?? ""}",
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 8),
+                  CustomCard(
+                    icon: Icons.school,
+                    //title: "Academic Year: ${userData?.year ?? ""}",
+                    title:
+                        "${'Profile.academic_year'.tr()}: ${userData?.year ?? ""}",
 
-              onTap: () {},
-            ),
-            const SizedBox(height: 20),
-            _buildCoursesList(userData!.classes, isDarkMode),
-            const SizedBox(height: 50),
-            PrimaryButton(
-              buttontext: 'Profile.edit_data_button'.tr(),
-              func: () =>
-                  navigationService.instance
-                      .navigateTo(CompleteProfile.id),
-            ),
-          ],
-        )
+                    onTap: () {},
+                  ),
+                  // const SizedBox(height: 20),
+                  // _buildCoursesList(userData!.classes, isDarkMode),
+                  const SizedBox(height: 50),
+                  PrimaryButton(
+                    buttontext: 'Profile.edit_data_button'.tr(),
+                    func: () => navigationService.instance
+                        .navigateTo(CompleteProfile.id),
+                  ),
+                ],
+              )
             : CompleteProfile();
       },
     );
@@ -137,7 +140,8 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Theme(
         data: Theme.of(context).copyWith(
-          dividerColor: Colors.transparent,),
+          dividerColor: Colors.transparent,
+        ),
         child: ExpansionTile(
           leading: Icon(Icons.menu_book, color: Color(0xff769BC6)),
           title: Text(
@@ -146,9 +150,9 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
           ),
           children: classes
               .map(
-                (course) =>
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                (course) => Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 4.0),
                   child: Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
@@ -165,7 +169,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                     ),
                   ),
                 ),
-          )
+              )
               .toList(),
         ),
       ),

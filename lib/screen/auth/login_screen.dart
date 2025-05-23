@@ -1,24 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:grad_proj/constants.dart';
-import 'package:grad_proj/refactored/loginform_screen.dart';
-import 'package:grad_proj/widgets/Header_Text.dart';
-import 'package:grad_proj/refactored/singupform_screen.dart';
-import 'package:grad_proj/widgets/NavigatorTextButton.dart';
-import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/forget_pass_row.dart';
 import 'package:grad_proj/widgets/have_acc_row.dart';
 import 'package:grad_proj/widgets/language_login_button.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
-import 'package:grad_proj/screen/auth/resetpassword_screen.dart';
-import 'package:grad_proj/screen/auth/singup_screen.dart';
 import 'package:grad_proj/widgets/theme_button_login.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/snackbar_service.dart';
-import '../../services/navigation_Service.dart';
 import '../../widgets/customtextfield.dart';
 import '../theme/dark_theme_colors.dart';
 import '../theme/light_theme.dart';
@@ -49,10 +40,12 @@ class _LoginScreenState extends State<LoginScreen> {
     _DeviceWidth = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-        gradient: isDarkMode? DarkThemeColors.backgroundGradient: LightTheme.backgroundGradient,
-    ),
+            body: Container(
+      decoration: BoxDecoration(
+        gradient: isDarkMode
+            ? DarkThemeColors.backgroundGradient
+            : LightTheme.backgroundGradient,
+      ),
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -60,6 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
             value: AuthProvider.instance,
             child: Builder(builder: (_context) {
               _auth = Provider.of<AuthProvider>(_context);
+              if (_auth == null) {
+                return CircularProgressIndicator();
+              }
               SnackBarService.instance.buildContext = context;
               return Form(
                 key: _formKey,
@@ -75,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: const [
-                         LanguageLoginButton(),
+                          LanguageLoginButton(),
                           SizedBox(width: 8),
                           ThemeButtonLogin(),
                         ],
@@ -86,21 +82,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       'Login.welcome'.tr(),
                       style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-                      textAlign: TextAlign.center,),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
                     const SizedBox(height: 40),
                     Align(
                       alignment: Alignment.topLeft,
-                      child:  Text(
+                      child: Text(
                         'Login.title'.tr(),
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white,),),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
-                      controller: t1, hintText: 'Login.email'.tr(),),
+                      controller: t1,
+                      hintText: 'Login.email1'.tr(),
+                    ),
                     const SizedBox(height: 16),
                     CustomTextField(
-                      controller: t2, hintText: 'Login.password'.tr(), isPassword: true,),
+                      controller: t2,
+                      hintText: 'Login.password'.tr(),
+                      isPassword: true,
+                    ),
                     const SizedBox(height: 40),
                     ForgetPassRow(),
                     SizedBox(height: 30),
@@ -113,6 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _password = t2.text.trim();
                               _email = t1.text.trim();
                               if (_formKey.currentState!.validate()) {
+                                //   bool isValid = _auth.user!.emailVerified;
                                 _auth.loginUserWithEmailAndPassword(
                                     _email, _password);
                               }
@@ -120,15 +130,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             buttontext: 'Login.login_button'.tr(),
                           ),
                     const SizedBox(height: 40),
-                   HaveAccRow(),
+                    HaveAccRow(),
                     const SizedBox(height: 24),
                   ],
-                ),);
+                ),
+              );
             }),
           ),
         ),
       ),
-      )
-    ));
+    )));
   }
 }

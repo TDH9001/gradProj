@@ -20,8 +20,7 @@ Widget chatMessageBubble(
     child: Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color:
-              message.isImportant ? Color(0xFFD3E3F1) : Colors.grey[300]),
+          color: message.isImportant ? Color(0xFFD3E3F1) : Colors.grey[300]),
 
       padding: EdgeInsets.symmetric(horizontal: 15),
       // height:
@@ -35,12 +34,19 @@ Widget chatMessageBubble(
             ? CrossAxisAlignment.start
             : CrossAxisAlignment.end,
         children: [
-          Text(message.senderName.trim(),style: TextStyle(color: Colors.black54,fontSize: 16),),
+          Text(
+            message.senderName.trim(),
+            style: TextStyle(color: Colors.black54, fontSize: 16),
+          ),
           SizedBox(
             height: 5,
           ),
-          LinkifyText(
+          // LinkifyText(
+          //   message.messageContent.trim(),
+          // ),
+          Text(
             message.messageContent.trim(),
+            style: TextStyle(color: Colors.black54, fontSize: 16),
           ),
           // SizedBox(
           //   height: 15,
