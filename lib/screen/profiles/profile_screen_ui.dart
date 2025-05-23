@@ -108,7 +108,7 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
                     onTap: () {},
                   ),
                   // const SizedBox(height: 20),
-                  //   _buildCoursesList(userData!.classes, isDarkMode),
+                  // _buildCoursesList(userData!.classes, isDarkMode),
                   const SizedBox(height: 50),
                   PrimaryButton(
                     buttontext: 'Profile.edit_data_button'.tr(),

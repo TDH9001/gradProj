@@ -39,10 +39,7 @@ class _AddChatDialogState extends State<AddChatDialog> {
     if (scannedLink != null && scannedLink.isNotEmpty) {
       _courseLinkController.text = scannedLink;
     } else {
-      // Optional: Show a message if scan was cancelled or no result
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text('QR scan cancelled or no data found')),
-      // );
+     
     }
   }
 
@@ -70,11 +67,14 @@ class _AddChatDialogState extends State<AddChatDialog> {
     });
 
     try {
-      if ((await FirebaseFirestore.instance
+      if (
+        (await FirebaseFirestore.instance
               .collection('Chats')
               .doc(courseLink)
               .get())
-          .exists) {
+          .exists
+          )
+           {
         DBService.instance.addChatToUser(
             HiveUserContactCashingService.getUserContactData().id, courseLink);
         DBService.instance.addMembersToChat(

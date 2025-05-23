@@ -252,12 +252,16 @@ class DBService {
       // Optionally throw an exception or handle this case gracefully
       return;
     }
+    var userchat = _db.collection(_UserCollection).doc(uid);
+    ;
 
     var ref = _db
         .collection(_UserCollection)
         .doc(uid)
         .collection(_ChatCollection)
         .doc(chatID);
+
+    await ref.set({"classes": chatID}, SetOptions(merge: true));
 
     return ref.set({
       "chatID": chatID,

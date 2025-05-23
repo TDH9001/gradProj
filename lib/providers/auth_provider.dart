@@ -88,18 +88,18 @@ class AuthProvider extends ChangeNotifier {
               .toJson());
       await instance.user!.reload();
       bool isVerified = instance.user!.emailVerified;
-      // if (isVerified) {
+      if (isVerified) {
+        SnackBarService.instance
+            .showsSnackBarSucces(text: "Welcome ${user?.email}");
+        navigationService.instance.navigateToReplacement("HomeScreen");
+      } else {
+        SnackBarService.instance.showsSnackBarError(
+            text:
+                "plase validate your email , using the link sent to your inbox");
+      }
       SnackBarService.instance
           .showsSnackBarSucces(text: "Welcome ${user?.email}");
       navigationService.instance.navigateToReplacement("HomeScreen");
-      // } else {
-      //   SnackBarService.instance.showsSnackBarError(
-      //       text:
-      //           "plase validate your email , using the link sent to your inbox");
-      // }
-      // SnackBarService.instance
-      //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      // navigationService.instance.navigateToReplacement("HomeScreen");
     } on Exception catch (e) {
       if (e is SocketException) {
         print(e);
