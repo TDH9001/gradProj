@@ -163,7 +163,7 @@ class AuthProvider extends ChangeNotifier {
       instance.user = null;
 
       navigationService.instance.goBack();
-      SnackBarService.instance.showsSnackBarError(text: "Error authenticating");
+    //  SnackBarService.instance.showsSnackBarError(text: "Error authenticating");
     }
     notifyListeners();
   }
