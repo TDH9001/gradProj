@@ -108,7 +108,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         hintText: widget.hintText,
         hintStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
         filled: true,
-        fillColor:isDarkMode ? Colors.grey[800] : Colors.grey[50],
+        fillColor: isDarkMode ? Colors.grey[800] : Colors.grey[50],
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(18),
           borderSide: const BorderSide(color: LightTheme.primary),
@@ -138,7 +138,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       )
                     : const Icon(
                         Icons.visibility,
-                        color:LightTheme.primary,
+                        color: LightTheme.primary,
                       ),
               )
             : null,
@@ -170,6 +170,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return "you can only contain one instance of '@' in your email";
           } else if (!emailRegex.hasMatch(data.trim())) {
             return "Invalid email format, it should be similar to 'test@example.com'";
+          } else if (!data
+              .trim()
+              .toLowerCase()
+              .contains("@sci.asu.edu.eg".trim())) {
+            return "requires academic email adress";
           } else {
             return null;
           }

@@ -5,6 +5,7 @@ import 'package:grad_proj/models/feed_items_models/schedule_create_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_delete_item.dart';
 import 'package:grad_proj/models/feed_items_models/schedule_update_item.dart';
 import 'package:grad_proj/models/schedule.dart';
+import 'package:grad_proj/screen/auth/login_screen.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/widgets/bottom_navegation_bar_screen.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
@@ -66,8 +67,7 @@ class DBService {
               isComplete: false,
               phoneNumber: phoneNumber)
           .toJson());
-      navigationService.instance
-          .navigateToReplacement(BottomNavegationBarScreen.id);
+      navigationService.instance.navigateToReplacement(LoginScreen.id);
     } on Exception catch (e) {
       print(e);
       SnackBarService.instance.showsSnackBarError(text: "Creation error");

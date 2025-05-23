@@ -86,9 +86,20 @@ class AuthProvider extends ChangeNotifier {
       HiveUserContactCashingService.updateUserContactData(
           (await DBService.instance.getUserData(_result.user!.uid).first)
               .toJson());
-      SnackBarService.instance
-          .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      navigationService.instance.navigateToReplacement("HomeScreen");
+      await instance.user!.reload();
+      bool isVerified = instance.user!.emailVerified;
+      if (isVerified) {
+        SnackBarService.instance
+            .showsSnackBarSucces(text: "Welcome ${user?.email}");
+        navigationService.instance.navigateToReplacement("HomeScreen");
+      } else {
+        SnackBarService.instance.showsSnackBarError(
+            text:
+                "plase validate your email , using the link sent to your inbox");
+      }
+      // SnackBarService.instance
+      //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
+      // navigationService.instance.navigateToReplacement("HomeScreen");
     } on Exception catch (e) {
       if (e is SocketException) {
         print(e);
@@ -115,10 +126,35 @@ class AuthProvider extends ChangeNotifier {
       instance.user = _result.user;
       status = AuthStatus.Authenticated;
       await onSucces!(instance.user!.uid.toString());
+      instance.user!.sendEmailVerification();
       SnackBarService.instance
-          .showsSnackBarSucces(text: "Welcome ${instance.user?.email}");
+          .showsSnackBarSucces(text: "validation email sent to ${user?.email}");
     } on Exception catch (e) {
+      if (e is FirebaseAuthException) {
+        try {
+          if (e.code == "email-already-in-use") {
+            UserCredential _result = await _auth.signInWithEmailAndPassword(
+              email: email,
+              password: password,
+            );
+            instance.user = _result.user;
+
+            if (instance.user != null && !instance.user!.emailVerified) {
+              await instance.user!.sendEmailVerification();
+              SnackBarService.instance.showsSnackBarSucces(
+                text: "Verification email re-sent to ${user?.email}",
+              );
+            } else {
+              SnackBarService.instance.showsSnackBarError(
+                  text: "email is used , try and reset the password");
+            }
+          }
+        } on Exception catch (e) {
+          print(e);
+        }
+      }
       if (e is SocketException) {
+        print(e);
         navigationService.instance.goBack();
         SnackBarService.instance
             .showsSnackBarError(text: "error connecting to server");
