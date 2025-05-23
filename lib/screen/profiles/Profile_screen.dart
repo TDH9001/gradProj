@@ -28,12 +28,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         appBar: Orgappbar(
           scaffoldKey: scaffoldKey,
           title: "Profile",
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back, color: Colors.white),
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          // ),
         ),
         body: Padding(
           padding: EdgeInsets.all(12),

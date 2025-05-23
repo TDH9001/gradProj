@@ -5,6 +5,7 @@ import 'package:grad_proj/services/DB-service.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/navigation_Service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
+import 'package:grad_proj/widgets/NavigatorTextButton.dart';
 import 'package:grad_proj/widgets/UniversalTextFormField.dart';
 import 'package:grad_proj/widgets/dropdown_select_widget.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
@@ -43,7 +44,7 @@ class _UpdateUserDataState extends State<CompleteProfile> {
     SnackBarService.instance.buildContext = _context;
 
     return Scaffold(
-      appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Complete Profile"),
+      // appBar: Orgappbar(scaffoldKey: scaffoldKey, title: "Complete Profile"),
       body: ChangeNotifierProvider<AuthProvider>.value(
         value: AuthProvider.instance,
         child: Form(
@@ -80,14 +81,14 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                   controller: _seatIdController,
                 ),
               ),
-              SizedBox(height: 16),
-              _buildInfoCard(
-                label: "Courses",
-                child: DropdownSelect(
-                  data: courses,
-                  cont: _listController,
-                ),
-              ),
+              // SizedBox(height: 16),
+              // _buildInfoCard(
+              //   label: "Courses",
+              //   child: DropdownSelect(
+              //     data: courses,
+              //     cont: _listController,
+              //   ),
+              // ),
               SizedBox(height: 32),
               PrimaryButton(
                 buttontext: "Validate and Submit",
@@ -106,20 +107,20 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                       seatNumber: int.parse(_seatIdController.text),
                     );
 
-                    for (int i = 0; i < selectedItems.length; i++) {
-                      await DBService.instance.addChatToUser(
-                        HiveUserContactCashingService.getUserContactData()
-                            .id
-                            .trim(),
-                        selectedItems[i].value,
-                      );
-                      await DBService.instance.addMembersToChat(
-                        HiveUserContactCashingService.getUserContactData()
-                            .id
-                            .trim(),
-                        selectedItems[i].value,
-                      );
-                    }
+                    // for (int i = 0; i < selectedItems.length; i++) {
+                    //   await DBService.instance.addChatToUser(
+                    //     HiveUserContactCashingService.getUserContactData()
+                    //         .id
+                    //         .trim(),
+                    //     selectedItems[i].value,
+                    //   );
+                    //   await DBService.instance.addMembersToChat(
+                    //     HiveUserContactCashingService.getUserContactData()
+                    //         .id
+                    //         .trim(),
+                    //     selectedItems[i].value,
+                    //   );
+                    // }
 
                     SnackBarService.instance.showsSnackBarSucces(
                       text: "Profile successfully updated",
@@ -129,6 +130,10 @@ class _UpdateUserDataState extends State<CompleteProfile> {
                   }
                 },
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Navigatortextbutton(text: "go back", location: "pop")
             ],
           ),
         ),

@@ -25,7 +25,7 @@ class SpreadSheetFunctions {
       if (pickedFile == null) {
         SnackBarService.instance.buildContext = context;
         SnackBarService.instance
-            .showsSnackBarError(text:'SpreadSheetFunctions.error'.tr());
+            .showsSnackBarError(text: 'SpreadSheetFunctions.error'.tr());
         return;
       }
       File finalFile = File(pickedFile.files.single.path!);
@@ -37,12 +37,13 @@ class SpreadSheetFunctions {
       var fileUrl = await result!.ref.getDownloadURL();
       DBService.instance.addSpreadsheetToChat(chatID, fileUrl);
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance
-          .showsSnackBarSucces(text: 'SpreadSheetFunctions.spreadSheet_uploaded'.tr());
+      SnackBarService.instance.showsSnackBarSucces(
+          text: 'SpreadSheetFunctions.spreadSheet_uploaded'.tr());
     } on Exception catch (e) {
       print(e);
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance.showsSnackBarError(text: 'SpreadSheetFunctions.error'.tr());
+      SnackBarService.instance
+          .showsSnackBarError(text: 'SpreadSheetFunctions.error'.tr());
     }
   }
 
@@ -83,8 +84,8 @@ class SpreadSheetFunctions {
       // var file = File("${chatId}_spreadSheet.xlsx");
       // await file.writeAsBytes(bytes, flush: true);
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance
-          .showsSnackBarSucces(text: 'SpreadSheetFunctions.spreadSheet_downloaded'.tr());
+      SnackBarService.instance.showsSnackBarSucces(
+          text: 'SpreadSheetFunctions.spreadSheet_downloaded'.tr());
     }
   }
 
@@ -94,26 +95,26 @@ class SpreadSheetFunctions {
       String link = await DBService.instance.getSpreadSheetLink(chatId);
       if (link == "") {
         SnackBarService.instance.buildContext = context;
-        SnackBarService.instance
-            .showsSnackBarError(text: 'SpreadSheetFunctions.spreadSheet_not_yet_uploaded'.tr());
+        SnackBarService.instance.showsSnackBarError(
+            text: 'SpreadSheetFunctions.spreadSheet_not_yet_uploaded'.tr());
         return;
       }
 
       var connectResult = await Connectivity().checkConnectivity();
 
       var fileInfo = await DefaultCacheManager().getFileFromCache(link);
-      late File possibleFile;
+      File? possibleFile = null;
 
       if (connectResult.contains(ConnectivityResult.none) && fileInfo == null) {
         SnackBarService.instance.buildContext = context;
-        SnackBarService.instance
-            .showsSnackBarError(text: 'SpreadSheetFunctions.cold_not_connect'.tr());
+        SnackBarService.instance.showsSnackBarError(
+            text: 'SpreadSheetFunctions.cold_not_connect'.tr());
         return;
       } else if (!await NetworkCheckerService.urlExists(link) &&
           fileInfo == null) {
         SnackBarService.instance.buildContext = context;
-        SnackBarService.instance
-            .showsSnackBarError(text:'SpreadSheetFunctions.spreadSheet_not_found'.tr());
+        SnackBarService.instance.showsSnackBarError(
+            text: 'SpreadSheetFunctions.spreadSheet_not_found'.tr());
         return;
       } else {
         //is not loaded and is connected to int
@@ -127,7 +128,7 @@ class SpreadSheetFunctions {
         var excel = Excel.decodeBytes(bytes);
         List<Data?> firstRow =
             []; //excel.tables[0]!.rows[0].asMap().values.toList();
-        late List<Data?> targetRow;
+        List<Data?>? targetRow = null;
         for (var table in excel.tables.keys) {
           firstRow = excel.tables[table]!.rows[0].asMap().values.toList();
           for (var row in excel.tables[table]!.rows) {
@@ -141,8 +142,9 @@ class SpreadSheetFunctions {
           }
           if (targetRow == null) {
             SnackBarService.instance.buildContext = context;
-            SnackBarService.instance
-                .showsSnackBarError(text: 'SpreadSheetFunctions.user_not_found_in_spreadsheet'.tr());
+            SnackBarService.instance.showsSnackBarError(
+                text:
+                    'SpreadSheetFunctions.user_not_found_in_spreadsheet'.tr());
             return;
           }
         }
@@ -151,13 +153,14 @@ class SpreadSheetFunctions {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
           return SpreadSheetResult(
             base: firstRow,
-            result: targetRow,
+            result: targetRow!,
           );
         }));
       }
     } on Exception catch (e) {
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance.showsSnackBarError(text: 'SpreadSheetFunctions.error2'.tr());
+      SnackBarService.instance
+          .showsSnackBarError(text: 'SpreadSheetFunctions.error2'.tr());
       print(e);
     }
   }
@@ -168,26 +171,26 @@ class SpreadSheetFunctions {
     String link = await DBService.instance.getSpreadSheetLink(chatId);
     if (link == "") {
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance
-          .showsSnackBarError(text: 'SpreadSheetFunctions.spreadSheet_not_yet_uploaded'.tr());
+      SnackBarService.instance.showsSnackBarError(
+          text: 'SpreadSheetFunctions.spreadSheet_not_yet_uploaded'.tr());
       return;
     }
 
     var connectResult = await Connectivity().checkConnectivity();
 
     var fileInfo = await DefaultCacheManager().getFileFromCache(link);
-    late File possibleFile;
+    File? possibleFile = null;
 
     if (connectResult.contains(ConnectivityResult.none) && fileInfo == null) {
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance
-          .showsSnackBarError(text:'SpreadSheetFunctions.cold_not_connect'.tr());
+      SnackBarService.instance.showsSnackBarError(
+          text: 'SpreadSheetFunctions.cold_not_connect'.tr());
       return;
     } else if (!await NetworkCheckerService.urlExists(link) &&
         fileInfo == null) {
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance
-          .showsSnackBarError(text: 'SpreadSheetFunctions.spreadSheet_not_found_in_server'.tr());
+      SnackBarService.instance.showsSnackBarError(
+          text: 'SpreadSheetFunctions.spreadSheet_not_found_in_server'.tr());
       return;
     } else {
       //is not loaded and is connected to int
@@ -208,8 +211,8 @@ class SpreadSheetFunctions {
       String filePath = "$targetDir/current_sheet.xlsx";
       File newFile = await possibleFile.copy(filePath);
       SnackBarService.instance.buildContext = context;
-      SnackBarService.instance
-          .showsSnackBarSucces(text:'SpreadSheetFunctions.current_spreadSheet_downloaded'.tr());
+      SnackBarService.instance.showsSnackBarSucces(
+          text: 'SpreadSheetFunctions.current_spreadSheet_downloaded'.tr());
       return;
       //   }
       // } on Exception catch (e) {
