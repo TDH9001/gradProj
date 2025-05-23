@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 15),
                     CustomTextField(
                       controller: t1,
-                      hintText: 'Login.email'.tr(),
+                      hintText: 'Login.email1'.tr(),
                     ),
                     const SizedBox(height: 16),
                     CustomTextField(
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _password = t2.text.trim();
                               _email = t1.text.trim();
                               if (_formKey.currentState!.validate()) {
-                             //   bool isValid = _auth.user!.emailVerified;
+                                //   bool isValid = _auth.user!.emailVerified;
                                 _auth.loginUserWithEmailAndPassword(
                                     _email, _password);
                               }

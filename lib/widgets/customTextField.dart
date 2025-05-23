@@ -179,6 +179,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return null;
           }
           // Valid email
+        }
+        if (widget.hintText == "Email1" || widget.hintText == "email1") {
+          if (data == null || data.trim().isEmpty) {
+            return "empty field";
+          } else if (!data.trim().contains("@")) {
+            return "the email must contain an '@' symbol";
+          } else if (data.trim().indexOf("@") != data.trim().lastIndexOf("@")) {
+            return "you can only contain one instance of '@' in your email";
+          } else if (!emailRegex.hasMatch(data.trim())) {
+            return "Invalid email format, it should be similar to 'test@example.com'";
+          } else {
+            return null;
+          }
+          // Valid email
         } else if (widget.hintText == "Password" ||
             widget.hintText == "Confirm Password") {
           if (data == null || data.trim().isEmpty) {

@@ -88,15 +88,15 @@ class AuthProvider extends ChangeNotifier {
               .toJson());
       await instance.user!.reload();
       bool isVerified = instance.user!.emailVerified;
-      if (isVerified) {
-        SnackBarService.instance
-            .showsSnackBarSucces(text: "Welcome ${user?.email}");
-        navigationService.instance.navigateToReplacement("HomeScreen");
-      } else {
-        SnackBarService.instance.showsSnackBarError(
-            text:
-                "plase validate your email , using the link sent to your inbox");
-      }
+      // if (isVerified) {
+      SnackBarService.instance
+          .showsSnackBarSucces(text: "Welcome ${user?.email}");
+      navigationService.instance.navigateToReplacement("HomeScreen");
+      // } else {
+      //   SnackBarService.instance.showsSnackBarError(
+      //       text:
+      //           "plase validate your email , using the link sent to your inbox");
+      // }
       // SnackBarService.instance
       //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
       // navigationService.instance.navigateToReplacement("HomeScreen");
@@ -163,7 +163,7 @@ class AuthProvider extends ChangeNotifier {
       instance.user = null;
 
       navigationService.instance.goBack();
-    //  SnackBarService.instance.showsSnackBarError(text: "Error authenticating");
+      //  SnackBarService.instance.showsSnackBarError(text: "Error authenticating");
     }
     notifyListeners();
   }
