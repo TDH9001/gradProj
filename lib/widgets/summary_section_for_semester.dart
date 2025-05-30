@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../models/Semester_logs_models/semester_model.dart';
 import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
 import 'package:grad_proj/screen/theme/light_theme.dart';
-import '../models/Semester_logs_models/semester_model.dart';
 
 class SummarySectionForSemester extends StatelessWidget {
   final SemesterModel semester;
@@ -16,10 +16,7 @@ class SummarySectionForSemester extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double totalCredits = semester.courses.fold(0, (sum, c) => sum + c.creditHours);
-    double gpa = semester.courses.isNotEmpty
-        ? semester.courses.fold(0.0, (sum, c) => sum + c.grade) / semester.courses.length
-        : 0;
-
+ 
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(top: 6),
@@ -42,7 +39,7 @@ class SummarySectionForSemester extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            "Semester GPA: ${gpa.toStringAsFixed(2)}",
+            "Semester GPA: ${semester.semmesterGpa.toStringAsFixed(2)}",
             style: TextStyle(
               color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
             ),

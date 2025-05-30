@@ -5,6 +5,8 @@ import 'package:grad_proj/models/Semester_logs_models/course_model.dart';
 import 'package:grad_proj/widgets/dialogs/course_dialog.dart';
 import 'package:grad_proj/widgets/dialogs/semester_dialog.dart';
 import 'package:provider/provider.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
 import 'package:grad_proj/widgets/student_info_card.dart';
 import 'package:grad_proj/widgets/summary_section_for_semester.dart';
@@ -47,6 +49,7 @@ class AcademicCareerScreen extends StatelessWidget {
         creditHours: 3,
         courseScore: 85.0,
         gradeLetter: Grades.A,
+        academicCredits: 3,
       ),
       CourseModel(
         courseCode: "PHYS101",
@@ -55,6 +58,7 @@ class AcademicCareerScreen extends StatelessWidget {
         creditHours: 4,
         courseScore: 80.0,
         gradeLetter: Grades.B_Plus,
+        academicCredits: 4,
       ),
     ];
 
@@ -94,12 +98,14 @@ class _AcademicCareerScreenContent extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Academic Career"),
-        //  backgroundColor:
-        //           isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,
+        backgroundColor: isDarkMode
+            ? DarkThemeColors.secondary
+            : LightTheme.secondary,
         elevation: 2,
       ),
-      //     backgroundColor:
-      //       isDarkMode ? DarkThemeColors.background : LightTheme.background,
+      backgroundColor: isDarkMode
+          ? DarkThemeColors.background
+          : LightTheme.background,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -129,8 +135,7 @@ class _AcademicCareerScreenContent extends StatelessWidget {
                   courses: selectedSemester.courses,
                   isDarkMode: isDarkMode,
                   semester: selectedSemester,
-                  onEdit: (index, course) =>
-                      _showEditCourseDialog(context, index, course),
+                  onEdit: (index, course) => _showEditCourseDialog(context, index, course),
                   onDelete: (index) {
                     careerProvider.deleteCourseFromSelectedSemester(index);
                   },
@@ -156,8 +161,7 @@ class _AcademicCareerScreenContent extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddSemesterDialog(context),
- //       backgroundColor:
-       //     isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+        backgroundColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
         child: const Icon(Icons.add_to_photos),
         tooltip: 'إضافة فصل دراسي جديد',
       ),
@@ -168,27 +172,29 @@ class _AcademicCareerScreenContent extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Academic Career"),
-      //  backgroundColor:
-        //    isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,
+        backgroundColor: isDarkMode
+            ? DarkThemeColors.secondary
+            : LightTheme.secondary,
         elevation: 2,
       ),
-   //   backgroundColor:
-     //     isDarkMode ? DarkThemeColors.background : LightTheme.background,
+      backgroundColor: isDarkMode
+          ? DarkThemeColors.background
+          : LightTheme.background,
       body: Center(
         child: Text(
           "No academic career data found.\nPlease start by adding your data.",
           style: TextStyle(
             fontSize: 18,
-        //    color:
-       //         isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+            color: isDarkMode
+                ? DarkThemeColors.textcolor
+                : LightTheme.textcolor,
           ),
           textAlign: TextAlign.center,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddSemesterDialog(context),
-    //    backgroundColor:
-     //       isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+        backgroundColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
         child: const Icon(Icons.add_to_photos),
         tooltip: 'إضافة فصل دراسي جديد',
       ),
@@ -198,8 +204,7 @@ class _AcademicCareerScreenContent extends StatelessWidget {
   void _showAddCourseDialog(BuildContext context) async {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     final isDarkMode = themeProvider.isDarkMode;
-    final careerProvider =
-        Provider.of<AcademicCareerProvider>(context, listen: false);
+    final careerProvider = Provider.of<AcademicCareerProvider>(context, listen: false);
 
     final result = await showDialog<CourseModel>(
       context: context,
@@ -214,12 +219,10 @@ class _AcademicCareerScreenContent extends StatelessWidget {
     }
   }
 
-  void _showEditCourseDialog(
-      BuildContext context, int index, CourseModel course) async {
+  void _showEditCourseDialog(BuildContext context, int index, CourseModel course) async {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     final isDarkMode = themeProvider.isDarkMode;
-    final careerProvider =
-        Provider.of<AcademicCareerProvider>(context, listen: false);
+    final careerProvider = Provider.of<AcademicCareerProvider>(context, listen: false);
 
     final result = await showDialog<CourseModel>(
       context: context,
@@ -235,9 +238,8 @@ class _AcademicCareerScreenContent extends StatelessWidget {
   }
 
   void _showAddSemesterDialog(BuildContext context) async {
-    final careerProvider =
-        Provider.of<AcademicCareerProvider>(context, listen: false);
-
+    final careerProvider = Provider.of<AcademicCareerProvider>(context, listen: false);
+    
     await showDialog(
       context: context,
       builder: (_) => SemesterDialog(

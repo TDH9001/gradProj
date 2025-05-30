@@ -1,4 +1,5 @@
 import 'package:grad_proj/models/Semester_logs_models/semester_model.dart';
+import 'package:grad_proj/utils/grade_utils.dart';
 
 class AcademicCareer {
   final List<SemesterModel> semesters;
@@ -12,24 +13,8 @@ class AcademicCareer {
     required this.succesHours,
     required this.seatNumber,
   }) {
-
-    int totalCredits = 0;
-    double totalWeightedGpa = 0.0;
-    for (var semester in semesters) {
-      totalWeightedGpa += semester.semmesterGpa * semester.totalCreditHours;
-      totalCredits += semester.totalCreditHours;
-    }
-    gpa = totalCredits > 0 ? totalWeightedGpa / totalCredits : 0.0;
-
-    totalGrade = _getTotalGradeFromGpa(gpa);
-  }
-
-  int _getTotalGradeFromGpa(double gpa) {
-    if (gpa >= 3.7) return 1; 
-    if (gpa >= 3.0) return 2; 
-    if (gpa >= 2.0) return 3; 
-    if (gpa >= 1.0) return 4; 
-    return 5; 
+    gpa = GradeUtils.calculateCumulativeGPA(semesters);
+    totalGrade = GradeUtils.getAcademicRankFromGPA(gpa);
   }
 
   factory AcademicCareer.fromJson(Map<String, dynamic> json) {

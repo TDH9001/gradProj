@@ -23,8 +23,7 @@ class SemesterDialog extends StatefulWidget {
 class _SemesterDialogState extends State<SemesterDialog> {
   final TextEditingController _semesterYearController = TextEditingController();
   final TextEditingController _semesterNameController = TextEditingController();
-  final TextEditingController _semesterNumberController =
-      TextEditingController();
+  final TextEditingController _semesterNumberController = TextEditingController();
   List<CourseModel> newCourses = [];
 
   @override
@@ -137,16 +136,14 @@ class _SemesterDialogState extends State<SemesterDialog> {
             title: Text(
               course.courseName,
               style: TextStyle(
-                color: isDarkMode
-                    ? DarkThemeColors.textcolor
-                    : LightTheme.textcolor,
+                color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
               ),
             ),
             subtitle: Text(
               "${course.courseCode} - ${course.creditHours} hrs - Grade: ${course.grade}",
               style: TextStyle(
-                color: isDarkMode
-                    ? DarkThemeColors.textcolor.withValues(alpha: 0.7)
+                color: isDarkMode 
+                    ? DarkThemeColors.textcolor.withValues(alpha: 0.7) 
                     : LightTheme.textcolor.withValues(alpha: 0.7),
               ),
             ),
@@ -157,8 +154,7 @@ class _SemesterDialogState extends State<SemesterDialog> {
                   newCourses.removeAt(index);
                 });
               },
-              color:
-                  isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+              color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
             ),
           );
         },

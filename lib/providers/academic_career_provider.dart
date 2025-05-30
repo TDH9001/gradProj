@@ -7,7 +7,6 @@ import '../models/Semester_logs_models/course_model.dart';
 class AcademicCareerProvider extends ChangeNotifier {
   AcademicCareer? _academicCareer;
   int _selectedSemesterIndex = 0;
-  final GradeUtils _gradeUtils = GradeUtils();
 
   AcademicCareer? get academicCareer => _academicCareer;
   int get selectedSemesterIndex => _selectedSemesterIndex;
@@ -23,9 +22,18 @@ class AcademicCareerProvider extends ChangeNotifier {
       _academicCareer = null;
     } else {
       _academicCareer = career;
+      _updateCareerSummaryFields();
     }
     _selectedSemesterIndex = 0;
     notifyListeners();
+  }
+
+  void _updateCareerSummaryFields() {
+    if (_academicCareer != null) {
+      _academicCareer!.gpa = GradeUtils.calculateCumulativeGPA(_academicCareer!.semesters);
+      _academicCareer!.totalGrade = GradeUtils.getAcademicRankFromGPA(_academicCareer!.gpa);
+      _academicCareer!.succesHours = GradeUtils.calculateTotalPassedAcademicCredits(_academicCareer!.semesters);
+    }
   }
 
   void setSelectedSemesterIndex(int index) {
@@ -45,14 +53,16 @@ class AcademicCareerProvider extends ChangeNotifier {
     } else {
       _academicCareer!.semesters.add(semester);
     }
+    _updateCareerSummaryFields();
     _selectedSemesterIndex = _academicCareer!.semesters.length - 1;
     notifyListeners();
   }
 
   void addCourseToSelectedSemester(CourseModel course) {
     if (_academicCareer != null && selectedSemester != null) {
-      selectedSemester!.courses.add(course);
-      _gradeUtils.updateSemesterLevel(selectedSemester!);
+      print("AcademicCareerProvider: Adding course: ${course.toJson()} to semester: ${selectedSemester!.semesterName}");
+      selectedSemester!.addCourse(course);
+      _updateCareerSummaryFields();
       notifyListeners();
     }
   }
@@ -60,7 +70,7 @@ class AcademicCareerProvider extends ChangeNotifier {
   void updateCourseInSelectedSemester(int index, CourseModel course) {
     if (_academicCareer != null && selectedSemester != null) {
       selectedSemester!.editCourseAt(index, course);
-      _gradeUtils.updateSemesterLevel(selectedSemester!);
+      _updateCareerSummaryFields();
       notifyListeners();
     }
   }
@@ -68,19 +78,19 @@ class AcademicCareerProvider extends ChangeNotifier {
   void deleteCourseFromSelectedSemester(int index) {
     if (_academicCareer != null && selectedSemester != null) {
       selectedSemester!.removeCourseAt(index);
-      _gradeUtils.updateSemesterLevel(selectedSemester!);
+      _updateCareerSummaryFields();
       notifyListeners();
     }
   }
 
   double calculateCumulativeGPA() {
     if (_academicCareer == null) return 0.0;
-    return _gradeUtils.calculateCumulativeGPA(_academicCareer!.semesters);
+    return GradeUtils.calculateCumulativeGPA(_academicCareer!.semesters);
   }
 
   int calculateTotalCreditHours() {
     if (_academicCareer == null) return 0;
-    return _gradeUtils.calculateTotalCreditHours(_academicCareer!.semesters);
+    return GradeUtils.calculateTotalCreditHours(_academicCareer!.semesters);
   }
 
   void updateSeatNumber(String seatNumber) {
