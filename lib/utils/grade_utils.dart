@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:grad_proj/models/Semester_logs_models/semester_model.dart';
 
 import '../models/Semester_logs_models/course_model.dart';
@@ -116,27 +117,27 @@ class GradeUtils {
 
   static String getStudentStatus(double gpa) {
     if (gpa >= 3.7) {
-      return "الحالة: ممتاز مع مرتبة الشرف";
+      return "academicCareer.statusExcellentWithHonors";
     } else if (gpa >= 3.00) {
-      return "الحالة: جيد جداً";
+      return "academicCareer.statusVeryGood";
     } else if (gpa >= 2.33) {
-      return "الحالة: جيد";
+      return "academicCareer.statusGood";
     } else if (gpa >= 2.0) {
-      return "الحالة: مقبول";
+      return "academicCareer.statusAcceptable";
     } else {
-      return "الحالة: تحت المراقبة الأكاديمية";
+      return "academicCareer.statusOnProbation";
     }
   }
 
   static String calculateSemesterLevel(int totalCreditHours) {
     if (totalCreditHours < 33) {
-      return "الأول";
+      return tr("academicCareer.levelFirst");
     } else if (totalCreditHours < 67) {
-      return "الثاني";
+      return tr("academicCareer.levelSecond");
     } else if (totalCreditHours < 101) {
-      return "الثالث";
+      return tr("academicCareer.levelThird");
     } else {
-      return "الرابع";
+      return tr("academicCareer.levelFourth");
     }
   }
 

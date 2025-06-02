@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
 import 'package:grad_proj/screen/theme/light_theme.dart';
@@ -18,7 +19,7 @@ class AddCourseButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton.icon(
         icon: const Icon(Icons.add),
-        label: const Text('إضافة مقرر جديد'),
+        label: Text(tr('academicCareer.addNewCourseButton')),
         style: ElevatedButton.styleFrom(
           backgroundColor:
               isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,

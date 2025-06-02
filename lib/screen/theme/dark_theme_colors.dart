@@ -7,6 +7,8 @@ abstract class DarkThemeColors {
   static const Color secondary = Color(0xFF4A739F);
   static const Color background = Color(0xFF1C1C1C);
   static const Color textcolor = Color(0xffE0E0E0);
+  static const Color buttonTextColor = Colors.white;
+  static const Color danger = Color(0xFFD32F2F);
   static const  buttonBackgroundColor = Color(0xff2E5077);
   static const  iconColor = Color(0xffA3BFE0);
   static const  arrowColor = Colors.white70;

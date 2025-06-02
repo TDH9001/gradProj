@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
 import 'package:grad_proj/screen/theme/light_theme.dart';
@@ -25,12 +26,19 @@ class SemesterSummaryRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
         color: isDarkMode
-            ? DarkThemeColors.secondary.withValues(alpha: 0.10)
-            : LightTheme.secondary.withValues(alpha: 0.10),
+            ? DarkThemeColors.secondary.withOpacity(0.10)
+            : LightTheme.secondary.withOpacity(0.10),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
-        "عدد الساعات المعتمدة المجتازة: ${totalCreditHours.toStringAsFixed(1)} ، معدل درجات الفصل الدراسي: ${gpa.toStringAsFixed(2)} بتقدير: $gradeLetter",
+        tr(
+          "academicCareer.semesterSummaryText",
+          namedArgs: {
+            'hours': totalCreditHours.toStringAsFixed(1),
+            'gpa': gpa.toStringAsFixed(2),
+            'letter': gradeLetter,
+          },
+        ),
         style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 14,

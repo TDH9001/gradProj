@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Semester_logs_models/academic_career.dart';
 import 'package:grad_proj/models/Semester_logs_models/semester_model.dart';
@@ -16,6 +17,7 @@ import 'package:grad_proj/widgets/courses_table.dart';
 import 'package:grad_proj/widgets/semester_selector.dart';
 import 'package:grad_proj/widgets/semester_summary_row.dart';
 import 'package:grad_proj/providers/academic_career_provider.dart';
+import 'package:grad_proj/widgets/orgappbar.dart';
 
 class AcademicCareerScreen extends StatelessWidget {
   final AcademicCareer? academicCareer;
@@ -85,23 +87,22 @@ class _AcademicCareerScreenContent extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
     final careerProvider = Provider.of<AcademicCareerProvider>(context);
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     if (careerProvider.isEmpty) {
-      return _buildEmptyScreen(context, isDarkMode);
+      return _buildEmptyScreen(context, isDarkMode, scaffoldKey);
     }
 
     final selectedSemester = careerProvider.selectedSemester;
     if (selectedSemester == null) {
-      return _buildEmptyScreen(context, isDarkMode);
+      return _buildEmptyScreen(context, isDarkMode, scaffoldKey);
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Academic Career"),
-        backgroundColor: isDarkMode
-            ? DarkThemeColors.secondary
-            : LightTheme.secondary,
-        elevation: 2,
+      key: scaffoldKey,
+      appBar: Orgappbar(
+        scaffoldKey: scaffoldKey,
+        title: tr("academicCareer.title"),
       ),
       backgroundColor: isDarkMode
           ? DarkThemeColors.background
@@ -162,27 +163,26 @@ class _AcademicCareerScreenContent extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddSemesterDialog(context),
         backgroundColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+        foregroundColor: isDarkMode ? DarkThemeColors.buttonTextColor : LightTheme.buttonTextColor,
         child: const Icon(Icons.add_to_photos),
-        tooltip: 'إضافة فصل دراسي جديد',
+        tooltip: tr("academicCareer.addSemesterTooltip"),
       ),
     );
   }
 
-  Widget _buildEmptyScreen(BuildContext context, bool isDarkMode) {
+  Widget _buildEmptyScreen(BuildContext context, bool isDarkMode, GlobalKey<ScaffoldState> scaffoldKey) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Academic Career"),
-        backgroundColor: isDarkMode
-            ? DarkThemeColors.secondary
-            : LightTheme.secondary,
-        elevation: 2,
+      key: scaffoldKey,
+      appBar: Orgappbar(
+        scaffoldKey: scaffoldKey,
+        title: tr("academicCareer.title"),
       ),
       backgroundColor: isDarkMode
           ? DarkThemeColors.background
           : LightTheme.background,
       body: Center(
         child: Text(
-          "No academic career data found.\nPlease start by adding your data.",
+          tr("academicCareer.emptyScreenMessage"),
           style: TextStyle(
             fontSize: 18,
             color: isDarkMode
@@ -195,8 +195,9 @@ class _AcademicCareerScreenContent extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddSemesterDialog(context),
         backgroundColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+        foregroundColor: isDarkMode ? DarkThemeColors.buttonTextColor : LightTheme.buttonTextColor,
         child: const Icon(Icons.add_to_photos),
-        tooltip: 'إضافة فصل دراسي جديد',
+        tooltip: tr("academicCareer.addSemesterTooltip"),
       ),
     );
   }

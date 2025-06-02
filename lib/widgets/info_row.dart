@@ -27,7 +27,7 @@ class InfoRow extends StatelessWidget {
               icon,
               size: 18,
               color: isDarkMode
-                  ? DarkThemeColors.secondary
+                  ? DarkThemeColors.iconColor
                   : LightTheme.primary,
             ),
           if (icon != null) const SizedBox(width: 6),

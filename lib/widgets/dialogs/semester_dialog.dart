@@ -7,6 +7,7 @@ import 'package:grad_proj/screen/theme/light_theme.dart';
 import 'package:grad_proj/widgets/add_course_button.dart';
 import 'package:provider/provider.dart';
 import 'course_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SemesterDialog extends StatefulWidget {
   final Function(SemesterModel) onAddSemester;
@@ -46,23 +47,14 @@ class _SemesterDialogState extends State<SemesterDialog> {
     final isDarkMode = themeProvider.isDarkMode;
 
     return AlertDialog(
-      title: const Text('Add New Semester'),
+      backgroundColor: isDarkMode ? DarkThemeColors.background : LightTheme.background,
+      title: Text(tr('academicCareer.semesterDialogTitleAdd'), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            TextField(
-              controller: _semesterYearController,
-              decoration: const InputDecoration(labelText: 'Semester Year'),
-            ),
-            TextField(
-              controller: _semesterNameController,
-              decoration: const InputDecoration(labelText: 'Semester Name'),
-            ),
-            TextField(
-              controller: _semesterNumberController,
-              decoration: const InputDecoration(labelText: 'Semester Number'),
-              keyboardType: TextInputType.number,
-            ),
+            _buildTextField(_semesterYearController, tr('academicCareer.semesterDialogLabelSemesterYear'), isDarkMode),
+            _buildTextField(_semesterNameController, tr('academicCareer.semesterDialogLabelSemesterName'), isDarkMode),
+            _buildTextField(_semesterNumberController, tr('academicCareer.semesterDialogLabelSemesterNumber'), isDarkMode, keyboardType: TextInputType.number),
             const SizedBox(height: 12),
             AddCourseButton(
               onPressed: () async {
@@ -80,7 +72,7 @@ class _SemesterDialogState extends State<SemesterDialog> {
               isDarkMode: isDarkMode,
             ),
             const SizedBox(height: 8),
-            Text('Courses in this semester: ${newCourses.length}'),
+            Text(tr('academicCareer.semesterDialogCoursesCount', namedArgs: {'count': newCourses.length.toString()}), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
             if (newCourses.isNotEmpty) ...[
               const SizedBox(height: 8),
               _buildCoursesList(isDarkMode),
@@ -93,9 +85,13 @@ class _SemesterDialogState extends State<SemesterDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Cancel'),
+          child: Text(tr('academicCareer.courseDialogButtonCancel'), style: TextStyle(color: isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary)),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+            foregroundColor: isDarkMode ? DarkThemeColors.buttonTextColor : LightTheme.buttonTextColor,
+          ),
           onPressed: () {
             if (_semesterYearController.text.isNotEmpty &&
                 _semesterNameController.text.isNotEmpty &&
@@ -111,7 +107,7 @@ class _SemesterDialogState extends State<SemesterDialog> {
               Navigator.of(context).pop();
             }
           },
-          child: const Text('Add Semester'),
+          child: Text(tr('academicCareer.semesterDialogButtonAddSemester')),
         ),
       ],
     );
@@ -140,11 +136,15 @@ class _SemesterDialogState extends State<SemesterDialog> {
               ),
             ),
             subtitle: Text(
-              "${course.courseCode} - ${course.creditHours} hrs - Grade: ${course.grade}",
+              tr('academicCareer.semesterDialogCourseListItem', namedArgs: {
+                'code': course.courseCode,
+                'hours': course.creditHours.toString(),
+                'grade': course.grade.toStringAsFixed(3)
+              }),
               style: TextStyle(
                 color: isDarkMode 
-                    ? DarkThemeColors.textcolor.withValues(alpha: 0.7) 
-                    : LightTheme.textcolor.withValues(alpha: 0.7),
+                    ? DarkThemeColors.textcolor.withOpacity(0.7) 
+                    : LightTheme.textcolor.withOpacity(0.7),
               ),
             ),
             trailing: IconButton(
@@ -154,11 +154,29 @@ class _SemesterDialogState extends State<SemesterDialog> {
                   newCourses.removeAt(index);
                 });
               },
-              color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+              color: isDarkMode ? DarkThemeColors.danger : Colors.redAccent,
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildTextField(TextEditingController controller, String labelText, bool isDarkMode, {TextInputType? keyboardType}) {
+    return TextField(
+      controller: controller,
+      style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor.withOpacity(0.7) : LightTheme.textcolor.withOpacity(0.7)),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary),
+        ),
+      ),
+      keyboardType: keyboardType,
     );
   }
 }

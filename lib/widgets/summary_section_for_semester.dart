@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../models/Semester_logs_models/semester_model.dart';
 import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
@@ -23,15 +24,15 @@ class SummarySectionForSemester extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
         color: isDarkMode
-            ? DarkThemeColors.secondary.withValues(alpha: 0.10)
-            : LightTheme.secondary.withValues(alpha: 0.10),
+            ? DarkThemeColors.secondary.withOpacity(0.10)
+            : LightTheme.secondary.withOpacity(0.10),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Total Credits: $totalCredits",
+            tr("academicCareer.summaryTotalCredits", namedArgs: {'credits': totalCredits.toStringAsFixed(0)}),
             style: TextStyle(
               color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
               fontWeight: FontWeight.bold,
@@ -39,7 +40,7 @@ class SummarySectionForSemester extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            "Semester GPA: ${semester.semmesterGpa.toStringAsFixed(2)}",
+            tr("academicCareer.summarySemesterGpa", namedArgs: {'gpa': semester.semmesterGpa.toStringAsFixed(2)}),
             style: TextStyle(
               color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
             ),

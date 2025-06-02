@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Semester_logs_models/academic_career.dart';
 import 'package:grad_proj/utils/grade_utils.dart';
@@ -16,15 +17,19 @@ class StudentInfoCard extends StatelessWidget {
     Key? key,
     required this.career,
     required this.isDarkMode,
-    this.studentName = "غير محدد",
-    this.studentId = "غير محدد",
-    this.nationality = "غير محدد",
+    this.studentName = "",
+    this.studentId = "",
+    this.nationality = "",
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     int totalCreditHours = career.semesters.fold(
         0, (sum, semester) => sum + semester.courses.fold(0, (sum, course) => sum + course.creditHours));
+
+    String displayName = studentName.isNotEmpty ? studentName : tr("academicCareer.defaultValueUndefined");
+    String displayId = studentId.isNotEmpty ? studentId : tr("academicCareer.defaultValueUndefined");
+    String displayNationality = nationality.isNotEmpty ? nationality : tr("academicCareer.defaultValueUndefined");
 
     return Card(
       color: isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary,
@@ -39,7 +44,7 @@ class StudentInfoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "معلومات الطالب",
+                  tr("academicCareer.studentInfoCardTitle"),
                   style: TextStyle(
                     color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
                     fontWeight: FontWeight.bold,
@@ -55,49 +60,49 @@ class StudentInfoCard extends StatelessWidget {
             ),
             const Divider(height: 24, thickness: 1),
             InfoRow(
-              label: "الاسم:",
-              value: studentName,
+              label: tr("academicCareer.labelName"),
+              value: displayName,
               isDarkMode: isDarkMode,
               icon: Icons.person,
             ),
             InfoRow(
-              label: "الرقم القومي:",
-              value: studentId,
+              label: tr("academicCareer.labelNationalId"),
+              value: displayId,
               isDarkMode: isDarkMode,
               icon: Icons.badge,
             ),
             InfoRow(
-              label: "الجنسية:",
-              value: nationality,
+              label: tr("academicCareer.labelNationality"),
+              value: displayNationality,
               isDarkMode: isDarkMode,
               icon: Icons.public,
             ),
             InfoRow(
-              label: "رقم المقعد:",
-              value: career.seatNumber,
+              label: tr("academicCareer.labelSeatNumber"),
+              value: career.seatNumber.isNotEmpty ? career.seatNumber : tr("academicCareer.defaultValueUndefined"),
               isDarkMode: isDarkMode,
               icon: Icons.numbers,
             ),
             InfoRow(
-              label: "الساعات المجتازة:",
+              label: tr("academicCareer.labelPassedHours"),
               value: "${career.succesHours}",
               isDarkMode: isDarkMode,
               icon: Icons.access_time_filled,
             ),
             InfoRow(
-              label: "إجمالي الساعات المعتمدة:",
+              label: tr("academicCareer.labelTotalCreditHours"),
               value: "$totalCreditHours",
               isDarkMode: isDarkMode,
               icon: Icons.credit_card,
             ),
             InfoRow(
-              label: "المعدل التراكمي:",
+              label: tr("academicCareer.labelCumulativeGpa"),
               value: "${career.gpa.toStringAsFixed(2)}",
               isDarkMode: isDarkMode,
               icon: Icons.grade,
             ),
             InfoRow(
-              label: "عدد الفصول الدراسية:",
+              label: tr("academicCareer.labelSemesterCount"),
               value: "${career.semesters.length}",
               isDarkMode: isDarkMode,
               icon: Icons.calendar_month,
@@ -108,12 +113,12 @@ class StudentInfoCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(
                 color: isDarkMode 
-                    ? DarkThemeColors.primary.withValues(alpha: 0.2) 
-                    : LightTheme.primary.withValues(alpha: 0.2),
+                    ? DarkThemeColors.primary.withOpacity(0.2)
+                    : LightTheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                GradeUtils.getStudentStatus(career.gpa),
+                tr(GradeUtils.getStudentStatus(career.gpa)),
                 style: TextStyle(
                   color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
                   fontWeight: FontWeight.bold,

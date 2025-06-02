@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
 import 'package:grad_proj/screen/theme/light_theme.dart';
@@ -26,50 +27,50 @@ class CoursesTable extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: DataTable(
         headingRowColor: WidgetStateProperty.all(isDarkMode
-            ? DarkThemeColors.secondary.withValues(alpha: 0.2)
-            : LightTheme.secondary.withValues(alpha: 0.2)),
+            ? DarkThemeColors.secondary.withOpacity(0.2)
+            : LightTheme.secondary.withOpacity(0.2)),
         dataRowColor: WidgetStateProperty.all(
             isDarkMode ? DarkThemeColors.background : LightTheme.background),
         columnSpacing: 18,
         columns: [
           DataColumn(
-              label: Text("Grade",
+              label: Text(tr("academicCareer.tableHeaderGrade"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
                           : LightTheme.textcolor))),
           DataColumn(
-              label: Text("Credit Hours",
+              label: Text(tr("academicCareer.tableHeaderCreditHours"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
                           : LightTheme.textcolor))),
           DataColumn(
-              label: Text("Course Score",
+              label: Text(tr("academicCareer.tableHeaderCourseScore"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
                           : LightTheme.textcolor))),
           DataColumn(
-              label: Text("Grade Letter",
+              label: Text(tr("academicCareer.tableHeaderGradeLetter"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
                           : LightTheme.textcolor))),
           DataColumn(
-              label: Text("Course Name",
+              label: Text(tr("academicCareer.tableHeaderCourseName"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
                           : LightTheme.textcolor))),
           DataColumn(
-              label: Text("Course Code",
+              label: Text(tr("academicCareer.tableHeaderCourseCode"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
                           : LightTheme.textcolor))),
           DataColumn(
-              label: Text("Actions",
+              label: Text(tr("academicCareer.tableHeaderActions"),
                   style: TextStyle(
                       color: isDarkMode
                           ? DarkThemeColors.textcolor
@@ -117,12 +118,12 @@ class CoursesTable extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.edit,
                         color: isDarkMode ? Colors.orange : Colors.blue),
-                    tooltip: 'Edit',
+                    tooltip: tr("academicCareer.tooltipEdit"),
                     onPressed: () => onEdit(index, course),
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete, color: Colors.red),
-                    tooltip: 'Delete',
+                    icon: Icon(Icons.delete, color: isDarkMode ? DarkThemeColors.danger : LightTheme.danger),
+                    tooltip: tr("academicCareer.tooltipDelete"),
                     onPressed: () => onDelete(index),
                   ),
                 ],

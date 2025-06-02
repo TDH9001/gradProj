@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:grad_proj/models/Semester_logs_models/course_model.dart';
 import 'package:grad_proj/utils/grade_utils.dart';
 import 'package:grad_proj/widgets/add_course_button.dart';
+import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
+import 'package:grad_proj/screen/theme/light_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:grad_proj/providers/theme_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CourseDialog extends StatefulWidget {
   final bool isDarkMode;
@@ -58,6 +63,8 @@ class _CourseDialogState extends State<CourseDialog> {
   void _updateGradeAndLetterFields() {
     double rawScore = double.tryParse(_courseScoreController.text) ?? 0;
     int creditHours = int.tryParse(_creditHoursController.text) ?? 0;
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final bool isDarkMode = themeProvider.isDarkMode;
 
     if (_isPassFailCourse) {
       _gradeController.text = "0.000";
@@ -112,24 +119,25 @@ class _CourseDialogState extends State<CourseDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final String dialogTitle = widget.existingCourse != null ? 'Edit Course' : 'Add Course';
+    final String dialogTitle = widget.existingCourse != null 
+        ? tr('academicCareer.courseDialogTitleEdit') 
+        : tr('academicCareer.courseDialogTitleAdd');
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final bool isDarkMode = themeProvider.isDarkMode;
     
     return AlertDialog(
-      title: Text(dialogTitle),
+      backgroundColor: isDarkMode ? DarkThemeColors.background : LightTheme.background,
+      title: Text(dialogTitle, style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            TextField(
-              controller: _courseNameController,
-              decoration: const InputDecoration(labelText: 'Course Name'),
-            ),
-            TextField(
-              controller: _courseCodeController,
-              decoration: const InputDecoration(labelText: 'Course Code'),
-            ),
+            _buildTextField(_courseNameController, tr('academicCareer.courseDialogLabelCourseName'), isDarkMode),
+            _buildTextField(_courseCodeController, tr('academicCareer.courseDialogLabelCourseCode'), isDarkMode),
             CheckboxListTile(
-              title: const Text("Pass/Fail Course (0 GPA Credits)"),
+              title: Text(tr('academicCareer.courseDialogCheckboxPassFail'), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
               value: _isPassFailCourse,
+              activeColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+              checkColor: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
               onChanged: (bool? newValue) {
                 setState(() {
                   _isPassFailCourse = newValue!;
@@ -138,31 +146,10 @@ class _CourseDialogState extends State<CourseDialog> {
               },
               controlAffinity: ListTileControlAffinity.leading,
             ),
-            TextField(
-              controller: _courseScoreController,
-              decoration: const InputDecoration(labelText: 'Course Score'),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-              },
-            ),
-            TextField(
-              controller: _gradeController,
-              decoration: const InputDecoration(labelText: 'Grade'),
-              keyboardType: TextInputType.number,
-              enabled: false,
-            ),
-            TextField(
-              controller: _creditHoursController,
-              decoration: const InputDecoration(labelText: 'Credit Hours'),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-              },
-            ),
-            TextField(
-              controller: _gradeLetterController,
-              decoration: const InputDecoration(labelText: 'Grade Letter'),
-              enabled: false,
-            ),
+            _buildTextField(_courseScoreController, tr('academicCareer.courseDialogLabelCourseScore'), isDarkMode, keyboardType: TextInputType.number),
+            _buildTextField(_gradeController, tr('academicCareer.courseDialogLabelGrade'), isDarkMode, keyboardType: TextInputType.number, enabled: false),
+            _buildTextField(_creditHoursController, tr('academicCareer.courseDialogLabelCreditHours'), isDarkMode, keyboardType: TextInputType.number),
+            _buildTextField(_gradeLetterController, tr('academicCareer.courseDialogLabelGradeLetter'), isDarkMode, enabled: false),
           ],
         ),
       ),
@@ -171,11 +158,15 @@ class _CourseDialogState extends State<CourseDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('Cancel'),
+          child: Text(tr('academicCareer.courseDialogButtonCancel'), style: TextStyle(color: isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary)),
         ),
-        AddCourseButton(
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+            foregroundColor: isDarkMode ? DarkThemeColors.buttonTextColor : LightTheme.buttonTextColor,
+          ),
           onPressed: () {
-            print("CourseDialog: Add button pressed.");
+            print("CourseDialog: Add/Save button pressed.");
             String courseName = _courseNameController.text;
             String courseCode = _courseCodeController.text;
             double rawCourseScore = double.tryParse(_courseScoreController.text) ?? 0;
@@ -241,9 +232,31 @@ class _CourseDialogState extends State<CourseDialog> {
               Navigator.of(context).pop();
             }
           },
-          isDarkMode: widget.isDarkMode,
+          child: Text(widget.existingCourse != null ? tr('academicCareer.courseDialogButtonSaveChanges') : tr('academicCareer.addNewCourseButton')),
         ),
       ],
+    );
+  }
+
+  Widget _buildTextField(TextEditingController controller, String labelText, bool isDarkMode, {TextInputType? keyboardType, bool enabled = true}) {
+    return TextField(
+      controller: controller,
+      enabled: enabled,
+      style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor.withOpacity(0.7) : LightTheme.textcolor.withOpacity(0.7)),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: isDarkMode ? DarkThemeColors.secondary : LightTheme.secondary),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: isDarkMode ? DarkThemeColors.primary : LightTheme.primary),
+        ),
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: isDarkMode ? DarkThemeColors.textcolor.withOpacity(0.3) : LightTheme.textcolor.withOpacity(0.3)),
+        ),
+      ),
+      keyboardType: keyboardType,
     );
   }
 }
