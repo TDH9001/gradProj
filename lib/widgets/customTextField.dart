@@ -161,7 +161,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       ),
       validator: (data) {
         final emailRegex = RegExp(r'^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$');
-        if (widget.hintText == "Email" || widget.hintText == "email") {
+        if (widget.hintText.contains("Email") ||
+            widget.hintText.contains("email")) {
           if (data == null || data.trim().isEmpty) {
             return "empty field";
           } else if (!data.trim().contains("@")) {
@@ -180,7 +181,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           }
           // Valid email
         }
-        if (widget.hintText == "Email1" || widget.hintText == "email1") {
+        if (widget.hintText.contains("Email1") ||
+            widget.hintText.contains("email1")) {
           if (data == null || data.trim().isEmpty) {
             return "empty field";
           } else if (!data.trim().contains("@")) {
@@ -193,7 +195,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return null;
           }
           // Valid email
-        } else if (widget.hintText == "Password" ||
+        } else if (widget.hintText.contains("Password") ||
             widget.hintText == "Confirm Password") {
           if (data == null || data.trim().isEmpty) {
             return "Password cannot be empty.";
