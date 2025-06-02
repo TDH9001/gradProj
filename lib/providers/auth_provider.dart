@@ -96,6 +96,7 @@ class AuthProvider extends ChangeNotifier {
         SnackBarService.instance.showsSnackBarError(
             text:
                 "plase validate your email , using the link sent to your inbox");
+        signOut();
       }
       //  SnackBarService.instance
       //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
@@ -129,6 +130,7 @@ class AuthProvider extends ChangeNotifier {
       instance.user!.sendEmailVerification();
       SnackBarService.instance
           .showsSnackBarSucces(text: "validation email sent to ${user?.email}");
+      signOut();
     } on Exception catch (e) {
       if (e is FirebaseAuthException) {
         try {
