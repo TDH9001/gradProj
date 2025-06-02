@@ -50,7 +50,7 @@ class DBService {
         "lastName": lastname,
         "Email": email,
         "PhoneNumber": phoneNumber,
-        "Password": password, //stupid move > should nto be added here
+       // "Password": password, //stupid move > should nto be added here
         // "lastSeen": DateTime.now().toUtc(),
         "isComplete": false,
         "classes": [],

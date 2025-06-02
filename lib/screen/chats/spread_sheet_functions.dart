@@ -131,6 +131,7 @@ class SpreadSheetFunctions {
         List<Data?>? targetRow = null;
         for (var table in excel.tables.keys) {
           firstRow = excel.tables[table]!.rows[0].asMap().values.toList();
+          dev.log(firstRow.toString());
           for (var row in excel.tables[table]!.rows) {
             dev.log("entered the loop");
             for (var cell in row) {

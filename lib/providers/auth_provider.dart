@@ -97,9 +97,9 @@ class AuthProvider extends ChangeNotifier {
             text:
                 "plase validate your email , using the link sent to your inbox");
       }
-      SnackBarService.instance
-          .showsSnackBarSucces(text: "Welcome ${user?.email}");
-      navigationService.instance.navigateToReplacement("HomeScreen");
+      //  SnackBarService.instance
+      //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
+      //  navigationService.instance.navigateToReplacement("HomeScreen");
     } on Exception catch (e) {
       if (e is SocketException) {
         print(e);
