@@ -20,7 +20,7 @@ class AcademicCareer {
   factory AcademicCareer.fromJson(Map<String, dynamic> json) {
     return AcademicCareer(
       semesters: (json['semesters'] as List<dynamic>)
-          .map((s) => SemesterModel.fromJson(s as Map<String, dynamic>))
+          .map((s) => SemesterModel.fromJson(Map<String, dynamic>.from(s as Map))) 
           .toList(),
       succesHours: json['succesHours'] ?? 0,
       seatNumber: json['seatNumber'] ?? '',
@@ -43,9 +43,6 @@ class AcademicCareer {
   Future<void> saveToDatabase(Function(Map<String, dynamic>) saveCallback) async {
     final data = toJson();
     saveCallback(data);
-    /**if you use firebase or another async API, replace the above with your actual save logic
-     Example for Firebase:
-     await FirebaseFirestore.instance.collection('academic_careers').doc(seatNumber).set(data); */
     
   }
 }

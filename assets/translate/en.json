@@ -327,6 +327,9 @@
     "levelFirst": "First",
     "levelSecond": "Second",
     "levelThird": "Third",
-    "levelFourth": "Fourth"
+    "levelFourth": "Fourth",
+    "importPdfTooltip": "Import from PDF",
+    "importSuccess": "Successfully imported data from PDF!",
+    "importFail": "Failed to import data from PDF. Check console for details."
   }
 }

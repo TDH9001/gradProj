@@ -17,7 +17,7 @@ import 'package:grad_proj/widgets/courses_table.dart';
 import 'package:grad_proj/widgets/semester_selector.dart';
 import 'package:grad_proj/widgets/semester_summary_row.dart';
 import 'package:grad_proj/providers/academic_career_provider.dart';
-import 'package:grad_proj/widgets/orgappbar.dart';
+// import 'package:grad_proj/widgets/orgappbar.dart';
 
 class AcademicCareerScreen extends StatelessWidget {
   final AcademicCareer? academicCareer;
@@ -82,27 +82,50 @@ class AcademicCareerScreen extends StatelessWidget {
 class _AcademicCareerScreenContent extends StatelessWidget {
   const _AcademicCareerScreenContent({Key? key}) : super(key: key);
 
+
+  Future<void> _handlePdfImport(BuildContext context) async {
+    final provider = Provider.of<AcademicCareerProvider>(context, listen: false);
+    bool success = await provider.importAcademicCareerFromPdf();
+
+    if (!context.mounted) return;
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(tr("academicCareer.importSuccess"))), 
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(tr("academicCareer.importFail"))),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final bool isDarkMode = themeProvider.isDarkMode;
     final careerProvider = Provider.of<AcademicCareerProvider>(context);
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     if (careerProvider.isEmpty) {
-      return _buildEmptyScreen(context, isDarkMode, scaffoldKey);
+      return _buildEmptyScreen(context, isDarkMode, () => _handlePdfImport(context));
     }
 
     final selectedSemester = careerProvider.selectedSemester;
     if (selectedSemester == null) {
-      return _buildEmptyScreen(context, isDarkMode, scaffoldKey);
+      return _buildEmptyScreen(context, isDarkMode, () => _handlePdfImport(context));
     }
 
     return Scaffold(
-      key: scaffoldKey,
-      appBar: Orgappbar(
-        scaffoldKey: scaffoldKey,
-        title: tr("academicCareer.title"),
+      
+      appBar: AppBar( 
+        title: Text(tr("academicCareer.title")),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.picture_as_pdf_outlined),
+            tooltip: tr("academicCareer.importPdfTooltip"), 
+            onPressed: () => _handlePdfImport(context),
+          ),
+        ],
       ),
       backgroundColor: isDarkMode
           ? DarkThemeColors.background
@@ -170,12 +193,18 @@ class _AcademicCareerScreenContent extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyScreen(BuildContext context, bool isDarkMode, GlobalKey<ScaffoldState> scaffoldKey) {
+  Widget _buildEmptyScreen(BuildContext context, bool isDarkMode, VoidCallback onImportPdf) {
     return Scaffold(
-      key: scaffoldKey,
-      appBar: Orgappbar(
-        scaffoldKey: scaffoldKey,
-        title: tr("academicCareer.title"),
+     
+      appBar: AppBar( 
+        title: Text(tr("academicCareer.title")),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.picture_as_pdf_outlined),
+            tooltip: tr("academicCareer.importPdfTooltip"), 
+            onPressed: onImportPdf,
+          ),
+        ],
       ),
       backgroundColor: isDarkMode
           ? DarkThemeColors.background

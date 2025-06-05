@@ -27,7 +27,7 @@ class SemesterModel {
   factory SemesterModel.fromJson(Map<String, dynamic> json) {
     return SemesterModel(
       (json['courses'] as List<dynamic>)
-          .map((c) => CourseModel.fromJson(c as Map<String, dynamic>))
+          .map((c) => CourseModel.fromJson(Map<String, dynamic>.from(c as Map)))
           .toList(),
       json['semesterYear'] ?? '',
       json['semesterName'] ?? '',

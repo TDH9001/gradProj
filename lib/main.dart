@@ -23,7 +23,7 @@ import 'package:grad_proj/screen/splash/splash_screen.dart';
 import '../providers/auth_provider.dart';
 import '../services/navigation_Service.dart';
 import 'dart:ui' as ui;
-
+import 'package:grad_proj/services/hive_caching_service/hive_academic_career_caching_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +33,7 @@ void main() async {
   );
   HiveUserContactCashingService.initHive();
   HiveCahtMessaegsCachingService.initHive();
+  HiveAcademicCareerCachingService.initHive();
   runApp(
       EasyLocalization(
           supportedLocales: [Locale('en'), Locale('ar')],
