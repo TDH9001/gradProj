@@ -153,6 +153,7 @@ class _AcademicCareerScreenContent extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               SemesterSection(
+                key: ValueKey("${selectedSemester.semesterYear}-${selectedSemester.semesterName}-${selectedSemester.semesterNumber}"),
                 semester: selectedSemester,
                 isDarkMode: isDarkMode,
                 coursesTable: CoursesTable(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grad_proj/models/Semester_logs_models/course_model.dart';
 import 'package:grad_proj/models/Semester_logs_models/semester_model.dart';
 import 'package:grad_proj/providers/theme_provider.dart';
 import 'package:grad_proj/screen/theme/dark_theme_colors.dart';
@@ -8,17 +7,18 @@ import 'package:grad_proj/widgets/add_course_button.dart';
 import 'package:provider/provider.dart';
 import 'course_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:grad_proj/models/Semester_logs_models/course_model.dart';
 
 class SemesterDialog extends StatefulWidget {
-  final Function(SemesterModel) onAddSemester;
+  final void Function(SemesterModel) onAddSemester;
 
   const SemesterDialog({
     Key? key,
-    required this.onAddSemester,
+    required this.onAddSemester, 
   }) : super(key: key);
 
   @override
-  State<SemesterDialog> createState() => _SemesterDialogState();
+  _SemesterDialogState createState() => _SemesterDialogState();
 }
 
 class _SemesterDialogState extends State<SemesterDialog> {
@@ -49,35 +49,40 @@ class _SemesterDialogState extends State<SemesterDialog> {
     return AlertDialog(
       backgroundColor: isDarkMode ? DarkThemeColors.background : LightTheme.background,
       title: Text(tr('academicCareer.semesterDialogTitleAdd'), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
-      content: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildTextField(_semesterYearController, tr('academicCareer.semesterDialogLabelSemesterYear'), isDarkMode),
-            _buildTextField(_semesterNameController, tr('academicCareer.semesterDialogLabelSemesterName'), isDarkMode),
-            _buildTextField(_semesterNumberController, tr('academicCareer.semesterDialogLabelSemesterNumber'), isDarkMode, keyboardType: TextInputType.number),
-            const SizedBox(height: 12),
-            AddCourseButton(
-              onPressed: () async {
-                final result = await showDialog<CourseModel>(
-                  context: context,
-                  builder: (context) => CourseDialog(
-                    isDarkMode: isDarkMode,
-                    isNewCourse: true,
-                  ),
-                );
-                if (result != null) {
-                  _addCourseToList(result);
-                }
-              },
-              isDarkMode: isDarkMode,
-            ),
-            const SizedBox(height: 8),
-            Text(tr('academicCareer.semesterDialogCoursesCount', namedArgs: {'count': newCourses.length.toString()}), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
-            if (newCourses.isNotEmpty) ...[
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8, 
+        width: MediaQuery.of(context).size.width * 0.9, 
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min, 
+            children: [
+              _buildTextField(_semesterYearController, tr('academicCareer.semesterDialogLabelSemesterYear'), isDarkMode),
+              _buildTextField(_semesterNameController, tr('academicCareer.semesterDialogLabelSemesterName'), isDarkMode),
+              _buildTextField(_semesterNumberController, tr('academicCareer.semesterDialogLabelSemesterNumber'), isDarkMode, keyboardType: TextInputType.number),
+              const SizedBox(height: 12),
+              AddCourseButton(
+                onPressed: () async {
+                  final result = await showDialog<CourseModel>(
+                    context: context,
+                    builder: (context) => CourseDialog(
+                      isDarkMode: isDarkMode,
+                      isNewCourse: true,
+                    ),
+                  );
+                  if (result != null) {
+                    _addCourseToList(result);
+                  }
+                },
+                isDarkMode: isDarkMode,
+              ),
               const SizedBox(height: 8),
-              _buildCoursesList(isDarkMode),
+              Text(tr('academicCareer.semesterDialogCoursesCount', namedArgs: {'count': newCourses.length.toString()}), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
+              if (newCourses.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                _buildCoursesList(isDarkMode),
+              ],
             ],
-          ],
+          ),
         ),
       ),
       actions: [
@@ -103,7 +108,7 @@ class _SemesterDialogState extends State<SemesterDialog> {
                 _semesterNameController.text,
                 int.tryParse(_semesterNumberController.text) ?? 1,
               );
-              widget.onAddSemester(semester);
+              widget.onAddSemester(semester); 
               Navigator.of(context).pop();
             }
           },

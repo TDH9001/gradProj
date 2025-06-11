@@ -43,7 +43,6 @@ class _CourseDialogState extends State<CourseDialog> {
       _creditHoursController.text = widget.existingCourse!.creditHours.toString();
       _courseScoreController.text = widget.existingCourse!.courseScore.toString();
       
-
       if (widget.existingCourse!.creditHours == 0 && 
           (widget.existingCourse!.gradeLetter == Grades.P || widget.existingCourse!.gradeLetter == Grades.F) &&
           widget.existingCourse!.grade == 0.0) {
@@ -68,9 +67,7 @@ class _CourseDialogState extends State<CourseDialog> {
 
     if (_isPassFailCourse) {
       _gradeController.text = "0.000";
-
       _gradeLetterController.text = (rawScore >= 30.0) ? "P" : "F"; 
-
     } else {
       double maxScore = 0;
       if (creditHours <= 0) {
@@ -104,6 +101,7 @@ class _CourseDialogState extends State<CourseDialog> {
         setState(() {});
     }
   }
+
   @override
   void dispose() {
     _courseScoreController.removeListener(_updateGradeAndLetterFields);
@@ -128,29 +126,34 @@ class _CourseDialogState extends State<CourseDialog> {
     return AlertDialog(
       backgroundColor: isDarkMode ? DarkThemeColors.background : LightTheme.background,
       title: Text(dialogTitle, style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
-      content: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildTextField(_courseNameController, tr('academicCareer.courseDialogLabelCourseName'), isDarkMode),
-            _buildTextField(_courseCodeController, tr('academicCareer.courseDialogLabelCourseCode'), isDarkMode),
-            CheckboxListTile(
-              title: Text(tr('academicCareer.courseDialogCheckboxPassFail'), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
-              value: _isPassFailCourse,
-              activeColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
-              checkColor: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
-              onChanged: (bool? newValue) {
-                setState(() {
-                  _isPassFailCourse = newValue!;
-                  _updateGradeAndLetterFields();
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,
-            ),
-            _buildTextField(_courseScoreController, tr('academicCareer.courseDialogLabelCourseScore'), isDarkMode, keyboardType: TextInputType.number),
-            _buildTextField(_gradeController, tr('academicCareer.courseDialogLabelGrade'), isDarkMode, keyboardType: TextInputType.number, enabled: false),
-            _buildTextField(_creditHoursController, tr('academicCareer.courseDialogLabelCreditHours'), isDarkMode, keyboardType: TextInputType.number),
-            _buildTextField(_gradeLetterController, tr('academicCareer.courseDialogLabelGradeLetter'), isDarkMode, enabled: false),
-          ],
+      content: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        width: MediaQuery.of(context).size.width * 0.9,   
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildTextField(_courseNameController, tr('academicCareer.courseDialogLabelCourseName'), isDarkMode),
+              _buildTextField(_courseCodeController, tr('academicCareer.courseDialogLabelCourseCode'), isDarkMode),
+              CheckboxListTile(
+                title: Text(tr('academicCareer.courseDialogCheckboxPassFail'), style: TextStyle(color: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor)),
+                value: _isPassFailCourse,
+                activeColor: isDarkMode ? DarkThemeColors.primary : LightTheme.primary,
+                checkColor: isDarkMode ? DarkThemeColors.textcolor : LightTheme.textcolor,
+                onChanged: (bool? newValue) {
+                  setState(() {
+                    _isPassFailCourse = newValue!;
+                    _updateGradeAndLetterFields();
+                  });
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+              ),
+              _buildTextField(_courseScoreController, tr('academicCareer.courseDialogLabelCourseScore'), isDarkMode, keyboardType: TextInputType.number),
+              _buildTextField(_gradeController, tr('academicCareer.courseDialogLabelGrade'), isDarkMode, keyboardType: TextInputType.number, enabled: false),
+              _buildTextField(_creditHoursController, tr('academicCareer.courseDialogLabelCreditHours'), isDarkMode, keyboardType: TextInputType.number),
+              _buildTextField(_gradeLetterController, tr('academicCareer.courseDialogLabelGradeLetter'), isDarkMode, enabled: false),
+            ],
+          ),
         ),
       ),
       actions: [
