@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_proj/constants.dart';
 import 'package:grad_proj/models/schedule.dart';
-import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/ChatDataScreenWidgets.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/add_user_QR_tab.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_avalibility_tab.dart';
@@ -12,7 +10,6 @@ import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_data_widgets/chat_spreadsheets_manager.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/snackbar_service.dart';
-import 'package:provider/provider.dart';
 
 import '../theme/light_theme.dart';
 

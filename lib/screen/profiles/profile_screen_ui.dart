@@ -5,12 +5,11 @@ import 'package:grad_proj/screen/profiles/CompleteProfile.dart';
 import 'package:grad_proj/models/contact.dart';
 import 'package:grad_proj/providers/auth_provider.dart';
 import 'package:grad_proj/services/DB-service.dart';
+import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../services/navigation_Service.dart';
-import '../theme/light_theme.dart';
 import '../../widgets/custom_card.dart';
 
 class ProfileScreenUi extends StatefulWidget {
@@ -107,8 +106,8 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
 
                     onTap: () {},
                   ),
-                  // const SizedBox(height: 20),
-                  // _buildCoursesList(userData!.classes, isDarkMode),
+                  const SizedBox(height: 20),
+                  _buildCoursesList(userData!.classes, isDarkMode),
                   const SizedBox(height: 50),
                   PrimaryButton(
                     buttontext: 'Profile.edit_data_button'.tr(),
@@ -123,56 +122,83 @@ class _ProfileScreenUiState extends State<ProfileScreenUi> {
   }
 
   Widget _buildCoursesList(List<String> classes, bool isDarkMode) {
-    if (classes.isEmpty) {
-      return Center(
-        child: Text(
-          'Profile.no_course'.tr(),
-          style: TextStyle(
-              color: isDarkMode ? Colors.white60 : Colors.grey[600],
-              fontSize: 16),
-        ),
-      );
-    }
+    // final List<ChatSnipits> classList = await DBService.instance
+    //     .getUserChats(HiveUserContactCashingService.getUserContactData().id, "")
+    //     .first;
+    return StreamBuilder(
+      stream: DBService.instance.getUserChats(
+          HiveUserContactCashingService.getUserContactData().id, ""),
+      builder: (context, _snapshot) {
+        var data = _snapshot.data;
+        // devtools.log(widget.searchText);
 
-    return Card(
-      color: isDarkMode ? Color(0xFF323232) : Colors.white,
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          dividerColor: Colors.transparent,
-        ),
-        child: ExpansionTile(
-          leading: Icon(Icons.menu_book, color: Color(0xff769BC6)),
-          title: Text(
-            'Profile.course_enroll'.tr(),
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          children: classes
-              .map(
-                (course) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 4.0),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    color: isDarkMode ? Colors.grey[850] : Colors.grey[100],
-                    child: ListTile(
-                      leading: Icon(Icons.check_circle_outline,
-                          color: Color(0xff769BC6)),
-                      title: Text(
-                        course,
-                        style: TextStyle(
-                          color: isDarkMode ? Colors.white70 : Colors.black87,
+        if (_snapshot.connectionState == ConnectionState.waiting ||
+            _snapshot.connectionState == ConnectionState.none) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (_snapshot.hasError) {
+          return Center(
+              child: Text(
+                  "Error: ${_snapshot.error} \n please update your data and the data field mising"));
+        }
+        if (_snapshot.data == null) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (_snapshot.data!.isEmpty) {
+          return Center(
+            child: Text(
+              'Profile.no_course'.tr(),
+              style: TextStyle(
+                  color: isDarkMode ? Colors.white60 : Colors.grey[600],
+                  fontSize: 16),
+            ),
+          );
+        }
+
+        return Card(
+          color: isDarkMode ? Color(0xFF323232) : Colors.white,
+          elevation: 4,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              dividerColor: Colors.transparent,
+            ),
+            child: ExpansionTile(
+              leading: Icon(Icons.menu_book, color: Color(0xff769BC6)),
+              title: Text(
+                'Profile.course_enroll'.tr(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              children: _snapshot.data!
+                  .map(
+                    (course) => Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 4.0),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        color: isDarkMode ? Colors.grey[850] : Colors.grey[100],
+                        child: ListTile(
+                          leading: Icon(Icons.check_circle_outline,
+                              color: Color(0xff769BC6)),
+                          title: Text(
+                            course.chatId,
+                            style: TextStyle(
+                              color:
+                                  isDarkMode ? Colors.white70 : Colors.black87,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              )
-              .toList(),
-        ),
-      ),
+                  )
+                  .toList(),
+            ),
+          ),
+        );
+      },
     );
+
   }
 }

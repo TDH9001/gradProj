@@ -9,6 +9,7 @@ import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashin
 import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:grad_proj/widgets/primary_button.dart';
 import 'package:grad_proj/widgets/selectable_scedule_item.dart';
+import 'package:grad_proj/widgets/updated_scedule_item.dart';
 import 'dart:developer' as dev;
 
 import 'package:hive_flutter/adapters.dart';
@@ -158,10 +159,24 @@ class TemporaryChatSceleList extends StatelessWidget {
                         } else {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 2),
-                            child: SelectableScheduleItem(
-                              cont: context,
-                              scheduleItem: _snapshot.data![index],
-                            ),
+                            child: (widget.adminList.contains(
+                                        HiveUserContactCashingService
+                                                .getUserContactData()
+                                            .id) ||
+                                    HiveUserContactCashingService
+                                                .getUserContactData()
+                                            .id
+                                            .length <
+                                        10)
+                                ? SelectableScheduleItem(
+                                    cont: context,
+                                    scheduleItem: _snapshot.data![index],
+                                  )
+                                : updatedSceduleItem(_snapshot.data![index]),
+                            //  SelectableScheduleItem(
+                            //   cont: context,
+                            //   scheduleItem: _snapshot.data![index],
+                            // )
                           );
                         }
                       },
@@ -333,10 +348,20 @@ class PermanatChatScedulesList extends StatelessWidget {
                             color: Colors.transparent,
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: SelectableScheduleItem(
-                            cont: context,
-                            scheduleItem: _snapshot.data![index],
-                          ),
+                          child: (widget.adminList.contains(
+                                      HiveUserContactCashingService
+                                              .getUserContactData()
+                                          .id) ||
+                                  HiveUserContactCashingService
+                                              .getUserContactData()
+                                          .id
+                                          .length <
+                                      10)
+                              ? SelectableScheduleItem(
+                                  cont: context,
+                                  scheduleItem: _snapshot.data![index],
+                                )
+                              : updatedSceduleItem(_snapshot.data![index]),
                         );
                       },
                     )
