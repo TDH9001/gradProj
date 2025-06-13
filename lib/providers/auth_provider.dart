@@ -150,6 +150,7 @@ class AuthProvider extends ChangeNotifier {
               SnackBarService.instance.showsSnackBarError(
                   text: "email is used , try and reset the password");
             }
+            signOut();
           }
         } on Exception catch (e) {
           print(e);
