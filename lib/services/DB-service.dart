@@ -253,7 +253,7 @@ class DBService {
       return;
     }
     var userchat = _db.collection(_UserCollection).doc(uid);
-    ;
+    
 
     var ref = _db
         .collection(_UserCollection)

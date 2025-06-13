@@ -141,7 +141,7 @@
     "error1": "Course link cannot be empty",
     "error2": "User not logged in. Please log in and try again.",
     "successfully": "Successfully joined chat:{}",
-    "successfully_created": "Successfully joined the created chat:{}",
+    "successfully_created": "Successfully created chat:{}",
     "failed_to_join": "Failed to join chat. Link might be invalid or an error occurred.",
     "error": "An error occurred:{}",
     "title": "Add New Chat",
