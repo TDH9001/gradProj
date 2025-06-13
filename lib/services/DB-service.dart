@@ -50,7 +50,7 @@ class DBService {
         "lastName": lastname,
         "Email": email,
         "PhoneNumber": phoneNumber,
-       // "Password": password, //stupid move > should nto be added here
+        // "Password": password, //stupid move > should nto be added here
         // "lastSeen": DateTime.now().toUtc(),
         "isComplete": false,
         "classes": [],
@@ -125,7 +125,7 @@ class DBService {
     }
 
     return await ref.set({
-      "ChatAccesability": ChatAccesabilityEnum.admin_only.index,
+      "ChatAccesability": ChatAccesabilityEnum.allow_All.index,
       "leaders": [],
       "members": [_uid],
       "messages": [],
@@ -274,7 +274,7 @@ class DBService {
       "timestamp": Timestamp.now(),
       "type": 0,
       "ChatAccesability": (chat.data()) == null
-          ? ChatAccesabilityEnum.admin_only.name
+          ? ChatAccesabilityEnum.allow_All.name
           : (chat.data())!["ChatAccesability"],
       "leaders": (chat.data()) == null ? [] : (chat.data())!["leaders"],
     }, SetOptions(merge: true));
