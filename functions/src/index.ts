@@ -1,7 +1,69 @@
 import * as firestore from 'firebase-functions/v2/firestore';
 import * as admin from 'firebase-admin';
+import { onSchedule } from 'firebase-functions/v2/scheduler';
+import { Bucket } from '@google-cloud/storage';
+import { GetFilesOptions } from "@google-cloud/storage";
 
 admin.initializeApp();
+
+
+const TWO_WEEKS_MS = 14 * 24 * 60 * 60 * 1000;
+
+export const cleanupOldFiles = onSchedule(
+  {
+    schedule: 'every 24 hours',
+    timeZone: 'Etc/UTC',
+  },
+  async (event) => {
+    const bucket = admin.storage().bucket();
+    const now = Date.now();
+
+    const foldersToCheck = ['messageFiles of chats', 'voices']; // Adjust if necessary
+
+    for (const folder of foldersToCheck) {
+      console.log(`Scanning folder: ${folder}`);
+      await scanFolderRecursive(bucket, folder, now);
+    }
+
+    return;
+  }
+);
+
+async function scanFolderRecursive(
+  bucket: Bucket,
+  prefix: string,
+  now: number,
+  pageToken?: string
+): Promise<void> {
+  const [files, , nextQuery] = await bucket.getFiles({
+    prefix,
+    autoPaginate: false,
+    pageToken,
+  }) as [any[], any, GetFilesOptions?]; // 👈 explicitly type here
+
+  for (const file of files) {
+    const [metadata] = await file.getMetadata();
+    const updatedRaw = metadata.updated ?? metadata.timeCreated;
+    if (!updatedRaw) continue;
+
+    const updatedTime = new Date(updatedRaw).getTime();
+
+    if (now - updatedTime >= TWO_WEEKS_MS) {
+      console.log(`Old file found: ${file.name} | Last updated: ${updatedRaw}`);
+      // Optionally delete:
+      await file.delete();
+    }
+  }
+
+  const nextToken = nextQuery?.pageToken;
+  if (nextToken) {
+    await scanFolderRecursive(bucket, prefix, now, nextToken);
+  }
+}
+
+
+
+
 //edit to satisfy your own needs as you DEVthe app
 exports.onChatCreated = firestore.onDocumentCreated(
   "Chats/{chatID}",
