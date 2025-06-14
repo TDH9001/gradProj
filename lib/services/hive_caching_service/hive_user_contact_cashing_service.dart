@@ -28,7 +28,11 @@ abstract class HiveUserContactCashingService {
       if (mappedData["id"].toString().trim() ==
               "SQpNDH16Wda2oPDEHsUTWJmICwm2" || //my.acc 1
           mappedData["id"].toString().trim() ==
-              "nhjDOUyp03RO7cMKu6hUgO1SYLo1") {
+              "nhjDOUyp03RO7cMKu6hUgO1SYLo1" ||
+          mappedData["id"].toString().trim() ==
+              "wAEmkv1VYHYjaZwBhRShvpKu3472" ||
+          mappedData["id"].toString().trim() ==
+              "6ze44bPTmfhaUKNld2SbpP78PuB3") {
         // my.acc2
         return Contact.fromJson(id: "12345", snap: mappedData);
       }

@@ -185,7 +185,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               data.trim().toLowerCase() ==
                   "sciConnect2@outlook.com".toLowerCase() ||
               data.trim().toLowerCase() ==
-                  "sciConnect2@outlook.com".toLowerCase()) {
+                  "sciConnect3@outlook.com".toLowerCase()) {
             SnackBarService.instance.showsSnackBarSucces(text: "welcome admin");
             return null;
           } else if (!data
