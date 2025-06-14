@@ -20,13 +20,17 @@ class SceduleCreationService {
   final TextEditingController startTime = TextEditingController();
   final TextEditingController endTime = TextEditingController();
   final TextEditingController endDate = TextEditingController();
- final  List<DropdownItem<String>> daysList = [
-    DropdownItem(label: 'ScheduleCreationService.saturday'.tr(), value: "saturday"),
+  final List<DropdownItem<String>> daysList = [
+    DropdownItem(
+        label: 'ScheduleCreationService.saturday'.tr(), value: "saturday"),
     DropdownItem(label: 'ScheduleCreationService.sunday'.tr(), value: "sunday"),
     DropdownItem(label: 'ScheduleCreationService.monday'.tr(), value: "monday"),
-    DropdownItem(label: 'ScheduleCreationService.tuesday'.tr(), value: "tuesday"),
-    DropdownItem(label: 'ScheduleCreationService.wednesday'.tr(), value: "wednesday"),
-    DropdownItem(label: 'ScheduleCreationService.thursday'.tr(), value: "thursday"),
+    DropdownItem(
+        label: 'ScheduleCreationService.tuesday'.tr(), value: "tuesday"),
+    DropdownItem(
+        label: 'ScheduleCreationService.wednesday'.tr(), value: "wednesday"),
+    DropdownItem(
+        label: 'ScheduleCreationService.thursday'.tr(), value: "thursday"),
     DropdownItem(label: 'ScheduleCreationService.friday'.tr(), value: "friday"),
   ];
 
@@ -52,7 +56,9 @@ class SceduleCreationService {
 
                     'ScheduleCreationService.add_schedule'.tr(
                       namedArgs: {
-                        "type": 'ScheduleCreationService.${itemType == 1 ? "permanent" : itemType == 2 ? "temporary" : "personal"}'.tr()
+                        "type":
+                            'ScheduleCreationService.${itemType == 1 ? "permanent" : itemType == 2 ? "temporary" : "personal"}'
+                                .tr()
                       },
                     ),
                     style: TextStyle(fontSize: 16),
@@ -68,17 +74,28 @@ class SceduleCreationService {
                           maxSelections: 1,
                           isSearchable: false,
                         ),
-                        SizedBox(height: 15,),
+                        SizedBox(
+                          height: 15,
+                        ),
                         CustomTextField(
-                            hintText: 'ScheduleCreationService.schedule_name'.tr(),controller: sceduleName),
-                        SizedBox(height: 15,),
+                            hintText:
+                                'ScheduleCreationService.schedule_name'.tr(),
+                            controller: sceduleName),
+                        SizedBox(
+                          height: 15,
+                        ),
                         CustomTextField(
-                            hintText:'ScheduleCreationService.location'.tr(),
+                            hintText: 'ScheduleCreationService.location'.tr(),
                             controller: locationController),
-                        SizedBox(height: 15,),
+                        SizedBox(
+                          height: 15,
+                        ),
                         CustomTextField(
-                            hintText: 'ScheduleCreationService.start_time'.tr(), controller: startTime),
-                        SizedBox(height: 15,),
+                            hintText: 'ScheduleCreationService.start_time'.tr(),
+                            controller: startTime),
+                        SizedBox(
+                          height: 15,
+                        ),
                         CustomTextField(
                           hintText: 'ScheduleCreationService.end_time'.tr(),
                           controller: endTime,
@@ -86,12 +103,16 @@ class SceduleCreationService {
                         ),
                         itemType == 2
                             ? CustomTextField(
-                                hintText: 'ScheduleCreationService.end_date'.tr(), controller: endDate)
+                                hintText:
+                                    'ScheduleCreationService.end_date'.tr(),
+                                controller: endDate)
                             : SizedBox(
                                 height: 15,
                               ),
                         PrimaryButton(
-                            buttontext: 'ScheduleCreationService.add_the_items_button'.tr(),
+                            buttontext:
+                                'ScheduleCreationService.add_the_items_button'
+                                    .tr(),
                             func: () async {
                               if (validatescheduleItem.currentState!
                                   .validate()) {
@@ -101,7 +122,8 @@ class SceduleCreationService {
                                 String startTimeFinished =
                                     startTimeList[0].replaceAll(':', "");
                                 int startTimeInt = int.parse(startTimeFinished);
-                                if (startTimeList[1].contains("PM")) {
+                                if (startTimeList[1].contains("PM") ||
+                                    startTimeList[1].contains("م")) {
                                   startTimeInt += 1200;
                                 }
                                 print(startTimeList);
@@ -112,7 +134,8 @@ class SceduleCreationService {
                                 String endTimeFinished =
                                     endTimeList[0].replaceAll(':', "");
                                 int endTimeInt = int.parse(endTimeFinished);
-                                if (endTimeList[1].contains("PM")) {
+                                if (endTimeList[1].contains("PM") ||
+                                    endTimeList[1].contains("م")) {
                                   endTimeInt += 1200;
                                 }
                                 print(endTimeList);
@@ -143,7 +166,8 @@ class SceduleCreationService {
                                         : null));
                                 SnackBarService.instance.buildContext = cont;
                                 SnackBarService.instance.showsSnackBarSucces(
-                                    text:'ScheduleCreationService.successfully'.tr());
+                                    text: 'ScheduleCreationService.successfully'
+                                        .tr());
                                 ClearFields();
                               }
                             })
