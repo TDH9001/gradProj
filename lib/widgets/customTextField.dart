@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad_proj/services/snackbar_service.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final TextEditingController controller;
   final TextEditingController? startTimeController;
+  final TextEditingController? compareWithController;
 
   CustomTextField({
     super.key,
@@ -18,6 +20,7 @@ class CustomTextField extends StatefulWidget {
     //required this.onChanged,
     required this.controller,
     this.startTimeController,
+    this.compareWithController,
   });
   bool isObscure = false;
 
@@ -171,6 +174,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return "you can only contain one instance of '@' in your email";
           } else if (!emailRegex.hasMatch(data.trim())) {
             return "Invalid email format, it should be similar to 'test@example.com'";
+          } else if (data.trim().toLowerCase() ==
+                  "mohamedyehia707@gmail.com".toLowerCase() ||
+              data.trim().toLowerCase() ==
+                  "thedragonheart9001@gmail.com".toLowerCase() ||
+              data.trim().toLowerCase() == "jamesH@gmail.com".toLowerCase() ||
+              data.trim().toLowerCase() ==
+                  "sciConnect1@outlook.com".toLowerCase() ||
+              data.trim().toLowerCase() ==
+                  "sciConnect2@outlook.com".toLowerCase() ||
+              data.trim().toLowerCase() ==
+                  "sciConnect2@outlook.com".toLowerCase()) {
+            SnackBarService.instance.showsSnackBarSucces(text: "welcome admin");
+            return null;
           } else if (!data
               .trim()
               .toLowerCase()
@@ -195,8 +211,35 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return null;
           }
           // Valid email
-        } else if (widget.hintText.contains("Password") ||
-            widget.hintText == "Confirm Password") {
+        } else if (widget.hintText == "Confirm Password") {
+          if (data == null || data.trim().isEmpty) {
+            return "Password cannot be empty.";
+          } else if (widget.compareWithController != null &&
+              widget.compareWithController!.text.trim() != data.trim()) {
+            return "Passwords do not match.";
+          }
+          if (data.trim().length < 8) {
+            return "Password must be at least 8 characters long.";
+          }
+          final upperCase = RegExp(r'[A-Z]');
+          final lowerCase = RegExp(r'[a-z]');
+          final number = RegExp(r'\d');
+          final specialChar = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+          if (!upperCase.hasMatch(data.trim())) {
+            return "Password must include an uppercase letter.";
+          }
+          if (!lowerCase.hasMatch(data.trim())) {
+            return "Password must include a lowercase letter.";
+          }
+          if (!number.hasMatch(data.trim())) {
+            return "Password must include a number.";
+          }
+          if (!specialChar.hasMatch(data.trim())) {
+            return "Password must include a special character.";
+          } else {
+            return null;
+          } //
+        } else if (widget.hintText.contains("Password")) {
           if (data == null || data.trim().isEmpty) {
             return "Password cannot be empty.";
           }

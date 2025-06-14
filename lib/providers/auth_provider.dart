@@ -1,15 +1,12 @@
+import "dart:developer" as dev;
 import "dart:io";
 
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "package:grad_proj/constants.dart";
-import "package:grad_proj/models/contact.dart";
 import "package:grad_proj/services/DB-service.dart";
 import "package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart";
-import "package:grad_proj/widgets/bottom_navegation_bar_screen.dart";
 import "package:grad_proj/screen/splash/splash_screen.dart";
 import "package:grad_proj/services/navigation_Service.dart";
-import "package:path/path.dart";
 import '../services/snackbar_service.dart';
 
 //when Authprovider si called > then it will tell all listener in app > SOMETHING HAPPEND
@@ -44,8 +41,8 @@ class AuthProvider extends ChangeNotifier {
     navigationService.instance.navigateToReplacement(SplashScreen.id);
   }
 
-  void signOut() async {
-    _auth.signOut();
+  Future<void> signOut() async {
+    await _auth.signOut();
     user = null;
     await HiveUserContactCashingService.resetUserContactData();
   }
@@ -96,7 +93,7 @@ class AuthProvider extends ChangeNotifier {
         SnackBarService.instance.showsSnackBarError(
             text:
                 "plase validate your email , using the link sent to your inbox");
-        signOut();
+        await signOut();
       }
       //  SnackBarService.instance
       //     .showsSnackBarSucces(text: "Welcome ${user?.email}");
@@ -127,22 +124,36 @@ class AuthProvider extends ChangeNotifier {
       instance.user = _result.user;
       status = AuthStatus.Authenticated;
       await onSucces!(instance.user!.uid.toString());
-      instance.user!.sendEmailVerification();
-      SnackBarService.instance
-          .showsSnackBarSucces(text: "validation email sent to ${user?.email}");
-      signOut();
+      if (instance.user != null) {
+        await instance.user!.sendEmailVerification();
+        SnackBarService.instance.showsSnackBarSucces(
+            text: "Validation email sent to ${instance.user!.email}");
+
+        await Future.delayed(Duration(seconds: 1));
+        await signOut();
+      }
     } on Exception catch (e) {
       if (e is FirebaseAuthException) {
         try {
-          if (e.code == "email-already-in-use") {
-            UserCredential _result = await _auth.signInWithEmailAndPassword(
+          if (e.code == "ERROR_EMAIL_ALREADY_IN_USE" ||
+              e.code == "email-already-in-use") {
+            await signOut();
+
+            UserCredential result = await _auth.signInWithEmailAndPassword(
               email: email,
               password: password,
             );
-            instance.user = _result.user;
+            instance.user = result.user;
 
             if (instance.user != null && !instance.user!.emailVerified) {
-              await instance.user!.sendEmailVerification();
+              final credential = EmailAuthProvider.credential(
+                  email: email, password: password);
+              await instance.user!.reauthenticateWithCredential(credential);
+              //my research says this is a must to eliviate the 'requires-recent-login'error
+              //forcing fireabse too treat it as a new user and not hesitate in sending  validation mails
+              await result.user!.sendEmailVerification();
+              dev.log(
+                  "${user?.email}"); // did this as smetimes firebase refuses to send mails to accounts that have been deleted
               SnackBarService.instance.showsSnackBarSucces(
                 text: "Verification email re-sent to ${user?.email}",
               );
@@ -150,10 +161,11 @@ class AuthProvider extends ChangeNotifier {
               SnackBarService.instance.showsSnackBarError(
                   text: "email is used , try and reset the password");
             }
-            signOut();
+            await Future.delayed(Duration(seconds: 1));
+            await signOut();
           }
         } on Exception catch (e) {
-          print(e);
+          dev.log(e.toString());
         }
       }
       if (e is SocketException) {
