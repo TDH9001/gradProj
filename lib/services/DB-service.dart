@@ -661,6 +661,7 @@ class DBService {
         .map((snap) {
       if (snap.exists) {
         if (snap.data()!.containsKey("PersonalFeed")) {
+          (snap["PersonalFeed"]);
           List<dynamic> currentData = snap["PersonalFeed"];
           return currentData
               .where((item) => item["chatID"]
@@ -679,18 +680,24 @@ class DBService {
     });
   }
 
-  Stream<List<FeedItems>> getUserStaredFeed(String uid) {
+  Stream<List<FeedItems>> getUserStaredFeed(String uid, String searched) {
     return _db
         .collection(_UserCollection)
         .doc(uid)
         .collection(_FeedCollection)
-        .doc(_StaredFeed)
+        .doc(_PersonalFeed)
         .snapshots()
         .map((snap) {
       if (snap.exists) {
         if (snap.data()!.containsKey("StaredFeed")) {
           List<dynamic> currentData = snap["StaredFeed"];
-          return currentData.map((item) {
+          devtools.log("currentData: $currentData");
+          return currentData
+              .where((item) => item["chatID"]
+                  .toString()
+                  .toLowerCase()
+                  .contains(searched.toLowerCase()))
+              .map((item) {
             return FeedItems.getFeedItemFromSubClass(item);
           }).toList();
         } else {
