@@ -72,35 +72,40 @@ class _GetUsersStreamState extends State<GetUsersStream> {
       child: Column(
         children: [
           SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Container(
-                  width: double.infinity,
-                  height: MediaService.instance.getHeight() * 0.06,
-                  decoration: BoxDecoration(
-                    color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color:isDarkMode ? Colors.white60 : Color(0xff769BC6)),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Center(
-                    child: TextFormField(
-                      onChanged: (str) {
-                        widget.searchText = str;
-                        setState(() {});
-                      },
-                      keyboardType: TextInputType.text,
-                      autocorrect: false,
-                      decoration: InputDecoration(
-                        hintText: 'home.search_for_courses'.tr(),
-                        hintStyle: TextStyle(color: isDarkMode ? Colors.white : Colors.grey.shade600),
-                        prefixIcon: Icon(Icons.search, color:  isDarkMode ? Colors.white60 : Colors.grey.shade700),
-                        border: InputBorder.none,
-                      ),
-                    ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              width: double.infinity,
+              height: MediaService.instance.getHeight() * 0.06,
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                    color: isDarkMode ? Colors.white60 : Color(0xff769BC6)),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Center(
+                child: TextFormField(
+                  onChanged: (str) {
+                    widget.searchText = str;
+                    setState(() {});
+                  },
+                  keyboardType: TextInputType.text,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    hintText: 'home.search_for_courses'.tr(),
+                    hintStyle: TextStyle(
+                        color:
+                            isDarkMode ? Colors.white : Colors.grey.shade600),
+                    prefixIcon: Icon(Icons.search,
+                        color:
+                            isDarkMode ? Colors.white60 : Colors.grey.shade700),
+                    border: InputBorder.none,
                   ),
                 ),
               ),
+            ),
+          ),
           Container(
             height: MediaService.instance.getHeight() * 0.75,
             child: StreamBuilder<List<FeedItems>>(

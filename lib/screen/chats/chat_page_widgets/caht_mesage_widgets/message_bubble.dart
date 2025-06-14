@@ -1,4 +1,3 @@
-import 'dart:math' as MainAxisSize;
 import 'dart:ui';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:grad_proj/models/message.dart';
 import 'package:grad_proj/screen/chats/chat_page_widgets/caht_mesage_widgets/chat_popup_menu_builder_butons.dart';
 import 'package:grad_proj/services/hive_caching_service/hive_user_contact_cashing_service.dart';
 import 'package:grad_proj/services/media_service.dart';
-import 'package:linkfy_text/linkfy_text.dart';
 
 Widget chatMessageBubble(
     {required String chatID,
