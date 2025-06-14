@@ -113,17 +113,16 @@ class PopupWidgetHandler extends StatelessWidget {
           color:  Color(0xffA3BFE0) ,
           shape: CircleBorder(),
           child: IconButton(
-            icon: Icon(icon, color: Color(0xff2E5077), size: 26),
-            onPressed: onTap,
+            icon: Icon(icon, color: Color(0xff2E5077), size: 24),
+            onPressed: () => onTap(),
           ),
         ),
         SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFFD3E3F1),
+            fontSize: 10,
+            color: isDarkMode? Colors.white : Colors.black87,
           ),
         ),
       ],
