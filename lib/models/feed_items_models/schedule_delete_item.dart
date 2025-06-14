@@ -40,8 +40,10 @@ class ScheduleDeleteFeedItem extends FeedItems {
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = isDark ? DarkThemeColors.primary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
-    final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final backgroundColor =
+        isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
     final errorColor = Colors.red.shade300;
 
@@ -79,14 +81,19 @@ class ScheduleDeleteFeedItem extends FeedItems {
                     Text(
                       'ScheduleDeleteFeedItem.schedule_deleted'.tr(),
                       style: TextStyle(
-                        fontWeight: FontWeight.bold, 
-                        fontSize: 16,
-                        color: textColor
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: textColor),
                     ),
                     Text(
                       "$senderName • ${timeago.format(timestamp.toDate())}",
-                      style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
+                    ),
+                    Text(
+                      "From : $chatID",
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
                   ],
                 ),
@@ -104,18 +111,27 @@ class ScheduleDeleteFeedItem extends FeedItems {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                   'ScheduleDeleteFeedItem.deleted_schedule_details'.tr(),
+                    'ScheduleDeleteFeedItem.deleted_schedule_details'.tr(),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      fontSize: 14,
-                      color: textColor
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: textColor),
                   ),
                   Divider(color: errorColor.withOpacity(0.3)),
-                  _buildScheduleDetailRow(context, 'ScheduleDeleteFeedItem.course'.tr(), scheduleItem.name),
-                  _buildScheduleDetailRow(context, 'ScheduleDeleteFeedItem.day'.tr(), getDayName(scheduleItem.day)),
-                  _buildScheduleDetailRow(context, 'ScheduleDeleteFeedItem.time'.tr(), "${formatTime(scheduleItem.startTime)} - ${formatTime(scheduleItem.endTime)}"),
-                  _buildScheduleDetailRow(context, 'ScheduleDeleteFeedItem.location'.tr(), scheduleItem.location),
+                  _buildScheduleDetailRow(context,
+                      'ScheduleDeleteFeedItem.course'.tr(), scheduleItem.name),
+                  _buildScheduleDetailRow(
+                      context,
+                      'ScheduleDeleteFeedItem.day'.tr(),
+                      getDayName(scheduleItem.day)),
+                  _buildScheduleDetailRow(
+                      context,
+                      'ScheduleDeleteFeedItem.time'.tr(),
+                      "${formatTime(scheduleItem.startTime)} - ${formatTime(scheduleItem.endTime)}"),
+                  _buildScheduleDetailRow(
+                      context,
+                      'ScheduleDeleteFeedItem.location'.tr(),
+                      scheduleItem.location),
                 ],
               ),
             ),
@@ -125,10 +141,11 @@ class ScheduleDeleteFeedItem extends FeedItems {
     );
   }
 
-  Widget _buildScheduleDetailRow(BuildContext context, String label, String value) {
+  Widget _buildScheduleDetailRow(
+      BuildContext context, String label, String value) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -137,10 +154,7 @@ class ScheduleDeleteFeedItem extends FeedItems {
             width: 80,
             child: Text(
               "$label:",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: textColor
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500, color: textColor),
             ),
           ),
           Expanded(

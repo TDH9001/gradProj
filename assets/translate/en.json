@@ -241,9 +241,9 @@
     "personal": "Personal"
   },
   "DropdownSelect": {
-    "courses": "Courses",
-    "select_your_courses": "Select Your Courses",
-    "error": "Please Select A Course"
+    "days": "days",
+    "select_your_days": "Select Your days",
+    "error": "Please Select A days"
   },
   "ChatFileButton": {
     "could_not_upload ": "Could Not Upload The File"

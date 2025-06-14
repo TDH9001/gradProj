@@ -238,9 +238,9 @@
     "personal": "شخصي"
   },
   "DropdownSelect": {
-    "courses": "المقررات",
-    "select_your_courses": "اختر مقرراتك",
-    "error": "يرجى اختيار مقرر"
+    "days": "الايام",
+    "select_your_days": "اختر اليوم",
+    "error": "يرجى اختيار اليوم"
   },
   "ChatFileButton": {
     "could_not_upload ": "تعذر رفع الملف"

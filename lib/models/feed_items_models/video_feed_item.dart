@@ -86,6 +86,11 @@ class VideoFeedItem extends FeedItems {
                       style: TextStyle(
                           color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
+                    Text(
+                      "From : $chatID",
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
+                    ),
                   ],
                 ),
               ],

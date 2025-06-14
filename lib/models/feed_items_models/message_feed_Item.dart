@@ -53,9 +53,12 @@ class MessageFeedItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
-    final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
+    final primaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.primary;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final backgroundColor =
+        isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
 
     return Card(
@@ -84,14 +87,19 @@ class MessageFeedItem extends FeedItems {
                     Text(
                       senderName,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold, 
-                        fontSize: 16,
-                        color: textColor
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: textColor),
                     ),
                     Text(
                       timeago.format(timestamp.toDate()),
-                      style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
+                    ),
+                    Text(
+                      "From : $chatID",
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
                   ],
                 ),

@@ -95,11 +95,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
 
     return TextFormField(
-      // enabled: widget.hintText == "Start Time" ||
-      //         widget.hintText == "Start Time" ||
-      //         widget.hintText == "End Date"
-      //     ? false
-      //     : true,
       readOnly: widget.hintText == "Start Time" ||
           widget.hintText == "End Time" ||
           widget.hintText == "End Date",
@@ -146,16 +141,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
               )
             : null,
         prefixIcon: (widget.hintText == "Start Time" ||
+                widget.hintText == "تاريخ الانتهاء" ||
                 widget.hintText == "End Date" ||
-                widget.hintText == "End Time")
+                widget.hintText == "وقت النهاية" ||
+                widget.hintText == "End Time" ||
+                widget.hintText == "وقت البداية")
             ? IconButton(
                 icon: const Icon(Icons.calendar_today, color: Colors.grey),
                 onPressed: () {
-                  if (widget.hintText == "Start Time") {
+                  if (widget.hintText == "Start Time" ||
+                      widget.hintText == "وقت البداية") {
                     _pickStartTime();
-                  } else if (widget.hintText == "End Time") {
+                  } else if (widget.hintText == "End Time" ||
+                      widget.hintText == "وقت النهاية") {
                     _pickEndTime();
-                  } else if (widget.hintText == "End Date") {
+                  } else if (widget.hintText == "End Date" ||
+                      widget.hintText == "تاريخ الانتهاء") {
                     _pickDateTime();
                   }
                 },

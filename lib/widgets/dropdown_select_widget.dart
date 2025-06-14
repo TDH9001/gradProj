@@ -41,7 +41,7 @@ class _MyWidgetState extends State<DropdownSelect> {
           spacing: 10,
         ),
         fieldDecoration: FieldDecoration(
-          hintText: 'DropdownSelect.courses'.tr(),
+          hintText: 'DropdownSelect.days'.tr(),
           hintStyle:  TextStyle(color:isDarkMode ? Colors.white : Colors.black87),
           prefixIcon: const Icon(Icons.add_circle_rounded, color: Colors.grey),
           showClearIcon: false,
@@ -64,7 +64,7 @@ class _MyWidgetState extends State<DropdownSelect> {
           header:  Padding(
             padding: EdgeInsets.all(8),
             child: Text(
-              'DropdownSelect.select_your_courses'.tr(),
+              'DropdownSelect.select_your_days'.tr(),
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontSize: 16,

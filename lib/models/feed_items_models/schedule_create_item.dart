@@ -94,6 +94,11 @@ class SceduleCreateFeedItem extends FeedItems {
                       style: TextStyle(
                           color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
+                    Text(
+                      "From : $chatID",
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
+                    ),
                   ],
                 ),
               ],
@@ -117,15 +122,22 @@ class SceduleCreateFeedItem extends FeedItems {
                         color: textColor),
                   ),
                   Divider(color: successColor.withOpacity(0.3)),
-                  _buildScheduleDetailRow(context, 'SceduleCreateFeedItem.course'.tr(), scheduleItem.name),
+                  _buildScheduleDetailRow(context,
+                      'SceduleCreateFeedItem.course'.tr(), scheduleItem.name),
                   _buildScheduleDetailRow(
-                      context, 'SceduleCreateFeedItem.day'.tr(), getDayName(scheduleItem.day)),
+                      context,
+                      'SceduleCreateFeedItem.day'.tr(),
+                      getDayName(scheduleItem.day)),
                   _buildScheduleDetailRow(context, "Time",
                       "${formatTime(scheduleItem.startTime)} - ${formatTime(scheduleItem.endTime)}"),
                   _buildScheduleDetailRow(
-                      context, 'SceduleCreateFeedItem.location'.tr(), scheduleItem.location),
+                      context,
+                      'SceduleCreateFeedItem.location'.tr(),
+                      scheduleItem.location),
                   _buildScheduleDetailRow(
-                      context,'SceduleCreateFeedItem.instructor'.tr(), scheduleItem.creatorName),
+                      context,
+                      'SceduleCreateFeedItem.instructor'.tr(),
+                      scheduleItem.creatorName),
                 ],
               ),
             ),

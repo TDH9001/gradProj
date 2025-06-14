@@ -46,9 +46,12 @@ class ScheduleUpdateItem extends FeedItems {
   @override
   Widget present({required BuildContext context}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
-    final backgroundColor = isDark ? DarkThemeColors.background : LightTheme.background;
+    final primaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.primary;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final backgroundColor =
+        isDark ? DarkThemeColors.background : LightTheme.background;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
 
     // Get day names from enum
@@ -85,14 +88,19 @@ class ScheduleUpdateItem extends FeedItems {
                     Text(
                       'ScheduleUpdateItem.schedule_updated'.tr(),
                       style: TextStyle(
-                        fontWeight: FontWeight.bold, 
-                        fontSize: 16,
-                        color: textColor
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: textColor),
                     ),
                     Text(
                       "$senderName • ${timeago.format(timestamp.toDate())}",
-                      style: TextStyle(color: textColor.withOpacity(0.6), fontSize: 12),
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
+                    ),
+                    Text(
+                      "From : $chatID",
+                      style: TextStyle(
+                          color: textColor.withOpacity(0.6), fontSize: 12),
                     ),
                   ],
                 ),
@@ -112,17 +120,31 @@ class ScheduleUpdateItem extends FeedItems {
                   Text(
                     'ScheduleUpdateItem.updated_schedule_details'.tr(),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      fontSize: 14,
-                      color: textColor
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: textColor),
                   ),
                   Divider(color: secondaryColor.withOpacity(0.3)),
-                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.course'.tr(), oldScheduleItem.name, newScheduleItem.name),
-                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.day'.tr(), getDayName(oldScheduleItem.day), getDayName(newScheduleItem.day)),
-                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.time'.tr(), "${formatTime(oldScheduleItem.startTime)} - ${formatTime(oldScheduleItem.endTime)}",
-                                                     "${formatTime(newScheduleItem.startTime)} - ${formatTime(newScheduleItem.endTime)}"),
-                  _buildScheduleComparisonRow(context, 'ScheduleUpdateItem.location'.tr(), oldScheduleItem.location, newScheduleItem.location),
+                  _buildScheduleComparisonRow(
+                      context,
+                      'ScheduleUpdateItem.course'.tr(),
+                      oldScheduleItem.name,
+                      newScheduleItem.name),
+                  _buildScheduleComparisonRow(
+                      context,
+                      'ScheduleUpdateItem.day'.tr(),
+                      getDayName(oldScheduleItem.day),
+                      getDayName(newScheduleItem.day)),
+                  _buildScheduleComparisonRow(
+                      context,
+                      'ScheduleUpdateItem.time'.tr(),
+                      "${formatTime(oldScheduleItem.startTime)} - ${formatTime(oldScheduleItem.endTime)}",
+                      "${formatTime(newScheduleItem.startTime)} - ${formatTime(newScheduleItem.endTime)}"),
+                  _buildScheduleComparisonRow(
+                      context,
+                      'ScheduleUpdateItem.location'.tr(),
+                      oldScheduleItem.location,
+                      newScheduleItem.location),
                 ],
               ),
             ),
@@ -132,14 +154,17 @@ class ScheduleUpdateItem extends FeedItems {
     );
   }
 
-  Widget _buildScheduleComparisonRow(BuildContext context, String label, String oldValue, String newValue) {
+  Widget _buildScheduleComparisonRow(
+      BuildContext context, String label, String oldValue, String newValue) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = isDark ? DarkThemeColors.secondary : LightTheme.primary;
-    final secondaryColor = isDark ? DarkThemeColors.secondary : LightTheme.secondary;
+    final primaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.primary;
+    final secondaryColor =
+        isDark ? DarkThemeColors.secondary : LightTheme.secondary;
     final textColor = isDark ? DarkThemeColors.textcolor : LightTheme.textcolor;
-    
+
     bool changed = oldValue != newValue;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -148,10 +173,7 @@ class ScheduleUpdateItem extends FeedItems {
             width: 80,
             child: Text(
               "$label:",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: textColor
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500, color: textColor),
             ),
           ),
           Expanded(
@@ -168,7 +190,8 @@ class ScheduleUpdateItem extends FeedItems {
                           ),
                         ),
                       ),
-                      Icon(Icons.arrow_forward, size: 16, color: textColor.withOpacity(0.6)),
+                      Icon(Icons.arrow_forward,
+                          size: 16, color: textColor.withOpacity(0.6)),
                       Expanded(
                         child: Text(
                           newValue,
@@ -195,6 +218,6 @@ class ScheduleUpdateItem extends FeedItems {
         "oldScheduleItem": oldScheduleItem.toMap(),
         "newScheduleItem": newScheduleItem.toMap(),
         "type": feedItemsEnum.values.byName(type).index,
-        "chatID":chatID
+        "chatID": chatID
       };
 }
