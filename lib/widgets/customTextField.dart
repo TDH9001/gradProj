@@ -166,6 +166,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       validator: (data) {
         final emailRegex = RegExp(r'^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$');
         if (widget.hintText.contains("Email") ||
+            widget.hintText.contains("البريد الإلكتروني") ||
+            widget.hintText.contains("البريد الإلكتروني") ||
             widget.hintText.contains("email")) {
           if (data == null || data.trim().isEmpty) {
             return "empty field";
@@ -198,21 +200,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
           }
           // Valid email
         }
-        if (widget.hintText.contains("Email1") ||
-            widget.hintText.contains("email1")) {
-          if (data == null || data.trim().isEmpty) {
-            return "empty field";
-          } else if (!data.trim().contains("@")) {
-            return "the email must contain an '@' symbol";
-          } else if (data.trim().indexOf("@") != data.trim().lastIndexOf("@")) {
-            return "you can only contain one instance of '@' in your email";
-          } else if (!emailRegex.hasMatch(data.trim())) {
-            return "Invalid email format, it should be similar to 'test@example.com'";
-          } else {
-            return null;
-          }
-          // Valid email
-        } else if (widget.hintText == "Confirm Password") {
+        // else if (widget.hintText.contains("Email1") ||
+        //     widget.hintText.contains("email1")) {
+        //   if (data == null || data.trim().isEmpty) {
+        //     return "empty field";
+        //   } else if (!data.trim().contains("@")) {
+        //     return "the email must contain an '@' symbol";
+        //   } else if (data.trim().indexOf("@") != data.trim().lastIndexOf("@")) {
+        //     return "you can only contain one instance of '@' in your email";
+        //   } else if (!emailRegex.hasMatch(data.trim())) {
+        //     return "Invalid email format, it should be similar to 'test@example.com'";
+        //   } else {
+        //     return null;
+        //   }
+        //   // Valid email
+        // }
+        else if (widget.hintText.contains("Confirm Password") ||
+            widget.hintText.contains("تأكيد كلمة المرور")) {
           if (data == null || data.trim().isEmpty) {
             return "Password cannot be empty.";
           } else if (widget.compareWithController != null &&
@@ -240,7 +244,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           } else {
             return null;
           } //
-        } else if (widget.hintText.contains("Password")) {
+        } else if (widget.hintText.contains("Password") ||
+            widget.hintText.contains("كلمة المرور")) {
           if (data == null || data.trim().isEmpty) {
             return "Password cannot be empty.";
           }
@@ -266,6 +271,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return null;
           } // Valid password
         } else if (widget.hintText == "First Name" ||
+            widget.hintText == "الاسم الأول" ||
+            widget.hintText == "الاسم الأخير" ||
             widget.hintText == "Last Name") {
           if (data == null || data.trim().isEmpty) {
             return "empty field";
@@ -276,7 +283,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           } else if (data.length > 50) {
             return 'Name must not exceed 50 characters.';
           }
-        } else if (widget.hintText == "Phone Number") {
+        } else if (widget.hintText == "Phone Number" ||
+            widget.hintText == "رقم الهاتف") {
           if (data == null || data.trim().isEmpty) {
             return 'Phone number cannot be empty.';
           }
